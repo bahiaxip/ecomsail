@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController, App\Http\Controllers\LoginController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+//Laravel
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/home',[HomeController::class,'home'])->name('home');
+//para evitar pasar array en cada ruta podemos añadir la ruta 'App\Http\Controllers'
+//en el archivo de configuración de rutas RouteServiceProvider.php en el namespace del 
+//middleware web, en el método boot()
+//Route::get('/home','HomeController@home')->name('home');
+
+//login
+Route::get('/login',[LoginController::class,'login'])->name('login');
+Route::post('/login',[LoginController::class,'loginIn'])->name('login');
+//register
+Route::get('/register',[LoginController::class,'register'])->name('register');
+Route::post('/register',[LoginController::class,'registerAdd'])->name('register');
+//logout
+Route::get('/logout','LoginController@logout')->name('logout');
+
+//LiveWire
+Route::get('/home2',Home::class)->name('home2');
+//Route::get('/login',Login::class)->name('login');
