@@ -1,0 +1,180 @@
+color1 = #FFF
+color2 = #494949
+
+
+*
+	font-family: QuicksandR;
+/*
+body
+	font-family: 'Open Sans', sans-serif;
+*/
+	
+.mtop16
+	margin-top 15px
+
+/* estilos mensajes de error */
+.alert-danger
+.alert-success
+	padding 1rem 1rem
+	max-height 1000px
+	font-size 1em
+	overflow-y hidden
+	/*border 1px solid*/
+	transition max-height .3s linear,padding .5s ease-out
+	
+.hide	
+	max-height 0px	
+	padding-top 0px
+	padding-bottom 0px
+	border 0px
+/* fin estilos mensajes de error */
+.content
+	background-color #D3D3D3
+	display flex
+	min-height 100vh
+	width 100%
+	.paths		
+		margin auto 10px
+		ul
+			display inline-flex
+			padding 0
+			list-style: none
+			a
+				text-decoration none
+				
+	.sectionL
+		background-color #FFF
+		border-top darkorange 1px solid
+		display flex
+		width 12%
+		.sidebar
+			background-color color2
+			width 100%
+			.logo
+				display flex
+				padding-top 10px
+				img
+					width 64px
+					margin auto
+			.options
+				ul
+					margin 0px 
+					padding 0px
+					li
+						display flex
+						list-style none
+						a							
+							color #D3D3D3
+							font-family QuicksandB
+							padding 15px 0px 15px 15px
+							text-decoration none
+							width 100%					
+							&:hover
+								color lightblue
+						&:hover
+							background-color #454545
+							cursor pointer
+								
+	.sectionR
+		width 76%
+		margin 0px 10px		
+		.inner
+			ul.add
+				display flex
+				justify-content flex-end
+				
+				/*
+				background-color #f9f9f9
+				border-bottom #696969 1px solid
+				border-radius 4px				
+				*/
+				padding 4px 4px
+				width 100%
+				li
+					list-style none
+					position relative
+					a
+						margin auto 2px
+					
+					&:hover
+						ul							
+							display block
+					ul
+						display none
+						left -75px
+						padding 0						
+						position absolute						
+						width 150px
+					
+			width 100%
+			padding-top 14px
+			.div_table
+				background-color #f9f9f9
+				border-radius 8px
+				
+				.minibox
+					background-color #E9E9E9
+					border 1px solid #D3D3D3
+					border-radius 4px
+					margin auto 5px
+					text-align center
+			
+			.admin_items
+				display flex
+				a
+					align-items center
+					display flex
+					font-size .9em
+					height 38px
+					margin auto
+					width 38px
+					i
+						margin auto
+	.sectionE
+		width 12%
+		display flex
+		.menu_options
+			width 100%
+			background-color #f9f9f9
+			ul
+				list-style none
+				padding 0				
+			button
+				background-color #7952b3
+				color #FFF
+				font-weight bold
+				width 100%
+				i					
+					float right
+					margin-top 5px
+					
+				&:hover					
+					color lightblue
+					outline 0
+				&:active
+					outline 0
+				&:link
+					outline 0
+				&:focus
+					box-shadow 0 0 4px 0.10rem lightblue
+
+@font-face
+	font-family QuicksandR	
+	src url(../fonts/quicksand/Quicksand-Regular.ttf)
+	
+@font-face
+	font-family QuicksandB	
+	src url(../fonts/quicksand/Quicksand-Bold.ttf)
+
+
+	
+						
+						
+
+				
+
+
+				
+				
+
+				

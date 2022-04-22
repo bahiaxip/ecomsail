@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
+use Closure,Auth;
+
 use Illuminate\Http\Request;
 
 class Admin
 {
+    public $user;
     /**
      * Handle an incoming request.
      *
@@ -16,6 +18,17 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        $this->user = Auth::user();
+        //aunque si se añade el middleware auth antes del middleware admin no debe dar 
+        //error, en el caso de no añadirlo antes se genera un error con la llamada 
+        //Auth::user(), ya que devueleve null al no haber usuario logueado, para 
+        //evitarlo, modificamos el condicional if:
+        //if($this->user->role == 1):
+        if($this->user && $this->user->role == 1):
+            return $next($request);
+        else:
+            return redirect('/');
+        endif;
+        
     }
 }

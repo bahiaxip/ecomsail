@@ -84,7 +84,7 @@ class LoginController extends Controller
             endif;  
         endif;
     }
-
+//si se hace sin estar logueda genera error
     public function logout(){
         $status = Auth::user()->status;
         Auth::logout();

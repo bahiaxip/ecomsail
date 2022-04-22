@@ -15,7 +15,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-
+    @if(Route::is('login'))
+    <h2>
+        Hola
+    </h2>
+    @else
+    <h2>Adiós</h2>
+    @endif
     @section('content')
 
     @show
