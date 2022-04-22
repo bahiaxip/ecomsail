@@ -24,6 +24,8 @@ Route::group([
 	//users
 	Route::get('/users',\App\Http\Livewire\Admin\Users::class)->name('users');
 
+	//Products
+	Route::get('/products',\App\Http\Livewire\Admin\Product::class)->name('products');
 		
 })
 

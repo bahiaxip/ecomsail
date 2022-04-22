@@ -12,9 +12,9 @@
     </li>
     -->    
 
-    {{--@include('livewire.admin.products.create')--}}
-    {{--@include('livewire.admin.products.edit')--}}
-    {{--@include('livewire.admin.products.confirm')--}}
+    @include('livewire.admin.products.create')
+    @include('livewire.admin.products.edit')
+    @include('livewire.admin.products.confirm')
     <ul class="add">
         <li>
             <a href="#" class="btn btn-sm btn-primary" class="filter"><i class="fa-solid fa-plus"></i> Filtros</a>  
@@ -26,7 +26,7 @@
             </ul>
         </li>
         <li>
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
         </li>
         
     </ul>
@@ -36,27 +36,27 @@
                 <tr>
                     <!--<td width="64"></td>-->
                     <td>Nombre</td>
-                    <td>Slug</td>           
-                    <td>Descripción</td>
+                    <td>Detalle</td>           
+                    <td>Categoría</td>
                     <td width="140">Acciones</td>
                 </tr>
             </thead>
             <tbody>
-                @foreach($categories as $cat)
+                @foreach($products as $prod)
                 <tr>
-                    <!--<td><img src="{{ url('storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32"></td>-->
-                    <td>{{ $cat->name }}</td>
-                    <td>{{ $cat->slug }}</td>
-                    <td>{{ $cat->description }}</td>
+                    <!--<td><img src="{{ url('storage/'.$prod->image) }}" alt="{{ $prod->file_name }}" width="32"></td>-->
+                    <td>{{ $prod->name }}</td>
+                    <td>{{ $prod->detail }}</td>
+                    <td>{{ $prod->id }}</td>
                     <td>
                         <div class="admin_items">
-                            <a href="{{ url('admin/category/'.$cat->id.'/edit') }}" title="Editar">
+                            <a href="#" title="Editar">
                                 <i class="fa-solid fa-edit"></i>
                             </a>
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})">
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="edit({{$prod->id}})">
                                 <i class="fa-solid fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm back_livewire2" title="Eliminar usuario" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
+                            <button class="btn btn-sm back_livewire2" title="Eliminar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}})">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>

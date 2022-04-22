@@ -27,7 +27,7 @@
     <div class="header">            
         @include('layouts.nav')
     </div>
-    @if(Route::is(['users','categories']))
+    @if(Route::is(['users','categories','products']))
     <div class="content">
         <div class="sectionL">
             @include('layouts.sidebar')

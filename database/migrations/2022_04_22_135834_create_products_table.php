@@ -15,6 +15,25 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->integer('status');            
+            $table->string('name');
+            $table->string('slug')->nullable();
+            $table->integer('category_id');
+            $table->integer('subcategory_id');
+            $table->decimal('price')->nullable();
+            $table->integer('state_discount')->default(0);
+            $table->integer('discount')->nullable();
+            $table->date('init_date_discount')->nullable();
+            $table->date('end_date_discount')->nullable();
+            $table->text('detail');
+            $table->string('path_root')->nullable();
+            $table->string('path_tag')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_ext')->nullable();
+            $table->string('image')->nullable();
+            $table->string('thumb')->nullable();
+            $table->integer('code')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

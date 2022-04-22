@@ -11,7 +11,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{ url('/admin/products') }}">
+				<a href="{{ route('products') }}">
 					<i class="fa-solid fa-box"></i> Productos
 				</a>
 			</li>
