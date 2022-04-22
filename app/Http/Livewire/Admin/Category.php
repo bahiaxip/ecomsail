@@ -16,15 +16,42 @@ class Category extends Component
     public $cat_id=0;
     public $categories;
     public $catIdTmp;
+
+    public $filter_type;
+
+
     //se ha añadido el middleware en el archivo RouteServiceProvider, de forma genérica
     //ya que no encuentra la ruta desde aquí
     public function __construct(){
         //$this->middleware('admin');
     }
 
-    public function mount(){
+    public function mount($filter_type){
+        $this->filter_type = $filter_type;
+
         //$this->categories = Cat::where('type',0)->where('status','1')->orderBy('id','desc')->get();
         //$data = ['categories' => $categories];
+    }
+
+    public function set_filter_query($filter_type){
+        $cat=[];
+        switch($filter_type):
+            case '0':
+                //$this->filterType = $filterType;
+                $cat = Cat::where('status',$filter_type)->orderBy('id','desc')->paginate(20);
+                break;
+            case '1':                
+                $cat = Cat::where('status',$filter_type)->orderBy('id','desc')->paginate(20);
+                break;
+            case '2':                
+                $cat = Cat::onlyTrashed()->orderBy('id','desc')->paginate(20);
+                break;
+            case '3':                
+                $cat = Cat::orderBy('id','desc')->paginate(20);
+                break;
+
+        endswitch;
+        return $cat;
     }
 
     public function create(){
@@ -126,9 +153,9 @@ class Category extends Component
     }
 
     public function render()
-    {
-        $this->categories = Cat::where('type',0)->where('status','1')->orderBy('id','desc')->get();
-        $data = ['categories' => $this->categories];
+    {        
+        $query = $this->set_filter_query($this->filter_type);
+        $data = ['categ' => $query];
         return view('livewire.admin.categories.index',$data);
     }
 }

@@ -16,14 +16,24 @@
     @include('livewire.admin.categories.edit')
     @include('livewire.admin.categories.confirm')
     <ul class="add">
-        <li>
-            <a href="#" class="btn btn-sm btn-primary" class="filter"><i class="fa-solid fa-plus"></i> Filtros</a>  
-            <ul >
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Públicos</a></li>
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Borrador</a></li>
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a></li>
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Todos</a></li>
-            </ul>
+        <li>            
+            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtros
+            </button>            
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li>
+                    <a href="{{ route('categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                </li>
+                <li>
+                    <a href="{{ route('categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                </li>
+                <li>
+                    <a href="{{ route('categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                </li>
+                <li>
+                    <a href=" {{ route('categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                </li>
+            </ul>            
         </li>
         <li>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
@@ -42,7 +52,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($categories as $cat)
+                @foreach($categ as $cat)
                 <tr>
                     <!--<td><img src="{{ url('storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32"></td>-->
                     <td>{{ $cat->name }}</td>

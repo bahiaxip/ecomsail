@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Product as Prod;
-
+use Illuminate\Http\Request;
 class Product extends Component
 {
     public $name;
@@ -22,9 +22,36 @@ class Product extends Component
     public $prod_id;
     //temporal de confirmación
     public $prodIdTmp;
+    //tipo de filtrado (publico,borrador,reciclaje,todos)
+    public $filter_type;
+    
 
-    public function mount(){
+    public function mount($filter_type){
+        $this->filter_type = $filter_type;    
+    }
+    public function updated(){
         
+    }
+
+    public function set_filter_query($filter_type){
+        $prod=[];
+        switch($filter_type):
+            case '0':
+                //$this->filterType = $filterType;
+                $prod = Prod::where('status',$filter_type)->orderBy('id','desc')->paginate(20);
+                break;
+            case '1':                
+                $prod = Prod::where('status',$filter_type)->orderBy('id','desc')->paginate(20);
+                break;
+            case '2':                
+                $prod = Prod::onlyTrashed()->orderBy('id','desc')->paginate(20);
+                break;
+            case '3':                
+                $prod = Prod::orderBy('id','desc')->paginate(20);
+                break;
+
+        endswitch;
+        return $prod;
     }
 
     public function store(){
@@ -130,8 +157,8 @@ class Product extends Component
 
     public function render()
     {
-        $prod = Prod::where('status',1)->orderBy('id','desc')->paginate(20);
-        $data = ['products' => $prod];
+        $query = $this->set_filter_query($this->filter_type);
+        $data = ['products' => $query];
         return view('livewire.admin.products.index',$data);
     }
 

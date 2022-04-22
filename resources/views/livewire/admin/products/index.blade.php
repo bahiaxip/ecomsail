@@ -16,14 +16,19 @@
     @include('livewire.admin.products.edit')
     @include('livewire.admin.products.confirm')
     <ul class="add">
+        
         <li>
-            <a href="#" class="btn btn-sm btn-primary" class="filter"><i class="fa-solid fa-plus"></i> Filtros</a>  
-            <ul >
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Públicos</a></li>
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Borrador</a></li>
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a></li>
-                <li><a href="#"><i class="fa-solid fa-globe-americas"></i> Todos</a></li>
+            <div class="dropdown">
+            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtros
+            </button>            
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="{{ route('products',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Públicos</a></li>
+                <li><a href="{{ route('products',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a></li>
+                <li><a href="{{ route('products',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a></li>
+                <li><a href=" {{ route('products',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a></li>
             </ul>
+            </div>
         </li>
         <li>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct"><i class="fa-solid fa-plus"></i> Crear Producto</a>    

@@ -11,12 +11,12 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('products') }}">
+				<a href="{{ route('products',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-box"></i> Productos
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('categories') }}">
+				<a href="{{ route('categories',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-tags"></i> Categorías
 				</a>
 			</li>
