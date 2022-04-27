@@ -3,29 +3,58 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
+
+use  Livewire\WithFileUploads;
+
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Str;
 class Product extends Component
 {
+    use WithFileUploads;
     public $name;
     public $status=0;
-    public $category;
-    public $category_id;
-    public $subcategory_id;
+    public $category=0;
+    //public $category_id=0;
+    public $subcategory_id;    
+    public $detail=null;
+
+    public $image;
+    public $code;
+    public $price=1.00;
+    public $stock=1;
     public $state_discount;
     public $discount;
     public $init_date_discount;
     public $end_date_discount;
-    public $detail;
-    public $image;
-    public $code;
+    public $short_detail;
     public $prod_id;
+
+    //edit
+    public $availability;
+    public $weight;    
+    public $long;
+    public $width;
+    public $height;    
+    public $tax;
+    public $attachment;
+    public $detail2 = null;
     //temporal de confirmación
     public $prodIdTmp;
     //tipo de filtrado (publico,borrador,reciclaje,todos)
     public $filter_type;
     
+    public $typealert;
 
+    //personalizamos el nombre del atributo de los mensajes de error
+    protected $validationAttributes = [
+        'short_detail' => 'descipción corta',
+        'category' => 'categoría',
+        'detail' => 'descripción',
+        'image' => 'imagen'
+
+    ];
     public function mount($filter_type){
         $this->filter_type = $filter_type;    
     }
@@ -54,19 +83,68 @@ class Product extends Component
         return $prod;
     }
 
+
+
     public function store(){
+        //regex con validación con coma y punto de máximo 2 decimales
         $validated = $this->validate([
             'name' => 'required',
+            'category' => 'required|gt:0',
+            'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'status' => 'required',
+            'code' => 'nullable',
+            'stock' => 'required|gt:0',
+            'short_detail' => 'required|max:40',
             'detail' => 'required',
-            'status' => 'required'
+            'image' => 'nullable|image'
         ]);
-        $category = Prod::create([
+        
+        //convertimos a double y formateamos a 2 decimales           
+        //$float_price = floatval($validated['price']);        
+        //$price = number_format($float_price,2);        
+        //creamos registro
+        //dd($price);
+        $product = Prod::create([
             'name' => $validated['name'],
-            'detail' =>$validated['detail'],
-            'category_id' => 0,
+            'slug' => Str::slug($validated['name']),
+            'category_id' => $validated['category'],
             'subcategory_id' => 0,
-            'status' => $validated['status']
+            'price' => $validated['price'],
+            'status' => $validated['status'],
+            'code' => $validated['code'],
+            'stock' => $validated['stock'],
+            'detail' =>$validated['detail'],
+            'short_detail' => $validated['short_detail'],
         ]);
+
+        if($validated['image'] !== null){
+//comprobar si existe imagen y eliminar la anterior
+            $image_name = $this->image->getClientOriginalName();
+            $ext = $this->image->getClientOriginalExtension();            
+            //almacenamos con el método store que genera un nombre de archivo aleatorio
+            $path_date= date('Y-m-d');
+            $image = $this->image->store('public/files/'.$path_date,'');
+            $path_tag = 'public/files/'.$path_date.'/';
+            //eliminamos el directorio public
+            $imagelesspublic = substr($image,7);
+            $thumb = $image;
+            //dd($ext);
+            $product->update([
+                'image' => $imagelesspublic,
+                'thumb' => $imagelesspublic,
+                'file_name' => $image_name,
+                'file_ext' => $ext,
+                'path_tag' => $path_tag                
+            ]);
+        }
+//prueba para añadir excepciones en caso de error en la vista
+        if(!$product){
+            $errorProduct = "Se produjo un error";
+            $this->typalert = 'danger';
+        }
+
+        $this->typealert = 'success';
+        //dd($validated['category']);
         session()->flash('message',"Producto creado correctamente");
         $this->clear2();
         $this->emit('addProduct');
@@ -75,34 +153,52 @@ class Product extends Component
     public function edit($id){
         //sleep(3);
         //registro de la tabla users con el usuario seleccionado
-        $prod
-        =Prod::where('id',$id)->first();
+        $prod=Prod::where('id',$id)->first();
         $this->prod_id=$prod->id;
         //(se podría evitar la consulta $user y llamar al método user del modelo 
         //Profile belongsTo...)
         //asignación de datos mediante consulta a tabla users 
         $this->name = $prod->name;        
         $this->detail=$prod->detail;
-        $this->category_id = $prod->category_id;
-        $this->status=$prod->status;        
+        $this->category = $prod->category_id;
+        $this->status=$prod->status;
+        $this->price = $prod->price;
+        $this->short_detail = $prod->short_detail;
+        $this->stock = $prod->stock; 
+        $this->typealert = 'success';
+        //$this->availability = $p
+        $this->emit('description2',$this->detail);       
     }
 
-    public function update(){
+    public function update(){        
         $validated = $this->validate([
             'name' => 'required',
+            'category' => 'required|gt:0',
+            'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'status' => 'required',
+            'code' => 'nullable',
+            'stock' => 'required|gt:0',
+            'short_detail' => 'required',
             'detail' => 'required',
-            'status' => 'required'
         ]);
+
         if($this->prod_id){
             $prod = Prod::where('id',$this->prod_id)->first();
             $prod->update([
                 'name' => $validated['name'],
-                'detail' =>$validated['detail'],
-                'category_id' => 0,
-                'subcategory_id' => 0,
-                'status' => $validated['status']
+            'slug' => Str::slug($validated['name']),
+            'category_id' => $validated['category'],
+            'subcategory_id' => 0,
+            'price' => $validated['price'],
+            'status' => $validated['status'],
+            'code' => $validated['code'],
+            'stock' => $validated['stock'],
+            'detail' =>$validated['detail'],
+            'short_detail' => $validated['short_detail'],
             ]);
         }
+        $this->typealert = 'success';
+
         session()->flash('message','Producto actualizado correctamente');
         $this->clear2();
         $this->emit('editProduct');
@@ -137,14 +233,25 @@ class Product extends Component
             $this->emit('confirmDel');
         }
     }
+    //se inicia cada vez que mostramos el modal que contiene editor
+    public function setckeditor(){        
+        $this->emit('description1');
+    }
 
     //limpiar datos de formulario
     public function clear(){
         if($this->prod_id)
             $this->prod_id='';        
         $this->name='';
+        $this->category = 0;
+        $this->price = 1.00;
+        $this->status = 0;
+        $this->image = null;
+        $this->code = null;
+        $this->short_detail = null;
         $this->detail = '';
-        $this->status=0;
+        
+
 
         //$this->emit('userUpdated');
     }
@@ -158,7 +265,9 @@ class Product extends Component
     public function render()
     {
         $query = $this->set_filter_query($this->filter_type);
-        $data = ['products' => $query];
+        $cats = Category::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');
+        $cats->prepend('Ninguna', 0);
+        $data = ['products' => $query,'cats'=> $cats];
         return view('livewire.admin.products.index',$data);
     }
 

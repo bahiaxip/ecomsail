@@ -1,4 +1,13 @@
 <div>
+
+    @section('path')
+    &nbsp;>&nbsp;
+    <li>
+        <a href="{{ route('users') }}">
+            <i class="fa-solid fa-columns"></i> Usuarios
+        </a>
+    </li>
+    @endsection
     <!-- modals -->
     @include('livewire.admin.users.create')
     @include('livewire.admin.users.edit')

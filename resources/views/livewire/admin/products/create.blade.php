@@ -1,6 +1,6 @@
 <!-- Modal crear producto -->
 <div wire:ignore.self class="modal fade " id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog ">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <div class="modal-title h5">
@@ -9,41 +9,130 @@
       </div>
       <div class="modal-body">
         <form enctype="multipart/form-data">
-        	<div class="form-group">
-        		<label for="name">Nombre</label>
-        		<input type="text" name="name" class="form-control" wire:model="name"/>
-            @error('name')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
-        	</div>
-        	<div class="form-group">
-        		<label for="type">Tipo</label>
-        		
-            <!--
-            <select name="type" class="form-select" wire:model="type">
-              <option value="0">Categoría</option>
-              <option value="1">Subcategoría</option>
-            </select>
-          -->
-          {{ Form::textarea('detail',null,['class' => 'form-control', 'wire:model' => 'detail'])}}
-        	</div>
+          <div class="row">
+            <div class="col-md-6">
+              {{ Form::label('nombre','Nombre') }}
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fa-solid fa-keyboard"></i>
+                </span>                
+                <!--<input type="text" name="name" class="form-control" wire:model="name"/>-->
+                {{ Form::text('nombre',null,['class' => 'form-control','wire:model' =>'name'])}}
+              </div>
+              @error('name')
+              <p class="text-danger">{{$message}}</p>
+              @enderror
+            </div>
+            <div class="col-md-6">
+              {{ Form::label('category','Categoría') }}
 
-          <div class="form-group">
-            <label for="category">Categoría</label>
-            {{ Form::select('status',[0 => 'Categoría',1 => 'Subcategoría'],null,['class' => 'form-select', 'wire:model' => 'category'])}}
+              {{ Form::select('category',$cats,null,['class' => 'form-select', 'wire:model' => 'category'])}}
+              @error('category')
+              <p class="text-danger">{{$message}}</p>
+              @enderror
+            </div>
           </div>
-
-          <div class="form-group">
-            <label for="status">Estado</label>
+          <div class="row mtop16">
+            <div class="col-md-6">
+              {{ Form::label('price','Precio') }}
+              {{ Form::number('price',0,['class' => 'form-control','wire:model' =>'price','step' =>'any','min' => 0]) }}
+              @error('price')
+              <p class="text-danger">{{$message}}</p>
+              @enderror
+            </div>
+          {{--
+            <div class="col-md-6">
+              {{ Form::label('stock','Stock') }}
+                             
+              {{ Form::number('stock',0,['class' => 'form-control','wire:model'=>'stock'])}}
+              @error('stock')
+              <p class="text-danger">{{$message}}</p>
+              @enderror
+            </div>--}}
+            <div class="col-md-6">
+              <label for="status">Estado</label>
             {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+            </div>
           </div>
+          <div class="row mtop16">
+            <div class="col-md-6">
+              {{ Form::label('image','Imagen') }}
+              {{ Form::file('image',['class' => 'form-control','accept'=> 'image/*','wire:model' => 'image']) }}
+              @error('image')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+            <div class="col-md-6">
+              {{ Form::label('refcode','Cod.Ref') }}
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fa-solid fa-keyboard"></i>
+                </span>
+                {{ Form::text('code',null,['class' => 'form-control','wire:model'=>'code'])}}
+                @error('code')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+              </div>
+            </div>            
+          </div>
+          <div class="row mtop16">
+            <div class="col-md-6">
+              {{ Form::label('short_detail','Descripción corta')}}
+              {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
+              @error('short_detail')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+            <div class="col-md-6">
+              {{ Form::label('stock','Stock')}}
+              {{ Form::number('stock',1,['class' => 'form-control','wire:model' => 'stock'])}}
+              @error('stock')
+                <p class="text-danger">{{$message}}</p>
+              @enderror
+            </div>
+          </div>
+          <div class="row mtop16">
+            <div class="col-md-12" wire:ignore id="form_description">
+              {{ Form::label('detail','Descripción')}}
+              {{ Form::textarea('detail',null,['class' => 'form-control','id' => 'friendly_edit1','wire:model'=>'detail'])}}
+              
+              <script>
+              editor_init('friendly_edit1');
+                CKEDITOR.instances.friendly_edit1.on('change',function(e){
+                    @this.detail=this.getData();
+                    console.log("getData: ",this.getData)
+                    if(this.getData() == ""){
+                      console.log("description es null")
+                    }
+                });
+              </script>
+            </div>
+            @error('detail')
+              <p class="text-danger">{{$message}}</p>
+            @enderror
+          </div>
+
+          
           
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()">Cancelar</button>
-        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="store()">Crear</button>
+        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="store()" id="btn_create_products">Crear</button>
       </div>
     </div>
   </div>
 </div>
+
+@section('scripts')
+<script>
+//document.onreadystatechange = () => {
+/*
+document.addEventListener('DOMContentLoaded',() => {
+  if(document.readyState == "complete")
+    if(document.querySelector('#friendly_edit'))
+      editor_init('friendly_edit');
+})
+*/
+</script>
+@endsection

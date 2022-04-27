@@ -18,7 +18,7 @@ Route::group([
 	'prefix'=>'/admin'
 	],function(){
 	//categories
-	Route::get('/categories/{filter_type}',\App\Http\Livewire\Admin\Category::class)->name('categories');
+	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)->name('categories');
 	//Route::get('/admin',Admin\Category::class)->name('categories');
 
 	//users

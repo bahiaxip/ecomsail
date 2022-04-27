@@ -55,6 +55,8 @@ return [
     */
 
     'asset_url' => null,
+    //genera error, ya que el livewire.js se llama mediante esta variable
+    //'asset_url'=>'http://localhost:3000/public',
 
     /*
     |--------------------------------------------------------------------------

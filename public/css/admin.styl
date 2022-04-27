@@ -1,13 +1,24 @@
 color1 = #FFF
 color2 = #494949
 
-
+/* ocultar barra scroll en chrome sustituido al elemento directamente más abajo */
+/*
+::-webkit-scrollbar{
+	display: none;					
+}
+*/
+/*
 *
 	font-family: QuicksandR;
-/*
-body
-	font-family: 'Open Sans', sans-serif;
 */
+
+body
+	/*
+	font-family: 'Open Sans', sans-serif;
+	*/
+	font-family QuicksandR;
+	font-size .9em 		
+
 	
 .mtop16
 	margin-top 15px
@@ -40,7 +51,10 @@ body
 			padding 0
 			list-style: none
 			a
+				color #696969
 				text-decoration none
+				font-size .8em
+				
 				
 	.sectionL
 		background-color #FFF
@@ -76,7 +90,7 @@ body
 							cursor pointer
 								
 	.sectionR
-		width 76%
+		width 86%
 		margin 0px 10px		
 		.inner
 			ul.add
@@ -91,11 +105,21 @@ body
 				padding 4px 4px
 				width 100%
 				
-				li
+				li					
+					font-family QuicksandB
+					
 					list-style none
+					margin auto 2px
 					position relative
-					a
+					button
+						color #F3F3F3
+						font-size .9em
 						margin auto 2px
+						&:hover
+							color #FFF
+					ul
+						li
+							font-size .9em
 				/*	
 					&:hover
 						ul							
@@ -110,9 +134,42 @@ body
 				*/	
 			width 100%
 			padding-top 14px
+			/* ocultar barra scroll en chrome */
+			.div_table::-webkit-scrollbar{
+					display none
+				}
 			.div_table
 				background-color #f9f9f9
 				border-radius 8px
+				overflow-x auto
+				scrollbar{ display none}
+				/* ocultar barra scroll en mozilla firefox */
+				scrollbar-width none
+				
+				
+				
+				thead
+					font-family QuicksandB !important
+					font-size .9em
+					tr
+						td
+							text-align center
+				/*
+				tbody { > tr, & { > td { > a {						
+					display flex
+					vertical-align middle
+					align-items center
+					margin auto
+					justify-content center
+				}}}}
+				*/
+				tbody
+					tr
+						td							
+							text-align center
+							vertical-align middle
+							
+					
 				
 				.minibox
 					background-color #E9E9E9
@@ -133,7 +190,7 @@ body
 					i
 						margin auto
 	.sectionE
-		width 12%
+		width 8%
 		display flex
 		.menu_options
 			width 100%
@@ -160,6 +217,13 @@ body
 				&:focus
 					box-shadow 0 0 4px 0.10rem lightblue
 
+
+.active
+	display block !important
+.subcat
+	display none
+	
+
 @font-face
 	font-family QuicksandR	
 	src url(../fonts/quicksand/Quicksand-Regular.ttf)
@@ -170,7 +234,6 @@ body
 
 
 	
-						
 						
 
 				

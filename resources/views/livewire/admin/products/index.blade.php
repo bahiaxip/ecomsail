@@ -1,20 +1,37 @@
 <div>
-    
-    {{-- Stop trying to control. --}}
+    @section('title','Productos')
 
-
-
-
-    <!--<li>
-        <a href="#">
-            <i class="fa-solid fa-box"></i> Categorías
+    @section('path')
+    &nbsp;>&nbsp;
+    <li>
+        <a href="{{ route('products',1) }}">
+            <i class="fa-solid fa-columns"></i> Productos
         </a>
     </li>
-    -->    
-
+    @endsection
     @include('livewire.admin.products.create')
     @include('livewire.admin.products.edit')
     @include('livewire.admin.products.confirm')
+
+    @if(session()->has('message'))
+    <div class="container ">
+        <div class="alert alert-{{$typealert}}">            
+            <h2 >{{session('message') }}</h2>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                $('.alert').slideDown();
+                setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+            </script>
+        </div>
+    </div>
+    @endif
+
     <ul class="add">
         
         <li>
@@ -31,32 +48,46 @@
             </div>
         </li>
         <li>
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
         </li>
         
     </ul>
     <div class="div_table shadow mtop16">
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <!--<td width="64"></td>-->
+                    <td width="40">ID</td>
+                    <td width="64"></td>
                     <td>Nombre</td>
-                    <td>Detalle</td>           
+                    <td>Descripción corta</td>
                     <td>Categoría</td>
+                    <td>Precio</td>
+                    <td>Stock</td>
+                    <td>Cod.Ref.</td>
                     <td width="140">Acciones</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($products as $prod)
                 <tr>
-                    <!--<td><img src="{{ url('storage/'.$prod->image) }}" alt="{{ $prod->file_name }}" width="32"></td>-->
+                    <td><a href="#">{{ $prod->id }}</a></td>
+                    <td>
+                        @if($prod->image)
+                        <img src="{{ url('/storage/'.$prod->image) }}" alt="{{ $prod->file_name }}" width="32">
+                        @else
+                        <img style="margin:auto" src="{{ url('images/bolsas-de-compra.png') }}" alt="{{ $prod->file_name }}" width="32">
+                        @endif
+                    </td>
                     <td>{{ $prod->name }}</td>
-                    <td>{{ $prod->detail }}</td>
-                    <td>{{ $prod->id }}</td>
+                    <td>{{ $prod->short_detail }}</td>
+                    <td>{{ $prod->cat->name }}</td>
+                    <td>{{ $prod->price }}</td>
+                    <td>{{ $prod->stock }}</td>
+                    <td>{{ $prod->code }}</td>
                     <td>
                         <div class="admin_items">
-                            <a href="#" title="Editar">
-                                <i class="fa-solid fa-edit"></i>
+                            <a href="#" title="Inventario">
+                                <i class="fa-solid fa-list-check"></i>
                             </a>
                             <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="edit({{$prod->id}})">
                                 <i class="fa-solid fa-edit"></i>
@@ -67,7 +98,10 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach         
+                @endforeach
+                <tr>
+                    <td colspan="6">{{ $products->links() }}</td>
+                </tr>
             </tbody>
         </table>
     </div>

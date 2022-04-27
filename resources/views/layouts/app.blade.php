@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf_token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+    <meta name="route_name" content={{ Route::currentRouteName() }}>
+    <title>EcomSail - @yield('title')</title>
     <!-- bootstrap csss -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--nav top -->
@@ -14,13 +15,22 @@
     
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">    
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
     <script src="https://kit.fontawesome.com/8588bc45a2.js" crossorigin="anonymous"></script>
     
     
     <!-- bootstrap.bundle para dropdown menu de bootstrap -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="{{ url('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{url('js/function_editor.js')}}"></script>
+
+
+    
+    
     @livewireStyles
 </head>
 <body>
@@ -37,15 +47,18 @@
                 <nav class="paths">
                     <ul >
                         <li>
-                            <a href="#">
-                                <i class="fa-solid fa-columns"></i> Panel
+                            <a href="{{ route('users') }}">
+                                <i class="fa-solid fa-columns"></i> Admin
                             </a>
                         </li>
-                        @section('path')
-                        @show
+                        @yield('path')
+
+
                     </ul>
                 </nav>
-                @if(Session::has('message'))
+                {{--@if(Session::has('message'))--}}
+                @if(session()->has('message'))
+                <h2>Hola</h2>
                 <div class="container">
                     <div class="alert alert-{{ Session::get('typealert') }} hide" >
                         {{ Session::get('message') }}
@@ -83,20 +96,37 @@
                 @endif
                 {{$slot ?? ''}}
             </div>
+            
+        </div>
+        <div class="sectionE">
+            
         </div>
     </div>
     @else   
     {{$slot ?? ''}}
     @endif
+
     @livewireScripts
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--version 3 da error con tooltip-->    
+    
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    @stack('scripts')
+    <!-- versión 2.7 -->
+    <!--<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>-->
+
+
+{{--mover arriba--}}
+    
     <script src="{{url('js/functions.js')}}"></script>
     <script>
     
+        
     
         
 
     </script>
+    
 </body>
-
+    
 </html>

@@ -1,41 +1,90 @@
 <!-- Modal crear usuario -->
 <div wire:ignore.self class="modal fade " id="editCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog ">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <div class="modal-title h5">
           Editar Categoría
         </div>
       </div>
-      <div class="modal-body">
+      <div class="modal-body">              
           {{ Form::hidden('cat_id',$cat_id,['wire:model' => 'cat_id']) }}
 
-        	<div class="form-group">
-        		<label for="name">Nombre</label>
-        		<input type="text" name="name" class="form-control" wire:model="name"/>
-            @error('name')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
-        	</div>
-        	<div class="form-group">
-        		<label for="type">Tipo</label>
-        		
-            <!--
-            <select name="type" class="form-select" wire:model="type">
-              <option value="0">Categoría</option>
-              <option value="1">Subcategoría</option>
-            </select>
-          -->
-          {{ Form::select('type',["0"=> 'Categoría',"1" => 'Subcategoría'],null,['class' => 'form-select', 'wire:model' => 'type'])}}
-          
-            
-        	</div>
-
-          <div class="form-group">
+          <div class="row">
+            	<div class="col-md-6">
+            		<label for="name">Nombre</label>
+            		<input type="text" name="name" class="form-control" wire:model="name"/>
+                @error('name')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            	</div>        	
+              <div class="col-md-6">
+            		<label for="type">Categoría padre</label>
+            		
+                <!--
+                <select name="type" class="form-select" wire:model="type">
+                  <option value="0">Categoría</option>
+                  <option value="1">Subcategoría</option>
+                </select>
+              -->
+              {{ Form::select('type',$cats,null,['class' => 'form-select', 'wire:model' => 'type'])}}
+            	</div>
+          <!--<div class="form-group">
             <label for="status">Estado</label>
             {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+          </div>-->
           </div>
-          
+          <div class="row mtop16">
+              <div class="col-md-6">
+                  <label for="customFile" >Default file input example</label>
+                    <!--<label for="icon" class="mtop16">Icono:</label>-->
+                    <!--<div class="form-file">                      
+                      <input class="form-control" type="file" id="formFile" wire:model="icon">
+                    </div>-->
+                  
+                  {!! Form::file('icon',['class' =>'form-control','id' => 'customFile','accept' =>'image/*','wire:model' => 'icon'])!!}
+                  @error('icon')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                  
+              </div>      
+              <div class="col-md-6">
+                  <label for="status">Estado</label>
+                  <div class="input-group">                    
+                    {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+                  </div>  
+              </div>
+          </div>
+          <div class="row mtop16">
+              <div class="col-md-12" wire:ignore>
+                  <label for="description">Descripción</label>
+                  {{ Form::textarea('description',null,['class' => 'form-control','id' =>'friendly_edit2','wire:model.lazy' => "datos"])}}
+                  @error('description')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
+              <script>
+                //ckeditor genera conflicto con wire:model, para ello 
+                //creamos el siguiente script para establecer la propiedad
+                //description desde JavaScript
+                document.addEventListener('DOMContentLoaded',() => {
+                    //en el modal create llamamos a una función externa
+                    //en edit lo metemos directamente, eliminamos del segundo
+                    //objeto el string 'Image','Link'y 'Unlink'  temporalmente
+                    CKEDITOR.replace('friendly_edit2',{
+                      toolbar:[
+                      { name:'clipboard', items:['Cut','Copy','Paste','PasteText','-','Undo','Redo']},
+                      { name: 'basicstyles',items:['Bold','Italic','BulletedList','Strike','Blockquote']},
+                      { name: 'document', items:['CodeSnippet','EmojiPanel','Preview','Source']}
+                      ]
+                    });
+                    CKEDITOR.instances.friendly_edit2.on('change',function(e){
+                        @this.description=this.getData();
+                    });
+                })
+                
+              </script>
+          </div>
         
       </div>
       <div class="modal-footer">
@@ -45,3 +94,8 @@
     </div>
   </div>
 </div>
+@push('scripts')
+<script>
+  
+</script>
+@endpush

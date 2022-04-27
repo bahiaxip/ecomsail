@@ -1,20 +1,44 @@
 <div>
     
-    {{-- Stop trying to control. --}}
+    @section('title','Categorías')
 
-
-
-
-    <!--<li>
-        <a href="#">
-            <i class="fa-solid fa-box"></i> Categorías
+    @section('path')
+    &nbsp;>&nbsp;
+    <li>
+        <a href="{{ url('admin/categories/1') }}">
+            <i class="fa-solid fa-columns"></i> Categorías
+        </a>
+    </li>    
+    <li class="subcat">
+        <a href="{{ url('admin/categories/1/') }}" id="subcat">
+            <i class="fa-solid fa-columns"></i> Subcategorías
         </a>
     </li>
-    -->    
+    @endsection
 
     @include('livewire.admin.categories.create')
     @include('livewire.admin.categories.edit')
     @include('livewire.admin.categories.confirm')
+
+    @if(session()->has('message'))
+    <div class="container ">
+        <div class="alert alert-{{$typealert}}">            
+            <h2 >{{session('message') }}</h2>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                $('.alert').slideDown();
+                setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+            </script>
+        </div>
+    </div>
+    @endif
+    
     <ul class="add">
         <li>            
             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,43 +60,60 @@
             </ul>            
         </li>
         <li>
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
         </li>
         
     </ul>
+
     <div class="div_table shadow mtop16">
         <table class="table">
             <thead>
                 <tr>
-                    <!--<td width="64"></td>-->
-                    <td>Nombre</td>
-                    <td>Slug</td>           
+                    <td width="64"></td>                    
+                    <td>Nombre</td>           
                     <td>Descripción</td>
                     <td width="140">Acciones</td>
                 </tr>
             </thead>
             <tbody>
-                @foreach($categ as $cat)
+                @foreach($categories as $cat)
                 <tr>
-                    <!--<td><img src="{{ url('storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32"></td>-->
+
+                    <td>
+                        @if($cat->image)
+                        <img src="{{ url('/storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32">
+                        @else
+                        <img src="{{ url('/images/bolsas-de-compra.png') }}" alt="{{ $cat->file_name }}" width="32">
+                        @endif
+                    </td>                    
                     <td>{{ $cat->name }}</td>
-                    <td>{{ $cat->slug }}</td>
-                    <td>{{ $cat->description }}</td>
+                    <!--
+                    usamos la sintaxis laravel con !! para limpiar los 
+                    tags añadidos del textarea en lugar de doble corchete
+                    -->
+                    <td>{!! $cat->description !!}</td>
                     <td>
                         <div class="admin_items">
-                            <a href="{{ url('admin/category/'.$cat->id.'/edit') }}" title="Editar">
+                            @if(!$subcat)
+                            <button class="btn btn-sm"  title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
                                 <i class="fa-solid fa-edit"></i>
-                            </a>
+                            </button>
+                            @endif
                             <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})">
                                 <i class="fa-solid fa-edit"></i>
                             </button>
+                            @if($filter_type!=2)
                             <button class="btn btn-sm back_livewire2" title="Eliminar usuario" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
+                            @endif
                         </div>
                     </td>
                 </tr>
-                @endforeach         
+                @endforeach
+                <tr>
+                    <td colspan="6">{{ $categories->links() }}</td>
+                </tr>         
             </tbody>
         </table>
     </div>
