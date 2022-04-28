@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 use App\Models\Category as Cat;
 use Illuminate\Http\Request;
 use Str;
+
 class Category extends Component
 {
     use WithFileUploads;
@@ -103,6 +104,8 @@ class Category extends Component
         $iconlesspublic="";
         $icon_name="";        
         $ext;
+
+//comprobar si existe otro slug igual
         $category = Cat::create([
             'name' => $validated['name'],
             'slug' => Str::slug($validated['name']),

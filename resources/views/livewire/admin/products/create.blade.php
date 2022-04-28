@@ -24,6 +24,13 @@
               @enderror
             </div>
             <div class="col-md-6">
+              <label for="status">Estado</label>
+              {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+            </div>
+            
+          </div>
+          <div class="row mtop16">
+            <div class="col-md-6">
               {{ Form::label('category','Categoría') }}
 
               {{ Form::select('category',$cats,null,['class' => 'form-select', 'wire:model' => 'category'])}}
@@ -31,29 +38,15 @@
               <p class="text-danger">{{$message}}</p>
               @enderror
             </div>
-          </div>
-          <div class="row mtop16">
             <div class="col-md-6">
-              {{ Form::label('price','Precio') }}
-              {{ Form::number('price',0,['class' => 'form-control','wire:model' =>'price','step' =>'any','min' => 0]) }}
-              @error('price')
+              {{ Form::label('subcategory','Subcategoría') }}
+              {{ Form::select('subcategory',$cats,null,['class' => 'form-select', 'wire:model' => 'subcategory','disabled'])}}
+              @error('subcategory')
               <p class="text-danger">{{$message}}</p>
               @enderror
             </div>
-          {{--
-            <div class="col-md-6">
-              {{ Form::label('stock','Stock') }}
-                             
-              {{ Form::number('stock',0,['class' => 'form-control','wire:model'=>'stock'])}}
-              @error('stock')
-              <p class="text-danger">{{$message}}</p>
-              @enderror
-            </div>--}}
-            <div class="col-md-6">
-              <label for="status">Estado</label>
-            {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
-            </div>
           </div>
+          
           <div class="row mtop16">
             <div class="col-md-6">
               {{ Form::label('image','Imagen') }}
@@ -63,7 +56,7 @@
                 @enderror
             </div>
             <div class="col-md-6">
-              {{ Form::label('refcode','Cod.Ref') }}
+              {{ Form::label('code','Cod.Ref') }}
               <div class="input-group">
                 <span class="input-group-text">
                   <i class="fa-solid fa-keyboard"></i>
@@ -77,11 +70,11 @@
           </div>
           <div class="row mtop16">
             <div class="col-md-6">
-              {{ Form::label('short_detail','Descripción corta')}}
-              {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
-              @error('short_detail')
-                <p class="text-danger">{{$message}}</p>
-                @enderror
+              {{ Form::label('price','Precio') }}
+              {{ Form::number('price',0,['class' => 'form-control','wire:model' =>'price','step' =>'any','min' => 0]) }}
+              @error('price')
+              <p class="text-danger">{{$message}}</p>
+              @enderror
             </div>
             <div class="col-md-6">
               {{ Form::label('stock','Stock')}}
@@ -92,10 +85,19 @@
             </div>
           </div>
           <div class="row mtop16">
+            <div class="col-md-12">
+              {{ Form::label('short_detail','Descripción corta')}}
+              {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
+              @error('short_detail')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+            
+          </div>
+          <div class="row mtop16">
             <div class="col-md-12" wire:ignore id="form_description">
               {{ Form::label('detail','Descripción')}}
-              {{ Form::textarea('detail',null,['class' => 'form-control','id' => 'friendly_edit1','wire:model'=>'detail'])}}
-              
+              {{ Form::textarea('detail',null,['class' => 'form-control','id' => 'friendly_edit1','wire:model'=>'detail'])}}              
               <script>
               editor_init('friendly_edit1');
                 CKEDITOR.instances.friendly_edit1.on('change',function(e){

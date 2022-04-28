@@ -8,16 +8,16 @@ use  Livewire\WithFileUploads;
 
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts;
 use Str;
 class Product extends Component
 {
     use WithFileUploads;
     public $name;
     public $status=0;
-    public $category=0;
+    public $category=0;    
     //public $category_id=0;
-    public $subcategory_id;    
+    public $subcategory=0;    
     public $detail=null;
 
     public $image;
@@ -25,20 +25,29 @@ class Product extends Component
     public $price=1.00;
     public $stock=1;
     public $state_discount;
-    public $discount;
-    public $init_date_discount;
-    public $end_date_discount;
+    
     public $short_detail;
     public $prod_id;
 
-    //edit
-    public $availability;
-    public $weight;    
+    //settings edit
+    public $availability=0;
+    public $product_state=0;
     public $long;
     public $width;
-    public $height;    
-    public $tax;
+    public $height;
+    public $weight;    
     public $attachment;
+    //infoprice edit
+    public $type_tax;
+    public $tax;
+    public $partial_price;
+    public $discount_type;
+    public $discount;    
+    public $init_discount;
+    public $end_discount;
+    
+    
+    
     public $detail2 = null;
     //temporal de confirmación
     public $prodIdTmp;
@@ -55,6 +64,8 @@ class Product extends Component
         'image' => 'imagen'
 
     ];
+
+//comprobar antes si existen categorías, si no, mostrar enlace a crear categoría
     public function mount($filter_type){
         $this->filter_type = $filter_type;    
     }
@@ -84,19 +95,20 @@ class Product extends Component
     }
 
 
-
+//comprobar si existe otro slug igual
     public function store(){
         //regex con validación con coma y punto de máximo 2 decimales
         $validated = $this->validate([
             'name' => 'required',
-            'category' => 'required|gt:0',
-            'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
             'status' => 'required',
+            'category' => 'required|gt:0',
+            'subcategory' =>'nullable',
+            'image' => 'nullable|image',
             'code' => 'nullable',
+            'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
             'stock' => 'required|gt:0',
             'short_detail' => 'required|max:40',
             'detail' => 'required',
-            'image' => 'nullable|image'
         ]);
         
         //convertimos a double y formateamos a 2 decimales           
@@ -107,14 +119,21 @@ class Product extends Component
         $product = Prod::create([
             'name' => $validated['name'],
             'slug' => Str::slug($validated['name']),
+            'status' => $validated['status'],
             'category_id' => $validated['category'],
             'subcategory_id' => 0,
-            'price' => $validated['price'],
-            'status' => $validated['status'],
             'code' => $validated['code'],
+            'price' => $validated['price'],
             'stock' => $validated['stock'],
-            'detail' =>$validated['detail'],
             'short_detail' => $validated['short_detail'],
+            'detail' =>$validated['detail'],
+        ]);
+
+        $settings_prod = SettingsProducts::create([
+            'product_id' => $product->id
+        ]);
+        $infoprice_prod = InfopriceProducts::create([
+            'product_id' => $product->id
         ]);
 
         if($validated['image'] !== null){
@@ -151,26 +170,48 @@ class Product extends Component
     }
 
     public function edit($id){
+
         //sleep(3);
         //registro de la tabla users con el usuario seleccionado
-        $prod=Prod::where('id',$id)->first();
+        $prod=Prod::onlyTrashed()->where('id',$id)->first();        
         $this->prod_id=$prod->id;
         //(se podría evitar la consulta $user y llamar al método user del modelo 
         //Profile belongsTo...)
         //asignación de datos mediante consulta a tabla users 
-        $this->name = $prod->name;        
-        $this->detail=$prod->detail;
-        $this->category = $prod->category_id;
+        $this->name = $prod->name;
         $this->status=$prod->status;
+        $this->category = $prod->category_id;
+        $this->subcategory = 0;
+        $this->code = $prod->code;
         $this->price = $prod->price;
+        $this->stock = $prod->stock;
         $this->short_detail = $prod->short_detail;
-        $this->stock = $prod->stock; 
+        $this->detail=$prod->detail;
+
+        $settings_prod = SettingsProducts::onlyTrashed()->where('product_id',$id)->first();
+        $this->availability = $settings_prod->availability;
+        $this->product_state = $settings_prod->product_state;
+        $this->long = $settings_prod->long;
+        $this->width = $settings_prod->width;
+        $this->height = $settings_prod->height;
+        $this->weight = $settings_prod->weight;
+
+        $infoprice_prod = InfopriceProducts::onlyTrashed()->where('product_id',$id)->first();        
+        $this->type_tax=$infoprice_prod->type_tax;
+        $this->tax =  $infoprice_prod->tax;
+        $this->partial_price= $infoprice_prod->partial_price;
+        $this->discount_type = $infoprice_prod->discount_type;
+        $this->discount = $infoprice_prod->discount;
+        $this->init_discount = $infoprice_prod->init_discount;
+        $this->end_discount = $infoprice_prod->end_discount;
+        
         $this->typealert = 'success';
-        //$this->availability = $p
+
         $this->emit('description2',$this->detail);       
     }
-
-    public function update(){        
+//detectar si es onlyTrashed
+    public function update(){
+        
         $validated = $this->validate([
             'name' => 'required',
             'category' => 'required|gt:0',
@@ -180,22 +221,102 @@ class Product extends Component
             'stock' => 'required|gt:0',
             'short_detail' => 'required',
             'detail' => 'required',
-        ]);
+            'image' => 'nullable|image',
 
+            'availability' => 'required',
+            'product_state' =>'required',
+            'long' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'width' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'height' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'weight' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            //'attachment' => 'nullable|mimetypes:application/pdf',
+            'attachment' => 'nullable|mimes:pdf,ppt,doc,docx,xls,xlsx',
+
+            'type_tax' => 'required|integer',
+            'tax' => 'required|integer',
+            'partial_price' => 'nullable',
+            'discount_type' =>'nullable|integer',
+            'discount' => 'nullable|integer',
+            'init_discount' => 'nullable|date',
+            'end_discount' => 'nullable|date',
+
+        ]);
+        
         if($this->prod_id){
+            //dd($validated['availability']);
             $prod = Prod::where('id',$this->prod_id)->first();
             $prod->update([
                 'name' => $validated['name'],
             'slug' => Str::slug($validated['name']),
+            'status' => $validated['status'],
             'category_id' => $validated['category'],
             'subcategory_id' => 0,
-            'price' => $validated['price'],
-            'status' => $validated['status'],
             'code' => $validated['code'],
+            'price' => $validated['price'],
             'stock' => $validated['stock'],
-            'detail' =>$validated['detail'],
             'short_detail' => $validated['short_detail'],
+            'detail' =>$validated['detail'],
+            ]);            
+
+            $settings_prod = SettingsProducts::where('product_id',$this->prod_id)->first();
+            $settings_prod->update([
+                'availability' => $validated['availability'],
+                'product_state' => $validated['product_state'],
+                'long' => $validated['long'],
+                'width' => $validated['width'],
+                'height' => $validated['height'],
+                'weight' => $validated['weight'],
             ]);
+            $infoprice_prod = InfopriceProducts::where('product_id',$this->prod_id)->first();
+            $infoprice_prod->update([
+                'type_tax' => $validated['type_tax'],
+                'tax' => $validated['tax'],
+                'partial_price' => $validated['partial_price'],
+                'discount_type' => $validated['discount_type'],
+                'discount' => $validated['discount'],
+                'init_discount' => $validated['init_discount'],
+                'end_discount' => $validated['end_discount'],
+            ]);
+            if($validated['image'] !== null){
+//comprobar si existe imagen y eliminar la anterior
+                $image_name = $this->image->getClientOriginalName();
+                $ext = $this->image->getClientOriginalExtension();            
+                //almacenamos con el método store que genera un nombre de archivo aleatorio
+                $path_date= date('Y-m-d');
+                $image = $this->image->store('public/files/'.$path_date,'');
+                $path_tag = 'public/files/'.$path_date.'/';
+                //eliminamos el directorio public
+                $imagelesspublic = substr($image,7);
+                $thumb = $image;
+                //dd($ext);
+                $product->update([
+                    'image' => $imagelesspublic,
+                    'thumb' => $imagelesspublic,
+                    'file_name' => $image_name,
+                    'file_ext' => $ext,
+                    'path_tag' => $path_tag                
+                ]);
+            }
+            if($validated['attachment'] !== null){
+                $file_name = $this->attachment->getClientOriginalName();
+                $ext = $this->attachment->getClientOriginalExtension();            
+                //almacenamos con el método store que genera un nombre de archivo aleatorio
+                $path_date= date('Y-m-d');
+                $file = $this->attachment->store('public/files/'.$path_date,'');
+                $path_tag = 'public/files/'.$path_date.'/';
+                //eliminamos el directorio public
+                $filelesspublic = substr($file,7);
+                $thumb = $file;
+                //dd($ext);
+                $settings_prod->update([
+                    'attachment_file' => $filelesspublic,
+                    'thumb' => $filelesspublic,
+                    'file_name' => $file_name,
+                    'file_ext' => $ext,
+                    'path_tag' => $path_tag                
+                ]);
+            }
+
         }
         $this->typealert = 'success';
 

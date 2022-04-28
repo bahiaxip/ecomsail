@@ -14,6 +14,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 Route::group([
 
+	//middleware admin (administrador en forma genérica a un conjunto de rutas)
 	'middleware' => ['auth','admin'],
 	'prefix'=>'/admin'
 	],function(){
