@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 //Paises
 use App\Functions\Paises;
-
+use App\Functions\Permissions as Permis;
 use App\Models\User;
 //use Illuminate\Http\Request;
 class Users extends Component
@@ -22,10 +22,34 @@ class Users extends Component
     public $file;
     //public $pass;
 
+    //permissions
 
+    public $permissions = [
+        'users' => [
+            'list_users' => null,
+            'add_users' => null,
+            'edit_users' => null,
+            'delete_users' => null,
+        ],
+        'categories' =>[
+            'list_categories' => null,
+            'add_categories' => null,
+            'edit_categories' => null,
+            'delete_categories' => null
+        ],
+        'products' =>[
+            'list_products' => null,
+            'add_products' => null,
+            'edit_products' => null,
+            'delete_products' => null
+        ]
+    ];
     protected $paisesObj;
     public $province;
     public $country;
+
+    protected $permissions2;
+    protected $permissions3;
 
     public function __construct(){
         
@@ -33,10 +57,36 @@ class Users extends Component
     }
     
 
-    public function mount(){        
+    public function mount(){
+        $this->permissions2 = new Permis();
         $this->paisesObj = new Paises();
+        //$this->permissions2 = new Permis();
         $this->countries = $this->paisesObj->all;
         $this->provincias = $this->paisesObj->provincias;
+
+    }
+
+    public function set_filter_query($filter_type,$subcat=null){
+        $user=[];
+        $typelist=0;
+        
+        switch($filter_type):
+            case '0':
+                //$this->filterType = $filterType;
+                $user = User::where('status',$filter_type)->orderBy('id','desc')->paginate(10);
+                break;
+            case '1':                
+                $user = User::where('status',$filter_type)->where('type',$typelist)->orderBy('id','desc')->paginate(10);
+                break;
+            case '2':                
+                $user = User::onlyTrashed()->orderBy('id','desc')->where('type',$typelist)->paginate(10);
+                break;
+            case '3':                
+                $user = User::orderBy('id','desc')->where('type',$typelist)->paginate(10);
+                break;
+
+        endswitch;
+        return $user;
     }
 
     //public function updated($fields){
@@ -122,6 +172,34 @@ class Users extends Component
         }
     }
 
+    public function edit_permissions($id){        
+        $user = User::findOrFail($id);
+        $data = $user->permissions;
+        //dd($data);
+        $this->permissions3 = $data;
+        $this->permissions2 = new Permis();
+        //$dato = $dato->testPermission('hola','list_users');
+        //dd($dato);
+        
+        $this->user_id = $id;
+    }
+    public function submit($data){
+
+        $user = User::findOrFail($data['id']);
+        //eliminamos id del arraay
+        unset($data['id']);
+        unset($data['_token']);
+        //dd(json_encode($data));
+        $user->update([
+            'permissions' => json_encode($data)
+        ]);
+        $this->typealert = 'success';
+        session()->flash('message',"Permisos actualizados correctamente");
+        $this->emit('editPermissions');
+        
+        
+    }
+
     //limpiar datos de formulario
     public function clear(){
         if($this->user_id)
@@ -140,6 +218,7 @@ class Users extends Component
 
     public function render()
     {
+        $this->permissions2 = new Permis();
         $users = User::orderBy('id','desc')->paginate(20);
 
         $data = ['users' => $users,'countries' => $this->countries,'provincias' => $this->provincias];

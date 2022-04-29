@@ -19,14 +19,14 @@ Route::group([
 	'prefix'=>'/admin'
 	],function(){
 	//categories
-	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)->name('categories');
+	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)->name('list_categories');
 	//Route::get('/admin',Admin\Category::class)->name('categories');
 
 	//users
-	Route::get('/users',\App\Http\Livewire\Admin\Users::class)->name('users');
+	Route::get('/users',\App\Http\Livewire\Admin\Users::class)->name('list_users');
 
 	//Products
-	Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('products');
+	Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('list_products');
 		
 })
 

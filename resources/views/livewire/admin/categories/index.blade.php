@@ -38,7 +38,7 @@
         </div>
     </div>
     @endif
-    
+    <!--
     <ul class="add">
         <li>            
             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,7 +64,47 @@
         </li>
         
     </ul>
+-->
+    <div class="filters mtop16">
+        <ul class="addL">
+            <li>
+                <div class="input-group">
+                    
+                    <input type="text" id="searchData" class="form-control form-control-sm">
+                    
+                </div>
+            </li>
+        </ul>
+        <ul class="add">
+           
+            <li>
+                <button class="btn btn-sm btn-primary">Exportar</button>
+            </li>
 
+            <li>            
+                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtros
+                </button>            
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
+                    <li>
+                        <a href="{{ route('categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                    </li>
+                    <li>
+                        <a href=" {{ route('categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                    </li>
+                </ul>            
+            </li>
+            <li>
+                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
+            </li>
+        </ul>
+    </div>
     <div class="div_table shadow mtop16">
         <table class="table">
             <thead>

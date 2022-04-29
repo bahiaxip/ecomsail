@@ -93,45 +93,52 @@ body
 		width 86%
 		margin 0px 10px		
 		.inner
-			ul.add
+			.filters
 				display flex
-				justify-content flex-end
 				
-				/*
-				background-color #f9f9f9
-				border-bottom #696969 1px solid
-				border-radius 4px				
-				*/
-				padding 4px 4px
-				width 100%
-				
-				li					
-					font-family QuicksandB
+				align-items center
+				ul.addL
+					display flex
+					justify-content flex-start									
+				ul.add					
+					display flex
+					justify-content flex-end
 					
-					list-style none
-					margin auto 2px
-					position relative
-					button
-						color #F3F3F3
-						font-size .9em
+					/*
+					background-color #f9f9f9
+					border-bottom #696969 1px solid
+					border-radius 4px				
+					*/
+					padding 4px 4px
+					width 100%
+					
+					li					
+						font-family QuicksandB
+						
+						list-style none
 						margin auto 2px
-						&:hover
-							color #FFF
-					ul
-						li
+						position relative
+						button
+							color #F3F3F3
 							font-size .9em
-				/*	
-					&:hover
-						ul							
-							display block
-								
-					ul
-						display none
-						left -75px
-						padding 0						
-						position absolute						
-						width 150px
-				*/	
+							margin auto 2px
+							&:hover
+								color #FFF
+						ul
+							li
+								font-size .9em
+					/*	
+						&:hover
+							ul							
+								display block
+									
+						ul
+							display none
+							left -75px
+							padding 0						
+							position absolute						
+							width 150px
+					*/	
 			width 100%
 			padding-top 14px
 			/* ocultar barra scroll en chrome */
@@ -152,7 +159,7 @@ body
 					font-family QuicksandB !important
 					font-size .9em
 					tr
-						td
+						td,th
 							text-align center
 				/*
 				tbody { > tr, & { > td { > a {						
@@ -168,6 +175,8 @@ body
 						td							
 							text-align center
 							vertical-align middle
+							img
+								margin auto
 							
 					
 				
@@ -178,17 +187,18 @@ body
 					margin auto 5px
 					text-align center
 			
-			.admin_items
-				display flex
-				a
-					align-items center
-					display flex
-					font-size .9em
-					height 38px
-					margin auto
-					width 38px
-					i
+					.admin_items
+						display flex
 						margin auto
+						a
+							align-items center
+							display flex
+							font-size .9em
+							height 38px
+							margin auto
+							width 38px
+							i
+								margin auto
 	.sectionE
 		width 8%
 		display flex
@@ -216,6 +226,17 @@ body
 					outline 0
 				&:focus
 					box-shadow 0 0 4px 0.10rem lightblue
+
+.permissions
+	.panel
+		width 100%
+		.header
+			padding 15px
+			border-bottom #696969 1px solid
+		.box
+			padding 15px 
+			
+
 
 
 .active
