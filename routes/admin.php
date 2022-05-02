@@ -19,14 +19,18 @@ Route::group([
 	'prefix'=>'/admin'
 	],function(){
 	//categories
-	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)->name('list_categories');
+	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)
+		->name('list_categories')->middleware('role_permissions');
 	//Route::get('/admin',Admin\Category::class)->name('categories');
 
 	//users
-	Route::get('/users',\App\Http\Livewire\Admin\Users::class)->name('list_users');
+	Route::get('/users/{filter_type}',\App\Http\Livewire\Admin\Users::class)->name('list_users')
+		->middleware('role_permissions');
+
 
 	//Products
-	Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('list_products');
+	Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('list_products')
+		->middleware('role_permissions');
 		
 })
 

@@ -89,7 +89,22 @@ document.addEventListener('readystatechange',() => {
 
 
 
+            }
+            //resaltar/oscurecer los iconos del buscador al hacer/deshacer focus
+            let search_data=document.querySelector('#search_data');
+            if(search_data){
+                let div_inputgroup = document.querySelector('.div_search');
+                search_data.addEventListener('focus',()=>{
+                    //console.log("buscando el focus: ",div_inputgroup.firstElementChild.style.color="#696969")
+                    div_inputgroup.firstElementChild.classList.add('active');
+                    div_inputgroup.lastElementChild.classList.add('active');
+                })
+                search_data.addEventListener('blur',()=>{                    
+                    //console.log("buscando el focus: ",div_inputgroup.firstElementChild.style.color="#696969")
+                    div_inputgroup.firstElementChild.classList.remove('active');
+                    div_inputgroup.lastElementChild.classList.remove('active');
+                })
             }        
-    }
+        }
 })     
 //}

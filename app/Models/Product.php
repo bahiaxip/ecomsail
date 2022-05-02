@@ -25,7 +25,7 @@ class Product extends Model
     protected $hidden = ['created_at','updated_at'];
 
     public function cat(){
-        return $this->hasOne(Category::class,'id','category_id');
+        return $this->belongsTo(Category::class,'category_id','id');
     }
 
     public function settings(){
@@ -57,6 +57,22 @@ class Product extends Model
             */
 
         });
+        self::restoring(function (Product $product) {
+
+            //para relaciones de uno
+            $product->settings()->restore();
+            $product->infoprice()->restore();
+
+            //para relaciones con muchos
+            /*
+            foreach ($product->settings as $settings)
+            {
+                $settings->delete();
+            }
+            */
+
+        });
+
     }
     
 

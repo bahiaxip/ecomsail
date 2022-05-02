@@ -7,7 +7,7 @@ use Livewire\Component;
 use  Livewire\WithFileUploads;
 use Livewire\WithPagination;
 //models
-use App\Models\Category as Cat;
+use App\Models\Category as Cat,App\Models\Product;
 use Illuminate\Http\Request;
 use Str;
 
@@ -32,11 +32,14 @@ class Category extends Component
     public $subcat;
     public $subcatname;
     public $typealert='success';
-    //se ha añadido el middleware en el archivo RouteServiceProvider, de forma genérica
-    //ya que no encuentra la ruta desde el construct() ni desde el mount()
+    public $count_cat;
 
+    //campo de búsqueda (wire:model)
+    public $search_data;
+    //orden columnas (asc/desc)
+    public $orderType;
 
-    //el construct genera conflictos con alpine, por ejemplo con el parámetro
+    //el construct genera conflictos con el parámetro
     //@this para manejar los datos desde javascript
     /*
     public function __construct(){
@@ -79,6 +82,23 @@ class Category extends Component
 
         endswitch;
         return $cat;
+    }
+
+    public function set_type_query(){
+        $query;
+        if($this->search_data){
+            $query= $this->set_filter_query($this->filter_type);
+            $search_data = '%'.$this->search_data.'%';
+            if($this->filter_type==2){
+                $query = Cat::onlyTrashed()->where('name','LIKE',$search_data)->paginate(10);
+            }else{
+                $query = Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->paginate(10);    
+            }
+        }
+        else{
+            $query= $this->set_filter_query($this->filter_type,$this->subcat);
+        }
+        return $query;
     }
 
 
@@ -144,16 +164,15 @@ class Category extends Component
         $this->clear2();
         $this->emit('addCategory');
         //limpiamos el textarea de ckeditor
-        
-            
-        
-        
     }
 
     public function edit($id){
-        //sleep(3);
-        //registro de la tabla users con el usuario seleccionado
-        $cat=Cat::where('id',$id)->first();
+        if($this->filter_type == 2):
+            $cat=Cat::onlyTrashed()->where('id',$id)->first();
+        else:
+            $cat=Cat::where('id',$id)->first();
+        endif;
+
         $this->cat_id=$cat->id;
         //(se podría evitar la consulta $user y llamar al método user del modelo 
         //Profile belongsTo...)
@@ -222,10 +241,6 @@ class Category extends Component
                 ]);    
                 
             }
-        
-
-        
-            
         }
         $this->typealert="success";
         session()->flash('message','Categoría actualizada correctamente');
@@ -233,11 +248,18 @@ class Category extends Component
         $this->emit('editCategory');
     }
     public function saveCatId($catId){
+        //dd($catId);
         $this->catIdTmp=$catId;
+        $this->count_cat = Product::where('category_id',$catId)->count();        
     }
     //si se recarga la página tb ser resetea el userIdTmp, en el método mount()
     public function clearCatId(){
         $this->catIdTmp='';
+    }
+
+    //botón X de buscador para eliminar datos de búsqueda
+    public function clearSearch(){
+        $this->search_data='';
     }
     public function updated(){
         //$this->description="eooo";
@@ -266,6 +288,15 @@ class Category extends Component
             $this->clear2();
             $this->emit('confirmDel');
         }
+    }
+
+    //restaurar producto
+    public function restore($id){
+        $cat = $cat=Cat::onlyTrashed()->where('id',$id)->first();
+        $cat->restore();
+        $this->typealert = 'success';
+        session()->flash('message',"Categoría restaurada correctamente");
+
     }
 
     //limpiar datos de formulario
@@ -300,15 +331,19 @@ class Category extends Component
 
     public function render()
     {
+        /*
         $subcat=null;        
         if($this->subcat){
 
             $subcat=$this->subcat;            
             $query = $this->set_filter_query($this->filter_type,$subcat);
         }else{            
-            $query = $this->set_filter_query($this->filter_type);    
+            //$query = $this->set_filter_query($this->filter_type);    
+            $query = $this->set_type_query();
         }
-        
+        */
+        $query = $this->set_type_query();
+        //iteration es necesario resetear el caché del input file
         $iteration=rand();
         //$cats[0] = 'Ninguna';
         $cats = Cat::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');

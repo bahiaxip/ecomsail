@@ -49,12 +49,17 @@ class Product extends Component
     
     
     public $detail2 = null;
-    //temporal de confirmación
+    //temporal de confirmación, quizás se podría usar $prod_id
     public $prodIdTmp;
     //tipo de filtrado (publico,borrador,reciclaje,todos)
     public $filter_type;
     
     public $typealert;
+
+     //campo de búsqueda (wire:model)
+    public $search_data;
+    //orden columnas (asc/desc)
+    public $orderType;
 
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
@@ -92,6 +97,23 @@ class Product extends Component
 
         endswitch;
         return $prod;
+    }
+
+    public function set_type_query(){
+        $query;
+        if($this->search_data){
+            $query= $this->set_filter_query(1);
+            $search_data = '%'.$this->search_data.'%';
+            if($this->filter_type==2){
+                $query = Prod::onlyTrashed()->where('name','LIKE',$search_data)->paginate(10);
+            }else{
+                $query = Prod::where('name','LIKE',$search_data)->where('status',$this->filter_type)->paginate(10);    
+            }
+        }
+        else{
+            $query= $this->set_filter_query($this->filter_type);
+        }
+        return $query;
     }
 
 
@@ -171,9 +193,12 @@ class Product extends Component
 
     public function edit($id){
 
-        //sleep(3);
-        //registro de la tabla users con el usuario seleccionado
-        $prod=Prod::onlyTrashed()->where('id',$id)->first();        
+        //necesario detectar si es un elemento de reciclaje
+        if($this->filter_type == 2):
+            $prod=Prod::onlyTrashed()->where('id',$id)->first();            
+        else:
+            $prod=Prod::where('id',$id)->first();
+        endif;
         $this->prod_id=$prod->id;
         //(se podría evitar la consulta $user y llamar al método user del modelo 
         //Profile belongsTo...)
@@ -188,15 +213,23 @@ class Product extends Component
         $this->short_detail = $prod->short_detail;
         $this->detail=$prod->detail;
 
-        $settings_prod = SettingsProducts::onlyTrashed()->where('product_id',$id)->first();
+        if($this->filter_type == 2):
+            $settings_prod = SettingsProducts::onlyTrashed()->where('product_id',$id)->first();
+        else:
+            $settings_prod = SettingsProducts::where('product_id',$id)->first();
+        endif;
+
         $this->availability = $settings_prod->availability;
         $this->product_state = $settings_prod->product_state;
         $this->long = $settings_prod->long;
         $this->width = $settings_prod->width;
         $this->height = $settings_prod->height;
         $this->weight = $settings_prod->weight;
-
-        $infoprice_prod = InfopriceProducts::onlyTrashed()->where('product_id',$id)->first();        
+        if($this->filter_type == 2):
+            $infoprice_prod = InfopriceProducts::onlyTrashed()->where('product_id',$id)->first();
+        else:
+            $infoprice_prod = InfopriceProducts::where('product_id',$id)->first();
+        endif;
         $this->type_tax=$infoprice_prod->type_tax;
         $this->tax =  $infoprice_prod->tax;
         $this->partial_price= $infoprice_prod->partial_price;
@@ -206,7 +239,7 @@ class Product extends Component
         $this->end_discount = $infoprice_prod->end_discount;
         
         $this->typealert = 'success';
-
+        //pasamos el contenido del textarea de ckeditor
         $this->emit('description2',$this->detail);       
     }
 //detectar si es onlyTrashed
@@ -333,7 +366,12 @@ class Product extends Component
         $this->prodIdTmp='';
     }
 
-    //eliminación de categoría
+    //botón X de buscador para eliminar datos de búsqueda
+    public function clearSearch(){
+        $this->search_data='';
+    }
+
+    //eliminación de producto
     public function delete(){
         if($this->prodIdTmp){
             $prod=Prod::where('id',$this->prodIdTmp)->first();
@@ -349,10 +387,19 @@ class Product extends Component
             //$user=User::where('id',$this->userIdTmp)->first();
             //$profile->delete();
             $prod->delete();
+            $this->typealert = 'danger';
             session()->flash('message',"Producto eliminado correctamente");
-            $this->clear2();
+            //$this->clear2();
             $this->emit('confirmDel');
         }
+    }
+    //restaurar producto
+    public function restore($id){
+        $prod = $prod=Prod::onlyTrashed()->where('id',$id)->first();
+        $prod->restore();
+        $this->typealert = 'success';
+        session()->flash('message',"Producto restaurado correctamente");
+
     }
     //se inicia cada vez que mostramos el modal que contiene editor
     public function setckeditor(){        
@@ -371,9 +418,6 @@ class Product extends Component
         $this->code = null;
         $this->short_detail = null;
         $this->detail = '';
-        
-
-
         //$this->emit('userUpdated');
     }
 
@@ -385,10 +429,11 @@ class Product extends Component
 
     public function render()
     {
-        $query = $this->set_filter_query($this->filter_type);
+        //$query = $this->set_filter_query($this->filter_type);
+        $query = $this->set_type_query();
         $cats = Category::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');
         $cats->prepend('Ninguna', 0);
-        $data = ['products' => $query,'cats'=> $cats];
+        $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type];
         return view('livewire.admin.products.index',$data);
     }
 

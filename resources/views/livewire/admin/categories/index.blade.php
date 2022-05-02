@@ -16,9 +16,15 @@
     </li>
     @endsection
 
-    @include('livewire.admin.categories.create')
+    @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
+        @include('livewire.admin.categories.create')
+    @endif
+    @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
     @include('livewire.admin.categories.edit')
-    @include('livewire.admin.categories.confirm')
+    @endif
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
+        @include('livewire.admin.categories.confirm')
+    @endif
 
     @if(session()->has('message'))
     <div class="container ">
@@ -46,16 +52,16 @@
             </button>            
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <li>
-                    <a href="{{ route('categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                    <a href="{{ route('list_categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                 </li>
                 <li>
-                    <a href="{{ route('categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                    <a href="{{ route('list_categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
                 </li>
                 <li>
-                    <a href="{{ route('categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                    <a href="{{ route('list_categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
                 </li>
                 <li>
-                    <a href=" {{ route('categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                    <a href=" {{ route('list_categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
                 </li>
             </ul>            
         </li>
@@ -68,10 +74,10 @@
     <div class="filters mtop16">
         <ul class="addL">
             <li>
-                <div class="input-group">
-                    
-                    <input type="text" id="searchData" class="form-control form-control-sm">
-                    
+                <div class="input-group div_search">
+                    <span class="d-none d-sm-flex fas fa-search form-control-icon"></span>                    
+                    <input type="text" id="search_data" class="form-control form-control-sm" placeholder="Buscar..." wire:model="search_data">
+                    <span class="d-none d-md-flex far fa-times-circle form-control-icon2" wire:click="clearSearch"></span>
                 </div>
             </li>
         </ul>
@@ -87,22 +93,24 @@
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
                     <li>
-                        <a href="{{ route('categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        <a href="{{ route('list_categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                     </li>
                     <li>
-                        <a href="{{ route('categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                        <a href="{{ route('list_categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
                     </li>
                     <li>
-                        <a href="{{ route('categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                        <a href="{{ route('list_categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
                     </li>
                     <li>
-                        <a href=" {{ route('categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        <a href=" {{ route('list_categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
                     </li>
                 </ul>            
             </li>
-            <li>
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
-            </li>
+            @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
+                <li>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
+                </li>
+            @endif
         </ul>
     </div>
     <div class="div_table shadow mtop16">
@@ -134,18 +142,30 @@
                     <td>{!! $cat->description !!}</td>
                     <td>
                         <div class="admin_items">
-                            @if(!$subcat)
-                            <button class="btn btn-sm"  title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
-                                <i class="fa-solid fa-edit"></i>
-                            </button>
-                            @endif
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})">
-                                <i class="fa-solid fa-edit"></i>
-                            </button>
-                            @if($filter_type!=2)
-                            <button class="btn btn-sm back_livewire2" title="Eliminar usuario" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                            @if($filter_type != 2)
+                                @if(!$subcat)
+                                <button class="btn btn-sm"  title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
+                                    <i class="fa-solid fa-tag"></i>
+                                </button>
+                                @endif
+                                @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                                @endif
+                                @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
+                                    @if($filter_type!=2)
+                                        <button class="btn btn-sm back_livewire2" title="Eliminar usuario" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    @endif
+                                @endif
+                            @else
+                                @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
+                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" wire:click="restore({{$cat->id}})">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </button>
+                                @endif
                             @endif
                         </div>
                     </td>

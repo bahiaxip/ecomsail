@@ -37,17 +37,20 @@
     <div class="header">            
         @include('layouts.nav')
     </div>
-    @if(Route::is(['users','categories','products']))
+    @if(Route::is(['list_users','list_categories','list_products']))
     <div class="content">
         <div class="sectionL">
-            @include('layouts.sidebar')
+            {{--@include('layouts.sidebar')--}}
+            @section('sidebar')
+                @include('layouts.sidebar')
+            @show
         </div>
         <div class="sectionR">
             <div class="inner">
                 <nav class="paths">
                     <ul >
                         <li>
-                            <a href="{{ route('users') }}">
+                            <a href="{{ route('list_users',['filter_type' => 1]) }}">
                                 <i class="fa-solid fa-columns"></i> Admin
                             </a>
                         </li>
@@ -57,9 +60,11 @@
                     </ul>
                 </nav>
                 {{--@if(Session::has('message'))--}}
-                @if(session()->has('message'))
+                <!-- añadimos una variable para que solo se muestre el message en el component y no en los 2 -->
+                @if(session()->has('message') && !session()->has('only_component'))
                 <h2>Hola</h2>
                 <div class="container">
+
                     <div class="alert alert-{{ Session::get('typealert') }} hide" >
                         {{ Session::get('message') }}
                         @if($errors->any())

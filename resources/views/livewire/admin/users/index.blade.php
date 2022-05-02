@@ -5,16 +5,23 @@
     @section('path')
     &nbsp;>&nbsp;
     <li>
-        <a href="{{ route('users') }}">
+        <a href="{{ route('list_users',['filter_type' => 1]) }}">
             <i class="fa-solid fa-columns"></i> Usuarios
         </a>
     </li>
     @endsection
     <!-- modals -->
-    @include('livewire.admin.users.create')
-    @include('livewire.admin.users.edit')
-    @include('livewire.admin.users.confirm')
-    @include('livewire.admin.users.edit_permissions')
+
+    <!-- los usuario se creand en register -->
+    {{--@include('livewire.admin.users.create')--}}
+    @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
+        @include('livewire.admin.users.edit')
+    @endif
+    <!-- los usuarios no se pueden eliminar -->
+    {{--@include('livewire.admin.users.confirm')--}}
+    @if(helper()->testPermission(Auth::user()->permissions,'admin_permissions')== true)
+        @include('livewire.admin.users.edit_permissions')
+    @endif
 
     @if(session()->has('message'))
     <div class="container ">
@@ -39,10 +46,10 @@
     
         <ul class="addL">
              <li>
-                <div class="input-group">
-                    
-                    <input type="text" id="searchData" class="form-control form-control-sm">
-                    
+                <div class="input-group div_search">
+                    <span class="d-none d-sm-flex fas fa-search form-control-icon"></span>                    
+                    <input type="text" id="search_data" class="form-control form-control-sm" placeholder="Buscar..." wire:model="search_data">
+                    <span class="d-none d-md-flex far fa-times-circle form-control-icon2" wire:click="clearSearch"></span>
                 </div>
             </li>
         </ul>
@@ -58,16 +65,19 @@
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
                     <li>
-                        <a href="{{ route('users',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        <a href="{{ route('list_users',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                     </li>
                     <li>
-                        <a href="{{ route('users',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                        <a href="{{ route('list_users',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
                     </li>
+                    <!-- //no mostramos ya que puede haber ususarios eliminados -->
+                    <!--
                     <li>
-                        <a href="{{ route('users',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                        <a href="{{ route('list_users',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
                     </li>
+                    -->
                     <li>
-                        <a href=" {{ route('users',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        <a href=" {{ route('list_users',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
                     </li>
                 </ul>            
             </li>
@@ -103,16 +113,23 @@
                             <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editUser" wire:click="edit({{$user->id}})">
                                 <i class="fa-solid fa-pencil-alt"></i>
                             </button>
+                            @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
                             <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editUser" wire:click="edit({{$user->id}})">
                                 <i class="fa-solid fa-edit"></i>
                             </button>
+                            @endif
+                            @if(helper()->testPermission(Auth::user()->permissions,'admin_permissions')== true)
                             <button class="btn btn-sm" title="Editar permisos de usuario" data-bs-toggle="modal" data-bs-target="#editPermissions" wire:click.prevent = 'edit_permissions({{$user->id}})'>
                                 <i class="fa-solid fa-list-check"></i>
                             </button>
+                            @endif
                         </div>
                     </td>
                 </tr>
                 @endforeach
+                <tr>
+                    <td colspan="6">{{ $users->links() }}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -178,6 +195,7 @@
                                 </td>
                             </tr>
                             @endforeach
+
                         </tbody>
                     </table>
                     {{--{{$users->Links()}}--}}

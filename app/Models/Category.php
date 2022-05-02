@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
@@ -16,4 +17,39 @@ class Category extends Model
 
     protected $fillable = ['name','type','status','slug','description','image','file_name','thumb','file_ext','path_root','path_tag'];
     protected $hidden = ['created_at','updated_at'];
+
+    public function prod(){
+        return $this->hasMany(Product::class,'category_id','id');
+    }
+
+    public static function boot (){
+        parent::boot();
+        self::deleting(function (Category $category){
+            //elimina todos los productos
+            $category->prod()->delete();
+        });
+
+        self::restoring(function (Category $category) {
+            //no se deben restarurar, ya que podría restaurar
+            //productos que no han sido eliminados en la eliminación 
+            //de la categoría
+            //$category->prod()->restore();
+        });
+
+    //self::deleting(function (Product $product) {
+
+            //para relaciones de uno
+    //$product->settings()->delete();
+    //$product->infoprice()->delete();
+
+            //para relaciones con muchos
+            /*
+            foreach ($product->settings as $settings)
+            {
+                $settings->delete();
+            }
+            */
+    //}
+    }
+
 }

@@ -3,7 +3,7 @@
 		@auth
 		<ul>
 			<li>
-				<a href="{{ url('/admin/users') }}">
+				<a href="{{ route('list_users',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-gears"></i> Panel
 				</a>
 			</li>
@@ -52,7 +52,7 @@
 						<a href="{{url('/logout')}}">Salir</a>
 					</li>
 					<li>
-						<a href="{{url('/admin/users')}}">Admin</a>
+						<a href="{{route('list_users',['filter_type' => 1])}}">Admin</a>
 					</li>
 				</ul>
 			</li>

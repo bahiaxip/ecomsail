@@ -9,6 +9,7 @@ use App\Functions\Paises;
 use App\Functions\Permissions as Permis;
 use App\Models\User;
 //use Illuminate\Http\Request;
+use Route;
 class Users extends Component
 {    
 
@@ -51,24 +52,33 @@ class Users extends Component
     protected $permissions2;
     protected $permissions3;
 
+    public $typealert = 'success';
+
+    public $filter_type;
+    //campo de búsqueda (wire:model)
+    public $search_data;
+    //orden columnas (asc/desc)
+    public $orderType;
+
     public function __construct(){
         
 
     }
     
 
-    public function mount(){
+    public function mount($filter_type){
+        //dd(request());
         $this->permissions2 = new Permis();
         $this->paisesObj = new Paises();
         //$this->permissions2 = new Permis();
         $this->countries = $this->paisesObj->all;
         $this->provincias = $this->paisesObj->provincias;
-
+        $this->filter_type = $filter_type;
     }
 
     public function set_filter_query($filter_type,$subcat=null){
         $user=[];
-        $typelist=0;
+        $role=1;
         
         switch($filter_type):
             case '0':
@@ -76,20 +86,53 @@ class Users extends Component
                 $user = User::where('status',$filter_type)->orderBy('id','desc')->paginate(10);
                 break;
             case '1':                
-                $user = User::where('status',$filter_type)->where('type',$typelist)->orderBy('id','desc')->paginate(10);
+                $user = User::where('status',$filter_type)->where('role',$role)->orderBy('id','desc')->paginate(10);
                 break;
+                //no mostramos ya que puede haber ususarios eliminados
+            /*
             case '2':                
-                $user = User::onlyTrashed()->orderBy('id','desc')->where('type',$typelist)->paginate(10);
+                $user = User::onlyTrashed()->orderBy('id','desc')->where('role',$role)->paginate(10);
                 break;
-            case '3':                
-                $user = User::orderBy('id','desc')->where('type',$typelist)->paginate(10);
+            */
+            case '3':
+                //500 es usuario baneado                
+                $user = User::where('status','!=',500)->where('role',$role)->orderBy('id','desc')->paginate(10);
                 break;
 
         endswitch;
         return $user;
     }
 
-    //public function updated($fields){
+//se debería realizar mediante la eliminación de columnas de forma visual, poder 
+    //eliminar la búsqueda de esas columnas
+    public function set_type_query(){
+        $query;
+        if($this->search_data){
+            $query= $this->set_filter_query($this->filter_type);
+            $search_data = '%'.$this->search_data.'%';
+            //no mostramos ya que puede haber ususarios eliminados
+            /*if($this->filter_type==2){
+                $query = User::onlyTrashed()->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data)->orWhere('lastname','LIKE',$search_data)->paginate(10);
+            }else{
+            */
+                $query = User::where('name','LIKE',$search_data)->where('status',$this->filter_type)->orWhere('nick','LIKE',$search_data)->orWhere('lastname','LIKE',$search_data)->paginate(10);    
+            //}
+        }
+        else{
+            $query= $this->set_filter_query($this->filter_type);
+        }
+        return $query;
+    }    
+
+    public function updated($fields){
+        
+        /*
+        if($this->searchData){
+            $this->resetPage();
+        }else{
+            $this->clear_query();
+        }
+        */
         /*
         $this->validateOnly($fields,[
             'nick' => 'required',
@@ -98,7 +141,11 @@ class Users extends Component
             
         ]);
         */
-    //}
+    }
+
+    public function clear_query(){
+        $this->orderType='asc';
+    }
 
     public function edit($id){
         //sleep(3);
@@ -140,6 +187,7 @@ class Users extends Component
 
     }
 
+//no se puede eliminar usuarios
     //Los 2 métodos siguientes (saveUserId, clearUserId) son necesarios para 
     //la confirmación de borrado de usuario (mediante un modal de bootstrap), 
     //guardar y limpiar el id del usuario seleccionado de forma temporal    
@@ -193,11 +241,20 @@ class Users extends Component
         $user->update([
             'permissions' => json_encode($data)
         ]);
-        $this->typealert = 'success';
-        session()->flash('message',"Permisos actualizados correctamente");
-        $this->emit('editPermissions');
+        //$this->typealert = 'success';
+        //session()->flash('message',"Permisos actualizados correctamente");
+        //$this->emit('editPermissions');
+
+        //esto permite recargar la página pero no genera mensaje, conveniente //eliminar con javascript el elemento del sidebar correspondiente
+        //return redirect(request()->header('Referer','datos'));
+        return redirect()->route('list_users',['filter_type' => $this->filter_type])->with('message',"permisos actualizados")->with('only_component','true');
+        //Route::get('/users',['hola']);
         
-        
+    }
+
+    //botón X de buscador para eliminar datos de búsqueda
+    public function clearSearch(){
+        $this->search_data='';
     }
 
     //limpiar datos de formulario
@@ -219,7 +276,9 @@ class Users extends Component
     public function render()
     {
         $this->permissions2 = new Permis();
-        $users = User::orderBy('id','desc')->paginate(20);
+        //$users = User::orderBy('id','desc')->paginate(20);
+        //$users = $this->set_type_query();
+        $users = $this->set_type_query();
 
         $data = ['users' => $users,'countries' => $this->countries,'provincias' => $this->provincias];
         //return view('livewire.admin.users.index',$data)->extends('layouts.admin');
