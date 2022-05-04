@@ -7,6 +7,10 @@
           Editar Producto
         </div>
       </div>
+      <!-- loading cuando actualizamos edición -->
+      <div id="loading" style="width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      </div>
       <div class="modal-body">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -73,11 +77,15 @@
             <div class="row mtop16">
                 <div class="col-md-6">
                   {{ Form::label('image','Imagen') }}
-                  {{ Form::file('image',['class' => 'form-control','accept'=> 'image/*','wire:model' => 'image']) }}
+                  {{ Form::file('image',['class' => 'form-control','id'=>$iteration,'accept'=> 'image/*','wire:model' => 'image']) }}
+                  @error('image')
+                      <p class="text-danger">{{$message}}</p>
+                  @enderror
+                  <div wire:loading wire:target="image">
+                      <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                  </div>
                 </div>
-                @error('image')
-                <p class="text-danger">{{$message}}</p>
-                @enderror
+                
                 <div class="col-md-6">
                   {{ Form::label('refcode','Cod.Ref') }}
                   <div class="input-group">
@@ -304,3 +312,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  let btn_update=document.querySelector('#btn_update');
+  if(btn_update){
+    btn_update.addEventListener('click',()=>{
+      let loading = document.querySelector('#loading');
+      loading.style.display='flex';
+    })
+  }
+</script>

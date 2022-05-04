@@ -5,8 +5,8 @@
         @if(!$thumb)
         <img src="{{url('images/default2.png')}}" alt="" width="64" style="position:absolute;left:10px;margin-top:5px">
         @else
-        <div>
-            <img src="{{url('storage/'.$thumb)}}" alt="" style="" class="img_user">
+        <div class="img_user" style="background-image:url({{url('storage/'.$thumb)}})">
+            <!--<img src="{{url('storage/'.$thumb)}}" alt="" style="" class="img_user">-->
         </div>
         @endif
         <div class="modal-title h5 justify-self-center" >
@@ -15,20 +15,22 @@
         </div>
         
       </div>
-      @if(!$data_tmp)
+      <!-- loading cuando comienza la edición -->
+      @if(!$user_id)
       <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
       </div>
       @endif
+      <!-- loading cuando actualizamos edición -->
       <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
       </div>
       <div class="modal-body" >
         
           <!-- campo oculto: id -->
-          <input type="hidden" name="id" wire:model="data_tmp">
+          
           <input type="hidden" name="id" wire:model="user_id">
-          <div class="row">
+          <div class="row ">
               <div class="col-md-6">
                   <label for="nick">Nick</label>
                   <div class="input-group">
@@ -55,7 +57,7 @@
                   @enderror
               </div>
           </div>
-          <div class="row">
+          <div class="row mtop16">
               <div class="col-md-6">
                   <label for="surname">Apellidos</label>
                   <div class="input-group">
@@ -81,25 +83,36 @@
                   @enderror
               </div>
           </div>
-          <div class="row">
+          <div class="row mtop16">
             <div class="col-md-6">
-                <label for="customFile" >Imagen</label>
-                {!! Form::file('image',['class' =>'form-control','id' => 'customFile','accept' =>'image/*','wire:model' => 'image'])!!}
-                @error('image')
+                <label for="profile_image" >Imagen</label>
+                {!! Form::file('profile_image',['class' =>'form-control','id' => $iteration,'accept' =>'image/*','wire:model' => 'profile_image'])!!}
+                @error('profile_image')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
+                <div wire:loading wire:target="profile_image">
+                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                </div>
             </div>
             <div class="col-md-6">
                 <label for="country">País</label>
-                  {{ Form::select('country',$countries,null,['class' => 'form-select','wire:model' => 'country'])}}
+                  {{ Form::select('country',$countries,null,['class' => 'form-select','wire:model' => 'country','wire:change' => 'testCountry'])}}
                   @error('country')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
             </div>
           </div>
-          <div class="row">
+          <div class="row" wire:loading wire:target="country">
+              <div class="col-md-12 justify-content-center"   style="position:absolute;background-color:rgba(255,255,255,.8);width:99%;min-height:20px;margin:auto;">
+                  <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:20px auto" width="32">
+              </div>
+          </div>
+
+          @if($country==58)
+          <div class="row mtop16">
+              
               <div class="col-md-6">
-                  <label for="province">Provincias</label>
+                  <label for="province">Provincia</label>
 
                   <select name="province" wire:model="province" class="form-select">
                     <option value="0">Seleccione...</option>
@@ -117,15 +130,15 @@
                   <!-- con wire:loading,wire:loading.remove,... podemos mantener la espera
                     a la devolución de datos con wire:target podemos indicar la variable o 
                     método al que escuchar-->                    
-                        <select name="city" wire:model="city"  wire:loading.attr="disabled"  wire:target="province"  class="form-select">
-                              <option value="0" >Seleccione...</option>
-                              @foreach($municipies_list as $mun)
-                              @if($mun['provincia_id']==$province)
-                              <option value="{{$mun['municipio_id']}}" >{{$mun['nombre']}}</option>
-                              @endif
-                              @endforeach
-                          
-                        </select>
+                  <select name="city" wire:model="city"  wire:loading.attr="disabled"  wire:target="province"  class="form-select">
+                        <option value="0" >Seleccione...</option>
+                        @foreach($municipies_list as $mun)
+                        @if($mun['provincia_id']==$province)
+                        <option value="{{$mun['municipio_id']}}" >{{$mun['nombre']}}</option>
+                        @endif
+                        @endforeach
+                    
+                  </select>
                     
                   
 
@@ -144,9 +157,12 @@
                   @error('city')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
+                  <div wire:loading wire:target="province">
+                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                </div>
               </div>
           </div>
-        	
+        	@endif
         	 <!-- ignoramos pass e email en la edición por seguridad -->
         	<!--
           <div class="form-group">
@@ -170,8 +186,8 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>
-        <button type="button" class="btn btn-sm btn-primary back_livewire2 " wire:click.prevent="update()" id="btn_update">Actualizar</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear()" style="z-index:2">Cerrar</button>
+        <button type="button" class="btn btn-sm btn-primary back_livewire2 " wire:click.prevent="update()" id="btn_update" style="z-index:2">Actualizar</button>
       </div>
     </div>
   </div>

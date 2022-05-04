@@ -24,8 +24,10 @@ class Users extends Component
     public $name;
     public $surname;
     public $email;
-    public $image;
+    public $profile_image;
     public $thumb;
+    //iteration es necesario resetear el caché del input file
+    public $iteration;
     public $phone;
     public $country;
     public $province;
@@ -78,8 +80,8 @@ class Users extends Component
     public $prov_id_selected;
     //public $provinces;
     public $municipies_list;
-    //gestiona 
-    public $data_tmp;
+    //anulado 
+    //public $data_tmp;
     public function mount($filter_type){
 
         //dd(request());
@@ -235,8 +237,9 @@ class Users extends Component
 
     public function edit($id){
         if($id != 0){
-            $this->data_tmp=$id;
-            //sleep(3);
+            //anulado
+            //$this->data_tmp=$id;
+            
             //registro de la tabla users con el usuario seleccionado
             $user=User::where('id',$id)->first();
             if($user->id){
@@ -269,7 +272,7 @@ class Users extends Component
     public function update(){
         //ocultamos el loading duplicado que se ha iniciado
         $this->emit('loading','loading');
-        
+        //dd($this->profile_image);
         if($this->user_id){
             $validated = $this->validate([
                 'nick' => 'required',
@@ -279,8 +282,9 @@ class Users extends Component
                 'country' => 'nullable',
                 'province' => 'nullable',
                 'city' => 'nullable',
-                'image' =>'nullable|image'
+                'profile_image' =>'nullable|image'
             ]);
+            
             if($this->user_id){
                 $user = User::where('id',$this->user_id)->first();
                 $user->update([
@@ -293,14 +297,18 @@ class Users extends Component
                     'city' => $validated['city'],
 
                 ]);
+
                 //dd($this->image);
-                if($validated['image'] !== null){
+                if($validated['profile_image'] !== null){
+
             //comprobar si existe imagen y eliminar la anterior            
-                    $image_name = $this->image->getClientOriginalName();
-                    $ext = $this->image->getClientOriginalExtension();
+                    $image_name = $this->profile_image->getClientOriginalName();
+
+                    $ext = $this->profile_image->getClientOriginalExtension();
                     $path_date= date('Y-m-d');
-                    $image = $this->image->store('public/files/'.$path_date,'');
-                    $path_tag = 'public/files/'.$path_date.'/';                
+                    $image = $this->profile_image->store('public/files/'.$path_date,'');
+
+                    $path_tag = 'public/files/'.$path_date.'/';
                     //eliminamos el directorio public
                     $imagelesspublic = substr($image,7);
                     $thumb = $image;
@@ -383,6 +391,12 @@ class Users extends Component
         //Route::get('/users',['hola']);
         
     }
+    //si se selecciona España se activan los select de province y city
+    //si no se desactivan
+    public function testCountry(){
+        //58 es el id de España
+        
+    }
 
     //botón X de buscador para eliminar datos de búsqueda
     public function clearSearch(){
@@ -396,8 +410,10 @@ class Users extends Component
         $this->nick='';
         $this->name='';
         $this->surname='';
+        $this->profile_image=null;
         //$this->emit('editUser');
-        $this->data_tmp='';
+        //iteration es necesario resetear el caché del input file
+        $this->iteration=rand();
     }
 
     public function clear2(){
@@ -414,14 +430,14 @@ class Users extends Component
             array_push($dato,$this->provincias[$i]['nombre']);
         }
         */
-        
-        
+        //iteration es necesario resetear el caché del input file
+        $iteration=rand();
         $this->permissions2 = new Permis();
         //$users = User::orderBy('id','desc')->paginate(20);
         //$users = $this->set_type_query();
         $users = $this->set_type_query();
 
-        $data = ['users' => $users,'countries' => $this->countries,'provinces_list' => $this->provinces_list,'cities' => $this->municipies_list,'data_tmp'=> $this->data_tmp];
+        $data = ['users' => $users,'countries' => $this->countries,'provinces_list' => $this->provinces_list,'cities' => $this->municipies_list,'iteration'=>$this->iteration];
         //return view('livewire.admin.users.index',$data)->extends('layouts.admin');
 
         return view('livewire.admin.users.index',$data);

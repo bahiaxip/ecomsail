@@ -21,6 +21,8 @@ class Product extends Component
     public $detail=null;
 
     public $image;
+    //iteration es necesario resetear el caché del input file        
+    public $iteration;
     public $code;
     public $price=1.00;
     public $stock=1;
@@ -244,7 +246,7 @@ class Product extends Component
     }
 //detectar si es onlyTrashed
     public function update(){
-        
+        $this->emit('loading','loading');
         $validated = $this->validate([
             'name' => 'required',
             'category' => 'required|gt:0',
@@ -322,7 +324,7 @@ class Product extends Component
                 $imagelesspublic = substr($image,7);
                 $thumb = $image;
                 //dd($ext);
-                $product->update([
+                $prod->update([
                     'image' => $imagelesspublic,
                     'thumb' => $imagelesspublic,
                     'file_name' => $image_name,
@@ -419,21 +421,25 @@ class Product extends Component
         $this->short_detail = null;
         $this->detail = '';
         //$this->emit('userUpdated');
+        //iteration es necesario resetear el caché del input file
+        $this->iteration=rand();
     }
 
     public function clear2(){
         $this->clear();
         //resetea todos los campos necesario para input file
-        //$this->resetValidation();
+        $this->resetValidation();
     }
 
     public function render()
     {
+
+        
         //$query = $this->set_filter_query($this->filter_type);
         $query = $this->set_type_query();
         $cats = Category::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');
         $cats->prepend('Ninguna', 0);
-        $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type];
+        $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type,'iteration'=>$this->iteration];
         return view('livewire.admin.products.index',$data);
     }
 

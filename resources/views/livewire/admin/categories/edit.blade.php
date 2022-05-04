@@ -7,6 +7,15 @@
           Editar Categoría
         </div>
       </div>
+      @if(!$cat_id)
+      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+      </div>
+      @endif
+      <!-- loading cuando actualizamos edición -->
+      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+      </div>
       <div class="modal-body">              
           {{ Form::hidden('cat_id',$cat_id,['wire:model' => 'cat_id']) }}
 
@@ -36,17 +45,19 @@
           </div>
           <div class="row mtop16">
               <div class="col-md-6">
-                  <label for="customFile" >Default file input example</label>
+                  <label for="icon" >Default file input example</label>
                     <!--<label for="icon" class="mtop16">Icono:</label>-->
                     <!--<div class="form-file">                      
                       <input class="form-control" type="file" id="formFile" wire:model="icon">
                     </div>-->
                   
-                  {!! Form::file('icon',['class' =>'form-control','id' => 'customFile','accept' =>'image/*','wire:model' => 'icon'])!!}
+                  {!! Form::file('icon',['class' =>'form-control','id' => '$iteration','accept' =>'image/*','wire:model' => 'icon'])!!}
                   @error('icon')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
-                  
+                  <div wire:loading wire:target="icon">
+                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                </div>
               </div>      
               <div class="col-md-6">
                   <label for="status">Estado</label>
@@ -96,6 +107,13 @@
 </div>
 @push('scripts')
 <script>
-  
+  //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  let btn_update=document.querySelector('#btn_update');
+  if(btn_update){
+    btn_update.addEventListener('click',()=>{
+      let loading = document.querySelector('#loading');
+      loading.style.display='flex';
+    })
+  }
 </script>
 @endpush

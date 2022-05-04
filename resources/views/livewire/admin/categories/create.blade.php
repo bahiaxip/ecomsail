@@ -7,6 +7,10 @@
           Crear Categoría
         </div>
       </div>
+      <!-- loading cuando actualizamos edición -->
+      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      </div>      
       <div class="modal-body">
         <form enctype="multipart/form-data">
         	<!--<div class="form-group">-->
@@ -48,7 +52,12 @@
                     </div>-->
                   
                   {!! Form::file('icon',['class' =>'form-control','id' => $iteration,'accept' =>'image/*','wire:model'=>"icon"])!!}
-                  
+                  @error('icon')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                  <div wire:loading wire:target="icon">
+                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                </div>
                   
               </div>      
               <div class="col-md-6">
@@ -86,3 +95,13 @@
     </div>
   </div>
 </div>
+<script>
+  //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  let btn_update=document.querySelector('#btn_update');
+  if(btn_update){
+    btn_update.addEventListener('click',()=>{
+      let loading = document.querySelector('#loading');
+      loading.style.display='flex';
+    })
+  }
+</script>

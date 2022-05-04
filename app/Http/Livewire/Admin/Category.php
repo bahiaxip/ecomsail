@@ -22,6 +22,7 @@ class Category extends Component
     public $status=0;
     public $icon;
     public $thumb;
+    public $iteration;
     public $file_name;
     public $cat_id=0;
     public $description;
@@ -109,7 +110,7 @@ class Category extends Component
     }
 
     public function store(){
-        
+        $this->emit('loading','loading');
         //$this->emit('description1',$this->description);
         $validated = $this->validate([
             'name' => 'required',            
@@ -190,6 +191,7 @@ class Category extends Component
     }
 
     public function update(){
+        $this->emit('loading','loading');
         if($this->cat_id){            
             $validated = $this->validate([
                 'name' => 'required',
@@ -309,7 +311,9 @@ class Category extends Component
         $this->description="";
         $this->icon = null;
         $this->file_name="";
-        $this->thumb= "";
+        $this->thumb= "";        
+        //iteration es necesario resetear el caché del input file
+        $this->iteration=rand();
         //$this->emit('userUpdated');
     }
 
@@ -343,14 +347,13 @@ class Category extends Component
         }
         */
         $query = $this->set_type_query();
-        //iteration es necesario resetear el caché del input file
-        $iteration=rand();
+        
         //$cats[0] = 'Ninguna';
         $cats = Cat::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');
         //añadimos al comienzo la opción por defecto
         $cats->prepend('Ninguna','0');
         //dd($cats);        
-        $data = ['categories' => $query,'filter_type' => $this->filter_type,'cats' => $cats,'iteration' => $iteration,'typealert' => $this->typealert,'subcatname' => $this->subcatname];
+        $data = ['categories' => $query,'filter_type' => $this->filter_type,'cats' => $cats,'iteration' => $this->iteration,'typealert' => $this->typealert,'subcatname' => $this->subcatname];
 
         return view('livewire.admin.categories.index',$data);
     }
