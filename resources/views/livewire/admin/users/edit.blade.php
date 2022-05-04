@@ -1,36 +1,153 @@
-<div wire:ignore.self class="modal fade " id="editUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog ">
-    <div class="modal-content">
+<div wire:ignore.self class="modal fade edit_modal" id="editUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content" >
       <div class="modal-header justify-content-center">
-        <div class="modal-title h5">
-          Editar Usuario
+        @if(!$thumb)
+        <img src="{{url('images/default2.png')}}" alt="" width="64" style="position:absolute;left:10px;margin-top:5px">
+        @else
+        <div>
+            <img src="{{url('storage/'.$thumb)}}" alt="" style="" class="img_user">
         </div>
+        @endif
+        <div class="modal-title h5 justify-self-center" >
+          Editar Usuario
+          <p style="font-size:12px;text-align:center">E-Mail: {{$email}}</p>
+        </div>
+        
       </div>
-      <div class="modal-body">
+      @if(!$data_tmp)
+      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+      </div>
+      @endif
+      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+      </div>
+      <div class="modal-body" >
         
           <!-- campo oculto: id -->
+          <input type="hidden" name="id" wire:model="data_tmp">
           <input type="hidden" name="id" wire:model="user_id">
+          <div class="row">
+              <div class="col-md-6">
+                  <label for="nick">Nick</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fa-solid fa-keyboard"></i>
+                      </span>
+                      <input type="text" name="nick" id="nick" class="form-control" wire:model="nick"/>
+                  </div>
+                  @error('nick')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
           
-          <div class="form-group">
-            <label for="nick">Nick</label>
-            <input type="text" name="nick" id="nick" class="form-control" wire:model="nick"/>
-            @error('nick')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
+              <div class="col-md-6">
+                  <label for="name">Nombre</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fa-solid fa-keyboard"></i>
+                      </span>
+                      <input type="text" name="name" id="name" class="form-control" wire:model="name"/>
+                  </div>
+                  @error('name')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
           </div>
-          
-        	<div class="form-group">
-        		<label for="name">Nombre</label>
-        		<input type="text" name="name" id="name" class="form-control" wire:model="name"/>
-            @error('name')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
-        	</div>
-        	<div class="form-group">
-        		<label for="surname">Apellidos</label>
-        		<input type="text" name="surname" id="surname" class="form-control" wire:model="surname"/>
-        	</div>
-  <!-- ignoramos pass e email en la edición por seguridad -->
+          <div class="row">
+              <div class="col-md-6">
+                  <label for="surname">Apellidos</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fa-solid fa-keyboard"></i>
+                      </span>
+                      <input type="text" name="surname" id="surname" class="form-control" wire:model="surname"/>
+                  </div>
+                  @error('surname')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
+              <div class="col-md-6">
+                  <label for="phone">Teléfono</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fa-solid fa-keyboard"></i>
+                      </span>
+                      <input type="text" name="phone" id="phone" class="form-control" wire:model="phone"/>
+                  </div>
+                  @error('phone')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label for="customFile" >Imagen</label>
+                {!! Form::file('image',['class' =>'form-control','id' => 'customFile','accept' =>'image/*','wire:model' => 'image'])!!}
+                @error('image')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <label for="country">País</label>
+                  {{ Form::select('country',$countries,null,['class' => 'form-select','wire:model' => 'country'])}}
+                  @error('country')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <label for="province">Provincias</label>
+
+                  <select name="province" wire:model="province" class="form-select">
+                    <option value="0">Seleccione...</option>
+                    @foreach($provinces_list as $prov)
+                    <option value="{{$prov['provincia_id']}}">{{$prov['nombre']}}</option>
+                    @endforeach
+                  </select>
+                  
+                  @error('province')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
+              <div class="col-md-6">
+                  <label for="city">Ciudad/Municipio</label>
+                  <!-- con wire:loading,wire:loading.remove,... podemos mantener la espera
+                    a la devolución de datos con wire:target podemos indicar la variable o 
+                    método al que escuchar-->                    
+                        <select name="city" wire:model="city"  wire:loading.attr="disabled"  wire:target="province"  class="form-select">
+                              <option value="0" >Seleccione...</option>
+                              @foreach($municipies_list as $mun)
+                              @if($mun['provincia_id']==$province)
+                              <option value="{{$mun['municipio_id']}}" >{{$mun['nombre']}}</option>
+                              @endif
+                              @endforeach
+                          
+                        </select>
+                    
+                  
+
+                  {{--
+                  <select name="city" wire:model="city" wire:loading.remove wire:target="provinces" class="form-select">
+                    <option value="" >Seleccione...</option>
+                    @foreach($municipies_list as $mun)
+                    @if($mun['provincia_id']==$provinces)
+                    <option value="">{{$mun['nombre']}}</option>
+                    @endif
+                    @endforeach
+                  </select>
+                  --}}
+
+                  
+                  @error('city')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+              </div>
+          </div>
+        	
+        	 <!-- ignoramos pass e email en la edición por seguridad -->
         	<!--
           <div class="form-group">
         		<label for="email">Email</label>
@@ -54,8 +171,18 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>
-        <button type="button" class="btn btn-sm btn-primary back_livewire2 " wire:click.prevent="update()">Actualizar</button>
+        <button type="button" class="btn btn-sm btn-primary back_livewire2 " wire:click.prevent="update()" id="btn_update">Actualizar</button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  let btn_update=document.querySelector('#btn_update');
+  if(btn_update){
+    btn_update.addEventListener('click',()=>{
+      let loading = document.querySelector('#loading');
+      loading.style.display='flex';
+    })
+  }
+</script>

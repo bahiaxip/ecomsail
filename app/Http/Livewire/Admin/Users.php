@@ -6,13 +6,17 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 //Paises
 use App\Functions\Paises;
+use App\Functions\Prov as Pr, App\Functions\Municipalities;
 use App\Functions\Permissions as Permis;
 use App\Models\User;
 //use Illuminate\Http\Request;
 use Route;
+use  Livewire\WithFileUploads;
+use Livewire\WithPagination;
 class Users extends Component
 {    
-
+    use WithFileUploads;
+    use WithPagination;
     //use AuthorizesRequests;
 
     public $user_id;
@@ -20,9 +24,19 @@ class Users extends Component
     public $name;
     public $surname;
     public $email;
-    public $file;
-    //public $pass;
+    public $image;
+    public $thumb;
+    public $phone;
+    public $country;
+    public $province;
+    public $city;
+    //datos de paises,provincias, ciudades
+    protected $paisesObj;
+    public $provinces;
+    public $countries;
 
+    public $province_selected;
+    //public $pass;
     //permissions
 
     public $permissions = [
@@ -45,12 +59,12 @@ class Users extends Component
             'delete_products' => null
         ]
     ];
-    protected $paisesObj;
-    public $province;
-    public $country;
+    
 
     protected $permissions2;
     protected $permissions3;
+    protected $prov;
+    protected $municip;
 
     public $typealert = 'success';
 
@@ -60,19 +74,79 @@ class Users extends Component
     //orden columnas (asc/desc)
     public $orderType;
 
-    public function __construct(){
-        
-
-    }
-    
-
+    public $provinces_list;
+    public $prov_id_selected;
+    //public $provinces;
+    public $municipies_list;
+    //gestiona 
+    public $data_tmp;
     public function mount($filter_type){
+
         //dd(request());
         $this->permissions2 = new Permis();
+        //sustituimos paises por paises en array php
         $this->paisesObj = new Paises();
-        //$this->permissions2 = new Permis();
+        $this->prov = new Pr();
+        $this->provinces_list = $this->prov->prov;
+        //dd($this->prov->prov);
         $this->countries = $this->paisesObj->all;
-        $this->provincias = $this->paisesObj->provincias;
+        $this->municip = new Municipalities();
+        $this->municipies_list = $this->municip->cities;
+        //$this->cities =  json_decode(file_get_contents('js/municipios.json'),true);
+        /*
+        //convirtiendo array de provincias en json a archivo php
+        if(!file_exists('images/cms.php')){
+            fopen('images/cms.php','w');
+        }        
+        $file=fopen('images/cms.php','w');
+        fwrite($file,'<?php '.PHP_EOL);
+        fwrite($file, 'namespace App\Functions;'.PHP_EOL);
+        fwrite($file,'class Municipalities {'.PHP_EOL);
+        fwrite($file,'public $cities = [ '.PHP_EOL);
+        foreach($this->cities as $key=>$value){
+            fwrite($file,$key.' => [');
+            //fwrite($file,'  ['.PHP_EOL);
+            fwrite($file,'"provincia_id" => "'.$value['provincia_id'].'",');
+            fwrite($file,'"municipio_id" => "'.$value['municipio_id'].'",');
+            fwrite($file,'"nombre" => "'.$value['nombre'].'"');
+            fwrite($file,'],'.PHP_EOL);
+
+        }
+        fwrite($file,'];'.PHP_EOL);
+        fwrite($file,'}'.PHP_EOL);
+        fwrite($file, '?>'.PHP_EOL);
+        fclose($file);
+        dd("sadf");
+        */
+//como crear un archivo PHP desde un array de objetos en JSON y de esa forma importarlo
+//directamente en PHP
+        //leyendo archivo y decodificando
+        //array de provincias (necesario el parámetro true para decodificar cada uno de los objetos)        
+        /*
+        $this->provincias =  json_decode(file_get_contents('js/provincias.json'),true);
+        //convirtiendo array de provincias en json a archivo php
+        if(!file_exists('images/cms.php')){
+            fopen('images/cms.php','w');
+        }        
+        $file=fopen('images/cms.php','w');
+        fwrite($file,'<?php '.PHP_EOL);
+        fwrite($file, 'namespace App\Functions;'.PHP_EOL);
+        fwrite($file,'class Prov {'.PHP_EOL);
+        fwrite($file,'public $prov = [ '.PHP_EOL);
+        foreach($this->provincias as $key=>$value){
+            fwrite($file,$key.' => [');
+            //fwrite($file,'  ['.PHP_EOL);
+            fwrite($file,'\'provincia_id\' => \''.$value['provincia_id'].'\',');
+            fwrite($file,'\'nombre\' => \''.$value['nombre'].'\'');
+            fwrite($file,'],'.PHP_EOL);
+
+        }
+        fwrite($file,'];'.PHP_EOL);
+        fwrite($file,'}'.PHP_EOL);
+        fwrite($file, '?>'.PHP_EOL);
+        fclose($file);
+        */
+        
         $this->filter_type = $filter_type;
     }
 
@@ -86,7 +160,7 @@ class Users extends Component
                 $user = User::where('status',$filter_type)->orderBy('id','desc')->paginate(10);
                 break;
             case '1':                
-                $user = User::where('status',$filter_type)->where('role',$role)->orderBy('id','desc')->paginate(10);
+                $user = User::where('status',$filter_type)->orderBy('id','desc')->paginate(10);
                 break;
                 //no mostramos ya que puede haber ususarios eliminados
             /*
@@ -96,7 +170,7 @@ class Users extends Component
             */
             case '3':
                 //500 es usuario baneado                
-                $user = User::where('status','!=',500)->where('role',$role)->orderBy('id','desc')->paginate(10);
+                $user = User::where('status','!=',500)->orderBy('id','desc')->paginate(10);
                 break;
 
         endswitch;
@@ -125,7 +199,19 @@ class Users extends Component
     }    
 
     public function updated($fields){
-        
+        if($this->provinces){
+            //si ha seleccionado uno nuevo pasamos el valor de city a null
+            //no es necesario, tan solo es necesario si no añadimos el valor del id 
+            //a los option
+            if($this->province_selected != $this->province){
+                //$this->city=0;
+            }            
+            $this->province_selected=$this->province;
+            //$this->citiy=0;
+            //dd($this->provinces);
+        }
+        //$this->data_tmp=$this->user_id;
+
         /*
         if($this->searchData){
             $this->resetPage();
@@ -148,42 +234,88 @@ class Users extends Component
     }
 
     public function edit($id){
-        //sleep(3);
-        //registro de la tabla users con el usuario seleccionado
-        $user=User::where('id',$id)->first();
-        $this->user_id=$user->id;
-        //(se podría evitar la consulta $user y llamar al método user del modelo 
-        //Profile belongsTo...)
-        //asignación de datos mediante consulta a tabla users 
-        $this->nick = $user->nick;
-        $this->name=$user->name;
-        $this->email=$user->email;
-        //asignación de datos mediante consulta con tabla profiles
-        $this->surname=$user->lastname;
-        //$this->phone=$user->phone;
-        //$this->country=$profile->country;
-        //$this->province=$profile->province;
-        //$this->file=$profile->file;
-        //$this->thumb=$profile->thumb;
-        //$this->file_title=$profile->file_name;
+        if($id != 0){
+            $this->data_tmp=$id;
+            //sleep(3);
+            //registro de la tabla users con el usuario seleccionado
+            $user=User::where('id',$id)->first();
+            if($user->id){
+                $this->user_id=$user->id;
+                //(se podría evitar la consulta $user y llamar al método user del modelo 
+                //Profile belongsTo...)
+                //asignación de datos mediante consulta a tabla users 
+                $this->nick = $user->nick;
+                $this->name=$user->name;
+                $this->email=$user->email;
+                //asignación de datos mediante consulta con tabla profiles
+                $this->surname=$user->lastname;
+                //dd("dsfas");
+                
+                
+                //$this->image=$user->image;
+                $this->thumb = $user->thumb;
+                $this->phone=$user->phone;
+                $this->country=$user->country;
+                $this->province=$user->province;
+                $this->city = $user->city;
+                //$this->file=$profile->file;
+                //$this->thumb=$profile->thumb;
+                //$this->file_title=$profile->file_name;
+            }
+        }
+        
     }
 
     public function update(){
-        $this->validate([
-            'nick' => 'required',
-            'name' => 'required',
-            'surname' => 'required',            
-        ]);
+        //ocultamos el loading duplicado que se ha iniciado
+        $this->emit('loading','loading');
+        
         if($this->user_id){
-            $user = User::where('id',$this->user_id)->first();
-            $user->update([
-                'nick' => $this->nick,
-                'name' => $this->name,                
-                'lastname' => $this->surname
+            $validated = $this->validate([
+                'nick' => 'required',
+                'name' => 'required',
+                'surname' => 'required',
+                'phone' => 'nullable',
+                'country' => 'nullable',
+                'province' => 'nullable',
+                'city' => 'nullable',
+                'image' =>'nullable|image'
             ]);
+            if($this->user_id){
+                $user = User::where('id',$this->user_id)->first();
+                $user->update([
+                    'nick' => $validated['nick'],
+                    'name' => $validated['name'],                
+                    'lastname' => $validated['surname'],
+                    'phone' => $validated['phone'],
+                    'country' => $validated['country'],
+                    'province' => $validated['province'],
+                    'city' => $validated['city'],
+
+                ]);
+                //dd($this->image);
+                if($validated['image'] !== null){
+            //comprobar si existe imagen y eliminar la anterior            
+                    $image_name = $this->image->getClientOriginalName();
+                    $ext = $this->image->getClientOriginalExtension();
+                    $path_date= date('Y-m-d');
+                    $image = $this->image->store('public/files/'.$path_date,'');
+                    $path_tag = 'public/files/'.$path_date.'/';                
+                    //eliminamos el directorio public
+                    $imagelesspublic = substr($image,7);
+                    $thumb = $image;
+                    $user->update([
+                        'image' => $imagelesspublic,
+                        'thumb' => $imagelesspublic,
+                        'path_tag' => $path_tag,
+                        'file_name' => $image_name,
+                    ]);
+                }
+            }
+            session()->flash('message','Usuario actualizado correctamente');
+            $this->clear2();
+            $this->emit('editUser');
         }
-        session()->flash('message','Usuario actualizado correctamente');
-        $this->clear2();
 
     }
 
@@ -259,12 +391,13 @@ class Users extends Component
 
     //limpiar datos de formulario
     public function clear(){
-        if($this->user_id)
-            $this->user_id='';
+        //if($this->user_id)
+        $this->user_id='';
         $this->nick='';
         $this->name='';
-        $this->surnames='';
-        $this->emit('userUpdated');
+        $this->surname='';
+        //$this->emit('editUser');
+        $this->data_tmp='';
     }
 
     public function clear2(){
@@ -275,13 +408,22 @@ class Users extends Component
 
     public function render()
     {
+        /*
+        $dato=array();        
+        for($i=0;$i<count($this->provincias);$i++){
+            array_push($dato,$this->provincias[$i]['nombre']);
+        }
+        */
+        
+        
         $this->permissions2 = new Permis();
         //$users = User::orderBy('id','desc')->paginate(20);
         //$users = $this->set_type_query();
         $users = $this->set_type_query();
 
-        $data = ['users' => $users,'countries' => $this->countries,'provincias' => $this->provincias];
+        $data = ['users' => $users,'countries' => $this->countries,'provinces_list' => $this->provinces_list,'cities' => $this->municipies_list,'data_tmp'=> $this->data_tmp];
         //return view('livewire.admin.users.index',$data)->extends('layouts.admin');
+
         return view('livewire.admin.users.index',$data);
     }
 }

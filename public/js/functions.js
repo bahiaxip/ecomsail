@@ -1,12 +1,13 @@
 //nombre de ruta (asignado en meta tag que indica el valor de name en el archivo de rutas)
 var route = document.getElementsByName('route_name')[0].getAttribute('content');
 
-var events = ['userUpdated','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions'];
+var events = ['userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions'];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
 //es necesario añadir datos al array
 events.forEach((event)=>{        
     window.livewire.on(event,()=>{
+        console.log("event: ",event+' cerramos modal')
         $('#'+event).modal('hide');
     })
 })
@@ -37,6 +38,13 @@ window.livewire.on('description1',()=>{
 
 window.livewire.on('description2',(data)=>{
     CKEDITOR.instances.friendly_edit2.setData(data);
+})
+window.livewire.on('loading',(data)=>{
+    let loading = document.querySelector('#'+data);
+    if(data){
+        loading.style.display='none';
+    }
+    
 })
 window.livewire.on('subcat',(data,data2)=>{
     console.log(data)

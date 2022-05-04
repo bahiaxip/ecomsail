@@ -114,7 +114,7 @@
                                 <i class="fa-solid fa-pencil-alt"></i>
                             </button>
                             @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editUser" wire:click="edit({{$user->id}})">
+                            <button class="btn btn-sm" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#editUser"  wire:click="edit({{$user->id}})"@else wire:click="edit(0)" @endif>
                                 <i class="fa-solid fa-edit"></i>
                             </button>
                             @endif

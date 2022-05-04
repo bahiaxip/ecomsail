@@ -26,7 +26,13 @@ class User extends Authenticatable
         'path_tag',
         'file_name',
         'image',
-        'permissions'
+        'thumb',
+        'phone',
+        'country',
+        'province',
+        'city',
+        'permissions',
+
     ];
 
     /**
