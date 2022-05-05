@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 //models
 use App\Models\Category as Cat,App\Models\Product;
 use Illuminate\Http\Request;
-use Str;
+use Str,PDF;
 
 class Category extends Component
 {
@@ -38,7 +38,12 @@ class Category extends Component
     //campo de búsqueda (wire:model)
     public $search_data;
     //orden columnas (asc/desc)
-    public $orderType;
+    public $order_type = 'asc';
+    //columna seleccionada
+    public $selectedCol='id';
+
+    //pdf
+    protected $pdf;
 
     //el construct genera conflictos con el parámetro
     //@this para manejar los datos desde javascript
@@ -55,50 +60,127 @@ class Category extends Component
         //$this->subcat = null;
 
         $this->filter_type = $filter_type;
+        $this->order_type = 'asc';
 
         //$this->categories = Cat::where('type',0)->where('status','1')->orderBy('id','desc')->get();
         //$data = ['categories' => $categories];
     }
+    //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
+    public function setColAndOrder($nameCol=null){
+
+        //posibles columnas
+        $cols=['id','name'];
+        //comprobamos si la columna seleccionada existe, por si se intenta 
+        //introducir otra de forma maliciosa
+        if(in_array($nameCol, $cols))
+            $this->selectedCol = $nameCol;
+        $order = 'asc';
+        //comprobando si el nombre de la columna seleccionado es distinto al 
+        //anterior (en caso de haber pulsado la vez anterior)
+        if($this->selectedCol != $nameCol)
+            $order = 'asc';
+        else
+            //if($this->order_type=='' || $this->order_type =='desc')
+            $order = ($this->order_type =='desc') ? 'asc': 'desc';
+        //se establece el nombre de la columna
+        $this->selectedCol = $nameCol;
+        $this->order_type = $order;
+    }
     //filtrado de categorías (Borrador/Público/Reciclaje/Todos)
-    public function set_filter_query($filter_type,$subcat=null){
-        $cat=[];
-        $typecat=0;
-        if($subcat){
-            $typecat=$subcat;
+    public function set_filter_query($filter_type,$export=false,$subcat=0){
+        $cat='';
+        $search_data = '%'.$this->search_data.'%';
+        //el subcat indica si es categoría padre(0) o subcategoría(1)
+        $subcat = ($subcat) ? $subcat : 0;        
+        //columna de referencia para ordenar
+        $col_order='id';
+        //si $this->selectedCol no es null establecemos la columna seleccionada 
+        if($this->selectedCol)
+            $col_order=$this->selectedCol;
+        //tipo de ordenamiento
+        //$order='desc';
+        $order = $this->order_type;
+        
+        //si es reciclaje creamos consulta con onlyTrashed(los eliminados con softDelete())
+        if($filter_type==2)            
+            $init_query = ($this->search_data) ?
+                Cat::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$subcat)
+                :
+                Cat::onlyTrashed()->orderBy($col_order,$order)->where('type',$subcat);
+        //si es todos no establecemos status en la consulta para que englobe a 
+        //los 2 posibles estados (tanto los de status=0 como los de status=1)
+        elseif($filter_type==3){
+            $init_query = ($this->search_data) ?
+                Cat::where('name','LIKE',$search_data)->where('type',$subcat)
+                :
+                Cat::where('type',$subcat);
+        }
+        //si es 0 o 1 establecemos la misma consulta
+        else{
+            $init_query = ($this->search_data) ?
+                Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->where('type',$subcat)
+                :
+                Cat::where('status',$filter_type)->where('type',$subcat);
         }
         switch($filter_type):
             case '0':
                 //$this->filterType = $filterType;
-                $cat = Cat::where('status',$filter_type)->where('type',$typecat)->orderBy('id','desc')->paginate(10);
+                ($export) ?
+                    $cat = $init_query->orderBy($col_order,$order)->get()
+                    :
+                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
                 break;
-            case '1':                
-                $cat = Cat::where('status',$filter_type)->where('type',$typecat)->orderBy('id','desc')->paginate(10);
+            case '1':
+                ($export) ?
+                    $cat = $init_query->orderBy($col_order,$order)->get()
+                    :                
+                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
                 break;
-            case '2':                
-                $cat = Cat::onlyTrashed()->orderBy('id','desc')->where('type',$typecat)->paginate(10);
+            case '2':
+                ($export) ?
+                    $cat = $init_query->get()
+                    :
+                    $cat = $init_query->paginate(10);
                 break;
-            case '3':                
-                $cat = Cat::orderBy('id','desc')->where('type',$typecat)->paginate(10);
+            case '3':
+                //si el filtro es todos(3) realizamos la consulta sin filtrar status
+                ($export) ?
+                $cat = $init_query->get()
+                :
+                $cat = $init_query->paginate(10);
                 break;
-
         endswitch;
         return $cat;
     }
 
-    public function set_type_query(){
-        $query;
-        if($this->search_data){
+    public function set_type_query($export=false){        
+        $query;        
+        /*
+        if($this->search_data && $export){
             $query= $this->set_filter_query($this->filter_type);
             $search_data = '%'.$this->search_data.'%';
+            //eliminados con softDelete(onlyTrashed)
+            if($this->filter_type==2){
+                $query = Cat::onlyTrashed()->where('name','LIKE',$search_data)->get();
+            }else{
+                $query = Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->get();    
+            }
+        }
+        elseif($this->search_data){
+            $query= $this->set_filter_query($this->filter_type);
+            $search_data = '%'.$this->search_data.'%';
+            //eliminados con softDelete(onlyTrashed)
             if($this->filter_type==2){
                 $query = Cat::onlyTrashed()->where('name','LIKE',$search_data)->paginate(10);
             }else{
                 $query = Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->paginate(10);    
             }
         }
-        else{
-            $query= $this->set_filter_query($this->filter_type,$this->subcat);
+        else{            
+            $query= $this->set_filter_query($this->filter_type,$export,$this->subcat);
         }
+        */
+        $query= $this->set_filter_query($this->filter_type,$export,$this->subcat);
         return $query;
     }
 
@@ -119,12 +201,17 @@ class Category extends Component
             'icon' => 'nullable',
             'description' => 'nullable'
         ]);
-        $icon;
-        $icon_name;
-        $thumb;
-        $iconlesspublic="";
-        $icon_name="";        
-        $ext;
+        $icon='images/categoria.png';
+        $icon_name='categoria.png';
+        $thumb='categoria.png';
+        $ext='png';
+        $path_tag = '/storage/';
+        //si no es categoría(type=0) debe de ser subcategoría (type=1)
+        if($validated['type'] != 0){
+            $icon='images/subcategoria.png';
+            $icon_name='subcategoria.png';
+            $thumb='subcategoria.png';
+        }
 
 //comprobar si existe otro slug igual
         $category = Cat::create([
@@ -133,6 +220,12 @@ class Category extends Component
             'type' => $validated['type'],
             'status' => $validated['status'],           
             'description' => $this->description,
+            'path_tag' => $path_tag,
+            'file_name' => $icon_name,
+            'file_ext' => $ext,
+            'image' => $icon,
+            'thumb' => $thumb
+
         ]);        
         if($validated['icon'] !== null){
 //comprobar si existe imagen y eliminar la anterior
@@ -141,7 +234,8 @@ class Category extends Component
             //almacenamos con el método store que genera un nombre de archivo aleatorio
             $path_date= date('Y-m-d');
             $icon = $this->icon->store('public/files/'.$path_date,'');
-            $path_tag = 'public/files/'.$path_date.'/';
+
+            $path_tag = '/storage/';
             //eliminamos el directorio public
             $iconlesspublic = substr($icon,7);
             $thumb = $icon;
@@ -184,6 +278,7 @@ class Category extends Component
         $this->description = $cat->description;
         $this->file_name = $cat->file_name;
         //$this->icon = $cat->image;
+
         $this->thumb = $cat->thumb;
         $this->typealert="success";
         $this->emit('description2',$this->description);        
@@ -309,6 +404,7 @@ class Category extends Component
         $this->type=0;
         $this->status=0;
         $this->description="";
+//revisar si es necesario limpiar icon,thumb...
         $this->icon = null;
         $this->file_name="";
         $this->thumb= "";        
@@ -326,6 +422,20 @@ class Category extends Component
         $this->emit('description1');
     }
 
+    //exportar archivo PDF al navegador del usuario
+    public function exportPDF(){
+    //opción actual         
+        $categories=$this->set_type_query(true);
+        //dd($categories);
+        $view="livewire.admin.categories.export";
+        $pdf=PDF::loadView($view,['categories'=>$categories]);
+        $this->pdf=$pdf;
+        return response()->streamDownload(function(){
+                    //con print o con echo
+            print $this->pdf->stream();//echo $this->pdf->stream();
+        },'test.pdf');
+    }
+
     public function renderSubCat($subcat_id,$name){
         $this->subcatname=$name;
         //falta pasar a active la clase subcat de <li> para subcategorías
@@ -335,6 +445,7 @@ class Category extends Component
 
     public function render()
     {
+        
         /*
         $subcat=null;        
         if($this->subcat){

@@ -97,6 +97,7 @@
 </div>
 <script>
   //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  /*
   let btn_update=document.querySelector('#btn_update');
   if(btn_update){
     btn_update.addEventListener('click',()=>{
@@ -104,4 +105,5 @@
       loading.style.display='flex';
     })
   }
+  */
 </script>

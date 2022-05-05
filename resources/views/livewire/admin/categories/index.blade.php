@@ -84,7 +84,26 @@
         <ul class="add">
            
             <li>
-                <button class="btn btn-sm btn-primary">Exportar</button>
+                <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false" >
+                    Exportar
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">                
+                    <li>
+                        <a href="#" class="dropdown-item" wire:click="exportPDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-item">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('list_categories',['filter_type' => 2]) }}" class="dropdown-item">
+                            <i class="fa-solid fa-envelope"></i> E-Mail
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li>            
@@ -118,7 +137,11 @@
             <thead>
                 <tr>
                     <td width="64"></td>                    
-                    <td>Nombre</td>           
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('name')">
+                            Nombre    
+                        </a>
+                    </td>           
                     <td>Descripción</td>
                     <td width="140">Acciones</td>
                 </tr>
