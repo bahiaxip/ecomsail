@@ -86,7 +86,8 @@ class Category extends Component
         $this->selectedCol = $nameCol;
         $this->order_type = $order;
     }
-    //filtrado de categorías (Borrador/Público/Reciclaje/Todos)
+    //filtrado de categorías (Borrador/Público/Reciclaje/Todos), filtrado de 
+    //búsqueda y filtrado de export
     public function set_filter_query($filter_type,$export=false,$subcat=0){
         $cat='';
         $search_data = '%'.$this->search_data.'%';
@@ -138,16 +139,16 @@ class Category extends Component
                 break;
             case '2':
                 ($export) ?
-                    $cat = $init_query->get()
+                    $cat = $init_query->orderBy($col_order,$order)->get()
                     :
-                    $cat = $init_query->paginate(10);
+                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
                 break;
             case '3':
                 //si el filtro es todos(3) realizamos la consulta sin filtrar status
                 ($export) ?
-                $cat = $init_query->get()
+                $cat = $init_query->orderBy($col_order,$order)->get()
                 :
-                $cat = $init_query->paginate(10);
+                $cat = $init_query->orderBy($col_order,$order)->paginate(10);
                 break;
         endswitch;
         return $cat;
