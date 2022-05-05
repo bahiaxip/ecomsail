@@ -9,7 +9,8 @@ use Livewire\WithPagination;
 //models
 use App\Models\Category as Cat,App\Models\Product;
 use Illuminate\Http\Request;
-use Str,PDF;
+use App\Functions\Export;
+use Str,PDF,Excel;
 
 class Category extends Component
 {
@@ -435,6 +436,12 @@ class Category extends Component
                     //con print o con echo
             print $this->pdf->stream();//echo $this->pdf->stream();
         },'test.pdf');
+    }
+
+    //exportar archivo Excel al navegador del usuario
+    public function exportExcel(){
+        $categories=$this->set_type_query(true);
+        return Excel::download(new Export($categories),'exportexcel.xlsx');
     }
 
     public function renderSubCat($subcat_id,$name){

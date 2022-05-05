@@ -94,7 +94,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item">
+                        <a href="#" class="dropdown-item" wire:click="exportExcel">
                             <i class="fa-solid fa-file-excel"></i> Excel
                         </a>
                     </li>
