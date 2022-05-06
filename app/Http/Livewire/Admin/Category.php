@@ -10,8 +10,9 @@ use Livewire\WithPagination;
 use App\Models\Category as Cat,App\Models\Product;
 use Illuminate\Http\Request;
 use App\Functions\Export;
-use Str,PDF,Excel;
-
+use Str,PDF,Excel,Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Listado;
 class Category extends Component
 {
     use WithFileUploads;
@@ -45,7 +46,9 @@ class Category extends Component
 
     //pdf
     protected $pdf;
-
+    public $checkpdf;
+    public $checkexcel;
+    public $email_export;
     //el construct genera conflictos con el parámetro
     //@this para manejar los datos desde javascript
     /*
@@ -53,6 +56,10 @@ class Category extends Component
         //$this->middleware('admin');        
     }
     */
+    //nombre de listado para envió de email
+    public $listname;
+    //nombre de usuario para envió de email
+    public $username;
     public function mount($filter_type){
         
         //reseteamos subcat
@@ -62,7 +69,9 @@ class Category extends Component
 
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
-
+        $this->listname = 'categorías';
+        $this->username=Auth::user()->name;
+        $this->checkpdf = 1;
         //$this->categories = Cat::where('type',0)->where('status','1')->orderBy('id','desc')->get();
         //$data = ['categories' => $categories];
     }
@@ -70,7 +79,7 @@ class Category extends Component
     public function setColAndOrder($nameCol=null){
 
         //posibles columnas
-        $cols=['id','name'];
+        $cols=['id','name','description'];
         //comprobamos si la columna seleccionada existe, por si se intenta 
         //introducir otra de forma maliciosa
         if(in_array($nameCol, $cols))
@@ -235,7 +244,7 @@ class Category extends Component
             $ext = $this->icon->getClientOriginalExtension();            
             //almacenamos con el método store que genera un nombre de archivo aleatorio
             $path_date= date('Y-m-d');
-            $icon = $this->icon->store('public/files/'.$path_date,'');
+            $icon = $this->icon->store('public/files/'.$path_date,'local');
 
             $path_tag = '/storage/';
             //eliminamos el directorio public
@@ -420,6 +429,15 @@ class Category extends Component
         //resetea todos los mensajes de error
         $this->resetValidation();
     }
+
+    //limpiar datos de exportación
+    public function clearExport(){
+        $this->checkpdf='1';
+        $this->checkexcel='';
+        $this->emailParaExportar='';
+
+    }
+
     public function setckeditor(){
         $this->emit('description1');
     }
@@ -443,6 +461,60 @@ class Category extends Component
         $categories=$this->set_type_query(true);
         return Excel::download(new Export($categories),'exportexcel.xlsx');
     }
+    //guardar el archivo PDF en el server para después poder enviar por correo 
+    //como archivo adjunto
+    public function savePDF(){
+        $path_date=date('Y-m-d');
+        $categories=$this->set_type_query(true);
+        $view="livewire.admin.categories.export";
+        $pdf= PDF::loadView($view,['categories'=>$categories]);
+        $pdf->save('listado_'.$path_date.'.pdf');
+    }
+    //guardar archivo Excel en el server para después poder enviar por correo //como archivo adjunto
+    public function saveExcel(){
+        $path_date=date('Y-m-d');
+        $categories=$this->set_type_query(true);
+        //grabar en disco
+        return  Excel::store(new Export($categories),'listado_'.$path_date.'.xlsx','public');
+    }
+
+    //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
+    
+    public function sendEmail(){
+
+        $attach=["pdf"=>0,"excel"=>0];
+        $validated = $this->validate([
+            'email_export'=>'required|email'
+        ]);
+        //mensaje de validación de checkbox
+        
+        if($this->checkpdf == '' && $this->checkexcel==''){
+            session()->flash('check','Es necesario marcar al menos uno');
+        }else{
+
+            if($this->checkpdf){
+                $this->savePDF();                
+                $attach["pdf"]="1";
+            }
+            if($this->checkexcel){
+                $this->saveExcel();                
+                $attach["excel"]="1";
+            }
+        //falta condicional por si falla el servidor de correo
+            Mail::to($validated["email_export"], "eHidra")
+            ->send(new Listado($attach,$this->username,$this->listname));
+        //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
+        //correo ya no desplega el dropdown de exportar 
+        //session()->flash('message',"Correo enviado correctamente");
+        return redirect()->route('list_categories',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
+            //limpiar datos de selección para el envio (correo y archivos adjuntos)
+        $this->clearExport();
+        $this->emit("sendModal");            
+                
+        }
+        
+    }
+    
 
     public function renderSubCat($subcat_id,$name){
         $this->subcatname=$name;
@@ -453,7 +525,7 @@ class Category extends Component
 
     public function render()
     {
-        
+        fopen(public_path('hola.txt'),'w');
         /*
         $subcat=null;        
         if($this->subcat){

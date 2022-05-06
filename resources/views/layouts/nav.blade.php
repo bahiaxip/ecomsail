@@ -14,33 +14,37 @@
 		<ul class="list">
 			<li>
 				<a href="{{ url('/') }}">
-					<i class="fa-solid fa-house"></i> Inicio
+					<i class="fa-solid fa-house"></i> 
+					<span class="d-none d-md-flex">Inicio</span>
 				</a>
 			</li>
 			<li>
 				<a href="{{ url('/') }}">
 					<i class="fa-solid fa-store"></i>
-					Tienda
+					<span class="d-none d-md-flex">Tienda</span>
 				</a>
 			</li>
 			<li>
 				<a href="{{ url('/') }}">
-					<i class="fa-solid fa-trophy"></i> Ofertas
+					<i class="fa-solid fa-trophy"></i> 
+					<span class="d-none d-md-flex">Ofertas</span>
 				</a>
 			</li>
 			<li>
 				<a href="{{ url('/') }}">
-					<i class="fa-solid fa-envelope"></i> Contacto
+					<i class="fa-solid fa-envelope"></i> 
+					<span class="d-none d-md-flex">Contacto</span>
 				</a>
 			</li>
 			<li>
 				<a href="{{ url('/') }}">
-					<i class="fa-solid fa-gears"></i> Panel
+					<i class="fa-solid fa-gears"></i> 
+					<span class="d-none d-md-flex">Panel</span>
 				</a>
 			</li>
 		</ul>
 	</div>
-	<div class="nav_lat nav_right">
+	<div class=" nav_lat nav_right">
 		<ul>
 			@auth
 			<li>				

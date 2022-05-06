@@ -4,9 +4,11 @@
 
     @section('path')
     &nbsp;>&nbsp;
-    <li>
-        <a href="{{ url('admin/categories/1') }}">
-            <i class="fa-solid fa-columns"></i> Categorías
+    <li class="flex">
+        <a href="{{ url('admin/categories/1') }}" style="display:flex">
+            <div class="icon"></div>
+            <!--<i class="fa-solid fa-columns"></i>--> 
+            <span>Categorías</span>
         </a>
     </li>    
     <li class="subcat">
@@ -25,6 +27,7 @@
     @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
         @include('livewire.admin.categories.confirm')
     @endif
+    @include('livewire.admin.categories.sendmail')
 
     @if(session()->has('message'))
     <div class="container ">
@@ -84,10 +87,14 @@
         <ul class="add">
            
             <li>
-                <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false" >
-                    Exportar
+                <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" >
+                    <span class="d-none d-md-inline">Exportar</span>
+                    <span class="d-inline d-md-none">
+                        <i class="fa-solid fa-file-export"></i>
+                    </span>
+
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">                
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">                
                     <li>
                         <a href="#" class="dropdown-item" wire:click="exportPDF">
                             <i class="fa-solid fa-file-pdf"></i> PDF
@@ -99,7 +106,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('list_categories',['filter_type' => 2]) }}" class="dropdown-item">
+                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal" aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa-solid fa-envelope"></i> E-Mail
                         </a>
                     </li>
@@ -108,7 +115,10 @@
 
             <li>            
                 <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filtros
+                    <span class="d-none d-md-inline">Filtros</span>
+                    <span class="d-inline d-md-none">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </span>
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
                     <li>
@@ -127,29 +137,48 @@
             </li>
             @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
                 <li>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Agregar Categoría</a>    
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> 
+                        <span class="d-none d-md-inline">Agregar Categoría</span>
+                    </a>
                 </li>
             @endif
         </ul>
     </div>
     <div class="div_table shadow mtop16">
+<!-- div loading -->
+
         <table class="table">
             <thead>
                 <tr>
+                    <td>
+                        {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
+                    </td>
+                    <td width="64">
+                        <a href="#" wire:click="setColAndOrder('id')">
+                            ID
+                        </a>
+                    </td>
                     <td width="64"></td>                    
                     <td>
                         <a href="#" wire:click="setColAndOrder('name')">
                             Nombre    
                         </a>
                     </td>           
-                    <td>Descripción</td>
+                    <td class="max d-none d-md-table-cell">
+                        <a href="#" wire:click="setColAndOrder('description')">
+                            Descripción
+                        </a>
+                    </td>
                     <td width="140">Acciones</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach($categories as $cat)
                 <tr>
-
+                    <td>
+                        {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
+                    </td>
+                    <td>{{ $cat->id }}</td>
                     <td>
                         @if($cat->image)
                         <img src="{{ url('/storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32">
@@ -162,23 +191,24 @@
                     usamos la sintaxis laravel con !! para limpiar los 
                     tags añadidos del textarea en lugar de doble corchete
                     -->
-                    <td>{!! $cat->description !!}</td>
+                    <td class="max d-none d-md-table-cell">{!! $cat->description !!}</td>
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
                                 @if(!$subcat)
-                                <button class="btn btn-sm"  title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
-                                    <i class="fa-solid fa-tag"></i>
+                                <button class="btn btn-sm scat"  title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
+                                    <!--<img src="{{url('icons/grid_subcat.svg')}}" alt="" width="16">-->
+                                    <div class="icon"></div>
                                 </button>
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
-                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})">
+                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})" title="Editar {{$cat->name}}">
                                     <i class="fa-solid fa-edit"></i>
                                 </button>
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
                                     @if($filter_type!=2)
-                                        <button class="btn btn-sm back_livewire2" title="Eliminar usuario" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
+                                        <button class="btn btn-sm delete" title="Eliminar {{$cat->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     @endif

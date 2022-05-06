@@ -1,7 +1,7 @@
 //nombre de ruta (asignado en meta tag que indica el valor de name en el archivo de rutas)
 var route = document.getElementsByName('route_name')[0].getAttribute('content');
 
-var events = ['userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions'];
+var events = ['userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions','sendModal'];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
 //es necesario añadir datos al array

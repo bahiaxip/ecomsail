@@ -16,10 +16,11 @@ color2 = #494949
 	height 30px
 	justify-content center
 	margin auto
+	
 	width 100%
 	.nav_lat
 		display flex
-		width 100%
+		/*width 100%*/
 		justify-content flex-start
 		ul			
 			padding 0				
@@ -35,9 +36,20 @@ color2 = #494949
 		ul
 			display flex
 			justify-content flex-end
+		/*
+		@media screen and (max-width: 768px)
+			width 100%
+		*/	
+				
 	.nav_center
 		width 70%
-
+		ul
+			li
+				a
+					@media screen and (max-width: 768px)
+						padding 10px
+					@media screen and (max-width: 460px)
+						padding 0px
 	ul			
 		display flex
 		height 100%
@@ -61,3 +73,5 @@ color2 = #494949
 				&:hover
 					//background-color orange
 					color darkorange
+
+/*@media screen and (max-width:768px)*/
