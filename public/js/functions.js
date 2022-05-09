@@ -46,18 +46,33 @@ window.livewire.on('loading',(data)=>{
     }
     
 })
-window.livewire.on('subcat',(data,data2)=>{
-    console.log(data)
-    console.log(data2)
-    let subcat =  document.querySelector('.subcat');
-    let link=`<a href="admin/categories/1/2" id="subcat">&nbsp;
-        <i class="fa-solid fa-columns"></i> &nbsp;>&nbsp;${data2}
+//Añadir link en la url
+window.livewire.on('subcat',(cat_id,cat_name)=>{
+    console.log(cat_id)
+    console.log(cat_name)
+    let subcat =  document.querySelector('#sublist_name');
+    let link=`&nbsp;>&nbsp;<a href="${cat_id}" id="subcat">
+        <i class="fa-solid fa-columns"></i> ${cat_name}
     </a>`;
+
+    //estableciendo datos en localStorage, anulado: no necesario
+    /*
+    let data = {'cat_id':cat_id,'cat_name':cat_name};    
+    localStorage.setItem('subcats',JSON.stringify(data));
+    */
+
     //subcat.firstElementChild.href="dfsaf";    
     subcat.innerHTML = link;
-    document.querySelector('#subcat').href='admin/categories/1/'+data;
+    //document.querySelector('#subcat').href='admin/categories/1/'+data;
 
     subcat.classList.add('active');
+
+//establecemos la ruta subcategorías, ya que si entra aquí es porqué se ha pulsado el
+//botón de subcategorías de algún elemento del listado de categorías
+    if(route == 'list_categories'){
+        document.getElementsByTagName('title')[0].innerHTML='EcomSail - Subcategorías';
+    }
+    
 
 })
 
@@ -112,7 +127,48 @@ document.addEventListener('readystatechange',() => {
                     div_inputgroup.firstElementChild.classList.remove('active');
                     div_inputgroup.lastElementChild.classList.remove('active');
                 })
-            }        
+            }
+            console.log("history.length: ",window.history.length)
+            
+            //el evento popstate detecta el botón de adelante, atrás del navegador
+            //o cuando se llama a los métodos history.back(), history.forward(), history.go()
+            window.addEventListener('popstate',(e)=>{
+                //console.log(e.state);
+                console.log(e.state)
+                
+            //se comprueba la ruta para detectar si es categoría o subcategoría y cambiar el title
+            //se usa el evento popstate como alternativa a la variable route establecida al comienzo del layout con el tag meta
+            //además de modificar el title popstate permite obtener si se ha pulsado el botón atrás o adelante en el navegador
+            //y redirigimos con window.location para que no genere errores
+                if(e.path[0].route == 'list_categories'){
+                    
+                    //obtener ruta exceptuando la raíz : location.pathname
+                    if(window.location.pathname){
+                        let path = window.location.pathname;
+                        //expresión regular para contar los "/" que contiene el location.pathname
+                        let sumSlash = path.match(/\//g);
+                        if(sumSlash.length == 3){
+                            //categorías
+                            document.getElementsByTagName('title')[0].innerHTML='EcomSail - Categorías';
+                            console.log("hostname: ",window.location.hostname)
+                            console.log("host: ",window.location.host)
+                            console.log("protocol: ",window.location.protocol)
+                            window.location = path;
+                        }else if(sumSlash.length==4){
+                            //subcategorías
+                            document.getElementsByTagName('title')[0].innerHTML='EcomSail - Subcategorías';
+                            window.location = path;
+                        }
+
+                        console.log(path.match(/\//g).length);
+                    }
+                }
+                
+            })
+
+            
+            
         }
+
 })     
 //}

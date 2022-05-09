@@ -21,6 +21,19 @@ class Category extends Model
     public function prod(){
         return $this->hasMany(Product::class,'category_id','id');
     }
+    //mediante array (@foreach...@endforeach) se puede obtener los datos de la 
+    //subcategoría
+    public function subcat(){
+        return $this->hasMany(Category::class,'type','id');
+    }
+    //obtener el número de subcategorías que contiene una categoría
+    public function subcatlength(){
+        return $this->hasMany(Category::class,'type','id')->count();
+    }
+    //obtener la categoría padre de una subcategoría
+    public function parentcat(){
+        return $this->belongsTo(Category::class,'type','id');
+    }
 
     public static function boot (){
         parent::boot();

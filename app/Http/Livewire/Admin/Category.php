@@ -33,7 +33,7 @@ class Category extends Component
 
     public $filter_type;
     public $subcat;
-    public $subcatname;
+    public $subcatlist=['id' => null,'name' => null];
     public $typealert='success';
     public $count_cat;
 
@@ -60,6 +60,38 @@ class Category extends Component
     public $listname;
     //nombre de usuario para envió de email
     public $username;
+    //listado de registros seleccionados mediante checkbox    
+    public $selected_list;
+    //select de acciones por lote
+    public $action_selected_ids;
+
+    //variable exclusiva para mostrar el botón volver al recargar página en
+    //subcategorías que no contienen resultados, y por tanto no existe $subcatlist['name']
+    public $btn_back;
+    public function deleteids(){  
+//añadir icono loading      
+        //comprobamos si se ha seleccionado la opción de eliminar
+        if($this->action_selected_ids==1){
+            //comprobamos si el array contiene elementos
+            if(!empty($this->selected_list) && count($this->selected_list)>0){
+                //eliminamos elementos
+                Cat::destroy($this->selected_list);            
+            }
+
+            /*
+            else{
+                dd('esta vacio');
+            }
+            */
+        }
+        
+        
+        //dd($this->selected_list);
+    }
+    public function select_id($id){
+        dd("hola");
+
+    }
     public function mount($filter_type){
         
         //reseteamos subcat
@@ -517,15 +549,20 @@ class Category extends Component
     
 
     public function renderSubCat($subcat_id,$name){
-        $this->subcatname=$name;
+        //dd($name);
+        $this->subcatlist['name']=$name;
+        $this->subcatlist['id'] = $subcat_id;
+
         //falta pasar a active la clase subcat de <li> para subcategorías
         $this->emit('subcat',$subcat_id,$name);
+
         $this->subcat=$subcat_id;
+
     }
 
     public function render()
     {
-        fopen(public_path('hola.txt'),'w');
+        //fopen(public_path('hola.txt'),'w');
         /*
         $subcat=null;        
         if($this->subcat){
@@ -543,9 +580,55 @@ class Category extends Component
         $cats = Cat::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');
         //añadimos al comienzo la opción por defecto
         $cats->prepend('Ninguna','0');
-        //dd($cats);        
-        $data = ['categories' => $query,'filter_type' => $this->filter_type,'cats' => $cats,'iteration' => $this->iteration,'typealert' => $this->typealert,'subcatname' => $this->subcatname];
 
+        //si subcat contiene valor establecemos el title, este método es solo si
+        // al recargar la página se encuentra en subcategorías, en lugar de usar el
+        //evento popstate en javascript, para el resto de opciones usamos popstate
+
+        //reseteamos botón de volver
+        $this->btn_back=false;
+        if($this->subcat){            
+            //obtenemos el nombre de la categoría padre del primer elemento de la lista
+            //comprobando si existe
+            if($query[0] && $query[0]->parentcat->name){
+                $this->subcatlist['name'] = $query[0]->parentcat->name;
+                $this->subcatlist['id'] = $this->subcat;
+            }else{
+                //si no existen elementos pasamos la variable "btn_back" a true,
+                //de esa forma podemos mostrar el botón volver
+                $this->btn_back = true;
+                //para obtener el nombre en un listado sin elementos aprovechamos la 
+                //consulta $cats destinada para el select, pero solo funciona si el 
+                //filtrado es público(filter_type = 1), si no, necesitamos realiza otra
+                //consulta. Esto es solo necesario para poder mostrar el enlace de
+                //"minilink" mostrando el nombre de la subcategoría y solo al recargar
+                //la página ya que en el método renderSubcat ya enviamos el nombre
+                
+                //si el filtrado es público aprovechamos el resultado $cats;
+                if(($this->filter_type == 1)){
+                    dd("asdfasd");
+                    $cattmp=$cats;
+                //si no es público realizamos la consulta, no afectará en rendimiento
+                //de forma visible ya que solo será necesario si se recarga la página
+                }else{
+                    dd("asdfasd");
+                    $cattmp = Cat::where('status',$this->filter_type)->pluck('name','id');
+                }
+                $this->subcatlist['name']=$cattmp[$this->subcatlist['id']];
+                $this->subcatlist['id'] = $this->subcat;
+            }            
+            
+            
+            
+            
+            
+        }
+
+        $data = ['categories' => $query,'filter_type' => $this->filter_type,'cats' => $cats,'iteration' => $this->iteration,'typealert' => $this->typealert,'subcatname' => $this->subcatlist['name']];
+
+        
         return view('livewire.admin.categories.index',$data);
+        
+        
     }
 }

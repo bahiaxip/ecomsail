@@ -57,8 +57,6 @@
                             </a>
                         </li>
                         @yield('path')
-
-
                     </ul>
                 </nav>
                 {{--@if(Session::has('message'))--}}

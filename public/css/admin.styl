@@ -1,5 +1,8 @@
-color1 = #FFF
-color2 = #494949
+//color1 = #489bf8
+color1 = #4861ff
+color2 = #00b292
+color3 = #ff003d
+color6 = #494949
 
 /* ocultar barra scroll en chrome sustituido al elemento directamente más abajo */
 /*
@@ -42,6 +45,15 @@ body
 	border 0px
 /* fin estilos mensajes de error */
 
+.btn_primary
+	background-color color1
+	color #E7E7E7
+	font-size .9em
+	&:hover
+		color #FFF
+	&:focus
+		box-shadow 0 0 6px #4861ff
+	
 .content
 	background-color #D3D3D3
 	display flex
@@ -57,26 +69,32 @@ body
 				color #696969
 				text-decoration none
 				font-size .8em
-			li.flex
-				display flex
+			li.sublist_name,li.list_name
+				display inline-flex
 				align-items center
 				a
-					.icon		
-						background-image url('../icons/grid_cat.svg')
+					display flex
+					.icon
 						background-position center
 						background-repeat no-repeat
 						background-size 100%
 						display flex
 						height 18px								
 						width 14px
-				
+					.icon_cat
+						background-image url('../icons/grid_cat.svg')						
+					.icon_subcat
+						background-image url('../icons/grid_subcat.svg')
 					span
 						margin-left 2px	
 						&:hover
 							color #FFF						
 					&:hover
-						.icon
-							background-image url('../icons/grid_cat_white.svg')		
+						.icon_cat
+							background-image url('../icons/grid_cat_white.svg')
+					&:hover
+						.icon_subcat
+							background-image url('../icons/grid_subcat_E7E7E7.svg')		
 				
 	.sectionL
 		background-color #FFF
@@ -88,7 +106,7 @@ body
 		@media screen and (max-width: 992px)
 			width 5%
 		.sidebar
-			background-color color2
+			background-color color6
 			width 100%
 			.logo
 				display flex
@@ -197,14 +215,19 @@ body
 						margin auto 2px
 						position relative
 						button
+							/*sustituido por btn_primary*/
+							/*
 							background-color #4861ff
 							color #F3F3F3
 							font-size .9em
+							*/
 							margin auto 2px
+							/*
 							&:hover
 								color #FFF
 							&:focus
 								box-shadow 0 0 6px #4861ff
+							*/
 						ul
 							li
 								font-size .9em
@@ -315,25 +338,25 @@ body
 								background-image url('../icons/grid_subcat_white.svg')
 								
 						&:hover,&:focus
-							box-shadow 0 0 6px #4861ff
+							box-shadow 0 0 6px color1
 							color #FFF
 						
 					.edit
-						background-color #00b292
+						background-color color2
 						color #E7E7E7
 						&:hover
 							color #FFF
-							box-shadow 0 0 6px #00b292
+							box-shadow 0 0 6px color2
 						&:focus
-							box-shadow 0 0 6px #00b292
+							box-shadow 0 0 6px color2
 					.delete
-						background-color #ff2a42
+						background-color color3
 						color #E7E7E7
 						&:hover
 							color #FFF
-							box-shadow 0 0 6px #ff2a42
+							box-shadow 0 0 6px color3
 						&:focus
-							box-shadow 0 0 6px #ff2a42
+							box-shadow 0 0 6px color3
 							
 	.sectionE
 		width 0%

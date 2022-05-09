@@ -1,21 +1,33 @@
 <div>
+    {{-- establecemos title si subcatlist['name'] contiene valor --}}
+    @section('title',$subcatlist['name'] ?? 'Categorías')
     
-    @section('title','Categorías')
-
+    
     @section('path')
     &nbsp;>&nbsp;
-    <li class="flex">
-        <a href="{{ url('admin/categories/1') }}" style="display:flex">
-            <div class="icon"></div>
+    <li class="list_name">
+        <a href="{{ url('admin/categories/1') }}">
+            <div class="icon icon_cat"></div>
             <!--<i class="fa-solid fa-columns"></i>--> 
             <span>Categorías</span>
         </a>
-    </li>    
-    <li class="subcat">
-        <a href="{{ url('admin/categories/1/') }}" id="subcat">
-            <i class="fa-solid fa-columns"></i> Subcategorías
+    </li>
+    <!-- elemento li que será rellenado al pulsar el botón subcategorías de algún 
+        elemento del listado categorías -->
+    <li class="sublist_name" id="sublist_name">
+        
+    </li>
+    <!-- elemento li que será mostrado al recargar la página en una subcategoría, 
+        este elemento se sustituye por el anterior al recargar la página -->
+    @if($subcatlist['name'])
+    &nbsp;>&nbsp;
+    <li class="sublist_name">
+        <a href="{{ url('admin/categories/'.$filter_type.'/'.$subcatlist['id']) }}" id="subcat">
+            <div class="icon icon_subcat"></div>
+            <span>{{$subcatlist['name']}}</span>
         </a>
     </li>
+    @endif
     @endsection
 
     @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
@@ -29,6 +41,7 @@
     @endif
     @include('livewire.admin.categories.sendmail')
 
+    {{Form::hidden('hidden',null,['wire:model' => 'selected_list','id' => 'hidden_list'])}}
     @if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -85,9 +98,15 @@
             </li>
         </ul>
         <ul class="add">
-           
+            @if($subcatlist['name'] || $btn_back)
             <li>
-                <button class="btn btn-sm btn-primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" >
+                <a href="{{route('list_categories',['filter_type'=>$filter_type])}}" class="btn btn-sm btn_primary">
+                    <i class="fa-solid fa-left-long"></i> Atrás
+                </a>
+            </li>
+            @endif
+            <li>
+                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" >
                     <span class="d-none d-md-inline">Exportar</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-file-export"></i>
@@ -114,7 +133,7 @@
             </li>
 
             <li>            
-                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="d-none d-md-inline">Filtros</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-bars-staggered"></i>
@@ -137,7 +156,7 @@
             </li>
             @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
                 <li>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> 
+                    <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> 
                         <span class="d-none d-md-inline">Agregar Categoría</span>
                     </a>
                 </li>
@@ -151,7 +170,7 @@
             <thead>
                 <tr>
                     <td>
-                        {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
+                        {{Form::checkbox('box',true,null,['class' => 'form-check-input','id'=>'allcheckbox','onclick' => 'selectAllCheckbox()'])}}
                     </td>
                     <td width="64">
                         <a href="#" wire:click="setColAndOrder('id')">
@@ -163,6 +182,11 @@
                         <a href="#" wire:click="setColAndOrder('name')">
                             Nombre    
                         </a>
+                    </td>
+                    <td>
+                        @if(!$subcat)
+                        Cantidad
+                        @endif
                     </td>           
                     <td class="max d-none d-md-table-cell">
                         <a href="#" wire:click="setColAndOrder('description')">
@@ -175,8 +199,8 @@
             <tbody>
                 @foreach($categories as $cat)
                 <tr>
-                    <td>
-                        {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
+                    <td width="50">
+                        {{Form::checkbox($cat->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$cat->id.',this)','class' => 'checkbox'])}}
                     </td>
                     <td>{{ $cat->id }}</td>
                     <td>
@@ -185,8 +209,13 @@
                         @else
                         <img src="{{ url('/images/bolsas-de-compra.png') }}" alt="{{ $cat->file_name }}" width="32">
                         @endif
-                    </td>                    
-                    <td>{{ $cat->name }}</td>
+                    </td>
+                    <td>{{$cat->name}}</td>
+                    <td>
+                        @if(!$subcat)
+                        <span>{{$cat->subcatlength()}}</span>
+                        @endif
+                    </td>
                     <!--
                     usamos la sintaxis laravel con !! para limpiar los 
                     tags añadidos del textarea en lugar de doble corchete
@@ -196,7 +225,7 @@
                         <div class="admin_items">
                             @if($filter_type != 2)
                                 @if(!$subcat)
-                                <button class="btn btn-sm scat"  title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
+                                <button class="btn btn-sm scat" title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
                                     <!--<img src="{{url('icons/grid_subcat.svg')}}" alt="" width="16">-->
                                     <div class="icon"></div>
                                 </button>
@@ -225,6 +254,30 @@
                 </tr>
                 @endforeach
                 <tr>
+                    <!--
+                    <td colspan="1">
+                        {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
+                    </td>
+                    -->
+                    <td colspan="3" style="font-size:14px">
+                        @if($btn_back)
+                        <p>No existen Subcategorías</p>
+                        @else
+                        <label for="status"><strong>Acciones en lote</strong></label>
+                        @endif    
+                    </td>
+                    <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
+                        <div class="input-group">                    
+                            {{ Form::select('action_selected_ids',[0 => 'Seleccione...',1 => 'Eliminar'],null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px'])}}
+                        </div> 
+                        
+                        <div>
+                            <button class="btn btn-sm btn-primary" wire:click="deleteids">Aplicar</button>    
+                        </div>
+                        
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="6">{{ $categories->links() }}</td>
                 </tr>         
             </tbody>
@@ -232,3 +285,62 @@
     </div>
     
 </div>
+@push('scripts')
+<script>
+
+//FALTA COMPROBAR SI SE QUEDA VACÍA LA PÁGINA PASAR A LA ANTERIOR DESDE PHP
+
+
+//métodos para selección/deselección de checkbox y aplicar acciones en lote
+let selected_list=[];
+
+//para la selección total
+//si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
+function selectAllCheckbox(){
+
+    //si existe elemento allcheckbox...
+    if(document.querySelector('#allcheckbox')){
+        let allcheckbox = document.querySelector('#allcheckbox');
+        console.log(allcheckbox)
+        //almacenamos todos los checkbox
+        let total_list = document.querySelectorAll('.checkbox');
+        //convertimos a array
+        let total = [].slice.call(total_list);
+        //comprobamos si es seleccionar o deseleccionar
+        if(allcheckbox.checked){
+            //establecemos todos los checkbox a true y añadimos elementos al selected_list 
+            selected_list = total.map((item)=>{
+                item.checked=true;
+                return item.name
+            })
+        }else{
+            //establecemos todos los checkbox a false y resetamos la lista
+            total.map((item)=>{
+                item.checked=false;                
+            })
+            selected_list = [];
+        }
+    }
+    console.log(selected_list)
+    @this.selected_list = selected_list;
+}
+    
+    
+function selectCheckbox(id,el){
+    //si está checkeado añadimos a la lista        
+    if(el.checked){
+        //comprobamos si no se encuentra en la lista (para más seguridad)
+        if(!selected_list.includes(id))
+            selected_list.push(id);
+            
+    //si no está checkeado comprobamos si existe en la listay se elimina de la lista
+    }else{
+        //comprobamos si existe en la lista
+        if(selected_list.includes(id))                
+            selected_list=selected_list.filter((item) => item != id);
+    }
+    //actualizamos el data binding del form hidden 
+    @this.selected_list = selected_list;
+}
+</script>
+@endpush
