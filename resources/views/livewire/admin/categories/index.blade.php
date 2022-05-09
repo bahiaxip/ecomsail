@@ -274,7 +274,7 @@
                         </div> 
                         
                         <div>
-                            <button class="btn btn-sm btn-primary" wire:click="deleteids">Aplicar</button>    
+                            <button class="btn btn-sm btn_primary" wire:click="deleteids">Aplicar</button>    
                         </div>
                     </td>
                     @endif

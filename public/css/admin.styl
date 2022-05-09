@@ -1,7 +1,7 @@
-//color1 = #489bf8
 color1 = #4861ff
 color2 = #00b292
 color3 = #ff003d
+color4 = #489bf8
 color6 = #494949
 
 /* ocultar barra scroll en chrome sustituido al elemento directamente más abajo */
@@ -48,6 +48,7 @@ body
 .btn_primary
 	background-color color1
 	color #E7E7E7
+	font-family QuicksandB
 	font-size .9em
 	&:hover
 		color #FFF
@@ -69,6 +70,7 @@ body
 				color #696969
 				text-decoration none
 				font-size .8em
+				font-weight bold
 			li.sublist_name, li.list_name
 				display inline-flex
 				align-items center
@@ -88,17 +90,19 @@ body
 					span
 						margin-left 2px	
 						&:hover
-							color #FFF						
+							color color4						
 					&:hover
+						color color4
 						.icon_cat
-							background-image url('../icons/grid_cat_white.svg')
+							background-image url('../icons/grid_cat_489bf8.svg')
 					&:hover
 						.icon_subcat
-							background-image url('../icons/grid_subcat_E7E7E7.svg')		
+							background-image url('../icons/grid_subcat_489bf8.svg')
+						
 				
 	.sectionL
 		background-color #FFF
-		border-top #489bf8 1px solid
+		border-top color4 1px solid
 		display flex
 		transition width 1s linear
 		width 12%

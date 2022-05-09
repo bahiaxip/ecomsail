@@ -75,41 +75,32 @@ class Category extends Component
             //comprobamos si el array contiene elementos
             if(!empty($this->selected_list) && count($this->selected_list)>0){
                 //eliminamos elementos
-                Cat::destroy($this->selected_list);            
+                Cat::destroy($this->selected_list);
             }
-
             /*
             else{
                 dd('esta vacio');
             }
             */
         }
-        
-        
-        //dd($this->selected_list);
     }
+
     public function select_id($id){
         dd("hola");
-
     }
+
     public function mount($filter_type){
         
-        //reseteamos subcat
-//se debería revisar si existe subcategoría al recargar la página
-//y establecer el link de subcategorías
+        //reseteamos subcat, no necesario
         //$this->subcat = null;
-
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
         $this->listname = 'categorías';
         $this->username=Auth::user()->name;
         $this->checkpdf = 1;
-        //$this->categories = Cat::where('type',0)->where('status','1')->orderBy('id','desc')->get();
-        //$data = ['categories' => $categories];
     }
     //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
     public function setColAndOrder($nameCol=null){
-
         //posibles columnas
         $cols=['id','name','description'];
         //comprobamos si la columna seleccionada existe, por si se intenta 
@@ -228,12 +219,13 @@ class Category extends Component
     }
 
 
-
+    /*
     public function create(){
 
         //return redirect()->to('admin')
     }
-
+    */
+    //creación de categoría/subcategoría
     public function store(){
         $this->emit('loading','loading');
         //$this->emit('description1',$this->description);
@@ -303,7 +295,7 @@ class Category extends Component
         $this->emit('addCategory');
         //limpiamos el textarea de ckeditor
     }
-
+    //edición de categoría/subcategoría
     public function edit($id){
         if($this->filter_type == 2):
             $cat=Cat::onlyTrashed()->where('id',$id)->first();
@@ -327,7 +319,7 @@ class Category extends Component
         $this->emit('description2',$this->description);        
 
     }
-
+    //actualización de categoría/subcategoría
     public function update(){
         $this->emit('loading','loading');
         if($this->cat_id){            
@@ -387,8 +379,8 @@ class Category extends Component
         $this->clear2();
         $this->emit('editCategory');
     }
-    public function saveCatId($catId){
-        //dd($catId);
+
+    public function saveCatId($catId){        
         $this->catIdTmp=$catId;
         $this->count_cat = Product::where('category_id',$catId)->count();        
     }
@@ -401,9 +393,12 @@ class Category extends Component
     public function clearSearch(){
         $this->search_data='';
     }
+    //no utlizado
+    /*
     public function updated(){
         //$this->description="eooo";
     }
+    */
 
     //eliminación de categoría
     public function delete(){
@@ -430,13 +425,12 @@ class Category extends Component
         }
     }
 
-    //restaurar producto
+    //restaurar categoría/subcategoría
     public function restore($id){
         $cat = $cat=Cat::onlyTrashed()->where('id',$id)->first();
         $cat->restore();
         $this->typealert = 'success';
         session()->flash('message',"Categoría restaurada correctamente");
-
     }
 
     //limpiar datos de formulario
@@ -456,6 +450,7 @@ class Category extends Component
         //$this->emit('userUpdated');
     }
 
+    //método intermedio para limpiar datos de formulario
     public function clear2(){
         $this->clear();
         //resetea todos los mensajes de error
@@ -467,11 +462,12 @@ class Category extends Component
         $this->checkpdf='1';
         $this->checkexcel='';
         $this->emailParaExportar='';
-
     }
 
+    //en principio no necesario, asignado al botón Agregar Categoría
+
     public function setckeditor(){
-        $this->emit('description1');
+        //$this->emit('description1');
     }
 
     //exportar archivo PDF al navegador del usuario
@@ -502,7 +498,8 @@ class Category extends Component
         $pdf= PDF::loadView($view,['categories'=>$categories]);
         $pdf->save('listado_'.$path_date.'.pdf');
     }
-    //guardar archivo Excel en el server para después poder enviar por correo //como archivo adjunto
+    //guardar archivo Excel en el server para después poder enviar por correo 
+    //como archivo adjunto
     public function saveExcel(){
         $path_date=date('Y-m-d');
         $categories=$this->set_type_query(true);
@@ -541,23 +538,17 @@ class Category extends Component
         return redirect()->route('list_categories',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
             //limpiar datos de selección para el envio (correo y archivos adjuntos)
         $this->clearExport();
-        $this->emit("sendModal");            
-                
+        $this->emit("sendModal");
         }
-        
     }
-    
 
+    //mostrar listado de subcategorías
     public function renderSubCat($subcat_id,$name){
         //dd($name);
         $this->subcatlist['name']=$name;
-        $this->subcatlist['id'] = $subcat_id;
-
-        //falta pasar a active la clase subcat de <li> para subcategorías
+        $this->subcatlist['id'] = $subcat_id;        
         $this->emit('subcat',$subcat_id,$name);
-
         $this->subcat=$subcat_id;
-
     }
 
     public function render()
@@ -612,25 +603,14 @@ class Category extends Component
                 //si no es público realizamos la consulta, no afectará en rendimiento
                 //de forma visible ya que solo será necesario si se recarga la página
                 }else{
-                    
                     $cattmp = Cat::where('status',$this->filter_type)->pluck('name','id');
-                    
                 }
                 $this->subcatlist['name']=$cattmp[$this->subcat];
                 $this->subcatlist['id'] = $this->subcat;
-            }            
-            
-            
-            
-            
-            
+            }
         }
-
         $data = ['categories' => $query,'filter_type' => $this->filter_type,'cats' => $cats,'iteration' => $this->iteration,'typealert' => $this->typealert,'subcatname' => $this->subcatlist['name']];
-
         
         return view('livewire.admin.categories.index',$data);
-        
-        
     }
 }
