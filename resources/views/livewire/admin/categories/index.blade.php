@@ -259,12 +259,14 @@
                         {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
                     </td>
                     -->
-                    <td colspan="3" style="font-size:14px">
-                        @if($btn_back)
+                    @if($btn_back)
+                        
+                    <td colspan="100%">
                         <p>No existen Subcategorías</p>
-                        @else
+                    </td>
+                    @else
+                    <td colspan="3" style="font-size:14px">
                         <label for="status"><strong>Acciones en lote</strong></label>
-                        @endif    
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div class="input-group">                    
@@ -274,8 +276,8 @@
                         <div>
                             <button class="btn btn-sm btn-primary" wire:click="deleteids">Aplicar</button>    
                         </div>
-                        
                     </td>
+                    @endif
                 </tr>
                 <tr>
                     <td colspan="6">{{ $categories->links() }}</td>

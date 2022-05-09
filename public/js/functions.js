@@ -52,7 +52,7 @@ window.livewire.on('subcat',(cat_id,cat_name)=>{
     console.log(cat_name)
     let subcat =  document.querySelector('#sublist_name');
     let link=`&nbsp;>&nbsp;<a href="${cat_id}" id="subcat">
-        <i class="fa-solid fa-columns"></i> ${cat_name}
+        <div class="icon icon_subcat"></div> <span>${cat_name}</span>
     </a>`;
 
     //estableciendo datos en localStorage, anulado: no necesario
@@ -64,8 +64,8 @@ window.livewire.on('subcat',(cat_id,cat_name)=>{
     //subcat.firstElementChild.href="dfsaf";    
     subcat.innerHTML = link;
     //document.querySelector('#subcat').href='admin/categories/1/'+data;
-
-    subcat.classList.add('active');
+    //mostramos el minilink de subcategorías
+    subcat.classList.add('active_inflex');
 
 //establecemos la ruta subcategorías, ya que si entra aquí es porqué se ha pulsado el
 //botón de subcategorías de algún elemento del listado de categorías

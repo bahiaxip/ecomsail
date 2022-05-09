@@ -590,6 +590,8 @@ class Category extends Component
         if($this->subcat){            
             //obtenemos el nombre de la categoría padre del primer elemento de la lista
             //comprobando si existe
+    //el subcatlist['id'] representa el id de la categoría seleccionada
+    //el subcatlist['name'] representa el nombre de la categoría seleccionada
             if($query[0] && $query[0]->parentcat->name){
                 $this->subcatlist['name'] = $query[0]->parentcat->name;
                 $this->subcatlist['id'] = $this->subcat;
@@ -605,16 +607,16 @@ class Category extends Component
                 //la página ya que en el método renderSubcat ya enviamos el nombre
                 
                 //si el filtrado es público aprovechamos el resultado $cats;
-                if(($this->filter_type == 1)){
-                    dd("asdfasd");
+                if(($this->filter_type == 1)){                    
                     $cattmp=$cats;
                 //si no es público realizamos la consulta, no afectará en rendimiento
                 //de forma visible ya que solo será necesario si se recarga la página
                 }else{
-                    dd("asdfasd");
+                    
                     $cattmp = Cat::where('status',$this->filter_type)->pluck('name','id');
+                    
                 }
-                $this->subcatlist['name']=$cattmp[$this->subcatlist['id']];
+                $this->subcatlist['name']=$cattmp[$this->subcat];
                 $this->subcatlist['id'] = $this->subcat;
             }            
             
