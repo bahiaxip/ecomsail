@@ -16,6 +16,27 @@ class Permissions {
 			}
 		}
 	}
+
+	public $permissions_list = [
+        'users' => [
+            'list_users' => null,
+            'add_users' => null,
+            'edit_users' => null,
+            'delete_users' => null,
+        ],
+        'categories' =>[
+            'list_categories' => null,
+            'add_categories' => null,
+            'edit_categories' => null,
+            'delete_categories' => null
+        ],
+        'products' =>[
+            'list_products' => null,
+            'add_products' => null,
+            'edit_products' => null,
+            'delete_products' => null
+        ]
+    ];
 }
 
 ?>

@@ -12,12 +12,11 @@ class Export implements FromView
 {
     //datos users(eloquent)
     protected $data;
-    public function __construct($data=null){
+    protected $listname;
+    public function __construct($data=null,$listname){
         $this->data=$data;
+        $this->listname = $listname;
     }
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     
     public function collection()
     {
@@ -25,8 +24,9 @@ class Export implements FromView
     }
 
     public function view():View{
-        return view('livewire.admin.categories.excel',['categories'=>$this->data]);
+        return view('livewire.admin.'.$this->listname.'.excel',[$this->listname => $this->data]);
+        //solo para categories
+        //return view('livewire.admin.categories.excel',['categories'=>$this->data]);
     }
 }
-
 ?>

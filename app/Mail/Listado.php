@@ -14,7 +14,7 @@ class Listado extends Mailable
     //array datos adjuntos (pdf y/o excel)
     public $attach;
     //datos usuarios (eloquent)
-    public $categories;
+    public $username;
     public $listname;
 
     public function __construct($attach,$username,$listname)
@@ -33,16 +33,16 @@ class Listado extends Mailable
     {
         $path_date=date('Y-m-d');
         $mail=$this->from("proyecto@gmail.com")
-            ->view('livewire.admin.categories.template_email')
+            ->view('livewire.admin.'.$this->listname.'.template_email')
             ->with("username",$this->username)->with('listname',$this->listname);        
             if(isset($this->attach["pdf"]) && $this->attach["pdf"]=="1"){
                 $mail->attach(public_path('listado_'.$path_date.'.pdf'),[
-                    'as'=>'proyectoeHidra.pdf',
+                    'as'=>'listado'.$path_date.'.pdf',
                     'mime'=>'application/pdf'
                 ]);
             }
             if(isset($this->attach["excel"]) && $this->attach["excel"]=="1"){
-                $mail->attach(public_path('listado_'.$path_date.'.xlsx'));    
+                $mail->attach(public_path('listado2_'.$path_date.'.xlsx'));    
             }
                 
         return $mail;

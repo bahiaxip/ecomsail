@@ -6,8 +6,19 @@
           Editar Permisos
         </div>
       </div>
+      <!-- loading cuando comienza la edición -->
+      @if(!$this->permissions3)
+      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      </div>
+      @endif
+      <!-- loading cuando actualizamos edición -->
+      <div id="loading_permissions" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      </div>
+      
       <div class="modal-body permissions">
-          <form wire:submit.prevent="submit(Object.fromEntries(new FormData($event.target)))">
+          <form wire:submit.prevent="update_permissions(Object.fromEntries(new FormData($event.target)))">
             @csrf
                 <!-- campo oculto: id -->
                 <input type="hidden" name="id" wire:model="user_id">
@@ -27,7 +38,7 @@
                         -->
                         <div class="box">
                           <div class="form-check">
-                          {{ Form::checkbox('admin_panel',"true",($this->permissions2->testPermission($this->permissions3,'admin_panel')) ? 'checked':'',['class' => 'form-check-input']) }}
+                          {{ Form::checkbox('admin_panel',"true",($this->role_permissions->testPermission($this->permissions3,'admin_panel')) ? 'checked':'',['class' => 'form-check-input']) }}
                           {{ Form::label('admin_panel','Panel de administrador',['class' => 'form-check-label']) }}
                           </div>
                         </div>
@@ -48,22 +59,22 @@
                           -->
                           <div class="box">            
                             <div class="form-check">
-                              {{ Form::checkbox('list_users',"true",($this->permissions2->testPermission($this->permissions3,'list_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_users','wire:model'=>$this->permissions['users']['list_users']]) }}
+                              {{ Form::checkbox('list_users',"true",($this->role_permissions->testPermission($this->permissions3,'list_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_users','wire:model'=>$this->permissions['users']['list_users']]) }}
                               {{ Form::label('list_users','Listar usuarios') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('add_users',"true",($this->permissions2->testPermission($this->permissions3,'add_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_users','wire:model'=>$this->permissions['users']['add_users']]) }}
+                                {{ Form::checkbox('add_users',"true",($this->role_permissions->testPermission($this->permissions3,'add_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_users','wire:model'=>$this->permissions['users']['add_users']]) }}
                                 {{ Form::label('add_users','Crear usuarios') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('edit_users',"true",($this->permissions2->testPermission($this->permissions3,'edit_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_users','wire:model'=>$this->permissions['users']['edit_users']]) }}
+                                {{ Form::checkbox('edit_users',"true",($this->role_permissions->testPermission($this->permissions3,'edit_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_users','wire:model'=>$this->permissions['users']['edit_users']]) }}
                                 {{ Form::label('edit_users','Editar usuarios') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('admin_permissions',"true",($this->permissions2->testPermission($this->permissions3,'admin_permissions')) ? 'checked':'',['class' => 'form-check-input','id' => 'admin_permissions','wire:model'=>$this->permissions['users']['list_users']]) }}
+                                {{ Form::checkbox('admin_permissions',"true",($this->role_permissions->testPermission($this->permissions3,'admin_permissions')) ? 'checked':'',['class' => 'form-check-input','id' => 'admin_permissions','wire:model'=>$this->permissions['users']['list_users']]) }}
                                 {{ Form::label('admin_permissions','Administrar permisos') }}                          
                             </div>
                         </div>
@@ -85,27 +96,27 @@
                           -->
                           <div class="box">            
                               <div class="form-check">
-                                {{ Form::checkbox('list_categories',true,($this->permissions2->testPermission($this->permissions3,'list_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_categories']) }}
+                                {{ Form::checkbox('list_categories',true,($this->role_permissions->testPermission($this->permissions3,'list_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_categories']) }}
                                 {{ Form::label('list_categories','Listar categorías') }}
                               </div>
 
                               <div class="form-check">
-                                  {{ Form::checkbox('add_categories',true,($this->permissions2->testPermission($this->permissions3,'add_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_categories']) }}
+                                  {{ Form::checkbox('add_categories',true,($this->role_permissions->testPermission($this->permissions3,'add_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_categories']) }}
                                   {{ Form::label('add_categories','Crear categorías') }}
                               </div>
 
                               <div class="form-check">
-                                  {{ Form::checkbox('edit_categories',true,($this->permissions2->testPermission($this->permissions3,'edit_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_categories']) }}
+                                  {{ Form::checkbox('edit_categories',true,($this->role_permissions->testPermission($this->permissions3,'edit_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_categories']) }}
                                   {{ Form::label('edit_categories','Editar categorías') }}
                               </div>
 
                               <div class="form-check">
-                                  {{ Form::checkbox('delete_categories',true,($this->permissions2->testPermission($this->permissions3,'delete_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_categories']) }}
+                                  {{ Form::checkbox('delete_categories',true,($this->role_permissions->testPermission($this->permissions3,'delete_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_categories']) }}
                                   {{ Form::label('delete_categories','Eliminar categorías') }}
                               </div>
 
                               <div class="form-check">
-                                  {{ Form::checkbox('restore_categories',true,($this->permissions2->testPermission($this->permissions3,'restore_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_categories']) }}
+                                  {{ Form::checkbox('restore_categories',true,($this->role_permissions->testPermission($this->permissions3,'restore_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_categories']) }}
                                   {{ Form::label('restore_categories','Eliminar categorías') }}
                               </div>
                           </div>
@@ -128,27 +139,27 @@
                           -->
                           <div class="box">            
                             <div class="form-check">
-                              {{ Form::checkbox('list_products',true,($this->permissions2->testPermission($this->permissions3,'list_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_products']) }}
+                              {{ Form::checkbox('list_products',true,($this->role_permissions->testPermission($this->permissions3,'list_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_products']) }}
                               {{ Form::label('list_products','Listar productos') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('add_products',true,($this->permissions2->testPermission($this->permissions3,'add_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_products']) }}
+                                {{ Form::checkbox('add_products',true,($this->role_permissions->testPermission($this->permissions3,'add_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_products']) }}
                                 {{ Form::label('add_products','Crear productos') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('edit_products',true,($this->permissions2->testPermission($this->permissions3,'edit_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_products']) }}
+                                {{ Form::checkbox('edit_products',true,($this->role_permissions->testPermission($this->permissions3,'edit_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_products']) }}
                                 {{ Form::label('edit_products','Editar productos') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('delete_products',true,($this->permissions2->testPermission($this->permissions3,'delete_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_products']) }}
+                                {{ Form::checkbox('delete_products',true,($this->role_permissions->testPermission($this->permissions3,'delete_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_products']) }}
                                 {{ Form::label('delete_products','Eliminar productos') }}
                             </div>
 
                             <div class="form-check">
-                                {{ Form::checkbox('restore_products',true,($this->permissions2->testPermission($this->permissions3,'restore_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_products']) }}
+                                {{ Form::checkbox('restore_products',true,($this->role_permissions->testPermission($this->permissions3,'restore_products')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_products']) }}
                                 {{ Form::label('restore_products','Restaurar productos') }}
                             </div>
                         </div>
@@ -158,7 +169,7 @@
                 </div>
                 <div class="mtop26">
                   <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>
-                  <button type="submit" class="btn btn-sm btn-primary ">Actualizar</button>
+                  <button type="submit" class="btn btn-sm btn-primary " id="btn_update_permissions">Actualizar</button>
                 </div>
           </form>
           </div>
@@ -170,3 +181,16 @@
     </div>
   </div>
 </div>
+<script>
+  //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  let btn_update_permissions=document.querySelector('#btn_update_permissions');
+  if(btn_update_permissions){
+
+    console.log("permissions: ",btn_update_permissions)
+    btn_update_permissions.addEventListener('click',()=>{
+      console.log("nuevo cambio")
+      let loading_permissions = document.querySelector('#loading_permissions');
+      loading_permissions.style.display='flex';
+    })
+  }
+</script>

@@ -68,6 +68,9 @@ class Category extends Component
     //variable exclusiva para mostrar el botón volver al recargar página en
     //subcategorías que no contienen resultados, y por tanto no existe $subcatlist['name']
     public $btn_back;
+
+
+    //eliminar seleccionados(aplicar acción de eliminar en lote)
     public function deleteids(){  
 //añadir icono loading      
         //comprobamos si se ha seleccionado la opción de eliminar
@@ -95,7 +98,7 @@ class Category extends Component
         //$this->subcat = null;
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
-        $this->listname = 'categorías';
+        $this->listname = 'categories';
         $this->username=Auth::user()->name;
         $this->checkpdf = 1;
     }
@@ -379,12 +382,14 @@ class Category extends Component
         $this->clear2();
         $this->emit('editCategory');
     }
-
+    //Los 2 métodos siguientes (saveCatId, clearCatId) son necesarios para 
+    //la confirmación de borrado de categoría (mediante un modal de bootstrap), 
+    //guardar y limpiar el id de la categoría seleccionada de forma temporal 
     public function saveCatId($catId){        
         $this->catIdTmp=$catId;
         $this->count_cat = Product::where('category_id',$catId)->count();        
     }
-    //si se recarga la página tb ser resetea el userIdTmp, en el método mount()
+    //si se recarga la página tb se resetea el catIdTmp, en el método mount()
     public function clearCatId(){
         $this->catIdTmp='';
     }
@@ -487,7 +492,7 @@ class Category extends Component
     //exportar archivo Excel al navegador del usuario
     public function exportExcel(){
         $categories=$this->set_type_query(true);
-        return Excel::download(new Export($categories),'exportexcel.xlsx');
+        return Excel::download(new Export($categories,$this->listname),'exportexcel.xlsx');
     }
     //guardar el archivo PDF en el server para después poder enviar por correo 
     //como archivo adjunto
@@ -504,23 +509,19 @@ class Category extends Component
         $path_date=date('Y-m-d');
         $categories=$this->set_type_query(true);
         //grabar en disco
-        return  Excel::store(new Export($categories),'listado_'.$path_date.'.xlsx','public');
+        return  Excel::store(new Export($categories,$this->listname),'listado_'.$path_date.'.xlsx','public');
     }
 
     //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
-    
     public function sendEmail(){
-
         $attach=["pdf"=>0,"excel"=>0];
         $validated = $this->validate([
             'email_export'=>'required|email'
         ]);
         //mensaje de validación de checkbox
-        
         if($this->checkpdf == '' && $this->checkexcel==''){
             session()->flash('check','Es necesario marcar al menos uno');
         }else{
-
             if($this->checkpdf){
                 $this->savePDF();                
                 $attach["pdf"]="1";

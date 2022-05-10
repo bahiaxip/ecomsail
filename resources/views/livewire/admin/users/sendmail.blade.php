@@ -9,7 +9,7 @@
             
         </div>
         <!-- loading cuando actualizamos edición -->
-        <div id="loading_sendemail" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <div id="loading_sendemail_user" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
             <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
         </div>
         <div class="modal-body">
@@ -17,7 +17,6 @@
                 <div class="col-md-12">
                     <label for="sendEmail">Email</label>
                     <div class="input-group">
-                        
                         <span class="input-group-text">
                             <i class="fa-solid fa-keyboard"></i>
                         </span>
@@ -45,20 +44,20 @@
             </div>
         </div>
       <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearCatId()">Cancelar</button>
-          @if($count_cat==0)
-          <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="sendEmail" id="btn_sendemail_cat">Enviar</button>
-        @endif
+          <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearUserId()">Cancelar</button>
+          {{--@if($count_user==0)--}}
+          <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="sendEmail" id="btn_sendemail_user">Enviar</button>
+          {{--@endif--}}
       </div>
     </div>
   </div>
 </div>
 <script>
   //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
-  let btn_sendemail=document.querySelector('#btn_sendemail_cat');
-  if(btn_sendemail){
-    btn_sendemail.addEventListener('click',()=>{
-      let loading = document.querySelector('#loading_sendemail');
+  let btn_sendemail_user=document.querySelector('#btn_sendemail_user');
+  if(btn_sendemail_user){
+    btn_sendemail_user.addEventListener('click',()=>{
+      let loading = document.querySelector('#loading_sendemail_user');
       loading.style.display='flex';
     })
   }

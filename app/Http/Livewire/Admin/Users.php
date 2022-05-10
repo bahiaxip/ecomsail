@@ -7,12 +7,16 @@ use Livewire\Component;
 //Paises
 use App\Functions\Paises;
 use App\Functions\Prov as Pr, App\Functions\Municipalities;
+//método para testear acceso a bloques en función del permiso del usuario
 use App\Functions\Permissions as Permis;
 use App\Models\User;
-//use Illuminate\Http\Request;
-use Route;
+use Illuminate\Http\Request;
+use App\Functions\Export;
+use Route,Auth,Str,PDF,Excel;
 use  Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Listado;
 class Users extends Component
 {    
     use WithFileUploads;
@@ -36,133 +40,108 @@ class Users extends Component
     protected $paisesObj;
     public $provinces;
     public $countries;
-
+    //provincia seleccionada
     public $province_selected;
-    //public $pass;
-    //permissions
+    //listado de permisos(archivo externo)
+    public $permissions=[]; 
 
-    public $permissions = [
-        'users' => [
-            'list_users' => null,
-            'add_users' => null,
-            'edit_users' => null,
-            'delete_users' => null,
-        ],
-        'categories' =>[
-            'list_categories' => null,
-            'add_categories' => null,
-            'edit_categories' => null,
-            'delete_categories' => null
-        ],
-        'products' =>[
-            'list_products' => null,
-            'add_products' => null,
-            'edit_products' => null,
-            'delete_products' => null
-        ]
-    ];
-    
-
-    protected $permissions2;
+    protected $role_permissions;
     protected $permissions3;
     protected $prov;
     protected $municip;
 
     public $typealert = 'success';
 
+    public $count_user;
+    //listado de provincias
+    public $provinces_list;
+    //provincia seleccionada
+    public $prov_id_selected;
+    //listado de municipios
+    public $municipies_list;
+    
+    //tipo de filtrado (Público/Borrador/Todos), en usuarios no existe softDeletes ya que no se pueden eliminar
     public $filter_type;
     //campo de búsqueda (wire:model)
     public $search_data;
     //orden columnas (asc/desc)
-    public $orderType;
-
-    public $provinces_list;
-    public $prov_id_selected;
-    //public $provinces;
-    public $municipies_list;
+    public $order_type;
+    //columna seleccionada
+    public $selectedCol;
     //anulado 
     //public $data_tmp;
-    public function mount($filter_type){
 
-        //dd(request());
-        $this->permissions2 = new Permis();
-        //sustituimos paises por paises en array php
+    //pdf/excel
+    protected $pdf;
+    public $checkpdf;
+    public $checkexcel;
+    public $email_export;
+    //nombre de listado para envió de email
+    public $listname;
+    //nombre de usuario para envió de email
+    public $username;
+
+    public $userIdTmp;
+
+    public function mount($filter_type){
+        
+        $this->role_permissions = new Permis();
+        $this->permissions = $this->role_permissions->permissions_list;
+        //Class Países solo utilizada para obtener los paises (array all)
         $this->paisesObj = new Paises();
+        $this->countries = $this->paisesObj->all;
+        //class Pr con listado de provincias
         $this->prov = new Pr();
         $this->provinces_list = $this->prov->prov;
-        //dd($this->prov->prov);
-        $this->countries = $this->paisesObj->all;
+        //class Municipalities con listado de municipios/ciudades relacionados con el
+        //listado de provincias mediante provincia_id
         $this->municip = new Municipalities();
         $this->municipies_list = $this->municip->cities;
-        //$this->cities =  json_decode(file_get_contents('js/municipios.json'),true);
-        /*
-        //convirtiendo array de provincias en json a archivo php
-        if(!file_exists('images/cms.php')){
-            fopen('images/cms.php','w');
-        }        
-        $file=fopen('images/cms.php','w');
-        fwrite($file,'<?php '.PHP_EOL);
-        fwrite($file, 'namespace App\Functions;'.PHP_EOL);
-        fwrite($file,'class Municipalities {'.PHP_EOL);
-        fwrite($file,'public $cities = [ '.PHP_EOL);
-        foreach($this->cities as $key=>$value){
-            fwrite($file,$key.' => [');
-            //fwrite($file,'  ['.PHP_EOL);
-            fwrite($file,'"provincia_id" => "'.$value['provincia_id'].'",');
-            fwrite($file,'"municipio_id" => "'.$value['municipio_id'].'",');
-            fwrite($file,'"nombre" => "'.$value['nombre'].'"');
-            fwrite($file,'],'.PHP_EOL);
 
-        }
-        fwrite($file,'];'.PHP_EOL);
-        fwrite($file,'}'.PHP_EOL);
-        fwrite($file, '?>'.PHP_EOL);
-        fclose($file);
-        dd("sadf");
-        */
-//como crear un archivo PHP desde un array de objetos en JSON y de esa forma importarlo
-//directamente en PHP
-        //leyendo archivo y decodificando
-        //array de provincias (necesario el parámetro true para decodificar cada uno de los objetos)        
-        /*
-        $this->provincias =  json_decode(file_get_contents('js/provincias.json'),true);
-        //convirtiendo array de provincias en json a archivo php
-        if(!file_exists('images/cms.php')){
-            fopen('images/cms.php','w');
-        }        
-        $file=fopen('images/cms.php','w');
-        fwrite($file,'<?php '.PHP_EOL);
-        fwrite($file, 'namespace App\Functions;'.PHP_EOL);
-        fwrite($file,'class Prov {'.PHP_EOL);
-        fwrite($file,'public $prov = [ '.PHP_EOL);
-        foreach($this->provincias as $key=>$value){
-            fwrite($file,$key.' => [');
-            //fwrite($file,'  ['.PHP_EOL);
-            fwrite($file,'\'provincia_id\' => \''.$value['provincia_id'].'\',');
-            fwrite($file,'\'nombre\' => \''.$value['nombre'].'\'');
-            fwrite($file,'],'.PHP_EOL);
-
-        }
-        fwrite($file,'];'.PHP_EOL);
-        fwrite($file,'}'.PHP_EOL);
-        fwrite($file, '?>'.PHP_EOL);
-        fclose($file);
-        */
-        
         $this->filter_type = $filter_type;
+        $this->order_type = 'asc';
+        //datos para email y saveexport
+        $this->listname = 'users';
+        $this->username=Auth::user()->name;
+        $this->checkpdf=1;
     }
 
-    public function set_filter_query($filter_type,$subcat=null){
+    public function set_filter_query($filter_type,$export=false,$role=0){
         $user=[];
-        $role=1;
+        //$role=1;
+        $search_data = '%'.$this->search_data.'%';
+        $col_order='id';
+        if($this->selectedCol)
+            $col_order = $this->selectedCol;
+        $order = $this->order_type;
+        //en usuario no existe la opción 2 ya que no existen eliminados
+
         
+        if($filter_type==3){
+            if( ($this->search_data)) 
+                $init_query = User::where('status','==',500)->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data);
+            else
+                $init_query = User::where('status','==',500);
+
+        }else{
+            if($this->search_data) 
+                $init_query = User::where('status',$filter_type)->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data);
+            else
+                $init_query = User::where('status',$filter_type);
+        }
+            
         switch($filter_type):
             case '0':
-                //$this->filterType = $filterType;
-                $user = User::where('status',$filter_type)->orderBy('id','desc')->paginate(10);
+                ($export) ?
+                    $user = $init_query->orderBy('id','desc')->get()
+                    :
+                    $user = $init_query->orderBy('id','desc')->paginate(10);
                 break;
             case '1':                
-                $user = User::where('status',$filter_type)->orderBy('id','desc')->paginate(10);
+                ($export) ?
+                    $user = $init_query->orderBy('id','desc')->get()
+                    :
+                    $user = $init_query->orderBy('id','desc')->paginate(10);
                 break;
                 //no mostramos ya que puede haber ususarios eliminados
             /*
@@ -170,33 +149,22 @@ class Users extends Component
                 $user = User::onlyTrashed()->orderBy('id','desc')->where('role',$role)->paginate(10);
                 break;
             */
-            case '3':
-                //500 es usuario baneado                
-                $user = User::where('status','!=',500)->orderBy('id','desc')->paginate(10);
+            case '3':                
+                //500 es usuario baneado 
+                ($export) ?
+                    $user = $init_query->orderBy('id','desc')->get()
+                    :               
+                    $user = $init_query->orderBy('id','desc')->paginate(10);
                 break;
-
         endswitch;
         return $user;
     }
 
 //se debería realizar mediante la eliminación de columnas de forma visual, poder 
     //eliminar la búsqueda de esas columnas
-    public function set_type_query(){
+    public function set_type_query($export=false){
         $query;
-        if($this->search_data){
-            $query= $this->set_filter_query($this->filter_type);
-            $search_data = '%'.$this->search_data.'%';
-            //no mostramos ya que puede haber ususarios eliminados
-            /*if($this->filter_type==2){
-                $query = User::onlyTrashed()->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data)->orWhere('lastname','LIKE',$search_data)->paginate(10);
-            }else{
-            */
-                $query = User::where('name','LIKE',$search_data)->where('status',$this->filter_type)->orWhere('nick','LIKE',$search_data)->orWhere('lastname','LIKE',$search_data)->paginate(10);    
-            //}
-        }
-        else{
-            $query= $this->set_filter_query($this->filter_type);
-        }
+        $query= $this->set_filter_query($this->filter_type,$export);
         return $query;
     }    
 
@@ -232,7 +200,7 @@ class Users extends Component
     }
 
     public function clear_query(){
-        $this->orderType='asc';
+        $this->order_type='asc';
     }
 
     public function edit($id){
@@ -250,11 +218,8 @@ class Users extends Component
                 $this->nick = $user->nick;
                 $this->name=$user->name;
                 $this->email=$user->email;
-                //asignación de datos mediante consulta con tabla profiles
+                
                 $this->surname=$user->lastname;
-                //dd("dsfas");
-                
-                
                 //$this->image=$user->image;
                 $this->thumb = $user->thumb;
                 $this->phone=$user->phone;
@@ -266,7 +231,6 @@ class Users extends Component
                 //$this->file_title=$profile->file_name;
             }
         }
-        
     }
 
     public function update(){
@@ -295,19 +259,16 @@ class Users extends Component
                     'country' => $validated['country'],
                     'province' => $validated['province'],
                     'city' => $validated['city'],
-
                 ]);
-
-                //dd($this->image);
+                
                 if($validated['profile_image'] !== null){
 
-            //comprobar si existe imagen y eliminar la anterior            
+//comprobar si existe imagen y eliminar la anterior            
                     $image_name = $this->profile_image->getClientOriginalName();
 
                     $ext = $this->profile_image->getClientOriginalExtension();
                     $path_date= date('Y-m-d');
                     $image = $this->profile_image->store('public/files/'.$path_date,'');
-
                     $path_tag = 'public/files/'.$path_date.'/';
                     //eliminamos el directorio public
                     $imagelesspublic = substr($image,7);
@@ -326,55 +287,20 @@ class Users extends Component
         }
 
     }
-
-//no se puede eliminar usuarios
-    //Los 2 métodos siguientes (saveUserId, clearUserId) son necesarios para 
-    //la confirmación de borrado de usuario (mediante un modal de bootstrap), 
-    //guardar y limpiar el id del usuario seleccionado de forma temporal    
-    public function saveUserId($userId){
-        $this->userIdTmp=$userId;
-    }
-    //si se recarga la página tb ser resetea el userIdTmp, en el método mount()
-    public function clearUserId(){
-        $this->userIdTmp='';
-    }
-
-    //eliminación de usuario
-    public function delete(){
-        if($this->userIdTmp){
-            $user=User::where('id',$this->userIdTmp)->first();
-            //comprobamos si existe imagen y si existe y
-            //es distinta a la asignada por defecto se elimina del server
-            /*
-            $exists=Storage::disk('public')->exists($profile->file);
-            if($exists && $profile->file != 'img/person.png'){
-                Storage::disk('public')->delete($profile->file);
-                session()->flash('message',$profile->file);    
-            }
-            */            
-            //$user=User::where('id',$this->userIdTmp)->first();
-            //$profile->delete();
-            $user->delete();
-            session()->flash('message',"Usuario eliminado correctamente");
-            $this->clear2();
-        }
-    }
-
+    //edición de permisos de usuario
     public function edit_permissions($id){        
         $user = User::findOrFail($id);
         $data = $user->permissions;
         //dd($data);
         $this->permissions3 = $data;
-        $this->permissions2 = new Permis();
-        //$dato = $dato->testPermission('hola','list_users');
-        //dd($dato);
-        
+        $this->role_permissions = new Permis();
         $this->user_id = $id;
     }
-    public function submit($data){
-
+    //actualización de permisos de usuario
+    public function update_permissions($data){
+        $this->emit('loading','loading');
         $user = User::findOrFail($data['id']);
-        //eliminamos id del arraay
+        //eliminamos id y token del array
         unset($data['id']);
         unset($data['_token']);
         //dd(json_encode($data));
@@ -384,18 +310,19 @@ class Users extends Component
         //$this->typealert = 'success';
         //session()->flash('message',"Permisos actualizados correctamente");
         //$this->emit('editPermissions');
-
-        //esto permite recargar la página pero no genera mensaje, conveniente //eliminar con javascript el elemento del sidebar correspondiente
-        //return redirect(request()->header('Referer','datos'));
-        return redirect()->route('list_users',['filter_type' => $this->filter_type])->with('message',"permisos actualizados")->with('only_component','true');
-        //Route::get('/users',['hola']);
         
+        //esto permite recargar la página pero no genera mensaje         
+        //return redirect(request()->header('Referer','datos'));
+        
+        //con redirect() recargamos la página para no mostrar el elemento del sidebar en caso de restricción de acceso
+        //añadimos la variable only_component para solo mostrar el session message del componente y no mostrar el session message del layout
+        return redirect()->route('list_users',['filter_type' => $this->filter_type])->with('message',"permisos actualizados")->with('only_component','true');
     }
+
     //si se selecciona España se activan los select de province y city
     //si no se desactivan
     public function testCountry(){
         //58 es el id de España
-        
     }
 
     //botón X de buscador para eliminar datos de búsqueda
@@ -405,38 +332,105 @@ class Users extends Component
 
     //limpiar datos de formulario
     public function clear(){
-        //if($this->user_id)
+        
         $this->user_id='';
         $this->nick='';
         $this->name='';
         $this->surname='';
         $this->profile_image=null;
-        //$this->emit('editUser');
         //iteration es necesario resetear el caché del input file
         $this->iteration=rand();
     }
 
     public function clear2(){
         $this->clear();
-        //resetea todos los campos necesario para input file
+        //resetea todos los mensajes
         $this->resetValidation();
+    }
+
+    //si se recarga la página tb se resetea el catIdTmp, en el método mount()
+    public function clearUserId(){
+        $this->userIdTmp='';
+    }
+
+    //exportar archivo PDF al navegador del usuario
+    public function exportPDF(){    
+        $users=$this->set_type_query(true);
+        $view="livewire.admin.users.export";
+        $pdf=PDF::loadView($view,['users'=>$users]);
+        $this->pdf=$pdf;
+        return response()->streamDownload(function(){
+                    //con print o con echo
+            print $this->pdf->stream();//echo $this->pdf->stream();
+        },'listado.pdf');
+    }
+    //exportar archivo Excel al navegador del usuario
+    public function exportExcel(){
+        $users=$this->set_type_query(true);
+        return Excel::download(new Export($users,$this->listname),'exportexcel.xlsx');
+    }
+
+    //guardar el archivo PDF en el server para después poder enviar por correo 
+    //como archivo adjunto
+    public function savePDF(){
+        $path_date=date('Y-m-d');
+        $users=$this->set_type_query(true);
+        $view="livewire.admin.users.export";
+        $pdf= PDF::loadView($view,['users'=>$users]);
+        $pdf->save('listado_'.$path_date.'.pdf');
+    }
+    //guardar archivo Excel en el server para después poder enviar por correo 
+    //como archivo adjunto
+    public function saveExcel(){
+        $path_date=date('Y-m-d');
+        $users=$this->set_type_query(true);
+        //grabar en disco
+        return  Excel::store(new Export($users,$this->listname),'listado2_'.$path_date.'.xlsx','public');
+    }
+
+    //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
+    public function sendEmail(){
+        $attach=["pdf"=>0,"excel"=>0];
+        $validated = $this->validate([
+            'email_export'=>'required|email'
+        ]);
+        //mensaje de validación de checkbox
+        if($this->checkpdf == '' && $this->checkexcel==''){
+            session()->flash('check','Es necesario marcar al menos uno');
+        }else{
+            if($this->checkpdf){
+                $this->savePDF();                
+                $attach["pdf"]="1";
+            }
+            if($this->checkexcel){
+                $this->saveExcel();                
+                $attach["excel"]="1";
+            }
+        //falta condicional por si falla el servidor de correo
+            Mail::to($validated["email_export"], "eHidra")
+            ->send(new Listado($attach,$this->username,$this->listname));
+        //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
+        //correo ya no desplega el dropdown de exportar 
+        //session()->flash('message',"Correo enviado correctamente");
+        return redirect()->route('list_users',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
+            //limpiar datos de selección para el envio (correo y archivos adjuntos)
+        $this->clearExport();
+        $this->emit("sendModal");
+        }
+    }
+    //limpiar datos de exportación
+    public function clearExport(){
+        $this->checkpdf='1';
+        $this->checkexcel='';
+        //$this->emailParaExportar='';
     }
 
     public function render()
     {
-        /*
-        $dato=array();        
-        for($i=0;$i<count($this->provincias);$i++){
-            array_push($dato,$this->provincias[$i]['nombre']);
-        }
-        */
         //iteration es necesario resetear el caché del input file
         $iteration=rand();
-        $this->permissions2 = new Permis();
-        //$users = User::orderBy('id','desc')->paginate(20);
-        //$users = $this->set_type_query();
+        $this->role_permissions = new Permis();
         $users = $this->set_type_query();
-
         $data = ['users' => $users,'countries' => $this->countries,'provinces_list' => $this->provinces_list,'cities' => $this->municipies_list,'iteration'=>$this->iteration];
         //return view('livewire.admin.users.index',$data)->extends('layouts.admin');
 

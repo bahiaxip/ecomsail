@@ -22,6 +22,7 @@
     @if(helper()->testPermission(Auth::user()->permissions,'admin_permissions')== true)
         @include('livewire.admin.users.edit_permissions')
     @endif
+    @include('livewire.admin.users.sendmail')
 
     @if(session()->has('message'))
     <div class="container ">
@@ -56,14 +57,37 @@
         <ul class="add">
            
             <li>
-                <button class="btn btn-sm btn-primary">Exportar</button>
+                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuUsers" data-bs-toggle="dropdown" aria-expanded="false" >
+                    <span class="d-none d-md-inline">Exportar</span>
+                    <span class="d-inline d-md-none">
+                        <i class="fa-solid fa-file-export"></i>
+                    </span>
+
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">                
+                    <li>
+                        <a href="#" class="dropdown-item" wire:click="exportPDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-item" wire:click="exportExcel">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa-solid fa-envelope"></i> E-Mail
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li>            
-                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenuFilterUsers" data-bs-toggle="dropdown" aria-expanded="false">
                     Filtros
                 </button>            
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuFilterUsers">                
                     <li>
                         <a href="{{ route('list_users',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                     </li>

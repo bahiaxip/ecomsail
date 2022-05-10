@@ -79,6 +79,7 @@ class LoginController extends Controller
             $user->lastname = e($request->input('lastname'));
             $user->email = e($request->input('email'));
             $user->password = Hash::make($request->input('pass'));
+            $user->image = 'images/default2.png';
             if($user->save()):
                 return redirect('/login')->with(['message' => 'El usuario ha sido registrado con éxito','typealert' =>'success']);
             endif;  

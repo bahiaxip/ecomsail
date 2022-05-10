@@ -4,7 +4,7 @@
             <div  class="container mt-3" >
                 <div class="card">
                     <div class="card-header text-center">
-                        <p style="font-size:20px;text-align:center;font-weight:bold">Perfil de usuarios</p>
+                        <p style="font-size:20px;text-align:center;font-weight:bold">Listado de categorías</p>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" >
