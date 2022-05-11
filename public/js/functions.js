@@ -1,7 +1,9 @@
 //nombre de ruta (asignado en meta tag que indica el valor de name en el archivo de rutas)
 var route = document.getElementsByName('route_name')[0].getAttribute('content');
 
-var events = ['userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions','sendModal'];
+var events = [
+'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions','sendModal','sendModal2','addAttribute','editAttribute'
+];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
 //es necesario añadir datos al array
@@ -113,7 +115,7 @@ document.addEventListener('readystatechange',() => {
 
 
             }
-            //resaltar/oscurecer los iconos del buscador al hacer/deshacer focus
+        //resaltar/oscurecer los iconos del buscador al hacer/deshacer focus
             let search_data=document.querySelector('#search_data');
             if(search_data){
                 let div_inputgroup = document.querySelector('.div_search');
@@ -130,7 +132,7 @@ document.addEventListener('readystatechange',() => {
             }
             console.log("history.length: ",window.history.length)
             
-            //el evento popstate detecta el botón de adelante, atrás del navegador
+        //el evento popstate detecta el botón de adelante, atrás del navegador
             //o cuando se llama a los métodos history.back(), history.forward(), history.go()
             window.addEventListener('popstate',(e)=>{
                 //console.log(e.state);

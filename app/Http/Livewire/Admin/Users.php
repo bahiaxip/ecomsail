@@ -169,17 +169,19 @@ class Users extends Component
     }    
 
     public function updated($fields){
-        if($this->provinces){
+        //if($this->provinces){
             //si ha seleccionado uno nuevo pasamos el valor de city a null
             //no es necesario, tan solo es necesario si no añadimos el valor del id 
             //a los option
+            /*
             if($this->province_selected != $this->province){
                 //$this->city=0;
             }            
             $this->province_selected=$this->province;
+            */
             //$this->citiy=0;
             //dd($this->provinces);
-        }
+        //}
         //$this->data_tmp=$this->user_id;
 
         /*
@@ -389,7 +391,7 @@ class Users extends Component
     }
 
     //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
-    public function sendEmail(){
+    public function sendEmailUser(){
         $attach=["pdf"=>0,"excel"=>0];
         $validated = $this->validate([
             'email_export'=>'required|email'
@@ -406,12 +408,14 @@ class Users extends Component
                 $this->saveExcel();                
                 $attach["excel"]="1";
             }
+
         //falta condicional por si falla el servidor de correo
             Mail::to($validated["email_export"], "eHidra")
             ->send(new Listado($attach,$this->username,$this->listname));
         //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
         //correo ya no desplega el dropdown de exportar 
         //session()->flash('message',"Correo enviado correctamente");
+
         return redirect()->route('list_users',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
             //limpiar datos de selección para el envio (correo y archivos adjuntos)
         $this->clearExport();
@@ -422,7 +426,7 @@ class Users extends Component
     public function clearExport(){
         $this->checkpdf='1';
         $this->checkexcel='';
-        //$this->emailParaExportar='';
+        $this->email_export='';
     }
 
     public function render()

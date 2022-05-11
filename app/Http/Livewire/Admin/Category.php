@@ -138,7 +138,7 @@ class Category extends Component
         //$order='desc';
         $order = $this->order_type;
         
-        //si es reciclaje creamos consulta con onlyTrashed(los eliminados con softDelete())
+        //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
         if($filter_type==2)            
             $init_query = ($this->search_data) ?
                 Cat::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$subcat)
@@ -307,9 +307,10 @@ class Category extends Component
         endif;
 
         $this->cat_id=$cat->id;
-        //(se podría evitar la consulta $user y llamar al método user del modelo 
+//por comprobar em método parent_cat
+        //(se podría evitar la consulta $cat y llamar al método parent_cat del modelo 
         //Profile belongsTo...)
-        //asignación de datos mediante consulta a tabla users 
+        //asignación de datos mediante consulta a tabla categories 
         $this->name = $cat->name;        
         $this->type=$cat->type;        
         $this->status=$cat->status;
@@ -466,7 +467,7 @@ class Category extends Component
     public function clearExport(){
         $this->checkpdf='1';
         $this->checkexcel='';
-        $this->emailParaExportar='';
+        $this->email_export='';
     }
 
     //en principio no necesario, asignado al botón Agregar Categoría
@@ -545,10 +546,13 @@ class Category extends Component
 
     //mostrar listado de subcategorías
     public function renderSubCat($subcat_id,$name){
-        //dd($name);
+        
         $this->subcatlist['name']=$name;
         $this->subcatlist['id'] = $subcat_id;        
         $this->emit('subcat',$subcat_id,$name);
+        //subcat permite distinguir en la vista si es padre o hijo, como también realizar comprobaciones 
+        //en cada renderizado (render()), si existe es que se ha iniciado el método renderSubCat()  
+        //indicando que se ha accedido a una subcategoría
         $this->subcat=$subcat_id;
     }
 
@@ -579,6 +583,7 @@ class Category extends Component
 
         //reseteamos botón de volver
         $this->btn_back=false;
+        //dd($this->subcat);
         if($this->subcat){            
             //obtenemos el nombre de la categoría padre del primer elemento de la lista
             //comprobando si existe

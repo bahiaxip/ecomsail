@@ -76,7 +76,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal" aria-expanded="false" aria-controls="collapseExample">
+                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal2" aria-expanded="false" aria-controls="collapseExample">
                             <i class="fa-solid fa-envelope"></i> E-Mail
                         </a>
                     </li>

@@ -43,9 +43,9 @@
 			</li>
 			@endif
 			<li>
-				<a href="#">
+				<a href="{{ route('list_attributes',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-box"></i> <span class="d-none d-lg-inline-flex">
-						Personalizar
+						Atributos
 					</span>
 				</a>
 			</li>

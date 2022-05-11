@@ -87,6 +87,8 @@ body
 						background-image url('../icons/grid_cat.svg')						
 					.icon_subcat
 						background-image url('../icons/grid_subcat.svg')
+					.icon_attr
+						background-image url('../icons/attribute.svg')
 					span
 						margin-left 2px	
 						&:hover
@@ -98,7 +100,9 @@ body
 					&:hover
 						.icon_subcat
 							background-image url('../icons/grid_subcat_489bf8.svg')
-						
+					&:hover
+						.icon_attr
+							background-image url('../icons/attribute_489bf8.svg')
 				
 	.sectionL
 		background-color #FFF
@@ -330,16 +334,23 @@ body
 						border #4861ff 1px solid
 						color #E7E7E7
 						.icon
-							background-image url('../icons/grid_subcat_E7E7E7.svg')
+							
 							background-position center
 							background-repeat no-repeat
 							background-size 100%
 							display flex
 							height 20px								
 							width 16px
+						.icon_subcat
+							background-image url('../icons/grid_subcat_E7E7E7.svg')
+						.icon_value
+							background-image url('../icons/attribute_E7E7E7.svg')
 						&:hover
-							.icon
+							.icon_subcat
 								background-image url('../icons/grid_subcat_white.svg')
+						&:hover
+							.icon_value
+								background-image url('../icons/attribute_white.svg')
 								
 						&:hover,&:focus
 							box-shadow 0 0 6px color1

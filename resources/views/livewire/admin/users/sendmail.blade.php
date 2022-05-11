@@ -1,5 +1,5 @@
 <!-- Modal confirmación eliminar usuario -->
-<div wire:ignore.self class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+<div wire:ignore.self class="modal fade" id="sendModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header justify-content-center">
@@ -46,7 +46,7 @@
       <div class="modal-footer justify-content-center">
           <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearUserId()">Cancelar</button>
           {{--@if($count_user==0)--}}
-          <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="sendEmail" id="btn_sendemail_user">Enviar</button>
+          <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="sendEmailUser" id="btn_sendemail_user">Enviar</button>
           {{--@endif--}}
       </div>
     </div>

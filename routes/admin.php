@@ -18,6 +18,7 @@ Route::group([
 	'middleware' => ['auth','admin'],
 	'prefix'=>'/admin'
 	],function(){
+
 	//categories
 	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)
 		->name('list_categories')->middleware('role_permissions');
@@ -31,8 +32,11 @@ Route::group([
 	//Products
 	Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('list_products')
 		->middleware('role_permissions');
-		
-})
+
+	//Attributes
+	Route::get('/attributes/{filter_type}/{attr?}',\App\Http\Livewire\Admin\Attribute::class)->name('list_attributes');
+	}
+);
 
 
 ?>
