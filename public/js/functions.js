@@ -2,7 +2,9 @@
 var route = document.getElementsByName('route_name')[0].getAttribute('content');
 
 var events = [
-'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions','sendModal','sendModal2','addAttribute','editAttribute','addValue'
+'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
+'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
+'editAttribute','addValue','massiveConfirm'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
@@ -49,15 +51,15 @@ window.livewire.on('loading',(data)=>{
     
 })
 //Añadir link en la url
-window.livewire.on('subcat',(cat_id,cat_name)=>{
+window.livewire.on('minilink',(cat_id,cat_name,classname)=>{
     console.log(cat_id)
     console.log(cat_name)
     let subcat =  document.querySelector('#sublist_name');
-    let link=`&nbsp;>&nbsp;<a href="${cat_id}" id="subcat">
-        <div class="icon icon_subcat"></div> <span>${cat_name}</span>
+    let link=`&nbsp;>&nbsp;<a href="${cat_id}" >
+        <div class="icon ${classname}"></div> <span>${cat_name}</span>
     </a>`;
 
-    //estableciendo datos en localStorage, anulado: no necesario
+    //estableciendo datos en localStorage, anulado: no necesario,anulado
     /*
     let data = {'cat_id':cat_id,'cat_name':cat_name};    
     localStorage.setItem('subcats',JSON.stringify(data));

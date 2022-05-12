@@ -18,7 +18,7 @@ class Attribute extends Model
     protected $hidden = ['created_at','updated_at'];
     //obtener la cantidad de valores que contiene una atributo
     public function valueslength(){
-        return $this->hasMany(Attribute::class,'type','id');
+        return $this->hasMany(Attribute::class,'type','id')->count();
     }
 
     public function parentattr(){

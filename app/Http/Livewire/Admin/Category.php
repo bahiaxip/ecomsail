@@ -548,8 +548,9 @@ class Category extends Component
     public function renderSubCat($subcat_id,$name){
         
         $this->subcatlist['name']=$name;
-        $this->subcatlist['id'] = $subcat_id;        
-        $this->emit('subcat',$subcat_id,$name);
+        $this->subcatlist['id'] = $subcat_id;
+        //método para mostrar el minilink de subcategorías
+        $this->emit('minilink',$subcat_id,$name,'icon_subcat');
         //subcat permite distinguir en la vista si es padre o hijo, como también realizar comprobaciones 
         //en cada renderizado (render()), si existe es que se ha iniciado el método renderSubCat()  
         //indicando que se ha accedido a una subcategoría

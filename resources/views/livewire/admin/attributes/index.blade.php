@@ -15,9 +15,17 @@
     <li class="sublist_name" id="sublist_name">
         
     </li>
-    <!-- elemento li que será mostrado al recargar la página en una subcategoría, 
-        este elemento se sustituye por el anterior al recargar la página -->
-    
+    <!-- elemento li que será mostrado al recargar la página en valores("subatributos"), 
+        este elemento li sustituye al anterior al recargar la página -->
+    @if($attrlist['name'])
+    &nbsp;>&nbsp;
+    <li class="sublist_name">
+        <a href="{{ url('admin/attributes/'.$filter_type.'/'.$attrlist['id']) }}">
+            <div class="icon icon_value"></div>
+            <span>{{$attrlist['name']}}</span>
+        </a>
+    </li>
+    @endif
     @endsection
 
     @if(session()->has('message'))
@@ -46,6 +54,9 @@
     @endif
     @include('livewire.admin.attributes.confirm')
     @include('livewire.admin.attributes.sendmail')
+    @include('livewire.admin.attributes.massive_confirm')
+
+    {{Form::hidden('hidden',null,['wire:model' => 'selected_list','id' => 'hidden_list'])}}
     <div class="filters mtop16">
         <ul class="addL">
             <li>
@@ -93,13 +104,13 @@
             </li>
             <!-- Filtros -->
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" onclick="showFilters()" aria-expanded="false">
                     <span class="d-none d-md-inline">Filtros</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </span>
                 </button>            
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
+                <ul class="dropdown-menu" id="dropdownMenu2Ul" aria-labelledby="dropdownMenu2">                
                     <li>
                         <a @if(!$attr)
                         href="{{ route('list_attributes',['filter_type' => 1]) }}"
@@ -190,7 +201,7 @@
                     </td>
                     <td>{{ $at->id }}</td>
                     <td>{{$at->name}}</td>
-                    <td>0</td>
+                    <td>{{$at->valueslength()}}</td>
                     
                     <!--
                     usamos la sintaxis laravel con !! para limpiar los 
@@ -213,14 +224,14 @@
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
                                     @if($filter_type!=2)
-                                        <button class="btn btn-sm delete" title="Eliminar {{$at->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}})">
+                                        <button class="btn btn-sm delete" title="Eliminar {{$at->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     @endif
                                 @endif
                             @else
                                 @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" wire:click="restore({{$at->id}})">
+                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>
                                 @endif
@@ -245,11 +256,12 @@
                         <label for="status"><strong>Acciones en lote</strong></label>
                     </td>
                     <td colspan="1" style="display:inline-flex;vertical-align:middle;align-items:center">
-                        <div class="input-group">                    
-                            {{ Form::select('action_selected_ids',[0 => 'Seleccione...',1 => 'Eliminar'],null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px'])}}
+
+                        <div class="input-group">
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px'])}}
                         </div>
                         <div>
-                            <button class="btn btn-sm btn_primary" wire:click="deleteids">Aplicar</button>    
+                            <button class="btn btn-sm btn_primary" onclick="testAnyCheckbox()" >Aplicar</button>
                         </div>
                     </td>
                     @endif
@@ -260,5 +272,89 @@
             </tbody>
         </table>
     </div>
-
 </div>
+@push('scripts')
+<script>
+    //generamos desde aquí el dropdown de "Filtros" ya que en ocasiones genera conflicto
+    //con modal de boostrap o con session()->flash())
+    function showFilters(){
+        $('#dropdownMenu2Ul').toggle();
+    }
+
+//FALTA COMPROBAR SI SE QUEDA VACÍA LA PÁGINA PASAR A LA ANTERIOR DESDE PHP
+
+
+//métodos para selección/deselección de checkbox y aplicar acciones en lote
+let selected_list=[];
+//comprueba si existe algún checkbox seleccionado, si existe muestra el modal
+function testAnyCheckbox(){
+    //almacenamos todos los checkbox
+    let total_list = document.querySelectorAll('.checkbox');
+    //convertimos a array
+    let total = [].slice.call(total_list);
+    let res = total.filter(item => item.checked)
+    if(res.length > 0)
+        $('#massiveConfirm').modal('show');
+}
+//para la selección total
+//si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
+function selectAllCheckbox(){
+    //si existe elemento allcheckbox...
+    if(document.querySelector('#allcheckbox')){
+        let allcheckbox = document.querySelector('#allcheckbox');
+        //almacenamos todos los checkbox
+        let total_list = document.querySelectorAll('.checkbox');
+        //convertimos a array
+        let total = [].slice.call(total_list);
+        //comprobamos si es seleccionar o deseleccionar
+        if(allcheckbox.checked)
+            activeCheckbox(total);
+        else
+           clearCheckbox(total);
+    }    
+    @this.selected_list = selected_list;
+}
+//activar todos los checkbox
+function activeCheckbox(allcheckbox){
+    //establecemos todos los checkbox a true y añadimos elementos al selected_list 
+    selected_list = allcheckbox.map((item)=>{
+        item.checked=true;
+        return item.name
+    })
+}
+
+function clearCheckbox(allcheckbox=null){    
+    let list=allcheckbox;
+    if(!list){
+        //almacenamos todos los checkbox
+        let total_list = document.querySelectorAll('.checkbox');
+        //convertimos a array
+        list = [].slice.call(total_list);
+    }
+    //establecemos todos los checkbox a false y resetamos la lista
+    list.map((node)=>{        
+        node.checked=false;
+    })
+    document.querySelector('#allcheckbox').checked=false;
+    selected_list = [];
+}
+    
+//selección por id(uno en uno)
+function selectCheckbox(id,el){
+    //si está checkeado añadimos a la lista        
+    if(el.checked){
+        //comprobamos si no se encuentra en la lista (para más seguridad)
+        if(!selected_list.includes(id))
+            selected_list.push(id);
+            
+    //si no está checkeado comprobamos si existe en la listay se elimina de la lista
+    }else{
+        //comprobamos si existe en la lista
+        if(selected_list.includes(id))                
+            selected_list=selected_list.filter((item) => item != id);
+    }
+    //actualizamos el data binding del form hidden 
+    @this.selected_list = selected_list;
+}
+</script>
+@endpush

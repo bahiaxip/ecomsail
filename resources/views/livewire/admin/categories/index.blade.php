@@ -18,7 +18,7 @@
         
     </li>
     <!-- elemento li que será mostrado al recargar la página en una subcategoría, 
-        este elemento se sustituye por el anterior al recargar la página -->
+        este elemento li sustituye al anterior al recargar la página -->
     @if($subcatlist['name'])
     &nbsp;>&nbsp;
     <li class="sublist_name">

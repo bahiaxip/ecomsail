@@ -10,6 +10,7 @@ use Str,Auth,PDF,Excel;
 use Illuminate\Support\Facades\Mail;
 //use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Mail\Listado;
+use App\Functions\Functions;
 class Attribute extends Component
 {
 
@@ -54,7 +55,15 @@ class Attribute extends Component
 
     public $listname ='attributes';
     public $username;
+    //elementos por página
+    public $limit_page=10;
 
+    //listado de registros seleccionados mediante checkbox    
+    public $selected_list;
+    //select de acciones por lote
+    public $action_selected_ids;
+    //acción temporal para el modal confirm (delte/restore)
+    public $actionTmp;
     //archivo temporal para poder eliminar el archivo Excel descargado, ya que 
     //al sobreescribir genera error.
     public $file_tmp;
@@ -63,6 +72,41 @@ class Attribute extends Component
         $this->order_type = 'asc';
         $this->username = Auth::user()->name;
     }
+    //comprobamos la acción seleccionada
+    public function set_action_massive(){        
+        $action = $this->action_selected_ids;
+        $list = $this->selected_list;
+        $this->emit('massiveConfirm');
+        if(!empty($list) && count($list) > 0){
+    //añadir icono loading      
+            switch($action):
+                //Eliminar
+                case '1':
+                    $this->delete_list();
+                    break;
+                //Restaurar                
+                case '2':
+                    $this->restore_list();
+                    break;
+            endswitch;
+            //devolvemos el select a 0
+            $this->action_selected_ids = 0;
+        }        
+        
+        session()->flash('message','Acción ejecutada correctamente');
+        $this->selected_list=[];
+        
+    }
+    //eliminar seleccionados(aplicar acción de eliminar en lote)
+    public function delete_list(){
+        Attr::destroy($this->selected_list);
+    }
+
+    public function restore_list(){
+        Attr::whereIn('id',$this->selected_list)->restore();
+    }
+
+
 
     public function set_type_query($export=false){
         $query;        
@@ -84,18 +128,20 @@ class Attribute extends Component
         if($filter_type == 2){
             $init_query = ($this->search_data) ?
                 Attr::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$attr)
+                    ->orderBy($col_order,$order)
                 :
-                Attr::onlyTrashed()->orderBy($col_order,$order)->where('type',$attr);
+                Attr::onlyTrashed()->where('type',$attr)->orderBy($col_order,$order);
         }elseif($filter_type == 3){
             $init_query = ($this->search_data) ?
-                Attr::where('name','LIKE',$search_data)->where('type',$attr)
+                Attr::where('name','LIKE',$search_data)->where('type',$attr)->orderBy($col_order,$order)
                 :
-                Attr::where('type',$attr);
+                Attr::where('type',$attr)->orderBy($col_order,$order);
         }else{            
             $init_query = ($this->search_data) ?
-                Attr::where('name','LIKE',$search_data)->where('status',$filter_type)->where('type',$attr)
+                Attr::where('name','LIKE',$search_data)->where('status',$filter_type)
+                    ->where('type',$attr)->orderBy($col_order,$order)
                 :
-                Attr::where('status',$filter_type)->where('type',$attr);
+                Attr::where('status',$filter_type)->where('type',$attr)->orderBy($col_order,$order);
 
 
         }
@@ -103,28 +149,28 @@ class Attribute extends Component
             case '0':
                 //$this->filterType = $filterType;
                 ($export) ?
-                    $res = $init_query->orderBy($col_order,$order)->get()
+                    $res = $init_query->get()
                     :
-                    $res = $init_query->orderBy($col_order,$order)->paginate(10);
+                    $res = $init_query->paginate($this->limit_page);
                 break;
             case '1':                
                 ($export) ?
-                    $res = $init_query->orderBy($col_order,$order)->get()
+                    $res = $init_query->get()
                     :                
-                    $res = $init_query->orderBy($col_order,$order)->paginate(10);
+                    $res = $init_query->paginate($this->limit_page);
                 break;
             case '2':
                 ($export) ?
-                    $res = $init_query->orderBy($col_order,$order)->get()
+                    $res = $init_query->get()
                     :
-                    $res = $init_query->orderBy($col_order,$order)->paginate(10);
+                    $res = $init_query->paginate($this->limit_page);
                 break;
             case '3':
                 //si el filtro es todos(3) realizamos la consulta sin filtrar status
                 ($export) ?
-                    $res = $init_query->orderBy($col_order,$order)->get()
+                    $res = $init_query->get()
                     :
-                    $res = $init_query->orderBy($col_order,$order)->paginate(10);
+                    $res = $init_query->paginate($this->limit_page);
                 break;
 
         endswitch;
@@ -262,6 +308,8 @@ class Attribute extends Component
         $message = ($attr->type == 0) ?
             "Atributo restaurado correctamente":"Valor restaurado correctamente";        
         session()->flash('message',$message);
+        $this->clear2();
+        $this->emit('confirmDel');
     }
 
     //exportar archivo PDF al navegador del usuario
@@ -346,8 +394,10 @@ class Attribute extends Component
     //Los 2 métodos siguientes (saveCatId, clearCatId) son necesarios para 
     //la confirmación de borrado de categoría (mediante un modal de bootstrap), 
     //guardar y limpiar el id de la categoría seleccionada de forma temporal 
-    public function saveAttrId($attr_id){        
+    public function saveAttrId($attr_id,$action){
+        
         $this->attrIdTmp=$attr_id;
+        $this->actionTmp = $action; 
         //revisar en producción
         //comprobamos si existen valores asociados a ese atributo, en caso de existir
         //no se puede eliminar y cambia el mensaje de confirm
@@ -392,11 +442,13 @@ class Attribute extends Component
     public function renderValues($attr_id,$attr_name){
         $this->attrlist['id'] = $attr_id;
         $this->attrlist['name'] = $attr_name;
-        $this->emit('attribute',$attr_id,$attr_name);
+        $this->emit('minilink',$attr_id,$attr_name,'icon_value');
         //value permite distinguir en la vista si es padre o hijo, como también realizar comprobaciones 
         //en cada renderizado (render()), si existe es que se ha iniciado el método renderValues()  
         //indicando que se ha accedido a un valor ("subatributo") en lugar de un atributo (atributo padre)
         $this->attr = $attr_id;
+        //limpiamos búsqueda
+        $this->clearSearch();
     }
     public function render()
     {
@@ -406,6 +458,7 @@ class Attribute extends Component
         //añadimos a la opción por defecto del select NULL o "" en lugar de 0 para la validación 
         $attrs->prepend('Selecione...',NULL);
         
+
 
         if($this->attr){
 
