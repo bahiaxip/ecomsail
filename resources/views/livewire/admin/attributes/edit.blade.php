@@ -47,7 +47,7 @@
                         <option value="1">Atributo 2</option>
                       </select>
                       -->
-                      {{ Form::select('hola',$attrs,'true',['class' => 'form-select', 'wire:model' => 'parent_attr'])}}
+                      {{ Form::select('parent_attr',$attrs,'true',['class' => 'form-select', 'wire:model' => 'parent_attr'])}}
                       @error('parent_attr')
                       <p class="text-danger">{{$message}}</p>
                       @enderror

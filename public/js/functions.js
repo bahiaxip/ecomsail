@@ -2,7 +2,7 @@
 var route = document.getElementsByName('route_name')[0].getAttribute('content');
 
 var events = [
-'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions','sendModal','sendModal2','addAttribute','editAttribute'
+'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct','confirmDel','editPermissions','sendModal','sendModal2','addAttribute','editAttribute','addValue'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo

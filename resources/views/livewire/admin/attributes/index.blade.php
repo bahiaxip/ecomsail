@@ -44,6 +44,8 @@
     @if($attributes->total() > 0)
     @include('livewire.admin.attributes.create_value')
     @endif
+    @include('livewire.admin.attributes.confirm')
+    @include('livewire.admin.attributes.sendmail')
     <div class="filters mtop16">
         <ul class="addL">
             <li>
@@ -89,7 +91,7 @@
                     </li>
                 </ul>
             </li>
-
+            <!-- Filtros -->
             <li>            
                 <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="d-none d-md-inline">Filtros</span>
@@ -99,16 +101,33 @@
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
                     <li>
-                        <a href="{{ route('list_attributes',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        <a @if(!$attr)
+                        href="{{ route('list_attributes',['filter_type' => 1]) }}"
+                        @else
+                        href="{{ route('list_attributes',['filter_type' => 1,'attr' => $attr]) }}"
+                        @endif 
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                     </li>
                     <li>
-                        <a href="{{ route('list_attributes',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                        <a  @if(!$attr)href="{{ route('list_attributes',['filter_type' => 0]) }}"@else href="{{ route('list_attributes',['filter_type' => 0,'attr' => $attr]) }}"@endif class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
                     </li>
                     <li>
-                        <a href="{{ route('list_attributes',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                        <a 
+                        @if(!$attr)
+                        href="{{ route('list_attributes',['filter_type' => 2]) }}"
+                        @else
+                        href="{{ route('list_attributes',['filter_type' => 2,'attr' => $attr]) }}"
+                        @endif
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
                     </li>
                     <li>
-                        <a href=" {{ route('list_attributes',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        <a 
+                        @if(!$attr)
+                        href=" {{ route('list_attributes',['filter_type' => 3]) }}"
+                        @else
+                        href=" {{ route('list_attributes',['filter_type' => 3,'attr' => $attr]) }}"
+                        @endif
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
                     </li>
                 </ul>            
             </li>
@@ -118,7 +137,8 @@
                         <span class="d-none d-md-inline">Agregar Atributo</span>
                     </a>
                 </li>
-                @if($attributes->total() > 0)
+                <!-- si no existe ningún atributo padre todavía ocultamos el botón Crear Valor-->
+                @if($attr)
                 <li>
                     <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addValue" wire:click.prevent="setckeditor"><i class="fa-solid fa-plus"></i> 
                         <span class="d-none d-md-inline">Agregar Valor</span>
@@ -163,44 +183,44 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($attributes as $attr)
+                @foreach($attributes as $at)
                 <tr>
                     <td width="50">
-                        {{Form::checkbox($attr->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$attr->id.',this)','class' => 'checkbox'])}}
+                        {{Form::checkbox($at->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$at->id.',this)','class' => 'checkbox'])}}
                     </td>
-                    <td>{{ $attr->id }}</td>
-                    <td>{{$attr->name}}</td>
+                    <td>{{ $at->id }}</td>
+                    <td>{{$at->name}}</td>
                     <td>0</td>
                     
                     <!--
                     usamos la sintaxis laravel con !! para limpiar los 
                     tags añadidos del textarea en lugar de doble corchete
                     -->
-                    <td class="max d-none d-md-table-cell">{!! $attr->description !!}</td>
+                    <td class="max d-none d-md-table-cell">{!! $at->description !!}</td>
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                                @if(!$value)
-                                <button class="btn btn-sm scat" title="Valores" wire:click="renderValues({{ $attr->id }},'{{trim($attr->name)}}')">
+                                @if(!$attr)
+                                <button class="btn btn-sm scat" title="Valores" wire:click="renderValues({{ $at->id }},'{{trim($at->name)}}')">
                                     <!--<img src="{{url('icons/attribute_white.svg')}}" alt="" width="16">-->
                                     <div class="icon icon_value "></div>
                                 </button>
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
-                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editAttribute" wire:click="edit({{$attr->id}})" title="Editar {{$attr->name}}">
+                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editAttribute" wire:click="edit({{$at->id}})" title="Editar {{$at->name}}">
                                     <i class="fa-solid fa-edit"></i>
                                 </button>
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
                                     @if($filter_type!=2)
-                                        <button class="btn btn-sm delete" title="Eliminar {{$attr->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$attr->id}})">
+                                        <button class="btn btn-sm delete" title="Eliminar {{$at->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}})">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     @endif
                                 @endif
                             @else
                                 @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" wire:click="restore({{$cat->id}})">
+                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" wire:click="restore({{$at->id}})">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>
                                 @endif

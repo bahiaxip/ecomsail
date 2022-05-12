@@ -16,12 +16,14 @@ class Listado extends Mailable
     //datos usuarios (eloquent)
     public $username;
     public $listname;
+    public $file_name;
 
-    public function __construct($attach,$username,$listname)
+    public function __construct($attach,$username,$listname,$file_name)
     {
         $this->attach=$attach;
         $this->username=$username;
         $this->listname = $listname;
+        $this->file_name = $file_name;
     }
 
     /**
@@ -42,7 +44,7 @@ class Listado extends Mailable
                 ]);
             }
             if(isset($this->attach["excel"]) && $this->attach["excel"]=="1"){
-                $mail->attach(public_path('listado2_'.$path_date.'.xlsx'));    
+                $mail->attach(public_path($this->file_name));    
             }
                 
         return $mail;
