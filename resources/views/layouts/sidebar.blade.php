@@ -21,7 +21,7 @@
 				<a href="{{ url('/admin') }}">
 					<i class="fa-solid fa-chart-line"></i> 
 					<span class="d-none d-lg-inline-flex">
-						Principal
+						Inicio
 					</span>
 				</a>
 			</li>
@@ -42,6 +42,7 @@
 				</a>
 			</li>
 			@endif
+			@if(helper()->testPermission(Auth::user()->permissions,'list_attributes') == true)
 			<li>
 				<a href="{{ route('list_attributes',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-box"></i> <span class="d-none d-lg-inline-flex">
@@ -49,6 +50,7 @@
 					</span>
 				</a>
 			</li>
+			@endif
 			@if(helper()->testPermission(Auth::user()->permissions,'list_users')== true)
 			<li>
 				<a href="{{ route('list_users',['filter_type' => 1]) }}">

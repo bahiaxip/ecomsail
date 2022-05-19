@@ -14,7 +14,9 @@
     @endif
     @if(helper()->testPermission(Auth::user()->permissions,'edit_products')== true)
         @include('livewire.admin.products.edit')
+        @include('livewire.admin.products.settings')
     @endif
+    
     @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true)
         @include('livewire.admin.products.confirm')
     @endif
@@ -110,16 +112,19 @@
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                                <a href="#" title="Inventario">
-                                    <i class="fa-solid fa-list-check"></i>
-                                </a>
                                 @if(helper()->testPermission(Auth::user()->permissions,'edit_products')== true)
-                                    <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="edit({{$prod->id}})">
+                                    <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#settings" wire:click="edit_settings_product({{$prod->id}})">
+                                        <i class="fa-solid fa-list-check"></i>
+                                    </button>
+                                @endif
+                                
+                                @if(helper()->testPermission(Auth::user()->permissions,'edit_products')== true)
+                                    <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="edit({{$prod->id}})">
                                         <i class="fa-solid fa-edit"></i>
                                     </button>
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Eliminar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}})">
+                                    <button class="btn btn-sm delete" title="Eliminar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}})">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 @endif

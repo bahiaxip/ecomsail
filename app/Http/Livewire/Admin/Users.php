@@ -387,7 +387,14 @@ class Users extends Component
         $path_date=date('Y-m-d');
         $users=$this->set_type_query(true);
         //grabar en disco
-        return  Excel::store(new Export($users,$this->listname),'listado2_'.$path_date.'.xlsx','public');
+        //si no añadimos aleatorio(random) en ocasiones genera un archivo corrupto, por ejemplo
+        //cuando se genera una búsqueda con LIKE. Si se añade un nombre distinto, al no 
+        //tener que sobreescribir sobre el anterior archivo, en el servidor, por alguna 
+        //razón genera el archivo correctamente.
+        $number_rand = Str::random(10);
+        $this->file_tmp = 'listado'.$number_rand.'.xlsx';
+
+        return  Excel::store(new Export($users,$this->listname),$this->file_tmp,'public');
     }
 
     //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
@@ -411,11 +418,14 @@ class Users extends Component
 
         //falta condicional por si falla el servidor de correo
             Mail::to($validated["email_export"], "eHidra")
-            ->send(new Listado($attach,$this->username,$this->listname));
+            ->send(new Listado($attach,$this->username,$this->listname,$this->file_tmp));
         //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
         //correo ya no desplega el dropdown de exportar 
         //session()->flash('message',"Correo enviado correctamente");
-
+        if(file_exists(public_path($this->file_tmp))){
+            unlink(public_path($this->file_tmp));    
+        }
+        
         return redirect()->route('list_users',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
             //limpiar datos de selección para el envio (correo y archivos adjuntos)
         $this->clearExport();

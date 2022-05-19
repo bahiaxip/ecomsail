@@ -12,26 +12,14 @@
         <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
       </div>
       <div class="modal-body">
-        <nav>
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">General</button>              
-              <button class="nav-link" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ajustes</button>
-              <button class="nav-link" id="nav-price-tab" data-bs-toggle="tab" data-bs-target="#nav-price" type="button" role="tab" aria-controls="nav-price" aria-selected="false">Precio</button>
-          </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-
-          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" wire:ignore.self>
-            {{ Form::hidden('prod_id',null,['wire:model' => 'prod_id']) }}
-
-            <div class="row">
+        {{ Form::hidden('prod_id',null,['wire:model' => 'prod_id']) }}
+        <div class="row">
               <div class="col-md-6">
                 {{ Form::label('name','Nombre') }}
                 <div class="input-group">
                   <span class="input-group-text">
                     <i class="fa-solid fa-keyboard"></i>
                   </span>
-                  <!--<input type="text" name="name" class="form-control" wire:model="name"/>-->
                   {{ Form::text('name',null,['class' => 'form-control','wire:model' =>'name'])}}
                 </div>
                 @error('name')
@@ -39,9 +27,9 @@
                 @enderror
               </div>
               <div class="col-md-6">
-                  <label for="status">Estado</label>
-                {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
-                </div>
+                  {{ Form::label('Tipo')}}
+                  {{ Form::select('type_product',[0 => 'Producto simple',1 => 'Producto variable'],null,['class' => 'form-select','id' => 'type_product'])}}
+              </div>
             </div>
 
             <div class="row mtop16">
@@ -52,8 +40,7 @@
                   @error('category')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
-                </div>
-                <!-- si existe subcategoría desactivar en la edición -->
+                </div>                
                 <div class="col-md-6">
                   {{ Form::label('subcategory','Subcategoría') }}
 
@@ -85,19 +72,10 @@
                       <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
                   </div>
                 </div>
-                
                 <div class="col-md-6">
-                  {{ Form::label('refcode','Cod.Ref') }}
-                  <div class="input-group">
-                    <span class="input-group-text">
-                      <i class="fa-solid fa-keyboard"></i>
-                    </span>
-                    {{ Form::text('code',null,['class' => 'form-control','wire:model'=>'code'])}}
-                    @error('code')
-                    <p class="text-danger">{{$message}}</p>
-                    @enderror
-                  </div>
-                </div>            
+                  <label for="status">Estado</label>
+                {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+                </div>
             </div>
 
             <div class="row mtop16">
@@ -117,17 +95,161 @@
                 </div>
             </div>
             <div class="row mtop16">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   {{ Form::label('short_detail','Descripción corta')}}
                   {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
                   @error('short_detail')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="col-md-6">
+                  {{ Form::label('refcode','Cod.Ref') }}
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-keyboard"></i>
+                    </span>
+                    {{ Form::text('code',null,['class' => 'form-control','wire:model'=>'code'])}}
+                    @error('code')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                  </div>
+                </div>
             </div>
+            <div class="row mtop16">
+                <div class="col-md-12" wire:ignore>
+                  {{ Form::label('detail','Descripción')}}
+                  {{ Form::textarea('detail',null,['class' => 'form-control','id' => 'friendly_edit2','wire:model'=>'detail'])}}
+                  @error('detail')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                  <script>
+                  
+                  editor_init('friendly_edit2');
+                    CKEDITOR.instances.friendly_edit2.on('change',function(e){
+                        @this.detail=this.getData();
+                    });
+                  
+                  </script>
+                </div>
+            </div>
+        <!--<nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">General</button>              
+              <button class="nav-link" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ajustes</button>
+              <button class="nav-link" id="nav-price-tab" data-bs-toggle="tab" data-bs-target="#nav-price" type="button" role="tab" aria-controls="nav-price" aria-selected="false">Precio</button>
+              <button class="nav-link" id="nav-price-tab" data-bs-toggle="tab" data-bs-target="#nav-price" type="button" role="tab" aria-controls="nav-price" aria-selected="false">Combinaciones</button>
           </div>
+        </nav>-->
+        <div class="tab-content" id="nav-tabContent">
 
-          <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab" wire:ignore.self>
+        <!--  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" wire:ignore.self>
+            
+
+            <div class="row">
+              <div class="col-md-6">
+                {{ Form::label('name','Nombre') }}
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fa-solid fa-keyboard"></i>
+                  </span>
+                  {{ Form::text('name',null,['class' => 'form-control','wire:model' =>'name'])}}
+                </div>
+                @error('name')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
+              </div>
+              <div class="col-md-6">
+                  {{ Form::label('Tipo')}}
+                  {{ Form::select('type_product',[0 => 'Producto simple',1 => 'Producto variable'],null,['class' => 'form-select','id' => 'type_product'])}}
+              </div>
+            </div>
+
+            <div class="row mtop16">
+                <div class="col-md-6">
+                  {{ Form::label('category','Categoría') }}
+
+                  {{ Form::select('category',$cats,null,['class' => 'form-select', 'wire:model' => 'category'])}}
+                  @error('category')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                </div>                
+                <div class="col-md-6">
+                  {{ Form::label('subcategory','Subcategoría') }}
+
+                  {{ Form::select('subcategory',$cats,null,['class' => 'form-select', 'wire:model' => 'subcategory','disabled'])}}
+                  @error('subcategory')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                </div>
+                {{--
+                <div class="col-md-6">
+                  {{ Form::label('stock','Stock') }}
+                                 
+                  {{ Form::number('stock',0,['class' => 'form-control','wire:model'=>'stock'])}}
+                  @error('stock')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                </div>--}}
+                
+            </div>
+
+            <div class="row mtop16">
+                <div class="col-md-6">
+                  {{ Form::label('image','Imagen') }}
+                  {{ Form::file('image',['class' => 'form-control','id'=>$iteration,'accept'=> 'image/*','wire:model' => 'image']) }}
+                  @error('image')
+                      <p class="text-danger">{{$message}}</p>
+                  @enderror
+                  <div wire:loading wire:target="image">
+                      <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="status">Estado</label>
+                {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+                </div>
+            </div>
+
+            <div class="row mtop16">
+                <div class="col-md-6">
+                  {{ Form::label('price','Precio') }}
+                  {{ Form::number('price',0,['class' => 'form-control','wire:model' =>'price','step' =>'0.01','min' => 0]) }}
+                  @error('price')
+                  <p class="text-danger">{{$message}}</p>
+                  @enderror
+                </div>
+                <div class="col-md-6">
+                  {{ Form::label('stock','Stock')}}
+                  {{ Form::number('stock',1,['class' => 'form-control','wire:model' => 'stock'])}}
+                  @error('stock')
+                    <p class="text-danger">{{$message}}</p>
+                  @enderror
+                </div>
+            </div>
+            <div class="row mtop16">
+                <div class="col-md-6">
+                  {{ Form::label('short_detail','Descripción corta')}}
+                  {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
+                  @error('short_detail')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                  {{ Form::label('refcode','Cod.Ref') }}
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="fa-solid fa-keyboard"></i>
+                    </span>
+                    {{ Form::text('code',null,['class' => 'form-control','wire:model'=>'code'])}}
+                    @error('code')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                  </div>
+                </div>
+            </div>
+          </div>-->
+
+          <!--<div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab" wire:ignore.self>
             <div class="row mtop16">                
                 <div class="col-md-6">
                   {{ Form::label('availability','Disponibilidad')}}
@@ -179,7 +301,7 @@
                     @enderror
                 </div>
                 
-                <!-- imagenes de ficha técnica -->
+                
                 <div class="col-md-6">
                   {{ Form::label('attachment','Archivo adjunto(pdf)') }}
                   {{ Form::file('attachment',['class' => 'form-control','accept'=> '.pdf','wire:model' => 'attachment']) }}
@@ -205,9 +327,9 @@
                   </script>
                 </div>
             </div>
-          </div>
+          </div>-->
 
-          <div class="tab-pane fade" id="nav-price" role="tabpanel" aria-labelledby="nav-price-tab" wire:ignore.self>
+          <!--<div class="tab-pane fade" id="nav-price" role="tabpanel" aria-labelledby="nav-price-tab" wire:ignore.self>
             <div class="row mtop16">
                 <div class="col-md-6">
                   {{ Form::label('type_tax','Tipo de impuesto')}}
@@ -301,7 +423,7 @@
                   </script>
                 </div>
             </div>
-          </div>
+          </div>-->
         </div>
           
       </div>
@@ -322,4 +444,18 @@
       loading.style.display='flex';
     })
   }
+
+  //no necesario
+  /*
+  let typeProduct = document.querySelector('#type_product');
+  typeProduct.addEventListener('change',()=>{
+      console.log(typeProduct.value)
+      if(typeProduct.value == 0){
+        console.log("se ha cambiado a simple, enviar mensaje si existen combinaciones")
+      }else if(typeProduct.value == 1){
+        console.log("se ha cambiado a variable, mostrar combinaciones");
+      }
+  })
+  */
+
 </script>

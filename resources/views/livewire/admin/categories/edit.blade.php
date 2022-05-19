@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <div class="modal-title h5">
-          Editar Categoría
+          Editar @if($subcat) {{'Subcategoría'}} @else {{'Categoría'}} @endif
         </div>
       </div>
       @if(!$cat_id)

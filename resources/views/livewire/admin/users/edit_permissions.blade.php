@@ -166,6 +166,47 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-lg-4 ">
+                    <div class="panel shadow">
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_attributes" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-box-open"></i> Atributos <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <div class="collapse" id="collapse_attributes">
+                          <!--
+                          <div class="header">
+                            <h2 class="title"><i class="fas fa-box-open"></i> Productos</h2>
+                          </div>
+                          -->
+                          <div class="box">            
+                            <div class="form-check">
+                              {{ Form::checkbox('list_attributes',true,($this->role_permissions->testPermission($this->permissions3,'list_attributes')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_attributes']) }}
+                              {{ Form::label('list_attributes','Listar atributos') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('add_attributes',true,($this->role_permissions->testPermission($this->permissions3,'add_attributes')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_attributes']) }}
+                                {{ Form::label('add_attributes','Crear atributos') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('edit_attributes',true,($this->role_permissions->testPermission($this->permissions3,'edit_attributes')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_attributes']) }}
+                                {{ Form::label('edit_attributes','Editar atributos') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('delete_attributes',true,($this->role_permissions->testPermission($this->permissions3,'delete_attributes')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_attributes']) }}
+                                {{ Form::label('delete_attributes','Eliminar atributos') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('restore_attributes',true,($this->role_permissions->testPermission($this->permissions3,'restore_attributes')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_attributes']) }}
+                                {{ Form::label('restore_attributes','Restaurar atributos') }}
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="mtop26">
                   <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>

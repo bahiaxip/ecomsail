@@ -33,10 +33,13 @@ if (btnCreateProducts)
     })
 //método necesario para mostrar el valor por defecto de description
 //en la edición, ya que ckeditor genera conflicto con wire:model
-window.livewire.on('description1',()=>{
+window.livewire.on('description1',(data=null)=>{
         
     //CKEDITOR.on('instanceReady',function(){
-        CKEDITOR.instances.friendly_edit1.setData("");    
+        CKEDITOR.instances.friendly_edit1.setData("");
+        if(data == 'value'){
+            CKEDITOR.instances.friendly_edit1_value.setData("");
+        }    
     //})
 })
 
@@ -50,6 +53,11 @@ window.livewire.on('loading',(data)=>{
     }
     
 })
+
+window.livewire.on('combinations',()=>{
+    clearPanelCombinations();
+})
+
 //Añadir link en la url
 window.livewire.on('minilink',(cat_id,cat_name,classname)=>{
     console.log(cat_id)
@@ -76,6 +84,7 @@ window.livewire.on('minilink',(cat_id,cat_name,classname)=>{
     if(route == 'list_categories'){
         document.getElementsByTagName('title')[0].innerHTML='EcomSail - Subcategorías';
     }
+
     
 
 })
@@ -169,10 +178,426 @@ document.addEventListener('readystatechange',() => {
                 }
                 
             })
-
-            
-            
         }
 
-})     
-//}
+        if(route == 'list_attributes'){
+            console.log("attr");
+        }
+
+
+})
+
+//comprueba si existe algún checkbox seleccionado, si existe muestra el modal
+function testAnyCheckbox(){
+    console.log("sadf");
+    //almacenamos todos los checkbox
+    let total_list = document.querySelectorAll('.checkbox');
+    //convertimos a array
+    let total = [].slice.call(total_list);
+    let res = total.filter(item => item.checked)
+    if(res.length > 0)
+        $('#massiveConfirm').modal('show');
+}
+//para la selección total
+//si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
+function selectAllCheckbox(){
+    //si existe elemento allcheckbox...
+    if(document.querySelector('#allcheckbox')){
+        let allcheckbox = document.querySelector('#allcheckbox');
+        //almacenamos todos los checkbox
+        let total_list = document.querySelectorAll('.checkbox');
+        //convertimos a array
+        let total = [].slice.call(total_list);
+        //comprobamos si es seleccionar o deseleccionar
+        if(allcheckbox.checked)
+            activeCheckbox(total);
+        else
+           clearCheckbox(total);
+    }
+    setList();
+}
+
+
+
+//FALTA COMPROBAR SI SE QUEDA VACÍA LA PÁGINA PASAR A LA ANTERIOR DESDE PHP
+
+        /*métodos para selección/deselección de checkbox y aplicar acciones en lote*/
+
+let selected_list=[];
+//generamos desde aquí el dropdown de "Filtros" ya que en ocasiones genera conflicto
+//con modal de boostrap o con session()->flash())
+function showFilters(){    
+    $('#dropdownMenu2Ul').toggle();
+}
+
+//activar todos los checkbox
+function activeCheckbox(allcheckbox){
+    //establecemos todos los checkbox a true y añadimos elementos al selected_list 
+    selected_list = allcheckbox.map((item)=>{
+        item.checked=true;
+        return item.name
+    })
+}
+
+function clearCheckbox(allcheckbox=null){    
+    let list=allcheckbox;
+    if(!list){
+        //almacenamos todos los checkbox
+        let total_list = document.querySelectorAll('.checkbox');
+        //convertimos a array
+        list = [].slice.call(total_list);
+    }
+    //establecemos todos los checkbox a false y resetamos la lista
+    list.map((node)=>{        
+        node.checked=false;
+    })
+    document.querySelector('#allcheckbox').checked=false;
+    selected_list = [];
+}
+    
+//selección por id(uno en uno)
+function selectCheckbox(id,el){
+    //si está checkeado añadimos a la lista        
+    if(el.checked){
+        //comprobamos si no se encuentra en la lista (para más seguridad)
+        if(!selected_list.includes(id))
+            selected_list.push(id);
+            
+    //si no está checkeado comprobamos si existe en la listay se elimina de la lista
+    }else{
+        //comprobamos si existe en la lista
+        if(selected_list.includes(id))                
+            selected_list=selected_list.filter((item) => item != id);
+    }
+    //actualizamos el data binding del form hidden 
+    setList();
+}
+
+        /*fin métodos para select boxes de aplicaciones en lote*/
+
+
+//método clearActiveTabs resetea las pestañas del modal de configuración de producto
+//para que siempre que se pulse Cancelar al volver a abrir comienze por la primera pestaña
+function clearActiveTabs(){
+    console.log("llega")
+    let tabpanes = document.querySelectorAll('.tab-pane');
+    let tabs = [].slice.call(tabpanes);
+    tabs.map((item,index)=>{
+        //comprobamos si existen las clases active y show en alguna de las pestañas
+        //exceptuando la primera
+        if(index != 0)
+            if(item.classList.contains('show')){
+                item.classList.remove('active');
+                item.classList.remove('show');
+                tabs[0].classList.add('active');
+                tabs[0].classList.add('show');
+            }
+    })
+    clearValues();
+}
+
+
+            /*bloque de métodos para generar combinaciones*/
+
+let list_combinations=[];
+//id temporal para eliminación de combinaciones
+let combIdTmp;
+//importe adicional de combinaciones (temporal, solo para la edición de precio)
+let added_price_tmp;
+//importe total de combinaciones (temporal, solo para la edición de precio)
+let final_price_tmp;
+//globales que pasaremos para actualizar los 2 input de precio en save() en PHP
+let added_price, final_price
+//añadir valor al panel de combinaciones
+function addValue(value_id,value_name,parent_id,el=null){
+    
+    
+//Revisar si es necesario
+    //filtramos si ya existe en la lista de combinaciones el input seleccionado para no repetirlo
+    
+    //let filteredList = list_combinations.filter(item => item.id==value_id)
+    let filteredList=list_combinations;
+    console.log("filteredList: ",filteredList);
+    
+    
+
+
+//revisar si es necesario
+    //este método era para la acción de descheckear, al cambiar a input radio no es necesario
+    /*
+    if(!el || !el.checked){
+        if(filteredList)
+            list_combinations = list_combinations.filter(item => item.id != value_id);
+    }
+    */
+
+    
+    //si es el primero añadimos a la lista, si no es el primero comprobamos si pertenecen 
+    //al mismo padre, ya que, al ser input radio solo puede haber uno seleccionado del mismo grupo
+    if(filteredList.length == 0){
+        list_combinations.push({id:value_id,name:value_name,parent_id:parent_id});
+    }else{
+        filteredList = list_combinations.filter(item => item.parent_id != parent_id)
+        filteredList.push({id:value_id,name:value_name,parent_id:parent_id})
+        list_combinations = filteredList;
+    }
+    
+    
+    let list=[];
+    list_combinations.map((item)=>{
+        let comb = `<button type="button" class="btn btn-primary btn-sm" style="margin:2px auto;vertical-align:middle">
+            ${item.name} <span class="badge text-bg-secondary" onclick="addValue(${item.id},'${item.name}')">X</span>
+        </button>`;        
+        list.push(comb);
+    })
+    console.log("list: ",list);
+    let panel = document.querySelector('#panel_combinations');
+    panel.innerHTML=list;
+}
+//resetea el div de generar combinaciones
+function clearPanelCombinations(){
+    let panel = document.querySelector('#panel_combinations');
+    panel.innerHTML = "";
+    list_combinations = [];
+    clearValues()
+
+}
+//resetear todos los checkbox de valores
+function clearValues(){
+    let boxesNode = document.querySelectorAll('.boxes');
+    let boxes = [].slice.call(boxesNode);
+    //console.log(boxes)  
+    boxes.map((box)=>{
+        let valuesNode = box.querySelectorAll('.values');
+        let values = [].slice.call(valuesNode);
+        values.map((child)=>{
+            child.firstElementChild.checked = false;
+        })
+    })
+}
+//eliminando combinación, para pasar el id usamos la variable combIdTmp
+function confirmComb(id){
+    let confirmComb = document.querySelector('#confirmComb');
+    let btn_delete =confirmComb.querySelector('#btn_delete');    
+    combIdTmp = id;
+    confirmComb.classList.toggle('showconfirm');
+    clearPanelCombinations();
+    
+}
+//método principal que llama desde los botones de edit de cada combinación
+function editComb(id,cancel=null){
+    //primero reseteamos todos por si se ha dejado alguno sin cerrar o actualizar
+    resetEditComb();
+    let tr = document.querySelector('.tr_'+id);
+    let input = tr.querySelector('.added_price').getElementsByTagName('input')[0];
+    let input2 = tr.querySelector('.final_price').getElementsByTagName('input')[0];
+    //si se pulsa cancelar no se actualiza el valor del input
+    if(!cancel){
+        //si es editar, en lugar de cancelar la edición, almacenamos en global
+        //para poder recuperar el valor que se encontraba al editar si se desea cancelar
+        added_price_tmp = input.value;
+        final_price_tmp = input2.value;
+        openEditComb(tr,input,input2)
+    }else{
+        closeEditComb(tr,input,input2) 
+    }
+    clearPanelCombinations();
+    
+}
+//editar combinación de un solo registro de la tabla de combinaciones
+function openEditComb(t,el,el2){
+    el.disabled = false;
+    el2.disabled = false;
+    el.focus();
+    //input2.disabled = false;
+    t.querySelector('.edit_comb').style.display='none';
+    t.querySelector('.edit_comb_update').style.display='flex';
+    //t.querySelector('.delete').style.display='none';
+}
+//editar combinación de un solo registro de la tabla de combinaciones
+function closeEditComb(t,el,el2){
+    el.disabled = true;        
+    el2.disabled = true;
+    t.querySelector('.edit_comb').style.display='flex';
+    t.querySelector('.edit_comb_update').style.display='none';
+    //t.querySelector('.delete').style.display='flex';
+    //recuperamos los valores anteriores a la edición 
+    el.value=added_price_tmp;
+    el2.value=final_price_tmp;
+    //reseteamos las globales
+    added_price_tmp = null;
+    final_price_tmp = null;
+}
+//resetea todos los botones de edición de combinaciones y desactiva todos los inputs de precio
+//devolviendo el valor que tenía el último en el caso de que se haya dejado abierto
+function resetEditComb(){
+    let table = document.querySelector('.table');
+    let allInputsNode = table.querySelectorAll('input');
+    console.log("allinputsnode: ",allInputsNode);
+    let allInputs =[].slice.call(allInputsNode);
+    //con counter establecemos que el primer item desactivado pertenece a added_price
+    //y el segundo a final_price
+    let counter = 0;
+    allInputs.map((item,index)=>{
+        //si existe alguno desactivado se desactiva y se devuelve su valor original
+        if(item.disabled == false){
+            console.log(index)
+            if(counter==0)
+                item.value=added_price_tmp;
+            if(counter==1)
+                item.value = final_price_tmp;
+        }
+        item.disabled=true;
+    })
+
+    let allCombNode = table.querySelectorAll('.edit_comb');
+    let allCombUpdateNode = table.querySelectorAll('.edit_comb_update');
+    let allComb = [].slice.call(allCombNode);
+    let allCombUpdate = [].slice.call(allCombUpdateNode);
+    allComb.map((item)=>{
+        item.style.display = 'flex';
+    })
+    allCombUpdate.map((item)=>{
+        item.style.display='none';
+    })
+}
+//eventos change para detectar el precio de los input y poder pasarlo al actualizar
+//mediante JavaScript
+function update_added_price(data){
+    added_price = data.value;
+}
+function update_final_price(data){
+    final_price = data.value;
+}
+
+
+
+        /*fin de bloque de métodos para generar combinaciones*/
+
+                    /* drag&drop */
+
+
+//eliminar imagen transferida mediante drag&drop
+function deleteTransfer(index){
+    if(index==0){
+      this.listImages=[];
+    }
+    console.log("arraiba:. ",this.listImages)    
+    this.listImages.splice(index,1);
+    this.listFiles.splice(index,1);
+
+    if(this.listImages.length==0){
+      this.existsImg=false;
+    }
+}
+
+function dropHandler(event){    
+    event.preventDefault();    
+  
+  //mayoría de navegadores (dataTransfer.items)
+    if(event.dataTransfer.items){      
+      // Usar la interfaz DataTransferItemList para acceder a el/los archivos)
+      for(let i=0;i<event.dataTransfer.items.length;i++){        
+        // Si los elementos arrastrados no son ficheros, rechazarlos
+        //aunque el método showAndStoreFile ya incorpora una validación
+        if(event.dataTransfer.items[i].kind === 'file'){ 
+          let file = event.dataTransfer.items[i].getAsFile();
+//necesario comprobar 2MB de archivo e incluir el else con el método dataTransfer()
+          showAndStoreFile(file);
+        }else{
+          console.log("No es un archivo válido")
+        }
+      }
+    }else{      
+  // Usar la interfaz DataTransfer y su propiedad files para acceder a 
+      //los archivos en I.E (ev.dataTransfer.files)
+      if(event.dataTransfer.files){
+        console.log("existen dataTransfer, files: ",event.dataTransfer.files)
+      
+        for(let i=0;i<event.dataTransfer.files.length;i++){
+          let file=event.dataTransfer.files[i];
+          //evitamos la validación, ya incorporada en showAndStoreFile()
+          /*
+          if(file.type==='image/jpeg' || file.type==="image/png"
+            || file.type==="image/gif"){
+          */
+          
+          showAndStoreFile(file);
+          
+          /*
+          }else{
+          
+            console.log("No es un archivo válido")
+          }
+          */
+        }
+      }
+    }
+    //Pasar el evento a removeDragData para limpiar
+    removeDragData(event);
+}
+
+//valida el archivo dataTransfer
+function showAndStoreFile(file){
+    //si listImages (que es un Input() del padre) es distinto a listFiles 
+    //reseteamos listFiles para que no se mantenga al crear un nuevo alojamiento
+    if(this.listImages.length != this.listFiles.length){
+      this.listFiles=[];
+    }
+    var reader = new FileReader();
+    
+    if(file){
+        console.log("FILE: ",file)
+        //validación de extensión y medida
+        //1048576 bytes = 1024 Kbytes = 1Mbytes
+        //medida máxima 2MB
+        let size=1048576 * 2;
+        if(file.type =="image/png" && file.size <= size 
+          || file.type == "image/jpeg" && file.size <= size
+          || file.type == "image/gif" && file.size <= size){
+          let formdata=new FormData();          
+          formdata.append('file',file,file.name);
+          reader.readAsDataURL(file);
+        //pasando en onloadend el parámetro event y recogiendo con event.target.result
+        //no funciona en este caso, pasamos sin parámetro el onloadend y
+        //recogemos con el mismo reader, para evitar algunos errores, la lectura 
+        //con el método readAsDataURL() se debe establecer antes de onloadend()
+          reader.onloadend=() =>{
+            let ima;
+            if(this.existsImg){
+              if(typeof reader.result === 'string'){
+                ima=reader.result;                
+              }else{
+                console.log("no es string")
+              }                    
+              this.listImages.push(ima);
+              //this.listFormData.push(formdata);
+              this.listFiles.push(file);
+            }else{
+              if(typeof reader.result === 'string'){
+                ima=reader.result;                
+              }else{
+                console.log("no es string")
+              }
+              console.log(file)              
+              this.listImages.push(ima);
+              //this.listFormData.push(formdata);
+              this.listFiles.push(file);
+              //switch que indica que existe al menos una imagen en la lista
+              this.existsImg=true;
+            }
+            this._cardrentService.setImages(this.listFiles);
+            //this.listFiles=[];
+          };
+          reader.onerror = function(){
+            console.log(reader.error);
+          }
+        }else{
+          //llamamos al modal y mostramos mensaje si no es de formato imagen
+          console.log("El archivo no es una imagen válida");
+          this._cardrentService.setGlobalModal("newcard","La imagen no es válida");          
+        }
+    }     
+}
+
+                        /* fin drag&drop */

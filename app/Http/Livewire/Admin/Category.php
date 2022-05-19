@@ -64,33 +64,16 @@ class Category extends Component
     public $selected_list;
     //select de acciones por lote
     public $action_selected_ids;
+    //acción temporal para el modal confirm (delete/restore)
+    public $actionTmp;
+
+    //archivo temporal para poder eliminar el archivo Excel descargado, ya que 
+    //al sobreescribir genera error.
+    public $file_tmp;
 
     //variable exclusiva para mostrar el botón volver al recargar página en
     //subcategorías que no contienen resultados, y por tanto no existe $subcatlist['name']
     public $btn_back;
-
-
-    //eliminar seleccionados(aplicar acción de eliminar en lote)
-    public function deleteids(){  
-//añadir icono loading      
-        //comprobamos si se ha seleccionado la opción de eliminar
-        if($this->action_selected_ids==1){
-            //comprobamos si el array contiene elementos
-            if(!empty($this->selected_list) && count($this->selected_list)>0){
-                //eliminamos elementos
-                Cat::destroy($this->selected_list);
-            }
-            /*
-            else{
-                dd('esta vacio');
-            }
-            */
-        }
-    }
-
-    public function select_id($id){
-        dd("hola");
-    }
 
     public function mount($filter_type){
         
@@ -102,6 +85,42 @@ class Category extends Component
         $this->username=Auth::user()->name;
         $this->checkpdf = 1;
     }
+
+    //comprobamos la acción seleccionada
+    public function set_action_massive(){        
+        $action = $this->action_selected_ids;
+        $list = $this->selected_list;
+        $this->emit('massiveConfirm');
+        if(!empty($list) && count($list) > 0){
+    //añadir icono loading      
+            switch($action):
+                //Eliminar
+                case '1':
+                    $this->delete_list();
+                    break;
+                //Restaurar                
+                case '2':
+                    $this->restore_list();
+                    break;
+            endswitch;
+            //devolvemos el select a 0
+            $this->action_selected_ids = 0;
+        }
+        session()->flash('message','Acción ejecutada correctamente');
+        $this->selected_list=[];
+    }
+
+    //eliminar seleccionados(aplicar acción de eliminar en lote)
+    public function delete_list(){
+        Cat::destroy($this->selected_list);
+    }
+
+    public function restore_list(){
+        Cat::whereIn('id',$this->selected_list)->restore();
+    }
+    
+
+    
     //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
     public function setColAndOrder($nameCol=null){
         //posibles columnas
@@ -386,11 +405,19 @@ class Category extends Component
     //Los 2 métodos siguientes (saveCatId, clearCatId) son necesarios para 
     //la confirmación de borrado de categoría (mediante un modal de bootstrap), 
     //guardar y limpiar el id de la categoría seleccionada de forma temporal 
-    public function saveCatId($catId){        
-        $this->catIdTmp=$catId;
-        $this->count_cat = Product::where('category_id',$catId)->count();        
+    public function saveCatId($cat_id,$action){        
+        $this->catIdTmp=$cat_id;
+        $this->actionTmp = $action;
+        if($cat_id != 0){
+            //comprobamos si esta categoría tiene subcategorías ( no se podrá eliminar )
+            $this->count_cat = Cat::where('type',$cat_id)->count();
+            if($this->count_cat == 0){
+                //comprobamos si esta categoría tiene productos asociados ( no se podrá eliminar )
+                $this->count_cat = Product::where('category_id',$cat_id)->count();
+            }
+        }  
     }
-    //si se recarga la página tb se resetea el catIdTmp, en el método mount()
+    //quizás sea necesario establecer a null el catIdTmp en el método mount() al recargar la página
     public function clearCatId(){
         $this->catIdTmp='';
     }
@@ -433,10 +460,14 @@ class Category extends Component
 
     //restaurar categoría/subcategoría
     public function restore($id){
-        $cat = $cat=Cat::onlyTrashed()->where('id',$id)->first();
+        $cat = Cat::onlyTrashed()->where('id',$id)->first();
         $cat->restore();
         $this->typealert = 'success';
+        $message = ($cat->type == 0) ?
+            "Categoría restaurada correctamente":"Subcategoría restaurada correctamente";
         session()->flash('message',"Categoría restaurada correctamente");
+        $this->clear2();
+        $this->emit('confirmDel');
     }
 
     //limpiar datos de formulario
@@ -510,7 +541,14 @@ class Category extends Component
         $path_date=date('Y-m-d');
         $categories=$this->set_type_query(true);
         //grabar en disco
-        return  Excel::store(new Export($categories,$this->listname),'listado_'.$path_date.'.xlsx','public');
+
+        //si no añadimos aleatorio(random) en ocasiones genera un archivo corrupto, por ejemplo
+    //cuando se genera una búsqueda con LIKE. Si se añade un nombre distinto, al no 
+    //tener que sobreescribir sobre el anterior archivo, en el servidor, por alguna 
+    //razón genera el archivo correctamente.
+        $number_rand = Str::random(10);
+        $this->file_tmp = 'listado'.$number_rand.'.xlsx';
+        return  Excel::store(new Export($categories,$this->listname),$this->file_tmp,'public');
     }
 
     //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
@@ -531,9 +569,14 @@ class Category extends Component
                 $this->saveExcel();                
                 $attach["excel"]="1";
             }
+
         //falta condicional por si falla el servidor de correo
             Mail::to($validated["email_export"], "eHidra")
-            ->send(new Listado($attach,$this->username,$this->listname));
+            ->send(new Listado($attach,$this->username,$this->listname,$this->file_tmp));
+            
+            if(file_exists(public_path($this->file_tmp))){
+                unlink(public_path($this->file_tmp));    
+            }
         //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
         //correo ya no desplega el dropdown de exportar 
         //session()->flash('message',"Correo enviado correctamente");
@@ -585,7 +628,8 @@ class Category extends Component
         //reseteamos botón de volver
         $this->btn_back=false;
         //dd($this->subcat);
-        if($this->subcat){            
+        if($this->subcat){  
+
             //obtenemos el nombre de la categoría padre del primer elemento de la lista
             //comprobando si existe
     //el subcatlist['id'] representa el id de la categoría seleccionada
@@ -612,8 +656,10 @@ class Category extends Component
                 }else{
                     $cattmp = Cat::where('status',$this->filter_type)->pluck('name','id');
                 }
-                $this->subcatlist['name']=$cattmp[$this->subcat];
-                $this->subcatlist['id'] = $this->subcat;
+                if($query->total() > 0){
+                    $this->subcatlist['name']=$cattmp[$this->subcat];
+                    $this->subcatlist['id'] = $this->subcat;
+                }
             }
         }
         $data = ['categories' => $query,'filter_type' => $this->filter_type,'cats' => $cats,'iteration' => $this->iteration,'typealert' => $this->typealert,'subcatname' => $this->subcatlist['name']];

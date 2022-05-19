@@ -57,24 +57,56 @@
                     </div>  
                 </div>
             </div>
+            
+
             <div class="row mtop16">
               <div class="col-md-12" wire:ignore>
                 <label for="description">Descripción</label>
-                {{ Form::textarea('description',null,['class' => 'form-control description','id' =>'friendly_edit_value'])}}
+                {{ Form::textarea('description',null,['class' => 'form-control description','id' =>'friendly_edit1_value'])}}
                 
                 <script>
                   //ckeditor genera conflicto con wire:model, para ello 
                   //creamos el siguiente script para establecer la propiedad
                   //description desde JavaScript
                   //CKEDITOR.replace('friendly_edit1');
-                  editor_init('friendly_edit_value');
-                  CKEDITOR.instances.friendly_edit_value.on('change',function(e){
+                  editor_init('friendly_edit1_value');
+                  CKEDITOR.instances.friendly_edit1_value.on('change',function(e){
                       @this.description=this.getData();
                   });                
                   
                 </script>
                 
               </div>
+            </div>
+            <div class="row mtop16">
+                <div class="col-md-6">
+                    <label for="customFile" >Imagen <small>(Opcional)</small></label>
+                      <!--<label for="icon" class="mtop16">Icono:</label>-->
+                      <!--<div class="form-file">                      
+                        <input class="form-control" type="file" id="formFile" wire:model="icon">
+                      </div>-->
+                    
+                    {!! Form::file('image',['class' =>'form-control','accept' =>'image/*','wire:model'=>"image",'type'=>'file'])!!}
+                    @error('image')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                    <div wire:loading wire:target="image">
+                        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                    </div>
+                </div>      
+                <div class="col-md-6">
+                    <label for="status">Color <small>(Opcional)</small></label>
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fa-solid fa-keyboard"></i>
+                      </span>                     
+                      {{ Form::text('color',null,['class' => 'form-control form-control-sm', 'wire:model' => 'color'])}}
+                      <input type="color" class="form-control form-control-color" id="colorpicker" oninput="getColor(this.value)">
+                      @error('color')
+                      <p class="text-danger">{{$message}}</p>
+                      @enderror
+                    </div>  
+                </div>
             </div>
           </form>
       </div>

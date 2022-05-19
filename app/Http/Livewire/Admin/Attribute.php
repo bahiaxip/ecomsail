@@ -11,8 +11,13 @@ use Illuminate\Support\Facades\Mail;
 //use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Mail\Listado;
 use App\Functions\Functions;
+
+use  Livewire\WithFileUploads;
+use Livewire\WithPagination;
 class Attribute extends Component
 {
+    use WithFileUploads;
+    use WithPagination;
 
     public $name;
     //status:publico/borrador/reciclaje/todos 
@@ -22,6 +27,10 @@ class Attribute extends Component
     //lista de atributos padres
     public $parent_attr;
     public $description;
+    //opcional para formulario de valores
+    public $color;
+    //opcional para formulario de valores
+    public $image;
     //$attr_id: data binding de input hidden en vista edit y en métodos edit,update y clear
     public $attr_id;
     public $typealert='success';
@@ -62,7 +71,7 @@ class Attribute extends Component
     public $selected_list;
     //select de acciones por lote
     public $action_selected_ids;
-    //acción temporal para el modal confirm (delte/restore)
+    //acción temporal para el modal confirm (delete/restore)
     public $actionTmp;
     //archivo temporal para poder eliminar el archivo Excel descargado, ya que 
     //al sobreescribir genera error.
@@ -193,18 +202,40 @@ class Attribute extends Component
 //modificar mensaje de error mostrado
             //restricción de null y espacio en blanco
             'parent_attr' => 'required_if:parent_attr,==,"",null',
-            'description' => 'nullable'
-        ]);
-        
+            'description' => 'nullable',
+            'image' => 'nullable|image',
+            'color' => ['nullable','regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
+        ]);        
         $attribute = Attr::create([
             'name' => $validated['name'],
             'slug' => Str::slug($validated['name']),
             'status' => $validated['status'],
             'type' => $validated['parent_attr'],
-            'description' => $this->description
+            'description' => $this->description,
+            'color' => $validated['color']
         ]);
-        if($type==1){
-            $attribute->fill(['type',$attribute->id]);
+        if($type==1){            
+            if($validated['image'] !== null){
+                //comprobar si existe imagen y eliminar la anterior
+                $file_name = $this->image->getClientOriginalName();
+                $ext = $this->image->getClientOriginalExtension();            
+                //almacenamos con el método store que genera un nombre de archivo aleatorio
+                $path_date= date('Y-m-d');
+                $image = $this->image->store('public/files/'.$path_date,'local');
+                $path_tag = '/storage/';
+                //eliminamos el directorio public
+                $imagelesspublic = substr($image,7);
+                
+                //dd($ext);
+                $attribute->update([
+                    'image' => $imagelesspublic,
+                    'thumb' => $imagelesspublic,
+                    'file_name' => $file_name,
+                    'file_ext' => $ext,
+                    'path_tag' => $path_tag,
+                    'type',$attribute->id
+                ]);
+            }            
         }
         $this->typealert = 'success';
         $message = ($attribute->type == 0) ?
@@ -220,19 +251,20 @@ class Attribute extends Component
     public function edit($id,$type=0){
 
         if($this->filter_type == 2):
-            $attr=Attr::onlyTrashed()->where('id',$id)->first();
+            $res=Attr::onlyTrashed()->where('id',$id)->first();
         else:
-            $attr=Attr::where('id',$id)->first();
+            $res=Attr::where('id',$id)->first();
         endif;
 
-        $this->attr_id=$attr->id;
+        $this->attr_id=$res->id;
         //(se podría evitar la consulta $user y llamar al método user del modelo 
         //Profile belongsTo...)
         //asignación de datos mediante consulta a tabla users 
-        $this->name = $attr->name;        
-        $this->parent_attr=$attr->type;        
-        $this->status=$attr->status;
-        $this->description = $attr->description;
+        $this->name = $res->name;        
+        $this->parent_attr=$res->type;        
+        $this->status=$res->status;
+        $this->description = $res->description;
+        $this->color = $res->color;
         $this->typealert="success";
         $this->emit('description2',$this->description);
     }
@@ -246,20 +278,41 @@ class Attribute extends Component
                 'name' => 'required',
                 'status' =>'required',
                 'parent_attr' =>'nullable|required_if:parent_attr,==,"",null',
-                'description' => 'nullable'
+                'description' => 'nullable',
+                'image' => 'nullable|image',
+                'color' => ['nullable','regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
             ]);
-            
+
             $attr = Attr::where('id',$this->attr_id)->first();
             $attr->update([
                 'name' => $validated['name'],
                 'slug' => Str::slug($validated['name']),
                 'status' => $validated['status'],
                 'type' => $validated['parent_attr'],
-                'description' => $this->description
+                'description' => $this->description,
+                'color' => $validated['color'],
             ]);
-            //if($type==1){
-                //$attr->fill(['type',$this->parent_attr]);
-            //}
+
+            if($validated['image'] !== null){
+                //comprobar si existe imagen y eliminar la anterior
+                $file_name = $this->image->getClientOriginalName();
+                $ext = $this->image->getClientOriginalExtension();            
+                //almacenamos con el método store que genera un nombre de archivo aleatorio
+                $path_date= date('Y-m-d');
+                $image = $this->image->store('public/files/'.$path_date,'local');
+                $path_tag = '/storage/';
+                //eliminamos el directorio public
+                $imagelesspublic = substr($image,7);
+                
+                //dd($ext);
+                $attr->update([
+                    'image' => $imagelesspublic,
+                    'thumb' => $imagelesspublic,
+                    'file_name' => $file_name,
+                    'file_ext' => $ext,
+                    'path_tag' => $path_tag                
+                ]);
+            }
         }
         $this->typealert = 'success';
         $message = ($attr->type == 0) ?
@@ -270,8 +323,12 @@ class Attribute extends Component
     }
 
     //se inicia cada vez que mostramos el modal que contiene editor
-    public function setckeditor(){        
-        $this->emit('description1');
+    public function setckeditor(){
+        if($this->attr){
+            $this->emit('description1','value');
+        }else{
+            $this->emit('description1');
+        }
     }
     //eliminación de categoría
     public function delete(){        
@@ -383,7 +440,7 @@ class Attribute extends Component
         
         //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
         //correo ya no desplega el dropdown de exportar 
-        session()->flash('message',"Correo enviado correctamente");
+        //session()->flash('message',"Correo enviado correctamente");
         
         return redirect()->route('list_attributes',['filter_type' => $this->filter_type,'attr' => $this->attr])->with('message',"Correo enviado correctamente")->with('only_component','true');
             //limpiar datos de selección para el envio (correo y archivos adjuntos)
@@ -458,7 +515,7 @@ class Attribute extends Component
         //añadimos a la opción por defecto del select NULL o "" en lugar de 0 para la validación 
         $attrs->prepend('Selecione...',NULL);
         
-
+        //dd($this->search_data);
 
         if($this->attr){
 

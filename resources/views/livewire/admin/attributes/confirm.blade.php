@@ -14,7 +14,7 @@
             <div class="modal-title h5 ">¿Seguro que desea eliminar el registro seleccionado?
           </div>
         @else
-            <div class="modal-title h5 ">No es posible eliminar este atributo porque tiene productos asociados
+            <div class="modal-title h5 ">No es posible eliminar este atributo porque tiene valores asociados
           </div>  
         @endif
       </div>      

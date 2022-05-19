@@ -89,7 +89,7 @@
             </div>
           </div>
           <div class="row mtop16">
-            <div class="col-md-12">
+            <div class="col-md-6">
               {{ Form::label('short_detail','Descripción corta')}}
               {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
               @error('short_detail')

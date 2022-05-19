@@ -46,16 +46,25 @@
         </div>
     </div>
     @endif
-
-    @include('livewire.admin.attributes.create')
-    @include('livewire.admin.attributes.edit')
-    @if($attributes->total() > 0)
-    @include('livewire.admin.attributes.create_value')
+    @if(helper()->testPermission(Auth::user()->permissions,'add_attributes')== true)
+        @include('livewire.admin.attributes.create')
+        @if($attr)
+            @include('livewire.admin.attributes.create_value')
+        @endif
     @endif
-    @include('livewire.admin.attributes.confirm')
+    @if(helper()->testPermission(Auth::user()->permissions,'edit_attributes')== true)
+        @include('livewire.admin.attributes.edit')
+    @endif
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_attributes')== true)
+        @include('livewire.admin.attributes.confirm')
+    @endif
+    
     @include('livewire.admin.attributes.sendmail')
-    @include('livewire.admin.attributes.massive_confirm')
-
+    
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_attributes') == true ||
+    helper()->testPermission(Auth::user()->permissions,'restore_attributes') == true)
+        @include('livewire.admin.attributes.massive_confirm')
+    @endif
     {{Form::hidden('hidden',null,['wire:model' => 'selected_list','id' => 'hidden_list'])}}
     <div class="filters mtop16">
         <ul class="addL">
@@ -163,7 +172,7 @@
     <div class="div_table shadow mtop16">
 <!-- div loading -->
 
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <td>
@@ -173,18 +182,33 @@
                         <a href="#" wire:click="setColAndOrder('id')">
                             ID
                         </a>
-                    </td>                    
+                    </td>
+                    @if($attr)
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('name')">
+                            Imagen
+                        </a>
+                    </td>
+                    @endif
                     <td>
                         <a href="#" wire:click="setColAndOrder('name')">
                             Nombre    
                         </a>
                     </td>
+                    @if($attr)
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('name')">
+                            Color
+                        </a>
+                    </td>
+                    @endif
+                    @if(!$attr)
                     <td>
                         <a href="#" wire:click="setColAndOrder('name')">
                             Cantidad    
                         </a>
                     </td>
-                    
+                    @endif
                     <td class="max d-none d-md-table-cell">
                         <a href="#" wire:click="setColAndOrder('description')">
                             Descripción
@@ -199,9 +223,28 @@
                     <td width="50">
                         {{Form::checkbox($at->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$at->id.',this)','class' => 'checkbox'])}}
                     </td>
-                    <td>{{ $at->id }}</td>
+                    <td>{{ $at->id }}</td>                    
+                    @if($attr)
+                    <td>
+                        @if($at->image)
+                        <img src="{{ url('/storage/'.$at->image) }}" alt="{{ $at->file_name }}" width="32">
+                        @else
+                        <img src="{{ url('/icons/values.svg') }}" alt="{{ $at->file_name }}" width="32">
+                        @endif
+                    </td>
+                    @endif
                     <td>{{$at->name}}</td>
+                    @if($attr)
+                    <td>
+                        @if($at->color)
+                        <div style="background-color:{{$at->color}};width:20px;height:20px;margin:auto" title="{{$at->color}}"></div>                        
+                        @endif
+                    </td>
+                    @endif
+                    @if(!$attr)
                     <td>{{$at->valueslength()}}</td>
+                    @endif
+
                     
                     <!--
                     usamos la sintaxis laravel con !! para limpiar los 
@@ -212,17 +255,19 @@
                         <div class="admin_items">
                             @if($filter_type != 2)
                                 @if(!$attr)
-                                <button class="btn btn-sm scat" title="Valores" wire:click="renderValues({{ $at->id }},'{{trim($at->name)}}')">
-                                    <!--<img src="{{url('icons/attribute_white.svg')}}" alt="" width="16">-->
-                                    <div class="icon icon_value "></div>
-                                </button>
+                                    @if(helper()->testPermission(Auth::user()->permissions,'list_attributes')== true)
+                                    <button class="btn btn-sm scat" title="Valores" wire:click="renderValues({{ $at->id }},'{{trim($at->name)}}')">
+                                        <!--<img src="{{url('icons/attribute_white.svg')}}" alt="" width="16">-->
+                                        <div class="icon icon_value "></div>
+                                    </button>
+                                    @endif
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
+                                @if(helper()->testPermission(Auth::user()->permissions,'edit_attributes')== true)
                                 <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editAttribute" wire:click="edit({{$at->id}})" title="Editar {{$at->name}}">
                                     <i class="fa-solid fa-edit"></i>
                                 </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
+                                @if(helper()->testPermission(Auth::user()->permissions,'delete_attributes')== true)
                                     @if($filter_type!=2)
                                         <button class="btn btn-sm delete" title="Eliminar {{$at->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
@@ -230,7 +275,7 @@
                                     @endif
                                 @endif
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
+                                @if(helper()->testPermission(Auth::user()->permissions,'restore_attributes')== true)
                                     <button class="btn btn-sm back_livewire2" title="Restaruar categoría" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>
@@ -275,86 +320,11 @@
 </div>
 @push('scripts')
 <script>
-    //generamos desde aquí el dropdown de "Filtros" ya que en ocasiones genera conflicto
-    //con modal de boostrap o con session()->flash())
-    function showFilters(){
-        $('#dropdownMenu2Ul').toggle();
-    }
-
-//FALTA COMPROBAR SI SE QUEDA VACÍA LA PÁGINA PASAR A LA ANTERIOR DESDE PHP
-
-
-//métodos para selección/deselección de checkbox y aplicar acciones en lote
-let selected_list=[];
-//comprueba si existe algún checkbox seleccionado, si existe muestra el modal
-function testAnyCheckbox(){
-    //almacenamos todos los checkbox
-    let total_list = document.querySelectorAll('.checkbox');
-    //convertimos a array
-    let total = [].slice.call(total_list);
-    let res = total.filter(item => item.checked)
-    if(res.length > 0)
-        $('#massiveConfirm').modal('show');
-}
-//para la selección total
-//si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
-function selectAllCheckbox(){
-    //si existe elemento allcheckbox...
-    if(document.querySelector('#allcheckbox')){
-        let allcheckbox = document.querySelector('#allcheckbox');
-        //almacenamos todos los checkbox
-        let total_list = document.querySelectorAll('.checkbox');
-        //convertimos a array
-        let total = [].slice.call(total_list);
-        //comprobamos si es seleccionar o deseleccionar
-        if(allcheckbox.checked)
-            activeCheckbox(total);
-        else
-           clearCheckbox(total);
-    }    
+function setList(){
     @this.selected_list = selected_list;
 }
-//activar todos los checkbox
-function activeCheckbox(allcheckbox){
-    //establecemos todos los checkbox a true y añadimos elementos al selected_list 
-    selected_list = allcheckbox.map((item)=>{
-        item.checked=true;
-        return item.name
-    })
-}
-
-function clearCheckbox(allcheckbox=null){    
-    let list=allcheckbox;
-    if(!list){
-        //almacenamos todos los checkbox
-        let total_list = document.querySelectorAll('.checkbox');
-        //convertimos a array
-        list = [].slice.call(total_list);
-    }
-    //establecemos todos los checkbox a false y resetamos la lista
-    list.map((node)=>{        
-        node.checked=false;
-    })
-    document.querySelector('#allcheckbox').checked=false;
-    selected_list = [];
-}
-    
-//selección por id(uno en uno)
-function selectCheckbox(id,el){
-    //si está checkeado añadimos a la lista        
-    if(el.checked){
-        //comprobamos si no se encuentra en la lista (para más seguridad)
-        if(!selected_list.includes(id))
-            selected_list.push(id);
-            
-    //si no está checkeado comprobamos si existe en la listay se elimina de la lista
-    }else{
-        //comprobamos si existe en la lista
-        if(selected_list.includes(id))                
-            selected_list=selected_list.filter((item) => item != id);
-    }
-    //actualizamos el data binding del form hidden 
-    @this.selected_list = selected_list;
+function getColor(data){
+    @this.color = data;
 }
 </script>
 @endpush

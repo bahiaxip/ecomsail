@@ -134,16 +134,16 @@
                     <td>{{$user->email}}</td>
                     <td>
                         <div class="admin_items">
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#editUser" wire:click="edit({{$user->id}})">
+                            <button class="btn btn-sm " data-bs-toggle="modal" data-bs-target="#editUser" wire:click="edit({{$user->id}})">
                                 <i class="fa-solid fa-pencil-alt"></i>
                             </button>
                             @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
-                            <button class="btn btn-sm" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#editUser"  wire:click="edit({{$user->id}})"@else wire:click="edit(0)" @endif>
+                            <button class="btn btn-sm edit" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#editUser"  wire:click="edit({{$user->id}})"@else wire:click="edit(0)" @endif>
                                 <i class="fa-solid fa-edit"></i>
                             </button>
                             @endif
                             @if(helper()->testPermission(Auth::user()->permissions,'admin_permissions')== true)
-                            <button class="btn btn-sm" title="Editar permisos de usuario" data-bs-toggle="modal" data-bs-target="#editPermissions" wire:click.prevent = 'edit_permissions({{$user->id}})'>
+                            <button class="btn btn-sm scat" title="Editar permisos de usuario" data-bs-toggle="modal" data-bs-target="#editPermissions" wire:click.prevent = 'edit_permissions({{$user->id}})'>
                                 <i class="fa-solid fa-list-check"></i>
                             </button>
                             @endif

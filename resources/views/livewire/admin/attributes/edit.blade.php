@@ -54,7 +54,7 @@
                     </div>
                   </div>
             </div>
-            @endif
+            @endif            
             <div class="row mtop16">
                 <div class="col-md-12">
                     <label for="status">Estado</label>
@@ -63,6 +63,8 @@
                     </div>  
                 </div>
             </div>
+            
+
             <div class="row mtop16">
               <div class="col-md-12" wire:ignore>
                 <label for="description">Descripción</label>
@@ -79,9 +81,40 @@
                   });                
                   
                 </script>
-                
               </div>
             </div>
+            @if($attr)
+            <div class="row mtop16">
+                <div class="col-md-6">
+                    <label for="customFile" >Imagen <small>(Opcional)</small></label>
+                      <!--<label for="icon" class="mtop16">Icono:</label>-->
+                      <!--<div class="form-file">                      
+                        <input class="form-control" type="file" id="formFile" wire:model="icon">
+                      </div>-->
+                    
+                    {!! Form::file('image',['class' =>'form-control','accept' =>'image/*','wire:model'=>"image",'type'=>'file'])!!}
+                    @error('image')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                    <div wire:loading wire:target="image">
+                        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                    </div>
+                </div>      
+                <div class="col-md-6">
+                    <label for="status">Color <small>(Opcional)</small></label>
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fa-solid fa-keyboard"></i>
+                      </span>                     
+                      {{ Form::text('color',null,['class' => 'form-control form-control-sm', 'wire:model' => 'color'])}}
+                      <input type="color" class="form-control form-control-color" id="colorpicker" oninput="getColor(this.value)">
+                      @error('color')
+                      <p class="text-danger">{{$message}}</p>
+                      @enderror
+                    </div>  
+                </div>
+            </div>
+            @endif
           </form>
       </div>
       <div class="modal-footer">

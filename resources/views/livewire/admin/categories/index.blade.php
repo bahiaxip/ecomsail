@@ -40,7 +40,7 @@
         @include('livewire.admin.categories.confirm')
     @endif
     @include('livewire.admin.categories.sendmail')
-
+    @include('livewire.admin.attributes.massive_confirm')
     {{Form::hidden('hidden',null,['wire:model' => 'selected_list','id' => 'hidden_list'])}}
     @if(session()->has('message'))
     <div class="container ">
@@ -133,24 +133,48 @@
             </li>
 
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" onclick="showFilters()"  aria-expanded="false" >
                     <span class="d-none d-md-inline">Filtros</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </span>
                 </button>            
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenu2Ul">
                     <li>
-                        <a href="{{ route('list_categories',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        <a 
+                        @if(!$subcat)
+                        href="{{ route('list_categories',['filter_type' => 1]) }}" 
+                        @else
+                        href="{{ route('list_categories',['filter_type' => 1,'subcat' => $subcat]) }}" 
+                        @endif
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                     </li>
                     <li>
-                        <a href="{{ route('list_categories',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                        <a 
+                        @if(!$subcat)
+                        href="{{ route('list_categories',['filter_type' => 0]) }}" 
+                        @else
+                        href="{{ route('list_categories',['filter_type' => 0,'subcat' => $subcat]) }}" 
+                        @endif
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
                     </li>
                     <li>
-                        <a href="{{ route('list_categories',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                        <a 
+                        @if(!$subcat)
+                        href="{{ route('list_categories',['filter_type' => 2]) }}" 
+                        @else
+                        href="{{ route('list_categories',['filter_type' => 2,'subcat' => $subcat]) }}" 
+                        @endif
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
                     </li>
                     <li>
-                        <a href=" {{ route('list_categories',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        <a 
+                        @if(!$subcat)
+                        href=" {{ route('list_categories',['filter_type' => 3]) }}" 
+                        @else
+                        href=" {{ route('list_categories',['filter_type' => 3,'subcat' => $subcat]) }}" 
+                        @endif
+                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
                     </li>
                 </ul>            
             </li>
@@ -237,14 +261,14 @@
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
                                     @if($filter_type!=2)
-                                        <button class="btn btn-sm delete" title="Eliminar {{$cat->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}})">
+                                        <button class="btn btn-sm delete" title="Eliminar {{$cat->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     @endif
                                 @endif
                             @else
                                 @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" wire:click="restore({{$cat->id}})">
+                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>
                                 @endif
@@ -270,11 +294,11 @@
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div class="input-group">                    
-                            {{ Form::select('action_selected_ids',[0 => 'Seleccione...',1 => 'Eliminar'],null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px'])}}
                         </div> 
                         
                         <div>
-                            <button class="btn btn-sm btn_primary" wire:click="deleteids">Aplicar</button>    
+                            <button class="btn btn-sm btn_primary" onclick="testAnyCheckbox()">Aplicar</button>    
                         </div>
                     </td>
                     @endif
@@ -289,60 +313,11 @@
 </div>
 @push('scripts')
 <script>
-
-//FALTA COMPROBAR SI SE QUEDA VACÍA LA PÁGINA PASAR A LA ANTERIOR DESDE PHP
-
-
-//métodos para selección/deselección de checkbox y aplicar acciones en lote
-let selected_list=[];
-
-//para la selección total
-//si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
-function selectAllCheckbox(){
-
-    //si existe elemento allcheckbox...
-    if(document.querySelector('#allcheckbox')){
-        let allcheckbox = document.querySelector('#allcheckbox');
-        console.log(allcheckbox)
-        //almacenamos todos los checkbox
-        let total_list = document.querySelectorAll('.checkbox');
-        //convertimos a array
-        let total = [].slice.call(total_list);
-        //comprobamos si es seleccionar o deseleccionar
-        if(allcheckbox.checked){
-            //establecemos todos los checkbox a true y añadimos elementos al selected_list 
-            selected_list = total.map((item)=>{
-                item.checked=true;
-                return item.name
-            })
-        }else{
-            //establecemos todos los checkbox a false y resetamos la lista
-            total.map((item)=>{
-                item.checked=false;                
-            })
-            selected_list = [];
-        }
-    }
-    console.log(selected_list)
+function setList(){
     @this.selected_list = selected_list;
 }
-    
-    
-function selectCheckbox(id,el){
-    //si está checkeado añadimos a la lista        
-    if(el.checked){
-        //comprobamos si no se encuentra en la lista (para más seguridad)
-        if(!selected_list.includes(id))
-            selected_list.push(id);
-            
-    //si no está checkeado comprobamos si existe en la listay se elimina de la lista
-    }else{
-        //comprobamos si existe en la lista
-        if(selected_list.includes(id))                
-            selected_list=selected_list.filter((item) => item != id);
-    }
-    //actualizamos el data binding del form hidden 
-    @this.selected_list = selected_list;
+function getColor(data){
+    @this.color = data;
 }
 </script>
 @endpush

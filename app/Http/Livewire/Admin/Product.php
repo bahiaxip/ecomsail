@@ -8,7 +8,7 @@ use  Livewire\WithFileUploads;
 
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
-use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts;
+use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts, App\Models\Attribute as Attr, App\Models\Combination as Comb;
 use Str;
 class Product extends Component
 {
@@ -49,12 +49,17 @@ class Product extends Component
     public $end_discount;
     
     
-    
     public $detail2 = null;
     //temporal de confirmación, quizás se podría usar $prod_id
     public $prodIdTmp;
     //tipo de filtrado (publico,borrador,reciclaje,todos)
     public $filter_type;
+
+    public $min_stock;
+    public $active_stock_not;
+    public $active_stock_email;
+
+    public $delivery_term=0;
     
     public $typealert;
 
@@ -62,6 +67,15 @@ class Product extends Component
     public $search_data;
     //orden columnas (asc/desc)
     public $orderType;
+
+    public $list_combinations;
+    public $combinations;
+    //id de combinación para eliminar mediante confirmación
+    public $combtmp_id;
+
+    //importe adicional de combinaciones
+    public $added_price;
+    public $final_price;
 
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
@@ -77,7 +91,7 @@ class Product extends Component
         $this->filter_type = $filter_type;    
     }
     public function updated(){
-        
+        //dd($this->delivery_term);
     }
 
     public function set_filter_query($filter_type){
@@ -215,13 +229,24 @@ class Product extends Component
         $this->short_detail = $prod->short_detail;
         $this->detail=$prod->detail;
 
+        
+
+       
+        
+        
+        $this->typealert = 'success';
+        //pasamos el contenido del textarea de ckeditor
+        $this->emit('description2',$this->detail);       
+    }
+
+    public function edit_settings_product($id){
+        $this->prod_id = $id;
         if($this->filter_type == 2):
             $settings_prod = SettingsProducts::onlyTrashed()->where('product_id',$id)->first();
         else:
             $settings_prod = SettingsProducts::where('product_id',$id)->first();
         endif;
-
-        $this->availability = $settings_prod->availability;
+         $this->availability = $settings_prod->availability;
         $this->product_state = $settings_prod->product_state;
         $this->long = $settings_prod->long;
         $this->width = $settings_prod->width;
@@ -239,10 +264,11 @@ class Product extends Component
         $this->discount = $infoprice_prod->discount;
         $this->init_discount = $infoprice_prod->init_discount;
         $this->end_discount = $infoprice_prod->end_discount;
-        
-        $this->typealert = 'success';
+        $this->typealert = 'success';        
         //pasamos el contenido del textarea de ckeditor
-        $this->emit('description2',$this->detail);       
+        $this->emit('description2',$this->detail);
+        //combinations
+        $this->combinations = Comb::where('product_id',$id)->get();
     }
 //detectar si es onlyTrashed
     public function update(){
@@ -422,24 +448,85 @@ class Product extends Component
         $this->detail = '';
         //$this->emit('userUpdated');
         //iteration es necesario resetear el caché del input file
-        $this->iteration=rand();
+        $this->iteration=null;
     }
 
     public function clear2(){
         $this->clear();
         //resetea todos los campos necesario para input file
-        $this->resetValidation();
+        $this->resetValidation();        
+    }
+    //crear combinaciones
+    public function createCombinations($data,$product_id){    
+        
+        //$name_list=[];
+        //$id_list=[];
+        
+        $parent;
+        $name_list = [];
+        $id_list = [];
+
+        foreach($data as $d){
+            $at = Attr::findOrFail($d['id']);
+            $name_list[] = $at->parentattr->name.' > '.$at->name;
+            $id_list[] = $at->id;
+        }
+        
+        $name_list_string = implode(",",$name_list);
+        $id_list_string = implode(",",$id_list);
+        $comb = Comb::create([
+            'name' => $name_list_string,
+            'list_ids' => $id_list_string,
+            'amount' => 0,
+            'product_id' => $product_id
+        ]);
+        $this->combinations = Comb::where('product_id',$product_id)->get();
+        $this->emit('combinations');
+
+    }
+    public function clearCombinations(){
+        //list_combinations=[];
+    }
+
+    //eliminar combinación
+    public function deleteComb($id){
+        if($id){
+            $comb = Comb::findOrFail($id);
+            $comb->delete();
+        }
+            $this->typealert = 'danger';
+            session()->flash('message2',"Combinación eliminada correctamente");
+            //$this->clear2();
+            
+
+    }
+    //actualizar los precios de la combinación seleccionada
+    public function save($id,$added_price,$final_price){
+        
+        if(!$added_price)
+            $added_price = 0.00;
+        if(!$final_price)
+            $final_price = 0.00;
+        
+        $comb = Comb::findOrFail($id);
+        //dd($id);
+        $comb->update([
+            'added_price' => $added_price,
+            'final_price' => $final_price
+        ]);
+        //$this->combinations = Comb::where('product_id',$this->prod_id)->get();
     }
 
     public function render()
-    {
-
-        
+    {           
         //$query = $this->set_filter_query($this->filter_type);
         $query = $this->set_type_query();
         $cats = Category::where('status',1)->where('type',0)->orderBy('id','desc')->pluck('name','id');
         $cats->prepend('Ninguna', 0);
-        $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type,'iteration'=>$this->iteration];
+
+        $attributes = Attr::where('status',1)->where('type',0)->orderBy('id','asc')->get();
+        $this->combinations = Comb::where('product_id',$this->prod_id)->get();
+        $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type,'iteration'=>$this->iteration,'attributes' => $attributes];
         return view('livewire.admin.products.index',$data);
     }
 
