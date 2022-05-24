@@ -402,10 +402,18 @@
 
           </div>
           <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab" wire:ignore.self>
-
-              <div class="back_upload" style="" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
-                  <div class="box" style="/*box-shadow:1px 1px 1px black, -1px 1px 1px black,1px 1px 15px black inset;*/">
-                    
+              
+              <div class="gallery">
+                  
+              </div>
+              <div class="back_upload" style="" ondrop="dropHandler(event,{{$prod_id}})" ondragover="dragOverHandler(event)">
+                  <div class="box" id="box_transfer" style="/*box-shadow:1px 1px 1px black, -1px 1px 1px black,1px 1px 15px black inset;*/">
+                    <span class="left" style="display: none" onclick="scrollGalleryLeft()">
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                    </span>
+                    <span class="right" style="display: none" onclick="scrollGalleryRight()">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </span>
                   </div>
                   <div class="info_upload" >
                     <p class="text" >Max. 2 MB</p>
@@ -414,17 +422,6 @@
                   <div class="back_images" >
                   <!-- añadir display:flex si es más alta que ancha, necesario 
                     para que se vea el icono close en ese tipo de imágenes-->
-
-                    <div class="box_images" *ngFor="let images of listImages;let j=index">
-                      <span class="w100">
-                        <div class="div_images">
-                          <!--<img [src]="images" class="images" />-->
-                          <div class="delete_images" onclick="deleteTransfer(j)">
-                            X
-                          </div>
-                        </div>
-                      </span> 
-                    </div>
                   </div>
                 </div>
           </div>
@@ -432,6 +429,9 @@
         
       </div>
       <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" onclick="uploadImage({{$prod_id}})">Actualizar
+            
+        </button>
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()" onclick="clearActiveTabs()">Cancelar</button>
         <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()">Actualizar</button>
       </div>
@@ -441,7 +441,29 @@
 
 @push('scripts')
 <script>
+/*
+function uploadImage(id){
+  console.log(id);
+  console.log(listFiles);
+  
+  let dato = JSON.stringify(listFiles);
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST","http://localhost:3000/images?data"+listFiles+"&_token="+token);
+  xhr.send("http://localhost:3000/images?data"+listFiles+"&_token="+token);
+  xhr.onreadystatechange =  function(){
+    if(xhr.readyState == 4){
+      xhr.response;
+      console.log()
+    }
+  };
+  xhr.onerror = function (){
+    console.log("error");
+  }
 
+
+}
+
+*/
 //document.onreadystatechange = () => {
 /*
 document.addEventListener('DOMContentLoaded',() => {

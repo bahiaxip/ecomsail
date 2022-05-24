@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Validator, Auth, Hash;
 
@@ -95,4 +95,7 @@ class LoginController extends Controller
             return redirect('/');
         endif;
     }
+
+    
 }
+//$icon = $this->icon->store('public/files/'.$path_date,'local');

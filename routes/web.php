@@ -22,6 +22,7 @@ Route::get('/', function () {
 */
 
 Route::get('/',[HomeController::class,'home'])->name('home');
+
 //para evitar pasar array en cada ruta podemos añadir la ruta 'App\Http\Controllers'
 //en el archivo de configuración de rutas RouteServiceProvider.php en el namespace del 
 //middleware web, en el método boot()
@@ -40,3 +41,4 @@ Route::get('/register',[LoginController::class,'register'])->name('register');
 Route::post('/register',[LoginController::class,'registerAdd'])->name('register');
 //logout (blade)
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+Route::post('/images2',[HomeController::class,'images'])->name('images');

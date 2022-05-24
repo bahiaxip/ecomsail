@@ -1,6 +1,6 @@
 //nombre de ruta (asignado en meta tag que indica el valor de name en el archivo de rutas)
 var route = document.getElementsByName('route_name')[0].getAttribute('content');
-
+var token = document.getElementsByName('csrf_token')[0].getAttribute('content');
 var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
@@ -475,45 +475,53 @@ function update_final_price(data){
         /*fin de bloque de métodos para generar combinaciones*/
 
                     /* drag&drop */
-
-
+let listImages = [];
+let listFiles = [];
+let existsImg = false;
+let list;
+let images;
+let formdata;
+let file2;
 //eliminar imagen transferida mediante drag&drop
-function deleteTransfer(index){
-    if(index==0){
-      this.listImages=[];
-    }
-    console.log("arraiba:. ",this.listImages)    
-    this.listImages.splice(index,1);
-    this.listFiles.splice(index,1);
+function deleteTransfer(index,id){
 
-    if(this.listImages.length==0){
-      this.existsImg=false;
+    if(index==0){
+      listImages=[];
+    }    
+    listImages.splice(index,1);
+    listFiles.splice(index,1);
+
+    if(listImages.length==0){
+      existsImg=false;
     }
+    images=listImages;
+    showFiles(id);
+
 }
 
-function dropHandler(event){    
-    event.preventDefault();    
-  
+function dropHandler(event,id){    
+    event.preventDefault();
   //mayoría de navegadores (dataTransfer.items)
     if(event.dataTransfer.items){      
       // Usar la interfaz DataTransferItemList para acceder a el/los archivos)
       for(let i=0;i<event.dataTransfer.items.length;i++){        
         // Si los elementos arrastrados no son ficheros, rechazarlos
         //aunque el método showAndStoreFile ya incorpora una validación
+         
         if(event.dataTransfer.items[i].kind === 'file'){ 
           let file = event.dataTransfer.items[i].getAsFile();
+          //console.log("el file: ",file);
 //necesario comprobar 2MB de archivo e incluir el else con el método dataTransfer()
-          showAndStoreFile(file);
+          showAndStoreFile(file,id);
         }else{
-          console.log("No es un archivo válido")
+            //se muestra siempre, mientras se actualiza
+          //console.log("No es un archivo válido");
         }
       }
     }else{      
   // Usar la interfaz DataTransfer y su propiedad files para acceder a 
       //los archivos en I.E (ev.dataTransfer.files)
       if(event.dataTransfer.files){
-        console.log("existen dataTransfer, files: ",event.dataTransfer.files)
-      
         for(let i=0;i<event.dataTransfer.files.length;i++){
           let file=event.dataTransfer.files[i];
           //evitamos la validación, ya incorporada en showAndStoreFile()
@@ -522,7 +530,7 @@ function dropHandler(event){
             || file.type==="image/gif"){
           */
           
-          showAndStoreFile(file);
+          showAndStoreFile(file,id);
           
           /*
           }else{
@@ -538,66 +546,208 @@ function dropHandler(event){
 }
 
 //valida el archivo dataTransfer
-function showAndStoreFile(file){
+function showAndStoreFile(file,id){
     //si listImages (que es un Input() del padre) es distinto a listFiles 
     //reseteamos listFiles para que no se mantenga al crear un nuevo alojamiento
-    if(this.listImages.length != this.listFiles.length){
-      this.listFiles=[];
+    if(listImages.length != listFiles.length){
+      listFiles=[];
     }
     var reader = new FileReader();
     
-    if(file){
-        console.log("FILE: ",file)
+    if(file){        
         //validación de extensión y medida
         //1048576 bytes = 1024 Kbytes = 1Mbytes
         //medida máxima 2MB
         let size=1048576 * 2;
         if(file.type =="image/png" && file.size <= size 
           || file.type == "image/jpeg" && file.size <= size
-          || file.type == "image/gif" && file.size <= size){
-          let formdata=new FormData();          
-          formdata.append('file',file,file.name);
-          reader.readAsDataURL(file);
-        //pasando en onloadend el parámetro event y recogiendo con event.target.result
-        //no funciona en este caso, pasamos sin parámetro el onloadend y
-        //recogemos con el mismo reader, para evitar algunos errores, la lectura 
-        //con el método readAsDataURL() se debe establecer antes de onloadend()
-          reader.onloadend=() =>{
-            let ima;
-            if(this.existsImg){
-              if(typeof reader.result === 'string'){
-                ima=reader.result;                
-              }else{
-                console.log("no es string")
-              }                    
-              this.listImages.push(ima);
-              //this.listFormData.push(formdata);
-              this.listFiles.push(file);
-            }else{
-              if(typeof reader.result === 'string'){
-                ima=reader.result;                
-              }else{
-                console.log("no es string")
+          || file.type == "image/gif" && file.size <= size)
+        {
+              formdata=new FormData();          
+              formdata.append('file',file,file.name);
+              reader.readAsDataURL(file);
+            //pasando en onloadend el parámetro event y recogiendo con event.target.result
+            //no funciona en este caso, pasamos sin parámetro el onloadend y
+            //recogemos con el mismo reader, para evitar algunos errores, la lectura 
+            //con el método readAsDataURL() se debe establecer antes de onloadend()
+              reader.onloadend=() =>{
+                    let ima;
+                    if(existsImg){
+                      if(typeof reader.result === 'string'){
+                        ima=reader.result;                
+                      }else{
+                        //console.log("no es string")
+                      }
+                      //listImages es el array de elementos para asignarlos en el contenedor
+                      listImages.push(ima);
+                      //listFiles es el array para subir los archivos al servidor
+
+                      listFiles.push(file);
+                      //console.log("listFiles: ",listFiles);
+                    }else{
+
+                      if(typeof reader.result === 'string'){
+                        ima=reader.result;                
+                      }else{
+                        //console.log("no es string")
+                      }
+                      
+                      //listImages es el array de elementos para asignarlos en el contenedor
+                      listImages.push(ima);
+                      //listFiles es el array para subir los archivos al servidor
+                      listFiles.push(file);
+                      //console.log("listFiles: ",listFiles);
+                      file2 = file;
+                      //switch que indica que existe al menos una imagen en la lista
+                      existsImg=true;
+                    }
+                //this._cardrentService.setImages(listFiles);
+                images = listImages;
+                
+                showFiles(id);    
+                
+                
+                //this.listFiles=[];
+              };
+              reader.onerror = function(){
+                console.log(reader.error);
               }
-              console.log(file)              
-              this.listImages.push(ima);
-              //this.listFormData.push(formdata);
-              this.listFiles.push(file);
-              //switch que indica que existe al menos una imagen en la lista
-              this.existsImg=true;
-            }
-            this._cardrentService.setImages(this.listFiles);
-            //this.listFiles=[];
-          };
-          reader.onerror = function(){
-            console.log(reader.error);
-          }
         }else{
+
           //llamamos al modal y mostramos mensaje si no es de formato imagen
           console.log("El archivo no es una imagen válida");
-          this._cardrentService.setGlobalModal("newcard","La imagen no es válida");          
+          console.log("La imagen no tiene el formato permitido o es superior a 2MB")
+
         }
     }     
 }
 
-                        /* fin drag&drop */
+function showFiles(id){
+    let list = [];    
+    let data = [];
+    let image;
+
+    
+    for(let i=0;i<images.length;i++){
+        image = `<div class="box_images" id="gallery_${i}" >
+                <span class="" style="width:100%">
+                    <div class="div_images">
+                        <img src="${images[i]}" class="images" />
+                        <div class="upload_image" onclick="uploadImage(${id},${i})"><<</div>
+                        <div class="delete_images" onclick="deleteTransfer(${i},id)">
+                            X
+                        </div>
+                    </div>
+                </span> 
+            </div>`;
+        //console.log(images[i]);
+        list.push(image);
+    }
+    let back_images = document.querySelector('.back_images');
+    let boxTransfer = document.querySelector("#box_transfer");
+    if(back_images){
+        back_images.innerHTML=list.join("");    
+    }
+    //mostramos o ocultamos flechas de scroll de galería transfer
+    if(back_images.clientWidth>boxTransfer.clientWidth){
+        boxTransfer.getElementsByTagName('span')[0].style.display="block";
+        boxTransfer.getElementsByTagName('span')[1].style.display="block";
+    }else{
+        boxTransfer.getElementsByTagName('span')[0].style.display="none";
+        boxTransfer.getElementsByTagName('span')[1].style.display="none";
+    }
+
+    //document.querySelector('.box').style.width='100%';
+    //document.querySelector('.info_upload').style.display='none';
+
+    document.querySelector('.info_upload').style.display='none';
+    //comprobamos ancho y si es necesario mostramos flechas
+    console.log("width de back_images: ",back_images.clientWidth)
+    console.log("width de box: ",boxTransfer.clientWidth)
+    //si no existen imágenes volvemos a mostrar el div "info_upload" que indica soltar imagen
+    if(images.length == 0){
+        document.querySelector('.info_upload').style.display='flex';
+    }
+
+}
+
+function removeDragData(ev){
+    //console.log("eliminando drag data")
+    if(ev.dataTransferItemList){
+      console.log("existe itemlist")
+      ev.dataTransferItemList.clear();
+    }
+    if(ev.dataTransfer.items){
+      //Usamos la la interface DataTransferItemList para eliminar el drag data
+      ev.dataTransfer.items.clear();
+      //console.log("dataTransfer.items")
+    }
+    if(ev.dataTransfer){
+      //Usar la interface DataTransfer para eliminar el drag data
+      ev.dataTransfer.clearData();
+      //console.log("dataTransfer")
+    }    
+  }
+
+function dragOverHandler(event){
+    //console.log("dragOverHandler");
+    //console.log(this.listImages)
+    //console.log(this._cardrentService.getImages())
+    event.preventDefault();
+  }
+
+
+function scrollGalleryLeft(){
+let gallery = document.querySelector('.back_upload');
+    gallery.scrollLeft -=50;
+}
+ 
+function scrollGalleryRight(){
+    let gallery = document.querySelector('.back_upload');
+    gallery.scrollLeft +=50;
+}
+
+                       /* fin drag&drop */
+
+function uploadImage(id,image_id=null){
+    
+    //console.log(id);return;
+    //en principio no es necesario promesas
+  //return new Promise(function(resolve, reject){
+      
+    let fd = new FormData();
+    //subida de imagen individual o de todas las imágenes
+    if(image_id){
+        fd.append('files[]',listFiles[image_id]);
+    }
+    else{
+        listFiles.forEach((item)=> fd.append('files[]',item));
+    }
+    fd.append("_token",token);
+    fd.append("product_id",id);
+
+    let xhr = new XMLHttpRequest();
+    let rand=parseInt(Math.random()*99999);
+    
+    let vinculo = "../../images2";
+    xhr.open("POST",vinculo);
+    /* cabeceras no necesarias
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-type","multipart/form-data");
+    xhr.setRequestHeader("Content-type","application/json");
+    */
+      
+    xhr.onreadystatechange =  function(){
+        if(xhr.readyState == 4){
+          //resolve(console.log("response:" ,xhr.responseText));
+            console.log("response:" ,xhr.response)
+        }
+    }
+    xhr.onerror = function (){
+        //reject(console.log("error"));
+        console.log("error");
+    }
+    xhr.send(fd);
+  //});
+
+}                       

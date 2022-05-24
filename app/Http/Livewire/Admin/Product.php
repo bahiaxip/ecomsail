@@ -517,6 +517,10 @@ class Product extends Component
         //$this->combinations = Comb::where('product_id',$this->prod_id)->get();
     }
 
+    public function uploadImages($images){
+        dd($images);
+    }
+
     public function render()
     {           
         //$query = $this->set_filter_query($this->filter_type);

@@ -462,6 +462,7 @@ body
 	height 100%
 	opacity 1
 	width 100%
+/* fin modal confirm combinations*/
 	
 .active
 	display block !important
@@ -471,30 +472,41 @@ body
 	display none
 
 /* galería */
+							
 .back_upload
 	width 100%
-	height 200px
+	height 120px
 	display flex
 	vertical-align middle
 	overflow auto
+	/*ocultar barra de scroll en firefox*/
+	scrollbar-width none
 .back_upload .box
+	display flex
+	align-items center
+	height 120px
+	justify-content space-between
+	outline #676767 1px solid
+	position absolute
 	/*restamos el padding del mat-expansion de angular material y sumamos 
 	1 para que no se solape el outline*/
-
-	width calc(100% - 47px)
-	position absolute
-	height 200px
-	outline #676767 1px solid
-	/*display:flex;*/
-	/*margin:auto;*/
+	width calc(100% - 32px)
+	span				
+		font-size 2em
+		position relative
+		z-index 2
+	span.left
+		left 5px
+	span.right
+		right 5px
 .back_upload .info_upload
 	position absolute
 	display flex
 	vertical-align middle
 	justify-content center
 	align-items center
-	width calc(100% - 48px)
-	min-height 200px
+	width calc(100% - 32px)
+	min-height 120px
 .back_upload .text
 	font-size 10px
 	margin auto
@@ -510,12 +522,19 @@ body
 	user-select none
 
 .back_images .box_images
+	border #F3F3F3 1px solid
+	border-radius 5px
 	display flex
 	width 150px
+	
 	position relative
 	overflow hidden
 	align-items center
-	margin 5px
+	margin 2px
+/* provisional para meterlo en un div con height 100px, a 200px como estaba no es necesaria*/
+.back_images .box_images span
+	
+	height:100%
 .back_images .div_images
 	width 100%
 	height 100%
@@ -528,13 +547,19 @@ body
 	width auto
 	height auto
 	overflow hidden
-
+.back_images .upload_image
+	left 3px
+	position absolute
+	background-color white
+	
 .back_images .delete_images
 	position absolute
-	right 0
+	right 3px
 	background-color white
 
+/* fin galería de imágenes */
 
+/* font-face */
 @font-face
 	font-family QuicksandR	
 	src url(../fonts/quicksand/Quicksand-Regular.ttf)
@@ -543,7 +568,7 @@ body
 	font-family QuicksandB	
 	src url(../fonts/quicksand/Quicksand-Bold.ttf)
 
-
+/* fin font-face */
 	
 
 	
