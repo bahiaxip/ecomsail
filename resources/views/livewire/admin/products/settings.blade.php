@@ -48,18 +48,18 @@
                 
                 <div class="col-md-4" >                  
                    <div class="form-check" >
-                    {{ Form::checkbox('active_stock_not','true',null,['class' => 'form-check-input','type' => 'checkbox','id' => 'active_stock_not','wire:model' => 'active_stock_not'])}}
-                    {{ Form::label('active_stock_not','Activar notificación de stock mínimo',['class' => 'form-check-label'])}}                    
+                    {{ Form::checkbox('not_minstock','true',null,['class' => 'form-check-input','type' => 'checkbox','id' => 'active_stock_not','wire:model' => 'not_minstock'])}}
+                    {{ Form::label('not_minstock','Activar notificación de stock mínimo',['class' => 'form-check-label'])}}                    
                   </div>
                   <div class="form-check">
-                      {{ Form::checkbox('active_stock_email','true',null,['class' => 'form-check-input','type' => 'checkbox','id' => 'active_stock_email'])}}
-                      {{ Form::label('active_stock_email','Activar correo de stock mínimo',['class' => 'form-check-label'])}}
+                      {{ Form::checkbox('email_minstock','true',null,['class' => 'form-check-input','type' => 'checkbox','id' => 'email_minstock'])}}
+                      {{ Form::label('email_minstock','Activar correo de stock mínimo',['class' => 'form-check-label'])}}
                   </div>
                   
                 </div>
                 <div class="col-md-4">
-                    {{ Form::label('min_stock','Stock mínimo')}}
-                    {{ Form::number('min_stock',null,['class' => 'form-control','wire:model'=>'min_stock'])}}
+                    {{ Form::label('minstock','Stock mínimo')}}
+                    {{ Form::number('minstock',null,['class' => 'form-control','wire:model'=>'minstock'])}}
                 </div>
                 <!-- imagenes de ficha técnica -->
                 <div class="col-md-4">
@@ -76,14 +76,14 @@
                   <div class="col-md-4">
                       <label for="delivery_term">Plazo de entrega</label>
                       <div class="form-check">
-                        <label for="delivery_term1">
-                          <input type="radio" value="0" name="delivery_term" class="form-check-input" id="delivery_term1" checked wire:model="delivery_term">
+                        <label for="delivery_time1">
+                          <input type="radio" value="0" name="delivery_time" class="form-check-input" id="delivery_time1" checked wire:model="delivery_time">
                           Plazo predeterminado
                         </label>
                       </div>
                       <div class="form-check">
-                          <label for="delivery_term2">
-                          <input type="radio" value="1" name="delivery_term" class="form-check-input" id="delivery_term2" wire:model="delivery_term">
+                          <label for="delivery_time2">
+                          <input type="radio" value="1" name="delivery_time" class="form-check-input" id="delivery_time2" wire:model="delivery_time">
                           Plazo personalizado
                           </label>
                       </div>
@@ -93,8 +93,8 @@
                       {{ Form::number('custom_delivery',null,['class' => 'form-control','disabled'])}}
                   </div>
                   <div class="col-md-4">
-                      {{ Form::label('additional_shipping','Gasto adicional de envío')}}
-                      {{ Form::number('additional_shipping',null,['class' => 'form-control'])}}
+                      {{ Form::label('amount_delivery','Gasto adicional de envío')}}
+                      {{ Form::number('amount_delivery',null,['class' => 'form-control'])}}
                   </div>
               </div>
             <div class="row mtop16">
@@ -459,7 +459,7 @@
 
       <div class="modal-footer">
           <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()" onclick="clearActiveTabs()">Cancelar</button>
-          <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()">Actualizar</button>          
+          <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update_settings_products()">Actualizar</button>          
       </div>
     </div>
   </div>

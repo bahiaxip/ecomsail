@@ -54,15 +54,19 @@ class Product extends Component
     public $prodIdTmp;
     //tipo de filtrado (publico,borrador,reciclaje,todos)
     public $filter_type;
-
-    public $min_stock;
-    public $active_stock_not;
-    public $active_stock_email;
-
-    public $delivery_term=0;
-    
+    //stock mínimo
+    public $minstock;
+    //notificación mínimo stock activar/desactivar
+    public $not_minstock;
+    //email mínimo stock activar/desactivar
+    public $email_minstock;
+    //plazo de entrega determinado/personalizado
+    public $delivery_time=0;
+    //entrega personalizada (días)
+    public $custom_delivery;
+    //gasto adicional de entrega
+    public $amount_delivery;
     public $typealert;
-
      //campo de búsqueda (wire:model)
     public $search_data;
     //orden columnas (asc/desc)
@@ -286,9 +290,14 @@ class Product extends Component
     public function update_settings_products($id){
 
         $validated = $this->validate([
-            'availability' => 'required',
-            'product_state' => 'required',
-
+            'availability' => 'required|integer',
+            'product_state' => 'required|integer',
+            'not_minstock' => 'required|integer',
+            'email_minstock' => 'required|integer',
+            'minstock' => 'nullable|integer',
+            'delivery_time' => 'required|integer',
+            'custom_delivery' => 'nullable|integer',
+            'amount_delivery' => 'nullable',
             'long' => 'nullable',
             'width' => 'nullable',
             'height' => 'nullable',
@@ -300,9 +309,16 @@ class Product extends Component
             'discount_type' => 'required',
             'discount' => 'required',
             'init_discount' => 'nullable',
-            'end_discount' => 'nullable'
-
+            'end_discount' => 'nullable',
+            'type_tax' => 'required',
+            'tax' => 'required',
+            'partial_price' => 'nullable',
+            'discount_type' => 'required|integer',
+            'discount' => 'required|integer',
+            'init_discount' => 'nullable',
+            'end_discount' => 'nullable',
         ]);
+        dd("ea");
         $infoprice_prod = InfopriceProducts::where('product_id',$id);
 
 
