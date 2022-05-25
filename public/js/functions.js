@@ -302,6 +302,8 @@ function clearActiveTabs(){
 let list_combinations=[];
 //id temporal para eliminación de combinaciones
 let combIdTmp;
+//id temporal para eliminación de galería
+let galleryIdTmp;
 //importe adicional de combinaciones (temporal, solo para la edición de precio)
 let added_price_tmp;
 //importe total de combinaciones (temporal, solo para la edición de precio)
@@ -375,13 +377,21 @@ function clearValues(){
         })
     })
 }
-//eliminando combinación, para pasar el id usamos la variable combIdTmp
+//mostrar/ocultar modal de confirmación para la eliminación de combinación o galería
+//para pasar el id de combinación usamos la variable combIdTmp
+//para detectar si es galería o combinación pasamos gallery
 function confirmComb(id){
-    let confirmComb = document.querySelector('#confirmComb');
-    let btn_delete =confirmComb.querySelector('#btn_delete');    
-    combIdTmp = id;
-    confirmComb.classList.toggle('showconfirm');
-    clearPanelCombinations();
+        let confirmComb = document.querySelector('#confirmComb');
+        let btn_delete =confirmComb.querySelector('#btn_delete');    
+        combIdTmp = id;
+        confirmComb.classList.toggle('showconfirm');    
+        clearPanelCombinations();
+}
+function confirmGallery(id){    
+    let confirmGallery = document.querySelector('#confirmGallery');
+    galleryIdTmp = id;
+    console.log(confirmGallery)
+    confirmGallery.classList.toggle('showconfirm2');    
     
 }
 //método principal que llama desde los botones de edit de cada combinación
@@ -475,7 +485,9 @@ function update_final_price(data){
         /*fin de bloque de métodos para generar combinaciones*/
 
                     /* drag&drop */
+//lista de imágenes transfer en base64
 let listImages = [];
+//lista de imágenes de tipo File()
 let listFiles = [];
 let existsImg = false;
 let list;
@@ -484,10 +496,13 @@ let formdata;
 let file2;
 //eliminar imagen transferida mediante drag&drop
 function deleteTransfer(index,id){
-
-    if(index==0){
+    //revisar este index    
+    
+    if(index==-1){
       listImages=[];
-    }    
+    }
+    
+    //eliminamos la imagen de la lista    
     listImages.splice(index,1);
     listFiles.splice(index,1);
 
@@ -498,7 +513,7 @@ function deleteTransfer(index,id){
     showFiles(id);
 
 }
-
+//id es el product_id
 function dropHandler(event,id){    
     event.preventDefault();
   //mayoría de navegadores (dataTransfer.items)
@@ -626,22 +641,28 @@ function showFiles(id){
     let list = [];    
     let data = [];
     let image;
-
-    
-    for(let i=0;i<images.length;i++){
-        image = `<div class="box_images" id="gallery_${i}" >
-                <span class="" style="width:100%">
-                    <div class="div_images">
-                        <img src="${images[i]}" class="images" />
-                        <div class="upload_image" onclick="uploadImage(${id},${i})"><<</div>
-                        <div class="delete_images" onclick="deleteTransfer(${i},id)">
-                            X
+    if(images){
+        console.log("images: ",images)
+        for(let i=0;i<images.length;i++){
+            image = `<div class="box_images" id="gallery_${i}" >
+                    <span class="" style="width:100%">
+                        <div class="div_images">
+                            <img src="${images[i]}" class="images" />
+                            <div class="upload_image" onclick="uploadImage(${id},${i})" title="Subir imagen">
+                                <i class="fa-solid fa-circle-up"></i>
+                            </div>
+                            <div class="delete_images" onclick="deleteTransfer(${i},id)">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </div>
+                            <div class="loading_transfer" style="display: none;" >
+                                <img src="../../icons/spinner2.svg" alt="" style="margin:auto" width="80">
+                            </div>
                         </div>
-                    </div>
-                </span> 
-            </div>`;
-        //console.log(images[i]);
-        list.push(image);
+                    </span> 
+                </div>`;
+            //console.log(images[i]);
+            list.push(image);
+        }
     }
     let back_images = document.querySelector('.back_images');
     let boxTransfer = document.querySelector("#box_transfer");
@@ -661,14 +682,15 @@ function showFiles(id){
     //document.querySelector('.info_upload').style.display='none';
 
     document.querySelector('.info_upload').style.display='none';
+    document.querySelector('.div_btn_gallery').classList.add('active');
     //comprobamos ancho y si es necesario mostramos flechas
     console.log("width de back_images: ",back_images.clientWidth)
     console.log("width de box: ",boxTransfer.clientWidth)
     //si no existen imágenes volvemos a mostrar el div "info_upload" que indica soltar imagen
-    if(images.length == 0){
+    if(!images || images.length == 0){
         document.querySelector('.info_upload').style.display='flex';
+        document.querySelector('.div_btn_gallery').classList.remove('active');
     }
-
 }
 
 function removeDragData(ev){
@@ -710,6 +732,17 @@ function scrollGalleryRight(){
                        /* fin drag&drop */
 
 function uploadImage(id,image_id=null){
+    let loadingTransfer;
+    console.log("existe_image_id: ",image_id)
+    //necesario la comparación a null, ya que el image_id puede ser 0 y lo detecta como false
+    if(image_id != null){
+        //loadingTransfer = document.querySelector('#gallery_'+image_id).querySelector(".loading_transfer");    
+        loadingTransfer =document.querySelector('#gallery_'+image_id).querySelector('.loading_transfer');
+    }else{
+        loadingTransferNode =document.querySelectorAll('.loading_transfer');
+        loadingTransfer = [].slice.call(loadingTransferNode);
+
+    }
     
     //console.log(id);return;
     //en principio no es necesario promesas
@@ -717,12 +750,13 @@ function uploadImage(id,image_id=null){
       
     let fd = new FormData();
     //subida de imagen individual o de todas las imágenes
-    if(image_id){
+    if(image_id != null){
         fd.append('files[]',listFiles[image_id]);
     }
     else{
         listFiles.forEach((item)=> fd.append('files[]',item));
     }
+
     fd.append("_token",token);
     fd.append("product_id",id);
 
@@ -736,18 +770,48 @@ function uploadImage(id,image_id=null){
     xhr.setRequestHeader("Content-type","multipart/form-data");
     xhr.setRequestHeader("Content-type","application/json");
     */
-      
-    xhr.onreadystatechange =  function(){
+    //mostramos loading de carga
+    if(image_id != null){
+        loadingTransfer.style.display="flex";
+    }else{
+        loadingTransfer.map((item)=>{item.style.display="flex"})
+    }
+    
+    xhr.onreadystatechange =  function(){ 
+    //console.log("ejem: ",image_id);return;       
         if(xhr.readyState == 4){
           //resolve(console.log("response:" ,xhr.responseText));
             console.log("response:" ,xhr.response)
+            //ocultamos el loading de carga
+            if(image_id != null){
+                loadingTransfer.style.display="flex";
+            }else{
+                loadingTransfer.map((item)=>{item.style.display="flex"})
+            }
+     
+            //eliminamos la imagen subida del drag&drop
+            if(image_id != null){
+                console.log("el image_id es: ",image_id)
+                console.log(listFiles);
+                deleteTransfer(image_id,id);
+            }else{
+                deleteTransfer(-1,id);                
+            }
+            console.log("livewire")
+            mimetodo(id);
         }
     }
     xhr.onerror = function (){
         //reject(console.log("error"));
         console.log("error");
+        loadingTransfer.style.display="none";
     }
     xhr.send(fd);
   //});
 
-}                       
+}
+window.livewire.on('reload_images',(product_id)=>{
+    showFiles(product_id);
+    //activamos la pestaña de galería, ya que al renderizar se pasa a la primera
+    document.querySelector('#nav-gallery-tab').click();
+})

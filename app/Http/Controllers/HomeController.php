@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //use App\Models\Profile;
+use App\Models\ImagesProducts;
+use Str;
 class HomeController extends Controller
 {
     /**
@@ -59,7 +61,19 @@ class HomeController extends Controller
             
             foreach($files['error'] as $key=>$error){
                 if($error == UPLOAD_ERR_OK){
-                    move_uploaded_file($files['tmp_name'][$key], 'gallery/'.$prod_id.'/'.$files['name'][$key]);
+                    //nombre aleatorio
+                    $random = Str::random(10);
+                    //extensión
+                    $ext = pathinfo($files['name'][$key],PATHINFO_EXTENSION);
+                    move_uploaded_file($files['tmp_name'][$key], 'gallery/'.$prod_id.'/'.$random.'.'.$ext);
+                    
+                    ImagesProducts::create([
+                        'path_tag' => 'gallery/'.$prod_id.'/',
+                        'file_name' => $files['name'][$key],
+                        'image' => $random.'.'.$ext,
+                        'file_ext' => $ext,
+                        'product_id' => $prod_id
+                    ]);
                     
                 }
             }

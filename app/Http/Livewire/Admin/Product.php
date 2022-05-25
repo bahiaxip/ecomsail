@@ -8,7 +8,7 @@ use  Livewire\WithFileUploads;
 
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
-use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts, App\Models\Attribute as Attr, App\Models\Combination as Comb;
+use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts, App\Models\Attribute as Attr, App\Models\Combination as Comb, App\Models\ImagesProducts;
 use Str;
 class Product extends Component
 {
@@ -72,6 +72,7 @@ class Product extends Component
     public $combinations;
     //id de combinación para eliminar mediante confirmación
     public $combtmp_id;
+    public $images_products;
 
     //importe adicional de combinaciones
     public $added_price;
@@ -171,6 +172,7 @@ class Product extends Component
             'product_id' => $product->id
         ]);
         $infoprice_prod = InfopriceProducts::create([
+            
             'product_id' => $product->id
         ]);
 
@@ -238,6 +240,13 @@ class Product extends Component
         //pasamos el contenido del textarea de ckeditor
         $this->emit('description2',$this->detail);       
     }
+    //recarga las imágenes de la galería al subir imágenes
+    public function reload_image_products($id){
+        //renderizamos las imágenes de la galería
+        $this->images_products = ImagesProducts::where('product_id',$id)->get();
+        //renderizamos la lista del drag&drop, por si hubiera algunas añadidas
+        $this->emit('reload_images',$id);
+    }
 
     public function edit_settings_product($id){
         $this->prod_id = $id;
@@ -246,7 +255,7 @@ class Product extends Component
         else:
             $settings_prod = SettingsProducts::where('product_id',$id)->first();
         endif;
-         $this->availability = $settings_prod->availability;
+        $this->availability = $settings_prod->availability;
         $this->product_state = $settings_prod->product_state;
         $this->long = $settings_prod->long;
         $this->width = $settings_prod->width;
@@ -269,6 +278,34 @@ class Product extends Component
         $this->emit('description2',$this->detail);
         //combinations
         $this->combinations = Comb::where('product_id',$id)->get();
+
+        //imágenes de productos (galería)
+        $this->images_products = ImagesProducts::where('product_id',$id)->get();
+    }
+
+    public function update_settings_products($id){
+
+        $validated = $this->validate([
+            'availability' => 'required',
+            'product_state' => 'required',
+
+            'long' => 'nullable',
+            'width' => 'nullable',
+            'height' => 'nullable',
+            'weight' => 'nullable',
+            'attachment_file' => 'nullable',
+            'type_tax' => 'required',
+            'tax' => 'required',
+            'partial_price' => 'nullable',
+            'discount_type' => 'required',
+            'discount' => 'required',
+            'init_discount' => 'nullable',
+            'end_discount' => 'nullable'
+
+        ]);
+        $infoprice_prod = InfopriceProducts::where('product_id',$id);
+
+
     }
 //detectar si es onlyTrashed
     public function update(){
@@ -497,8 +534,17 @@ class Product extends Component
             $this->typealert = 'danger';
             session()->flash('message2',"Combinación eliminada correctamente");
             //$this->clear2();
-            
-
+    }
+    //eliminamos imágenes de la galería y recargamos galería y drag&drop
+    public function deleteGallery($id){
+        if($id){
+            $image = ImagesProducts::findOrFail($id);
+            $image->delete();            
+        }
+        //renderizamos las imágenes de la galería
+        $this->images_products = ImagesProducts::where('product_id',$this->prod_id)->get();
+        //renderizamos la lista del drag&drop, por si hubiera algunas añadidas
+        $this->emit('reload_images',$this->prod_id);
     }
     //actualizar los precios de la combinación seleccionada
     public function save($id,$added_price,$final_price){
@@ -530,6 +576,8 @@ class Product extends Component
 
         $attributes = Attr::where('status',1)->where('type',0)->orderBy('id','asc')->get();
         $this->combinations = Comb::where('product_id',$this->prod_id)->get();
+
+
         $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type,'iteration'=>$this->iteration,'attributes' => $attributes];
         return view('livewire.admin.products.index',$data);
     }

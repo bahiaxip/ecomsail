@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-6">
                     {{ Form::label('product_state','Estado de producto')}}
-                    {{ Form::select('product_state',[0=>'Nuevo',1=>'Usado',2=>'Reacondicionado'],null,['class' => 'form-select','wire:model' => 'product_state'])}}
+                    {{ Form::select('product_state',[0=>'Nuevo',1=>'Usado',2=>'Reacondicionado'],null,['class' => 'form-select','wire:model.defer' => 'product_state'])}}
                   @error('product_state')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -134,14 +134,14 @@
             <div class="row mtop16">
                 <div class="col-md-6">
                   {{ Form::label('type_tax','Tipo de impuesto')}}
-                  {{ Form::select('type_tax',[0=>'Estándar',1=>'Tasa reducida',2=>'Tasa cero'],null,['class' => 'form-select','wire:model' => 'type_tax'])}}
+                  {{ Form::select('type_tax',[0=>'Estándar',1=>'Tasa reducida',2=>'Tasa cero'],null,['class' => 'form-select','wire:model.defer' => 'type_tax'])}}
                   @error('type_tax')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="col-md-6">
                   {{ Form::label('tax','Impuesto')}}
-                  {{ Form::number('tax',null,['class' => 'form-control','wire:model' => 'tax'])}}
+                  {{ Form::number('tax',null,['class' => 'form-control','wire:model.defer' => 'tax'])}}
                   @error('tax')
                     <p class="text-danger">{{$message}}</p>
                   @enderror
@@ -151,14 +151,14 @@
             <div class="row mtop16">
                 <div class="col-md-6">
                   {{ Form::label('partial_price','Precio(Imp.exc.)') }}
-                  {{ Form::number('partial_price',0,['class' => 'form-control','wire:model' =>'partial_price','step' =>'any','min' => 0]) }}
+                  {{ Form::number('partial_price',0,['class' => 'form-control','wire:model.defer' =>'partial_price','step' =>'any','min' => 0]) }}
                   @error('partial_price')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="col-md-6">
                   {{ Form::label('price','Precio(Imp.inc.)') }}
-                  {{ Form::number('price',0,['class' => 'form-control','wire:model' =>'price','step' =>'any','min' => 0]) }}
+                  {{ Form::number('price',0,['class' => 'form-control','wire:model.defer' =>'price','step' =>'any','min' => 0]) }}
                   @error('price')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
@@ -168,14 +168,14 @@
             <div class="row mtop16">                
                 <div class="col-md-6">
                   {{ Form::label('discount_type','Tipo Descuento')}}
-                  {{ Form::select('discount_type',[0=>'No',1=>'Sí',2=>'Personalizado'],null,['class' => 'form-control','wire:model' => 'discount_type'])}}
+                  {{ Form::select('discount_type',[0=>'No',1=>'Sí',2=>'Personalizado'],null,['class' => 'form-control','wire:model.defer' => 'discount_type'])}}
                   @error('discount_type')
                     <p class="text-danger">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="col-md-6">
                   {{ Form::label('weight','Descuento(%)')}}
-                  {{ Form::number('discount',null,['class' => 'form-control','wire:model' => 'discount'])}}
+                  {{ Form::number('discount',null,['class' => 'form-control','wire:model.defer' => 'discount'])}}
                   @error('discount')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -189,7 +189,7 @@
                     <span class="input-group-text" id="basic-addon1">
                       <i class="far fa-keyboard"></i>
                     </span>                
-                    {!! Form::date('init_discount',null,['class'=> 'form-control','wire:model' => 'init_discount']) !!}
+                    {!! Form::date('init_discount',null,['class'=> 'form-control','wire:model.defer' => 'init_discount']) !!}
                     @error('init_discount')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -201,7 +201,7 @@
                     <span class="input-group-text" id="basic-addon1">
                       <i class="far fa-keyboard"></i>
                     </span>                
-                    {!! Form::date('end_discount',null,['class'=> 'form-control','wire:model' => 'end_discount']) !!}
+                    {!! Form::date('end_discount',null,['class'=> 'form-control','wire:model.defer' => 'end_discount']) !!}
                     @error('end_discount')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -219,7 +219,11 @@
                   <script>
                   editor_init('friendly_edit3');
                     CKEDITOR.instances.friendly_edit3.on('change',function(e){
+                      e.preventDefault();
+                        document.querySelector('#nav-price-tab').click();
                         @this.detail2=this.getData();
+
+
                     });
                   </script>
                 </div>
@@ -402,10 +406,28 @@
 
           </div>
           <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab" wire:ignore.self>
-              
+
+              @if($images_products)
               <div class="gallery">
-                  
+                @include('livewire.admin.products.confirm_gallery')
+                @foreach($images_products as $ima)
+                    <div class="gallery_images">
+                        <!--<span class="" style="width:100%">-->
+                            <div class="div_images">
+                              <div class="box_image">
+                                <img src="{{url($ima->path_tag.$ima->image)}}" class="images" />                                
+                              </div>
+                              <div class="back_slide">
+                                  <div class="delete_images" onclick="confirmGallery({{$ima->id}})">
+                                      <i class="fa-solid fa-circle-xmark"></i>
+                                  </div>
+                              </div>
+                            </div>
+                        <!--</span> -->
+                    </div>
+                @endforeach
               </div>
+              @endif
               <div class="back_upload" style="" ondrop="dropHandler(event,{{$prod_id}})" ondragover="dragOverHandler(event)">
                   <div class="box" id="box_transfer" style="/*box-shadow:1px 1px 1px black, -1px 1px 1px black,1px 1px 15px black inset;*/">
                     <span class="left" style="display: none" onclick="scrollGalleryLeft()">
@@ -424,16 +446,20 @@
                     para que se vea el icono close en ese tipo de imágenes-->
                   </div>
                 </div>
+                <div class="div_btn_gallery">
+                    <button class="btn btn-sm btn-primary" onclick="uploadImage({{$prod_id}})">
+                      Subir todo
+                    </button>
+                </div>
           </div>
+          
         </div>
-        
+         
       </div>
+
       <div class="modal-footer">
-        <button class="btn btn-sm btn-primary" onclick="uploadImage({{$prod_id}})">Actualizar
-            
-        </button>
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()" onclick="clearActiveTabs()">Cancelar</button>
-        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()">Actualizar</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()" onclick="clearActiveTabs()">Cancelar</button>
+          <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()">Actualizar</button>          
       </div>
     </div>
   </div>
@@ -441,6 +467,10 @@
 
 @push('scripts')
 <script>
+
+  function mimetodo(product_id){
+    @this.reload_image_products(product_id);
+  }
 /*
 function uploadImage(id){
   console.log(id);
