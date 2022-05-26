@@ -22,6 +22,7 @@ class CreateInfopriceProductsTable extends Migration
             $table->integer('discount')->default(15);
             $table->date('init_discount')->nullable();
             $table->date('end_discount')->nullable();
+            $table->text('aditional_detail')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->softDeletes();
             $table->timestamps();

@@ -4,7 +4,7 @@ var token = document.getElementsByName('csrf_token')[0].getAttribute('content');
 var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
-'editAttribute','addValue','massiveConfirm'
+'editAttribute','addValue','massiveConfirm','settings'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
@@ -45,6 +45,11 @@ window.livewire.on('description1',(data=null)=>{
 
 window.livewire.on('description2',(data)=>{
     CKEDITOR.instances.friendly_edit2.setData(data);
+})
+window.livewire.on('description3',(data)=>{
+    console.log("description3: ",data);
+    CKEDITOR.instances.friendly_edit3.setData(data);
+
 })
 window.livewire.on('loading',(data)=>{
     let loading = document.querySelector('#'+data);
@@ -183,6 +188,10 @@ document.addEventListener('readystatechange',() => {
         if(route == 'list_attributes'){
             console.log("attr");
         }
+        if(route == "list_products"){
+            
+        }
+        
 
 
 })
@@ -278,15 +287,19 @@ function selectCheckbox(id,el){
 
 //método clearActiveTabs resetea las pestañas del modal de configuración de producto
 //para que siempre que se pulse Cancelar al volver a abrir comienze por la primera pestaña
-function clearActiveTabs(){
+function clearActiveTabs(detail=null){
     console.log("llega")
+    if(detail){
+        saveDetail2();
+    }
     let tabpanes = document.querySelectorAll('.tab-pane');
     let tabs = [].slice.call(tabpanes);
     tabs.map((item,index)=>{
         //comprobamos si existen las clases active y show en alguna de las pestañas
         //exceptuando la primera
+        console.log("index: ",index);
         if(index != 0)
-            if(item.classList.contains('show')){
+            if(item.classList.contains('show') || item.classList.contains('active') ){
                 item.classList.remove('active');
                 item.classList.remove('show');
                 tabs[0].classList.add('active');
@@ -364,7 +377,7 @@ function clearPanelCombinations(){
     clearValues()
 
 }
-//resetear todos los checkbox de valores
+//resetear todos los checkbox de valores de los atributos para crear las combinaciones
 function clearValues(){
     let boxesNode = document.querySelectorAll('.boxes');
     let boxes = [].slice.call(boxesNode);
@@ -480,6 +493,24 @@ function update_final_price(data){
     final_price = data.value;
 }
 
+//al dar problemas con el input radio para poder activar/desactivar 
+//el input de custom_delivery(Entrega personalizada) enviamos los datos a la
+//variable mediante un onclick desde las opciones del input radio
+
+let deliveryTime;
+function setCustomDelivery(num,value){    
+    let customDelivery = document.querySelector('#custom_delivery');
+    if(num == 0){
+        customDelivery.value="";
+        customDelivery.setAttribute("disabled","true");
+    }else{
+        customDelivery.removeAttribute("disabled","false");
+    }
+    deliveryTime = value;
+    //enviamos al método setDeliveryTime() includio en settings.blade
+    //setDeliveryTime(value)
+
+}
 
 
         /*fin de bloque de métodos para generar combinaciones*/

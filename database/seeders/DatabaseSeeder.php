@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             'lastname' => 'Gomez',
             "email"=>"bahiaxip@hotmail.com",
             "password"=>bcrypt("calibra55"),
-            'role' => 1            
+            'role' => 1,
+            'permissions' => '{"admin_panel":"true","list_users":"true","edit_users":"true","admin_permissions":"true"}',
+            'status' => 1           
         ]);
         Category::create([
             'status' => 1,

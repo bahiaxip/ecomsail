@@ -14,12 +14,13 @@ class AddFieldsMinstockDeliveryToSettingsProductsTable extends Migration
     public function up()
     {
         Schema::table('settings_products', function (Blueprint $table) {
-            $table->integer('not_minstock')->after('product_state')->default(0);
-            $table->integer('email_minstock')->default(0)->after('not_minstock');
+            $table->enum('not_minstock',["true","false"])->after('product_state')->default("false");
+            $table->enum('email_minstock',["true","false"])->after('not_minstock')->default("false");
             $table->integer('minstock')->after('email_minstock')->nullable();
             $table->integer('delivery_time')->default(0)->after('minstock');
             $table->integer('custom_delivery')->after('delivery_time')->nullable();
             $table->decimal('amount_delivery')->after('custom_delivery')->nullable();
+            
         });
     }
 
