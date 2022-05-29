@@ -35,6 +35,12 @@ Route::group([
 
 	//Attributes
 	Route::get('/attributes/{filter_type}/{attr?}',\App\Http\Livewire\Admin\Attribute::class)->name('list_attributes');
+	
+
+	//Locations
+	Route::get('/locations/{filter_type}',\App\Http\Livewire\Admin\Location::class)->name('list_attributes');
+
+	
 	}
 );
 

@@ -35,6 +35,12 @@ class Permissions {
             'add_products' => null,
             'edit_products' => null,
             'delete_products' => null
+        ],
+        'locations' =>[
+            'list_products' => null,
+            'add_products' => null,
+            'edit_products' => null,
+            'delete_products' => null
         ]
     ];
 }

@@ -106,7 +106,7 @@
                           {{-- @if(file_exists(public_path())) --}}
                             
                         </span>
-                          {!!$c['code']!!} 
+                          {!!$c['icon_code']!!} 
                           {!!$c['nombre']!!} 
                           
                     </option>
