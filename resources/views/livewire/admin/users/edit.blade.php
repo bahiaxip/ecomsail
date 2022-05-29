@@ -95,8 +95,24 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <!-- countries con la variable all -->
                 <label for="country">País</label>
-                  {{ Form::select('country',$countries,null,['class' => 'form-select','wire:model' => 'country','wire:change' => 'testCountry'])}}
+                {{--  {{ Form::select('country',$countries,null,['class' => 'form-select','wire:model' => 'country','wire:change' => 'testCountry'])}} --}}
+                <select name="country" id="" class="form-select" wire:model="country" >
+                  <option value="0">Seleccione...</option>
+                  @foreach($countries as $c)
+                      <option value="{{$c['id']}}">
+                        <span   >
+                          {{-- @if(file_exists(public_path())) --}}
+                            
+                        </span>
+                          {!!$c['code']!!} 
+                          {!!$c['nombre']!!} 
+                          
+                    </option>
+
+                  @endforeach
+                </select>
                   @error('country')
                   <p class="text-danger">{{$message}}</p>
                   @enderror

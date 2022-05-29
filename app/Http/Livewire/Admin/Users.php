@@ -89,7 +89,7 @@ class Users extends Component
         $this->permissions = $this->role_permissions->permissions_list;
         //Class Países solo utilizada para obtener los paises (array all)
         $this->paisesObj = new Paises();
-        $this->countries = $this->paisesObj->all;
+        $this->countries = $this->paisesObj->all_list;
         //class Pr con listado de provincias
         $this->prov = new Pr();
         $this->provinces_list = $this->prov->prov;
