@@ -5,11 +5,13 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 
 use  Livewire\WithFileUploads;
-
+use App\Functions\Export;
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
 use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts, App\Models\Attribute as Attr, App\Models\Combination as Comb, App\Models\ImagesProducts;
-use Str;
+use Str,PDF,Excel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Listado;
 class Product extends Component
 {
     use WithFileUploads;
@@ -72,11 +74,7 @@ class Product extends Component
     //tipo de filtrado (publico,borrador,reciclaje,todos)
     public $filter_type;
     
-    public $typealert;
-     //campo de búsqueda (wire:model)
-    public $search_data;
-    //orden columnas (asc/desc)
-    public $orderType;
+    public $typealert;   
 
     public $list_combinations;
     public $combinations;
@@ -87,6 +85,40 @@ class Product extends Component
     //importe adicional de combinaciones
     public $added_price;
     public $final_price;
+
+    
+    //campo de búsqueda (wire:model)
+    public $search_data;
+    //orden columnas (asc/desc)
+    public $order_type = 'asc';
+    //columna seleccionada
+    public $selectedCol='id';
+
+    //pdf
+    protected $pdf;
+    public $checkpdf;
+    public $checkexcel;
+    public $email_export;
+
+    //archivo temporal para poder eliminar el archivo Excel descargado, ya que 
+    //al sobreescribir genera error.
+    public $file_tmp;
+    
+    //nombre de listado para envió de email
+    public $listname;
+    //nombre de usuario para envió de email
+    public $username;
+    //elementos por página
+    public $limit_page=10;
+    //listado de registros seleccionados mediante checkbox    
+    public $selected_list;
+    //select de acciones por lote
+    public $action_selected_ids;
+    //acción temporal para el modal confirm (delete/restore)
+    public $actionTmp;
+    //contador de productos en el método saveProdId, que junto a actionTmp permite
+    //rendir el mismo modal para eliminación y para restauración evitando duplicar 
+    public $count_prod;
 
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
@@ -100,36 +132,108 @@ class Product extends Component
 //comprobar antes si existen categorías, si no, mostrar enlace a crear categoría
     public function mount($filter_type){
         $this->filter_type = $filter_type;
-
+        $this->order_type = 'asc';
+        $this->listname = 'products';
+        $this->checkpdf = 1;
     }
-
-    public function setCheckbox(){
-        dd($this->not_minstock);
-    }
+    
     public function updated(){
         //dd($this->delivery_term);
     }
 
-    public function set_filter_query($filter_type){
-        $prod=[];
+    //comprobamos la acción seleccionada
+    public function set_action_massive(){        
+        $action = $this->action_selected_ids;
+        $list = $this->selected_list;
+        $this->emit('massiveConfirm');
+        if(!empty($list) && count($list) > 0){
+    //añadir icono loading      
+            switch($action):
+                //Eliminar
+                case '1':
+                    $this->delete_list();
+                    break;
+                //Restaurar                
+                case '2':
+                    $this->restore_list();
+                    break;
+            endswitch;
+            //devolvemos el select a 0
+            $this->action_selected_ids = 0;
+        }
+        session()->flash('message','Acción ejecutada correctamente');
+        $this->selected_list=[];
+    }
+
+    //eliminar seleccionados(aplicar acción de eliminar en lote)
+    public function delete_list(){
+        Prod::destroy($this->selected_list);
+    }
+
+    public function restore_list(){
+        Prod::whereIn('id',$this->selected_list)->restore();
+    }
+
+
+    //filtrado de productos(tipo de filtro pasado por url)
+    public function set_filter_query($filter_type,$export=false){
+        //$prod=[];
+        $prod='';
+        $search_data = '%'.$this->search_data.'%';        
+        //columna de referencia para ordenar
+        $col_order='id';
+        //si $this->selectedCol no es null establecemos la columna seleccionada 
+        if($this->selectedCol)
+            $col_order=$this->selectedCol;
+        //tipo de ordenamiento
+        //$order='desc';
+        $order = $this->order_type;
+        //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
+        if($filter_type==2)            
+            $init_query = ($this->search_data) ?
+                Prod::onlyTrashed()->where('name','LIKE',$search_data)
+                :
+                Prod::onlyTrashed()->orderBy($col_order,$order);
+        elseif($filter_type==3){
+            $init_query = ($this->search_data) ?
+                Prod::where('name','LIKE',$search_data)->orderBy($col_order,$order)
+                :
+                Prod::orderBy($col_order,$order);
+        }else{
+            $init_query = ($this->search_data) ?
+                Prod::where('name','LIKE',$search_data)->where('status',$this->filter_type)->orderBy($col_order,$order)
+                :
+                Prod::where('status',$filter_type)->orderBy($col_order,$order);
+        }
         switch($filter_type):
             case '0':
-                //$this->filterType = $filterType;
-                $prod = Prod::where('status',$filter_type)->orderBy('id','desc')->paginate(20);
+                ($export) ?
+                    $res = $init_query->get()
+                    :
+                    $res = $init_query->paginate($this->limit_page);
                 break;
             case '1':                
-                $prod = Prod::where('status',$filter_type)->orderBy('id','desc')->paginate(20);
+                ($export) ?
+                    $res = $init_query->get()
+                    :
+                    $res = $init_query->paginate($this->limit_page);
                 break;
             case '2':                
-                $prod = Prod::onlyTrashed()->orderBy('id','desc')->paginate(20);
+                ($export) ?
+                    $res = $init_query->get()
+                    :
+                    $res = $init_query->paginate($this->limit_page);
                 break;
             case '3':                
-                $prod = Prod::orderBy('id','desc')->paginate(20);
+                ($export) ?
+                    $res = $init_query->get()
+                    :
+                    $res = $init_query->paginate($this->limit_page);
                 break;
-
         endswitch;
-        return $prod;
+        return $res;
     }
+
 
     public function set_type_query(){
         $query;
@@ -318,22 +422,23 @@ class Product extends Component
             'not_minstock' => 'required',
             'email_minstock' => 'nullable',
             'minstock' => 'nullable|integer',
-            'attachment' => 'nullable',            
+            //'attachment' => 'nullable|mimetypes:application/pdf',
+            'attachment' => 'nullable|mimes:pdf,ppt,doc,docx,xls,xlsx',           
             'custom_delivery' => 'nullable|integer',
             'amount_delivery' => 'nullable',
-            'long' => 'nullable',
-            'width' => 'nullable',
-            'height' => 'nullable',
-            'weight' => 'nullable', 
+            'long' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'width' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'height' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
+            'weight' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'], 
             //price
-            'type_tax' => 'required',
-            'tax' => 'required',
+            'type_tax' => 'required|integer',
+            'tax' => 'required|integer',
             'partial_price' => 'nullable',
-            'price' => 'required',
-            'discount_type' => 'required|integer',
-            'discount' => 'required|integer',
-            'init_discount' => 'nullable',
-            'end_discount' => 'nullable',
+            'price' => 'required',            
+            'discount_type' =>'nullable|integer',
+            'discount' => 'nullable|integer',
+            'init_discount' => 'nullable|date',
+            'end_discount' => 'nullable|date',            
             'detail2' => 'nullable'
         ]);
 
@@ -377,6 +482,25 @@ class Product extends Component
             'end_discount' => $validated['end_discount'],
             'aditional_detail' => $validated['detail2']
         ]);
+        if($validated['attachment'] !== null){
+            $file_name = $this->attachment->getClientOriginalName();
+            $ext = $this->attachment->getClientOriginalExtension();            
+            //almacenamos con el método store que genera un nombre de archivo aleatorio
+            $path_date= date('Y-m-d');
+            $file = $this->attachment->store('public/files/'.$path_date,'');
+            $path_tag = 'public/files/'.$path_date.'/';
+            //eliminamos el directorio public
+            $filelesspublic = substr($file,7);
+            $thumb = $file;
+            //dd($ext);
+            $settings_prod->update([
+                'attachment_file' => $filelesspublic,
+                'thumb' => $filelesspublic,
+                'file_name' => $file_name,
+                'file_ext' => $ext,
+                'path_tag' => $path_tag                
+            ]);
+        }
         
         $this->typealert = 'success';        
         session()->flash('message',"Configuración actualizada correctamente");
@@ -396,26 +520,7 @@ class Product extends Component
             'stock' => 'required|gt:0',
             'short_detail' => 'required',
             'detail' => 'required',
-            'image' => 'nullable|image',
-
-            'availability' => 'required',
-            'product_state' =>'required',
-            'long' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
-            'width' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
-            'height' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
-            'weight' =>['nullable','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
-            //'attachment' => 'nullable|mimetypes:application/pdf',
-            'attachment' => 'nullable|mimes:pdf,ppt,doc,docx,xls,xlsx',
-
-            'type_tax' => 'required|integer',
-            'tax' => 'required|integer',
-            'partial_price' => 'nullable',
-            'discount_type' =>'nullable|integer',
-            'discount' => 'nullable|integer',
-            'init_discount' => 'nullable|date',
-            'end_discount' => 'nullable|date',
-
-
+            'image' => 'nullable|image'
         ]);
         
         if($this->prod_id){
@@ -423,35 +528,15 @@ class Product extends Component
             $prod = Prod::where('id',$this->prod_id)->first();
             $prod->update([
                 'name' => $validated['name'],
-            'slug' => Str::slug($validated['name']),
-            'status' => $validated['status'],
-            'category_id' => $validated['category'],
-            'subcategory_id' => 0,
-            'code' => $validated['code'],
-            'price' => $validated['price'],
-            'stock' => $validated['stock'],
-            'short_detail' => $validated['short_detail'],
-            'detail' =>$validated['detail'],
-            ]);            
-
-            $settings_prod = SettingsProducts::where('product_id',$this->prod_id)->first();
-            $settings_prod->update([
-                'availability' => $validated['availability'],
-                'product_state' => $validated['product_state'],
-                'long' => $validated['long'],
-                'width' => $validated['width'],
-                'height' => $validated['height'],
-                'weight' => $validated['weight'],
-            ]);
-            $infoprice_prod = InfopriceProducts::where('product_id',$this->prod_id)->first();
-            $infoprice_prod->update([
-                'type_tax' => $validated['type_tax'],
-                'tax' => $validated['tax'],
-                'partial_price' => $validated['partial_price'],
-                'discount_type' => $validated['discount_type'],
-                'discount' => $validated['discount'],
-                'init_discount' => $validated['init_discount'],
-                'end_discount' => $validated['end_discount'],
+                'slug' => Str::slug($validated['name']),
+                'status' => $validated['status'],
+                'category_id' => $validated['category'],
+                'subcategory_id' => 0,
+                'code' => $validated['code'],
+                'price' => $validated['price'],
+                'stock' => $validated['stock'],
+                'short_detail' => $validated['short_detail'],
+                'detail' =>$validated['detail'],
             ]);
             if($validated['image'] !== null){
 //comprobar si existe imagen y eliminar la anterior
@@ -473,25 +558,7 @@ class Product extends Component
                     'path_tag' => $path_tag                
                 ]);
             }
-            if($validated['attachment'] !== null){
-                $file_name = $this->attachment->getClientOriginalName();
-                $ext = $this->attachment->getClientOriginalExtension();            
-                //almacenamos con el método store que genera un nombre de archivo aleatorio
-                $path_date= date('Y-m-d');
-                $file = $this->attachment->store('public/files/'.$path_date,'');
-                $path_tag = 'public/files/'.$path_date.'/';
-                //eliminamos el directorio public
-                $filelesspublic = substr($file,7);
-                $thumb = $file;
-                //dd($ext);
-                $settings_prod->update([
-                    'attachment_file' => $filelesspublic,
-                    'thumb' => $filelesspublic,
-                    'file_name' => $file_name,
-                    'file_ext' => $ext,
-                    'path_tag' => $path_tag                
-                ]);
-            }
+            
 
         }
         $this->typealert = 'success';
@@ -501,8 +568,99 @@ class Product extends Component
         $this->emit('editProduct');
     }
 
-    public function saveProdId($prodId){
+    //limpiar datos de exportación
+    public function clearExport(){
+        $this->checkpdf='1';
+        $this->checkexcel='';
+        $this->email_export='';
+    }
+
+    //exportar archivo PDF al navegador del usuario
+    public function exportPDF(){
+    //opción actual         
+        $products=$this->set_type_query(true);        
+        $view="livewire.admin.products.export";
+        $pdf=PDF::loadView($view,['products'=>$products]);
+        $this->pdf=$pdf;
+        $rand = Str::random(10);
+        return response()->streamDownload(function(){
+                    //con print o con echo
+            print $this->pdf->stream();//echo $this->pdf->stream();
+        },$rand.'.pdf');
+    }
+
+    //exportar archivo Excel al navegador del usuario
+    public function exportExcel(){
+        $products=$this->set_type_query(true);
+        return Excel::download(new Export($products,$this->listname),'exportexcel.xlsx');
+    }
+
+    //guardar el archivo PDF en el server para después poder enviar por correo 
+    //como archivo adjunto
+    public function savePDF(){
+        $path_date=date('Y-m-d');
+        $products=$this->set_type_query(true);
+        $view="livewire.admin.products.export";
+        $pdf= PDF::loadView($view,['products'=>$products]);
+        $pdf->save('listado_'.$path_date.'.pdf');
+    }
+    //guardar archivo Excel en el server para después poder enviar por correo 
+    //como archivo adjunto
+    public function saveExcel(){
+        $path_date=date('Y-m-d');
+        $products=$this->set_type_query(true);
+        //grabar en disco
+
+        //si no añadimos aleatorio(random) en ocasiones genera un archivo corrupto, por ejemplo
+    //cuando se genera una búsqueda con LIKE. Si se añade un nombre distinto, al no 
+    //tener que sobreescribir sobre el anterior archivo, en el servidor, por alguna 
+    //razón genera el archivo correctamente.
+        $number_rand = Str::random(10);
+        $this->file_tmp = 'listado'.$number_rand.'.xlsx';
+        return  Excel::store(new Export($products,$this->listname),$this->file_tmp,'public');
+    }
+
+    //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
+    public function sendEmail(){
+        $attach=["pdf"=>0,"excel"=>0];
+        $validated = $this->validate([
+            'email_export'=>'required|email'
+        ]);
+        //mensaje de validación de checkbox
+        if($this->checkpdf == '' && $this->checkexcel==''){
+            session()->flash('check','Es necesario marcar al menos uno');
+        }else{
+            if($this->checkpdf){
+                $this->savePDF();                
+                $attach["pdf"]="1";
+            }
+            if($this->checkexcel){
+                $this->saveExcel();                
+                $attach["excel"]="1";
+            }
+
+        //falta condicional por si falla el servidor de correo
+            Mail::to($validated["email_export"], "eHidra")
+            ->send(new Listado($attach,$this->username,$this->listname,$this->file_tmp));
+            //eliminamos el archivo enviado al email para no sobrecargar el servidor de
+            //archivos siempre y cuando 
+//necesario cambiar pk el pdf debe ser tb aleatorio y eliminarlo
+            if($this->checkexcel && file_exists(public_path($this->file_tmp))){
+                unlink(public_path($this->file_tmp));    
+            }
+        //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar
+        //correo ya no desplega el dropdown de exportar 
+        //session()->flash('message',"Correo enviado correctamente");
+        return redirect()->route('list_products',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
+            //limpiar datos de selección para el envio (correo y archivos adjuntos)
+        $this->clearExport();
+        $this->emit("sendModal");
+        }
+    }
+
+    public function saveProdId($prodId,$action){
         $this->prodIdTmp=$prodId;
+        $this->actionTmp = $action;
     }
     //si se recarga la página tb ser resetea el userIdTmp, en el método mount()
     public function clearProdId(){
@@ -517,7 +675,12 @@ class Product extends Component
     //eliminación de producto
     public function delete(){
         if($this->prodIdTmp){
-            $prod=Prod::where('id',$this->prodIdTmp)->first();
+            if($this->actionTmp == 'deleteend'){
+                $prod=Prod::onlyTrashed()->where('id',$this->prodIdTmp)->first();    
+            }else{
+                $prod=Prod::where('id',$this->prodIdTmp)->first();    
+            }
+            
             //comprobamos si existe imagen y si existe y
             //es distinta a la asignada por defecto se elimina del server
             /*
@@ -529,7 +692,12 @@ class Product extends Component
             */            
             //$user=User::where('id',$this->userIdTmp)->first();
             //$profile->delete();
-            $prod->delete();
+            if($this->actionTmp == 'deleteend'){
+                $prod->forceDelete();    
+            }else{
+                $prod->delete();
+            }
+            
             $this->typealert = 'danger';
             session()->flash('message',"Producto eliminado correctamente");
             //$this->clear2();
@@ -542,6 +710,7 @@ class Product extends Component
         $prod->restore();
         $this->typealert = 'success';
         session()->flash('message',"Producto restaurado correctamente");
+        $this->emit('confirmDel');
 
     }
     //se inicia cada vez que mostramos el modal que contiene editor

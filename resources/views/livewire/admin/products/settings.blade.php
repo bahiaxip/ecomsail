@@ -66,8 +66,11 @@
                   {{ Form::label('attachment','Archivo adjunto(pdf)') }}
                   {{ Form::file('attachment',['class' => 'form-control','accept'=> '.pdf','wire:model' => 'attachment']) }}
                   @error('attachment')
-                  <p class="text-danger">{{$message}}</p>
-                @enderror
+                    <p class="text-danger">{{$message}}</p>
+                  @enderror
+                  <div wire:loading wire:target="attachment">
+                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                  </div>
                 </div>
                 
               </div>
@@ -336,7 +339,7 @@
                 <label for="" style="text-align: center;">Atributos</label>
                 @if($attributes->count() == 0)
                 <div>
-                  <p>No existen atributos, puede crear atributos para crear combinaciones. <a href="{{route('list_attributes',['filter_type' => 1])}}">Crear atributos</a></p>
+                  <p>No existen atributos, debe crear atributos para crear combinaciones de sus productos. <a href="{{route('list_attributes',['filter_type' => 1])}}">Crear atributos</a></p>
                   
                 </div>
                   

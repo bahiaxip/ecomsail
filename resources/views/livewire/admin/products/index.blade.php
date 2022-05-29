@@ -9,6 +9,7 @@
         </a>
     </li>
     @endsection
+    
     @if(helper()->testPermission(Auth::user()->permissions,'add_products')== true)
         @include('livewire.admin.products.create')
     @endif
@@ -20,7 +21,8 @@
     @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true)
         @include('livewire.admin.products.confirm')
     @endif
-
+    @include('livewire.admin.products.sendmail')
+    @include('livewire.admin.attributes.massive_confirm')
     @if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -53,15 +55,37 @@
         <ul class="add">
 
             <li>
-                <button class="btn btn-sm btn-primary">Exportar</button>
+                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuLink" onclick="showMenuExport()" aria-expanded="false" >
+                    <span class="d-none d-md-inline">Exportar</span>
+                    <span class="d-inline d-md-none">
+                        <i class="fa-solid fa-file-export"></i>
+                    </span>
+                </button>
+                <ul id="dropdownMenuExport" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">                
+                    <li>
+                        <a href="#" class="dropdown-item " wire:click.prevent="exportPDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-item" wire:click.prevent="exportExcel">
+                            <i class="fa-solid fa-file-excel"></i> Excel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa-solid fa-envelope"></i> E-Mail
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li>
                 <div class="dropdown">
-                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu1" onclick="showMenuFilters()" aria-expanded="false">
                         Filtros
                     </button>            
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdownMenuFilters">
                         <li><a href="{{ route('list_products',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Públicos</a></li>
                         <li><a href="{{ route('list_products',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a></li>
                         <li><a href="{{ route('list_products',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a></li>
@@ -71,7 +95,7 @@
             </li>
             @if(helper()->testPermission(Auth::user()->permissions,'add_products')== true)
                 <li>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
+                    <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
                 </li>
             @endif
             
@@ -81,6 +105,9 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <td>
+                        {{Form::checkbox('box',true,null,['class' => 'form-check-input','id'=>'allcheckbox','onclick' => 'selectAllCheckbox()'])}}
+                    </td>
                     <td width="40">ID</td>
                     <td width="64"></td>
                     <td>Nombre</td>
@@ -95,7 +122,12 @@
             <tbody>
                 @foreach($products as $prod)
                 <tr>
-                    <td><a href="#">{{ $prod->id }}</a></td>
+                    <td width="50">
+                        {{Form::checkbox($prod->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$prod->id.',this)','class' => 'checkbox'])}}
+                    </td>
+                    <td>
+                        <a href="#">{{ $prod->id }}</a>
+                    </td>
                     <td>
                         @if($prod->image)
                         <img src="{{ url('/storage/'.$prod->image) }}" alt="{{ $prod->file_name }}" width="32">
@@ -124,14 +156,17 @@
                                     </button>
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true)
-                                    <button class="btn btn-sm delete" title="Eliminar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}})">
+                                    <button class="btn btn-sm delete" title="Eliminar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}},'delete')">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 @endif
                             @else
                                 @if(helper()->testPermission(Auth::user()->permissions,'restore_products')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Restaruar producto" wire:click="restore({{$prod->id}})">
+                                    <button class="btn btn-sm edit" title="Restaruar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </button>
+                                    <button class="btn btn-sm delete" title="Eliminar producto @if($actionTmp=='deleteend') definitivamente @endif " data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}},'deleteend')">
+                                        <i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 @endif
                             @endif
@@ -141,10 +176,31 @@
                 </tr>
                 @endforeach
                 <tr>
+                    
+                    <td colspan="3" style="font-size:14px">
+                        <label for="status"><strong>Acciones en lote</strong></label>
+                    </td>
+                    <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
+                        <div class="input-group">                    
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select ', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                        </div> 
+                        
+                        <div>
+                            <button class="btn btn-sm btn_primary" onclick="testAnyCheckbox()">Aplicar</button>    
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="6">{{ $products->links() }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    
 </div>
+@push('scripts')
+<script>
+function setList(){
+    @this.selected_list = selected_list;
+}
+</script>
+@endpush

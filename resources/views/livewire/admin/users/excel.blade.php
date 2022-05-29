@@ -37,7 +37,11 @@
                                 <thead  style="border:black 1px solid !important;margin-top: 10px;">
                                 <tr>
                                     <td style="border:black 1px solid;text-align:center;vertical-align: middle;padding:5px">
+                                        @if($user->image)
                                         <img width="32" src="{{ 'storage/'.$user->image }}" style="margin:auto;" />
+                                        @else
+                                        <img src="{{ public_path('/images/default2.png') }}" alt="" width="32">
+                                        @endif
                                     </td>
                                     <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center;padding:5px">
                                         {{$user->nick}}

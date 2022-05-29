@@ -18,12 +18,21 @@
                             <tbody  class="">
                                 @foreach($categories as $cat)
                                 <thead  style="border:black 1px solid !important;margin-top: 10px;">
-                                <tr >
+                                <tr>
+                                    
                                     <td style="margin-top: 14px;padding-top:12px">
-                                        <img width="32" src="{{ 'storage/'.$cat->image }}"/>
+                                        @if($cat->image)
+                                        <img width="32" src="{{ url('storage/'.$cat->image) }}"/>
+                                        @else
+                                        <img src="{{ public_path('/icons/categories.png') }}" alt="{{ $cat->file_name }}" width="32">
+                                        @endif
                                     </td>
-                                    <td style="margin-top: 14px;padding-top:12px">{{$cat->name}}</td>
-                                    <td style="margin-top: 14px;padding-top:12px">{!!$cat->description!!}</td>
+                                    <td style="margin-top: 14px;padding-top:12px">
+                                        {{$cat->name}}
+                                    </td>
+                                    <td style="margin-top: 14px;padding-top:12px">
+                                        {!!$cat->description!!}
+                                    </td>
                                 </tr>
                             </thead>
                                 @endforeach

@@ -201,9 +201,9 @@ class Category extends Component
             case '3':
                 //si el filtro es todos(3) realizamos la consulta sin filtrar status
                 ($export) ?
-                $cat = $init_query->orderBy($col_order,$order)->get()
-                :
-                $cat = $init_query->orderBy($col_order,$order)->paginate(10);
+                    $cat = $init_query->orderBy($col_order,$order)->get()
+                    :
+                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
                 break;
         endswitch;
         return $cat;
@@ -514,11 +514,12 @@ class Category extends Component
         //dd($categories);
         $view="livewire.admin.categories.export";
         $pdf=PDF::loadView($view,['categories'=>$categories]);
+        $rand = Str::random(10);
         $this->pdf=$pdf;
         return response()->streamDownload(function(){
                     //con print o con echo
             print $this->pdf->stream();//echo $this->pdf->stream();
-        },'test.pdf');
+        },$rand.'.pdf');
     }
 
     //exportar archivo Excel al navegador del usuario
@@ -574,7 +575,7 @@ class Category extends Component
             Mail::to($validated["email_export"], "eHidra")
             ->send(new Listado($attach,$this->username,$this->listname,$this->file_tmp));
             
-            if(file_exists(public_path($this->file_tmp))){
+            if($this->checkexcel && file_exists(public_path($this->file_tmp))){
                 unlink(public_path($this->file_tmp));    
             }
         //sustituimos el flash por redirect(), ya que el div del message se muestra //correctamente pero genera conflicto con el dropdown de export, y al enviar

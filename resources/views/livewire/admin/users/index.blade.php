@@ -57,21 +57,21 @@
         <ul class="add">
            
             <li>
-                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuUsers" data-bs-toggle="dropdown" aria-expanded="false" >
+                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuUsers" onclick="showMenuExport()" aria-expanded="false" >
                     <span class="d-none d-md-inline">Exportar</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-file-export"></i>
                     </span>
 
                 </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuUsers">                
+                <ul class="dropdown-menu" role="menu" id="dropdownMenuExport" aria-labelledby="dropdownMenuUsers">                
                     <li>
-                        <a href="#" class="dropdown-item" wire:click="exportPDF">
+                        <a href="#" class="dropdown-item" wire:click.prevent="exportPDF">
                             <i class="fa-solid fa-file-pdf"></i> PDF
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item" wire:click="exportExcel">
+                        <a href="#" class="dropdown-item" wire:click.prevent="exportExcel">
                             <i class="fa-solid fa-file-excel"></i> Excel
                         </a>
                     </li>
@@ -84,10 +84,10 @@
             </li>
 
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenuFilterUsers" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenuFilterUsers" onclick="showMenuFilters()" aria-expanded="false">
                     Filtros
                 </button>            
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuFilterUsers">                
+                <ul class="dropdown-menu" id="dropdownMenuFilters" aria-labelledby="dropdownMenuFilterUsers">                
                     <li>
                         <a href="{{ route('list_users',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
                     </li>
@@ -125,7 +125,7 @@
                         @if($user->image)
                         <img src="{{ url('/storage/'.$user->image) }}" alt="" width="32">
                         @else
-                        <img src="{{ url('/images/bolsas-de-compra.png') }}" alt="" width="32">
+                        <img src="{{ url('/images/default2.png') }}" alt="" width="32">
                         @endif
                     </td>
                     <td>{{$user->nick}}</td>

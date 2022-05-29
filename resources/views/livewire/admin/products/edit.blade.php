@@ -7,6 +7,11 @@
           Editar Producto
         </div>
       </div>
+      @if(!$prod_id)
+      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+      </div>
+      @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
         <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
@@ -429,7 +434,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()">Cancelar</button>
-        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()">Actualizar</button>
+        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()" id="btn_update">Actualizar</button>
       </div>
     </div>
   </div>

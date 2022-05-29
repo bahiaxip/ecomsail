@@ -86,21 +86,21 @@
             </li>
             @endif
             <li>
-                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" >
+                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuLink" onclick="showMenuExport()" aria-expanded="false" >
                     <span class="d-none d-md-inline">Exportar</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-file-export"></i>
                     </span>
 
                 </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink">                
+                <ul class="dropdown-menu" role="menu" id="dropdownMenuExport" aria-labelledby="dropdownMenuLink">                
                     <li>
-                        <a href="#" class="dropdown-item" wire:click="exportPDF">
+                        <a href="#" class="dropdown-item" wire:click.prevent="exportPDF">
                             <i class="fa-solid fa-file-pdf"></i> PDF
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item" wire:click="exportExcel">
+                        <a href="#" class="dropdown-item" wire:click.prevent="exportExcel">
                             <i class="fa-solid fa-file-excel"></i> Excel
                         </a>
                     </li>
@@ -113,13 +113,13 @@
             </li>
             <!-- Filtros -->
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" onclick="showFilters()" aria-expanded="false">
+                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()" aria-expanded="false">
                     <span class="d-none d-md-inline">Filtros</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </span>
                 </button>            
-                <ul class="dropdown-menu" id="dropdownMenu2Ul" aria-labelledby="dropdownMenu2">                
+                <ul class="dropdown-menu" id="dropdownMenuFilters" aria-labelledby="dropdownMenu2">                
                     <li>
                         <a @if(!$attr)
                         href="{{ route('list_attributes',['filter_type' => 1]) }}"
@@ -303,7 +303,7 @@
                     <td colspan="1" style="display:inline-flex;vertical-align:middle;align-items:center">
 
                         <div class="input-group">
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div>
                         <div>
                             <button class="btn btn-sm btn_primary" onclick="testAnyCheckbox()" >Aplicar</button>

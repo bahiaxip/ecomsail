@@ -197,15 +197,31 @@ document.addEventListener('readystatechange',() => {
 })
 
 //comprueba si existe algún checkbox seleccionado, si existe muestra el modal
-function testAnyCheckbox(){
-    console.log("sadf");
+function testAnyCheckbox(){    
     //almacenamos todos los checkbox
     let total_list = document.querySelectorAll('.checkbox');
     //convertimos a array
     let total = [].slice.call(total_list);
-    let res = total.filter(item => item.checked)
-    if(res.length > 0)
+    let res = total.filter(item => item.checked)    
+    if(!actionSelected){
+        document.querySelector('#indiv_checkbox').focus();
+        return;
+    }
+    if(res.length == 0){        
+        document.querySelector('#allcheckbox').focus();
+        return;
+    }
+    if(res.length > 0 && actionSelected)
         $('#massiveConfirm').modal('show');
+}
+
+function setActionSelected(el){    
+    if(el.value == 1)
+        actionSelected = "delete";
+    else if(el.value == 2)
+        actionSelected = 'restore';
+    else
+        actionSelected = null;
 }
 //para la selección total
 //si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
@@ -224,6 +240,7 @@ function selectAllCheckbox(){
            clearCheckbox(total);
     }
     setList();
+    console.log("list_selected: ",selected_list);
 }
 
 
@@ -235,8 +252,13 @@ function selectAllCheckbox(){
 let selected_list=[];
 //generamos desde aquí el dropdown de "Filtros" ya que en ocasiones genera conflicto
 //con modal de boostrap o con session()->flash())
-function showFilters(){    
-    $('#dropdownMenu2Ul').toggle();
+function showMenuFilters(){
+    $('#dropdownMenuExport').hide();
+    $('#dropdownMenuFilters').toggle();
+}
+function showMenuExport(){
+    $('#dropdownMenuFilters').hide();
+    $('#dropdownMenuExport').toggle();
 }
 
 //activar todos los checkbox
@@ -266,6 +288,7 @@ function clearCheckbox(allcheckbox=null){
     
 //selección por id(uno en uno)
 function selectCheckbox(id,el){
+    console.log("selected_list: ",selected_list);
     //si está checkeado añadimos a la lista        
     if(el.checked){
         //comprobamos si no se encuentra en la lista (para más seguridad)
@@ -288,6 +311,9 @@ function selectCheckbox(id,el){
 //método clearActiveTabs resetea las pestañas del modal de configuración de producto
 //para que siempre que se pulse Cancelar al volver a abrir comienze por la primera pestaña
 function clearActiveTabs(detail=null){
+    //mostramos loading
+    let loading = document.querySelector('#loading');
+      loading.style.display='flex';
     console.log("llega")
     if(detail){
         saveDetail2();
@@ -525,6 +551,7 @@ let list;
 let images;
 let formdata;
 let file2;
+let actionSelected;
 //eliminar imagen transferida mediante drag&drop
 function deleteTransfer(index,id){
     //revisar este index    

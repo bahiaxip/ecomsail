@@ -57,7 +57,7 @@
                   @enderror
                   <div wire:loading wire:target="icon">
                     <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
-                </div>
+                  </div>
               </div>      
               <div class="col-md-6">
                   <label for="status">Estado</label>
@@ -100,7 +100,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()">Cancelar</button>
-        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()">Actualizar</button>
+        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update()" id="btn_update">Actualizar</button>
       </div>
     </div>
   </div>
