@@ -61,6 +61,16 @@
 				</a>
 			</li>
 			@endif
+			@if(helper()->testPermission(Auth::user()->permissions,'list_locations')== true)
+			<li>
+				<a href="{{ route('list_locations',['filter_type' => 1]) }}">
+					<i class="fa-solid fa-users"></i> 
+					<span class="d-none d-lg-inline-flex">
+						Ubicaciones
+					</span>
+				</a>
+			</li>
+			@endif
 			<li>
 				<a href="#">
 					<i class="fa-solid fa-gears"></i> 

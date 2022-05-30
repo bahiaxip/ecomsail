@@ -17,4 +17,8 @@ class Location extends Model
     ];
 
     protected $hidden = ['created_at','updated_at'];
+
+    public function namezone(){
+        return $this->belongsTo(Zone::class,'zone','id');
+    }
 }

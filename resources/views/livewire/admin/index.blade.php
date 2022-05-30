@@ -1,35 +1,9 @@
 <div>
     {{-- establecemos title si subcatlist['name'] contiene valor --}}
-    @section('title',$subcatlist['name'] ?? 'Ubicaciones')
+    @section('title', 'Ubicaciones')
     
     
-    @section('path')
-    &nbsp;>&nbsp;
-    <li class="list_name">
-        <a href="{{ url('admin/locations/1') }}">
-            <div class="icon icon_cat"></div>
-            <!--<i class="fa-solid fa-columns"></i>--> 
-            <span>Ubicaciones</span>
-        </a>
-    </li>
-    <!-- elemento li que será rellenado al pulsar el botón subcategorías de algún 
-        elemento del listado categorías -->
-    <li class="sublist_name" id="sublist_name">
-        
-    </li>
-    <!-- elemento li que será mostrado al recargar la página en una subcategoría, 
-        este elemento li sustituye al anterior al recargar la página -->
-    {{--@if($subcatlist['name'])
-    &nbsp;>&nbsp;
-    <li class="sublist_name">
-        <a href="{{ url('admin/categories/'.$filter_type.'/'.$subcatlist['id']) }}" id="subcat">
-            <div class="icon icon_subcat"></div>
-            <span>{{$subcatlist['name']}}</span>
-        </a>
-    </li>
-    @endif
-    --}}
-    @endsection
+    
 
     {{--
     @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)

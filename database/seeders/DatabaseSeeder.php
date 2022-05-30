@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        User::create([
+
+       //Falta probar db:seed de LocationSeeder desde aquí, probado individualmente
+       User::create([
             "nick" =>'xip',
             "name"=>"Fernando",
             'lastname' => 'Gomez',
@@ -34,5 +36,12 @@ class DatabaseSeeder extends Seeder
             'type' => 0,
             'name' =>'Gafas'
         ]);
+        
+        
+        $this->call([
+            LocationSeeder::class,
+            ZoneSeeder::class
+        ]);
+        
     }
 }

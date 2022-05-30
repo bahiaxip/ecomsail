@@ -39,7 +39,7 @@
     <div class="header">            
         @include('layouts.nav')
     </div>
-    @if(Route::is(['list_users','list_categories','list_products','list_attributes']))
+    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations']))
     <div class="content">
         <div class="sectionL">
             {{--@include('layouts.sidebar')--}}

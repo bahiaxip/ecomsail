@@ -102,15 +102,9 @@
                   <option value="0">Seleccione...</option>
                   @foreach($countries as $c)
                       <option value="{{$c['id']}}">
-                        <span   >
-                          {{-- @if(file_exists(public_path())) --}}
-                            
-                        </span>
                           {!!$c['icon_code']!!} 
-                          {!!$c['nombre']!!} 
-                          
+                          {!!$c['nombre']!!}
                     </option>
-
                   @endforeach
                 </select>
                   @error('country')
