@@ -17,16 +17,19 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('status');
-            $table->string('zone');
+            $table->integer('zone');
+            $table->integer('prefix_phone')->nullable();
+            $table->string('coin')->nullable();
             $table->string('path_tag')->nullable();
             $table->string('icon')->nullable();
             $table->string('icon_code')->nullable();
-            $table->string('isocode_alfa2')->nullable();
+            $table->string('isocode_alpha2')->nullable();
             $table->integer('isocode_num')->nullable();
+            //precio de entrega estimado por defecto
             $table->decimal('price_default')->nullable();
+            //días de entrega estimada por defecto
             $table->integer('default_delivery')->nullable();            
-            $table->string('type')->nullable();
-            $table->softDeletes();
+            $table->string('type')->nullable();            
             $table->timestamps();
         });
     }

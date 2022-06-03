@@ -223,11 +223,18 @@
                             <div class="form-check">
                               {{ Form::checkbox('list_locations',true,($this->role_permissions->testPermission($this->permissions3,'list_locations')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_locations']) }}
                               {{ Form::label('list_locations','Listar ubicaciones') }}
+                              {{-- para no tener conflictos con el middleware, ya que requiere la 
+                              coincidencia del routename con el nombre del permiso, lo añadimos 
+                              con input hidden y permitimos que el permiso list_locations 
+                              funcione tb con list_cities, no es necesario los demás, pk en 
+                              livewire solo existe una única ruta (list_users, list_locations,etc..--}}
+                              {{Form::hidden('list_cities',true)}}
                             </div>
 
                             <div class="form-check">
                                 {{ Form::checkbox('add_locations',true,($this->role_permissions->testPermission($this->permissions3,'add_locations')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_locations']) }}
                                 {{ Form::label('add_locations','Crear ubicaciones') }}
+                                {{Form::hidden('list_cities',true)}}
                             </div>
 
                             <div class="form-check">
@@ -250,8 +257,8 @@
                   </div>
                 </div>
                 <div class="mtop26">
-                  <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>
-                  <button type="submit" class="btn btn-sm btn-primary " id="btn_update_permissions">Actualizar</button>
+                  <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>
+                  <button type="submit" class="btn btn-sm btn_sail btn_pry" id="btn_update_permissions">Actualizar</button>
                 </div>
           </form>
           </div>

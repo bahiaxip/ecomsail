@@ -4,7 +4,7 @@ var token = document.getElementsByName('csrf_token')[0].getAttribute('content');
 var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
-'editAttribute','addValue','massiveConfirm','settings'
+'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity','editCity'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo

@@ -58,8 +58,8 @@
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear2()">Cancelar</button>
-        <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="store()">Crear</button>
+        <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click.prevent="clear2()">Cancelar</button>
+        <button type="button" class="btn btn-sm btn_sail btn_pry" wire:click.prevent="store()">Crear</button>
       </div>
     </div>
   </div>

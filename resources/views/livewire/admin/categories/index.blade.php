@@ -106,7 +106,7 @@
             </li>
             @endif
             <li>
-                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuLink" onclick="showMenuExport()" aria-expanded="false" >
+                <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" id="dropdownMenuLink" onclick="showMenuExport()" aria-expanded="false" >
                     <span class="d-none d-md-inline">Exportar</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-file-export"></i>
@@ -132,7 +132,7 @@
             </li>
 
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()"  aria-expanded="false" >
+                <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()"  aria-expanded="false" >
                     <span class="d-none d-md-inline">Filtros</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-bars-staggered"></i>
@@ -146,7 +146,9 @@
                         @else
                         href="{{ route('list_categories',['filter_type' => 1,'subcat' => $subcat]) }}" 
                         @endif
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        class="dropdown-item">
+                            &#x2714; Público
+                        </a>
                     </li>
                     <li>
                         <a 
@@ -155,7 +157,9 @@
                         @else
                         href="{{ route('list_categories',['filter_type' => 0,'subcat' => $subcat]) }}" 
                         @endif
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                        class="dropdown-item">
+                            &#x2716; Borrador
+                        </a>
                     </li>
                     <li>
                         <a 
@@ -164,7 +168,9 @@
                         @else
                         href="{{ route('list_categories',['filter_type' => 2,'subcat' => $subcat]) }}" 
                         @endif
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
+                        class="dropdown-item">
+                            <i class="fa-solid fa-trash"></i> Reciclaje
+                        </a>
                     </li>
                     <li>
                         <a 
@@ -173,14 +179,17 @@
                         @else
                         href=" {{ route('list_categories',['filter_type' => 3,'subcat' => $subcat]) }}" 
                         @endif
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        class="dropdown-item">
+                            &#x2714;&#x2716; Todos
+                        </a>
                     </li>
                 </ul>            
             </li>
             @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
                 <li>
-                    <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> 
-                        <span class="d-none d-md-inline">Agregar Categoría</span>
+                    <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()">
+                        <i class="fa-solid fa-plus"></i> 
+                        <span class="d-none d-md-inline">Crear Categoría</span>
                     </a>
                 </li>
             @endif
@@ -282,10 +291,14 @@
                         {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
                     </td>
                     -->
-                    @if($btn_back)
+                    @if($categories->count() == 0 && !$btn_back)
+                    <td colspan="100%">
+                        <p>No existen categorías</p>
+                    </td>
+                    @elseif($btn_back)
                         
                     <td colspan="100%">
-                        <p>No existen Subcategorías</p>
+                        <p>No existen subcategorías</p>
                     </td>
                     @else
                     <td colspan="3" style="font-size:14px">
@@ -293,11 +306,11 @@
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div class="input-group">                    
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div> 
                         
                         <div>
-                            <button class="btn btn-sm btn_primary" onclick="testAnyCheckbox()">Aplicar</button>    
+                            <button class="btn btn-sm btn_sail btn_pry" onclick="testAnyCheckbox()">Aplicar</button>    
                         </div>
                     </td>
                     @endif

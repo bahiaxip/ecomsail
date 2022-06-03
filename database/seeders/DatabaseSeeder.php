@@ -40,7 +40,9 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             LocationSeeder::class,
-            ZoneSeeder::class
+            ZoneSeeder::class,
+            ProvinceSeeder::class,
+            CitySeeder::class
         ]);
         
     }

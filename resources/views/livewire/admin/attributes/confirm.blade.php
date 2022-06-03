@@ -19,12 +19,12 @@
         @endif
       </div>      
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearAttrId()">Cancelar</button>
+        <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click="clearAttrId()">Cancelar</button>
         @if($count_attr==0)
           @if($actionTmp == 'delete')
-          <button type="button" class="btn btn-sm btn-primary back_livewire2 text-white" data-dismiss="modal" wire:click="delete()">Eliminar</button>
+          <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="delete()">Eliminar</button>
           @else
-          <button type="button" class="btn btn-sm btn-primary back_livewire2 text-white" data-dismiss="modal" wire:click="restore({{$attrIdTmp}})">Restaurar</button>
+          <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="restore({{$attrIdTmp}})">Restaurar</button>
           @endif
         @endif
       </div>

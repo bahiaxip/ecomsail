@@ -40,8 +40,9 @@ class Permissions {
             'list_locations' => null,
             'add_locations' => null,
             'edit_locations' => null,
-            'delete_locations' => null
-        ]
+            'delete_locations' => null,
+        ],
+        
     ];
 }
 

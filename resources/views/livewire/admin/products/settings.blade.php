@@ -366,12 +366,16 @@
                                 </div>
                                 -->
                                 <div class="box mtop16 boxes_values" >
+                                  @if($at->values()->count() == 0)
+                                      <p>No existen valores, debe crear valores para crear combinaciones de sus productos</p>
+                                  @else
                                     @foreach($at->values() as $a)
                                       <div class="form-check values">
                                         {{ Form::radio('list_'.$a->parentattr->id,true,null,['class' => 'form-check-input','id' => 'list_'.$a->id,'onclick' =>"addValue('$a->id','$a->name',".$a->parentattr->id.",this,)" ]) }}
                                         {{ Form::label('list_'.$a->id,$a->name) }}
                                       </div>
                                     @endforeach
+                                    @endif
                                 </div>
                             </div>
                       

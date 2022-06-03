@@ -1,17 +1,22 @@
 <div>
     {{-- establecemos title si subcatlist['name'] contiene valor --}}
     @section('title', 'Ubicaciones')
+    @section('path')
+    &nbsp;>&nbsp;
+    <li class="list_name">
+        <a href="{{ route('list_locations',['filter_type' => 1]) }}">
+            <i class="fa-solid fa-columns"></i> <span>Ubicaciones</span>
+        </a>
+    </li>
+    @endsection
     
     
-    
-
+    @if(helper()->testPermission(Auth::user()->permissions,'edit_locations')== true)
+        @include('livewire.admin.locations.edit')
+    @endif
     {{--
-    @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
-        @include('livewire.admin.locations.create')
-    @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
-    @include('livewire.admin.locations.edit')
-    @endif
+    
+    
     @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
         @include('livewire.admin.locations.confirm')
     @endif
@@ -52,44 +57,9 @@
             </li>
         </ul>
         
-        <ul class="add">
-            
-            {{--@if($subcatlist['name'] || $btn_back)
-            <li>
-                <a href="{{route('list_categories',['filter_type'=>$filter_type])}}" class="btn btn-sm btn_primary">
-                    <i class="fa-solid fa-left-long"></i> Atrás
-                </a>
-            </li>
-            @endif
-            --}}
-            <li>
-                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuLink" onclick="showMenuExport()" aria-expanded="false" >
-                    <span class="d-none d-md-inline">Exportar</span>
-                    <span class="d-inline d-md-none">
-                        <i class="fa-solid fa-file-export"></i>
-                    </span>
-                </button>
-                <ul class="dropdown-menu" role="menu" id="dropdownMenuExport" aria-labelledby="dropdownMenuLink">                
-                    <li>
-                        <a href="#" class="dropdown-item" wire:click.prevent="exportPDF">
-                            <i class="fa-solid fa-file-pdf"></i> PDF
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-item" wire:click.prevent="exportExcel">
-                            <i class="fa-solid fa-file-excel"></i> Excel
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#sendModal" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fa-solid fa-envelope"></i> E-Mail
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
+        <ul class="add">            
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()"  aria-expanded="false" >
+                <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()"  aria-expanded="false" >
                     <span class="d-none d-md-inline">Filtros</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-bars-staggered"></i>
@@ -104,45 +74,35 @@
                         {{--@else
                         href="{{ route('list_locations',['filter_type' => 1,'subcat' => $subcat]) }}" 
                         @endif --}}
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        class="dropdown-item">
+                            &#x2714; Público
+                        </a>
                     </li>
                     <li>
                         <a 
                         {{--@if(!$subcat)--}}
-                        href="{{ route('list_categories',['filter_type' => 0]) }}" 
+                        href="{{ route('list_locations',['filter_type' => 0]) }}" 
                         {{--@else
                         href="{{ route('list_categories',['filter_type' => 0,'subcat' => $subcat]) }}" 
                         @endif
                         --}}
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
-                    </li>
+                        class="dropdown-item">
+                            &#x2716; Borrador
+                        </a>
+                    </li>                    
                     <li>
                         <a 
                         {{--@if(!$subcat)--}}
-                        href="{{ route('list_categories',['filter_type' => 2]) }}" 
-                        {{--@else
-                        href="{{ route('list_categories',['filter_type' => 2,'subcat' => $subcat]) }}" 
-                        @endif--}}
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a>
-                    </li>
-                    <li>
-                        <a 
-                        {{--@if(!$subcat)--}}
-                        href=" {{ route('list_categories',['filter_type' => 3]) }}" 
+                        href=" {{ route('list_locations',['filter_type' => 3]) }}" 
                         {{--@else
                         href=" {{ route('list_categories',['filter_type' => 3,'subcat' => $subcat]) }}" 
                         @endif--}}
-                        class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        class="dropdown-item">
+                            &#x2714;&#x2716; Todos
+                        </a>
                     </li>
                 </ul>            
-            </li>
-            @if(helper()->testPermission(Auth::user()->permissions,'add_locations')== true)
-                <li>
-                    <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addLocation" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> 
-                        <span class="d-none d-md-inline">Agregar Ubicación</span>
-                    </a>
-                </li>
-            @endif
+            </li>            
         </ul>
         
     </div>
@@ -160,19 +120,22 @@
                             ID
                         </a>
                     </td>
-                    <td width="64"></td>                    
+                    <td width="64">Bandera</td>                    
                     <td>
                         <a href="#" wire:click="setColAndOrder('name')">
                             Nombre    
                         </a>
                     </td>
                     <td>
-                        Zona
+                        <a href="#" wire:click="setColAndOrder('zone')">
+                            Zona
+                        </a>
+                    </td>
+                    <td>
+                        Ciudades/Distritos
                     </td>           
                     <td class="max d-none d-md-table-cell">
-                        <a href="#" wire:click="setColAndOrder('description')">
-                            ISO
-                        </a>
+                        ISO
                     </td>
                     <td width="140">Acciones</td>
                 </tr>
@@ -192,8 +155,11 @@
                     <td>
                         {{$l->name}}
                     </td>
-                    <td>
+                    <td>                        
                         {{$l->namezone->name}}
+                    </td>
+                    <td>
+                        {{$l->countCities()}}
                     </td>
                     <td>
                         {{$l->isocode_alfa2}}
@@ -201,31 +167,20 @@
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                                {{--
-                                @if(!$subcat)
-                                
-                                <button class="btn btn-sm scat" title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
-                                    <!--<img src="{{url('icons/grid_subcat.svg')}}" alt="" width="16">-->
-                                    <div class="icon icon_subcat"></div>
-                                </button>
-                                
+                                @if(helper()->testPermission(Auth::user()->permissions,'list_locations')== true)
+                                    <button class="btn btn-sm delete" wire:click="renderCities({{$l->id}})" title="Ciudades de {{$l->name}}">
+                                        <i class="fa-solid fa-city"></i>
+                                    </button>
                                 @endif
-                                --}}
                                 @if(helper()->testPermission(Auth::user()->permissions,'edit_locations')== true)
-                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editLocation" wire:click="edit({{$l->id}})" title="Editar {{$l->name}}">
-                                    <i class="fa-solid fa-edit"></i>
-                                </button>
+                                    <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editLocation"  wire:click="edit({{$l->id}})" title="Editar {{$l->name}}">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_locations')== true)
-                                    @if($filter_type!=2)
-                                        <button class="btn btn-sm delete" title="Eliminar {{$l->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveLocId({{$l->id}},'delete')">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    @endif
-                                @endif
+                                                               
                             @else
                                 @if(helper()->testPermission(Auth::user()->permissions,'restore_locations')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Restaruar ubicación" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveLocId({{$cat->id}},'restore')">
+                                    <button class="btn btn-sm " title="Restaruar ubicación" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveLocId({{$cat->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>
                                 @endif

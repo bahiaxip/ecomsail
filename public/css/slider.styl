@@ -1,0 +1,112 @@
+color1 = #288feb
+color2 = #fdd700
+color3 = #334F9A
+
+.mdslider
+	display flex
+	flex-wrap wrap
+	margin-top 24px
+	min-height 522px
+	overflow hidden
+	position relative
+	width 100%
+	.md-slider-item
+		align-items center
+		border-right 1px solid #FFF
+		display none
+		background-color #FFF
+		color #FFF
+		font-size 4em
+		justify-content center
+		height 100%
+		width 100% !important
+		min-height 522px
+		transition .3s all ease-in-out
+		position absolute
+		.col-md-7
+		.col-md-5
+			padding 0px
+		.row
+			margin 0px
+			padding 0px
+		.content
+			background-color #f6f6f6
+			align-items center
+			color #333
+			display flex
+			height 100%
+			justify-content center
+			h2
+			p
+				display block
+				text-align left
+				width 100%
+			.cinside				
+				text-align left
+				border-left 2px solid color2
+				padding-left 20px
+				max-width 80%
+				h2
+					font-size 0.6em
+				p
+					font-size .4em
+				.btn
+					background-color color2
+					color #333
+					display inline-flex
+					margin 0px auto							
+			
+		/*
+		&:nth-child(1)
+			left 0px
+		&:nth-child(2)
+			left 100%
+		&:nth-child(3)
+			left 200%
+		&:nth-child(4)
+			left 300%
+			*/
+	ul.navigation
+		display block
+		margin 0px
+		padding 0px
+		position absolute
+		overflow hidden
+		top calc(50% - 18px)
+		z-index 9
+		width 100%
+		list-style none
+		li
+			display inline-flex
+			float left
+			a
+				color #FFF
+				background-color rgba(0,0,0,.75)
+				border-radius 50%
+				height 36px
+				width 36px
+				text-decoration none
+				font-size 1.4em
+				display flex
+				align-items center
+				justify-content center
+			/* en lugar de align-items y justify-content se puede centrar con i> margin auto
+				/*
+				i
+					margin auto
+				*/
+			&:first-child
+				margin-left 32px
+				a
+					i
+						position relative
+						margin-left -2px
+						margin-top 2px
+			&:last-child
+				float right
+				margin-right 32px
+				a
+					i
+						position relative
+						margin-left 2px
+						margin-top 2px

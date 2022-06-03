@@ -630,7 +630,7 @@ class Category extends Component
         $this->btn_back=false;
         //dd($this->subcat);
         if($this->subcat){  
-
+            
             //obtenemos el nombre de la categoría padre del primer elemento de la lista
             //comprobando si existe
     //el subcatlist['id'] representa el id de la categoría seleccionada

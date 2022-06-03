@@ -4,9 +4,9 @@
 
     @section('path')
     &nbsp;>&nbsp;
-    <li>
+    <li class="list_name">
         <a href="{{ route('list_users',['filter_type' => 1]) }}">
-            <i class="fa-solid fa-columns"></i> Usuarios
+            <i class="fa-solid fa-columns"></i> <span>Usuarios</span>
         </a>
     </li>
     @endsection
@@ -57,7 +57,7 @@
         <ul class="add">
            
             <li>
-                <button class="btn btn-sm btn_primary dropdown-toggle" id="dropdownMenuUsers" onclick="showMenuExport()" aria-expanded="false" >
+                <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" id="dropdownMenuUsers" onclick="showMenuExport()" aria-expanded="false" >
                     <span class="d-none d-md-inline">Exportar</span>
                     <span class="d-inline d-md-none">
                         <i class="fa-solid fa-file-export"></i>
@@ -84,15 +84,15 @@
             </li>
 
             <li>            
-                <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenuFilterUsers" onclick="showMenuFilters()" aria-expanded="false">
+                <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" type="button" id="dropdownMenuFilterUsers" onclick="showMenuFilters()" aria-expanded="false">
                     Filtros
                 </button>            
                 <ul class="dropdown-menu" id="dropdownMenuFilters" aria-labelledby="dropdownMenuFilterUsers">                
                     <li>
-                        <a href="{{ route('list_users',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Público</a>
+                        <a href="{{ route('list_users',['filter_type' => 1]) }}" class="dropdown-item">&#x2714; Público</a>
                     </li>
                     <li>
-                        <a href="{{ route('list_users',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a>
+                        <a href="{{ route('list_users',['filter_type' => 0]) }}" class="dropdown-item">&#x2716; Borrador</a>
                     </li>
                     <!-- //no mostramos ya que puede haber ususarios eliminados -->
                     <!--
@@ -101,7 +101,8 @@
                     </li>
                     -->
                     <li>
-                        <a href=" {{ route('list_users',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a>
+                        <a href=" {{ route('list_users',['filter_type' => 3]) }}" class="dropdown-item">
+                            &#x2714;&#x2716; Todos</a>
                     </li>
                 </ul>            
             </li>
@@ -134,9 +135,11 @@
                     <td>{{$user->email}}</td>
                     <td>
                         <div class="admin_items">
+                            {{--
                             <button class="btn btn-sm " data-bs-toggle="modal" data-bs-target="#editUser" wire:click="edit({{$user->id}})">
                                 <i class="fa-solid fa-pencil-alt"></i>
                             </button>
+                            --}}
                             @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
                             <button class="btn btn-sm edit" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#editUser"  wire:click="edit({{$user->id}})"@else wire:click="edit(0)" @endif>
                                 <i class="fa-solid fa-edit"></i>
@@ -151,6 +154,28 @@
                     </td>
                 </tr>
                 @endforeach
+                <tr>
+                    @if($users->count() == 0)
+                        
+                    <td colspan="100%">
+                        <p>No existen usuarios</p>
+                    </td>
+                    @else
+                    
+                    <td colspan="3" style="font-size:14px">
+                        <label for="status"><strong>Acciones en lote</strong></label>
+                    </td>
+                    <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
+                        <div class="input-group">                    
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                        </div> 
+                        
+                        <div>
+                            <button class="btn btn-sm btn_sail btn_pry" onclick="testAnyCheckbox()">Aplicar</button>    
+                        </div>
+                    </td>
+                    @endif
+                </tr>
                 <tr>
                     <td colspan="6">{{ $users->links() }}</td>
                 </tr>

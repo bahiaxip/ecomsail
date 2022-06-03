@@ -45,9 +45,9 @@
             </div>
         </div>
       <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearAttrId()">Cancelar</button>
+          <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click="clearAttrId()">Cancelar</button>
           @if($count_attr==0)
-          <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="sendEmail" id="btn_sendemail_attr">Enviar</button>
+          <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="sendEmail" id="btn_sendemail_attr">Enviar</button>
         @endif
       </div>
     </div>

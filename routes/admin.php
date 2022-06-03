@@ -19,29 +19,34 @@ Route::group([
 	'prefix'=>'/admin'
 	],function(){
 
-	//categories
-	Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)
-		->name('list_categories')->middleware('role_permissions');
-	//Route::get('/admin',Admin\Category::class)->name('categories');
+		//categories
+		Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)
+			->name('list_categories')->middleware('role_permissions');
+		//Route::get('/admin',Admin\Category::class)->name('categories');
 
-	//users
-	Route::get('/users/{filter_type}',\App\Http\Livewire\Admin\Users::class)->name('list_users')
-		->middleware('role_permissions');
+		//users
+		Route::get('/users/{filter_type}',\App\Http\Livewire\Admin\Users::class)->name('list_users')
+			->middleware('role_permissions');
 
 
-	//Products
-	Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('list_products')
-		->middleware('role_permissions');
+		//Products
+		Route::get('/products/{filter_type}',\App\Http\Livewire\Admin\Product::class)->name('list_products')
+			->middleware('role_permissions');
 
-	//Attributes
-	Route::get('/attributes/{filter_type}/{attr?}',\App\Http\Livewire\Admin\Attribute::class)->name('list_attributes');
-	
+		//Attributes
+		Route::get('/attributes/{filter_type}/{attr?}',\App\Http\Livewire\Admin\Attribute::class)->name('list_attributes');
+		
 
-	//Locations
-	Route::get('/locations/{filter_type}',\App\Http\Livewire\Admin\Location::class)->name('list_locations');
+		//Locations
+		Route::get('/locations/{filter_type}',\App\Http\Livewire\Admin\Location::class)->name('list_locations')
+			->middleware('role_permissions');
 
-	
+		//Ciudades
+		Route::get('/cities/{country}/{filter_type}',\App\Http\Livewire\Admin\City::class)->name('list_cities')
+			->middleware('role_permissions');
 	}
+
+
 );
 
 

@@ -22,12 +22,10 @@
                             <tbody>
                                 @foreach($products as $prod)
                                 <tr>
-                                    @if($prod->image)
                                     <td style="margin-top: 14px;padding-top:12px">
+                                    @if($prod->image)                                    
                                         <img width="32" src="{{ 'storage/'.$prod->image }}"/>
-                                    </td>
                                     @else
-                                    <td style="margin-top: 14px;padding-top:12px">
                                         <img width="32" src="{{ public_path('/images/bolsas-de-compra.png') }}"/>
                                     </td>
                                     @endif

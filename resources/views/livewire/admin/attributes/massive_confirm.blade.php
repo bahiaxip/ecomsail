@@ -13,9 +13,9 @@
         
       </div>      
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" >Cancelar</button>
+        <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" >Cancelar</button>
         
-          <button type="button" class="btn btn-sm btn-primary back_livewire2 text-white" data-dismiss="modal" wire:click="set_action_massive" onclick="clearCheckbox()">Aplicar</button>
+          <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="set_action_massive" onclick="clearCheckbox()">Aplicar</button>
         
       </div>
     </div>

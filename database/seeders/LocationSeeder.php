@@ -25,20 +25,21 @@ class LocationSeeder extends Seeder
                 'path_tag'=>'icons/flags_icons/',
                 'icon' => $c['icon'],
                 'icon_code' => $c['icon_code'],
-                'isocode_alfa2' => $c['isocode_alfa2']
+                'isocode_alpha2' => $c['isocode_alfa2']
             ]);
         }
-        
-        /*
-        Location::create([
-            'name' => 'nombre',
-            'status' => 0,
-            'zone' => 'zone',
-            'path_tag'=>'icons/flag_icons/',
-            'icon' => 'icon',
-            'icon_code' => 'icon_code',
-            'isocode_alfa2' => 'isocode_alfa2'
+        //actualizamos el status (filtrado en modo público) de todos los de Europa
+        $locations = Location::where('zone',1)->get();
+        foreach($locations as $loc){
+            $loc->update([
+                'status' => 1
+            ]);    
+        }
+        //actualizamos datos de España 
+        $location_spain = Location::find(58);
+        $location_spain->update([            
+            'prefix_phone' => 34,
+            'coin' => '€'
         ]);
-        */
     }
 }

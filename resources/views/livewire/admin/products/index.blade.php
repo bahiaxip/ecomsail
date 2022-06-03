@@ -3,9 +3,9 @@
 
     @section('path')
     &nbsp;>&nbsp;
-    <li>
+    <li class="list_name">
         <a href="{{ route('list_products',1) }}">
-            <i class="fa-solid fa-columns"></i> Productos
+            <i class="fa-solid fa-columns"></i> <span>Productos</span>
         </a>
     </li>
     @endsection
@@ -86,10 +86,26 @@
                         Filtros
                     </button>            
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdownMenuFilters">
-                        <li><a href="{{ route('list_products',['filter_type' => 1]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Públicos</a></li>
-                        <li><a href="{{ route('list_products',['filter_type' => 0]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Borrador</a></li>
-                        <li><a href="{{ route('list_products',['filter_type' => 2]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Reciclaje</a></li>
-                        <li><a href=" {{ route('list_products',['filter_type' => 3]) }}" class="dropdown-item"><i class="fa-solid fa-globe-americas"></i> Todos</a></li>
+                        <li>
+                            <a href="{{ route('list_products',['filter_type' => 1]) }}" class="dropdown-item">
+                                &#x2714; Públicos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('list_products',['filter_type' => 0]) }}" class="dropdown-item">
+                                &#x2716; Borrador
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('list_products',['filter_type' => 2]) }}" class="dropdown-item">
+                                <i class="fa-solid fa-trash"></i> Reciclaje
+                            </a>
+                        </li>
+                        <li>
+                            <a href=" {{ route('list_products',['filter_type' => 3]) }}" class="dropdown-item">
+                                &#x2714;&#x2716; Todos
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -176,19 +192,26 @@
                 </tr>
                 @endforeach
                 <tr>
+                    @if($products->count() == 0)
+                        
+                    <td colspan="100%">
+                        <p>No existen productos</p>
+                    </td>
+                    @else
                     
                     <td colspan="3" style="font-size:14px">
                         <label for="status"><strong>Acciones en lote</strong></label>
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div class="input-group">                    
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select ', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div> 
                         
                         <div>
-                            <button class="btn btn-sm btn_primary" onclick="testAnyCheckbox()">Aplicar</button>    
+                            <button class="btn btn-sm btn_sail btn_pry" onclick="testAnyCheckbox()">Aplicar</button>    
                         </div>
                     </td>
+                    @endif
                 </tr>
                 <tr>
                     <td colspan="6">{{ $products->links() }}</td>

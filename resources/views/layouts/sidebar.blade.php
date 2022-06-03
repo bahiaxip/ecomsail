@@ -36,7 +36,7 @@
 			<li style="position:relative;right:1px">
 				<a href="{{ route('list_categories',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
 					<!--<i class="fa-solid fa-tags"></i> Categorías-->
-					<div class="icon"></div>
+					<div class="icon icon_cat"></div>
 					<!--<img src="{{url('icons/grid_cat_D3D3D3.svg')}}" alt="" width="16" height="20" style="margin-right:2px;box-sizing:border-box"> -->
 					<span style="width:100%" class="d-none d-lg-inline-flex">Categorías</span>
 				</a>
@@ -44,8 +44,8 @@
 			@endif
 			@if(helper()->testPermission(Auth::user()->permissions,'list_attributes') == true)
 			<li>
-				<a href="{{ route('list_attributes',['filter_type' => 1]) }}">
-					<i class="fa-solid fa-box"></i> <span class="d-none d-lg-inline-flex">
+				<a href="{{ route('list_attributes',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
+					<div class="icon icon_value"></div> <span class="d-none d-lg-inline-flex">
 						Atributos
 					</span>
 				</a>
@@ -64,7 +64,7 @@
 			@if(helper()->testPermission(Auth::user()->permissions,'list_locations')== true)
 			<li>
 				<a href="{{ route('list_locations',['filter_type' => 1]) }}">
-					<i class="fa-solid fa-users"></i> 
+					<i class="fa-solid fa-location-dot"></i> 
 					<span class="d-none d-lg-inline-flex">
 						Ubicaciones
 					</span>

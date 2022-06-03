@@ -116,13 +116,19 @@ class Users extends Component
         $order = $this->order_type;
         //en usuario no existe la opción 2 ya que no existen eliminados
 
-        
+        //500 es si están baneados
+        /*
         if($filter_type==3){
             if( ($this->search_data)) 
                 $init_query = User::where('status','==',500)->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data);
             else
                 $init_query = User::where('status','==',500);
-
+        */
+        if($filter_type==3){
+            if( ($this->search_data)) 
+                $init_query = User::where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data)->orderBy('id','desc');
+            else
+                $init_query = User::orderBy('id','desc');
         }else{
             if($this->search_data) 
                 $init_query = User::where('status',$filter_type)->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data);
@@ -133,9 +139,9 @@ class Users extends Component
         switch($filter_type):
             case '0':
                 ($export) ?
-                    $user = $init_query->orderBy('id','desc')->get()
+                    $user = $init_query->get()
                     :
-                    $user = $init_query->orderBy('id','desc')->paginate(10);
+                    $user = $init_query->paginate(10);
                 break;
             case '1':                
                 ($export) ?

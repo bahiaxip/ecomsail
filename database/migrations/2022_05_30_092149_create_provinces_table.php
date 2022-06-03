@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateProvincesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('status')->default(0);
+            $table->string('type')->nullable();
+            $table->string('path_tag')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('icon_code')->nullable();
+            $table->string('isocode_alfa2')->nullable();
+            $table->integer('isocode_num')->nullable();
+            $table->integer('location_id');
+            $table->integer('province_id');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('provinces');
+    }
+}

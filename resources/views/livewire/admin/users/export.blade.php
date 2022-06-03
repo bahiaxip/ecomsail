@@ -35,7 +35,11 @@
                                 @foreach($users as $user)
                                 <tr>
                                     <td style="border:black 1px solid;text-align:center;vertical-align: middle;padding:5px">
+                                        @if($user->image)
                                         <img width="32" src="{{ 'storage/'.$user->image }}" style="margin:auto;" />
+                                        @else
+                                        <img width="32" src="{{ public_path('/images/default2.png') }}" style="margin:auto;" />
+                                        @endif
                                     </td>
                                     <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center;padding:5px">
                                         {{$user->nick}}
