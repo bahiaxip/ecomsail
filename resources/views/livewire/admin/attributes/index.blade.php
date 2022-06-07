@@ -334,5 +334,7 @@ function setList(){
 function getColor(data){
     @this.color = data;
 }
+
+console.log("llega a colorpicker")
 </script>
 @endpush

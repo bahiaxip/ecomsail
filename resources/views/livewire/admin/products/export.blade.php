@@ -46,7 +46,7 @@
                                     <tr>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
                                             @if($prod->image)
-                                            <img width="32" src="{{ 'storage/'.$prod->image }}"/>
+                                            <img width="32" src="{{ public_path($prod->path_tag.$prod->image) }}"/>
                                             @else
                                             <img width="32" src="{{ public_path('/images/bolsas-de-compra.png') }}"/>
                                             @endif

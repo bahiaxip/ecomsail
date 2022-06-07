@@ -1,3 +1,27 @@
+color1 = #4861ff
+color2 = #00b292
+color3 = #ff003d
+color4 = #489bf8
+color6 = #494949
+
+.mtop16
+	margin-top 16px
+.mtop32
+	margin-top 32px
+
+.btn_pry
+	background-color color1
+	&:focus
+		box-shadow 0 0 6px color1
+.btn_sry
+	background-color color2
+	&:focus
+		box-shadow 0 0 6px color2
+.btn_grey
+	background-color color6
+	&:focus
+		box-shadow 0 0 6px color6
+
 .lat, .lat
 	width 10%
 	li
@@ -40,7 +64,151 @@
 						margin-right 2px
 .menu_hidden
 	display none
+
+.div_products_list
+	display block
+	text-align center
+	width 100%
+	
+	.products
+		display inline-block
+		margin auto
+		position relative
+		text-align left
+		width 18%
+			
+		.image
+			display flex
+			justify-content center
+			position relative
+			overflow hidden
+			width 100%
+			.layer
+				background-color rgba(0,0,0,.1)
+				border-radius 6px
+				cursor pointer			
+				display none			
+				height 100%
+				position absolute
+				width 100%
+				z-index 4
+				
+				.favorite
+					display flex
+					height 30%
+					margin-left 5px
+					width 100%
+					position relative
+					.icon					
+						align-items center
+						background-color color1
+						border-radius 50%
+						color color1
+						display flex
+						font-size 1.2em
+						height 20px
+						justify-content center
+						margin-top 5px
+						padding 15px
+						width 20px
+						i
+							color #FFF
+				.plus				
+					align-items flex-end
+					display flex
+					height 70%
+					justify-content center
+					position relative
+					width 100%
+					.plus_btn					
+						button
+							color #FFF
+							margin-bottom 5px
 						
+			img
+				padding 12px
+				max-height 200px
+				transform scale(1)
+				transition .3s all ease-in-out
+		
+		&:hover
+			.layer
+				display block
+			.image
+				img
+					transform scale(1.10)
+		.title
+			display flex
+			margin 10px auto
+
+.modal_item
+.modal_item .modal-content
+	padding-top 15px
+	.title_item
+		h5
+			font-family QuicksandB
+			font-size 1.7em
+	
+	.carousel_item
+		display flex
+		justify-content center
+		padding 10px
+	.quantity_item
+		
+		.price
+			min-height 100px
+			span				
+				font-size 1.5em
+			p
+				font-size 0.7em
+		.quantity
+			display flex
+			.amount_action
+				align-items center
+				background-color color1
+				border-radius 50%
+				color #FFF
+				display flex
+				float left
+				font-size .8em
+				margin-top 4px
+				height 32px
+				justify-content center
+				text-decoration none
+				width 32px
+				&:first-child
+					margin-right 8px
+				&:last-child
+					margin-left 8px		
+			.form-control
+				float left
+				width calc(100% - 80px)
+		.quantity_btn
+			align-items center
+			display flex
+			justify-content space-around
+			button
+				background-color color2
+				border-radius 5px
+				color #FFF
+			.icon
+				align-items center
+				background-color color1
+				border-radius 50%
+				display flex
+				font-size 1.2em
+				justify-content center
+				height 30px
+				vertical-align middle
+				width 30px
+				i
+					color #FFF
+		
+
+		
+			
+			
+	
 @media only screen and (max-width 992px)
 	.nav_user
 		
@@ -52,3 +220,14 @@
 	.menu_hidden
 		display flex
 		align-items center
+		
+/* font-face */
+@font-face
+	font-family QuicksandR	
+	src url(../fonts/quicksand/Quicksand-Regular.ttf)
+	
+@font-face
+	font-family QuicksandB	
+	src url(../fonts/quicksand/Quicksand-Bold.ttf)
+
+/* fin font-face */

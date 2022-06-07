@@ -377,7 +377,7 @@ class Category extends Component
                 //almacenamos con el método store que genera un nombre de archivo aleatorio
                 $path_date= date('Y-m-d');
                 $icon = $this->icon->store('public/files/'.$path_date,'');
-                $path_tag = 'public/files/'.$path_date.'/';                
+                $path_tag = '/storage/';                
                 //eliminamos el directorio public
                 $iconlesspublic = substr($icon,7);
                 $thumb = $icon;

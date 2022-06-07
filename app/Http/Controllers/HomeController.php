@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //use App\Models\Profile;
-use App\Models\ImagesProducts;
+use App\Models\ImagesProducts, App\Models\Product, App\Models\Category;
 use Str;
 class HomeController extends Controller
 {
@@ -25,7 +25,14 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home');
+        //destacados
+        $products = Product::where('status',1)->paginate(15);
+        $categories = Category::where('status',1)->where('type',0)->get();
+        $data = ['products' => $products,'categories' => $categories];
+        return view('home',$data);
+    }
+    public function fastview(){
+        dd("sdf");
     }
     /*
     public function verification(){        

@@ -107,7 +107,7 @@
                         <i class="fa-solid fa-keyboard"></i>
                       </span>                     
                       {{ Form::text('color',null,['class' => 'form-control form-control-sm', 'wire:model' => 'color'])}}
-                      <input type="color" class="form-control form-control-color" id="colorpicker" oninput="getColor(this.value)">
+                      <input type="color" class="form-control form-control-color" id="colorpicker" oninput="getColor(this.value)" data-color="#FFFFFF">
                       @error('color')
                       <p class="text-danger">{{$message}}</p>
                       @enderror

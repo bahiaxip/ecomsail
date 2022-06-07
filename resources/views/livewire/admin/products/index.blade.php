@@ -146,7 +146,7 @@
                     </td>
                     <td>
                         @if($prod->image)
-                        <img src="{{ url('/storage/'.$prod->image) }}" alt="{{ $prod->file_name }}" width="32">
+                        <img src="{{ url($prod->path_tag.$prod->image) }}" alt="{{ $prod->file_name }}" width="32">
                         @else
                         <img style="margin:auto" src="{{ url('images/bolsas-de-compra.png') }}" alt="{{ $prod->file_name }}" width="32">
                         @endif

@@ -4,7 +4,8 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 
-use  Livewire\WithFileUploads;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use App\Functions\Export;
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ use App\Mail\Listado;
 class Product extends Component
 {
     use WithFileUploads;
+    use WithPagination;
     public $name;
     public $status=0;
     public $category=0;    
@@ -120,6 +122,8 @@ class Product extends Component
     //rendir el mismo modal para eliminación y para restauración evitando duplicar 
     public $count_prod;
 
+
+    public $subcats;
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
         'short_detail' => 'descipción corta',
@@ -138,7 +142,11 @@ class Product extends Component
     }
     
     public function updated(){
-        //dd($this->delivery_term);
+        //si se encuentra en otra página resetea, si no, el buscador
+        //no realiza correctamente la búsqueda
+        if($this->search_data)
+            $this->resetPage();
+
     }
 
     //comprobamos la acción seleccionada
@@ -260,7 +268,7 @@ class Product extends Component
             'name' => 'required',
             'status' => 'required',
             'category' => 'required|gt:0',
-            'subcategory' =>'nullable',
+            'subcategory' =>'required|gt:0',
             'image' => 'nullable|image',
             'code' => 'nullable',
             'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
@@ -279,7 +287,7 @@ class Product extends Component
             'slug' => Str::slug($validated['name']),
             'status' => $validated['status'],
             'category_id' => $validated['category'],
-            'subcategory_id' => 0,
+            'subcategory_id' => $validated['subcategory'],
             'code' => $validated['code'],
             'price' => $validated['price'],
             'stock' => $validated['stock'],
@@ -302,7 +310,7 @@ class Product extends Component
             //almacenamos con el método store que genera un nombre de archivo aleatorio
             $path_date= date('Y-m-d');
             $image = $this->image->store('public/files/'.$path_date,'');
-            $path_tag = 'public/files/'.$path_date.'/';
+            $path_tag = '/storage/';
             //eliminamos el directorio public
             $imagelesspublic = substr($image,7);
             $thumb = $image;
@@ -343,7 +351,7 @@ class Product extends Component
         $this->name = $prod->name;
         $this->status=$prod->status;
         $this->category = $prod->category_id;
-        $this->subcategory = 0;
+        $this->subcategory = $prod->subcategory_id;
         $this->code = $prod->code;
         $this->price = $prod->price;
         $this->stock = $prod->stock;
@@ -514,6 +522,7 @@ class Product extends Component
         $validated = $this->validate([
             'name' => 'required',
             'category' => 'required|gt:0',
+            'subcategory' =>'required|gt:0',
             'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
             'status' => 'required',
             'code' => 'nullable',
@@ -531,7 +540,7 @@ class Product extends Component
                 'slug' => Str::slug($validated['name']),
                 'status' => $validated['status'],
                 'category_id' => $validated['category'],
-                'subcategory_id' => 0,
+                'subcategory_id' => $validated['subcategory'],
                 'code' => $validated['code'],
                 'price' => $validated['price'],
                 'stock' => $validated['stock'],
@@ -545,7 +554,7 @@ class Product extends Component
                 //almacenamos con el método store que genera un nombre de archivo aleatorio
                 $path_date= date('Y-m-d');
                 $image = $this->image->store('public/files/'.$path_date,'');
-                $path_tag = 'public/files/'.$path_date.'/';
+                $path_tag = '/storage/';
                 //eliminamos el directorio public
                 $imagelesspublic = substr($image,7);
                 $thumb = $image;
@@ -837,8 +846,19 @@ class Product extends Component
         dd($images);
     }
 
+    public function setSubcategories(){
+
+        
+        
+    }
+
     public function render()
-    {           
+    {
+        $this->subcats = null;        
+        if($this->category != 0){
+            $this->subcats = Category::where('status',1)->where('type',$this->category)->orderBy('id','desc')->pluck('name','id');    
+        }
+
         $this->custom_delivery_disabled=false;
         //$query = $this->set_filter_query($this->filter_type);
         $query = $this->set_type_query();

@@ -49,7 +49,14 @@
                 <div class="col-md-6">
                   {{ Form::label('subcategory','Subcategoría') }}
 
-                  {{ Form::select('subcategory',$cats,null,['class' => 'form-select', 'wire:model' => 'subcategory','disabled'])}}
+                  <select name="subcategory" id="subcategory" wire:model="subcategory" class="form-select" @isset($subcats)  @else disabled @endisset >
+                      @if($subcats)
+                        <option value="0">Seleccione subcategoría</option>
+                        @foreach($subcats as $key=>$value)
+                          <option value="{{$key}}">{{$value}}</option>
+                        @endforeach
+                      @endif
+                  </select>
                   @error('subcategory')
                   <p class="text-danger">{{$message}}</p>
                   @enderror

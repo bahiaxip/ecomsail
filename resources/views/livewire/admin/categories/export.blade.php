@@ -29,7 +29,7 @@
                                     <tr>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
                                             @if($cat->image)
-                                            <img width="32" src="{{ 'storage/'.$cat->image }}"/>
+                                            <img width="32" src="{{ public_path($cat->path_tag.$cat->image) }}"/>
                                             @else
                                             <img src="{{ public_path('/icons/categories.png') }}" alt="{{ $cat->file_name }}" width="32">
                                             @endif

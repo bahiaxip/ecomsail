@@ -237,7 +237,7 @@
                     <td>{{ $cat->id }}</td>
                     <td>
                         @if($cat->image)
-                        <img src="{{ url('/storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32">
+                        <img src="{{ url($cat->path_tag.$cat->image) }}" alt="{{ $cat->file_name }}" width="32">
                         @else
                         <img src="{{ url('/icons/grid_cat.svg') }}" alt="{{ $cat->file_name }}" width="32">
                         @endif

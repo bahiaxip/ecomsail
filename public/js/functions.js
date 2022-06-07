@@ -89,9 +89,11 @@ window.livewire.on('minilink',(cat_id,cat_name,classname)=>{
     if(route == 'list_categories'){
         document.getElementsByTagName('title')[0].innerHTML='EcomSail - Subcategorías';
     }
+})
 
-    
-
+window.livewire.on('slider',()=>{
+    var slider = new Slider();
+    console.log("slider")
 })
 
 console.log(route)
@@ -187,6 +189,14 @@ document.addEventListener('readystatechange',() => {
 
         if(route == 'list_attributes'){
             console.log("attr");
+            //$('#colorpicker').css('background-color','#FFFFFF');
+            //$('#colorpicker').colorpicker('setValue','#FFF');
+            //$('#colorpicker').ColorPicker()
+            //$('#colorpicker')[0].style.backgroundColor='#FFFFFF'
+            //$('#colorpicker').colpickSetColor('ffffff');
+            $('#colorpicker').val('#FFFFFF')
+            console.log($('#colorpicker'))
+    
         }
         if(route == "list_products"){
             

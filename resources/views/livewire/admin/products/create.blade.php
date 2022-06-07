@@ -37,18 +37,33 @@
             <div class="col-md-6">
               {{ Form::label('category','Categoría') }}
 
-              {{ Form::select('category',$cats,null,['class' => 'form-select', 'wire:model' => 'category'])}}
+              {{ Form::select('category',$cats,null,['class' => 'form-select', 'wire:model' => 'category','wire:change' => "setSubcategories"])}}
               @error('category')
               <p class="text-danger">{{$message}}</p>
               @enderror
             </div>
             <div class="col-md-6">
+
               {{ Form::label('subcategory','Subcategoría') }}
-              {{ Form::select('subcategory',$cats,null,['class' => 'form-select', 'wire:model' => 'subcategory','disabled'])}}
+              <select name="subcategory" id="subcategory" wire:model="subcategory" class="form-select" @isset($subcats)  @else disabled @endisset >
+                @if($subcats)
+                  <option value="0">Seleccione subcategoría</option>
+                  @foreach($subcats as $key=>$value)
+                    <option value="{{$key}}">{{$value}}</option>
+                  @endforeach
+                @endif
+              </select>
+
+              {{--{{ Form::select('subcategory',$cats,null,['class' => 'form-select', 'wire:model' => 'subcategory', if(0==0)'disabled' @endif])}} --}}
               @error('subcategory')
               <p class="text-danger">{{$message}}</p>
               @enderror
+
             </div>
+            <!-- no funciona -->
+            <div wire:loading wire:target="subcats">
+                  <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+              </div>
           </div>
           
           <div class="row mtop16">

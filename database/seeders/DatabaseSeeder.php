@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User, App\Models\Category;
+use App\Models\User;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -26,23 +26,17 @@ class DatabaseSeeder extends Seeder
             'permissions' => '{"admin_panel":"true","list_users":"true","edit_users":"true","admin_permissions":"true"}',
             'status' => 1           
         ]);
-        Category::create([
-            'status' => 1,
-            'type' => 0,
-            'name' =>'Ropa'
-        ]);
-        Category::create([
-            'status' => 1,
-            'type' => 0,
-            'name' =>'Gafas'
-        ]);
+        
         
         
         $this->call([
             LocationSeeder::class,
             ZoneSeeder::class,
             ProvinceSeeder::class,
-            CitySeeder::class
+            //CitySeeder::class,
+            CategorySeeder::class,
+            AttributeSeeder::class,
+            ProductSeeder::class            
         ]);
         
     }

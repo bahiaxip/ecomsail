@@ -21,8 +21,12 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/',[HomeController::class,'home'])->name('home');
+//Route::get('/',[HomeController::class,'home'])->name('home');
+//Route::get('/',[HomeController::class,'home'])->name('home');
+Route::get('/',Home::class)->name('home');
 
+//cart
+//Route::get('/cart',Cart::class)->name('cart');
 //para evitar pasar array en cada ruta podemos añadir la ruta 'App\Http\Controllers'
 //en el archivo de configuración de rutas RouteServiceProvider.php en el namespace del 
 //middleware web, en el método boot()

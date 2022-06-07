@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+@include('fastview_item')
 <div class="" style="width:100%;display:flex;">
     <li class="nav-item" style="float:left;list-style:none;color:orange;display:flex">
         <a href="{{url('/')}}" class="nav-link lk-home" style="color:#696969;display:flex">
@@ -30,9 +31,9 @@
             </a>
         </li>
         <div class="dropdown-menu" id="dropdownMenuLink5" arialabelledby="dropdownMenuLink">
-            <a href="#" class="btn btn_sail btn_pry dropdown-item">Accion</a>
-            <a href="#" class="btn btn_sail btn_pry dropdown-item" >Accion</a>
-            <a href="#" class="btn btn_sail btn_pry dropdown-item">Accion</a>
+            @foreach($categories as $cat)
+                <a href="#" class="btn btn_sail dropdown-item">{{$cat->name}}</a>
+            @endforeach            
         </div>
     </div>
     <div class="nav_user" >
@@ -101,14 +102,40 @@
 <div class="container">
     
     @include('slider_home')
-</div>
-<div class="w-100 ">
-    <div class="row justify-content-center">
-        <div class="col-auto h3 text-center nav_livewire2 p-4 rounded ">
-            Proyecto de prueba de eHidra con Laravel 8
+    <div class="div_products_list">
+    @foreach($products as $prod)    
+        <div class="products mtop32">
+            
+            <div class="image" data-bs-toggle="modal" data-bs-target="#fastview" wire:click="fastview">
+                <div class="layer">
+                    
+                    <div class="favorite">
+                        <div class="icon">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="plus">
+                        <div class="plus_btn">
+                            <button class="btn btn-sm btn_pry">
+                                <i class="fa-solid fa-cart-plus"></i> Añadir al carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <img src="{{$prod->path_tag.$prod->image}}" alt="">
+            </div>
+            <div class="title">
+                {{$prod->name}}        
+            </div>
+            
         </div>
-    </div>
+    
+    @endforeach
 </div>
+</div>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
