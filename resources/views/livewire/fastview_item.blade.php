@@ -8,9 +8,16 @@
           </div>
       @endif
       @if($item)
-      <div class="row">
+      <div wire:ignore class="row">
         <div class="col-md-4 carousel_item">
-            <img src="{{$item->path_tag.$item->image}}" alt="" width="128">
+            <div class="productmodal_slick">
+                <div>
+                  <img src="{{$item->path_tag.$item->image}}" alt="" width="128">
+                </div>
+                <div>
+                  <img src="{{$item->path_tag.$item->image}}" alt="" width="128">
+                </div>
+            </div>
         </div>
         <div class="col-md-8 " >
             <div class="modal-header justify-content-center title_item">
@@ -53,11 +60,7 @@
                                     //el input radio se establece mediante wire:model
                                     //esto genera conflictos al pasar un array, así que
                                     //checkeamos desde JS al acceder al modal
-                                    let combinationNodes = document.querySelectorAll('.combinations_items');
-                                    let combinations = [].slice.call(combinationNodes);
-                                    combinations.forEach((item)=>{
-                                      item.firstElementChild.firstElementChild.click();
-                                    })
+                                    
                                     
                                   </script>
                                 <!--
@@ -122,3 +125,12 @@
     </div>
   </div>
 </div>
+@push('scripts')
+<script>
+$(document).ready(()=>{
+           
+    
+  
+})
+</script>
+@endpush

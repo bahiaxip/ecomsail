@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.fastview_item')
+    
     <div class="" style="width:100%;display:flex;">
         <li class="nav-item" style="float:left;list-style:none;color:orange;display:flex">
             <a href="{{url('/')}}" class="nav-link lk-home" style="color:#696969;display:flex">
@@ -21,7 +21,9 @@
                 <a href="" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
             </ul>
         </div>
+        
         <div class="lat dropdown show">
+        {{--
             <li class="nav-item " >
                 <a href="#" class="nav-link lk-home dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">
                     <i class="fas fa-stream"></i> 
@@ -33,7 +35,9 @@
                     <a href="#" class="btn btn_sail dropdown-item">{{$cat->name}}</a>
                 @endforeach            
             </div>
+        --}}
         </div>
+        
         <div class="nav_user" >
             <ul class="" >
                 
@@ -97,72 +101,101 @@
             
         </nav>
     </div>
-    <div  class="container">
-        <div wire:ignore>
-            @include('livewire.slider_home')    
-        </div>
+    <div  class="container product_item">
         
-        <div class="div_products_list mtop32">
-        @foreach($products as $prod)    
-            <div class="products mtop32">
-                <a href="{{ url('/product/'.$prod->id) }}" class="image" wire:click="">
+        
+        <div class="div_product  mtop32">
+        
+            <div class="product_gallery mtop32">
+                <div class="image">
                     <div class="layer">
-                        <div class="favorite">
-                            <div class="icon">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
+                        
+                    </div>
+                    <div class="product_slick">
+                        <div>
+                            <img src="{{$prod->path_tag.$prod->image}}" alt="" >
                         </div>
-                        <div class="plus">
-                            <div class="plus_btn">
-                                <button class="btn btn-sm btn_pry" onclick="modalFastview(event)" wire:click.prevent="fastview({{$prod->id}})">
-                                    <i class="fa-solid fa-cart-plus"></i> Añadir al carrito
-                                </button>
-                            </div>
+                        <div>
+                            <img src="{{$prod->path_tag.$prod->image}}" alt="" >
                         </div>
                     </div>
-                    <img src="{{$prod->path_tag.$prod->image}}" alt="">
-                </a>
-                <div class="title">
-                    {{$prod->name}}        
+                    
+                </div>
+                
+            </div>
+            <div class="product">
+                <div class="header">
+                    <h2>{{$prod->name}}</h2>
                 </div>
                 <div class="price">
-                    {{$prod->price}} €
+                    <span>{{$prod->price}} €</span> 
+                    <p>(Impuestos incluidos)</p>
+                </div>
+
+                <div class="combinations product_combinations" >
+                    @if($combinations_list && count($combinations_list) > 0)
+                      @foreach($combinations_list as $key=>$comb)
+                        <div class="combinations_name">
+                            {{Form::label($comb['name'],$comb['name'])}}
+                        </div>
+                        <div class="combinations_items">
+                          
+                          @foreach($comb as $k => $c)
+                            @if($k != 'name')
+                                <div class="item">                                  
+                                    <input class="mylabel"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  />
+                                    <label for="" >
+                                      {{$c['name']}}
+                                    </label>
+                                  {{--{{$c['name']}}--}}
+                                  
+                                </div>
+                            @endif
+                          @endforeach
+                        </div>
+
+                        <!--
+                          <select name="{{$comb['name']}}" id="" class="form-select form-select-sm">          
+                                @foreach($comb as $k => $c)
+                                  @if($k != 'name' && $k !== 'id')
+                                  <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                  @endif
+                                @endforeach
+                          </select>
+                          -->
+                      @endforeach
+                    @endif
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-5">
+                      <div class="quantity">
+                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus')">
+                          <i class="fas fa-minus"></i>
+                        </a>
+                        {{ Form::number('quantity',1,['class' => 'form-control','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity']) }}
+                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus')">
+                          <i class="fas fa-plus"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-md-7 quantity_btn">
+                      <button type="button" class="btn " wire:click="add_cart">
+                        <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                      {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
+                      --}}
+                        <div class="icon_product">
+                            <i class="fas fa-star"></i> 
+                        </div>
+                    </div>                            
+                    
+                </div>
+                <div class="row mtop32">
+                    <h5>Descripción</h5>
+                     <p>{{$prod->detail}}</p>
                 </div>
             </div>
-        @endforeach
+        </div>
     </div>
-    
 </div>
 
-<script>
-    let sliderfirst = false;
-    function toggleDropdown(){
-        $('#dropdownMenuLink5').toggle()    
-    }
-
-    function modalFastview(){
-       
-        $('#fastview').modal('show');
-        if(!sliderfirst){
-            setTimeout(()=>{
-                $('.productmodal_slick').slick({
-                  dots:true,
-                  infinite:true,
-                  autoplay:true,
-                  autoplaySpeed:4000
-              });
-            },100);
-            sliderfirst = true
-        }else{
-
-        }
-        
-    }
-
-    function clearModal(){
-        $('#fastview').modal('hide');
-    }
-    var slider = new MDSlider();
-
-    
-</script>

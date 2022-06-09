@@ -99,6 +99,15 @@ window.livewire.on('slider',()=>{
 console.log(route)
 //editor_init('friendly_edit');
 
+//galería slick de imágenes
+$('.product_slick').slick({
+    dots:true,
+    infinite:true,
+    autoplay:true,
+    autoplaySpeed:4000
+});
+ 
+
 document.addEventListener('readystatechange',() => {        
 //document.addEventListener('DOMContentLoaded',() => {        
     
@@ -185,6 +194,8 @@ document.addEventListener('readystatechange',() => {
                 }
                 
             })
+
+
         }
 
         if(route == 'list_attributes'){
@@ -201,10 +212,28 @@ document.addEventListener('readystatechange',() => {
         if(route == "list_products"){
             
         }
+        if(route == 'home'){
+            let combinationNodes = document.querySelectorAll('.combinations_items');
+            let combinations = [].slice.call(combinationNodes);
+            combinations.forEach((item)=>{
+              item.firstElementChild.firstElementChild.click();
+            })
+        }
+        if(route == 'product'){
+            let combinationNodes = document.querySelectorAll('.combinations_items');
+            let combinations = [].slice.call(combinationNodes);
+            console.log("llega a product")
+            combinations.forEach((item)=>{
+              item.firstElementChild.firstElementChild.click();
+            })
+        }
+
+
         
 
 
 })
+
 
 //comprueba si existe algún checkbox seleccionado, si existe muestra el modal
 function testAnyCheckbox(){    

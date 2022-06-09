@@ -149,7 +149,7 @@ color8 = #696969
 
 .modal_item
 	padding-top 15px
-.modal_item .modal-content
+.modal_item .modal-content,.product_item
 	
 	.title_item
 		h5
@@ -157,7 +157,7 @@ color8 = #696969
 			font-size 1.7em
 	
 	.carousel_item
-		display inline-flex
+		/*display inline-flex*/
 		justify-content center
 		margin auto
 		overflow hidden
@@ -166,7 +166,7 @@ color8 = #696969
 			margin auto
 			height auto
 		
-	.quantity_item
+	.quantity_item,.div_product
 		
 		.price
 			
@@ -174,6 +174,7 @@ color8 = #696969
 				font-size 1.5em
 			p
 				font-size 0.7em
+		
 		.combinations			
 			display block
 			margin-bottom 20px
@@ -185,25 +186,27 @@ color8 = #696969
 				
 				display flex
 				flex-flow row wrap
-				.item					
-					/*
-					border-radius 5px
-					color color6
-					cursor pointer
-					margin 5px
-					outline color7 1px solid
-					padding 3px 8px
-					*/
-					/*
-					&:hover
-						background-color color2
+				.item
+					position relative
+					.mylabel
+						height 100%
+						position absolute
+						opacity 0
+						cursor pointer
+						width 100%
+						z-index 999
+						
+					input + label
+						border-radius 5px
+						color color6
+						margin 5px
+						outline color7 1px solid
+						padding 2px 8px
+						
+					input[type=radio]:checked + label
+						background-color color1
 						color #FFF
 					
-					&:active
-						background-color color2
-						box-shadow 1px 1px 6px color2
-						color #FFF
-					*/
 					
 		.quantity
 			display flex
@@ -225,7 +228,6 @@ color8 = #696969
 				&:last-child
 					margin-left 8px
 				&:active
-					
 					box-shadow 0 0 6px color6
 					color #FFF		
 			.form-control
@@ -262,10 +264,146 @@ color8 = #696969
 				&:active
 					box-shadow 0 0 6px color1
 					color #FFF
-
+/* sobreescribimos algunas clases del product y utilizando las clases del modal fastview*/
+.div_product
+	display flex
+	
+	
+	width 100%
+	.product_gallery
+		width 40%		
+		.image
+			/*display flex*/
+			justify-content center
+			margin auto
+			padding 0 15px
+			
+			img
+				align-items center
+				margin 0 auto
+				
+				max-width 400px
+				max-height 800px
+				/* responsive
+				width 100%
+				*/
+				padding 0 30px
+	.product
+		display block
+		margin 20px
+		width 60%
+		.header
+			text-align center
+		.combinations.product_combinations			
+			width 90%
+			.combinations_items
+					
+				display flex
+				flex-flow row wrap
+				.item
+					position relative
+					.mylabel
+						height 100%
+						position absolute
+						opacity 0
+						cursor pointer
+						width 100%
+						z-index 999
+						
+					input + label
+						border-radius 5px
+						color color6
+						margin 5px
+						outline color7 1px solid
+						padding 2px 8px
+						
+					input[type=radio]:checked + label
+						background-color color1
+						color #FFF
+					
+		.icon_product
+			align-items center
+			background-color color1
+			border-radius 50%
+			cursor pointer
+			display flex
+			font-size 1.2em
+			justify-content center
+			height 40px
+			vertical-align middle
+			width 40px
+			i					
+				color color7
+				font-size .8em
+		
+			&:active
+				box-shadow 0 0 6px color1
+				color #FFF
 		
 			
+/* clases para los botones del slider slick (por defecto se encuentra transparent)
+como existen 2 uno es el carousel de product y otro el modal de product
+*/
+/* comunes para los 2 carouseles*/
+.product_slick,.productmodal_slick
+	.slick-arrow
+		align-items center
+		
+		border-radius 50%
+		display flex	
+		justify-content center
+		
+		z-index 90
+		&:before
+			position relative
+			top 1px	
+		&:hover
+		&:active
+		&:focus
+			background-color rgba(0,0,0,.75)
+/*modificamos ancho y alto de botones según si es el carousel de product o product modal*/
+.product_slick
+	.slick-next
+		right 8px
+	.slick-prev
+		left 8px
+	.slick-arrow
+		background-color rgba(0,0,0,.6)	
+		height 36px
+		width 36px
+	
+.productmodal_slick
+	.slick-next
+		right 8px
+		/* modifica el color del guión
+		&:hover
+			background-color orange
+		*/
+	.slick-prev
+		left 8px
+	
+	.slick-arrow
+		background-color rgba(0,0,0,.6)	
+		height 16px
+		width 16px
+		/* modifica el color del guión
+		&:hover		
+			background-color orange
+		*/
+	.slick-arrow:before
+		/* color con before modifica el fondo del guión*/
+		color color7
+		font-size 30px
+		opacity 1
+	
+	
+		
+				
+		
+		
+		
 			
+	
 	
 @media only screen and (max-width 992px)
 	.nav_user
@@ -290,29 +428,6 @@ color8 = #696969
 
 /* fin font-face */
 
-.quantity_item
-	.combinations
-		.combinations_items
+
 			
-			.item
-				position relative
-					
-				
-				.mylabel
-					height 100%
-					position absolute
-					opacity 0
-					cursor pointer
-					width 100%
-					z-index 999
-					
-				input + label
-					border-radius 5px
-					color color6
-					margin 5px
-					outline color7 1px solid
-					padding 2px 8px
-					
-				input[type=radio]:checked + label
-					background-color color1
-					color #FFF
+			
