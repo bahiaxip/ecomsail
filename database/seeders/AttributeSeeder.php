@@ -30,6 +30,7 @@ class AttributeSeeder extends Seeder
 
         $colores = ['blanco','gris','azul','verde','rojo','amarillo'.'naranja','marrón','lila','dorado','plata'];
         $tallas = ['S','M','L','XL','XXL','XXXL'];
+        $flexometros = ['3M','5M','8M'];
 
         foreach($colores as $color){
             Attribute::create([
@@ -38,7 +39,6 @@ class AttributeSeeder extends Seeder
                 'slug' => $color,
                 'status' => 1,
                 'description' => 'Color '.$color,
-                
             ]);    
         }
 
@@ -49,7 +49,16 @@ class AttributeSeeder extends Seeder
                 'slug' => $talla,
                 'status' => 1,
                 'description' => 'Talla '.$talla
-            ]);    
+            ]);
+        }
+        foreach($flexometros as $flex){
+            Attribute::create([
+                'name' => $flex,
+                'type' => 2,
+                'slug' => $flex,
+                'status' => 1,
+                'description' => 'Talla '.$flex
+            ]);
         }
 
         

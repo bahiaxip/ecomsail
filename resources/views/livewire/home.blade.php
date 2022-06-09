@@ -125,6 +125,9 @@
                 <div class="title">
                     {{$prod->name}}        
                 </div>
+                <div class="price">
+                    {{$prod->price}} €
+                </div>
             </div>
         @endforeach
     </div>

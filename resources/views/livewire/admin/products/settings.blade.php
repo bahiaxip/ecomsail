@@ -253,7 +253,7 @@
                     <div class="panel shadow" id="panel_combinations" style="width:98%;min-height:50px;border: #D3D3D3 1px solid;border-radius:4px;padding:10px;margin:auto">
                     </div>
                     <div class="mtop16">
-                        <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})">Crear combinación</button>
+                        <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" onclick="">Crear combinación</button>
                     </div>
                 </div>
                 @if(session()->has('message2'))

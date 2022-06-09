@@ -3,6 +3,8 @@ color2 = #00b292
 color3 = #ff003d
 color4 = #489bf8
 color6 = #494949
+color7 = #E3E3E3
+color8 = #696969
 
 .mtop16
 	margin-top 16px
@@ -106,12 +108,13 @@ color6 = #494949
 						color color1
 						display flex
 						font-size 1.2em
-						height 20px
+						height 15px
 						justify-content center
 						margin-top 5px
 						padding 15px
-						width 20px
+						width 15px
 						i
+							font-size .8em
 							color #FFF
 				.plus				
 					align-items flex-end
@@ -140,34 +143,75 @@ color6 = #494949
 		.title
 			display flex
 			margin 10px auto
+		.price
+			display flex
+			justify-content center
 
 .modal_item
-.modal_item .modal-content
 	padding-top 15px
+.modal_item .modal-content
+	
 	.title_item
 		h5
 			font-family QuicksandB
 			font-size 1.7em
 	
 	.carousel_item
-		display flex
+		display inline-flex
 		justify-content center
-		padding 10px
+		margin auto
+		overflow hidden
+		padding 10px		
+		img
+			margin auto
+			height auto
+		
 	.quantity_item
 		
 		.price
-			min-height 100px
+			
 			span				
 				font-size 1.5em
 			p
 				font-size 0.7em
+		.combinations			
+			display block
+			margin-bottom 20px
+			.combinations_name
+				border-bottom color7 1px solid
+				margin-bottom 8px
+				width 100%			
+			.combinations_items
+				
+				display flex
+				flex-flow row wrap
+				.item					
+					/*
+					border-radius 5px
+					color color6
+					cursor pointer
+					margin 5px
+					outline color7 1px solid
+					padding 3px 8px
+					*/
+					/*
+					&:hover
+						background-color color2
+						color #FFF
+					
+					&:active
+						background-color color2
+						box-shadow 1px 1px 6px color2
+						color #FFF
+					*/
+					
 		.quantity
 			display flex
 			.amount_action
 				align-items center
-				background-color color1
+				background-color #696969
 				border-radius 50%
-				color #FFF
+				color color7
 				display flex
 				float left
 				font-size .8em
@@ -179,31 +223,45 @@ color6 = #494949
 				&:first-child
 					margin-right 8px
 				&:last-child
-					margin-left 8px		
+					margin-left 8px
+				&:active
+					
+					box-shadow 0 0 6px color6
+					color #FFF		
 			.form-control
 				float left
 				width calc(100% - 80px)
 		.quantity_btn
 			align-items center
 			display flex
-			justify-content space-around
+			justify-content center
+			
 			button
-				background-color color2
+				background-color color1
 				border-radius 5px
-				color #FFF
+				color color7
+				margin auto 10px
+				&:active
+					box-shadow 0 0 6px color1
+					color #FFF
 			.icon
 				align-items center
 				background-color color1
 				border-radius 50%
+				cursor pointer
 				display flex
 				font-size 1.2em
 				justify-content center
 				height 30px
 				vertical-align middle
 				width 30px
-				i
+				i					
+					color color7
+					font-size .8em
+			
+				&:active
+					box-shadow 0 0 6px color1
 					color #FFF
-		
 
 		
 			
@@ -231,3 +289,30 @@ color6 = #494949
 	src url(../fonts/quicksand/Quicksand-Bold.ttf)
 
 /* fin font-face */
+
+.quantity_item
+	.combinations
+		.combinations_items
+			
+			.item
+				position relative
+					
+				
+				.mylabel
+					height 100%
+					position absolute
+					opacity 0
+					cursor pointer
+					width 100%
+					z-index 999
+					
+				input + label
+					border-radius 5px
+					color color6
+					margin 5px
+					outline color7 1px solid
+					padding 2px 8px
+					
+				input[type=radio]:checked + label
+					background-color color1
+					color #FFF

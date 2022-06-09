@@ -772,22 +772,19 @@ class Product extends Component
         $this->init_discount=null;
         $this->end_discount=null;
     }
+    /*
     //crear combinaciones
-    public function createCombinations($data,$product_id){    
-        
+    public function createCombinations($data,$product_id){
         //$name_list=[];
         //$id_list=[];
-        
         $parent;
         $name_list = [];
         $id_list = [];
-
         foreach($data as $d){
             $at = Attr::findOrFail($d['id']);
             $name_list[] = $at->parentattr->name.' > '.$at->name;
             $id_list[] = $at->id;
         }
-        
         $name_list_string = implode(",",$name_list);
         $id_list_string = implode(",",$id_list);
         $comb = Comb::create([
@@ -798,12 +795,59 @@ class Product extends Component
         ]);
         $this->combinations = Comb::where('product_id',$product_id)->get();
         $this->emit('combinations');
+    }
+    */
+    public function createCombinations($data,$product_id){
+        $parent;
+        $name_list = [];
+        $id_list = [];
+        $parent = [];
+        $switchbol = false;
+        foreach($data as $d){
+            $at = Attr::findOrFail($d['id']);            
+            $parent[$at->type] = $at->id;
+            $combinations = Comb::where('product_id',$product_id)->get();
+            //comprobamos si ya existe el mismo valor en una combinación
+            foreach($combinations as $comb){
+                $list = explode(",",$comb->list_ids);
+                foreach($list as $l){
+                    //si ya existe el mismo valor en una de las combinaciones
+                    //devolvemos mensaje de error, así nos aseguramos de que 
+                    //nunca haya valores duplicados
+                    if($l == $at->id){
+                        $this->typealert = 'danger';
+                        session()->flash('message2',"Ya existe ese valor");
+                        $this->emit('combinations');
+                        return;
+                    }
+                }
+            }   
+            $name_list[] = $at->parentattr->name.' > '.$at->name;
+            $id_list[] = $at->id;
+        }
+        
+        //obtenemos el precio del producto para añadirlo a la combinación
+        //en la creación
+        $product = Prod::findOrFail($product_id);
+        $price = $product->final_price;
+        $name_list_string = implode(",",$name_list);
+        $id_list_string = implode(",",$id_list);        
+        $comb = Comb::create([
+            'name' => $name_list_string,
+            'list_ids' => $id_list_string,
+            'amount' => 0,
+            'product_id' => $product_id,
+            'final_price' => $price
+        ]);
+        $this->combinations = Comb::where('product_id',$product_id)->get();
+        $this->emit('combinations');
 
     }
     public function clearCombinations(){
         //list_combinations=[];
     }
 
+//revisar que se hace con el precio: el precio de la combinación puede ser independiente
     //eliminar combinación
     public function deleteComb($id){
         if($id){
@@ -827,11 +871,11 @@ class Product extends Component
     }
     //actualizar los precios de la combinación seleccionada
     public function save($id,$added_price,$final_price){
-        
-        if(!$added_price)
-            $added_price = 0.00;
         if(!$final_price)
             $final_price = 0.00;
+        if($added_price)
+            $final_price = $added_price+$final_price;
+        
         
         $comb = Comb::findOrFail($id);
         //dd($id);

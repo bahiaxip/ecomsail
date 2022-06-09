@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
             //CitySeeder::class,
             CategorySeeder::class,
             AttributeSeeder::class,
-            ProductSeeder::class            
+            ProductSeeder::class,
+            CombinationSeeder::class
         ]);
         
     }

@@ -361,18 +361,10 @@ let final_price_tmp;
 let added_price, final_price
 //añadir valor al panel de combinaciones
 function addValue(value_id,value_name,parent_id,el=null){
-    
-    
 //Revisar si es necesario
     //filtramos si ya existe en la lista de combinaciones el input seleccionado para no repetirlo
-    
-    //let filteredList = list_combinations.filter(item => item.id==value_id)
     let filteredList=list_combinations;
     console.log("filteredList: ",filteredList);
-    
-    
-
-
 //revisar si es necesario
     //este método era para la acción de descheckear, al cambiar a input radio no es necesario
     /*
@@ -382,7 +374,6 @@ function addValue(value_id,value_name,parent_id,el=null){
     }
     */
 
-    
     //si es el primero añadimos a la lista, si no es el primero comprobamos si pertenecen 
     //al mismo padre, ya que, al ser input radio solo puede haber uno seleccionado del mismo grupo
     if(filteredList.length == 0){
@@ -392,39 +383,45 @@ function addValue(value_id,value_name,parent_id,el=null){
         filteredList.push({id:value_id,name:value_name,parent_id:parent_id})
         list_combinations = filteredList;
     }
-    
-    
+    setListValues();
+}
+function setListValues(){
     let list=[];
     list_combinations.map((item)=>{
         let comb = `<button type="button" class="btn btn-primary btn-sm" style="margin:2px auto;vertical-align:middle">
-            ${item.name} <span class="badge text-bg-secondary" onclick="addValue(${item.id},'${item.name}')">X</span>
+            ${item.name} <span class="badge text-bg-secondary" onclick="deleteValue(${item.id},'${item.name}')">X</span>
         </button>`;        
         list.push(comb);
     })
-    console.log("list: ",list);
     let panel = document.querySelector('#panel_combinations');
-    panel.innerHTML=list;
+    panel.innerHTML=list.join(' ');
+}
+function deleteValue(id,name){    
+    list_combinations = list_combinations.filter(item => item.id != id)
+    setListValues();    
 }
 //resetea el div de generar combinaciones
 function clearPanelCombinations(){
     let panel = document.querySelector('#panel_combinations');
-    panel.innerHTML = "";
-    list_combinations = [];
-    clearValues()
+    panel.innerHTML = "";    
+    clearValues();
+    //console.log("boxes: ",boxes);
 
 }
 //resetear todos los checkbox de valores de los atributos para crear las combinaciones
-function clearValues(){
+async function clearValues(){
     let boxesNode = document.querySelectorAll('.boxes');
     let boxes = [].slice.call(boxesNode);
     //console.log(boxes)  
     boxes.map((box)=>{
         let valuesNode = box.querySelectorAll('.values');
         let values = [].slice.call(valuesNode);
-        values.map((child)=>{
+        values.map((child)=>{            
             child.firstElementChild.checked = false;
         })
     })
+    //limpiamos la lista de combinaciones
+    list_combinations = [];    
 }
 //mostrar/ocultar modal de confirmación para la eliminación de combinación o galería
 //para pasar el id de combinación usamos la variable combIdTmp
