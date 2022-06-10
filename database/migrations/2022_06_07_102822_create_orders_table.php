@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('subtotal',11,2);
             $table->decimal('total',11,2);
             $table->integer('payment_method')->default(0);
-            $talbe->text('payment_info')->nullable();            
+            $table->text('payment_info')->nullable();            
             $table->integer('user_id');
             $table->dateTime('paid_at');
             $table->timestamps();

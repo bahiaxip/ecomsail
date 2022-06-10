@@ -114,7 +114,7 @@
                         </div>
                         <div class="plus">
                             <div class="plus_btn">
-                                <button class="btn btn-sm btn_pry" onclick="modalFastview(event)" wire:click.prevent="fastview({{$prod->id}})">
+                                <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
                                     <i class="fa-solid fa-cart-plus"></i> Añadir al carrito
                                 </button>
                             </div>
@@ -139,28 +139,51 @@
     function toggleDropdown(){
         $('#dropdownMenuLink5').toggle()    
     }
-
+    /*
     function modalFastview(){
-       
+       console.log($('.productmodal_slick'))
         $('#fastview').modal('show');
+
         if(!sliderfirst){
             setTimeout(()=>{
                 $('.productmodal_slick').slick({
                   dots:true,
                   infinite:true,
                   autoplay:true,
-                  autoplaySpeed:4000
+                  autoplaySpeed:4000,
+                  
               });
+                console.log($('.productmodal_slick'));
             },100);
             sliderfirst = true
         }else{
-
+            sliderfirst=false;
+            setTimeout(()=>{
+                $('.productmodal_slick').slick({
+                  dots:true,
+                  infinite:true,
+                  autoplay:true,
+                  autoplaySpeed:4000,
+                  
+              });
+                console.log($('.productmodal_slick'));
+            },100);
+            console.log("primero");
         }
-        
     }
-
+    */
     function clearModal(){
+        
+        //$('.productmodal_slick').slick('destroy').slick();
+        //$('.productmodal_slick')[0].slick.destroy();
+        //$('.productmodal_slick')[0].slick.unslick();
+        $('.productmodal_slick').slick('unslick').slick('slickRemove');
+        //$('.productmodal_slick').slick('unslick');
+        $('.productmodal_slick').slick('destroy');
+        //$('.productmodal_slick').html('<div><img src="/images/products/appliance/fridges/candy_CMDDS/candy_CMDDS.jpg" width="128"></div>');
+        //$('.productmodal_slick').slick('destroy').slick();
         $('#fastview').modal('hide');
+        console.log("modal: ",$('.productmodal_slick'))
     }
     var slider = new MDSlider();
 

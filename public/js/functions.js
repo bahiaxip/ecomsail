@@ -95,17 +95,57 @@ window.livewire.on('slider',()=>{
     var slider = new Slider();
     console.log("slider")
 })
-
+/* no necesaria, eliminar
+window.livewire.on('galleryslider',()=>{
+    //$('productmodal_slick').slick('unslick').slick();
+    $('#fastview').modal('hide');
+    console.log("clearmodal")
+})
+*/
+//Para reicinializar el slider slick se inicia la primera vez, y después las
+//siguientes se usa refresh(). (antes se han eliminado las imágenes del slick)
+window.livewire.on('slick',(data)=>{
+    console.log("data: ",data);
+    if(data){
+        $('#fastview').modal('show');
+        //$('.productmodal_slick').slick('addValue','<div><img src="$this->imagen);)
+        $('.productmodal_slick').slick('refresh');        
+    }else{
+        $('#fastview').modal('show');
+    //    setTimeout(()=>{
+           $('.productmodal_slick').slick({
+              dots:true,
+              infinite:true,
+              autoplay:true,
+              autoplaySpeed:4000,
+              
+            });
+            console.log($('.productmodal_slick'));
+    //    },100);
+    }
+})
+//no necesario, eliminar
+/*
+window.livewire.on('unslick',()=>{
+    console.log("unslick");
+    $('#fastview').modal('hide');
+    $('.productmodal_slick').slick('unslick');
+})
+*/
 console.log(route)
 //editor_init('friendly_edit');
 
 //galería slick de imágenes
-$('.product_slick').slick({
-    dots:true,
-    infinite:true,
-    autoplay:true,
-    autoplaySpeed:4000
-});
+
+if(route == 'product'){
+    console.log("slick")
+    $('.product_slick').slick({
+        dots:true,
+        infinite:true,
+        autoplay:true,
+        autoplaySpeed:4000
+    });
+}
  
 
 document.addEventListener('readystatechange',() => {        

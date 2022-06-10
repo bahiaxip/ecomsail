@@ -2,21 +2,27 @@
 <div wire:ignore.self class="modal fade" id="fastview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-lg modal_item">
     <div class="modal-content">
-      @if(!$item || $combinations_list === null)
+      @if(!$item || $combinations_list === null )
           <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:1" >
               <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
           </div>
       @endif
       @if($item)
-      <div wire:ignore class="row">
+      <div  class="row">
         <div class="col-md-4 carousel_item">
             <div class="productmodal_slick">
-                <div>
-                  <img src="{{$item->path_tag.$item->image}}" alt="" width="128">
+              <div>
+                  <img src="{{$imagen}}" alt="" width="128" >
                 </div>
-                <div>
-                  <img src="{{$item->path_tag.$item->image}}" alt="" width="128">
-                </div>
+              @if($images_products->count() > 0)
+                @foreach($images_products as $ip)
+                  <div>
+                    <img src="{{$ip->path_tag.$ip->image}}" alt="" width="128">
+                  </div>
+                @endforeach
+              @endif
+              
+                
             </div>
         </div>
         <div class="col-md-8 " >
@@ -119,7 +125,7 @@
         
         
         
-        <button type="button" class="btn btn-sm  btn-secondary" onclick="clearModal()" wire:click="clear_product">Cancelar</button>
+        <button  class="btn btn-sm  btn-secondary" onclick="clearModal()" >Cancelar</button>
         
       </div>
     </div>

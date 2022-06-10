@@ -7,9 +7,7 @@ use App\Models\Attribute;
 class AttributeSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+ ¡¡¡Recordar que si se añaden Atributos padres nuevos los list_ids de combinations deben cambiarse (sumarse 1 por cada atributo nuevo)!!!
      */
     public function run()
     {
@@ -26,6 +24,13 @@ class AttributeSeeder extends Seeder
             'slug' => 'talla',
             'status' => 1,
             'description' => 'Tallas'
+        ]);
+        Attribute::create([
+            'name' => 'Longitud',
+            'type' => 0,
+            'slug' => 'longitud',
+            'status' => 1,
+            'description' => 'Longitud'
         ]);
 
         $colores = ['blanco','gris','azul','verde','rojo','amarillo'.'naranja','marrón','lila','dorado','plata'];
@@ -54,7 +59,7 @@ class AttributeSeeder extends Seeder
         foreach($flexometros as $flex){
             Attribute::create([
                 'name' => $flex,
-                'type' => 2,
+                'type' => 3,
                 'slug' => $flex,
                 'status' => 1,
                 'description' => 'Talla '.$flex

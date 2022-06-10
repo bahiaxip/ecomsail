@@ -82,8 +82,9 @@ return [
     | a Livewire component updates). It is set to "web" by default.
     |
     */
-
-    'middleware_group' => ['web','admin'],
+    //el admin genera error en algunas plantillas si no se está autenticado como admin
+    //'middleware_group' => ['web','admin'],
+    'middleware_group' => ['web'],
 
     /*
     |--------------------------------------------------------------------------

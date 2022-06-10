@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             AttributeSeeder::class,
             ProductSeeder::class,
-            CombinationSeeder::class
+            CombinationSeeder::class,
+            ProductsGallerySeeder::class,
         ]);
         
     }

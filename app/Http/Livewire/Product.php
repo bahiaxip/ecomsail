@@ -23,7 +23,6 @@ class Product extends Component
             $this->quantity++;
         elseif($operator == 'minus' && $this->quantity > 1)
             $this->quantity--;
-
     }
 
     public function setCombinations(){
