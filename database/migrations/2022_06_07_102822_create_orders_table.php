@@ -19,14 +19,15 @@ class CreateOrdersTable extends Migration
             $table->integer('order_type')->default(0);
             $table->integer('order_num')->nullable();
             $table->text('order_comment')->nullable();
-            $table->integer('delivery');
-            $table->integer('selected_address');
-            $table->decimal('subtotal',11,2);
-            $table->decimal('total',11,2);
+            $table->integer('delivery')->nullable();
+            $table->integer('selected_address')->nullable();
+            $table->decimal('subtotal',11,2)->nullable();
+            $table->decimal('total',11,2)->nullable();
             $table->integer('payment_method')->default(0);
             $table->text('payment_info')->nullable();            
             $table->integer('user_id');
-            $table->dateTime('paid_at');
+            $table->dateTime('paid_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

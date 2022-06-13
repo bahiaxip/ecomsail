@@ -2,14 +2,33 @@
 <div wire:ignore.self class="modal fade" id="fastview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-lg modal_item">
     <div class="modal-content">
+      @if(session()->has('message'))
+          <div class="container ">
+              <div class="alert alert-{{$typealert}}">            
+                  <h2 >{{session('message') }}</h2>
+                  @if($errors->any())
+                  <ul>
+                      @foreach($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+                  @endif
+                  <script>
+                      $('.alert').slideDown();
+                      setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+                  </script>
+              </div>
+          </div>
+      @endif
       @if(!$item || $combinations_list === null )
           <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:1" >
               <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
           </div>
       @endif
       @if($item)
+      {{ Form::hidden('product_id',$item->id)}}
       <div  class="row">
-        <div class="col-md-4 carousel_item">
+        <div class="col-md-4 carousel_item">          
             <div class="productmodal_slick">
               <div>
                   <img src="{{$imagen}}" alt="" width="128" >
@@ -21,8 +40,6 @@
                   </div>
                 @endforeach
               @endif
-              
-                
             </div>
         </div>
         <div class="col-md-8 " >
@@ -34,7 +51,7 @@
                 <div class="quantity_item">
                     <div class="row">
                         <div class="price">
-                            <span>{{$item->price}} €</span> 
+                            <span>{{ $price_tmp }} €</span> 
                             <p>(Impuestos incluidos)</p>
                         </div>
                         <div class="combinations" >
@@ -80,6 +97,9 @@
                                   -->
                               @endforeach
                             @endif
+                            @error('option')
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="row ">
@@ -88,44 +108,57 @@
                             <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus')">
                               <i class="fas fa-minus"></i>
                             </a>
-                            {{ Form::number('quantity',1,['class' => 'form-control','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity']) }}
-                            <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus')">
+                            {{ Form::number('quantity',1,['class' => 'form-control','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity','readonly' => 'true']) }}
+                            <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus')" >
                               <i class="fas fa-plus"></i>
                             </a>
                           </div>
+
                         </div>
                         <div class="col-md-7 quantity_btn">
-                          <button type="button" class="btn btn-sm" wire:click="add_cart">
+                          <button type="button" class="btn btn-sm" wire:click.prevent="add_cart" @guest disabled @endguest >
                             <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                           {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
                           --}}
-                            <div class="icon">
+                            <div class="icon @guest disabled @endguest" @auth wire:click.prevent="add_favorite" @endauth>
                                 <i class="fas fa-star"></i> 
                             </div>
-                        </div>                            
-                        
+                        </div>
                     </div>
                     <div class="row mtop32">
                         <h5>Descripción</h5>
                          <p>{{$item->detail}}</p>
                     </div>
-
                 </div>
-                
-
-                
             </div>
         </div>
       </div>
       @endif
       
       
-      <div class="modal-footer justify-content-end">
+      <div class="modal-footer fastview_footer">
+        @if(session()->has('message2'))
+            <div class="container ">
+                <div class="alert alert-{{$typealert}}">            
+                    <p >{{session('message2')}}</p>
+                    @if($errors->any())
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                    <script>
+                        $('.alert').slideDown();
+                        setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+                    </script>
+                </div>
+            </div>
+        @endif
         
         
         
-        
-        <button  class="btn btn-sm  btn-secondary" onclick="clearModal()" >Cancelar</button>
+        <button  class="btn btn-sm  btn-secondary" onclick="clearModal()" wire:click="clear_product">Cancelar</button>
         
       </div>
     </div>

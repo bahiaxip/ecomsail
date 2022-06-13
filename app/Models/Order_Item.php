@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Order_Item extends Model
+{
+    use HasFactory;
+
+    protected $table = 'orders_items';
+    protected $fillable = [
+        'combinations','quantity','discount_status','end_discount','price_unit','total','user_id','product_id','order_id'
+    ];
+    protected $hidden = ['created_at','updated_at'];
+
+    public function product(){
+        return $this->belongsTo(Product::class,'product_id','id');
+    }
+}

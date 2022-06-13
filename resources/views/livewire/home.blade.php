@@ -59,6 +59,7 @@
 
                         <span>CONTACTO</span></a>
                 </li>
+                @auth
                 <li class="nav-item">
                     <a href="" class="cart">
                         <span  style="">
@@ -66,15 +67,18 @@
                         </span> 
                     </a>
                 </li>
+                @endauth
             </ul>
         </div>
         <div class="lat lat_right" >
+            @auth
             <li>
-                <a href="{{url('/')}}" class="nav-link lk-home" >
+                <a href="{{url('/cart')}}" class="nav-link lk-home" >
                     <i class="fas fa-bag-shopping"></i> 
                     
                 </a>
             </li>
+            @endauth
             <li>
                 <a href="#" class="nav-link lk-home" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-user"></i>
@@ -115,7 +119,7 @@
                         <div class="plus">
                             <div class="plus_btn">
                                 <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
-                                    <i class="fa-solid fa-cart-plus"></i> Añadir al carrito
+                                    <i class="fa-solid fa-eye"></i> Vista rápida
                                 </button>
                             </div>
                         </div>
@@ -172,8 +176,8 @@
         }
     }
     */
-    function clearModal(){
-        
+    function clearModal(data=null){
+        @this.data = "false";
         //$('.productmodal_slick').slick('destroy').slick();
         //$('.productmodal_slick')[0].slick.destroy();
         //$('.productmodal_slick')[0].slick.unslick();
@@ -182,7 +186,10 @@
         $('.productmodal_slick').slick('destroy');
         //$('.productmodal_slick').html('<div><img src="/images/products/appliance/fridges/candy_CMDDS/candy_CMDDS.jpg" width="128"></div>');
         //$('.productmodal_slick').slick('destroy').slick();
-        $('#fastview').modal('hide');
+        if(!data){
+            $('#fastview').modal('hide');
+
+        }
         console.log("modal: ",$('.productmodal_slick'))
     }
     var slider = new MDSlider();

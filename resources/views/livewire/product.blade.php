@@ -111,7 +111,7 @@
                     <div class="layer">
                         
                     </div>
-                    <div class="product_slick">
+                    <div wire:ignore class="product_slick">
                         <div>
                             <img src="{{$prod->path_tag.$prod->image}}" alt="" >
                         </div>
@@ -128,7 +128,7 @@
                     <h2>{{$prod->name}}</h2>
                 </div>
                 <div class="price">
-                    <span>{{$prod->price}} €</span> 
+                    <span>{{$price_tmp}} €</span> 
                     <p>(Impuestos incluidos)</p>
                 </div>
 
@@ -189,6 +189,26 @@
                         </div>
                     </div>                            
                     
+                </div>
+                <div class="row mtop32">
+                    @if(session()->has('message2'))
+                        <div class="container ">
+                            <div class="alert alert-{{$typealert}}">            
+                                <p >{{session('message2')}}</p>
+                                @if($errors->any())
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                                <script>
+                                    $('.alert').slideDown();
+                                    setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+                                </script>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="row mtop32">
                     <h5>Descripción</h5>

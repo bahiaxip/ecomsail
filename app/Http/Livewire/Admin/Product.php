@@ -803,13 +803,26 @@ class Product extends Component
         $id_list = [];
         $parent = [];
         $switchbol = false;
+        //la cantidad de atributos seleccionados
+        $counter_data = count($data);
         foreach($data as $d){
             $at = Attr::findOrFail($d['id']);            
             $parent[$at->type] = $at->id;
             $combinations = Comb::where('product_id',$product_id)->get();
             //comprobamos si ya existe el mismo valor en una combinación
             foreach($combinations as $comb){
+
                 $list = explode(",",$comb->list_ids);
+                //si las combinaciones que ya existen tienen
+                //una cantidad de valores distinta a la combinación
+                //que se desea crear devolvemos mensaje de error
+                if($counter_data != count($list)){
+                    $this->typealert = 'danger';
+                        session()->flash('message2',"La combinación debe tener la misma cantidad de valores que las combinaciones existentes");
+                        $this->emit('combinations');
+                        return;
+                }
+
                 foreach($list as $l){
                     //si ya existe el mismo valor en una de las combinaciones
                     //devolvemos mensaje de error, así nos aseguramos de que 
@@ -829,7 +842,7 @@ class Product extends Component
         //obtenemos el precio del producto para añadirlo a la combinación
         //en la creación
         $product = Prod::findOrFail($product_id);
-        $price = $product->final_price;
+        $price = $product->price;
         $name_list_string = implode(",",$name_list);
         $id_list_string = implode(",",$id_list);        
         $comb = Comb::create([
@@ -837,7 +850,7 @@ class Product extends Component
             'list_ids' => $id_list_string,
             'amount' => 0,
             'product_id' => $product_id,
-            'final_price' => $price
+            'final_price' => 0.00
         ]);
         $this->combinations = Comb::where('product_id',$product_id)->get();
         $this->emit('combinations');

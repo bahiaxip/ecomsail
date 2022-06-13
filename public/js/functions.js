@@ -4,7 +4,8 @@ var token = document.getElementsByName('csrf_token')[0].getAttribute('content');
 var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
-'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity','editCity'
+'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity',
+'editCity','fastview'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
@@ -51,6 +52,7 @@ window.livewire.on('description3',(data)=>{
     CKEDITOR.instances.friendly_edit3.setData(data);
 
 })
+//ocultar div pasando el selector de id(#)  por parámetro(data)
 window.livewire.on('loading',(data)=>{
     let loading = document.querySelector('#'+data);
     if(data){
@@ -104,11 +106,9 @@ window.livewire.on('galleryslider',()=>{
 */
 //Para reicinializar el slider slick se inicia la primera vez, y después las
 //siguientes se usa refresh(). (antes se han eliminado las imágenes del slick)
-window.livewire.on('slick',(data)=>{
-    console.log("data: ",data);
-    if(data){
-        $('#fastview').modal('show');
-        //$('.productmodal_slick').slick('addValue','<div><img src="$this->imagen);)
+window.livewire.on('slick',(data)=>{    
+    if(data){        
+        $('#fastview').modal('show');        
         $('.productmodal_slick').slick('refresh');        
     }else{
         $('#fastview').modal('show');
@@ -118,12 +118,12 @@ window.livewire.on('slick',(data)=>{
               infinite:true,
               autoplay:true,
               autoplaySpeed:4000,
-              
             });
-            console.log($('.productmodal_slick'));
+           $('.productmodal_slick').slick('init');
     //    },100);
     }
 })
+
 //no necesario, eliminar
 /*
 window.livewire.on('unslick',()=>{
@@ -132,33 +132,49 @@ window.livewire.on('unslick',()=>{
     $('.productmodal_slick').slick('unslick');
 })
 */
-console.log(route)
+//reinicia el slider cada vez que livewire renderiza
+window.addEventListener('contentChanged',event =>{
+    console.log("contentChanged")
+    $('.productmodal_slick').slick('init'); 
+})
+window.addEventListener('contentChanged2',event =>{
+    console.log("contentChanged")
+    $('.product_slick').slick('init'); 
+})
 //editor_init('friendly_edit');
 
 //galería slick de imágenes
 
-if(route == 'product'){
-    console.log("slick")
-    $('.product_slick').slick({
-        dots:true,
-        infinite:true,
-        autoplay:true,
-        autoplaySpeed:4000
-    });
-}
+window.livewire.on('slick2',(data)=>{
+    console.log("slick2")
+    if(data){        
+        $('#fastview').modal('show');        
+        $('.product_slick').slick('refresh');        
+    }else{
+
+        //$('#fastview').modal('show');
+    //    setTimeout(()=>{
+           $('.product_slick').slick({
+              dots:true,
+              infinite:true,
+              autoplay:true,
+              autoplaySpeed:4000,
+            });
+           $('.product_slick').slick('init');
+    //    },100);
+    }
+})
  
 
 document.addEventListener('readystatechange',() => {        
-//document.addEventListener('DOMContentLoaded',() => {        
-    
-    console.log("llega")       
+//document.addEventListener('DOMContentLoaded',() => {
         if(document.readyState == "complete"){
             //tooltip
             Livewire.onLoad(() => {
                 $('[data-toggle="tooltip"]').tooltip()
             })
             if(route == 'categories'){ 
-                console.log("readystate")
+                //"readystate")
                 /*
                 let desc = document.querySelector('.description');
                 if(desc){
@@ -197,7 +213,7 @@ document.addEventListener('readystatechange',() => {
                     div_inputgroup.lastElementChild.classList.remove('active');
                 })
             }
-            console.log("history.length: ",window.history.length)
+            //console.log("history.length: ",window.history.length)
             
         //el evento popstate detecta el botón de adelante, atrás del navegador
             //o cuando se llama a los métodos history.back(), history.forward(), history.go()
@@ -229,7 +245,7 @@ document.addEventListener('readystatechange',() => {
                             window.location = path;
                         }
 
-                        console.log(path.match(/\//g).length);
+                        //console.log(path.match(/\//g).length);
                     }
                 }
                 
@@ -253,27 +269,45 @@ document.addEventListener('readystatechange',() => {
             
         }
         if(route == 'home'){
-            let combinationNodes = document.querySelectorAll('.combinations_items');
-            let combinations = [].slice.call(combinationNodes);
-            combinations.forEach((item)=>{
-              item.firstElementChild.firstElementChild.click();
-            })
+            
         }
-        if(route == 'product'){
-            let combinationNodes = document.querySelectorAll('.combinations_items');
-            let combinations = [].slice.call(combinationNodes);
-            console.log("llega a product")
-            combinations.forEach((item)=>{
-              item.firstElementChild.firstElementChild.click();
-            })
-        }
+
 
 
         
 
 
 })
+if(route == 'product'){
+    
+    let combinationNodes = document.querySelectorAll('.combinations_items');
+    let combinations = [].slice.call(combinationNodes);
+    console.log("llega a product")
+    combinations.forEach((item)=>{
+      item.firstElementChild.firstElementChild.click();
+    })
+    $('.product_slick').slick({
+      dots:true,
+      infinite:true,
+      autoplay:true,
+      autoplaySpeed:4000,
+    });
+   $('.product_slick').slick('init');
+}
+window.livewire.on('activeCombinations',() =>{
+    activeCheckboxCombinations();
+})
+    
 
+function activeCheckboxCombinations(){
+    console.log("llega a home");
+            let combinationNodes = document.querySelectorAll('.combinations_items');
+            console.log(combinationNodes)
+            let combinations = [].slice.call(combinationNodes);
+            combinations.forEach((item)=>{
+              item.firstElementChild.firstElementChild.click();
+            })
+}
 
 //comprueba si existe algún checkbox seleccionado, si existe muestra el modal
 function testAnyCheckbox(){    
