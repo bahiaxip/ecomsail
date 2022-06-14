@@ -382,7 +382,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		background-color rgba(0,0,0,.6)	
 		height 36px
 		width 36px
-	
+
 .productmodal_slick
 	.slick-next
 		right 8px
@@ -417,6 +417,10 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				
 /* carrito de compras */
 .cart
+	.empty_cart
+		display flex
+		justify-content center
+		margin-top 32px
 	.cart_header
 		border-bottom color7 2px solid
 	.cart_orders_items
@@ -484,7 +488,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		
 		
 			
-	
+@media only screen and (max-width 1200px)
+	.div_product
+		.product_gallery
+			.image
+				img
+					padding 0 0
 	
 @media only screen and (max-width 992px)
 	.nav_user

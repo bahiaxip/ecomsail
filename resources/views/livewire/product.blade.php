@@ -115,9 +115,13 @@
                         <div>
                             <img src="{{$prod->path_tag.$prod->image}}" alt="" >
                         </div>
-                        <div>
-                            <img src="{{$prod->path_tag.$prod->image}}" alt="" >
-                        </div>
+                        @if($images_products->count() > 0)
+                            @foreach($images_products as $ip)
+                              <div>
+                                <img src="{{url($ip->path_tag.$ip->image)}}" alt="" >
+                              </div>
+                            @endforeach
+                          @endif
                     </div>
                     
                 </div>

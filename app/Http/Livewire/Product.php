@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item;
+use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts;
 use Auth;
 class Product extends Component
 {
@@ -23,6 +23,7 @@ class Product extends Component
         $this->price_tmp = $this->product->price;
         $this->setCombinations();
         $this->counter=0;
+        $this->images_products = ImagesProducts::where('product_id',$id)->get();
     }
     public function hydrate(){
         if($this->counter == 0){
