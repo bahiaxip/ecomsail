@@ -1,0 +1,133 @@
+<div>
+    @include('livewire.modal_confirm')
+    @include('layouts.nav_user')
+    <div class="container">
+        <div class="row mtop32 cart justify-content-between">
+            <div class="col-md-8 shadow">
+                <div class="cart_header">
+                    <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
+                </div>
+                @php $sum=0;$total=0; @endphp
+                @if($orders_items->count()==0)
+                
+                <div class="empty_cart alert alert-success">
+                    <h5>El carrito está vacío</h5>
+                </div>
+                
+                @else
+                <div class="cart_orders_items">
+                    <table class="table_orders_items">
+                        <thead>
+                            <tr>                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+
+
+                            @foreach($orders_items as $oi)
+                            <tr>                                
+                                <td class="image">
+                                    <img style="max-width:128px;max-height:128px" src="{{url($oi->product->path_tag.$oi->product->image)}}" alt="">
+                                </td>
+                                <td>{{$oi->product->name}}</td>
+                                <td class="quantity">
+                                    {{Form::number('quantity',$oi->quantity,['class' => 'form-control','wire:model' => $quantity])}}
+                                </td>
+                                <td class="subtotal">
+                                    {{$oi->total}}
+                                </td>
+                                <td>
+                                    <div class="admin_items">
+                                        <button class="btn btn-sm delete" title="Eliminar producto" wire:click="save_product_id({{$oi->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @php
+                            $sum = $sum + $oi->quantity;
+                            $total = $total + $oi->total;
+                            @endphp
+
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @endif
+            </div>
+            <div class="col-md-3 shadow">
+                <div class="resum">
+                    <span class="left">{{$sum}} Productos</span>
+                    <span class="right">{{$total}} €</span>
+                </div>
+                <div class="resum">
+                    <span class="left">Transporte</span>
+                    <span class="right">Gratis</span>
+                </div>
+                
+                <div class="address">
+                    <a class="btn btn_sry w-100" href="#collapse_address" type="button"  data-bs-toggle="collapse">
+                        Direcciones
+                        <i class="fa-solid fa-chevron-down"></i>    
+                    </a>
+                    <div class="collapse " id="collapse_address">
+                        @if($addresses->count() > 0)
+                            @foreach($addresses as $adr)
+                            <div class="card card-body @if($adr->default==1) active @endif" onclick="set_direction(this)">
+                                <div class="row">
+                                    
+                                    <div class="col-md-2 input">
+                                        <input type="radio" name="address_selected" value="{{$adr->id}}" wire:model.defer="address_selected">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-title">
+                                            <h5>{{$adr->title}}</h5>
+                                        </div>
+                                        <div class="card-subtitle">
+                                            {{$adr->name}} {{$adr->lastname}}
+                                        </div>
+                                        <div class="card-text">
+                                            <div>{{$adr->address_home}}</div>
+                                            <span>
+                                                {{$adr->cp}} 
+                                                @if($adr->city_id){{$adr->get_city->name}}@endif
+                                            </span>
+                                            <div>{{$adr->get_location->name}}</div>
+                                            <div>{{$adr->nif}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="card card-body text-center nueva">
+                            <p>No existen direcciones</p>
+                            <a href="/address/{{$user_id}}" class="btn btn-sm btn_pry">Crear dirección</a>
+                        </div>
+                        @endif
+                    </div>
+                    
+                </div>
+                <div class="payment">
+                    Tipos de pago
+                </div>
+                <div class="comment">
+                    {{Form::label('comment','Mensaje ')}}
+                    {{Form::textarea('comment',null,['class' => 'form-control'])}}
+                    
+                </div>
+                <div class="finish_order mtop32">
+                    <button class="btn btn_pry" wire:click="finish_order">
+                        FINALIZAR COMPRA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

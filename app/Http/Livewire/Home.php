@@ -278,6 +278,6 @@ class Home extends Component
         $data = ['products' => $products,'categories' => $categories];
 
         //el slider falla con el layouts.app por duplicado de la clase content
-        return view('livewire.home',$data)->extends('layouts.main');
+        return view('livewire.home.home',$data)->extends('layouts.main');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address;
 use Auth;
 class Cart extends Component
 {
@@ -12,6 +12,7 @@ class Cart extends Component
     public $quantity;
     //id temporal de order_item para la eliminación
     public $oiIdTmp;
+    public $address_selected;
 
     public function mount(){
         $this->user_id = Auth::id();
@@ -22,7 +23,7 @@ class Cart extends Component
     public function get_order(){
         $order = Order::where('user_id',$this->user_id)->where('status',0)->first();
         
-        if($order->count() == 0){
+        if(!$order || $order->count() == 0){
             $order = new Order();
             $order->user_id = Auth::id();
             $order->save();
@@ -49,11 +50,37 @@ class Cart extends Component
         $oi->delete();
     }
 
+    public function finish_order(){
+        dd($this->address_selected);
+    }
+
+    public function change_quantity($operator){
+        if($operator == 'plus' )
+            $this->quantity++;
+        elseif($operator == 'minus' && $this->quantity > 1)
+            $this->quantity--;
+        
+        $this->price_tmp = $this->product->price * $this->quantity;        
+        if($this->added_price){
+            $this->set_price_combinations();
+            $this->added_price = $this->added_price * $this->quantity;
+        }
+        $this->price_tmp = $this->price_tmp + $this->added_price;
+        //$this->price_tmp = $this->item->price + $this->added_price;
+        //$this->dispatchBrowserEvent('contentChanged2');
+    }
+
     public function render()
     {
         $orders_items = $this->get_orders_items($this->order_id);
-        
-        $data = ['orders_items' => $orders_items];
-        return view('livewire.cart',$data)->extends('layouts.main');
+        $addresses = Address::where('user_id',$this->user_id)->get();
+        //establecemos el input radio de las direcciones como predeterminado
+        foreach($addresses as $adr){
+            if($adr->default == 1){                
+                $this->address_selected = $adr->id;
+            }
+        }
+        $data = ['orders_items' => $orders_items,'addresses' => $addresses];
+        return view('livewire.cart.cart',$data)->extends('layouts.main');
     }
 }

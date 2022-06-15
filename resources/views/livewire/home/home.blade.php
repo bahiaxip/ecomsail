@@ -1,10 +1,9 @@
 <div>
-    @include('livewire.fastview_item')
-
+    @include('livewire.home.fastview_item')
     @include('layouts.nav_user')
     <div  class="container">
         <div wire:ignore>
-            @include('livewire.slider_home')    
+            @include('livewire.home.slider_home')    
         </div>
         
         <div class="div_products_list mtop32">
@@ -31,7 +30,8 @@
                     {{$prod->name}}        
                 </div>
                 <div class="price">
-                    {{$prod->price}} €
+                    <span>{{$prod->price}} €</span>
+                    
                 </div>
             </div>
         @endforeach

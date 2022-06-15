@@ -6,6 +6,8 @@ color6 = #494949
 color7 = #E3E3E3
 color8 = #696969
 
+.mauto
+	margin auto
 .mtop16
 	margin-top 16px
 .mtop32
@@ -13,14 +15,22 @@ color8 = #696969
 
 .btn_pry
 	background-color color1
+	color color7
+	&:hover
+		color #FFF
 	&:focus
 		box-shadow 0 0 6px color1
 .btn_sry
 	background-color color2
+	&:hover
+		color #FFF
 	&:focus
 		box-shadow 0 0 6px color2
 .btn_grey
 	background-color color6
+	color color7
+	&:hover
+		color #FFF
 	&:focus
 		box-shadow 0 0 6px color6
 
@@ -73,7 +83,8 @@ color8 = #696969
 	width 100%
 	
 	.products
-		display inline-block
+		display inline-flex
+		flex-flow row wrap
 		margin auto
 		position relative
 		text-align left
@@ -145,8 +156,7 @@ color8 = #696969
 			display flex
 			margin 10px auto
 		.price
-			display flex
-			justify-content center
+			margin auto
 
 .modal_item
 	padding-top 15px
@@ -414,6 +424,16 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	display flex
 	flex-flow row
 	justify-content end
+
+/* producto */
+.product_message, .fastview_message
+	display flex
+	justify-content space-between
+	p
+		margin 0
+
+
+/* fin producto */
 				
 /* carrito de compras */
 .cart
@@ -424,10 +444,10 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	.cart_header
 		border-bottom color7 2px solid
 	.cart_orders_items
-		margin-top 16px
-		
+		display flex
+		justify-content center
+		margin-top 16px		
 		width 100%
-		style="display:flex;justify-content:center"
 		.table_orders_items
 			width 100%
 			thead
@@ -435,18 +455,51 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					td
 						text-align center
 			tbody
-				tr				
+				tr	
 					td.image
+						margin 10px auto
 						min-width 120px
 						display flex
 						justify-content center
-					td.quantity					
+					td.quantity
 						margin auto
-						max-width 60px
+						min-width 120px
+						
+						.div_quantity
+							display flex
+						
+							width 100%
+							input
+								min-width 80px
+								max-width 100px
+								width 100%
+							.amount_action
+								align-items center
+								background-color #696969
+								border-radius 50%
+								color color7
+								display flex
+								float left
+								font-size .8em
+								margin-top 4px
+								height 32px
+								justify-content center
+								text-decoration none
+								width 32px
+								min-width 32px
+								&:first-child
+									margin-right 8px
+								&:last-child
+									margin-left 8px
+								&:active
+									box-shadow 0 0 6px color6
+									color #FFF
 					td.subtotal
 						font-size 1.2em
 						font-weight bold
 						text-align center
+			
+			
 	.admin_items
 		.edit
 			background-color color2
@@ -482,9 +535,74 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			color color7
 			&:hover
 				color #FFF
+.address
+	.address_header
+		display flex
+		justify-content space-between
+		padding 10px
+	.empty_address
+		display flex
+		justify-content center
+		margin-top 32px
+	.address_orders_items
+		display flex
+		justify-content center
+		margin-top 16px		
+		width 100%
+		.table_orders_items
+			width 100%
+			thead
+				tr
+					td
+						text-align center
+			.admin_items
+				display flex
+				justify-content space-around
 	
+	#collapse_address
+		margin-top 5px
+		
+		.input
+			margin auto
+			input:checked::after
+				width 15px
+				height 15px
+				content ''
+				position relative
+				display inline-block
+				border 2px solid color4
+				color orange
+				top -4px
+				left -1px
+				border-radius 15px
+				background-color color1
+		.card-title
+			font-size 22px				
+		.card-text
+			div
+				display flex
+		
+			
+		.card-body			
+			cursor pointer				
+		a
+			margin auto
+			width 50%
+		.card-body.active
+			border color1 2px solid
+				
+.btn_collapse
+	display flex
+	justify-content space-between
+	width 100%
+	i			
+		align-items center
+		display flex					
 /* fin carrito de compras */
-	
+/* panel direcciones	*/
+
+			
+/* fin panel direcciones	*/
 		
 		
 			

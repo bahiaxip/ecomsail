@@ -232,6 +232,6 @@ class Product extends Component
         $this->computed_option = $this->option;
         
         $data = ['prod' => $this->product,'combinations_list' => $this->combinations_list];
-        return view('livewire.product',$data)->extends('layouts.main');
+        return view('livewire.products.product',$data)->extends('layouts.main');
     }
 }

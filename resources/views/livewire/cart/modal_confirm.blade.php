@@ -1,5 +1,5 @@
 <!-- Modal confirmación eliminar usuario -->
-<div wire:ignore.self class="modal fade" id="fastview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+<div wire:ignore.self class="modal fade" id="modalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       {{--
@@ -10,11 +10,12 @@
       @endif
       --}}
       <div class="modal-header justify-content-center">
-        
+        ¿Desea eliminar este producto del carrito?
       </div>      
       <div class="modal-footer justify-content-center">
-        
-        <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearProdId()">Cancelar</button>
+
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click="clear_oi_id()">Cancelar</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click="delete()">Eliminar</button>
         
       </div>
     </div>

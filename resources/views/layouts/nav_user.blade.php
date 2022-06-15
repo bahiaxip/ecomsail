@@ -14,9 +14,9 @@
                 <i class="fa-solid fa-bars"></i>
             </a>
             <ul class="dropdown-menu">            
-                <a href="" class="dropdown-item" data-toggle="dropdown">INICIO</a>
-                <a href="" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
-                <a href="" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
+                <a href="{{url('/')}}" class="dropdown-item" data-toggle="dropdown">INICIO</a>
+                <a href="{{url('/store')}}" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
+                <a href="{{url('/')}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
             </ul>
         </div>
         
@@ -63,7 +63,7 @@
                 </li>
                 @auth
                 <li class="nav-item">
-                    <a href="" class="cart">
+                    <a href="{{url('/cart')}}" class="cart">
                         <span  style="">
                             CARRITO
                         </span> 
@@ -85,18 +85,43 @@
                 <a href="#" class="nav-link lk-home" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-user"></i>
                 </a>
+                @auth
+                <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton2" style="" >
+                    <li style="">
+                        <a href="/register" class="dropdown-item" >
+                            <i class="fa-solid fa-user-pen"></i>
+                            Mi perfil
+                        </a>
+                    </li>
+                    <li style="">
+                        <a href="/address/{{auth()->id()}}" class="dropdown-item" >
+                            <i class="fa-solid fa-location-arrow"></i>
+                            Direcciones                        
+                        </a>
+                    </li>
+                    <li style="">
+                        <a href="/logout" class="dropdown-item" >
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+                @else
                 <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton2" style="" >
                     <li style="">
                         <a href="/login" class="dropdown-item" >
+                            <i class="fa-solid fa-user"></i>
                             Iniciar sesión                        
                         </a>
                     </li>
                     <li style="">
                         <a href="/register" class="dropdown-item" >
+                            <i class="fa-solid fa-user-plus"></i>
                             Registrarse                        
                         </a>
                     </li>
                 </ul>
+                @endif
             </li>
         </div>
         <nav class="navbar navbar-expand-lg justify-content-center">

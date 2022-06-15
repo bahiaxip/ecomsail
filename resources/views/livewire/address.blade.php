@@ -1,17 +1,22 @@
 <div>
-    @include('livewire.modal_confirm')
     @include('layouts.nav_user')
+    @include('livewire.addresses.create')
     <div class="container">
-        <div class="row mtop32 cart">
+        <div class="row mtop32 address">
             <div class="col-md-8 shadow">
-                <div class="cart_header">
-                    <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
+                <div class="address_header">
+                    <h5>
+                        <i class="fa-solid fa-location-arrow"></i> DIRECCIONES
+                    </h5>
+                    <button class="btn btn_pry" data-bs-toggle="modal" data-bs-target="#addAddress" wire:click="store()">
+                        Crear
+                    </button>
                 </div>
                 @php $sum=0;$total=0; @endphp
-                @if($orders_items->count()==0)
+                @if($addresses->count()==0)
                 
-                <div class="empty_cart alert alert-success">
-                    <h5>El carrito está vacío</h5>
+                <div class="empty_address alert alert-success">
+                    <h5>Aun no existen direcciones</h5>
                 </div>
                 
                 @else
@@ -30,8 +35,9 @@
                             
 
 
-                            @foreach($orders_items as $oi)
-                            <tr>                                
+                            @foreach($addresses as $address)
+                            <tr>
+                            {{--                                
                                 <td class="image">
                                     <img style="max-width:128px;max-height:128px" src="{{url($oi->product->path_tag.$oi->product->image)}}" alt="">
                                 </td>
@@ -49,6 +55,7 @@
                                         </button>
                                     </div>
                                 </td>
+                            --}}
                             </tr>
                             @php
                             $sum = $sum + $oi->quantity;

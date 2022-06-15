@@ -5,7 +5,7 @@ var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
 'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity',
-'editCity','fastview'
+'editCity','fastview','addAddress'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
@@ -250,6 +250,25 @@ document.addEventListener('readystatechange',() => {
                 }
                 
             })
+            if(route == 'product'){
+    
+                let combinationNodes = document.querySelectorAll('.combinations_items');
+                let combinations = [].slice.call(combinationNodes);
+                console.log("llega a product")
+                console.log(combinations);
+                combinations.forEach((item)=>{
+                    console.log(item);
+                    item.firstElementChild.firstElementChild.click();
+                })
+                $('.product_slick').slick({
+                  dots:true,
+                  infinite:true,
+                  autoplay:true,
+                  autoplaySpeed:4000,
+                });
+               $('.product_slick').slick('init');
+            }
+            
 
 
         }
@@ -278,22 +297,7 @@ document.addEventListener('readystatechange',() => {
 
 
 })
-if(route == 'product'){
-    
-    let combinationNodes = document.querySelectorAll('.combinations_items');
-    let combinations = [].slice.call(combinationNodes);
-    console.log("llega a product")
-    combinations.forEach((item)=>{
-      item.firstElementChild.firstElementChild.click();
-    })
-    $('.product_slick').slick({
-      dots:true,
-      infinite:true,
-      autoplay:true,
-      autoplaySpeed:4000,
-    });
-   $('.product_slick').slick('init');
-}
+
 window.livewire.on('activeCombinations',() =>{
     activeCheckboxCombinations();
 })
@@ -983,3 +987,15 @@ window.livewire.on('reload_images',(product_id)=>{
     //activamos la pestaña de galería, ya que al renderizar se pasa a la primera
     document.querySelector('#nav-gallery-tab').click();
 })
+
+//establecemos el input pulsando desde cualquier punto de la card de direcciones
+
+function set_direction(el){    
+    el.querySelector('.input').firstElementChild.click()
+    let directionsNodes = document.querySelectorAll('.card-body')
+    let directions = [].slice.call(directionsNodes);
+    directions.map((item)=>{
+        item.classList.remove('active');
+    })
+    el.classList.add('active');
+}

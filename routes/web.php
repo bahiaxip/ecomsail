@@ -30,6 +30,9 @@ Route::get('/cart',Cart::class)->name('cart');
 
 //product
 Route::get('/product/{id}',Product::class)->name('product');
+
+//addresses
+Route::get('/address/{id}',Address::class)->name('address');
 //para evitar pasar array en cada ruta podemos añadir la ruta 'App\Http\Controllers'
 //en el archivo de configuración de rutas RouteServiceProvider.php en el namespace del 
 //middleware web, en el método boot()
