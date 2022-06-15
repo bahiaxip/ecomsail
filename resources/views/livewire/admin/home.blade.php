@@ -66,17 +66,17 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
-                        Pedidos hoy
+                        Visitas hoy
                     </div>
                     <div class="card-body">
-                        10
+                        {{$visitors_today}}
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
-                        Pedidos hoy
+                        Valor medio del carrito
                     </div>
                     <div class="card-body">
                         10

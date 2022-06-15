@@ -13,10 +13,10 @@ class Cart extends Component
     //id temporal de order_item para la eliminación
     public $oiIdTmp;
     public $address_selected;
-
+    public $typealert;
     public function mount(){
         $this->user_id = Auth::id();
-        $this->order_id = $this->get_order()->id;
+        
         
     }
 
@@ -54,6 +54,8 @@ class Cart extends Component
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
         
         $order->update(['status'=>1]);
+        $this->typealert = 'success';
+        session()->flash('message','Compra realizada correctamente');        
     }
 
     public function change_quantity($operator){
@@ -74,6 +76,7 @@ class Cart extends Component
 
     public function render()
     {
+        $this->order_id = $this->get_order()->id;
         $orders_items = $this->get_orders_items($this->order_id);
         $addresses = Address::where('user_id',$this->user_id)->get();
         //establecemos el input radio de las direcciones como predeterminado

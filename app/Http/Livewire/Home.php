@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product, App\Models\Category, App\Models\Combination, App\Models\Attribute, App\Models\ImagesProducts, App\Models\Order, App\Models\Order_Item;
+use App\Models\Product, App\Models\Category, App\Models\Combination, App\Models\Attribute, App\Models\ImagesProducts, App\Models\Order, App\Models\Order_Item, App\Models\Visitor;
 use Auth;
 class Home extends Component
 {
@@ -29,6 +29,26 @@ class Home extends Component
     public $added_price=0;
     public $typealert='success';
 //error si no hay combinaciones
+
+    public function mount(){
+        $this->set_new_visitor();
+    }
+
+    public function set_new_visitor(){
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+        $page = $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF'];
+        $referer = $_SERVER['HTTP_REFERER'];
+        $datetime = date("F j, Y, g:i a");
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $visitor = Visitor::create([
+            'ipaddress' => $ipaddress,
+            'page' => $page,
+            'referrer' => $referer,
+            'time' => $datetime,
+            'user_agent' => $user_agent
+        ]);
+    }
+
     public function fastview($id){        
         $list = [];
         

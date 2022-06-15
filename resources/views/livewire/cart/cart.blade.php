@@ -7,11 +7,29 @@
                 <div class="cart_header">
                     <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
                 </div>
+                @if(session()->has('message'))
+                <div class="container ">
+                    <div class="alert alert-{{$typealert}}">            
+                        <h5>{{session('message') }}</h5>
+                        @if($errors->any())
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        @endif
+                        <script>
+                            $('.alert').slideDown();
+                            setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+                        </script>
+                    </div>
+                </div>
+                @endif
                 @php $sum=0;$total=0; @endphp
                 @if($orders_items->count()==0)
                 
-                <div class="empty_cart alert alert-success">
-                    <h5>El carrito está vacío</h5>
+                <div class="empty_cart">
+                    <p>El carrito está vacío. Agregue productos al carrito</p>
                 </div>
                 
                 @else
