@@ -51,7 +51,9 @@ class Cart extends Component
     }
 
     public function finish_order(){
-        dd($this->address_selected);
+        $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
+        
+        $order->update(['status'=>1]);
     }
 
     public function change_quantity($operator){

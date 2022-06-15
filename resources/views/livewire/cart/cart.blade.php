@@ -1,7 +1,7 @@
 <div>
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row mtop32 cart justify-content-between">
             <div class="col-xl-8 shadow">
                 <div class="cart_header">

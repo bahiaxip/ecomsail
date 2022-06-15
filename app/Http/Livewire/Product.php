@@ -47,7 +47,6 @@ class Product extends Component
         $this->price_tmp = $this->price_tmp + $this->added_price;
         //$this->price_tmp = $this->item->price + $this->added_price;
         //$this->dispatchBrowserEvent('contentChanged2');
-
     }
 
     public function setCombinations(){

@@ -18,7 +18,7 @@
 	<div class="options mtop16">
 		<ul>
 			<li>
-				<a href="{{ url('/admin') }}">
+				<a href="{{ route('list_home') }}">
 					<i class="fa-solid fa-chart-line"></i> 
 					<span class="d-none d-lg-inline-flex">
 						Inicio
