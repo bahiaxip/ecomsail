@@ -94,6 +94,18 @@
                         </a>
                     </li>
                     <li style="">
+                        <a href="/register" class="dropdown-item" >
+                            <i class="fa-solid fa-user-pen"></i>
+                            Mis favoritos
+                        </a>
+                    </li>
+                    <li style="">
+                        <a href="/register" class="dropdown-item" >
+                            <i class="fa-solid fa-user-pen"></i>
+                            Historial de pedidos
+                        </a>
+                    </li>
+                    <li style="">
                         <a href="/address/{{auth()->id()}}" class="dropdown-item" >
                             <i class="fa-solid fa-location-arrow"></i>
                             Direcciones                        

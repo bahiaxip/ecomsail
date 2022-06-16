@@ -79,6 +79,7 @@
                             @php
                             $sum = $sum + $oi->quantity;
                             $total = $total + $oi->total;
+                            $this->total = $total;
                             @endphp
 
                             @endforeach
@@ -139,22 +140,53 @@
                         </div>
                         @endif
                     </div>
-                    
                 </div>
-                <div class="payment mtop16">
-                    <a class="btn btn_grey btn_collapse" href="#collapse_address" type="button"  data-bs-toggle="collapse">
+                <div class="payment mtop10">
+                    <a class="btn btn_grey btn_collapse" href="#collapse_payment" type="button"  data-bs-toggle="collapse">
                         <i class="fa-solid fa-credit-card"></i>
                         Pagos
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
+                    <div class="collapse " id="collapse_payment">
+                        
+                            
+                        <div class="card card-body" >
+                            <div class="row">
+                                <div class="div_btn_payment input">
+                                    <button class="btn btn_payment" onclick="set_payment(this)">
+                                        <input type="radio" name="payment_method" wire:model.defer="payment_selected" value="1">
+                                            Tarjeta
+                                        </input>
+                                    </button>
+                                </div>
+                                <div class="div_btn_payment input">
+                                    <button class="btn btn_payment" onclick="set_payment(this)">
+                                        <input type="radio" name="payment_method" wire:model.defer="payment_selected" value="2">
+                                            Transferencia
+                                        </input>
+                                    </button>
+                                </div>
+                                <div class="div_btn_payment input">
+                                    <button class="btn btn_payment" onclick="set_payment(this)">
+                                        <input type="radio" name="payment_method" class=" " wire:model.defer="payment_selected" value="3">
+                                            Paypal
+                                        </input>
+                                    </button>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    @error('payment_selected')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
                 </div>
-                <div class="comment">
+                <div class="comment mtop16">
                     {{Form::label('comment','Mensaje ')}}
-                    {{Form::textarea('comment',null,['class' => 'form-control'])}}
+                    {{Form::textarea('comment',null,['class' => 'form-control','rows' => 3])}}
                     
                 </div>
                 <div class="finish_order mtop32">
-                    <button class="btn btn_pry" @if($orders_items->count() > 0 && $addresses->count() > 0) wire:click="finish_order" @else disabled @endif>
+                    <button class="btn btn_pry" @if($orders_items->count() > 0 && $addresses->count() > 0 && $address_selected ) wire:click="finish_order" @else disabled @endif>
                         FINALIZAR COMPRA
                     </button>
                 </div>

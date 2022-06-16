@@ -15,11 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('status')->default(0);            
+            $table->integer('status')->default(0);
+            $table->string('ref')->nullable();
             $table->integer('order_type')->default(0);
             $table->integer('order_num')->nullable();
             $table->text('order_comment')->nullable();
-            $table->integer('delivery')->nullable();
+            $table->integer('location')->nullable();
             $table->integer('selected_address')->nullable();
             $table->decimal('subtotal',11,2)->nullable();
             $table->decimal('total',11,2)->nullable();

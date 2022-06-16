@@ -17,15 +17,25 @@ class Product extends Component
     public $added_price;
     public $computed_option;
     public $counter;
-    public function mount($id){
+    public $user_id;
+    public $typealert='success';
+    public function mount($id){        
         $this->product_id = $id;
         $this->product = Prod::findOrFail($this->product_id);
         $this->price_tmp = $this->product->price;
         $this->setCombinations();
         $this->counter=0;
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
+        if(Auth::id()){
+            $this->user_id = Auth::id();    
+        }
+        else{
+            $this->typealert = 'danger';
+            session()->flash('message','Se originó un error con la autenticación de usuario, inicie sesión');
+        }
+        
     }
-    public function hydrate(){
+    public function hydrate(){        
         if($this->counter == 0){
             
             //$this->emit('slick2');
@@ -231,6 +241,6 @@ class Product extends Component
         $this->computed_option = $this->option;
         
         $data = ['prod' => $this->product,'combinations_list' => $this->combinations_list];
-        return view('livewire.products.product',$data)->extends('layouts.main');
+        return view('livewire.products.product',$data)->extends('layouts.main',['typealert'=>$this->typealert]);
     }
 }

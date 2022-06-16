@@ -8,6 +8,8 @@ color8 = #696969
 
 .mauto
 	margin auto
+.mtop10
+	margin-top 10px
 .mtop16
 	margin-top 16px
 .mtop32
@@ -543,7 +545,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			pointer-events all
 .address
   	.div_address
-		padding-bottom 20px
+		padding-bottom 0
 	.address_header
 		display flex
 		justify-content space-between
@@ -598,6 +600,43 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			width 50%
 		.card-body.active
 			border color1 2px solid
+	#collapse_payment		
+					
+			
+			/*
+			input:checked::after
+				display none
+			*/
+		
+		.div_btn_payment
+			
+			margin auto
+			.btn_payment
+				display flex
+				margin 5px auto
+				padding 4px 20px
+				position relative
+				input
+					cursor pointer
+					height 100%
+					left 0
+					opacity 0
+					position absolute
+					top 0					
+					width 100%
+				&:hover
+					background-color color1
+					color #FFF
+				&:focus
+					background-color color1
+					color #FFF
+					
+			 sustituido por el focus
+			.btn_payment.active
+				background-color color1
+				box-shadow 0 0 6px color1
+				color #FFF
+				
 				
 .btn_collapse
 	display flex

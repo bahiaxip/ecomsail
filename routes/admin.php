@@ -45,6 +45,9 @@ Route::group([
 		//Ciudades
 		Route::get('/cities/{country}/{filter_type}',\App\Http\Livewire\Admin\City::class)->name('list_cities')
 			->middleware('role_permissions');
+
+		//Pedidos
+		Route::get('/orders/{filter_type}', \App\Http\Livewire\Admin\Order::class)->name('list_orders');
 	}
 
 

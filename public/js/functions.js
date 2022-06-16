@@ -999,3 +999,16 @@ function set_direction(el){
     })
     el.classList.add('active');
 }
+
+
+function set_payment(el){ 
+
+    //no necesario hacer click    
+    //el.querySelector('.div_btn_payment').firstElementChild.click()
+    let paymentsNodes = document.querySelectorAll('.btn_payment')
+    let payments = [].slice.call(paymentsNodes);
+    payments.map((item)=>{
+        item.classList.remove('active');
+    })
+    el.classList.add('active');
+}

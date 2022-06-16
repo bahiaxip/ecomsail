@@ -11,7 +11,7 @@ class Visitor extends Model
 
     protected $table='visitors';
     protected $fillable = [
-        'ipaddress','page','referrer','time','user_agent'
+        'ip_address','page','referer','time','user_agent','port','method'
     ];
     protected $hidden = ['created_at','updated_at'];
 }

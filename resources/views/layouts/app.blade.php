@@ -39,7 +39,7 @@
     <div class="header">            
         @include('layouts.nav')
     </div>
-    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations','list_cities','list_home']))
+    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations','list_cities','list_home','list_orders']))
     <div class="content">
         <div class="sectionL">
             {{--@include('layouts.sidebar')--}}
@@ -61,8 +61,7 @@
                 </nav>
                 {{--@if(Session::has('message'))--}}
                 <!-- añadimos una variable para que solo se muestre el message en el component y no en los 2 -->
-                @if(session()->has('message') && !session()->has('only_component'))
-                <h2>Hola</h2>
+                @if(session()->has('message') && !session()->has('only_component'))                
                 <div class="container">
 
                     <div class="alert alert-{{ Session::get('typealert') }} hide" >

@@ -30,37 +30,43 @@ class Home extends Component
     public $typealert='success';
 //error si no hay combinaciones
 
-    public function mount(){        
+    public function mount(){
         try{
             $this->set_new_visitor();
         }catch(Exception $ex){
             dd($ex->getMessage());
         }
     }
-
+    //insertamos datos del visitante cada vez que accede al home (de usuario)
     public function set_new_visitor(){
-        $ipaddress = $_SERVER['REMOTE_ADDR'];
-        $page = $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF'];
-        $referer;
-        if(isset($_SERVER['HTTP_REFERER'])){
-            $referer=$_SERVER['HTTP_REFERER'];
-        }else{
-            $referer = "";
-        }
+        
+        //ip
+        $ip_address = (isset($ip_address)) ? $_SERVER['REMOTE_ADDR'] : NULL;        
+        //page
+        $page = (isset($page)) ? $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF'] : NULL;        
+        //referer
+        $referer = (isset($referer)) ? $_SERVER['HTTP_REFERER']:NULL;
+        //browser
+        $user_agent = (isset($user_agent)) ? $_SERVER['HTTP_USER_AGENT'] : NULL;
+        //port
+        $port = (isset($port)) ? $_SERVER['REMOTE_PORT'] : NULL;
+        //method
+        $method = (isset($method)) ? $_SERVER['REQUEST_METHOD'] : NULL;
+        //date now
         $datetime = date("F j, Y, g:i a");
-        $user_agent = $_SERVER['HTTP_USER_AGENT'];                
         $visitor = Visitor::create([
-            'ipaddress' => $ipaddress,
+            'ip_address' => $ip_address,
             'page' => $page,
-            'referrer' => $referer,
+            'referer' => $referer,
             'time' => $datetime,
-            'user_agent' => $user_agent
+            'user_agent' => $user_agent,
+            'port' => $port,
+            'method' => $method
         ]);
     }
 
     public function fastview($id){        
         $list = [];
-        
         $this->item = Product::findOrFail($id);
         $this->price_tmp = $this->item->price;
         //dd($this->item->image);
@@ -282,8 +288,10 @@ class Home extends Component
         $order;
         $count_order = Order::where('status',0)->where('user_id',$user_id)->count();
         if($count_order == 0){
+            $rand = Str::rand(0,999999);
             $order = new Order();
-            $order->user_id = $user_id;            
+            $order->user_id = $user_id;
+            $order->order_num=$rand;            
             $order->save();
         }else{
             $order = Order::where('status',0)->where('user_id',$user_id)->first();
