@@ -30,16 +30,25 @@ class Home extends Component
     public $typealert='success';
 //error si no hay combinaciones
 
-    public function mount(){
-        $this->set_new_visitor();
+    public function mount(){        
+        try{
+            $this->set_new_visitor();
+        }catch(Exception $ex){
+            dd($ex->getMessage());
+        }
     }
 
     public function set_new_visitor(){
         $ipaddress = $_SERVER['REMOTE_ADDR'];
         $page = $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF'];
-        $referer = $_SERVER['HTTP_REFERER'];
+        $referer;
+        if(isset($_SERVER['HTTP_REFERER'])){
+            $referer=$_SERVER['HTTP_REFERER'];
+        }else{
+            $referer = "";
+        }
         $datetime = date("F j, Y, g:i a");
-        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];                
         $visitor = Visitor::create([
             'ipaddress' => $ipaddress,
             'page' => $page,

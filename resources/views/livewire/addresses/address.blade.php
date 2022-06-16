@@ -4,7 +4,7 @@
     @include('livewire.addresses.confirm')
     <div class="container">
         <div class="row mtop32 address">
-            <div class="col-md-12 shadow">
+            <div class="col-md-12 shadow div_address">
                 <div class="address_header">
                     <h5><i class="fa-solid fa-location-arrow"></i> DIRECCIONES</h5>
                     <button class="btn btn_pry" data-bs-toggle="modal" data-bs-target="#addAddress" >

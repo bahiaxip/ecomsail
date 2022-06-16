@@ -6,7 +6,7 @@
 	{{--@foreach($sliders as $slider)--}}
 	<div class="md-slider-item" >
 		<div class="row">
-			<div class="col-md-7 col-sm-12">
+			<div class="col-md-7 col-sm-12 slider_left">
 				<div class="content">
 					<div class="cinside">
 						<h2>Las mejores marcas en ropa deportiva</h2>
@@ -21,7 +21,7 @@
 	</div>
 	<div class="md-slider-item" >
 		<div class="row">
-			<div class="col-md-7 col-sm-12">
+			<div class="col-md-7 col-sm-12 slider_left">
 				<div class="content">
 					<div class="cinside">
 						<h2>Novedades para toda la familia</h2>
@@ -36,7 +36,7 @@
 	</div>
 	<div class="md-slider-item" >
 		<div class="row">
-			<div class="col-md-7 col-sm-12">
+			<div class="col-md-7 col-sm-12 slider_left">
 				<div class="content">
 					<div class="cinside">
 						<h2>Electrohogar</h2>

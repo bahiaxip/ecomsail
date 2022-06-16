@@ -154,7 +154,7 @@
                     
                 </div>
                 <div class="finish_order mtop32">
-                    <button class="btn btn_pry" wire:click="finish_order">
+                    <button class="btn btn_pry" @if($orders_items->count() > 0 && $addresses->count() > 0) wire:click="finish_order" @else disabled @endif>
                         FINALIZAR COMPRA
                     </button>
                 </div>
