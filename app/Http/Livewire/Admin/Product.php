@@ -95,8 +95,7 @@ class Product extends Component
     public $order_type = 'asc';
     //columna seleccionada
     public $selectedCol='id';
-
-    //pdf
+    //export
     protected $pdf;
     public $checkpdf;
     public $checkexcel;

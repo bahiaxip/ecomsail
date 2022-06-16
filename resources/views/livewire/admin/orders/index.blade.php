@@ -12,6 +12,8 @@
     </li>
     @endsection
 
+    @include('livewire.admin.orders.confirm')
+
     @if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -126,6 +128,9 @@
                         Entrega
                     </td>
                     <td>
+                        Productos
+                    </td>
+                    <td>
                         Total
                     </td>
                     <td>
@@ -136,7 +141,10 @@
                     </td>
                     <td>
                         Fecha
-                    </td>                    
+                    </td>
+                    <td>
+                        Acciones
+                    </td>
                 </tr>
             </thead>
             <tbody>
@@ -159,10 +167,9 @@
                         N/A
                         @endif
                     </td>
-                    <!--
-                    usamos la sintaxis laravel con !! para limpiar los 
-                    tags añadidos del textarea en lugar de doble corchete
-                    -->
+                    <td>
+                        {{$order->quantity}}
+                    </td>
                     <td>
                         {{ $order->total }}
                     </td>
@@ -170,10 +177,33 @@
                         {{ $order->payment_method }}
                     </td>
                     <td>
-                        {{ $order->status }}
+                        @if($order->order_state != 0)
+                        {{ $order->get_state->name }}
+                        @else
+                        N/A
+                        @endif
                     </td>
                     <td>
                         {{ $order->created_at }}
+                    </td>
+                    <td>
+                        <div class="admin_items">
+                        @if($filter_type != 2)
+                            <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="edit({{$order->id}})" title="Ir a factura">
+                                <i class="fa-solid fa-file-invoice"></i>
+                            </button>
+
+                            <button class="btn btn-sm delete" title="Eliminar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'delete')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        @else
+
+                            <button class="btn btn-sm restore" title="Restaruar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'restore')">
+                                <i class="fa-solid fa-trash-arrow-up"></i>
+                            </button>
+                        @endif
+
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -203,7 +233,7 @@
                     @endif
                 </tr>
                 <tr>
-                    <td colspan="6"></td>
+                    <td colspan="6">{{$orders->links()}}</td>
                 </tr>         
             </tbody>
         </table>

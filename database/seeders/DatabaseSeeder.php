@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             CombinationSeeder::class,
             ProductsGallerySeeder::class,
+            MetaTagSeeder::class
         ]);
         
     }

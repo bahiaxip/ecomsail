@@ -21,6 +21,8 @@ class Cart extends Component
     public $typealert;
     //lista de direcciones anotadas
     public $addresses;
+
+    public $sum;
     public $total;
 
     public function mount(){
@@ -50,7 +52,8 @@ class Cart extends Component
         $order = Order::where('user_id',$this->user_id)->where('status',0)->first();
         if(!$order || $order->count() == 0){
             $order = new Order();
-            $order->user_id = Auth::id();
+            $order->user_id = $this->user_id;            
+            $order->order_state = 1;
             $order->save();
         }
         /*else{
@@ -81,7 +84,8 @@ class Cart extends Component
     public function finish_order(){        
         $validated = $this->validate([
             'payment_selected' => 'required',
-            'comment' => 'nullable'
+            'comment' => 'nullable',
+            'sum' => 'required|integer'
         ]);
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
         //generamos un nombre de pedido aleatorio y convertimos a mayúsculas
@@ -93,7 +97,8 @@ class Cart extends Component
             'selected_address' => $this->address_selected,
             'total' => $this->total,
             'payment_method' => $validated['payment_selected'],
-            'order_comment' => $validated['comment']
+            'order_comment' => $validated['comment'],
+            'quantity' => $validated['sum']
         ]);
         $this->typealert = 'success';
         session()->flash('message','Compra realizada correctamente');        
@@ -128,6 +133,6 @@ class Cart extends Component
             }
         }
         $data = ['orders_items' => $orders_items,'addresses' => $this->addresses];
-        return view('livewire.cart.cart',$data)->extends('layouts.main');
+        return view('livewire.cart.cart',$data)->extends('layouts.main',['typealert' => $this->typealert]);
     }
 }

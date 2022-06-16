@@ -14,7 +14,7 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'status','order_type','order_num','order_comment','location','selected_address','subtotal','total','payment_method','payment_info','user_id','paid_at' 
+        'status','order_type','order_num','order_comment','order_state','location','selected_address','subtotal','total','payment_method','payment_info','quantity','user_id','paid_at' 
     ];
     
     protected $hidden = ['created_at','updated_at'];
@@ -25,5 +25,9 @@ class Order extends Model
 
     public function get_user(){
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    public function get_state(){
+        return $this->hasOne(MetaTag::class,'id','order_state');
     }
 }

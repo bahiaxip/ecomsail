@@ -83,6 +83,9 @@
                             @endphp
 
                             @endforeach
+                            @php
+                            $this->sum = $sum
+                            @endphp
                         </tbody>
                     </table>
                 </div>
