@@ -14,7 +14,7 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'status','order_type','ref','order_num','order_comment','location','selected_address','subtotal','total','payment_method','payment_info','user_id','paid_at' 
+        'status','order_type','order_num','order_comment','location','selected_address','subtotal','total','payment_method','payment_info','user_id','paid_at' 
     ];
     
     protected $hidden = ['created_at','updated_at'];

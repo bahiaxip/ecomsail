@@ -17,6 +17,7 @@ class Cart extends Component
     //tipo de pago seleccionado
     public $payment_selected;
     public $location_id;
+    public $comment;
     public $typealert;
     //lista de direcciones anotadas
     public $addresses;
@@ -27,6 +28,7 @@ class Cart extends Component
         
         
     }
+    /*
     public function set_payment($type){
         $type;
         switch($type){
@@ -41,8 +43,8 @@ class Cart extends Component
                 break;
         }
         $this->payment_selected = $type;
-        
     }
+    */
 
     public function get_order(){
         $order = Order::where('user_id',$this->user_id)->where('status',0)->first();
@@ -78,18 +80,20 @@ class Cart extends Component
 
     public function finish_order(){        
         $validated = $this->validate([
-            'payment_selected' => 'required'
+            'payment_selected' => 'required',
+            'comment' => 'nullable'
         ]);
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
         //generamos un nombre de pedido aleatorio y convertimos a mayúsculas
         $rand= strtoupper(Str::random(20));
         $order->update([
             'status'=>1,
-            'ref' => $rand,
+            'order_num' => $rand,
             'location'=> $this->location_id,
             'selected_address' => $this->address_selected,
             'total' => $this->total,
-            'payment_method' => $validated['payment_selected']
+            'payment_method' => $validated['payment_selected'],
+            'order_comment' => $validated['comment']
         ]);
         $this->typealert = 'success';
         session()->flash('message','Compra realizada correctamente');        

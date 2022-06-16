@@ -3,7 +3,13 @@
     @section('title', 'Pedidos')
 
     @section('path')
-    
+    &nbsp;>&nbsp;
+    <li class="list_name">
+        <a href="{{ route('list_orders',['filter_type' => 1]) }}">
+            <i class="fa-solid fa-bag-shopping"></i> 
+            <span>Pedidos</span>
+        </a>
+    </li>
     @endsection
 
     @if(session()->has('message'))
@@ -141,7 +147,7 @@
                     </td>
                     <td>{{ $order->id }}</td>
                     <td>
-                        {{ $order->ref }}
+                        {{ $order->order_num }}
                     </td>
                     <td>
                         {{ $order->get_user->name }}
@@ -161,7 +167,7 @@
                         {{ $order->total }}
                     </td>
                     <td>
-                        {{ $order->total }}
+                        {{ $order->payment_method }}
                     </td>
                     <td>
                         {{ $order->status }}

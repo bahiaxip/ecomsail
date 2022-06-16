@@ -177,12 +177,12 @@
                         </div>
                     </div>
                     @error('payment_selected')
-                                <p class="text-danger">{{$message}}</p>
-                                @enderror
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="comment mtop16">
                     {{Form::label('comment','Mensaje ')}}
-                    {{Form::textarea('comment',null,['class' => 'form-control','rows' => 3])}}
+                    {{Form::textarea('comment',null,['class' => 'form-control','rows' => 3,'wire:model'=> 'comment'])}}
                     
                 </div>
                 <div class="finish_order mtop32">
