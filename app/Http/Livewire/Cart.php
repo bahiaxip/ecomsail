@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Address;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice;
 use Auth,Str;
 class Cart extends Component
 {
@@ -80,28 +80,80 @@ class Cart extends Component
     public function updated(){
         
     }
+    public function set_vat_to_price($total,$vat,$type){
+        $result;
+        $data = 100/(100+intval($vat));
+        if($type == 'minus'){
+            $result = $total * $data;
+        }
+        return number_format($result,2);
+    }
 
-    public function finish_order(){        
+    public function finish_order(){
+        
         $validated = $this->validate([
             'payment_selected' => 'required',
             'comment' => 'nullable',
             'sum' => 'required|integer'
         ]);
+        $address = Address::findOrFail($this->address_selected);
+        if(!$address->get_location->vat){
+            $this->typealert = 'success';
+            session()->flash('message','Su país no dispone de IVA para generar la factura');
+            return;
+        }
+
+        $location_vat = $address->get_location->vat;
+
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
         //generamos un nombre de pedido aleatorio y convertimos a mayúsculas
         $rand= strtoupper(Str::random(20));
+        $message;
+        $typealert;
         $order->update([
             'status'=>1,
             'order_num' => $rand,
-            'location'=> $this->location_id,
+            'location'=> $address->get_location->id,
             'selected_address' => $this->address_selected,
             'total' => $this->total,
             'payment_method' => $validated['payment_selected'],
             'order_comment' => $validated['comment'],
             'quantity' => $validated['sum']
         ]);
-        $this->typealert = 'success';
-        session()->flash('message','Compra realizada correctamente');        
+        $net = $this->set_vat_to_price($this->total,$location_vat,'minus');
+//creamos factura, necesitamos la dirección Address para
+//el iva y los productos que componen la factura y revisar
+//los descuentos
+        $orders_items = Order_Item::where('order_id',$order->id)->get();
+        if($orders_items->count() > 0){
+            //crear la factura y guardarla en pdf en el directorio
+            $total;
+            $sum = 0;
+            $total_items = 0;
+            foreach($orders_items as $oi){
+                $total = $oi->total;
+
+                $total_items = $total_items +$oi->quantity;
+
+            }
+            
+            $invoice = Invoice::create([
+                'status' => 1,
+                'net' => floatval($net),
+                'vat' => $location_vat,
+                'total' =>$this->total,
+                'quantity' =>$total_items,
+                'order_id' => $order->id            
+            ]);
+            
+            $typealert = 'success';
+            $message = 'Compra realizada correctamente';
+        }else{
+            $typealert = 'danger';
+            $message = 'No existen productos asociados a este pedido';
+        }
+        $this->typealert = $typealert;
+        session()->flash('message',$message);        
     }
 
     public function change_quantity($operator){

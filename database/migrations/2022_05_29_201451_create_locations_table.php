@@ -20,6 +20,7 @@ class CreateLocationsTable extends Migration
             $table->integer('zone');
             $table->integer('prefix_phone')->nullable();
             $table->string('coin')->nullable();
+            $table->string('vat')->nullable();
             $table->string('path_tag')->nullable();
             $table->string('icon')->nullable();
             $table->string('icon_code')->nullable();

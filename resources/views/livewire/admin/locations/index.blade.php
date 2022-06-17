@@ -133,7 +133,13 @@
                     </td>
                     <td>
                         Ciudades/Distritos
-                    </td>           
+                    </td>
+                    <td>
+                        Moneda
+                    </td>
+                    <td>
+                        IVA
+                    </td>
                     <td class="max d-none d-md-table-cell">
                         ISO
                     </td>
@@ -160,6 +166,12 @@
                     </td>
                     <td>
                         {{$l->countCities()}}
+                    </td>
+                    <td>
+                        {{$l->coin}}
+                    </td>
+                    <td>
+                        {{$l->vat}}
                     </td>
                     <td>
                         {{$l->isocode_alfa2}}

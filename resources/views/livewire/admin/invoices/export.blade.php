@@ -5,7 +5,7 @@
                     <div class="card">
                         <div class="card-header text-center">
                             <p style="font-size:20px;text-align:center;font-weight:bold">
-                                Lista de pedidos
+                                Lista de facturas
                             </p>
                         </div>
                         <div class="card-body">
@@ -17,31 +17,23 @@
                                         </th>
                                         <th 
                                         style="border:black 2px solid">
-                                            Pedido
+                                            Nombre
                                         </th>
                                         <th 
                                         style="border:black 2px solid">
-                                            Cliente
+                                            Neto
                                         </th>
                                         <th 
                                         style="border:black 2px solid">
-                                            Entrega
-                                        </th>
-                                        <th 
-                                        style="border:black 2px solid">
-                                            Productos
-                                        </th>
+                                            IVA
+                                        </th>                                        
                                         <th 
                                         style="border:black 2px solid">
                                             Total
                                         </th>
                                         <th style="border:black 2px solid">
-                                            Pago
-                                        </th>
-                                        <th 
-                                        style="border:black 2px solid">
-                                            Estado
-                                        </th>
+                                            Productos
+                                        </th>                                        
                                         <th 
                                         style="border:black 2px solid">
                                             Fecha
@@ -49,46 +41,28 @@
                                     </tr>                                
                                 <tbody  class="">
 
-                                    @foreach($orders as $order)
+                                    @foreach($invoices as $invoice)
                                     <tr>                                        
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{$order->id}}
+                                            {{$invoice->id}}
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{$order->order_num}}
+                                            {{ $invoice->get_order->get_address->name}} {{ $invoice->get_order->get_address->lastname}}
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            @if($order->selected_address != 0)
-                                            {{ $order->get_address->name}} {{$order->get_address->lastname}}
-                                            @else
-                                            N/A
-                                            @endif
+                                            {{ $invoice->net }}
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            @if($order->location)
-                                            {{ $order->get_location->name}}
-                                            @else
-                                            N/A
-                                            @endif
+                                            {{ $invoice->vat }}
+                                        </td>                                        
+                                        <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
+                                            {{$invoice->total}}
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{$order->quantity}}
-                                        </td>
+                                            {{ $invoice->get_order->quantity }}
+                                        </td>                                        
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{$order->total}}
-                                        </td>
-                                        <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{ $order->payment_method }}
-                                        </td>
-                                        <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            @if($order->order_state != 0)
-                                            {{ $order->get_state->name }}
-                                            @else
-                                            N/A
-                                            @endif
-                                        </td>
-                                        <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{$order->created_at}}
+                                            {{$invoice->created_at}}
                                         </td>
                                     </tr>                                
                                     @endforeach

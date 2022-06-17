@@ -48,6 +48,9 @@ Route::group([
 
 		//Pedidos
 		Route::get('/orders/{filter_type}', \App\Http\Livewire\Admin\Order::class)->name('list_orders');
+
+		//Facturas
+		Route::get('/invoices/{filter_type}/{order_id?}', \App\Http\Livewire\Admin\Invoice::class)->name('list_invoices');
 	}
 
 

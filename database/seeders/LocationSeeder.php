@@ -39,7 +39,8 @@ class LocationSeeder extends Seeder
         $location_spain = Location::find(58);
         $location_spain->update([            
             'prefix_phone' => 34,
-            'coin' => '€'
+            'coin' => '€',
+            'vat' => 21
         ]);
     }
 }

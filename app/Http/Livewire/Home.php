@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Product, App\Models\Category, App\Models\Combination, App\Models\Attribute, App\Models\ImagesProducts, App\Models\Order, App\Models\Order_Item, App\Models\Visitor;
-use Auth;
+use Auth,Str;
 class Home extends Component
 {
     public $hola;

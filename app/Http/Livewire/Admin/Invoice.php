@@ -3,19 +3,17 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Order as Ord;
+use App\Models\Invoice as Inv;
 use Livewire\WithPagination;
 use App\Functions\Export;
 use PDF,Excel,Str;
 use App\Mail\Listado;
 use Illuminate\Support\Facades\Mail;
-
-class Order extends Component
+class Invoice extends Component
 {
     use WithPagination;
-    //public $orders;
+    
     public $filter_type;
-
     //campo de búsqueda (wire:model)
     public $search_data;
     //orden columnas (asc/desc)
@@ -43,16 +41,18 @@ class Order extends Component
     //temporal para enviar email
     public $file_tmp;
 
-    public $orderIdTmp;
+    public $invoiceIdTmp;
     public $typealert='success';
+    public $order_id;
 
-
-
-    public function mount($filter_type){
+    public function mount($filter_type,$order_id=null){
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
-        $this->listname = 'orders';
+        $this->listname = 'invoices';
         $this->checkpdf = 1;
+        if($order_id){
+            $this->order_id = $order_id;
+        }
     }
 
     public function updated(){
@@ -62,10 +62,11 @@ class Order extends Component
             $this->resetPage();
 
     }
+
     //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
     public function setColAndOrder($nameCol=null){
         //posibles columnas
-        $cols=['id','order_num','selected_address'];
+        $cols=['id'];
         //comprobamos si la columna seleccionada existe, por si se intenta 
         //introducir otra de forma maliciosa
         if(in_array($nameCol, $cols))
@@ -85,10 +86,11 @@ class Order extends Component
 
     public function set_type_query($export=false){
         $query;        
-        $query = $this->set_filter_query($this->filter_type,$export);
+        $query = $this->set_filter_query($this->filter_type,$export,$this->order_id);
         return $query;
     }
-    public function set_filter_query($filter_type,$export=false){
+
+    public function set_filter_query($filter_type,$export=false,$order_id = false){
         $res='';
         $search_data = '%'.$this->search_data.'%';
 
@@ -98,90 +100,90 @@ class Order extends Component
 
         $order = $this->order_type;
         //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
-        
+         
+        //en este caso es necesario doble callback para hacer doble relación de la búsqueda
         switch($filter_type):
             case '0':
             case '1':
                 $init_query = ($this->search_data) ?
-                    Ord::whereHas('get_address',function($query) use ($search_data){
-                        $query->where('lastname','like',$search_data)
-                            ->orWhere('name','like',$search_data);
-                        })
-                        ->orWhere('order_num','like',$search_data)
-
-                    //Ord::where('order_num','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
+                    //Inv::where('order_num','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
+                    Inv::whereHas('get_order',function($query) use ($search_data){
+                        $query->whereHas('get_address',function($query2) use ($search_data){
+                            $query2->where('name','like',$search_data)
+                            ->orWhere('lastname','like',$search_data);
+                        });
+                    })
                     :
-
-                    Ord::where('status',$filter_type);
+                    Inv::where('status',$filter_type)->orderBy($col_order,$order);
                 break;
             case '2':
                 $init_query = ($this->search_data) ?
-                    Ord::onlyTrashed()->whereHas('get_address',function($query) use ($search_data){
-                        $query->where('lastname','like',$search_data)
-                            ->orWhere('name','like',$search_data);
-                        })
-                        ->orWhere('order_num','like',$search_data)
+                    Inv::onlyTrashed()->whereHas('get_order',function($query) use ($search_data){
+                        $query->whereHas('get_address',function($query2) use ($search_data){
+                            $query2->where('name','like',$search_data)
+                            ->orWhere('lastname','like',$search_data);;
+                        });
+                    })
                     :
-                    Ord::onlyTrashed();
+                    Inv::onlyTrashed()->orderBy($col_order,$order);
                 break;
             case '3':
                 $init_query = ($this->search_data) ?
-                    Ord::whereHas('get_address',function($query) use ($search_data){
-                        $query->where('lastname','like',$search_data)
-                            ->orWhere('name','like',$search_data);
-                        })
-                        ->orWhere('order_num','like',$search_data)
+                    Inv::whereHas('get_order',function($query) use ($search_data){
+                        $query->whereHas('get_address',function($query2) use ($search_data){
+                            $query2->where('name','like',$search_data)
+                            ->orWhere('lastname','like',$search_data);;
+                        });
+                    })
                     :
-                    Ord::orderBy($col_order,$order);
+                    Inv::orderBy($col_order,$order);
                 break;
-
         endswitch;
-        //(ANULADA LA EXCLUSIÓN):excluimos los pedidos con selected_address en 0,
-        //que indica que no se ha finalizado la compra(no se ha añadido una dirección)
 
-        //comprobamos export por si es para generar excel,pdf o para consulta en pantalla
-        ($export) ?
-            $res = $init_query->orderBy($col_order,$order)->get()
-            :
-            $res = $init_query->orderBy($col_order,$order)->paginate($this->limit_page);
-
+        if($order_id){            
+            $res = $init_query->where('order_id',$this->order_id)->paginate(10);
+        }else{
+            ($export) ?
+                $res = $init_query->get()
+                :
+                $res = $init_query->paginate($this->limit_page);
+        }
         return $res;
     }
 
-    //eliminación de categoría
+    //eliminación de factura
     public function delete(){        
-        if($this->orderIdTmp){
+        if($this->invoiceIdTmp){
             //$order=Ord::where('id',$this->orderIdTmp)->first();
-            $order = Ord::findOrFail($this->orderIdTmp);
-            $order->delete();
+            $invoice = Inv::findOrFail($this->invoiceIdTmp);
+            $invoice->delete();
             $this->typealert='danger';
-            $message = "Pedido eliminado correctamente";
+            $message = "Factura eliminada correctamente";
             session()->flash('message', $message);
             //$this->clear2();
             $this->emit('confirmDel');
         }
     }
 
-    //restaurar categoría/subcategoría
+    //restaurar factura
     public function restore($id){
-        $order = Ord::onlyTrashed()->where('id',$id)->first();
-        $order->restore();
+        $invoice = Inv::onlyTrashed()->where('id',$id)->first();
+        $invoice->restore();
         $this->typealert = 'success';
 
         //según sea valor o atributo modificamos el mensaje        
-        $message = "Pedido restaurado correctamente";
+        $message = "Fatura restaurada correctamente";
         session()->flash('message',$message);
         //$this->clear2();
         $this->emit('confirmDel');
     }
-
-    public function saveOrderId($order_id,$action){        
-        $this->orderIdTmp = $order_id;
+    public function saveInvoiceId($invoice_id,$action){        
+        $this->invoiceIdTmp = $invoice_id;
         $this->actionTmp = $action;
     }
     //si se recarga la página tb se resetea el catIdTmp, en el método mount()
     public function clearOrderId(){
-        $this->orderIdTmp='';
+        $this->invoiceIdTmp='';
     }
     //botón X de buscador para eliminar datos de búsqueda
     public function clearSearch(){
@@ -191,9 +193,9 @@ class Order extends Component
     //exportar archivo PDF al navegador del usuario
     public function exportPDF(){
     //opción actual         
-        $orders=$this->set_type_query(true);        
-        $view="livewire.admin.orders.export";
-        $pdf=PDF::loadView($view,['orders'=>$orders]);
+        $invoices=$this->set_type_query(true);        
+        $view="livewire.admin.invoices.export";
+        $pdf=PDF::loadView($view,['invoices'=>$invoices]);
         $this->pdf=$pdf;
         return response()->streamDownload(function(){
                     //con print o con echo
@@ -203,25 +205,25 @@ class Order extends Component
 
     //exportar archivo Excel al navegador del usuario
     public function exportExcel(){
-        $orders=$this->set_type_query(true);
+        $invoices=$this->set_type_query(true);
         
-        return Excel::download(new Export($orders,$this->listname),'exportexcel.xlsx');
+        return Excel::download(new Export($invoices,$this->listname),'exportexcel.xlsx');
     }
 
     //guardar el archivo PDF en el server para después poder enviar por correo 
     //como archivo adjunto
     public function savePDF(){
         $path_date=date('Y-m-d');
-        $orders=$this->set_type_query(true);
-        $view="livewire.admin.orders.export";
-        $pdf= PDF::loadView($view,['orders'=>$orders]);
+        $invoices=$this->set_type_query(true);
+        $view="livewire.admin.invoices.export";
+        $pdf= PDF::loadView($view,['invoices'=>$invoices]);
         $pdf->save('listado_'.$path_date.'.pdf');
     }
     //guardar archivo Excel en el server para después poder enviar por correo 
     //como archivo adjunto
     public function saveExcel(){
         $path_date=date('Y-m-d');
-        $orders=$this->set_type_query(true);
+        $invoices=$this->set_type_query(true);
         //grabar en disco
     //si no añadimos aleatorio(random) en ocasiones genera un archivo corrupto, por ejemplo
     //cuando se genera una búsqueda con LIKE. Si se añade un nombre distinto, al no 
@@ -229,7 +231,7 @@ class Order extends Component
     //razón genera el archivo correctamente.
         $number_rand = Str::random(10);
         $this->file_tmp = 'listado'.$number_rand.'.xlsx';
-        return  Excel::store(new Export($orders,$this->listname),$this->file_tmp,'public');
+        return  Excel::store(new Export($invoices,$this->listname),$this->file_tmp,'public');
     }
 
     //Enviar email con opción de enviar documento PDF y/o Excel como archivos adjuntos
@@ -261,19 +263,19 @@ class Order extends Component
         //correo ya no desplega el dropdown de exportar 
         //session()->flash('message',"Correo enviado correctamente");
         
-        return redirect()->route('list_orders',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
+        return redirect()->route('list_invoices',['filter_type' => $this->filter_type])->with('message',"Correo enviado correctamente")->with('only_component','true');
             //limpiar datos de selección para el envio (correo y archivos adjuntos)
         $this->clearExport();
         $this->emit("sendModal");
         }
     }
-
     //limpiar datos de exportación
     public function clearExport(){
         $this->checkpdf='1';
         $this->checkexcel='';
         $this->email_export='';
     }
+
     //comprobamos la acción seleccionada
     public function set_action_massive(){        
         $action = $this->action_selected_ids;
@@ -298,51 +300,19 @@ class Order extends Component
         session()->flash('message','Acción ejecutada correctamente');
         $this->selected_list=[];
     }
+
     //eliminar seleccionados(aplicar acción de eliminar en lote)
     public function delete_list(){
-        Ord::destroy($this->selected_list);
+        Inv::destroy($this->selected_list);
     }
 
     public function restore_list(){
-        Ord::whereIn('id',$this->selected_list)->restore();
-    }
-
-    public function invoices($order_id){
-        return redirect()->route('list_invoices',['filter_type'=> 1,'order_id'=> $order_id]);
+        Inv::whereIn('id',$this->selected_list)->restore();
     }
     public function render()
     {
-
         $query = $this->set_type_query();
-        //$query = Order::where('status',1)->get();
-        
-        //$q = Ord::where('status',1)->with('get_address')->where('name','like','%'.'asdf'.'%')->get();
-        /*
-        $search = 'fernando';
-        $q = Ord::with(['get_user' => function($query) use ($search){
-            $query->where('name','like','%'.$search.'%');
-        }])->get();
-        foreach($q as $t){
-            //dd($t->id);
-        }
-        */
-        //consulta para busqueda de nombre y apellido en tabla relacionada
-        /*
-        $search = 'gomez';
-        $q = Ord::whereHas('get_address',function($query) use ($search){
-            $query->where('lastname','like','%'.$search.'%')
-            ->orWhere('name','like','%'.$search.'%');
-        })->get();
-        */
-            /*
-            with(['get_address' => function($query) use ($search){
-            $query->where('name','like','%'.$search.'%');
-        }])->get();
-        */
-
-        //dd($q->count());
-        //dd($query->count());
-        $data = ['orders' => $query];
-        return view('livewire.admin.orders.index',$data);
+        $data = ['invoices' => $query];
+        return view('livewire.admin.invoices.index',$data);
     }
 }

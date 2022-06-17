@@ -40,6 +40,14 @@
 					</span>
 				</a>
 			</li>
+			<li>
+				<a href="{{ route('list_invoices',['filter_type' => 1]) }}">
+					<i class="fa-solid fa-file-invoice"></i> 
+					<span class="d-none d-lg-inline-flex">
+						Facturas
+					</span>
+				</a>
+			</li>
 			@if(helper()->testPermission(Auth::user()->permissions,'list_categories') == true)
 			<li style="position:relative;right:1px">
 				<a href="{{ route('list_categories',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">

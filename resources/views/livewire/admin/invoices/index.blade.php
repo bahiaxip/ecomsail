@@ -1,21 +1,29 @@
 <div>
-    {{-- establecemos title si subcatlist['name'] contiene valor --}}
-    @section('title', 'Pedidos')
+	@section('title', 'Facturas')
 
-    @section('path')
+	@section('path')
     &nbsp;>&nbsp;
     <li class="list_name">
-        <a href="{{ route('list_orders',['filter_type' => 1]) }}">
-            <i class="fa-solid fa-bag-shopping"></i> 
-            <span>Pedidos</span>
+        <a href="{{ route('list_invoices',['filter_type' => 1]) }}">
+            <i class="fa-solid fa-file-invoice"></i> 
+            <span>Facturas</span>
         </a>
     </li>
+    @if($order_id)
+    &nbsp;>&nbsp;
+    <li class="sublist_name">
+        <a href="{{ route('list_invoices',['filter_type'=> 1,'order_id' => $order_id]) }}">
+            <i class="fa-solid fa-file-invoice"></i> 
+            <span>{{$order_id}}</span>
+        </a>
+    </li>
+    @endif
     @endsection
 
-    @include('livewire.admin.orders.confirm')
-    @include('livewire.admin.orders.sendmail')
-    @include('livewire.admin.orders.massive_confirm')
+    @include('livewire.admin.invoices.confirm')
 
+    @include('livewire.admin.invoices.massive_confirm')
+    @include('livewire.admin.invoices.sendmail')
     @if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -82,22 +90,43 @@
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
                     <li>
-                        <a href="{{ route('list_orders',['filter_type' => 1]) }}" class="dropdown-item">
+                        <a @if(!$order_id)
+                            href="{{ route('list_invoices',['filter_type' => 1]) }}"
+                            @else
+                            href="{{ route('list_invoices',['filter_type' => 1,'order_id' => $order_id]) }}"
+                            @endif
+                            class="dropdown-item">
                             &#x2714; Público
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('list_orders',['filter_type' => 0]) }}" class="dropdown-item">
+                        <a 
+                            @if(!$order_id)
+                            href="{{ route('list_invoices',['filter_type' => 0]) }}" 
+                            @else
+                            href="{{ route('list_invoices',['filter_type' => 0,'order_id' => $order_id]) }}" 
+                            @endif
+                            class="dropdown-item">
                             &#x2716; Borrador
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('list_orders',['filter_type' => 2]) }}" class="dropdown-item">
+                        <a @if(!$order_id)
+                            href="{{ route('list_invoices',['filter_type' => 2]) }}" 
+                            @else
+                            href="{{ route('list_invoices',['filter_type' => 2,'order_id' => $order_id]) }}" 
+                            @endif
+                             class="dropdown-item">
                             <i class="fa-solid fa-trash"></i> Reciclaje
                         </a>
                     </li>
                     <li>
-                        <a href=" {{ route('list_orders',['filter_type' => 3]) }}" class="dropdown-item">
+                        <a @if(!$order_id)
+                            href="{{ route('list_invoices',['filter_type' => 3]) }}" 
+                            @else
+                            href="{{ route('list_invoices',['filter_type' => 3,'order_id' => $order_id]) }}" 
+                            @endif
+                        class="dropdown-item">
                             &#x2714;&#x2716; Todos
                         </a>
                     </li>
@@ -105,6 +134,7 @@
             </li>            
         </ul>
     </div>
+
 
     <div class="div_table shadow mtop16">
 <!-- div loading -->
@@ -119,115 +149,82 @@
                         <a href="#" wire:click="setColAndOrder('id')">
                             ID
                         </a>
-                    </td>                    
-                    <td>
-                        <a href="#" wire:click="setColAndOrder('order_num')">
-                            Pedido
-                        </a>
                     </td>
-                    <td>
-                        <a href="#" wire:click="setColAndOrder('selected_address')">
-                            Cliente
-                        </a>
+                    <td>                        
+                        Nombre
+                    </td>
+                    <td>                        
+                        Neto                        
+                    </td>
+                    <td>                        
+                        IVA
                     </td>           
                     <td>
-                        Entrega
+                        Total
                     </td>
                     <td>
                         Productos
                     </td>
                     <td>
-                        Total
-                    </td>
-                    <td>
-                        Pago
-                    </td>
-                    <td>
-                        Estado
-                    </td>
-                    <td>
                         Fecha
                     </td>
                     <td>
-                        Acciones
+                    	
                     </td>
                 </tr>
             </thead>
-            <tbody>                
-                @if($orders->count() > 0)
-                    @foreach($orders as $order)
-                    <tr>
-                        <td width="50">
-                            {{Form::checkbox($order->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$order->id.',this)','class' => 'checkbox'])}}
-                        </td>
-                        <td>{{ $order->id }}</td>
-                        <td>
-                            {{ $order->order_num }}
-                        </td>
-                        <td>
-                            @if($order->selected_address != 0)
-                            {{ $order->get_address->name}} {{$order->get_address->lastname}}
-                            @else
-                            {{ $order->selected_address }}
-                            @endif
-                        </td>
-                        <td>
-                            @if($order->location)
-                            {{ $order->get_location->name}}
-                            @else
-                            N/A
-                            @endif
-                        </td>
-                        <td>
-                            {{$order->quantity}}
-                        </td>
-                        <td>
-                            {{ $order->total }}
-                        </td>
-                        <td>
-                            {{ $order->payment_method }}
-                        </td>
-                        <td>
-                            @if($order->order_state != 0)
-                            {{ $order->get_state->name }}
-                            @else
-                            N/A
-                            @endif
-                        </td>
-                        <td>
-                            {{ $order->created_at }}
-                        </td>
-                        <td>
-                            <div class="admin_items">
+            <tbody>
+                @foreach($invoices as $invoice)
+                <tr>
+                    <td width="50">
+                        {{Form::checkbox($invoice->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$invoice->id.',this)','class' => 'checkbox'])}}
+                    </td>
+                    <td>                        
+                        {{ $invoice->id }}</td>                        
+                    <td>                        
+                        {{ $invoice->get_order->get_address->name}} {{ $invoice->get_order->get_address->lastname}}
+                    </td>
+                    <td>
+                        {{ $invoice->net }}
+                    </td>
+                    <td>
+                        {{ $invoice->vat }}
+                    </td>
+                    <td>
+                        {{ $invoice->total }}
+                    </td>
+                    <td>
+                        {{$invoice->get_order->quantity}}
+                    </td>
+
+                    <td>
+                        {{ $invoice->created_at }}
+                    </td>
+                    <td>
+                        <div class="admin_items">
                             @if($filter_type != 2)
-                                <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="invoices({{$order->id}})" title="Ir a facturas">
-                                    <i class="fa-solid fa-file-invoice"></i>
-                                </button>
-
-                                <button class="btn btn-sm delete" title="Eliminar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'delete')">
+                            <button class="btn btn-sm delete" title="Eliminar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'delete')">
                                     <i class="fa-solid fa-trash"></i>
-                                </button>
+                            </button>
                             @else
-
-                                <button class="btn btn-sm restore" title="Restaruar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'restore')">
-                                    <i class="fa-solid fa-trash-arrow-up"></i>
-                                </button>
+                            <button class="btn btn-sm edit" title="Restaruar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'restore')">
+                                <i class="fa-solid fa-trash-arrow-up"></i>
+                            </button>
                             @endif
 
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                @endif
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
                 <tr>
                     <!--
                     <td colspan="1">
                         {{Form::checkbox('box',true,null,['class' => 'form-check-input'])}}
                     </td>
                     -->
-                    @if($orders->count() == 0)
+                    @if($invoices->count() == 0)
                     <td colspan="100%">
-                        <p>No existen pedidos</p>
+                        <p>No existen facturas</p>
                     </td>                    
                     @else
                     <td colspan="3" style="font-size:14px">
@@ -245,7 +242,7 @@
                     @endif
                 </tr>
                 <tr>
-                    <td colspan="6">{{$orders->links()}}</td>
+                    <td colspan="6">{{$invoices->links()}}</td>
                 </tr>         
             </tbody>
         </table>

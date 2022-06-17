@@ -30,4 +30,8 @@ class Order extends Model
     public function get_state(){
         return $this->hasOne(MetaTag::class,'id','order_state');
     }
+
+    public function get_address(){
+        return $this->hasOne(Address::class,'id','selected_address');
+    }
 }
