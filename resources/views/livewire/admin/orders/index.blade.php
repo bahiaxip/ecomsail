@@ -13,6 +13,8 @@
     @endsection
 
     @include('livewire.admin.orders.confirm')
+    @include('livewire.admin.orders.sendmail')
+    @include('livewire.admin.orders.massive_confirm')
 
     @if(session()->has('message'))
     <div class="container ">
@@ -239,3 +241,10 @@
         </table>
     </div>
 </div>
+@push('scripts')
+<script>
+function setList(){
+    @this.selected_list = selected_list;
+}
+</script>
+@endpush

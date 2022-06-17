@@ -4,7 +4,7 @@
 		<ul>
 			<li>
 				<a href="{{ route('list_users',['filter_type' => 1]) }}">
-					<i class="fa-solid fa-gears"></i> Panel
+					<i class="fa-solid fa-gears"></i> Admin
 				</a>
 			</li>
 		</ul>
