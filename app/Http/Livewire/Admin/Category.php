@@ -158,95 +158,40 @@ class Category extends Component
         $order = $this->order_type;
         
         //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
-        if($filter_type==2)            
-            $init_query = ($this->search_data) ?
-                Cat::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$subcat)
-                :
-                Cat::onlyTrashed()->orderBy($col_order,$order)->where('type',$subcat);
-        //si es todos no establecemos status en la consulta para que englobe a 
-        //los 2 posibles estados (tanto los de status=0 como los de status=1)
-        elseif($filter_type==3){
-            $init_query = ($this->search_data) ?
-                Cat::where('name','LIKE',$search_data)->where('type',$subcat)
-                :
-                Cat::where('type',$subcat);
-        }
-        //si es 0 o 1 establecemos la misma consulta
-        else{
-            $init_query = ($this->search_data) ?
-                Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->where('type',$subcat)
-                :
-                Cat::where('status',$filter_type)->where('type',$subcat);
-        }
         switch($filter_type):
             case '0':
-                //$this->filterType = $filterType;
-                ($export) ?
-                    $cat = $init_query->orderBy($col_order,$order)->get()
-                    :
-                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
-                break;
             case '1':
-                ($export) ?
-                    $cat = $init_query->orderBy($col_order,$order)->get()
-                    :                
-                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
+                $init_query = ($this->search_data) ?
+                    Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->where('type',$subcat)
+                    :
+                    Cat::where('status',$filter_type)->where('type',$subcat);
                 break;
             case '2':
-                ($export) ?
-                    $cat = $init_query->orderBy($col_order,$order)->get()
+                $init_query = ($this->search_data) ?
+                    Cat::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$subcat)
                     :
-                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
+                    Cat::onlyTrashed()->orderBy($col_order,$order)->where('type',$subcat);
                 break;
             case '3':
-                //si el filtro es todos(3) realizamos la consulta sin filtrar status
-                ($export) ?
-                    $cat = $init_query->orderBy($col_order,$order)->get()
+                $init_query = ($this->search_data) ?
+                    Cat::where('name','LIKE',$search_data)->where('type',$subcat)
                     :
-                    $cat = $init_query->orderBy($col_order,$order)->paginate(10);
+                    Cat::where('type',$subcat);
                 break;
         endswitch;
+
+        ($export) ?
+            $cat = $init_query->orderBy($col_order,$order)->get()
+            :
+            $cat = $init_query->orderBy($col_order,$order)->paginate(10);
+
         return $cat;
     }
 
-    public function set_type_query($export=false){        
-        $query;        
-        /*
-        if($this->search_data && $export){
-            $query= $this->set_filter_query($this->filter_type);
-            $search_data = '%'.$this->search_data.'%';
-            //eliminados con softDelete(onlyTrashed)
-            if($this->filter_type==2){
-                $query = Cat::onlyTrashed()->where('name','LIKE',$search_data)->get();
-            }else{
-                $query = Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->get();    
-            }
-        }
-        elseif($this->search_data){
-            $query= $this->set_filter_query($this->filter_type);
-            $search_data = '%'.$this->search_data.'%';
-            //eliminados con softDelete(onlyTrashed)
-            if($this->filter_type==2){
-                $query = Cat::onlyTrashed()->where('name','LIKE',$search_data)->paginate(10);
-            }else{
-                $query = Cat::where('name','LIKE',$search_data)->where('status',$this->filter_type)->paginate(10);    
-            }
-        }
-        else{            
-            $query= $this->set_filter_query($this->filter_type,$export,$this->subcat);
-        }
-        */
-        $query= $this->set_filter_query($this->filter_type,$export,$this->subcat);
-        return $query;
+    public function set_type_query($export=false){
+        return $this->set_filter_query($this->filter_type,$export,$this->subcat);
     }
 
-
-    /*
-    public function create(){
-
-        //return redirect()->to('admin')
-    }
-    */
     //creación de categoría/subcategoría
     public function store(){
         $this->emit('loading','loading');

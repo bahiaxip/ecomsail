@@ -134,57 +134,37 @@ class Attribute extends Component
 
         $order = $this->order_type;
         //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
-        if($filter_type == 2){
-            $init_query = ($this->search_data) ?
-                Attr::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$attr)
-                    ->orderBy($col_order,$order)
-                :
-                Attr::onlyTrashed()->where('type',$attr)->orderBy($col_order,$order);
-        }elseif($filter_type == 3){
-            $init_query = ($this->search_data) ?
-                Attr::where('name','LIKE',$search_data)->where('type',$attr)->orderBy($col_order,$order)
-                :
-                Attr::where('type',$attr)->orderBy($col_order,$order);
-        }else{            
-            $init_query = ($this->search_data) ?
-                Attr::where('name','LIKE',$search_data)->where('status',$filter_type)
-                    ->where('type',$attr)->orderBy($col_order,$order)
-                :
-                Attr::where('status',$filter_type)->where('type',$attr)->orderBy($col_order,$order);
 
-
-        }
         switch($filter_type):
             case '0':
-                //$this->filterType = $filterType;
-                ($export) ?
-                    $res = $init_query->get()
+            case '1':
+                $init_query = ($this->search_data) ?
+                    Attr::where('name','LIKE',$search_data)->where('status',$filter_type)
+                        ->where('type',$attr)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
-                break;
-            case '1':                
-                ($export) ?
-                    $res = $init_query->get()
-                    :                
-                    $res = $init_query->paginate($this->limit_page);
+                    Attr::where('status',$filter_type)->where('type',$attr)->orderBy($col_order,$order);
                 break;
             case '2':
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Attr::onlyTrashed()->where('name','LIKE',$search_data)->where('type',$attr)
+                        ->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Attr::onlyTrashed()->where('type',$attr)->orderBy($col_order,$order);
                 break;
             case '3':
-                //si el filtro es todos(3) realizamos la consulta sin filtrar status
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Attr::where('name','LIKE',$search_data)->where('type',$attr)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Attr::where('type',$attr)->orderBy($col_order,$order);
                 break;
-
         endswitch;
-        return $res;
+        
+        ($export) ?
+            $res = $init_query->get()
+            :
+            $res = $init_query->paginate($this->limit_page);
 
+        return $res;
     }
 
     //el método store almacena atributo y valor diferenciando mediante $type

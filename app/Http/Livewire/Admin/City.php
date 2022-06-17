@@ -121,52 +121,35 @@ class City extends Component
         //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
         //si es todos no establecemos status en la consulta para que englobe a 
         //los 2 posibles estados (tanto los de status=0 como los de status=1)
-        if($filter_type==2){
-            $init_query = ($this->search_data) ?
-                Ci::onlyTrashed()->where('name','LIKE',$search_data)->where('location_id',$this->location_id)->orderBy($col_order,$order)
-                :
-                Ci::onlyTrashed()->where('location_id',$this->location_id)->orderBy($col_order,$order);
-        }        
-        else if($filter_type==3){
-            $init_query = ($this->search_data) ?
-                Ci::where('name','LIKE',$search_data)->where('location_id',$this->location_id)->orderBy($col_order,$order)
-                :
-                Ci::where('location_id',$this->location_id)->orderBy($col_order,$order);
-        }else{
-            $init_query = ($this->search_data) ?
-                Ci::where('name','LIKE',$search_data)->where('location_id',$this->location_id)->where('status',$filter_type)->orderBy($col_order,$order)
-                :
-                Ci::where('status',$filter_type)->where('location_id',$this->location_id)->orderBy($col_order,$order);
-        }
         
         switch($filter_type):
             case '0':
-                //$this->filterType = $filterType;
-                ($export) ?
-                    $res = $init_query->get()
+            case '1':
+                $init_query = ($this->search_data) ?
+                    Ci::where('name','LIKE',$search_data)->where('location_id',$this->location_id)->where('status',$filter_type)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Ci::where('status',$filter_type)->where('location_id',$this->location_id)->orderBy($col_order,$order);
                 break;
-            case '1':                
-                ($export) ?
-                    $res = $init_query->get()
-                    :                
-                    $res = $init_query->paginate($this->limit_page);
+            case '2':
+                $init_query = ($this->search_data) ?
+                    Ci::onlyTrashed()->where('name','LIKE',$search_data)->where('location_id',$this->location_id)->orderBy($col_order,$order)
+                    :
+                    Ci::onlyTrashed()->where('location_id',$this->location_id)->orderBy($col_order,$order);
                 break;
-            case '2':                
-                ($export) ?
-                    $res = $init_query->get()
-                    :                
-                    $res = $init_query->paginate($this->limit_page);
-                break;            
             case '3':
-                //si el filtro es todos(3) realizamos la consulta sin filtrar status
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Ci::where('name','LIKE',$search_data)->where('location_id',$this->location_id)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Ci::where('location_id',$this->location_id)->orderBy($col_order,$order);
                 break;
+
         endswitch;
+        
+        ($export) ?
+            $res = $init_query->get()
+            :
+            $res = $init_query->paginate($this->limit_page);
+        
         return $res;
     }
 

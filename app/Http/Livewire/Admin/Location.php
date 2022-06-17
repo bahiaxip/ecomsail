@@ -64,9 +64,13 @@ class Location extends Component
     public $zones;
 
     public $limit_page=10;
+    public $typealert = 'success';
 
     public function mount($filter_type){
         $this->filter_type = $filter_type;
+        if($filter_type != 0 && $filter_type != 1 && $filter_type != 3){
+            return redirect()->route('home')->with('message','Error en la consulta');
+        }
         $this->order_type = 'asc';
         $this->listname = 'locations';
         $this->username=Auth::user()->name;
@@ -116,40 +120,29 @@ class Location extends Component
         //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
         
         //si es todos no establecemos status en la consulta para que englobe a 
-        //los 2 posibles estados (tanto los de status=0 como los de status=1)
-        if($filter_type==3){
-            $init_query = ($this->search_data) ?
-                Loc::where('name','LIKE',$search_data)->orderBy($col_order,$order)
-                :
-                Loc::orderBy($col_order,$order);
-        }else{
-            $init_query = ($this->search_data) ?
-                Loc::where('name','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
-                :
-                Loc::where('status',$filter_type)->orderBy($col_order,$order);
-        }
+        //los 2 posibles estados (tanto los de status=0 como los de status=1)        
         switch($filter_type):
-            case '0':
-                //$this->filterType = $filterType;
-                ($export) ?
-                    $res = $init_query->get()
-                    :
-                    $res = $init_query->paginate($this->limit_page);
-                break;
+            case '0':                
             case '1':                
-                ($export) ?
-                    $res = $init_query->get()
-                    :                
-                    $res = $init_query->paginate($this->limit_page);
+                $init_query = ($this->search_data) ?
+                    Loc::where('name','LIKE',$search_data)->orderBy($col_order,$order)
+                    :
+                    Loc::orderBy($col_order,$order);
                 break;            
             case '3':
-                //si el filtro es todos(3) realizamos la consulta sin filtrar status
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Loc::where('name','LIKE',$search_data)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Loc::orderBy($col_order,$order);
                 break;
+
         endswitch;
+
+        ($export) ?
+            $res = $init_query->get()
+            :
+            $res = $init_query->paginate($this->limit_page);
+
         return $res;
     }
 

@@ -95,13 +95,13 @@
                     </li>
                     <li style="">
                         <a href="/register" class="dropdown-item" >
-                            <i class="fa-solid fa-user-pen"></i>
+                            <i class="fa-solid fa-star"></i>
                             Mis favoritos
                         </a>
                     </li>
                     <li style="">
                         <a href="/register" class="dropdown-item" >
-                            <i class="fa-solid fa-user-pen"></i>
+                            <i class="fa-solid fa-rectangle-list"></i>
                             Historial de pedidos
                         </a>
                     </li>

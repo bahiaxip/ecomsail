@@ -195,49 +195,33 @@ class Product extends Component
         //tipo de ordenamiento
         //$order='desc';
         $order = $this->order_type;
-        //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
-        if($filter_type==2)            
-            $init_query = ($this->search_data) ?
-                Prod::onlyTrashed()->where('name','LIKE',$search_data)
-                :
-                Prod::onlyTrashed()->orderBy($col_order,$order);
-        elseif($filter_type==3){
-            $init_query = ($this->search_data) ?
-                Prod::where('name','LIKE',$search_data)->orderBy($col_order,$order)
-                :
-                Prod::orderBy($col_order,$order);
-        }else{
-            $init_query = ($this->search_data) ?
-                Prod::where('name','LIKE',$search_data)->where('status',$this->filter_type)->orderBy($col_order,$order)
-                :
-                Prod::where('status',$filter_type)->orderBy($col_order,$order);
-        }
+        //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())        
         switch($filter_type):
-            case '0':
-                ($export) ?
-                    $res = $init_query->get()
-                    :
-                    $res = $init_query->paginate($this->limit_page);
-                break;
+            case '0':                
             case '1':                
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Prod::where('name','LIKE',$search_data)->where('status',$this->filter_type)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Prod::where('status',$filter_type)->orderBy($col_order,$order);
                 break;
             case '2':                
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Prod::onlyTrashed()->where('name','LIKE',$search_data)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Prod::onlyTrashed()->orderBy($col_order,$order);
                 break;
             case '3':                
-                ($export) ?
-                    $res = $init_query->get()
+                $init_query = ($this->search_data) ?
+                    Prod::where('name','LIKE',$search_data)->orderBy($col_order,$order)
                     :
-                    $res = $init_query->paginate($this->limit_page);
+                    Prod::orderBy($col_order,$order);
                 break;
         endswitch;
+
+        ($export) ?
+            $res = $init_query->get()
+            :
+            $res = $init_query->paginate($this->limit_page);
         return $res;
     }
 
