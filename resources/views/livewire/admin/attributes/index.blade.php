@@ -311,7 +311,7 @@
                     <td colspan="1" style="display:inline-flex;vertical-align:middle;align-items:center">
 
                         <div class="input-group">
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div>
                         <div>
                             <button class="btn btn-sm btn_sail btn_pry" onclick="testAnyCheckbox()" >Aplicar</button>

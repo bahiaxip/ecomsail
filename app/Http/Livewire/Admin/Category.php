@@ -62,8 +62,8 @@ class Category extends Component
     public $username;
     //listado de registros seleccionados mediante checkbox    
     public $selected_list;
-    //select de acciones por lote
-    public $action_selected_ids;
+    //select de acciones por lote(anulado)
+    //public $action_selected_ids;
     //acción temporal para el modal confirm (delete/restore)
     public $actionTmp;
 
@@ -87,27 +87,49 @@ class Category extends Component
     }
 
     //comprobamos la acción seleccionada
-    public function set_action_massive(){        
-        $action = $this->action_selected_ids;
-        $list = $this->selected_list;
+    public function set_action_massive($list_ids,$action_selected){        
+        $action = $action_selected;
+        $list = $list_ids;
+
+        foreach($list as $l){
+            if($l != 0){
+                //comprobamos si esta categoría tiene subcategorías ( no se podrá eliminar ) - mediante count_cat comprobamos en la vista
+                $this->count_cat = Cat::where('type',$l)->count();
+                if($this->count_cat == 0){
+                    //comprobamos si esta categoría tiene productos asociados ( no se podrá eliminar )
+                    $this->count_cat = Product::where('category_id',$l)->count();
+                }
+                if($this->count_cat >0){
+                    $this->typealert = 'danger';
+                    session()->flash('message','No ha sido posible eliminar las categorías. Alguna de las categorías seleccionadas tienen sucategorías o productos asociados');
+                    $this->emit('massiveConfirm');
+                    $this->selected_list=[];
+                    $this->emit('clearcheckbox');
+                    return false;
+                }
+            }
+        }
+        $this->selected_list = $list;
         $this->emit('massiveConfirm');
         if(!empty($list) && count($list) > 0){
     //añadir icono loading      
             switch($action):
                 //Eliminar
-                case '1':
+                case 'delete':
                     $this->delete_list();
                     break;
                 //Restaurar                
-                case '2':
+                case 'restore':
                     $this->restore_list();
                     break;
             endswitch;
             //devolvemos el select a 0
-            $this->action_selected_ids = 0;
+            //$this->action_selected_ids = 0;
         }
+        $this->typealert="success";
         session()->flash('message','Acción ejecutada correctamente');
         $this->selected_list=[];
+        $this->emit('clearcheckbox');
     }
 
     //eliminar seleccionados(aplicar acción de eliminar en lote)
@@ -354,7 +376,7 @@ class Category extends Component
         $this->catIdTmp=$cat_id;
         $this->actionTmp = $action;
         if($cat_id != 0){
-            //comprobamos si esta categoría tiene subcategorías ( no se podrá eliminar )
+            //comprobamos si esta categoría tiene subcategorías ( no se podrá eliminar ) - mediante count_cat comprobamos en la vista
             $this->count_cat = Cat::where('type',$cat_id)->count();
             if($this->count_cat == 0){
                 //comprobamos si esta categoría tiene productos asociados ( no se podrá eliminar )
@@ -380,6 +402,7 @@ class Category extends Component
 
     //eliminación de categoría
     public function delete(){
+
         if($this->catIdTmp){
             $cat=Cat::where('id',$this->catIdTmp)->first();
             //comprobamos si existe imagen y si existe y
@@ -390,9 +413,11 @@ class Category extends Component
                 Storage::disk('public')->delete($profile->file);
                 session()->flash('message',$profile->file);    
             }
+
             */            
             //$user=User::where('id',$this->userIdTmp)->first();
             //$profile->delete();
+
             $cat->delete();
             $this->typealert='danger';
             session()->flash('message', "Categoría eliminada correctamente");

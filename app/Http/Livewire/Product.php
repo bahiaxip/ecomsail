@@ -29,10 +29,12 @@ class Product extends Component
         if(Auth::id()){
             $this->user_id = Auth::id();    
         }
+        /*
         else{
             $this->typealert = 'danger';
             session()->flash('message','Se originó un error con la autenticación de usuario, inicie sesión');
         }
+        */
         
     }
     public function hydrate(){        

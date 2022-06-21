@@ -8,7 +8,7 @@
                             <p style="font-size:20px;text-align:center;font-weight:bold">Lista de productos</p>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered" >
+                            <table class="table table-bordered" style="width:100%">
                                     <tr>
                                         <th 
                                         style="border:black 2px solid">

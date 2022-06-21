@@ -39,9 +39,14 @@
 
 </head>
 <body>
-    <div class="header">            
-        @include('layouts.nav')
-    </div>
+    @auth
+        @if(helper()->testPermission(Auth::user()->permissions,'admin_panel')== true)
+        <div class="header">            
+            @include('layouts.nav')
+        </div>
+        @endif
+    @endauth
+    
     @if(session()->has('message') && !session()->has('only_component'))
     <div class="container">
         <div class="alert alert-@isset($typealert){{$typealert}}@else{{'success'}} @endisset hide" >

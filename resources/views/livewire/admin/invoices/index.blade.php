@@ -19,8 +19,9 @@
     </li>
     @endif
     @endsection
-
-    @include('livewire.admin.invoices.confirm')
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_invoices')== true || helper()->testPermission(Auth::user()->permissions,'restore_invoices')== true )
+        @include('livewire.admin.invoices.confirm')
+    @endif
 
     @include('livewire.admin.invoices.massive_confirm')
     @include('livewire.admin.invoices.sendmail')
@@ -181,8 +182,10 @@
                     </td>
                     <td>                        
                         {{ $invoice->id }}</td>                        
-                    <td>                        
+                    <td>
+                        @if($invoice->get_order)                        
                         {{ $invoice->get_order->get_address->name}} {{ $invoice->get_order->get_address->lastname}}
+                        @endif
                     </td>
                     <td>
                         {{ $invoice->net }}
@@ -194,7 +197,9 @@
                         {{ $invoice->total }}
                     </td>
                     <td>
+                        @if($invoice->get_order)
                         {{$invoice->get_order->quantity}}
+                        @endif
                     </td>
 
                     <td>
@@ -203,13 +208,17 @@
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                            <button class="btn btn-sm delete" title="Eliminar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'delete')">
-                                    <i class="fa-solid fa-trash"></i>
-                            </button>
+                                @if(helper()->testPermission(Auth::user()->permissions,'delete_invoices')== true)
+                                    <button class="btn btn-sm delete" title="Eliminar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'delete')">
+                                            <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                @endif
                             @else
-                            <button class="btn btn-sm edit" title="Restaruar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'restore')">
-                                <i class="fa-solid fa-trash-arrow-up"></i>
-                            </button>
+                                @if(helper()->testPermission(Auth::user()->permissions,'restore_invoices')== true)
+                                    <button class="btn btn-sm edit" title="Restaruar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'restore')">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </button>
+                                @endif
                             @endif
 
                         </div>
@@ -232,7 +241,7 @@
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div  class="input-group">                    
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div> 
                         
                         <div>

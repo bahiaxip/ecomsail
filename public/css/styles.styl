@@ -51,6 +51,26 @@ color8 = #696969
 	display flex
 	li	
 		display flex		
+	ul
+		li
+			cursor pointer
+/*imagen de perfile(edición)*/
+.edit_modal
+	.modal-header
+		padding 1.2rem 1.1rem
+
+		.img_user
+			background-position 50%
+			background-size 100% auto
+			border-radius 50%
+			left:10px;
+			margin-top:5px
+			object-fit contain
+			padding 5px
+			margin 5px 			
+			position:absolute;
+			width 64px
+			height 64px
 		
 
 .nav_user
@@ -86,12 +106,14 @@ color8 = #696969
 	
 	.products
 		display inline-flex
-		flex-flow row wrap
+		flex-flow column wrap
 		margin auto
 		position relative
 		text-align left
 		width 18%
-			
+		&:hover
+			outline color7 2px solid
+			border-radius 6px		
 		.image
 			align-items center
 			display flex
@@ -101,6 +123,7 @@ color8 = #696969
 			width 100%
 			.layer
 				background-color rgba(0,0,0,.1)
+				
 				border-radius 6px
 				cursor pointer			
 				display none			
@@ -143,7 +166,7 @@ color8 = #696969
 							margin-bottom 5px
 						
 			img
-				padding 12px
+				padding 25px
 				max-height 200px
 				transform scale(1)
 				transition .3s all ease-in-out
@@ -264,7 +287,9 @@ color8 = #696969
 			button:disabled
 				cursor not-allowed
 				pointer-events all 
-					
+			.icon_product.disabled
+				cursor not-allowed
+				opacity 0.7	
 			.icon
 				align-items center
 				background-color color1

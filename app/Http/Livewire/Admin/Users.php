@@ -445,7 +445,8 @@ class Users extends Component
         $iteration=rand();
         $this->role_permissions = new Permis();
         $users = $this->set_type_query();
-        $data = ['users' => $users,'countries' => $this->countries,'provinces_list' => $this->provinces_list,'cities' => $this->municipies_list,'iteration'=>$this->iteration];
+        //$data = ['users' => $users,'countries' => $this->countries,'provinces_list' => $this->provinces_list,'cities' => $this->municipies_list,'iteration'=>$this->iteration];
+        $data = ['users' => $users,'countries' => $this->countries,'iteration'=>$this->iteration];
         //return view('livewire.admin.users.index',$data)->extends('layouts.admin');
 
         return view('livewire.admin.users.index',$data);

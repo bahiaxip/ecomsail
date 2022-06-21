@@ -10,16 +10,26 @@
       <div class="modal-header justify-content-center">
         <!-- necesario loading -->
         
-          <div class="modal-title h5 ">¿Seguro que desea eliminar el registro seleccionado?
-          </div>        
+          <div class="modal-title h5 ">
+            @if($actionTmp == 'delete')
+              @if($count_order == 0)
+              ¿Seguro que desea eliminar el registro seleccionado?
+              @else
+              No es posible eliminar este pedido. Tiene facturas asociadas
+              @endif
+            @else              
+              ¿Seguro que desea restaurar el registro seleccionado?
+            @endif
+          </div>
       </div>      
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click="clearOrderId()">Cancelar</button>
-        
-        @if($actionTmp == 'delete')
-        <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="delete()">Eliminar</button>
-        @else
-        <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="restore({{$orderIdTmp}})">Restaurar</button>
+        @if($count_order == 0)
+          @if($actionTmp == 'delete')
+          <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="delete()">Eliminar</button>
+          @else
+          <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="restore({{$orderIdTmp}})">Restaurar</button>
+          @endif
         @endif
         
       </div>

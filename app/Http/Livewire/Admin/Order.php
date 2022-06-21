@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Order as Ord;
+use App\Models\Order as Ord, App\Models\Invoice;
 use Livewire\WithPagination;
 use App\Functions\Export;
 use PDF,Excel,Str;
@@ -36,8 +36,8 @@ class Order extends Component
     public $limit_page=10;
     //listado de registros seleccionados mediante checkbox    
     public $selected_list;
-    //select de acciones por lote
-    public $action_selected_ids;
+    //select de acciones por lote (anulado)
+    //public $action_selected_ids;
     //acción temporal para el modal confirm (delete/restore)
     public $actionTmp;
     //temporal para enviar email
@@ -45,6 +45,9 @@ class Order extends Component
 
     public $orderIdTmp;
     public $typealert='success';
+    //necesario count_order para indicar a los modals que el pedido tiene 
+    //facturas asociadas y no se puede eliminar
+    public $count_order;
 
 
 
@@ -178,6 +181,12 @@ class Order extends Component
     public function saveOrderId($order_id,$action){        
         $this->orderIdTmp = $order_id;
         $this->actionTmp = $action;
+        if($order_id != 0){
+        //comprobamos si este pedido tiene facturas asociadas, por tanto,
+        //no se puede eliminar, ya que generaría error al mostrar las facturas
+            $this->count_order = Invoice::where('order_id',$order_id)->count();
+            //dd($this->count_order);
+        }
     }
     //si se recarga la página tb se resetea el catIdTmp, en el método mount()
     public function clearOrderId(){
@@ -275,28 +284,47 @@ class Order extends Component
         $this->email_export='';
     }
     //comprobamos la acción seleccionada
-    public function set_action_massive(){        
-        $action = $this->action_selected_ids;
-        $list = $this->selected_list;
+    public function set_action_massive($list_ids,$action_selected){        
+        $action = $action_selected;
+        $list = $list_ids;
+        foreach($list as $l){
+            if($l != 0){
+        //comprobamos si este pedido tiene facturas asociadas, por tanto,
+        //no se puede eliminar, ya que generaría error al mostrar las facturas
+                $this->count_order = Invoice::where('order_id',$l)->count();
+                if($this->count_order > 0){
+                    $this->typealert = 'danger';
+                    session()->flash('message','No ha sido posible eliminar los pedidos. Alguno de los pedidos seleccionados tienen facturas asociadas');
+                    $this->emit('massiveConfirm');
+                    $this->selected_list=[];
+                    $this->emit('clearcheckbox');
+                    return false;
+                }
+            }
+
+        }
+        $this->selected_list = $list;
         $this->emit('massiveConfirm');
         if(!empty($list) && count($list) > 0){
     //añadir icono loading      
             switch($action):
                 //Eliminar
-                case '1':
+                case 'delete':
                     $this->delete_list();
                     break;
                 //Restaurar                
-                case '2':
+                case 'restore':
                     $this->restore_list();
                     break;
             endswitch;
             //devolvemos el select a 0
-            $this->action_selected_ids = 0;
+            //$this->action_selected_ids = 0;
         }        
         $this->typealert = 'success';
-        session()->flash('message','Acción ejecutada correctamente');
+        session()->flash('message','Acción ejecutada correctamente');        
         $this->selected_list=[];
+        $this->emit('clearcheckbox');
+
     }
     //eliminar seleccionados(aplicar acción de eliminar en lote)
     public function delete_list(){
@@ -304,7 +332,9 @@ class Order extends Component
     }
 
     public function restore_list(){
-        Ord::whereIn('id',$this->selected_list)->restore();
+        Ord::withTrashed()->whereIn('id',$this->selected_list)->each(function ($order,$key){
+            $order->restore();
+        });
     }
 
     public function invoices($order_id){

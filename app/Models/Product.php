@@ -67,7 +67,7 @@ class Product extends Model
             /*
             foreach ($product->settings as $settings)
             {
-                $settings->delete();
+                $settings->restore();
             }
             */
 

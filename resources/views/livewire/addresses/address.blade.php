@@ -25,16 +25,16 @@
                 
                 @else
                 <div class="address_orders_items">
-                    <table class="table_orders_items">
+                    <table class="table table_orders_items">
                         <thead>
                             <tr>                                
-                                <td ></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>                       
-                                <td></td>
-                                <td></td>
+                                <td>Nombre</td>
+                                <td>Apellidos</td>
+                                <td>País</td>
+                                <td>Provincia</td>
+                                <td>Ciudad</td>
+                                <td>Dirección</td>
+                                <td>Acciones</td>
                                 
                             </tr>
                         </thead>
@@ -72,7 +72,7 @@
                                 
                                 <td>
                                     <div class="admin_items" style="display:flex">
-                                        <div class="form-check form-switch">
+                                        <div class="form-check form-switch" style="display:flex;align-items:center;justify-content:center">
                                             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" wire:click="set_default({{$address->id}})" @if($address->default == 1) checked @endif @if($addresses->count() == 1) disabled @endif>           
                                         </div>
                                         <button class="btn btn-sm delete" title="Eliminar producto" wire:click="save_address_id({{$address->id}})" data-bs-toggle="modal" data-bs-target="#confirmDel">

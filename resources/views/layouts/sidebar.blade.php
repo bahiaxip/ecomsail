@@ -17,6 +17,7 @@
 	
 	<div class="options mtop16">
 		<ul>
+			@if(helper()->testPermission(Auth::user()->permissions,'list_home')== true)
 			<li>
 				<a href="{{ route('list_home') }}">
 					<i class="fa-solid fa-chart-line"></i> 
@@ -25,6 +26,7 @@
 					</span>
 				</a>
 			</li>
+			@endif
 			@if(helper()->testPermission(Auth::user()->permissions,'list_products')== true)
 			<li>
 				<a href="{{ route('list_products',['filter_type' => 1]) }}">
@@ -32,6 +34,7 @@
 				</a>
 			</li>
 			@endif
+			@if(helper()->testPermission(Auth::user()->permissions,'list_orders')== true)
 			<li>
 				<a href="{{ route('list_orders',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-bag-shopping"></i> 
@@ -40,6 +43,8 @@
 					</span>
 				</a>
 			</li>
+			@endif
+			@if(helper()->testPermission(Auth::user()->permissions,'list_invoices')== true)
 			<li>
 				<a href="{{ route('list_invoices',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-file-invoice"></i> 
@@ -48,6 +53,7 @@
 					</span>
 				</a>
 			</li>
+			@endif
 			@if(helper()->testPermission(Auth::user()->permissions,'list_categories') == true)
 			<li style="position:relative;right:1px">
 				<a href="{{ route('list_categories',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
@@ -89,8 +95,8 @@
 			@endif
 			
 			<li>
-				<a href="#">
-					<i class="fa-solid fa-gears"></i> 
+				<a href="{{route('settings')}}">
+					<i class="fa-solid fa-gear"></i> 
 					<span class="d-none d-lg-inline-flex">
 						Ajustes
 					</span>

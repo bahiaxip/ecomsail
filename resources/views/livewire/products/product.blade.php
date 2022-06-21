@@ -83,11 +83,11 @@
                       </div>
                     </div>
                     <div class="col-md-7 quantity_btn">
-                      <button type="button" class="btn " wire:click="add_cart">
+                      <button type="button" class="btn " wire:click="add_cart" @guest disabled @endguest @guest title="Inicie sesión para añadir productos al carrito" @endguest>
                         <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                       {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
                       --}}
-                        <div class="icon_product">
+                        <div class="icon_product @guest disabled @endguest" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest>
                             <i class="fas fa-star"></i> 
                         </div>
                     </div>                            

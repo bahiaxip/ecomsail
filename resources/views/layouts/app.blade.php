@@ -29,7 +29,7 @@
 
     <script src="{{ url('ckeditor/ckeditor.js') }}"></script>
     <script src="{{url('js/function_editor.js')}}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 
     
     
@@ -39,7 +39,7 @@
     <div class="header">            
         @include('layouts.nav')
     </div>
-    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations','list_cities','list_home','list_orders','list_invoices']))
+    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations','list_cities','list_home','list_orders','list_invoices','settings']))
     <div class="content">
         <div class="sectionL">
             {{--@include('layouts.sidebar')--}}
@@ -64,7 +64,7 @@
                 @if(session()->has('message') && !session()->has('only_component'))                
                 <div class="container">
 
-                    <div class="alert alert-@if($typealert){{$typealert}}@else success @endif hide" >
+                    <div class="alert alert-@if($typealert){{$typealert}}@else {{success}} @endif hide" >
                         {{ Session::get('message') }}
                         @if($errors->any())
                         <ul>

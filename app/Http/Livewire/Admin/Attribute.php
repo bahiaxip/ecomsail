@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use App\Models\Attribute as Attr;
+use App\Models\Attribute as Attr, App\Models\Combination;
 use App\Functions\Export;
 use Str,Auth,PDF,Excel;
 use Illuminate\Support\Facades\Mail;
@@ -69,8 +69,8 @@ class Attribute extends Component
 
     //listado de registros seleccionados mediante checkbox    
     public $selected_list;
-    //select de acciones por lote
-    public $action_selected_ids;
+    //select de acciones por lote (anulado)
+    //public $action_selected_ids;
     //acción temporal para el modal confirm (delete/restore)
     public $actionTmp;
     //archivo temporal para poder eliminar el archivo Excel descargado, ya que 
@@ -81,29 +81,80 @@ class Attribute extends Component
         $this->order_type = 'asc';
         $this->username = Auth::user()->name;
     }
+
+    //comprobar atributos o valores en todas las combinaciones
+    public function testAttrInCombinations($attr_id){
+        $combinations = Combination::all();
+        foreach($combinations as $comb){
+            $list = explode(",",$comb->list_ids);
+            foreach($list as $l){                
+                if($l == $attr_id)
+                    return false;
+            }
+        }
+        return true;
+    }
     //comprobamos la acción seleccionada
-    public function set_action_massive(){        
-        $action = $this->action_selected_ids;
-        $list = $this->selected_list;
+    public function set_action_massive($list_ids,$action_selected){        
+        $action = $action_selected;
+        $list = $list_ids;
+        if($action == 'delete'){
+            foreach($list as $l){
+                if($l != 0){                    
+                    $attr = Attr::findOrFail($l);
+                    $this->count_attr = 0;
+                    //si type es 0 es un atributo padre
+                    if($attr->type == 0){                        
+                        //comprobamos si existen valores asociados al padre
+                        $this->count_attr = Attr::where('type',$l)->count();
+                    }
+                //si tiene valores asociados al padre (count_attr mayor a 0)
+                    if($this->count_attr > 0){                        
+                        //no se puede eliminar pk tiene valores
+                        //devolvemos mensaje y detenemos
+                        $this->typealert = 'danger';
+                        session()->flash('message','No ha sido posible eliminar los atributos seleccionados porque tienen valores asociados');
+                        $this->emit('massiveConfirm');
+                        $this->selected_list=[];
+                        $this->emit('clearcheckbox');
+                        return false;
+
+                    }
+
+                //si es un valor(subatributo) o es un atributo padre sin 
+                //valores asociados comprobamos combinaciones
+                    if(!$this->testAttrInCombinations($l)){
+                        $this->typealert = 'danger';
+                        session()->flash('message','No ha sido posible eliminar los atributos o valores seleccionados porque existen combinaciones asociadas');
+                        $this->emit('massiveConfirm');
+                        $this->selected_list=[];
+                        $this->emit('clearcheckbox');
+                        return false;
+                    }
+                }
+            }
+        }
+        $this->selected_list = $list;
         $this->emit('massiveConfirm');
         if(!empty($list) && count($list) > 0){
     //añadir icono loading      
             switch($action):
                 //Eliminar
-                case '1':
+                case 'delete':
                     $this->delete_list();
                     break;
                 //Restaurar                
-                case '2':
+                case 'restore':
                     $this->restore_list();
                     break;
             endswitch;
             //devolvemos el select a 0
-            $this->action_selected_ids = 0;
+            //$this->action_selected_ids = 0;
         }        
         
         session()->flash('message','Acción ejecutada correctamente');
         $this->selected_list=[];
+        $this->emit('clearcheckbox');
         
     }
     //eliminar seleccionados(aplicar acción de eliminar en lote)
@@ -250,9 +301,10 @@ class Attribute extends Component
     }
     //actualiza atributo y valor mediante $type
     public function update(){
+    //si existe attr indica que es valor (subatributo), si no, es atributo padre
         if(!$this->attr)
             $this->parent_attr = 0;
-
+        
         if($this->attr_id){
             $validated = $this->validate([
                 'name' => 'required',
@@ -438,9 +490,36 @@ class Attribute extends Component
         //revisar en producción
         //comprobamos si existen valores asociados a ese atributo, en caso de existir
         //no se puede eliminar y cambia el mensaje de confirm
-        if($attr_id !=0){
-            $this->count_attr = Attr::where('type',$attr_id)->count();
+        if($action == 'delete'){
+            if($attr_id !=0){
+                $this->count_attr = 0;
+                $this->count_attr = Attr::where('type',$attr_id)->count();
+                if($this->count_attr == 0){
+                    //si es un valor(subatributo) o es un atributo padre sin 
+                    //valores asociados comprobamos combinaciones
+                    if(!$this->testAttrInCombinations($attr_id)){
+                        //pasamos count_attr a 1 para que el modal
+                        //interprete que no se puede eliminar
+                        $this->count_attr =1;
+                    }
+                }
+
+            }
         }
+        //en el caso de restaurar no es necesario ya que no se puede acceder
+        //al listado de subcategorías si está eliminada la categoría padre,
+        //y la categoría padre siempre se debe poder restaurar.
+        /*
+        if($action == 'restore'){
+            $attr = Attr::withTrashed()->findOrFail($attr_id);
+            dd($attr->type);
+            if($attr->type != 0){
+                $this->count_attr = Attr::withTrashed()->where()
+            }else{
+
+            }
+        }
+        */
     }
     //si se recarga la página tb se resetea el catIdTmp, en el método mount()
     public function clearAttrId(){

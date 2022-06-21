@@ -11,8 +11,9 @@
         </a>
     </li>
     @endsection
-
-    @include('livewire.admin.orders.confirm')
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_orders')== true || helper()->testPermission(Auth::user()->permissions,'restore_orders')== true )
+        @include('livewire.admin.orders.confirm')
+    @endif
     @include('livewire.admin.orders.sendmail')
     @include('livewire.admin.orders.massive_confirm')
 
@@ -200,18 +201,22 @@
                         <td>
                             <div class="admin_items">
                             @if($filter_type != 2)
-                                <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="invoices({{$order->id}})" title="Ir a facturas">
-                                    <i class="fa-solid fa-file-invoice"></i>
-                                </button>
-
-                                <button class="btn btn-sm delete" title="Eliminar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'delete')">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
+                                @if(helper()->testPermission(Auth::user()->permissions,'list_orders')== true)
+                                    <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="invoices({{$order->id}})" title="Ir a facturas">
+                                        <i class="fa-solid fa-file-invoice"></i>
+                                    </button>
+                                @endif
+                                @if(helper()->testPermission(Auth::user()->permissions,'delete_orders')== true)
+                                    <button class="btn btn-sm delete" title="Eliminar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'delete')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                @endif
                             @else
-
-                                <button class="btn btn-sm restore" title="Restaruar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'restore')">
-                                    <i class="fa-solid fa-trash-arrow-up"></i>
-                                </button>
+                                @if(helper()->testPermission(Auth::user()->permissions,'restore_orders')== true)
+                                    <button class="btn btn-sm restore" title="Restaruar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'restore')">
+                                        <i class="fa-solid fa-trash-arrow-up"></i>
+                                    </button>
+                                @endif
                             @endif
 
                             </div>
@@ -235,7 +240,7 @@
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div  class="input-group">                    
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div> 
                         
                         <div>

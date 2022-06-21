@@ -9,13 +9,18 @@
       @endif
       <div class="modal-header justify-content-center">
         <!-- necesario loading -->
-        
-        @if($count_attr==0)
-            <div class="modal-title h5 ">¿Seguro que desea eliminar el registro seleccionado?
-          </div>
+        @if($actionTmp == 'delete')            
+            <div class="modal-title h5 ">
+              @if($count_attr==0)
+              ¿Seguro que desea eliminar el registro seleccionado?
+              @else
+              No es posible eliminar este atributo porque tiene valores asociados o existen combinaciones asociadas             
+              @endif
+            </div>
         @else
-            <div class="modal-title h5 ">No es posible eliminar este atributo porque tiene valores asociados
-          </div>  
+            <div class="modal-title h5 ">¿Seguro que desea restaurar el registro seleccionado?
+            </div>
+            
         @endif
       </div>      
       <div class="modal-footer justify-content-center">

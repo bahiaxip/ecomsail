@@ -1,6 +1,29 @@
-<div>
+<div style="position: relative;">
+
+    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
+        <div class="alert alert-{{$typealert}}" style="min-width:700px">            
+            <h2 style="font-size:1em;text-align:center">Usuario actualizado correctamente</h2>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                
+            </script>
+        </div>
+    </div>
+    
     @include('livewire.home.fastview_item')
     @include('layouts.nav_user')
+
+    @include('livewire.home.edit_user')
+
+
+    
+
     <div  class="container">
         <div wire:ignore>
             @include('livewire.home.slider_home')    
@@ -10,6 +33,7 @@
         @foreach($products as $prod)    
             <div class="products mtop32">
                 <a href="{{ url('/product/'.$prod->id) }}" class="image" wire:click="">
+                    {{--
                     <div class="layer">
                         <div class="favorite">
                             <div class="icon">
@@ -24,6 +48,7 @@
                             </div>
                         </div>
                     </div>
+                    --}}
                     <img src="{{$prod->path_tag.$prod->image}}" alt="">
                 </a>
                 <div class="title">

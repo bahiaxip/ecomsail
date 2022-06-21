@@ -18,11 +18,11 @@
         @include('livewire.admin.products.settings')
     @endif
     
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true)
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true || helper()->testPermission(Auth::user()->permissions,'restore_products')== true )
         @include('livewire.admin.products.confirm')
     @endif
     @include('livewire.admin.products.sendmail')
-    @include('livewire.admin.attributes.massive_confirm')
+    @include('livewire.admin.products.massive_confirm')
     @if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -204,7 +204,7 @@
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div class="input-group">                    
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),0,['class' => 'form-select form-select-sm','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div> 
                         
                         <div>

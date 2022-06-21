@@ -56,6 +56,30 @@ class CategorySeeder extends Seeder
             'image' => 'food.png',
             'path_tag' => '/icons/cat_icons/',
         ]);
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Informática',
+            'file_name' => 'Informatica.png',
+            'image' => 'computing.png',
+            'path_tag' => '/icons/cat_icons/',
+        ]);
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Jardín',
+            'file_name' => 'Jardin.png',
+            'image' => 'garden.png',
+            'path_tag' => '/icons/cat_icons/',
+        ]);
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Belleza',
+            'file_name' => 'Belleza.png',
+            'image' => 'beauty.png',
+            'path_tag' => '/icons/cat_icons/',
+        ]);
 
         //subcategories
 
@@ -233,6 +257,92 @@ class CategorySeeder extends Seeder
                 'path_tag' => '/icons/cat_icons/food/',
             ]);
 
+            //Informática
+            Category::create([
+                'status' => 1,
+                'type' => 6,
+                'name' =>'Ordenadores portátiles',
+                'file_name' => 'Ordenadores_portatiles.png',
+                'image' => 'portable.png',
+                'path_tag' => '/icons/cat_icons/computing/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 6,
+                'name' =>'Almacenamiento',
+                'file_name' => 'Almacenamiento.png',
+                'image' => 'sd.png',
+                'path_tag' => '/icons/cat_icons/computing/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 6,
+                'name' =>'Aplicaciones',
+                'file_name' => 'Aplicaciones.png',
+                'image' => 'windows.png',
+                'path_tag' => '/icons/cat_icons/computing/',
+            ]);
+
+
+            //Jardín
+            Category::create([
+                'status' => 1,
+                'type' => 7,
+                'name' =>'Mangueras',
+                'file_name' => 'Mangueras.png',
+                'image' => 'hose.png',
+                'path_tag' => '/icons/cat_icons/garden/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 7,
+                'name' =>'Piscinas',
+                'file_name' => 'Piscinas.png',
+                'image' => 'inflatable-pool.png',
+                'path_tag' => '/icons/cat_icons/garden/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 7,
+                'name' =>'Cortacésped',
+                'file_name' => 'Cortacésped.png',
+                'image' => 'mower.png',
+                'path_tag' => '/icons/cat_icons/garden/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 7,
+                'name' =>'Semillas',
+                'file_name' => 'Semillas.png',
+                'image' => 'seed.png',
+                'path_tag' => '/icons/cat_icons/garden/',
+            ]);
+
+            //Belleza
+            Category::create([
+                'status' => 1,
+                'type' => 8,
+                'name' =>'Cuidado del cabello',
+                'file_name' => 'Cuidado_del_cabello.png',
+                'image' => 'hair_care.png',
+                'path_tag' => '/icons/cat_icons/beauty/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 8,
+                'name' =>'Maquillaje',
+                'file_name' => 'Maquillaje.png',
+                'image' => 'make-up.png',
+                'path_tag' => '/icons/cat_icons/beauty/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 8,
+                'name' =>'Perfumes',
+                'file_name' => 'Perfumes.png',
+                'image' => 'fragance.png',
+                'path_tag' => '/icons/cat_icons/beauty/',
+            ]);
         
 
 

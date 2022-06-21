@@ -113,6 +113,7 @@ class Address extends Component
         $this->typealert="success";
         session()->flash('message','La dirección ha sido guardada correctamente');
         $this->emit('addAddress');
+        $this->clear();
     }
 
     public function set_location(){
@@ -188,9 +189,9 @@ class Address extends Component
         }else if ($this->addresses->count() == 1){
             $this->addresses->first()->default=1;
         }
-        
-        
     }
+
+
 
     public function render()
     {

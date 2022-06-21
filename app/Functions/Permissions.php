@@ -18,6 +18,9 @@ class Permissions {
 	}
 
 	public $permissions_list = [
+        'home' =>[
+            'list_home' => null,
+        ],
         'users' => [
             'list_users' => null,
             'add_users' => null,
@@ -41,6 +44,11 @@ class Permissions {
             'add_locations' => null,
             'edit_locations' => null,
             'delete_locations' => null,
+        ],
+        'orders' =>[
+            'list_orders' => null,            
+            'delete_locations' => null,
+            'restore_orders' => null
         ],
         
     ];

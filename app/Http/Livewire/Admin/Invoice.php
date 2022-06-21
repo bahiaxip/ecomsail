@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Invoice as Inv;
+use App\Models\Invoice as Inv, App\Models\Order;
 use Livewire\WithPagination;
 use App\Functions\Export;
 use PDF,Excel,Str;
@@ -34,8 +34,8 @@ class Invoice extends Component
     public $limit_page=10;
     //listado de registros seleccionados mediante checkbox    
     public $selected_list;
-    //select de acciones por lote
-    public $action_selected_ids;
+    //select de acciones por lote(anulado)
+    //public $action_selected_ids;
     //acción temporal para el modal confirm (delete/restore)
     public $actionTmp;
     //temporal para enviar email
@@ -44,7 +44,9 @@ class Invoice extends Component
     public $invoiceIdTmp;
     public $typealert='success';
     public $order_id;
-
+    //necesario count_order para indicar a los modals que el pedido tiene 
+    //facturas asociadas y no se puede eliminar
+    public $count_invoice;
     public function mount($filter_type,$order_id=null){
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
@@ -172,7 +174,7 @@ class Invoice extends Component
         $this->typealert = 'success';
 
         //según sea valor o atributo modificamos el mensaje        
-        $message = "Fatura restaurada correctamente";
+        $message = "Factura restaurada correctamente";
         session()->flash('message',$message);
         //$this->clear2();
         $this->emit('confirmDel');
@@ -180,6 +182,14 @@ class Invoice extends Component
     public function saveInvoiceId($invoice_id,$action){        
         $this->invoiceIdTmp = $invoice_id;
         $this->actionTmp = $action;
+
+        //comprobamos si esta factura tiene un pedido asociado ( no se podrá restaurar ) - mediante count_invoice comprobamos en la vista
+        if($invoice_id != 0){
+            if($action == 'restore'){
+                $invoice = Inv::onlyTrashed()->findOrFail($invoice_id);
+                $this->count_invoice = Order::withTrashed()->where('id',$invoice->order_id)->where('deleted_at','!=',null)->count();
+            }
+        }
     }
     //si se recarga la página tb se resetea el catIdTmp, en el método mount()
     public function clearOrderId(){
@@ -277,19 +287,42 @@ class Invoice extends Component
     }
 
     //comprobamos la acción seleccionada
-    public function set_action_massive(){        
-        $action = $this->action_selected_ids;
-        $list = $this->selected_list;
+    public function set_action_massive($list_ids,$action_selected){        
+        $action = $action_selected;
+        $list = $list_ids;
+
+        foreach($list as $l){
+        //comprobamos si esta factura no tiene pedidos asociados, por tanto,
+        //no se puede restaurar
+        if($action == 'restore'){
+            if($l != 0){
+                $invoice = Inv::onlyTrashed()->findOrFail($l);
+                $order = Order::withTrashed()->findOrFail($invoice->order_id);
+                
+                if($order->deleted_at){
+                    $this->typealert = 'danger';
+                    session()->flash('message','No ha sido posible restaurar las facturas. Alguna de las facturas seleccionadas no tiene ningún pedido asociado');
+                    $this->emit('massiveConfirm');
+                    $this->selected_list=[];
+                    $this->emit('clearcheckbox');
+                    return false;
+                }
+
+            }
+        }
+            
+        }
+        $this->selected_list = $list;
         $this->emit('massiveConfirm');
         if(!empty($list) && count($list) > 0){
     //añadir icono loading      
             switch($action):
                 //Eliminar
-                case '1':
+                case 'delete':
                     $this->delete_list();
                     break;
                 //Restaurar                
-                case '2':
+                case 'restore':
                     $this->restore_list();
                     break;
             endswitch;
@@ -299,6 +332,7 @@ class Invoice extends Component
         $this->typealert = 'success';
         session()->flash('message','Acción ejecutada correctamente');
         $this->selected_list=[];
+        $this->emit('clearcheckbox');
     }
 
     //eliminar seleccionados(aplicar acción de eliminar en lote)

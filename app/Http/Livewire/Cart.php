@@ -5,8 +5,15 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice;
 use Auth,Str;
+//edit_user
+use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
+
+use  Livewire\WithFileUploads;
+
 class Cart extends Component
 {
+    use WithFileUploads;
+
     public $order_id;
     public $user_id;
     public $quantity;
@@ -18,16 +25,48 @@ class Cart extends Component
     public $payment_selected;
     public $location_id;
     public $comment;
-    public $typealert;
+    public $typealert='success';
     //lista de direcciones anotadas
     public $addresses;
 
     public $sum;
     public $total;
 
+    //edit_user
+    //redeclarado y pasado a $user_id2   
+    public $user_id2;
+    public $nick;
+    
+    public $surname;
+    public $email;
+    public $profile_image;
+    public $thumb;
+    //iteration es necesario resetear el caché del input file
+    public $iteration;
+    public $phone;
+    public $country;
+    public $province;
+    public $city;
+    protected $paisesObj;
+    public $provinces;
+    public $countries;
+    //provincia seleccionada
+    public $prov_id_selected;
+    //listado de municipios
+    public $municipies_list;
+    protected $prov;
+    protected $municip;
+
+    //fin edit_user
     public function mount(){
         $this->user_id = Auth::id();
-        
+        //Class Países solo utilizada para obtener los paises (array all)
+        $this->paisesObj = new Paises();
+        $this->countries = $this->paisesObj->all_list;
+        $this->prov = new Pr();
+        $this->provinces_list = $this->prov->prov;
+        $this->municip = new Municipalities();
+        $this->municipies_list = $this->municip->cities;
         
     }
     /*
@@ -108,19 +147,22 @@ class Cart extends Component
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
         //generamos un nombre de pedido aleatorio y convertimos a mayúsculas
         $rand= strtoupper(Str::random(20));
+        //obtenemos el subtotal(total sin impuestos) para el pedido(Order) y para la factura(Invoice)
+        $net = $this->set_vat_to_price($this->total,$location_vat,'minus');
         $message;
-        $typealert;
+        $typealert;        
         $order->update([
             'status'=>1,
             'order_num' => $rand,
             'location'=> $address->get_location->id,
             'selected_address' => $this->address_selected,
+            'subtotal' => $net,
             'total' => $this->total,
             'payment_method' => $validated['payment_selected'],
             'order_comment' => $validated['comment'],
             'quantity' => $validated['sum']
         ]);
-        $net = $this->set_vat_to_price($this->total,$location_vat,'minus');
+        
 //creamos factura, necesitamos la dirección Address para
 //el iva y los productos que componen la factura y revisar
 //los descuentos
@@ -171,6 +213,100 @@ class Cart extends Component
         //$this->price_tmp = $this->item->price + $this->added_price;
         //$this->dispatchBrowserEvent('contentChanged2');
     }
+
+    //edit_user
+    public function edit_user(){
+        $user = User::findOrFail(Auth::id());
+        if($user->id){
+            $this->user_id2 = $user->id;
+            $this->nick = $user->nick;
+            $this->name=$user->name;
+            $this->email=$user->email;
+            
+            $this->surname=$user->lastname;
+            //$this->image=$user->image;
+            $this->thumb = $user->thumb;
+            $this->phone=$user->phone;
+            $this->country=$user->country;
+            $this->province=$user->province;
+            $this->city = $user->city;
+        }
+    }
+    public function update(){
+        //ocultamos el loading duplicado que se ha iniciado
+        $this->emit('loading','loading');
+        //dd($this->profile_image);
+        if($this->user_id2){
+            $validated = $this->validate([
+                'nick' => 'required',
+                'name' => 'required',
+                'surname' => 'required',
+                'phone' => 'nullable',
+                'country' => 'nullable',
+                'province' => 'nullable',
+                'city' => 'nullable',
+                'profile_image' =>'nullable|image'
+            ]);
+            
+            if($this->user_id2){
+                $user = User::where('id',$this->user_id2)->first();
+                $user->update([
+                    'nick' => $validated['nick'],
+                    'name' => $validated['name'],                
+                    'lastname' => $validated['surname'],
+                    'phone' => $validated['phone'],
+                    'country' => $validated['country'],
+                    'province' => $validated['province'],
+                    'city' => $validated['city'],
+                ]);
+                
+                if($validated['profile_image'] !== null){
+
+//comprobar si existe imagen y eliminar la anterior            
+                    $image_name = $this->profile_image->getClientOriginalName();
+
+                    $ext = $this->profile_image->getClientOriginalExtension();
+                    $path_date= date('Y-m-d');
+                    $image = $this->profile_image->store('public/files/'.$path_date,'');
+                    $path_tag = 'public/files/'.$path_date.'/';
+                    //eliminamos el directorio public
+                    $imagelesspublic = substr($image,7);
+                    $thumb = $image;
+                    $user->update([
+                        'image' => $imagelesspublic,
+                        'thumb' => $imagelesspublic,
+                        'path_tag' => $path_tag,
+                        'file_name' => $image_name,
+                    ]);
+                }
+            }
+            $this->typealert = 'success';
+            session()->flash('message','Usuario actualizado correctamente');
+            $this->emit('message_opacity');
+            $this->clear2();
+            $this->emit('editUser');
+        }
+
+    }
+
+    //limpiar datos de formulario
+    public function clear(){
+        
+        $this->user_id2='';
+        $this->nick='';
+        $this->name='';
+        $this->surname='';
+        $this->profile_image=null;
+        //iteration es necesario resetear el caché del input file
+        $this->iteration=rand();
+    }
+
+    public function clear2(){
+        $this->clear();
+        //resetea todos los mensajes
+        $this->resetValidation();
+    }
+    //fin_edit_user
 
     public function render()
     {

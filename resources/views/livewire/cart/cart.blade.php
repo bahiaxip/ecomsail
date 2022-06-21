@@ -1,30 +1,39 @@
-<div>
+<div style="position:relative">
+    {{--
+    <div class="message_opacity" style="position:absolute;opacity:0;display:flex;justify-content:center;width:100%">
+        <div class="alert alert-{{$typealert}}" style="width:60%">
+    --}}
+    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
+        <div class="alert alert-{{$typealert}}" style="min-width:700px">
+            <h5 style="font-size:1em;text-align:center" >{{session('message') }}</h5>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                {{--
+                $('.alert').slideDown();
+                setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+                document.querySelector('.message_opacity').style.opacity = 0;
+                --}}
+            </script>
+        </div>
+    </div>
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
+    @include('livewire.cart.edit_user')
     <div class="container">
         <div class="row mtop32 cart justify-content-between">
             <div class="col-xl-8 shadow">
                 <div class="cart_header">
                     <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
                 </div>
-                @if(session()->has('message'))
-                <div class="container ">
-                    <div class="alert alert-{{$typealert}}">            
-                        <h5>{{session('message') }}</h5>
-                        @if($errors->any())
-                        <ul>
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        @endif
-                        <script>
-                            $('.alert').slideDown();
-                            setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
-                        </script>
-                    </div>
-                </div>
-                @endif
+                
+                
+                
                 @php $sum=0;$total=0; @endphp
                 @if($orders_items->count()==0)
                 

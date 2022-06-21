@@ -3,8 +3,8 @@
 		@auth
 		<ul>
 			<li>
-				<a href="{{ route('list_users',['filter_type' => 1]) }}">
-					<i class="fa-solid fa-gears"></i> Admin
+				<a href="{{ route('list_home') }}">
+					<i class="fa-solid fa-user-shield"></i> Admin
 				</a>
 			</li>
 		</ul>
@@ -45,29 +45,24 @@
 		</ul>
 	</div>
 	<div class=" nav_lat nav_right">
-		<ul>
-			@auth
+		<ul>					
+			<li style="margin:auto 50px" >				
+				<a href="{{ route('home') }}" >
+					<div class="position-relative">
+						<i class="fa-solid fa-bell"></i>
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+	    					99+
+	    					<span class="visually-hidden">unread messages</span>
+	  					</span>
+	  				</div>
+				</a>
+			</li>
 			<li>				
-				<a href="{{ url('/') }}">
-					<i class="fa-solid fa-gears"></i> Mi Cuenta
+				<a href="{{ route('home') }}">
+					<i class="fa-solid fa-eye"></i> Ver Tienda
 				</a>
-				<ul>
-					<li>
-						<a href="{{url('/logout')}}">Salir</a>
-					</li>
-					<li>
-						<a href="{{route('list_users',['filter_type' => 1])}}">Admin</a>
-					</li>
-				</ul>
+				
 			</li>
-			@else
-			<li>
-				<a href="{{ url('/login') }}">
-					<i class="fa-solid fa-gears"></i> Login
-				</a>
-			</li>
-			@endauth
-
 		</ul>
 	</div>
 </nav>

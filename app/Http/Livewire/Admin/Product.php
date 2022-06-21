@@ -68,6 +68,7 @@ class Product extends Component
     public $discount;    
     public $init_discount;
     public $end_discount;
+    public $option=[];
     
     
     public $detail2 = null;
@@ -76,7 +77,7 @@ class Product extends Component
     //tipo de filtrado (publico,borrador,reciclaje,todos)
     public $filter_type;
     
-    public $typealert;   
+    public $typealert='success';   
 
     public $list_combinations;
     public $combinations;
@@ -114,7 +115,7 @@ class Product extends Component
     //listado de registros seleccionados mediante checkbox    
     public $selected_list;
     //select de acciones por lote
-    public $action_selected_ids;
+    //public $action_selected_ids;
     //acción temporal para el modal confirm (delete/restore)
     public $actionTmp;
     //contador de productos en el método saveProdId, que junto a actionTmp permite
@@ -143,42 +144,65 @@ class Product extends Component
     public function updated(){
         //si se encuentra en otra página resetea, si no, el buscador
         //no realiza correctamente la búsqueda
+        
         if($this->search_data)
             $this->resetPage();
 
     }
 
     //comprobamos la acción seleccionada
-    public function set_action_massive(){        
-        $action = $this->action_selected_ids;
-        $list = $this->selected_list;
+    public function set_action_massive($list_ids,$action_selected){
+        //if($action_selected)
+        //dd($action_selected);
+        $action = $action_selected;                
+        $list = $list_ids;
+        $this->selected_list = $list;
+        //dd($lista);        
         $this->emit('massiveConfirm');
         if(!empty($list) && count($list) > 0){
     //añadir icono loading      
             switch($action):
                 //Eliminar
-                case '1':
+                case 'delete':                    
                     $this->delete_list();
                     break;
                 //Restaurar                
-                case '2':
+                case 'restore':                    
                     $this->restore_list();
                     break;
             endswitch;
             //devolvemos el select a 0
-            $this->action_selected_ids = 0;
+            //$this->action_selected_ids = 0;
         }
+        $this->typealert = 'success';
         session()->flash('message','Acción ejecutada correctamente');
+        //limpiamos los checkbox
         $this->selected_list=[];
+        $this->emit('clearcheckbox');
+
     }
 
-    //eliminar seleccionados(aplicar acción de eliminar en lote)
-    public function delete_list(){
-        Prod::destroy($this->selected_list);
+    //eliminar seleccionados(aplicar acción de eliminar en lote) massive
+    public function delete_list(){        
+        //Se puede usar whereIn con each() o tb se puede usar  destroy() para
+        //que las relaciones en los modelos tb sean eliminados
+        Prod::whereIn('id',$this->selected_list)->each(function ($prod,$key){
+            $prod->delete();
+        });
+        //con destroy
+        //Prod::destroy($this->selected_list);
+        
     }
 
     public function restore_list(){
-        Prod::whereIn('id',$this->selected_list)->restore();
+        //el operador de laravel whereIn puede no funcionar con más de 999 registros
+        //sin el método each restaura el producto pero no restaura las relaciones de los modelos asociados
+        //Prod::withTrashed()->whereIn('id',$this->selected_list)->restore();
+        
+        Prod::withTrashed()->whereIn('id',$this->selected_list)->each(function ($prod,$key){
+            $prod->restore();
+        });
+        
     }
 
 
@@ -354,18 +378,24 @@ class Product extends Component
     }
 
     public function edit_settings_product($id){
-
+        //$temp = SettingsProducts::where('product_id',5)->first();
+        
         $this->prod_id = $id;
+
         //para el precio $prod
-        $prod = Prod::findOrFail($id);
+        $prod = Prod::findOrFail($id);        
         $this->price = $prod->price;
         //distinguimos estado de reciclaje del resto de estados en settings
+        $settings_prod;
+        
         if($this->filter_type == 2):
             $settings_prod = SettingsProducts::onlyTrashed()->where('product_id',$id)->first();
         else:
             $settings_prod = SettingsProducts::where('product_id',$id)->first();
         endif;
-        $this->availability = $settings_prod->availability;
+        //dd(SettingsProducts::where('product_id',$id)->get());
+        if($settings_prod->availability)
+            $this->availability = $settings_prod->availability;
         $this->product_state = $settings_prod->product_state;
         //es necesario pasarlo como boolean,así que usamos filter_var para convertir a bool
         //$this->not_minstock = $settings_prod->not_minstock;

@@ -27,10 +27,10 @@
                   <div class="col-lg-4">                    
                     
                     <div class="panel shadow" >
-                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_adminpanel" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fa-solid fa-lock"></i> Admin <i class="fa-solid fa-chevron-down"></i>
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_home" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa-solid fa-lock"></i> Home <i class="fa-solid fa-chevron-down"></i>
                       </button>  
-                      <div class="collapse" id="collapse_adminpanel">
+                      <div class="collapse" id="collapse_home">
                         <!--
                         <div class="header">
                           <h2 class="title"><i class="fa-solid fa-lock"></i> Admin</h2>
@@ -38,94 +38,14 @@
                         -->
                         <div class="box">
                           <div class="form-check">
-                          {{ Form::checkbox('admin_panel',"true",($this->role_permissions->testPermission($this->permissions3,'admin_panel')) ? 'checked':'',['class' => 'form-check-input']) }}
-                          {{ Form::label('admin_panel','Panel de administrador',['class' => 'form-check-label']) }}
+                          {{ Form::checkbox('list_home',"true",($this->role_permissions->testPermission($this->permissions3,'list_home')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_home']) }}
+                          {{ Form::label('list_home','Inicio') }}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                
-                  <div class="col-lg-4 ">
-                    <div class="panel shadow">
-                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_users" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fas fa-user-friends"></i> Usuarios <i class="fa-solid fa-chevron-down"></i>
-                      </button>
-                      <div class="collapse" id="collapse_users">
-                          <!--
-                          <div class="header">
-                            <h2 class="title"><i class="fas fa-user-friends"></i> Usuarios</h2>
-                          </div>
-                          -->
-                          <div class="box">            
-                            <div class="form-check">
-                              {{ Form::checkbox('list_users',"true",($this->role_permissions->testPermission($this->permissions3,'list_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_users','wire:model'=>$this->permissions['users']['list_users']]) }}
-                              {{ Form::label('list_users','Listar usuarios') }}
-                            </div>
 
-                            <div class="form-check">
-                                {{ Form::checkbox('add_users',"true",($this->role_permissions->testPermission($this->permissions3,'add_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_users','wire:model'=>$this->permissions['users']['add_users']]) }}
-                                {{ Form::label('add_users','Crear usuarios') }}
-                            </div>
-
-                            <div class="form-check">
-                                {{ Form::checkbox('edit_users',"true",($this->role_permissions->testPermission($this->permissions3,'edit_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_users','wire:model'=>$this->permissions['users']['edit_users']]) }}
-                                {{ Form::label('edit_users','Editar usuarios') }}
-                            </div>
-
-                            <div class="form-check">
-                                {{ Form::checkbox('admin_permissions',"true",($this->role_permissions->testPermission($this->permissions3,'admin_permissions')) ? 'checked':'',['class' => 'form-check-input','id' => 'admin_permissions','wire:model'=>$this->permissions['users']['list_users']]) }}
-                                {{ Form::label('admin_permissions','Administrar permisos') }}                          
-                            </div>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4">
-                    <div class="panel shadow">
-                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_categories" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fas fa-tags"></i> Categorías <i class="fa-solid fa-chevron-down"></i>
-                      </button>
-                      <div class="collapse" id="collapse_categories">
-                          <!--
-                          <div class="header">
-                            <h2 class="title"> Categorías</h2>
-                          </div>
-                          -->
-                          <div class="box">            
-                              <div class="form-check">
-                                {{ Form::checkbox('list_categories',true,($this->role_permissions->testPermission($this->permissions3,'list_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_categories']) }}
-                                {{ Form::label('list_categories','Listar categorías') }}
-                              </div>
-
-                              <div class="form-check">
-                                  {{ Form::checkbox('add_categories',true,($this->role_permissions->testPermission($this->permissions3,'add_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_categories']) }}
-                                  {{ Form::label('add_categories','Crear categorías') }}
-                              </div>
-
-                              <div class="form-check">
-                                  {{ Form::checkbox('edit_categories',true,($this->role_permissions->testPermission($this->permissions3,'edit_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_categories']) }}
-                                  {{ Form::label('edit_categories','Editar categorías') }}
-                              </div>
-
-                              <div class="form-check">
-                                  {{ Form::checkbox('delete_categories',true,($this->role_permissions->testPermission($this->permissions3,'delete_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_categories']) }}
-                                  {{ Form::label('delete_categories','Eliminar categorías') }}
-                              </div>
-
-                              <div class="form-check">
-                                  {{ Form::checkbox('restore_categories',true,($this->role_permissions->testPermission($this->permissions3,'restore_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_categories']) }}
-                                  {{ Form::label('restore_categories','Eliminar categorías') }}
-                              </div>
-                          </div>
-                      </div>                      
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="row mtop16">
                   <div class="col-lg-4 ">
                     <div class="panel shadow">
                       <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_products" aria-expanded="false" aria-controls="collapseExample">
@@ -167,10 +87,122 @@
                     </div>
                   </div>
 
+                  <div class="col-lg-4">
+                    <div class="panel shadow">
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_orders" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-bag-shopping"></i> Pedidos <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <div class="collapse" id="collapse_orders">
+                          <!--
+                          <div class="header">
+                            <h2 class="title"> Categorías</h2>
+                          </div>
+                          -->
+                          <div class="box">            
+                              <div class="form-check">
+                                {{ Form::checkbox('list_orders',true,($this->role_permissions->testPermission($this->permissions3,'list_orders')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_orders']) }}
+                                {{ Form::label('list_orders','Listar pedidos') }}
+                              </div>
+
+                              <div class="form-check">
+                                  {{ Form::checkbox('delete_orders',true,($this->role_permissions->testPermission($this->permissions3,'delete_orders')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_orders']) }}
+                                  {{ Form::label('delete_orders','Eliminar pedidos') }}
+                              </div>
+
+                              <div class="form-check">
+                                  {{ Form::checkbox('restore_orders',true,($this->role_permissions->testPermission($this->permissions3,'restore_orders')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_orders']) }}
+                                  {{ Form::label('restore_orders','Restaurar pedidos') }}
+                              </div>
+                          </div>
+                      </div>                      
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row mtop16">
+
                   <div class="col-lg-4 ">
                     <div class="panel shadow">
-                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_attributes" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fas fa-box-open"></i> Atributos <i class="fa-solid fa-chevron-down"></i>
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_invoices" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-file-invoice"></i> Facturas <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <div class="collapse" id="collapse_invoices">
+                          <!--
+                          <div class="header">
+                            <h2 class="title"><i class="fas fa-box-open"></i> Productos</h2>
+                          </div>
+                          -->
+                          <div class="box">            
+                            <div class="form-check">
+                              {{ Form::checkbox('list_invoices',true,($this->role_permissions->testPermission($this->permissions3,'list_invoices')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_invoices']) }}
+                              {{ Form::label('list_invoices','Listar facturas') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('delete_invoices',true,($this->role_permissions->testPermission($this->permissions3,'delete_invoices')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_invoices']) }}
+                                {{ Form::label('delete_invoices','Eliminar facturas') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('restore_invoices',true,($this->role_permissions->testPermission($this->permissions3,'restore_invoices')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_invoices']) }}
+                                {{ Form::label('restore_invoices','Restaurar facturas') }}
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-lg-4">
+                    <div class="panel shadow">
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_categories" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-tags"></i> Categorías <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <div class="collapse" id="collapse_categories">
+                          <!--
+                          <div class="header">
+                            <h2 class="title"> Categorías</h2>
+                          </div>
+                          -->
+                          <div class="box">            
+                              <div class="form-check">
+                                {{ Form::checkbox('list_categories',true,($this->role_permissions->testPermission($this->permissions3,'list_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_categories']) }}
+                                {{ Form::label('list_categories','Listar categorías') }}
+                              </div>
+
+                              <div class="form-check">
+                                  {{ Form::checkbox('add_categories',true,($this->role_permissions->testPermission($this->permissions3,'add_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'add_categories']) }}
+                                  {{ Form::label('add_categories','Crear categorías') }}
+                              </div>
+
+                              <div class="form-check">
+                                  {{ Form::checkbox('edit_categories',true,($this->role_permissions->testPermission($this->permissions3,'edit_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_categories']) }}
+                                  {{ Form::label('edit_categories','Editar categorías') }}
+                              </div>
+
+                              <div class="form-check">
+                                  {{ Form::checkbox('delete_categories',true,($this->role_permissions->testPermission($this->permissions3,'delete_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'delete_categories']) }}
+                                  {{ Form::label('delete_categories','Eliminar categorías') }}
+                              </div>
+
+                              <div class="form-check">
+                                  {{ Form::checkbox('restore_categories',true,($this->role_permissions->testPermission($this->permissions3,'restore_categories')) ? 'checked':'',['class' => 'form-check-input','id' => 'restore_categories']) }}
+                                  {{ Form::label('restore_categories','Eliminar categorías') }}
+                              </div>
+                          </div>
+                      </div>                      
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 ">
+                    <div class="panel shadow">
+                      <button class="btn w-100 collapse_attributes" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_attributes" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="div_icon_attributes">
+                          <div class="icon icon_value"></div> 
+                          <span>Atributos</span>
+                          <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+
+                         
                       </button>
                       <div class="collapse" id="collapse_attributes">
                           <!--
@@ -208,10 +240,45 @@
                     </div>
                   </div>
 
+                </div>
+                <div class="row mtop16">
+
+                  <div class="col-lg-4 ">
+                    <div class="panel shadow">
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_users" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-user-friends"></i> Usuarios <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <div class="collapse" id="collapse_users">
+                          <!--
+                          <div class="header">
+                            <h2 class="title"><i class="fas fa-user-friends"></i> Usuarios</h2>
+                          </div>
+                          -->
+                          <div class="box">            
+                            <div class="form-check">
+                              {{ Form::checkbox('list_users',"true",($this->role_permissions->testPermission($this->permissions3,'list_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'list_users','wire:model'=>$this->permissions['users']['list_users']]) }}
+                              {{ Form::label('list_users','Listar usuarios') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('edit_users',"true",($this->role_permissions->testPermission($this->permissions3,'edit_users')) ? 'checked':'',['class' => 'form-check-input','id' => 'edit_users','wire:model'=>$this->permissions['users']['edit_users']]) }}
+                                {{ Form::label('edit_users','Editar usuarios') }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ Form::checkbox('admin_permissions',"true",($this->role_permissions->testPermission($this->permissions3,'admin_permissions')) ? 'checked':'',['class' => 'form-check-input','id' => 'admin_permissions','wire:model'=>$this->permissions['users']['list_users']]) }}
+                                {{ Form::label('admin_permissions','Administrar permisos') }}
+                            </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div class="col-lg-4 ">
                     <div class="panel shadow">
                       <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_locations" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fas fa-box-open"></i> Ubicaciones <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fas fa-location-dot"></i> Ubicaciones <i class="fa-solid fa-chevron-down"></i>
                       </button>
                       <div class="collapse" id="collapse_locations">
                           <!--
@@ -255,8 +322,31 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-lg-4">                    
+                    
+                    <div class="panel shadow" >
+                      <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_adminpanel" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa-solid fa-lock"></i> Admin <i class="fa-solid fa-chevron-down"></i>
+                      </button>  
+                      <div class="collapse" id="collapse_adminpanel">
+                        <!--
+                        <div class="header">
+                          <h2 class="title"><i class="fa-solid fa-lock"></i> Admin</h2>
+                        </div>
+                        -->
+                        <div class="box">
+                          <div class="form-check">
+                          {{ Form::checkbox('admin_panel',"true",($this->role_permissions->testPermission($this->permissions3,'admin_panel')) ? 'checked':'',['class' => 'form-check-input','id' => 'admin_panel']) }}
+                          {{ Form::label('admin_panel','Inicio') }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="mtop26">
+                <div class="mtop26 buttons">
                   <button type="button" class="btn btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click.prevent="clear()">Cerrar</button>
                   <button type="submit" class="btn btn-sm btn_sail btn_pry" id="btn_update_permissions">Actualizar</button>
                 </div>

@@ -22,7 +22,7 @@
     @if(helper()->testPermission(Auth::user()->permissions,'edit_locations')== true)
     @include('livewire.admin.cities.edit')
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_locations')== true)
+    @if(helper()->testPermission(Auth::user()->permissions,'delete_locations')== true || helper()->testPermission(Auth::user()->permissions,'restore_locations')== true)
         @include('livewire.admin.cities.confirm')
     @endif    
     {{--

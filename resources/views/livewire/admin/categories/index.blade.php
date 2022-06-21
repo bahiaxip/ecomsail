@@ -40,7 +40,7 @@
         @include('livewire.admin.categories.confirm')
     @endif
     @include('livewire.admin.categories.sendmail')
-    @include('livewire.admin.attributes.massive_confirm')
+    @include('livewire.admin.categories.massive_confirm')
     {{Form::hidden('hidden',null,['wire:model' => 'selected_list','id' => 'hidden_list'])}}
     @if(session()->has('message'))
     <div class="container ">
@@ -306,7 +306,7 @@
                     </td>
                     <td colspan="2" style="display:inline-flex;vertical-align:middle;align-items:center">
                         <div class="input-group">                    
-                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm', 'wire:model' => 'action_selected_ids','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
+                            {{ Form::select('action_selected_ids',get_actionslist($filter_type),null,['class' => 'form-select form-select-sm','style' => 'max-width:300px;margin-right:10px','onchange' => "setActionSelected(this)",'id' => 'indiv_checkbox'])}}
                         </div> 
                         
                         <div>

@@ -51,6 +51,9 @@ Route::group([
 
 		//Facturas
 		Route::get('/invoices/{filter_type}/{order_id?}', \App\Http\Livewire\Admin\Invoice::class)->name('list_invoices');
+
+		//Ajustes
+		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('settings');
 	}
 
 

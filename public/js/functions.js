@@ -164,9 +164,31 @@ window.livewire.on('slick2',(data)=>{
     //    },100);
     }
 })
- 
+//limpiar checkbox de acción masiva(aplicación en lote) y resetear 
+//select de acciones
+window.livewire.on('clearcheckbox',()=>{
+    clearCheckbox();
+    //reseteamos el select de acciones (necesario pasar actionSelected a null)
+    actionSelected=null;
+    document.querySelector('#indiv_checkbox').value=0;
+})
 
-document.addEventListener('readystatechange',() => {        
+window.livewire.on('message_opacity',()=>{
+    let div_message = document.querySelector('.message_opacity');
+    div_message.style.opacity = '1';
+    setTimeout(()=>{ $('.alert').slideUp();div_message.style.opacity = 0; }, 5000);
+    
+    console.log(div_message)
+})
+if(route == 'list_home'){
+    
+    let products = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto','Septiembre'];
+    
+    
+}
+
+document.addEventListener('readystatechange',() => {  
+
 //document.addEventListener('DOMContentLoaded',() => {
         if(document.readyState == "complete"){
             //tooltip
@@ -287,9 +309,7 @@ document.addEventListener('readystatechange',() => {
         if(route == "list_products"){
             
         }
-        if(route == 'home'){
-            
-        }
+
 
 
 
@@ -313,7 +333,9 @@ function activeCheckboxCombinations(){
             })
 }
 
-//comprueba si existe algún checkbox seleccionado, si existe muestra el modal
+//comprueba si existe algún checkbox y alguna acción seleccionados,
+//si existen muestra el modal
+
 function testAnyCheckbox(){    
     //almacenamos todos los checkbox
     let total_list = document.querySelectorAll('.checkbox');
@@ -332,7 +354,8 @@ function testAnyCheckbox(){
         $('#massiveConfirm').modal('show');
 }
 
-function setActionSelected(el){    
+function setActionSelected(el){
+    console.log("el: ",el.value);    
     if(el.value == 1)
         actionSelected = "delete";
     else if(el.value == 2)
@@ -343,20 +366,25 @@ function setActionSelected(el){
 //para la selección total
 //si se ha pulsado checkbox de seleccionar/deseleccionar todos comprobamos
 function selectAllCheckbox(){
-    //si existe elemento allcheckbox...
+    //si existe elemento allcheckbox...    
     if(document.querySelector('#allcheckbox')){
+
         let allcheckbox = document.querySelector('#allcheckbox');
         //almacenamos todos los checkbox
         let total_list = document.querySelectorAll('.checkbox');
         //convertimos a array
         let total = [].slice.call(total_list);
         //comprobamos si es seleccionar o deseleccionar
-        if(allcheckbox.checked)
+        if(allcheckbox.checked){
+            console.log("pasa por checked")
             activeCheckbox(total);
-        else
+        }
+        else{
+            console.log("no pasa por checked")
            clearCheckbox(total);
+        }
     }
-    setList();
+    //setList();
     console.log("list_selected: ",selected_list);
 }
 
@@ -405,21 +433,24 @@ function clearCheckbox(allcheckbox=null){
     
 //selección por id(uno en uno)
 function selectCheckbox(id,el){
-    console.log("selected_list: ",selected_list);
+    
     //si está checkeado añadimos a la lista        
     if(el.checked){
+        console.log("pasa por checked")
         //comprobamos si no se encuentra en la lista (para más seguridad)
         if(!selected_list.includes(id))
             selected_list.push(id);
             
     //si no está checkeado comprobamos si existe en la listay se elimina de la lista
     }else{
+        console.log("no pasa por checked")
         //comprobamos si existe en la lista
         if(selected_list.includes(id))                
             selected_list=selected_list.filter((item) => item != id);
     }
     //actualizamos el data binding del form hidden 
-    setList();
+    console.log("antes de setList(): ",selected_list);
+    //setList();
 }
 
         /*fin métodos para select boxes de aplicaciones en lote*/
@@ -1012,3 +1043,5 @@ function set_payment(el){
     })
     el.classList.add('active');
 }
+
+

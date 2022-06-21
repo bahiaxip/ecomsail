@@ -3,7 +3,8 @@ color2 = #00b292
 color3 = #ff003d
 color4 = #489bf8
 color6 = #494949
-
+color7 = #E3E3E3
+color8 = #696969
 /* ocultar barra scroll en chrome sustituido al elemento directamente más abajo */
 /*
 ::-webkit-scrollbar{
@@ -25,8 +26,14 @@ body
 
 .mtop26
 	margin-top 26px
+.mtop10
+	margin-top 10px
+.mtop12
+	margin-top 12px
 .mtop16
 	margin-top 15px
+.mtop32
+	margin-top 32px
 
 /* estilos mensajes de error */
 .alert-danger
@@ -60,8 +67,13 @@ body
 		margin 2px 2px 0px 0px
 .btn_pry
 	background-color color1
+	color color7
+	&:hover
+		color #FFF
 	&:focus
 		box-shadow 0 0 6px color1
+		color #FFF
+		
 .btn_sry
 	background-color color2
 	&:focus
@@ -80,7 +92,10 @@ body
 	i
 		display flex
 		margin 2px 2px 0px 0px
-		
+.dflex
+	display flex
+.mauto
+	margin auto
 	
 .content
 	background-color #D3D3D3
@@ -453,10 +468,42 @@ body
 .permissions
 	.panel
 		width 100%
+		
 		button
 			font-size 1.2em
 			i
 				font-size .8em
+			&:hover
+				background-color color1
+				color #FFF
+			&:focus
+				background-color color1
+				color #FFF
+		.collapse_attributes
+			align-items center
+			display flex
+			justify-content center
+			margin auto 3px
+			.div_icon_attributes
+				align-items center
+				display flex
+				justify-content center
+				span
+					margin auto 4px
+				i
+					margin-top 5px
+				.icon
+					background-position center
+					background-repeat no-repeat
+					background-size 100%
+					display flex
+					height 18px								
+					width 14px
+				.icon_value
+					background-image url('../icons/values.svg')
+			&:hover
+				.icon_value
+					background-image url('../icons/values_white.svg')
 		/*
 		.header
 			padding 15px
@@ -464,7 +511,11 @@ body
 		*/
 		.box
 			padding 15px 
-
+	.buttons
+		display flex
+		justify-content end
+		button
+			margin 16px 3px
 .edit_modal
 	.modal-header
 		padding 1.2rem 1.1rem
@@ -676,6 +727,27 @@ body
 	
 /* fin botón de subir galería de imágenes (settings) */
 
+/* ajustes de configuración (admin)*/
+.admin_settings
+	.admin_panels
+		display inline-flex
+		height 100%
+		justify-content space-around
+		margin auto
+		text-align center
+		width 100%		
+		.panel_settings			
+			display inline-flex
+			margin-top 16px
+			text-align left
+			width 25%
+			.card
+				width 100%
+	.buttons
+		display flex
+		justify-content end
+
+/* fin ajustes de configuración (admin)*/
 
 /* font-face */
 @font-face
@@ -687,8 +759,26 @@ body
 	src url(../fonts/quicksand/Quicksand-Bold.ttf)
 
 /* fin font-face */
-	
 
+@media only screen and (max-width 1200px)
+	.admin_settings
+		width 100%		
+		.admin_panels			
+			display inline-flex
+			flex-flow row wrap
+			
+			width 100%
+			.panel_settings
+				display inline-flex				
+				width 45%
+	
+@media only screen and (max-width 772px)
+	.admin_settings
+		.admin_panels
+			text-align center
+			.panel_settings
+				width 98%
+				
 	
 						
 
