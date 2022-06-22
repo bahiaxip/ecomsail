@@ -19,7 +19,12 @@
     <link rel="stylesheet" href="{{url('css/nav.css') }}" >
     <link rel="stylesheet" href="{{url('css/slider.css') }}" >
     <link rel="stylesheet" href="{{url('css/styles.css')}}" >
-    
+    <!-- 
+    necesarios estilos de tailwind para paginación de bootstrap, aunque se puede 
+    solucionar añadiendo el string 'pagination::bootstrap-4' como parámetro:
+    ....->links('pagination::bootstrap-4') 
+    -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
     <!--<link rel="stylesheet" href="css/main.css" > -->
     <!-- font.awesome -->
     <script src="https://kit.fontawesome.com/8588bc45a2.js" crossorigin="anonymous"></script>

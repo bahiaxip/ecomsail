@@ -15,6 +15,7 @@
         </div>
     </div>
     @include('layouts.nav_user')
+    {{-- para no incluir $user_id2 a todo el home usamos el modal de cart --}}
     @include('livewire.cart.edit_user')
     <div class="container">
         <div class="row mtop32 address">
@@ -54,7 +55,7 @@
                         </div>
                         <div class="col-md-4" style="display:block;margin:auto">
                             <div>
-                                Total: {{floatval($order->total)}} €
+                                Total: {{number_format((float)$order->total,2,'.',',')}} €
                             </div>
                             <button class="btn btn_pry">
                                 Eliminar
@@ -65,11 +66,12 @@
                     
                     
                 </div>
+                <div class="row">
+                    {{$orders->render()}}
+                </div>
                 @endif
-                
-                
-                
             </div>
         </div>
+        
     </div>
 </div>

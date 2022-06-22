@@ -17,6 +17,7 @@ class Cart extends Component
     public $order_id;
     public $user_id;
     public $quantity=[];
+    public $quantity_tmp;
     //id temporal de order_item para la eliminación
     public $oiIdTmp;
     //dirección seleccionada
@@ -126,6 +127,9 @@ class Cart extends Component
         $this->emit('message_opacity');
     }
     public function updated(){
+        if($this->quantity_tmp != $this->quantity){
+            $this->set_quantity();
+        }
         
     }
     public function set_vat_to_price($total,$vat,$type){
@@ -134,7 +138,7 @@ class Cart extends Component
         if($type == 'minus'){
             $result = $total * $data;
         }
-        return number_format($result,2);
+        return number_format($result,2,'.','');
     }
 
     public function finish_order(){
@@ -158,7 +162,8 @@ class Cart extends Component
         //generamos un nombre de pedido aleatorio y convertimos a mayúsculas
         $rand= strtoupper(Str::random(20));
         //obtenemos el subtotal(total sin impuestos) para el pedido(Order) y para la factura(Invoice)
-        $net = $this->set_vat_to_price($this->total,$location_vat,'minus');
+        $net = (float)$this->set_vat_to_price($this->total,$location_vat,'minus');
+        
         $message;
         $typealert;        
         $order->update([
@@ -227,21 +232,14 @@ class Cart extends Component
 //falta el clear()
     }
 
-    public function change_quantity($operator,$id){        
-        $order_item = Order_Item::findOrFail($id);
-
-        if($order_item){
+    public function change_quantity($operator,$id){
             if($operator == 'plus' )
                 $this->quantity[$id]['quantity']++;
             elseif($operator == 'minus' && $this->quantity[$id]['quantity'] > 1)
                 $this->quantity[$id]['quantity']--;
+            $this->update_order_item($id,$this->quantity[$id]['quantity']);
             
-            $order_item->quantity = $this->quantity[$id]['quantity'];
-            $order_item->total = $order_item->price_unit * $this->quantity[$id]['quantity'];
-            $order_item->save();
-            //dd($order_item->total);
-            //dd($order_item->total);
-            //$this->price_tmp = $product->price * $this->quantity;
+//faltan la comprobacion de combinaciones y su added_price
             //en el caso de combinaciones establecidas en el producto
             /*
             if($this->added_price){
@@ -252,10 +250,29 @@ class Cart extends Component
             //$this->price_tmp = $this->price_tmp + $this->added_price;
             //$this->price_tmp = $this->item->price + $this->added_price;
             //$this->dispatchBrowserEvent('contentChanged2');    
+        
+            
+        
+    }
+    public function update_order_item($id,$quantity){
+        $order_item = Order_Item::findOrFail($id);
+        if($order_item){
+            $order_item->quantity = $quantity;
+            $order_item->total = $order_item->price_unit * $quantity;
+            $order_item->save();
         }else{
             //mensaje de error de producto
         }
-        
+    }
+
+    public function set_quantity(){
+//faltan la comprobacion de combinaciones y su added_price        
+        foreach($this->quantity as $key=>$q){
+            if($this->quantity_tmp[$key]['quantity'] != $this->quantity[$key]['quantity']){
+                //actualizamos el order_item
+                $this->update_order_item($key,$this->quantity[$key]['quantity']);
+            }
+        }
     }
 
     //edit_user
@@ -373,6 +390,7 @@ class Cart extends Component
             $this->quantity[$o_items->id]['quantity'] = $o_items->quantity;
             $this->quantity[$o_items->id]['total'] = $o_items->total;
         }
+        $this->quantity_tmp=$this->quantity;
 
         return view('livewire.cart.cart')->extends('layouts.main',['typealert' => $this->typealert]);
     }

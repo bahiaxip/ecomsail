@@ -78,8 +78,9 @@ class HistoryOrder extends Component
         }
     }
     public function update(){
-        //ocultamos el loading duplicado que se ha iniciado
-        $this->emit('loading','loading');
+        //ocultamos el loading duplicado que se ha iniciado 
+        //este modal es el modal del componente cart
+        $this->emit('loading','loading_user');
         //dd($this->profile_image);
         if($this->user_id2){
             $validated = $this->validate([
