@@ -27,12 +27,14 @@
     @include('livewire.cart.edit_user')
     <div class="container">
         <div class="row mtop32 cart justify-content-between">
-            <div class="col-xl-8 shadow">
+            <div class="col-xl-8 shadow" style="position:relative">
+                <!-- loading cuando actualizamos edición -->
+                <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.5);z-index:999" >
+                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+                </div>
                 <div class="cart_header">
                     <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
                 </div>
-                
-                
                 
                 @php $sum=0;$total=0; @endphp
                 @if($orders_items->count()==0)
@@ -54,28 +56,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-
-
                             @foreach($orders_items as $oi)
-                            <tr>                                
+                            <tr class="{{$oi->total}}">                                
                                 <td class="image">
                                     <img style="max-width:128px;max-height:128px" src="{{url($oi->product->path_tag.$oi->product->image)}}" alt="">
                                 </td>
                                 <td>{{$oi->product->name}}</td>
                                 <td class="quantity">
                                     <div class="div_quantity">
-                                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus')">
+                                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus',{{$oi->id}})">
                                             <i class="fas fa-minus"></i>
                                         </a>
-                                        {{Form::number('quantity',$oi->quantity,['class' => 'form-control','wire:model' => $quantity])}}
-                                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus')">
+                                        <input type="text" name="quantity" wire:model="quantity.{{$oi->id}}.quantity">
+                                        {{--
+                                        {{Form::text('quantity',null,['class' => 'form-control','wire:model' => $quantity[$oi['id']]])}}
+                                        --}}
+                                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus',{{$oi->id}})">
                                           <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
                                 </td>
                                 <td class="subtotal">
-                                    {{$oi->total}}
+                                    {{floatval($oi['total'])}} €
                                 </td>
                                 <td>
                                     <div class="admin_items">
@@ -198,7 +200,7 @@
                     
                 </div>
                 <div class="finish_order mtop32">
-                    <button class="btn btn_pry" @if($orders_items->count() > 0 && $addresses->count() > 0 && $address_selected ) wire:click="finish_order" @else disabled @endif>
+                    <button id="btn_update" class="btn btn_pry" @if($orders_items->count() > 0 && $addresses->count() > 0 && $address_selected ) wire:click="finish_order" @else disabled @endif >
                         FINALIZAR COMPRA
                     </button>
                 </div>
@@ -206,3 +208,8 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+  
+</script>
+@endpush

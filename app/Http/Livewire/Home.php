@@ -310,9 +310,12 @@ class Home extends Component
             'end_discount' => $this->item->end_discount,
             'price_unit' => $this->item->price,
             'total' => $this->price_tmp,
+            'title' => $this->item->name,
+            'path_tag' => $this->item->path_tag,
+            'image' => $this->item->image,
             'user_id' => Auth::id(),
             'product_id' => $this->item->id,
-            'order_id' => $order->id
+            'order_id' => $order->id,
         ]);
         
         $this->dispatchBrowserEvent('contentChanged');

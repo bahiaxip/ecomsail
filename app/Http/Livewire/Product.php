@@ -12,6 +12,7 @@ class Product extends Component
     public $option = [];
     public $combinations_list;
     public $quantity = 1;
+    public $quantity_tmp=1;
     public $product;
     public $price_tmp=0;
     public $added_price;
@@ -46,6 +47,7 @@ class Product extends Component
     }
 
     public function change_quantity($operator){
+        $this->quantity_tmp = $this->quantity;
         if($operator == 'plus' )
             $this->quantity++;
         elseif($operator == 'minus' && $this->quantity > 1)
@@ -59,6 +61,15 @@ class Product extends Component
         $this->price_tmp = $this->price_tmp + $this->added_price;
         //$this->price_tmp = $this->item->price + $this->added_price;
         //$this->dispatchBrowserEvent('contentChanged2');
+    }
+
+    public function set_quantity(){        
+        $this->price_tmp = $this->product->price * $this->quantity;        
+        if($this->added_price){
+            $this->set_price_combinations();
+            $this->added_price = $this->added_price * $this->quantity;
+        }
+        $this->price_tmp = $this->price_tmp + $this->added_price;
     }
 
     public function setCombinations(){
@@ -103,7 +114,8 @@ class Product extends Component
     }
 
     public function updated(){
-        
+        if($this->quantity != $this->quantity_tmp)
+            $this->set_quantity();
         if($this->option != $this->computed_option){
             $this->set_price_combinations();
             $this->price_tmp = $this->product->price * $this->quantity;
@@ -166,6 +178,13 @@ class Product extends Component
                 return false;
             }
         }
+        $product = Prod::findOrFail($this->product_id);
+        if(!$product){
+            $this->typealert = 'danger';
+            session()->flash('message2','No existe ese producto');
+            $this->emit('message_opacity');
+            return false;
+        }
         //si en el array $diff no existe ningún resultado(0), 
         //indicando que no existe esa combinación o simplemente no 
         //existe ese item de ese producto creamos nuevo order_item
@@ -176,6 +195,9 @@ class Product extends Component
             'end_discount' => $this->product->end_discount,
             'price_unit' => $this->product->price,
             'total' => $this->price_tmp,
+            'title' => $product->name,
+            'path_tag' => $product->path_tag,
+            'image' => $product->image,
             'user_id' => Auth::id(),
             'product_id' => $this->product->id,
             'order_id' => $order->id

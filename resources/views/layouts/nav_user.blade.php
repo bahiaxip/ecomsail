@@ -40,13 +40,13 @@
         <ul class="" >
             
             <li class="nav-item" style="display:flex">
-                <a href="{{url('/')}}" class="nav-link lk-home" >
+                <a href="{{route('home')}}" class="nav-link lk-home" >
                     
                     <span>INICIO</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{url('/store')}}" class="nav-link lk-store lk-store_category lk-product_single">
+                <a href="{{route('store')}}" class="nav-link lk-store lk-store_category lk-product_single">
                     
                     <span>TIENDA</span>
                 </a>
@@ -63,7 +63,7 @@
             </li>
             @auth
             <li class="nav-item">
-                <a href="{{url('/cart')}}" class="cart">
+                <a href="{{route('cart')}}" class="cart">
                     <span  style="">
                         CARRITO
                     </span> 
@@ -90,17 +90,17 @@
                 <li style="">
                     <a class="dropdown-item" wire:click="edit_user" data-bs-toggle="modal" data-bs-target="#editUser">
                         <i class="fa-solid fa-user-pen"></i>
-                        Mi perfil
+                        Perfil
                     </a>
                 </li>
                 <li style="">
-                    <a href="/register" class="dropdown-item" >
+                    <a href="{{route('favorites')}}" class="dropdown-item" >
                         <i class="fa-solid fa-star"></i>
-                        Mis favoritos
+                        Favoritos
                     </a>
                 </li>
                 <li style="">
-                    <a href="/register" class="dropdown-item" >
+                    <a href="{{route('history_orders')}}" class="dropdown-item" >
                         <i class="fa-solid fa-rectangle-list"></i>
                         Historial de pedidos
                     </a>

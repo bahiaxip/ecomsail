@@ -1,7 +1,23 @@
-<div>
+<div style="position: relative;">
+    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
+        <div class="alert alert-{{$typealert}}" style="min-width:700px">            
+            <h2 style="font-size:1em;text-align:center">{{session('message') }}</h2>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                
+            </script>
+        </div>
+    </div>
     @include('layouts.nav_user')
     @include('livewire.addresses.create')
     @include('livewire.addresses.confirm')
+    @include('livewire.addresses.edit_user')
     <div class="container">
         <div class="row mtop32 address">
             <div class="col-md-12 shadow div_address">

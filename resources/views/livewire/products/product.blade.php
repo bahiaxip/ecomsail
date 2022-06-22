@@ -76,7 +76,7 @@
                         <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus')">
                           <i class="fas fa-minus"></i>
                         </a>
-                        {{ Form::number('quantity',1,['class' => ' form-control-sm','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity']) }}
+                        {{ Form::text('quantity',1,['class' => ' form-control-sm','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity']) }}
                         <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus')">
                           <i class="fas fa-plus"></i>
                         </a>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="row mtop32">
                     <h5>Descripción</h5>
-                     <p>{{$prod->detail}}</p>
+                     <p>{!!$prod->detail!!}</p>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@
         @endif
         <div class="modal-title h5 justify-self-center" >
           Editar Usuario
-          <p style="font-size:12px;text-align:center">E-Mail: {{$email}}</p>
+          <p style="font-size:12px;text-align:center">E-Mail: {{$email2}}</p>
         </div>
         
       </div>
@@ -22,7 +22,7 @@
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
-      <div id="loading_user" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
+      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
         <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
       </div>
       <div class="modal-body" >
@@ -71,14 +71,14 @@
                   @enderror
               </div>
               <div class="col-md-6">
-                  <label for="phone">Teléfono</label>
+                  <label for="phone2">Teléfono</label>
                   <div class="input-group">
                       <span class="input-group-text">
                         <i class="fa-solid fa-keyboard"></i>
                       </span>
-                      <input type="text" name="phone" id="phone" class="form-control" wire:model="phone"/>
+                      <input type="text" name="phone2" id="phone2" class="form-control" wire:model="phone2"/>
                   </div>
-                  @error('phone')
+                  @error('phone2')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
               </div>
@@ -100,7 +100,7 @@
                 {{--  {{ Form::select('country',$countries,null,['class' => 'form-select','wire:model' => 'country','wire:change' => 'testCountry'])}} --}}
                 <select name="country" id="" class="form-select" wire:model="country" >
                   <option value="0">Seleccione...</option>
-                  @foreach($countries as $c)
+                  @foreach($countries2 as $c)
                       <option value="{{$c['id']}}">
                           {!!$c['icon_code']!!} 
                           {!!$c['nombre']!!}
@@ -122,28 +122,28 @@
           <div class="row mtop16">
               
               <div class="col-md-6">
-                  <label for="province">Provincia</label>
+                  <label for="province2">Provincia</label>
 
-                  <select name="province" wire:model="province" class="form-select">
+                  <select name="province2" wire:model="province2" class="form-select">
                     <option value="0">Seleccione...</option>
                     @foreach($provinces_list as $prov)
                     <option value="{{$prov['provincia_id']}}">{{$prov['nombre']}}</option>
                     @endforeach
                   </select>
                   
-                  @error('province')
+                  @error('province2')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
               </div>
               <div class="col-md-6">
-                  <label for="city">Ciudad/Municipio</label>
+                  <label for="city2">Ciudad/Municipio</label>
                   <!-- con wire:loading,wire:loading.remove,... podemos mantener la espera
                     a la devolución de datos con wire:target podemos indicar la variable o 
                     método al que escuchar-->                    
-                  <select name="city" wire:model="city"  wire:loading.attr="disabled"  wire:target="province"  class="form-select">
+                  <select name="city2" wire:model="city2"  wire:loading.attr="disabled"  wire:target="province2"  class="form-select">
                         <option value="0" >Seleccione...</option>
                         @foreach($municipies_list as $mun)
-                        @if($mun['provincia_id']==$province)
+                        @if($mun['provincia_id']==$province2)
                         <option value="{{$mun['municipio_id']}}" >{{$mun['nombre']}}</option>
                         @endif
                         @endforeach
@@ -164,10 +164,10 @@
                   --}}
 
                   
-                  @error('city')
+                  @error('city2')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
-                  <div wire:loading wire:target="province">
+                  <div wire:loading wire:target="province2">
                     <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
                 </div>
               </div>
@@ -178,7 +178,7 @@
           <div class="form-group">
         		<label for="email">Email</label>
         		<input type="text" name="email" id="email" class="form-control" wire:model="email"/>
-            @error('email')
+            @error('email2')
             <p class="text-danger">{{$message}}</p>
             @enderror
         	</div>
@@ -204,13 +204,17 @@
 </div>
 <script>
   //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  //para no generar conflicto con el modal create modificamos
+  //el selector id a btn_update_user y el loading_user
   let btn_update_user=document.querySelector('#btn_update_user');
+  
   if(btn_update_user){
-
     btn_update_user.addEventListener('click',()=>{
       console.log("no llega");
       let loading_user = document.querySelector('#loading_user');
-      loading_user.style.display='flex';
+      loading_user.style.display='flex';      
     })
+    
   }
+  
 </script>

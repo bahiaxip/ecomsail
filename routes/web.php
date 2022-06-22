@@ -52,3 +52,10 @@ Route::post('/register',[LoginController::class,'registerAdd'])->name('register'
 //logout (blade)
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('/images2',[HomeController::class,'images'])->name('images');
+
+//historial pedidos
+Route::get('/history_orders',HistoryOrder::class)->name('history_orders');
+//favoritos
+Route::get('/favorites',Favorite::class)->name('favorites');
+//Tienda
+Route::get('/store',Store::class)->name('store');

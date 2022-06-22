@@ -15,9 +15,20 @@
       <div class="modal-footer justify-content-center">
 
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click="clear_oi_id()">Cancelar</button>
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click="delete()">Eliminar</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click="delete()" id="btn_update_modal">Eliminar</button>
         
       </div>
     </div>
   </div>
 </div>
+<script>
+  //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+  let btn_update_modal=document.querySelector('#btn_update_modal');
+  if(btn_update_modal){
+    btn_update_modal.addEventListener('click',()=>{
+        console.log("loading");
+      let loading = document.querySelector('#loading');
+      loading.style.display='flex';
+    })
+  }
+</script>

@@ -73,11 +73,15 @@
                   @error('location')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
-                  
               </div>
         	</div>
           @endisset
-          @isset($provinces)
+          <div class="row" >
+              <div wire:loading wire:target="location" style="text-align:center">
+                      <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                  </div>
+          </div>
+          @if($provinces)
           <div class="row mtop16">              
               
                 <div class="col-md-6">
@@ -104,7 +108,7 @@
                   </div>
               @endisset
           </div>
-          @endisset
+          @endif
           
           
           <div class="row mtop16">
@@ -286,7 +290,7 @@
 </div>
 <script>
   //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
-  /*
+  
   let btn_update=document.querySelector('#btn_update');
   if(btn_update){
     btn_update.addEventListener('click',()=>{
@@ -294,5 +298,5 @@
       loading.style.display='flex';
     })
   }
-  */
+  
 </script>

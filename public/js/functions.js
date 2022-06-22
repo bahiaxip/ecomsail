@@ -183,8 +183,18 @@ window.livewire.on('message_opacity',()=>{
 if(route == 'list_home'){
     
     let products = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto','Septiembre'];
-    
-    
+}
+if(route == 'cart'){
+    console.log("cart")
+    //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
+      let btn_update=document.querySelector('#btn_update');
+      if(btn_update){
+        btn_update.addEventListener('click',()=>{
+            console.log("loading");
+          let loading = document.querySelector('#loading');
+          loading.style.display='flex';
+        })
+      }
 }
 
 document.addEventListener('readystatechange',() => {  
@@ -309,6 +319,7 @@ document.addEventListener('readystatechange',() => {
         if(route == "list_products"){
             
         }
+        
 
 
 

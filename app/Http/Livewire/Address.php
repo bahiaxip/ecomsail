@@ -3,11 +3,16 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Address as Addr, App\Models\Location, App\Models\Zone, App\Models\Province, App\Models\City;
+use App\Models\Address as Addr, App\Models\Location, App\Models\Zone, App\Models\City, App\Models\Province;
 use Auth;
+use App\Functions\Prov as Pr;
+//edit_user
+use  Livewire\WithFileUploads;
+use App\Functions\Paises, App\Functions\Municipalities, App\Models\User;
 class Address extends Component
 {
-
+    use WithFileUploads;
+    
     public $user_id;
     public $name;
     public $lastname;    
@@ -37,8 +42,42 @@ class Address extends Component
     public $typealert;
     public $addressTmpId;
 
+    //edit_user
+    //redeclarado y pasado a $user_id2,phone2,email2,...   
+    public $user_id2;
+    public $nick;
+    
+    public $surname;
+    public $email2;
+    public $profile_image;
+    public $thumb;
+    //iteration es necesario resetear el caché del input file
+    public $iteration;
+    public $phone2;
+    public $country;
+    public $province2;
+    public $city2;
+    protected $paisesObj;
+    public $provinces2;
+    public $countries2;
+    //provincia seleccionada
+    public $prov_id_selected;
+    //listado de municipios
+    public $municipies_list;
+    protected $prov;
+    protected $municip;
+
+    //fin edit_user
+
     public function mount($id){
         $this->user_id = Auth::id();
+        //Class Países solo utilizada para obtener los paises (array all)
+        $this->paisesObj = new Paises();
+        $this->countries2 = $this->paisesObj->all_list;
+        $this->prov = new Pr();
+        $this->provinces_list = $this->prov->prov;
+        $this->municip = new Municipalities();
+        $this->municipies_list = $this->municip->cities;
     }
 
     public function clear(){
@@ -109,10 +148,10 @@ class Address extends Component
             'user_id' => Auth::id(),
             'default' => 1
         ]);
-        
+        $this->emit('addAddress');
         $this->typealert="success";
         session()->flash('message','La dirección ha sido guardada correctamente');
-        $this->emit('addAddress');
+        $this->emit('message_opacity');
         $this->clear();
     }
 
@@ -190,6 +229,100 @@ class Address extends Component
             $this->addresses->first()->default=1;
         }
     }
+
+    //edit_user
+    public function edit_user(){
+        $user = User::findOrFail(Auth::id());
+        if($user->id){
+            $this->user_id2 = $user->id;
+            $this->nick = $user->nick;
+            $this->name=$user->name;
+            $this->email2=$user->email;
+            
+            $this->surname=$user->lastname;
+            //$this->image=$user->image;
+            $this->thumb = $user->thumb;
+            $this->phone2=$user->phone;
+            $this->country=$user->country;
+            $this->province2=$user->province;
+            $this->city2 = $user->city;
+        }
+    }
+    public function update(){
+        //ocultamos el loading duplicado que se ha iniciado
+        $this->emit('loading','loading');
+        //dd($this->profile_image);
+        if($this->user_id2){
+            $validated = $this->validate([
+                'nick' => 'required',
+                'name' => 'required',
+                'surname' => 'required',
+                'phone2' => 'nullable',
+                'country' => 'nullable',
+                'province2' => 'nullable',
+                'city2' => 'nullable',
+                'profile_image' =>'nullable|image'
+            ]);
+            
+            if($this->user_id2){
+                $user = User::where('id',$this->user_id2)->first();
+                $user->update([
+                    'nick' => $validated['nick'],
+                    'name' => $validated['name'],                
+                    'lastname' => $validated['surname'],
+                    'phone' => $validated['phone2'],
+                    'country' => $validated['country'],
+                    'province' => $validated['province2'],
+                    'city' => $validated['city2'],
+                ]);
+                
+                if($validated['profile_image'] !== null){
+
+//comprobar si existe imagen y eliminar la anterior            
+                    $image_name = $this->profile_image->getClientOriginalName();
+
+                    $ext = $this->profile_image->getClientOriginalExtension();
+                    $path_date= date('Y-m-d');
+                    $image = $this->profile_image->store('public/files/'.$path_date,'');
+                    $path_tag = 'public/files/'.$path_date.'/';
+                    //eliminamos el directorio public
+                    $imagelesspublic = substr($image,7);
+                    $thumb = $image;
+                    $user->update([
+                        'image' => $imagelesspublic,
+                        'thumb' => $imagelesspublic,
+                        'path_tag' => $path_tag,
+                        'file_name' => $image_name,
+                    ]);
+                }
+            }
+            $this->typealert = 'success';
+            session()->flash('message','Usuario actualizado correctamente');
+            $this->emit('message_opacity');
+            $this->clear2();
+            $this->emit('editUser');
+        }
+
+    }
+
+    //limpiar datos de formulario
+    public function clear1(){
+        
+        $this->user_id2='';
+        $this->nick='';
+        $this->name='';
+        $this->surname='';
+        $this->profile_image=null;
+        //iteration es necesario resetear el caché del input file
+        $this->iteration=rand();
+    }
+
+    public function clear2(){
+        $this->clear1();
+        //resetea todos los mensajes
+        $this->resetValidation();
+    }
+    //fin_edit_user
 
 
 

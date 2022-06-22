@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product;
 use Auth,Str;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
@@ -16,7 +16,7 @@ class Cart extends Component
 
     public $order_id;
     public $user_id;
-    public $quantity;
+    public $quantity=[];
     //id temporal de order_item para la eliminación
     public $oiIdTmp;
     //dirección seleccionada
@@ -56,8 +56,11 @@ class Cart extends Component
     public $municipies_list;
     protected $prov;
     protected $municip;
-
     //fin edit_user
+
+    public $orders_items;
+
+//falta establecer la combinación de cada producto    
     public function mount(){
         $this->user_id = Auth::id();
         //Class Países solo utilizada para obtener los paises (array all)
@@ -67,6 +70,9 @@ class Cart extends Component
         $this->provinces_list = $this->prov->prov;
         $this->municip = new Municipalities();
         $this->municipies_list = $this->municip->cities;
+
+        
+
         
     }
     /*
@@ -115,6 +121,9 @@ class Cart extends Component
     public function delete(){
         $oi = Order_Item::findOrFail($this->oiIdTmp);
         $oi->delete();
+        $this->typealert = 'success';
+        session()->flash('message','Producto eliminado correctamente');
+        $this->emit('message_opacity');
     }
     public function updated(){
         
@@ -129,7 +138,7 @@ class Cart extends Component
     }
 
     public function finish_order(){
-        
+        $this->emit('loading','loading');
         $validated = $this->validate([
             'payment_selected' => 'required',
             'comment' => 'nullable',
@@ -139,6 +148,7 @@ class Cart extends Component
         if(!$address->get_location->vat){
             $this->typealert = 'success';
             session()->flash('message','Su país no dispone de IVA para generar la factura');
+            $this->emit('message_opacity');
             return;
         }
 
@@ -167,6 +177,23 @@ class Cart extends Component
 //el iva y los productos que componen la factura y revisar
 //los descuentos
         $orders_items = Order_Item::where('order_id',$order->id)->get();
+        foreach($orders_items as $order_item){
+            History_Order_Item::create([
+                'combinations' => $order_item->combinations,
+                'quantity' => $order_item->quantity,
+                'state_discount' => $order_item->state_discount,
+                'end_discount' => $order_item->end_discount,
+                'price_unit' => $order_item->price_unit,
+                'total' => $order_item->total,
+                'title' => $order_item->title,
+                'path_tag' => $order_item->path_tag,
+                'image' => $order_item->image,
+                'user_id' => $order_item->user_id,
+                'product_id' => $order_item->product_id,
+                'order_id' => $order_item->order_id,
+                'order_item_id' => $order_item->id
+            ]);
+        }
         if($orders_items->count() > 0){
             //crear la factura y guardarla en pdf en el directorio
             $total;
@@ -195,23 +222,40 @@ class Cart extends Component
             $message = 'No existen productos asociados a este pedido';
         }
         $this->typealert = $typealert;
-        session()->flash('message',$message);        
+        session()->flash('message',$message);
+        $this->emit('message_opacity');
+//falta el clear()
     }
 
-    public function change_quantity($operator){
-        if($operator == 'plus' )
-            $this->quantity++;
-        elseif($operator == 'minus' && $this->quantity > 1)
-            $this->quantity--;
-        
-        $this->price_tmp = $this->product->price * $this->quantity;        
-        if($this->added_price){
-            $this->set_price_combinations();
-            $this->added_price = $this->added_price * $this->quantity;
+    public function change_quantity($operator,$id){        
+        $order_item = Order_Item::findOrFail($id);
+
+        if($order_item){
+            if($operator == 'plus' )
+                $this->quantity[$id]['quantity']++;
+            elseif($operator == 'minus' && $this->quantity[$id]['quantity'] > 1)
+                $this->quantity[$id]['quantity']--;
+            
+            $order_item->quantity = $this->quantity[$id]['quantity'];
+            $order_item->total = $order_item->price_unit * $this->quantity[$id]['quantity'];
+            $order_item->save();
+            //dd($order_item->total);
+            //dd($order_item->total);
+            //$this->price_tmp = $product->price * $this->quantity;
+            //en el caso de combinaciones establecidas en el producto
+            /*
+            if($this->added_price){
+                $this->set_price_combinations();
+                $this->added_price = $this->added_price * $this->quantity;
+            }
+            */
+            //$this->price_tmp = $this->price_tmp + $this->added_price;
+            //$this->price_tmp = $this->item->price + $this->added_price;
+            //$this->dispatchBrowserEvent('contentChanged2');    
+        }else{
+            //mensaje de error de producto
         }
-        $this->price_tmp = $this->price_tmp + $this->added_price;
-        //$this->price_tmp = $this->item->price + $this->added_price;
-        //$this->dispatchBrowserEvent('contentChanged2');
+        
     }
 
     //edit_user
@@ -234,7 +278,7 @@ class Cart extends Component
     }
     public function update(){
         //ocultamos el loading duplicado que se ha iniciado
-        $this->emit('loading','loading');
+        $this->emit('loading','loading_user');
         //dd($this->profile_image);
         if($this->user_id2){
             $validated = $this->validate([
@@ -310,8 +354,7 @@ class Cart extends Component
 
     public function render()
     {
-        $this->order_id = $this->get_order()->id;
-        $orders_items = $this->get_orders_items($this->order_id);
+        
         $this->addresses = Address::where('user_id',$this->user_id)->get();
         //establecemos el input radio de las direcciones como predeterminado
         foreach($this->addresses as $adr){
@@ -320,7 +363,17 @@ class Cart extends Component
                 $this->location_id = $adr->location_id;
             }
         }
-        $data = ['orders_items' => $orders_items,'addresses' => $this->addresses];
-        return view('livewire.cart.cart',$data)->extends('layouts.main',['typealert' => $this->typealert]);
+        //$this->orders_items = $this->get_orders_items($this->order_id);
+        //$data = ['orders_items' => $orders_items,'addresses' => $this->addresses];
+        //productos
+        $this->order_id = $this->get_order()->id;
+        $this->orders_items = $this->get_orders_items($this->order_id);
+        
+        foreach($this->orders_items as $o_items){
+            $this->quantity[$o_items->id]['quantity'] = $o_items->quantity;
+            $this->quantity[$o_items->id]['total'] = $o_items->total;
+        }
+
+        return view('livewire.cart.cart')->extends('layouts.main',['typealert' => $this->typealert]);
     }
 }
