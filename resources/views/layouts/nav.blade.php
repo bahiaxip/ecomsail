@@ -26,7 +26,7 @@
 			</li>
 			<li>
 				<a href="{{ url('/') }}">
-					<i class="fa-solid fa-trophy"></i> 
+					<i class="fa-solid fa-trophy"></i>
 					<span class="d-none d-md-flex">Ofertas</span>
 				</a>
 			</li>

@@ -1,10 +1,39 @@
-<div>
+<div style="position:relative">
+    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
+        <div class="alert alert-{{$typealert}}" >
+            <h2 style="font-size:1em;text-align:center">{{session('message') }}</h2>
+            @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                
+            </script>
+        </div>
+    </div>
     @include('layouts.nav_user')
-    <div  class="container product_item">
+    <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         
-        
-        <div class="div_product  mtop32">
-        
+        <!--
+            forma abreviada
+            x-transition:enter.duration.1000ms
+        -->
+        <div class="div_product  mtop32" 
+        x-show="show2"
+        x-transition:enter="transition duration-500 transform"
+        x-transition:enter-start="opacity-0 -translate-x-10"
+        x-transition:enter-end="opacity-100 translate-x-0"
+        >
+        <!--
+        x-transition:enter="transition-transform transition-opacity ease-out duration-1500"
+        x-transition:enter-start="opacity-0 transform translate-x-2"
+        x-transition:enter-end="opacity-100 transform translate-y-0"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-end="opacity-0 transform translate-x-2"
+        -->
             <div class="product_gallery mtop32">
                 <div class="image">
                     <div class="layer">
@@ -71,7 +100,7 @@
                 </div>
 
                 <div class="row ">
-                    <div class="col-md-5">
+                    <div class="col-xl-5">
                       <div class="quantity">
                         <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus')">
                           <i class="fas fa-minus"></i>
@@ -82,12 +111,12 @@
                         </a>
                       </div>
                     </div>
-                    <div class="col-md-7 quantity_btn">
+                    <div class="col-xl-7 quantity_btn">
                       <button type="button" class="btn " wire:click="add_cart" @guest disabled @endguest @guest title="Inicie sesión para añadir productos al carrito" @endguest>
                         <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                       {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
                       --}}
-                        <div class="icon_product @guest disabled @endguest" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest>
+                        <div class="icon_product @guest disabled @endguest @if($favorite) active @endif" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest wire:click.prevent="add_favorite">
                             <i class="fas fa-star"></i> 
                         </div>
                     </div>                            
@@ -121,5 +150,7 @@
             </div>
         </div>
     </div>
+    
 </div>
+
 

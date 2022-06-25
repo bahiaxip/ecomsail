@@ -1,4 +1,4 @@
-<div style="position:relative">
+<div style="position:relative"  >
     {{--
     <div class="message_opacity" style="position:absolute;opacity:0;display:flex;justify-content:center;width:100%">
         <div class="alert alert-{{$typealert}}" style="width:60%">
@@ -25,9 +25,19 @@
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
     @include('livewire.cart.edit_user')
-    <div class="container">
-        <div class="row mtop32 cart justify-content-between">
-            <div class="col-xl-8 shadow" style="position:relative">
+    <div class="container" x-data="cart()" x-init="start()" x-cloak >
+        <div class="row mtop32 cart justify-content-between" 
+            x-show="show2"
+            x-transition:enter.duration.1000ms
+            x-transition:leave.duration.1000ms
+
+            
+            
+        >
+            <div class="col-xl-8 shadow" style="position:relative" 
+            
+
+            >
                 <!-- loading cuando actualizamos edición -->
                 <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.5);z-index:999" >
                     <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">

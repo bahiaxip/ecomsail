@@ -292,13 +292,7 @@ document.addEventListener('readystatechange',() => {
                     console.log(item);
                     item.firstElementChild.firstElementChild.click();
                 })
-                $('.product_slick').slick({
-                  dots:true,
-                  infinite:true,
-                  autoplay:true,
-                  autoplaySpeed:4000,
-                });
-               $('.product_slick').slick('init');
+                
             }
             
 

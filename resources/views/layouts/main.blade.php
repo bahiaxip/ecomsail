@@ -17,8 +17,10 @@
 
     <!--nav top -->
     <link rel="stylesheet" href="{{url('css/nav.css') }}" >
+    <link rel="stylesheet" href="{{url('css/nav_user.css')}}" >
     <link rel="stylesheet" href="{{url('css/slider.css') }}" >
     <link rel="stylesheet" href="{{url('css/styles.css')}}" >
+    <link rel="stylesheet" href="{{url('css/footer.css')}}" >
     <!-- 
     necesarios estilos de tailwind para paginación de bootstrap, aunque se puede 
     solucionar añadiendo el string 'pagination::bootstrap-4' como parámetro:
@@ -41,7 +43,11 @@
     
 
     @livewireStyles
-
+    <style>
+    [x-cloak] { 
+      display: none !important;
+   }
+    </style>
 </head>
 <body>
     @auth
@@ -88,16 +94,58 @@
         </div>
     </div>
     @endif
+    <!--
+    <div x-data = "main()">
+        <p x-text="open"></p>
+        <button x-on:click="open = !open">CAMBIA</button>
+        <p x-show="open">HOLA MUNDO ALPINE</p>
+        <p x-bind:class="{ 'active':open}">sdfasdfsdf</p>
+        
+    </div>
+-->
     {{--{{$slot ?? ''}}--}}
-    @yield('content')
+    @yield('content')    
     @livewireScripts
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>-->
     <script src="{{url('/js/slick/slick.min.js')}}"></script>
     <script src="{{url('/js/functions.js')}}"></script>
 
     <script>
 
     console.log("arrr")
+    function main(){
+        return{
+            open: true
+        }
+    }
+    function cart(){
+        return {
+            show2:false,
+            show3:false,
+            open2(){
+                this.show2=true;
+            },
+
+            start:function(){
+                setTimeout(()=>{                    
+                    this.open2();
+                    //establecemos aquí la llamada al carousel slick para que funcione correctamente
+                    if(route == 'product'){
+                        $('.product_slick').slick({
+                          dots:true,
+                          infinite:true,
+                          autoplay:true,
+                          autoplaySpeed:4000,
+                        });
+                        $('.product_slick').slick('init');
+                    }
+                },100)
+            }
+        }
+    }
+
+
     
     </script>
 </body>

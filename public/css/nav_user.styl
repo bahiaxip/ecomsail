@@ -1,0 +1,89 @@
+color1 = #4861ff
+color2 = #00b292
+color3 = #ff003d
+color4 = #489bf8
+color6 = #494949
+color7 = #E3E3E3
+color8 = #696969
+
+.lat, .lat
+	width 10%
+	li
+		list-style none
+		a
+			color #696969
+.lat_left
+	li
+		float left
+		
+.lat_right
+	justify-content flex-end
+	display flex
+	li	
+		display flex		
+	ul
+		li
+			cursor pointer
+.box_nav_user
+	
+	display flex
+.nav_user
+	background-color rgba(230,230,230,.9)
+	display flex
+	justify-content center
+	width 80%
+	ul
+		display flex
+		padding 0
+		
+		li
+			display flex			
+			list-style none
+			position relative
+			.layer_nav
+				background-color rgba(255,255,255,.6)
+				bottom 0
+				height 0
+				position absolute
+				width 100%
+				transition all 0.5s linear
+			&:hover .layer_nav			
+				height 100%
+				
+			a,button
+				color #696969				
+				font-weight bold
+				text-decoration none
+				transition all 1s linear
+				&:hover					
+					color color6
+				&:focus
+					color color6
+				span
+					position relative
+					z-index 1
+			a.active
+				z-index 1
+				border-bottom color6 1px solid
+				color color6
+				.layer_nav
+					height 100%
+			/*
+			a.cart
+				display flex		
+				span
+					display flex
+					align-items center
+					i
+						margin-right 2px
+			*/
+.menu_hidden
+	display none
+
+@media only screen and (max-width 992px)
+	.nav_user
+		ul
+			display none
+	.menu_hidden
+		display flex
+		align-items center

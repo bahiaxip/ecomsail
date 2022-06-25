@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="col-md-5 col-sm-12">
-				<img src="{{ url('/images/appliance.jpg')}}" alt="" class="img-fluid">
+				<img src="{{ url('/images/appliance_2.jpg')}}" alt="" class="img-fluid">
 			</div>
 		</div>		
 	</div>	

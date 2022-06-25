@@ -14,51 +14,48 @@
             </script>
         </div>
     </div>
+    @section('title','Favoritos')
     @include('layouts.nav_user')
-    {{-- para no incluir $user_id2 a todo el home usamos el modal de cart --}}
     @include('livewire.cart.edit_user')
-    <div class="container" x-data="cart()" x-init="start()" x-cloak>
-        <div class="row mtop32 address" 
-        x-show="show2"
-        x-transition:enter.duration.1000ms
-        >
-            <div class="col-12 shadow">
+    <div class="container">
+        <div class="row mtop32 address">
+            <div class="col-md-12 shadow">
                 <div class="address_header">
                     <h5>
-                        <i class="fa-solid fa-bag-shopping"></i> PEDIDOS
+                        <i class="fa-solid fa-star"></i> FAVORITOS
                     </h5>                    
                 </div>
-                @if($orders->count() == 0)
+                @if(!$favorites)
                 <div class="empty_address alert alert-success">
-                    <h5>Aun no existen pedidos</h5>
+                    <h5>La lista de favoritos esta vacía</h5>
                 </div>
                 
                 @else
                 <div class="div_orders">                    
-                    @foreach($orders as $order)
+                    @foreach($favorites as $favorite)
                     <div class="row" style="padding:10px">
                         <div class="col-12" >
                             <div class="order_header" style="border-bottom:#696969 1px solid;display:flex;justify-content:space-between">
                                 <div style="font-size:12px">
-                                    Nº Pedido: <span>{{$order->order_num}}</span>
+                                    Nombre: <span>{{$favorite->get_product->name}}</span>
                                 </div>
                                 <div style="font-size:12px">
-                                    Realizado el <span>{{$order->updated_at}}</span>
+                                    Realizado el <span>{{$favorite->updated_at}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row" style="padding:10px">
                         <div class="col-8" style="display:flex">
-                            @foreach($orders_items[$order->id] as $order_item)
-                            <div title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
-                                <img src="{{url($order_item->path_tag.$order_item->image)}}" alt="" width="100">
+                            
+                            <div title="{{$favorite->get_product->name}}">
+                                <img src="{{url($favorite->get_product->path_tag.$favorite->get_product->image)}}" alt="" width="100">
                             </div>
-                            @endforeach
+                            
                         </div>
                         <div class="col-4" style="display:block;margin:auto">
                             <div>
-                                Total: {{number_format((float)$order->total,2,'.',',')}} €
+                                Total: {{number_format((float)$favorite->get_product->price,2,'.',',')}} €
                             </div>
                             <button class="btn btn_pry">
                                 Eliminar
@@ -70,11 +67,13 @@
                     
                 </div>
                 <div class="row">
-                    {{$orders->render()}}
+                    {{$favorites->render()}}
                 </div>
                 @endif
+                
+                
+                
             </div>
         </div>
-        
     </div>
 </div>

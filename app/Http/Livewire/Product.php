@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts;
+use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts, App\Models\Favorite;
 use Auth;
 class Product extends Component
 {
@@ -20,6 +20,7 @@ class Product extends Component
     public $counter;
     public $user_id;
     public $typealert='success';
+    public $favorite;
     public function mount($id){        
         $this->product_id = $id;
         $this->product = Prod::findOrFail($this->product_id);
@@ -259,12 +260,35 @@ class Product extends Component
             $this->added_price = $sum;
         }
     }
+
+    public function add_favorite(){
+        //(al pulsar el botón de favoritos debe existir el $this->user_id)
+        $favorite = Favorite::where('product_id',$this->product_id)->where('user_id',$this->user_id)->first();
+        if(!$favorite){
+            Favorite::create([
+                'product_id' => $this->product_id,
+                'user_id' => $this->user_id
+            ]);
+            $message = 'El producto ha sido añadido a la lista de favoritos';
+        }else{
+            $favorite->delete();
+            $message = 'El producto ha sido eliminado de la lista de favoritos';
+        }
+        $this->typealert = 'success';
+        session()->flash('message',$message);
+        $this->emit('message_opacity');  
+    }
     public function render()
     {
         
         $this->computed_option = $this->option;
-        
+        $favorite = Favorite::where('user_id',$this->user_id)->where('product_id',$this->product_id)->first();
+        if($favorite)
+            $this->favorite = true;
+        else
+            $this->favorite = false;
         $data = ['prod' => $this->product,'combinations_list' => $this->combinations_list];
         return view('livewire.products.product',$data)->extends('layouts.main',['typealert'=>$this->typealert]);
     }
+        
 }

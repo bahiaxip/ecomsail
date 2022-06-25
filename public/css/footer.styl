@@ -1,0 +1,108 @@
+color1 = #4861ff
+color2 = #00b292
+color3 = #ff003d
+color4 = #489bf8
+color6 = #494949
+color7 = #E3E3E3
+color8 = #696969
+/* footer */
+.footer
+	.first
+		background-color #FFF
+		
+		.background
+			width 100%
+			min-height 400px
+			background-image url('../images/ropa_deportiva.jpg')
+			background-size 100%
+			background-attachment fixed
+			background-repeat no-repeat
+			position relative
+		
+		.info
+			padding 40px 0		
+			.header
+				display flex
+				justify-content center
+				i
+					font-size 2em
+			.text				
+				p
+					text-align center
+			.images
+				img
+					height 48px
+					width 48px			
+	.end
+		background-color color6
+		color #FFF
+		display flex
+		padding 40px
+		.options
+			display flex
+			justify-content space-between
+			width 70%
+			.column
+				display flex
+				width 33%
+				.links
+					display flex
+					justify-content center
+					width 100%
+					p
+						margin-left 15px
+		.comunity
+			width 30%
+			
+			margin auto
+			.header.rrss
+				p
+					text-align center
+			.links.rrss
+				display flex
+				justify-content space-around
+				margin-top 30px
+				img
+					height 45px
+					width 45px
+				img.uptop5
+					position relative
+					bottom 5px
+	.copy
+		background-color color6
+		border-top color7 1px solid
+		color #FFF
+		display flex
+		justify-content center
+		padding 10px
+		width 100%
+			
+			
+/* fin footer */
+@media only screen and (max-width 1400px)
+	.footer
+		.end
+			.options				
+				.column
+					width 100%
+			
+
+@media only screen and (max-width 1200px)
+	.footer
+		.end
+			display block
+			.options
+				width 100%
+			.comunity
+				margin-top 30px
+				width 100%
+				
+@media only screen and (max-width 600px)
+	.footer
+		.end
+			.options
+				display block
+				.column
+					margin-top 25px
+				
+				

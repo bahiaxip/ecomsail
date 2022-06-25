@@ -8,13 +8,13 @@
         <input type="search" name="search" class="form-control" size="100" placeholder="Buscar...">
     </li>
 </div>
-<div class="container-fluid" style="display:flex">
+<div class="container-fluid box_nav_user" >
     <div class="dropdown show menu_hidden">
         <a href="#" class="nav-link lk-home" type="button" id="dropdown_hidden" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
         </a>
         <ul class="dropdown-menu">            
-            <a href="{{url('/')}}" class="dropdown-item" data-toggle="dropdown">INICIO</a>
+            <a href="{{url('/')}}" class="dropdown-item  data-toggle="dropdown">INICIO</a>
             <a href="{{url('/store')}}" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
             <a href="{{url('/')}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
         </ul>
@@ -39,35 +39,39 @@
     <div class="nav_user" >
         <ul class="" >
             
-            <li class="nav-item" style="display:flex">
-                <a href="{{route('home')}}" class="nav-link lk-home" >
-                    
+            <li class="">
+                <a href="{{route('home')}}" class="nav-link @if(Route::is('home')) active @endif" >
                     <span>INICIO</span>
                 </a>
+                <div class="layer_nav"></div>
             </li>
-            <li class="nav-item">
-                <a href="{{route('store')}}" class="nav-link lk-store lk-store_category lk-product_single">
+            <li class="">
+                <a href="{{route('store')}}" class="nav-link @if(Route::is('store')) active @endif">
                     
                     <span>TIENDA</span>
                 </a>
+                <div class="layer_nav"></div>
+            </li>
+            <li class="">
+                <a href="{{url('/')}}" class="nav-link @if(Route::is('home')) active @endif">
+                    <span>OFERTAS</span>
+                </a>
+                <div class="layer_nav"></div>
             </li>
             <li class="nav-item">
-                <a href="{{url('/')}}" class="nav-link">
-
-                    <span>OFERTAS</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="{{url('/')}}" class="nav-link">
-
-                    <span>CONTACTO</span></a>
+                <a href="{{route('contact')}}" class="nav-link @if(Route::is('contact')) active @endif">
+                    <span>CONTACTO</span>
+                </a>
+                <div class="layer_nav"></div>
             </li>
             @auth
             <li class="nav-item">
-                <a href="{{route('cart')}}" class="cart">
-                    <span  style="">
+                <a href="{{route('cart')}}" class="nav-link @if(Route::is('cart')) active @endif">
+                    <span>
                         CARRITO
                     </span> 
                 </a>
+                <div class="layer_nav"></div>
             </li>
             @endauth
         </ul>
