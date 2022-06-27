@@ -1,22 +1,6 @@
 <div class="store" style="position:relative">
 
-	@section('title','Tienda')
-
-	<div class="message_opacity" >
-        <div class="alert alert-{{$typealert}}" >            
-            <h2 style="font-size:1em;text-align:center">{{session('message')}}</h2>
-            @if($errors->any())
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            @endif
-            <script>
-                
-            </script>
-        </div>
-    </div>
+	
 	@include('layouts.nav_user')
 	<div style="width:100%" x-data="cart()" x-init="start()" x-cloak>
         <div  class="box_products" >
@@ -25,8 +9,15 @@
             x-show="show2"
             x-transition:enter.duration.1000ms
             >
-            
+            	
                 <div class="div_products_list mtop32">
+                	<div style="display:flex;justify-content: center;">
+                		<div style="outline:#696969 1px solid;padding: 5px;border-radius:5px;">
+	            			<a href="#" class="" style="margin:5px"> Precio</a>
+	            			<a href="#" class=""> Pedidos</a>
+	            			<a href="#" class=""> Promo</a>
+            			</div>
+            		</div>
                 @foreach($products as $prod)    
                     <div class="products mtop32">
                     	<a href="{{ url('/product/'.$prod->id) }}" class="image" >
@@ -65,6 +56,9 @@
                     </div>
                 @endforeach
                 </div>
+            </div>
+            <div class="row">
+            	{{$products->render()}}
             </div>
         </div>
     @include('layouts.footer')           

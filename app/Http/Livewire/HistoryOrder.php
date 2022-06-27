@@ -176,6 +176,7 @@ class HistoryOrder extends Component
             }
         }
         */
+        $orders_items=null;
         foreach($orders as $order){
             $orders_items[$order->id] = History_Order_Item::where('order_id',$order->id)->get();
         }

@@ -23,14 +23,14 @@
     <div class="lat dropdown show">
         @isset($categories)
         <li class="nav-item " >
-            <a href="#" class="nav-link lk-home dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">
+            <a href="#" class="nav-link categories dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">
                 <i class="fas fa-stream"></i> 
                 <span>CATEGORÍAS</span>
             </a>
         </li>
         <div class="dropdown-menu" id="dropdownMenuLink5" arialabelledby="dropdownMenuLink">
             @foreach($categories as $cat)
-                <a href="#" class="btn btn_sail dropdown-item">{{$cat->name}}</a>
+                <a href="{{route('store',['category' => $cat->id])}}" class="btn btn_sail dropdown-item">{{$cat->name}}</a>
             @endforeach            
         </div>
         @endisset

@@ -1,10 +1,11 @@
 <div style="position:relative"  >
+    @section('title','Carrito')
     {{--
     <div class="message_opacity" style="position:absolute;opacity:0;display:flex;justify-content:center;width:100%">
         <div class="alert alert-{{$typealert}}" style="width:60%">
     --}}
     <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
-        <div class="alert alert-{{$typealert}}" style="min-width:700px">
+        <div class="alert alert-{{$typealert}}" >
             <h5 style="font-size:1em;text-align:center" >{{session('message') }}</h5>
             @if($errors->any())
             <ul>
@@ -25,6 +26,7 @@
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
     @include('livewire.cart.edit_user')
+
     <div class="container" x-data="cart()" x-init="start()" x-cloak >
         <div class="row mtop32 cart justify-content-between" 
             x-show="show2"
@@ -34,81 +36,89 @@
             
             
         >
-            <div class="col-xl-8 shadow" style="position:relative" 
-            
-
-            >
+            <div class="col-xl-8 shadow" style="position:relative">
                 <!-- loading cuando actualizamos edición -->
                 <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.5);z-index:999" >
                     <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
                 </div>
-                <div class="cart_header">
+                <div class="header">
                     <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
                 </div>
                 
                 @php $sum=0;$total=0; @endphp
                 @if($orders_items->count()==0)
                 
-                <div class="empty_cart">
+                <div class="empty">
                     <p>El carrito está vacío. Agregue productos al carrito</p>
                 </div>
                 
                 @else
-                <div class="cart_orders_items">
-                    <table class="table_orders_items">
-                        <thead>
-                            <tr>                                
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($orders_items as $oi)
-                            <tr class="{{$oi->total}}">                                
-                                <td class="image">
-                                    <img style="max-width:128px;max-height:128px" src="{{url($oi->product->path_tag.$oi->product->image)}}" alt="">
-                                </td>
-                                <td>{{$oi->product->name}}</td>
-                                <td class="quantity">
+                <div class="div_list">                    
+                    @foreach($orders_items as $oi)
+                    {{--
+                    <div class="row " style="padding:10px">
+                        <div class="col-12" >
+                            <div class="order_header" style="border-bottom:#696969 1px solid;display:flex;justify-content:space-between">
+                                <div style="font-size:12px">
+                                    Nº Pedido: <span>{{$oi->id}}</span>
+                                </div>
+                                <div style="font-size:12px">
+                                    Realizado el <span>{{$oi->id}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    --}}
+                    <div class="row list" >
+                        <div class="col-3 image">                            
+                            <div title="{{$oi->id}}&#013;{{$oi->id}}€ X {{$oi->id}}">
+                                <img src="{{url($oi->product->path_tag.$oi->product->image)}}" alt="" width="100">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-10 title">
+                                    {{$oi->title}}
+                                </div>
+                                <div class="col-2 admin_items end">
+                                    <button class="btn btn-sm delete_round" title="Eliminar producto" wire:click="save_product_id({{$oi->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row div_price" >
+                                <div class="price" >
+                                    <div>
+                                        <span style="font-size:12px"></span> {{number_format(floatval(number_format($oi->total,2,'.','')),0,",",".")}} €
+                                    </div>
                                     <div class="div_quantity">
-                                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus',{{$oi->id}})">
-                                            <i class="fas fa-minus"></i>
-                                        </a>
-                                        <input type="text" name="quantity" wire:model="quantity.{{$oi->id}}.quantity">
-                                        {{--
-                                        {{Form::text('quantity',null,['class' => 'form-control','wire:model' => $quantity[$oi['id']]])}}
-                                        --}}
-                                        <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus',{{$oi->id}})">
-                                          <i class="fas fa-plus"></i>
-                                        </a>
+                                        <div class="quantity">
+                                            <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus',{{$oi->id}})">
+                                                <i class="fas fa-minus"></i>
+                                            </a>
+                                            <input type="text" name="quantity" wire:model="quantity.{{$oi->id}}.quantity">
+                                            {{--
+                                            {{Form::text('quantity',null,['class' => 'form-control','wire:model' => $quantity[$oi['id']]])}}
+                                            --}}
+                                            <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus',{{$oi->id}})">
+                                              <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </td>
-                                <td class="subtotal">
-                                    {{floatval($oi['total'])}} €
-                                </td>
-                                <td>
-                                    <div class="admin_items">
-                                        <button class="btn btn-sm delete" title="Eliminar producto" wire:click="save_product_id({{$oi->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            @php
-                            $sum = $sum + $oi->quantity;
-                            $total = $total + $oi->total;
-                            $this->total = $total;
-                            @endphp
-
-                            @endforeach
-                            @php
-                            $this->sum = $sum
-                            @endphp
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                        @php
+                        $sum = $sum + $oi->quantity;
+                        $total = $total + $oi->total;
+                        $this->total = $total;
+                        @endphp
+                    @endforeach
+                        @php
+                        $this->sum = $sum
+                        @endphp
                 </div>
                 @endif
             </div>
@@ -123,35 +133,37 @@
                 </div>
                 
                 <div class="address">
-                    <a class="btn btn_grey btn_collapse" href="#collapse_address" type="button"  data-bs-toggle="collapse">
+                    <a class="btn btn_sry btn_collapse" href="#collapse_address" type="button"  data-bs-toggle="collapse">
                         <i class="fa-solid fa-location-arrow"></i>
-                        Direcciones
+                        Dirección
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
-                    <div class="collapse " id="collapse_address">
+                    <div class="collapse addresses" id="collapse_address">
                         @if($addresses->count() > 0)
                             @foreach($addresses as $adr)
-                            <div class="card card-body @if($adr->default==1) active @endif" onclick="set_direction(this)">
-                                <div class="row">
-                                    
-                                    <div class="col-md-2 input">
-                                        <input type="radio" name="address_selected" value="{{$adr->id}}" wire:model.defer="address_selected">
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-title">
-                                            <h5>{{$adr->title}}</h5>
+                            <div class="row">
+                                <div class="box_address_card @if($adr->default==1) active @endif" onclick="set_direction(this)">
+                                    <div class="address_card">
+                                        
+                                        <div class="col-md-2 input">
+                                            <input type="radio" name="address_selected" value="{{$adr->id}}" wire:model.defer="address_selected">
                                         </div>
-                                        <div class="card-subtitle">
-                                            {{$adr->name}} {{$adr->lastname}}
-                                        </div>
-                                        <div class="card-text">
-                                            <div>{{$adr->address_home}}</div>
-                                            <span>
-                                                {{$adr->cp}} 
-                                                @if($adr->city_id){{$adr->get_city->name}}@endif
-                                            </span>
-                                            <div>{{$adr->get_location->name}}</div>
-                                            <div>{{$adr->nif}}</div>
+                                        <div class="col-md-10">
+                                            <div class="card-title">
+                                                <h5>{{$adr->title}}</h5>
+                                            </div>
+                                            <div class="card-subtitle">
+                                                {{$adr->name}} {{$adr->lastname}}
+                                            </div>
+                                            <div class="card-text">
+                                                <div>{{$adr->address_home}}</div>
+                                                <span>
+                                                    {{$adr->cp}} 
+                                                    @if($adr->city_id){{$adr->get_city->name}}@endif
+                                                </span>
+                                                <div>{{$adr->get_location->name}}</div>
+                                                <div>{{$adr->nif}}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -166,17 +178,19 @@
                     </div>
                 </div>
                 <div class="payment mtop10">
-                    <a class="btn btn_grey btn_collapse" href="#collapse_payment" type="button"  data-bs-toggle="collapse">
+                    <a class="btn btn_sry btn_collapse" href="#collapse_payment" type="button"  data-bs-toggle="collapse">
                         <i class="fa-solid fa-credit-card"></i>
-                        Pagos
+                        Pago
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
                     <div class="collapse " id="collapse_payment">
                         
                             
-                        <div class="card card-body" >
+                        <div class="card card-body box_payment" >
+
                             <div class="row">
                                 <div class="div_btn_payment input">
+                                    <i class="fa-solid fa-check"></i>
                                     <button class="btn btn_payment" onclick="set_payment(this)">
                                         <input type="radio" name="payment_method" wire:model.defer="payment_selected" value="1">
                                             Tarjeta
@@ -184,6 +198,7 @@
                                     </button>
                                 </div>
                                 <div class="div_btn_payment input">
+                                    <i class="fa-solid fa-check"></i>
                                     <button class="btn btn_payment" onclick="set_payment(this)">
                                         <input type="radio" name="payment_method" wire:model.defer="payment_selected" value="2">
                                             Transferencia
@@ -191,6 +206,7 @@
                                     </button>
                                 </div>
                                 <div class="div_btn_payment input">
+                                    <i class="fa-solid fa-check"></i>
                                     <button class="btn btn_payment" onclick="set_payment(this)">
                                         <input type="radio" name="payment_method" class=" " wire:model.defer="payment_selected" value="3">
                                             Paypal

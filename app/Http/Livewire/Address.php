@@ -36,6 +36,7 @@ class Address extends Component
     public $provinces;
     public $cities;
     public $addresses;
+    public $address_selected;
     public $selected_default;
     //public $zones;
     //public $locations;

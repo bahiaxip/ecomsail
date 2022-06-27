@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product;
 use Auth,Str;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
@@ -22,8 +22,8 @@ class Cart extends Component
     public $oiIdTmp;
     //dirección seleccionada
     public $address_selected;
-    //tipo de pago seleccionado
-    public $payment_selected;
+    //tipo de pago seleccionado,tarjeta por defecto: 1
+    public $payment_selected=1;
     public $location_id;
     public $comment;
     public $typealert='success';
@@ -62,7 +62,7 @@ class Cart extends Component
     public $orders_items;
 
 //falta establecer la combinación de cada producto    
-    public function mount(){
+    public function mount(){        
         $this->user_id = Auth::id();
         //Class Países solo utilizada para obtener los paises (array all)
         $this->paisesObj = new Paises();
@@ -141,7 +141,7 @@ class Cart extends Component
         return number_format($result,2,'.','');
     }
 
-    public function finish_order(){
+    public function finish_order(){        
         $this->emit('loading','loading');
         $validated = $this->validate([
             'payment_selected' => 'required',
@@ -197,6 +197,16 @@ class Cart extends Component
                 'product_id' => $order_item->product_id,
                 'order_id' => $order_item->order_id,
                 'order_item_id' => $order_item->id
+            ]);
+            //creamos el registro de producto vendido
+            $counter=0;
+            $counter_sold_product = Sold_Product::where('product_id',$order_item->product_id)->count();
+            if($counter_sold_product > 0){
+                $counter=$counter_sold_product;
+            }
+            Sold_Product::create([
+                'sold_nums' => $counter+1,
+                'product_id' => $order_item->product_id
             ]);
         }
         if($orders_items->count() > 0){

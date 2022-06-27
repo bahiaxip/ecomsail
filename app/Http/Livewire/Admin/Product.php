@@ -224,7 +224,7 @@ class Product extends Component
             case '0':                
             case '1':                
                 $init_query = ($this->search_data) ?
-                    Prod::where('name','LIKE',$search_data)->where('status',$this->filter_type)->orderBy($col_order,$order)
+                    Prod::where('name','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
                     :
                     Prod::where('status',$filter_type)->orderBy($col_order,$order);
                 break;
@@ -243,27 +243,16 @@ class Product extends Component
         endswitch;
 
         ($export) ?
-            $res = $init_query->get()
+            $res = $init_query->get()            
             :
             $res = $init_query->paginate($this->limit_page);
         return $res;
     }
 
 
-    public function set_type_query(){
+    public function set_type_query($export=false){
         $query;
-        if($this->search_data){
-            $query= $this->set_filter_query(1);
-            $search_data = '%'.$this->search_data.'%';
-            if($this->filter_type==2){
-                $query = Prod::onlyTrashed()->where('name','LIKE',$search_data)->paginate(10);
-            }else{
-                $query = Prod::where('name','LIKE',$search_data)->where('status',$this->filter_type)->paginate(10);    
-            }
-        }
-        else{
-            $query= $this->set_filter_query($this->filter_type);
-        }
+        $query= $this->set_filter_query($this->filter_type,$export);
         return $query;
     }
 

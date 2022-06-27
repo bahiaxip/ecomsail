@@ -195,6 +195,9 @@ if(route == 'cart'){
           loading.style.display='flex';
         })
       }
+      
+    
+    set_payment();
 }
 
 document.addEventListener('readystatechange',() => {  
@@ -1028,7 +1031,8 @@ window.livewire.on('reload_images',(product_id)=>{
 
 function set_direction(el){    
     el.querySelector('.input').firstElementChild.click()
-    let directionsNodes = document.querySelectorAll('.card-body')
+    //let directionsNodes = document.querySelectorAll('.card-body')
+    let directionsNodes = document.querySelectorAll('.box_address_card')
     let directions = [].slice.call(directionsNodes);
     directions.map((item)=>{
         item.classList.remove('active');
@@ -1036,17 +1040,38 @@ function set_direction(el){
     el.classList.add('active');
 }
 
-
-function set_payment(el){ 
-
-    //no necesario hacer click    
-    //el.querySelector('.div_btn_payment').firstElementChild.click()
-    let paymentsNodes = document.querySelectorAll('.btn_payment')
+function set_payment(el=null){
+    let div = el;
+    let box_payment = document.querySelector('.box_payment');
+    if(!el){
+        //establecemos por defecto el tipo de pago (tarjeta) los estilos de activado 
+        let selected_payment = box_payment.firstElementChild.firstElementChild.querySelector('button');
+        div=selected_payment
+    }
+    
+    //no necesario hacer click        
+    let paymentsNodes = document.querySelectorAll('.btn_payment')    
     let payments = [].slice.call(paymentsNodes);
+
     payments.map((item)=>{
+        //eliminamos la clase active de cada elemento
         item.classList.remove('active');
+        //pasamos cada icono a node
+        item.previousElementSibling.classList.remove('active');
     })
-    el.classList.add('active');
+    div.classList.add('active');
+    div.previousElementSibling.classList.add('active');
+}
+
+function showModal(selector){
+    console.log($(selector))
+    $(selector).modal('show');
+}
+function hideModal(selector,event){
+    console.log($(event))
+    event.preventDefault();
+    event.stopPropagation();
+    $(selector).modal('hide');   
 }
 
 

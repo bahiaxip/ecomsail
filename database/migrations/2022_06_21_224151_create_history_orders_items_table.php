@@ -40,6 +40,6 @@ class CreateHistoryOrdersItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('history_orders');
+        Schema::dropIfExists('history_orders_items');
     }
 }

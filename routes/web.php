@@ -61,4 +61,4 @@ Route::get('/history_orders',HistoryOrder::class)->name('history_orders');
 //favoritos
 Route::get('/favorites',Favorite::class)->name('favorites');
 //Tienda
-Route::get('/store',Store::class)->name('store');
+Route::get('/store/{category?}',Store::class)->name('store');

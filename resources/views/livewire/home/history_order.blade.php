@@ -18,51 +18,58 @@
     {{-- para no incluir $user_id2 a todo el home usamos el modal de cart --}}
     @include('livewire.cart.edit_user')
     <div class="container" x-data="cart()" x-init="start()" x-cloak>
-        <div class="row mtop32 address" 
+        <div class="row history_order mtop32 address" 
         x-show="show2"
         x-transition:enter.duration.1000ms
         >
             <div class="col-12 shadow">
-                <div class="address_header">
+                <div class="header">
                     <h5>
                         <i class="fa-solid fa-bag-shopping"></i> PEDIDOS
                     </h5>                    
                 </div>
                 @if($orders->count() == 0)
-                <div class="empty_address alert alert-success">
+                <div class="empty alert alert-success">
                     <h5>Aun no existen pedidos</h5>
                 </div>
                 
                 @else
-                <div class="div_orders">                    
+                <div class="div_list">                    
                     @foreach($orders as $order)
                     <div class="row" style="padding:10px">
                         <div class="col-12" >
-                            <div class="order_header" style="border-bottom:#696969 1px solid;display:flex;justify-content:space-between">
-                                <div style="font-size:12px">
+                            <div class="order_num" >
+                                <div>
                                     Nº Pedido: <span>{{$order->order_num}}</span>
                                 </div>
-                                <div style="font-size:12px">
+                                <div>
                                     Realizado el <span>{{$order->updated_at}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="padding:10px">
-                        <div class="col-8" style="display:flex">
-                            @foreach($orders_items[$order->id] as $order_item)
-                            <div title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
-                                <img src="{{url($order_item->path_tag.$order_item->image)}}" alt="" width="100">
-                            </div>
-                            @endforeach
+                    <div class="row list" style="padding:10px">
+                        <div class="col-md-9" style="display:flex">
+                            
+                                @foreach($orders_items[$order->id] as $order_item)
+                                <div style="display:flex" title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
+                                    <img src="{{url($order_item->path_tag.$order_item->image)}}" alt="" width="100">
+                                </div>
+                                @endforeach
+                            
                         </div>
-                        <div class="col-4" style="display:block;margin:auto">
+                        <div class="col-md-3 col_price" >
                             <div>
-                                Total: {{number_format((float)$order->total,2,'.',',')}} €
+                                <div class="price">
+                                    <div style="text-align:center;font-weight:bold">
+                                        Total: {{number_format(floatval(number_format($order->total,2,'.','')),0,",",".")}} €
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn_grey" style="padding:4px 50px">
+                                    Eliminar
+                                </button>
                             </div>
-                            <button class="btn btn_pry">
-                                Eliminar
-                            </button>
                         </div>
                     </div>
                     @endforeach

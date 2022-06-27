@@ -16,7 +16,11 @@
     </div>
     @include('layouts.nav_user')
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
-        
+        <div class="btn_return">
+            <button onclick="history.back()" class="btn btn-sm btn_pry">
+                <i class="fa-solid fa-left-long"></i> Atrás
+            </button>
+        </div>
         <!--
             forma abreviada
             x-transition:enter.duration.1000ms

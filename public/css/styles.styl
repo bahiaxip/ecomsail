@@ -5,6 +5,7 @@ color4 = #489bf8
 color6 = #494949
 color7 = #E3E3E3
 color8 = #696969
+rgba2 = rgba(0,178,146,1)
 
 .mauto
 	margin auto
@@ -22,12 +23,14 @@ color8 = #696969
 		color #FFF
 	&:focus
 		box-shadow 0 0 6px color1
+		color #FFF
 .btn_sry
 	background-color color2
 	&:hover
 		color #FFF
 	&:focus
 		box-shadow 0 0 6px color2
+		color #FFF
 .btn_grey
 	background-color color6
 	color color7
@@ -35,7 +38,17 @@ color8 = #696969
 		color #FFF
 	&:focus
 		box-shadow 0 0 6px color6
-
+		color #FFF
+.btn_grey
+	background-color color3
+	color color7
+	&:hover
+		color #FFF
+	&:focus
+		box-shadow 0 0 6px color3
+		color #FFF
+.dflex
+	display flex
 
 /*imagen de perfile(edición)*/
 .edit_modal
@@ -55,9 +68,15 @@ color8 = #696969
 			width 64px
 			height 64px
 		
+#modalConfirm
+	/*transition all 1s linear*/
+.fade2	
+	opacity 0
+	transition opacity .3s linear
+.fade2.show
+	opacity 1
 
-
-
+/* home */	
 .box_products
 	width 80%
 	margin auto
@@ -177,11 +196,14 @@ color8 = #696969
 				font-family Arial
 				font-weight bold
 				justify-content center
-		
+/* fin home */
 
+/* modal fastview */
 .modal_item
 	padding-top 15px
-.modal_item .modal-content,.product_item	
+.modal_item .modal-content,.product_item
+	.btn_return
+		margin-top 10px	
 	.title_item
 		h5
 			font-family QuicksandB
@@ -204,6 +226,7 @@ color8 = #696969
 			
 			span				
 				font-size 1.5em
+				font-weight bold
 			p
 				font-size 0.7em
 		
@@ -311,12 +334,10 @@ color8 = #696969
 			.icon.disabled
 				cursor not-allowed
 				opacity 0.7
-				
+
 /* sobreescribimos algunas clases del product y utilizando las clases del modal fastview*/
 .div_product
 	display flex
-	
-	
 	width 100%
 	.product_gallery
 		width 40%		
@@ -466,92 +487,113 @@ como existen 2 uno es el carousel de product y otro el modal de product
 
 /* fin producto */
 				
-/* carrito de compras */
-.cart
-	.empty_cart
+/* carrito y favoritos, historial pedidos y direcciones */
+.cart,.favorite,.history_order,.address
+	.empty
 		display flex
 		justify-content center
 		margin-top 32px
 		p
 			color color6
 			font-size 18px
-	.cart_header
+	.header
 		border-bottom color7 2px solid
-	.cart_orders_items
-		display flex
-		justify-content center
-		margin-top 16px		
-		width 100%
-		.table_orders_items
-			width 100%
-			thead
-				tr
-					td
-						text-align center
-			tbody
-				tr	
-					td.image
-						margin 10px auto
-						min-width 120px
+		padding 10px
+		.address_header
+			align-items center 
+			display flex
+			justify-content space-between
+	.div_list
+		/* order_num solo en history_order */
+		.order_num
+			border-bottom #696969 1px solid
+			display flex
+			font-size 12px
+			justify-content space-between			
+		.list
+			border-bottom color7 1px solid
+			padding 20px 5px
+			.image
+				display flex
+			.title
+				display block
+				overflow hidden
+				text-overflow ellipsis
+				white-space nowrap
+			
+			.admin_items.end
+				display flex
+				justify-content end
+				.delete_round
+					align-items center
+					background-color transparent
+					border color7 1px solid
+					border-radius 50%
+					color color8
+					display flex
+					height 32px
+					justify-content flex-end
+					width 32px
+					i
+						font-size 1.1em
+					&:hover
+						box-shadow 0 0 6px color7
+						color color6
+					
+					&:focus
+						box-shadow 0 0 6px color7
+						color color6
+			.div_price
+				padding:10px
+				.price
+					display flex
+					justify-content space-between
+			.div_quantity
+				.quantity
+					display flex
+					justify-content center
+					width 100%
+					input
+						margin auto 5px
+						max-width 80px
+						min-width 30px
+						width 50px
+						
+						
+					.amount_action
+						align-items center
+						background-color #696969
+						border-radius 50%
+						color color7
 						display flex
+						float left
+						font-size .8em
+						margin-top 4px
+						height 22px
 						justify-content center
-					td.quantity
-						margin auto
-						min-width 120px
-						
-						.div_quantity
-							display flex
-						
-							width 100%
-							input
-								min-width 80px
-								max-width 100px
-								width 100%
-							.amount_action
-								align-items center
-								background-color #696969
-								border-radius 50%
-								color color7
-								display flex
-								float left
-								font-size .8em
-								margin-top 4px
-								height 32px
-								justify-content center
-								text-decoration none
-								width 32px
-								min-width 32px
-								&:first-child
-									margin-right 8px
-								&:last-child
-									margin-left 8px
-								&:active
-									box-shadow 0 0 6px color6
-									color #FFF
-					td.subtotal
-						font-size 1.2em
-						font-weight bold
-						text-align center
-			
-			
-	.admin_items
-		.edit
-			background-color color2
-			color #E7E7E7
-			&:hover
-				color #FFF
-				box-shadow 0 0 6px color2
-			&:focus
-				box-shadow 0 0 6px color2
-		.delete
-			background-color color3
-			color #E7E7E7
-			&:hover
-				color #FFF
-				box-shadow 0 0 6px color3
-			&:focus
-				box-shadow 0 0 6px color3
-
+						text-decoration none
+						width 22px
+						min-width 22px				
+						&:first-child
+							margin-right 8px
+						&:last-child
+							margin-left 8px
+						&:active
+							box-shadow 0 0 6px color6
+							color #FFF
+						i
+							font-size .9em
+			.col_price
+				align-items center
+				display flex
+				justify-content center
+				
+			.total
+				display block
+				font-size 1.2em
+				font-weight bold
+				text-align center
+		
 	.resum
 		display flex
 		
@@ -572,7 +614,117 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		button:disabled
 			cursor not-allowed
 			pointer-events all
+	/* adress_cards solo direcciones*/
+	.addresses
+		margin 20px 10px
+		transition height 0.2s linear
+		.box_address_card
+			border color7 2px solid
+			cursor pointer
+			display block
+			padding 0 2px
+			.address_card
+				display flex
+				height 100%
+				justify-content:space-between
+				.input
+					align-items center
+					display flex
+					height 100%
+					justify-content center
+					width 50px
+					/*
+					align-items center
+					margin auto 10px
+					display block
+					justify-content center
+					width 50px
+					max-width 70px
+					*/
+					input:checked::after
+						width 15px
+						height 15px
+						content ''
+						position relative
+						display inline-block
+						border 2px solid color2
+						color orange
+						top -4px
+						left -1px
+						border-radius 15px
+						background-color color2
+				.actions
+					.delete
+						display flex
+						justify-content center
+						margin-top 3px
+					.toggle
+						align-items flex-end
+						display flex
+						justify-content center
+						height 70%
+						.form-check-input
+							
+							color color2
+							display flex
+							justify-content center
+							&:focus
+								/* añadimos la imagen sin fondito azul de bootstrap cuando es focus sin ckeckear*/
+								background-image url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e")
+								box-shadow 0 0 0 0.25rem rgba(0,178,146,.3)
+							&:checked
+								background-color color2
+								border-color color2
+								&:focus
+									/* añadimos la imagen en fondo blanco cuando es focus y está checkeado */
+									background-image url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e")
+				
+		.box_address_card.active
+			border color2 2px solid
+	/*			
+	#collapse_address
+		font-family QuicksandR
+		margin-top 5px
+		
+		
+			
+		.input
+			margin auto
+			input:checked::after
+				width 15px
+				height 15px
+				content ''
+				position relative
+				display inline-block
+				border 2px solid color2
+				color orange
+				top -4px
+				left -1px
+				border-radius 15px
+				background-color color2
+		.card-title
+			font-size 22px				
+		.card-text
+			div
+				display flex
+		
+			
+		.card-body			
+			cursor pointer				
+		a
+			margin auto
+			width 50%
+		.card-body.active
+			border color2 2px solid
+	*/
+	/* adress_cards solo direcciones*/
+					
+/* fin carrito y favoritos, historial pedidos y direcciones */
+
+
+/*
 .address
+	
   	.div_address
 		padding-bottom 0
 	.address_header
@@ -597,54 +749,34 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			.admin_items
 				display flex
 				justify-content space-around
+			
 	
-	#collapse_address
-		margin-top 5px
-		
-		.input
-			margin auto
-			input:checked::after
-				width 15px
-				height 15px
-				content ''
-				position relative
-				display inline-block
-				border 2px solid color4
-				color orange
-				top -4px
-				left -1px
-				border-radius 15px
-				background-color color1
-		.card-title
-			font-size 22px				
-		.card-text
-			div
-				display flex
-		
-			
-		.card-body			
-			cursor pointer				
-		a
-			margin auto
-			width 50%
-		.card-body.active
-			border color1 2px solid
+*/
+.payment
 	#collapse_payment		
-					
+		transition height 0.2s linear	
 			
-			/*
-			input:checked::after
-				display none
-			*/
+		/*
+		input:checked::after
+		display none
+		*/
 		
 		.div_btn_payment
-			
-			margin auto
+			align-items center
+			display flex
+			justify-content center
+			i
+				opacity 0
+			i.active
+				color color2
+				opacity 1
 			.btn_payment
 				display flex
-				margin 5px auto
-				padding 4px 20px
+				/*margin 2px auto*/
+				margin 5px 8px
+				padding 2px 20px
 				position relative
+				
 				input
 					cursor pointer
 					height 100%
@@ -654,17 +786,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					top 0					
 					width 100%
 				&:hover
-					background-color color1
-					color #FFF
-				&:focus
-					background-color color1
-					color #FFF
+					color color2
+				
 					
-			 sustituido por el focus
+			 /*sustituido por el focus*/
 			.btn_payment.active
-				background-color color1
-				box-shadow 0 0 6px color1
-				color #FFF
+				color color2
 				
 				
 .btn_collapse

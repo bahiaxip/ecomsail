@@ -1,5 +1,5 @@
 <!-- Modal confirmación eliminar usuario -->
-<div wire:ignore.self class="modal fade" id="modalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+<div wire:ignore.self class="modal fade2" id="modalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       {{--

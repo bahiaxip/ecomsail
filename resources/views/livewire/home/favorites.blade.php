@@ -18,21 +18,22 @@
     @include('layouts.nav_user')
     @include('livewire.cart.edit_user')
     <div class="container">
-        <div class="row mtop32 address">
+        <div class="row mtop32 favorite">
             <div class="col-md-12 shadow">
-                <div class="address_header">
+                <div class="header">
                     <h5>
                         <i class="fa-solid fa-star"></i> FAVORITOS
                     </h5>                    
                 </div>
                 @if(!$favorites)
-                <div class="empty_address alert alert-success">
+                <div class="empty alert alert-success">
                     <h5>La lista de favoritos esta vacía</h5>
                 </div>
                 
                 @else
-                <div class="div_orders">                    
+                <div class="div_list">                    
                     @foreach($favorites as $favorite)
+                    <!--
                     <div class="row" style="padding:10px">
                         <div class="col-12" >
                             <div class="order_header" style="border-bottom:#696969 1px solid;display:flex;justify-content:space-between">
@@ -45,26 +46,37 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="padding:10px">
-                        <div class="col-8" style="display:flex">
-                            
+                    -->
+                    <div class="row list">
+                        <div class="col-3 image" style="display:flex">
                             <div title="{{$favorite->get_product->name}}">
-                                <img src="{{url($favorite->get_product->path_tag.$favorite->get_product->image)}}" alt="" width="100">
+                                <img src="{{url($favorite->get_product->path_tag.$favorite->get_product->image)}}" alt="" width="80">
                             </div>
-                            
                         </div>
-                        <div class="col-4" style="display:block;margin:auto">
-                            <div>
-                                Total: {{number_format((float)$favorite->get_product->price,2,'.',',')}} €
+                        <div class="col-9" >
+                            <div class="row">
+                                <div class="col-10 title">
+                                    {{$favorite->get_product->name}}
+                                </div>
+                                <div class="col-2 admin_items end">
+                                    <button class="btn btn-sm delete_round" title="Eliminar producto" wire:click="save_product_id({{$favorite->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <button class="btn btn_pry">
-                                Eliminar
-                            </button>
+                            <div class="row div_price">
+                                <div class="price">
+                                    <div>
+                                        Total: {{number_format(floatval(number_format($favorite->get_product->price,2,'.','')),0,",",".")}} €
+                                    </div>
+                                    <div>
+                                        Vendidos
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
-                    
-                    
                 </div>
                 <div class="row">
                     {{$favorites->render()}}
