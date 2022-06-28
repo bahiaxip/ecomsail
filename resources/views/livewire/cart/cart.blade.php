@@ -1,4 +1,4 @@
-<div style="position:relative"  >
+<div style="position:relative;height:100vh"  >
     @section('title','Carrito')
     {{--
     <div class="message_opacity" style="position:absolute;opacity:0;display:flex;justify-content:center;width:100%">
@@ -41,10 +41,11 @@
                 <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.5);z-index:999" >
                     <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
                 </div>
+                <div style="width:100%">
                 <div class="header">
                     <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
                 </div>
-                
+                </div>
                 @php $sum=0;$total=0; @endphp
                 @if($orders_items->count()==0)
                 

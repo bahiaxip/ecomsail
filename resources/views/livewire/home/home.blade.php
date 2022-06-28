@@ -78,10 +78,7 @@
 </div>
 
 <script>
-    let sliderfirst = false;
-    function toggleDropdown(){
-        $('#dropdownMenuLink5').toggle()    
-    }
+    
     /*
     function modalFastview(){
        console.log($('.productmodal_slick'))

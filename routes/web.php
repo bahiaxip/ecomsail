@@ -31,8 +31,7 @@ Route::get('/cart',Cart::class)->name('cart');
 //product
 Route::get('/product/{id}',Product::class)->name('product');
 
-//addresses
-Route::get('/address/{id}',Address::class)->name('address');
+
 
 //contact
 Route::get('/contact',Contact::class)->name('contact');
@@ -46,6 +45,14 @@ Route::middleware('auth')->group(function(){
     //LiveWire
     Route::get('/home2',Home::class)->name('home2');
     //Route::get('/login',Login::class)->name('login');
+    //Edit User
+    Route::get('/edit-user',EditUser::class)->name('edit_user');
+    //historial pedidos
+    Route::get('/history_orders',HistoryOrder::class)->name('history_orders');
+    //favoritos
+    Route::get('/favorites',Favorite::class)->name('favorites');
+    //addresses
+    Route::get('/address/{id}',Address::class)->name('address');
 });
 Route::get('/login',[LoginController::class,'login'])->name('login');
 Route::post('/login',[LoginController::class,'loginIn'])->name('login');
@@ -56,9 +63,6 @@ Route::post('/register',[LoginController::class,'registerAdd'])->name('register'
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('/images2',[HomeController::class,'images'])->name('images');
 
-//historial pedidos
-Route::get('/history_orders',HistoryOrder::class)->name('history_orders');
-//favoritos
-Route::get('/favorites',Favorite::class)->name('favorites');
+
 //Tienda
-Route::get('/store/{category?}',Store::class)->name('store');
+Route::get('/store/{category?}/{subcategory?}',Store::class)->name('store');

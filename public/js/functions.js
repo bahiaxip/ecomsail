@@ -1073,5 +1073,16 @@ function hideModal(selector,event){
     event.stopPropagation();
     $(selector).modal('hide');   
 }
+//menú categorías
+let sliderfirst = false;
+function toggleDropdown(){
+    $('#dropdownMenuLink5').toggle()
+    if($('#dropdownMenuLink').hasClass('active')){
+        $('#dropdownMenuLink').removeClass('active')
+    }else{
+        $('#dropdownMenuLink').addClass('active')    
+    }
+    
+}
 
 

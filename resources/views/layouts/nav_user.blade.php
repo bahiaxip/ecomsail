@@ -14,7 +14,9 @@
             <i class="fa-solid fa-bars"></i>
         </a>
         <ul class="dropdown-menu">            
-            <a href="{{url('/')}}" class="dropdown-item  data-toggle="dropdown">INICIO</a>
+            <a href="{{url('/')}}" class="dropdown-item"  data-toggle="dropdown">
+                INICIO
+            </a>
             <a href="{{url('/store')}}" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
             <a href="{{url('/')}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
         </ul>
@@ -29,8 +31,24 @@
             </a>
         </li>
         <div class="dropdown-menu" id="dropdownMenuLink5" arialabelledby="dropdownMenuLink">
-            @foreach($categories as $cat)
-                <a href="{{route('store',['category' => $cat->id])}}" class="btn btn_sail dropdown-item">{{$cat->name}}</a>
+            @foreach($categories as $key => $cat)
+            <li class="dropdown-submenu dropdown_menu1">
+                <a href="{{route('store',['category' => $cat->id])}}" class="btn btn_sail dropdown-item">
+                    <span>{{$cat->name}}</span>
+                </a>
+                <ul class="dropdown-menu dropdown_menu2">
+                    @php
+                    $subcat[$key] = App\Models\Category::where('type',$cat->id)->get();
+                    @endphp
+                    @foreach($subcat[$key] as $c)
+                    <li class="dropdown-item">
+                        <a href="{{route('store',['category' =>$cat->id ,'subcategory'=>$c->id])}}">
+                                <span>{{$c->name}}</span>
+                            </a>
+                    </li>                    
+                    @endforeach
+                </ul>
+            </li>
             @endforeach            
         </div>
         @endisset
@@ -91,31 +109,31 @@
             </a>
             @auth
             <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton2" style="" >
-                <li style="">
-                    <a class="dropdown-item" wire:click="edit_user" data-bs-toggle="modal" data-bs-target="#editUser">
+                <li class="dropdown_menu_user">
+                    <a class="dropdown-item" href="{{route('edit_user')}}">
                         <i class="fa-solid fa-user-pen"></i>
                         Perfil
                     </a>
                 </li>
-                <li style="">
+                <li class="dropdown_menu_user">
                     <a href="{{route('favorites')}}" class="dropdown-item" >
                         <i class="fa-solid fa-star"></i>
                         Favoritos
                     </a>
                 </li>
-                <li style="">
+                <li class="dropdown_menu_user">
                     <a href="{{route('history_orders')}}" class="dropdown-item" >
                         <i class="fa-solid fa-rectangle-list"></i>
                         Historial de pedidos
                     </a>
                 </li>
-                <li style="">
+                <li class="dropdown_menu_user">
                     <a href="/address/{{auth()->id()}}" class="dropdown-item" >
                         <i class="fa-solid fa-location-arrow"></i>
                         Direcciones                        
                     </a>
                 </li>
-                <li style="">
+                <li class="dropdown_menu_user">
                     <a href="/logout" class="dropdown-item" >
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Cerrar sesión
