@@ -16,9 +16,12 @@
     </div>
     @section('title','Favoritos')
     @include('layouts.nav_user')
-    @include('livewire.cart.edit_user')
-    <div class="container">
-        <div class="row mtop32 favorite">
+    {{--@include('livewire.cart.edit_user')--}}
+    <div class="container" x-data="cart()" x-init="start()" x-cloak>
+        <div class="row mtop32 favorite"
+        x-show="show2"
+        x-transition:enter.duration.1000ms
+        >
             <div class="col-md-12 shadow">
                 <div class="header">
                     <h5>
@@ -48,31 +51,40 @@
                     </div>
                     -->
                     <div class="row list">
-                        <div class="col-3 image" style="display:flex">
+                        <div class="col-3 col-lg-2 image" style="display:flex">
                             <div title="{{$favorite->get_product->name}}">
-                                <img src="{{url($favorite->get_product->path_tag.$favorite->get_product->image)}}" alt="" width="80">
+                                <a href="{{route('product',['id' => $favorite->product_id])}}">
+                                    <img src="{{url($favorite->get_product->path_tag.$favorite->get_product->image)}}" alt="" width="80">
+                                </a>
                             </div>
                         </div>
-                        <div class="col-9" >
+                        <div class="col-9 col-lg-10 content" >
                             <div class="row">
                                 <div class="col-10 title">
-                                    {{$favorite->get_product->name}}
+                                    <a href="{{route('product',['id' => $favorite->product_id])}}">
+                                        {{$favorite->get_product->name}}    
+                                    </a>
+                                    
                                 </div>
                                 <div class="col-2 admin_items end">
-                                    <button class="btn btn-sm delete_round" title="Eliminar producto" wire:click="save_product_id({{$favorite->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                                    <button class="btn btn-sm delete_round" title="Eliminar {{$favorite->get_product->name}}" wire:click="save_product_id({{$favorite->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="row div_price">
-                                <div class="price">
-                                    <div>
-                                        Total: {{number_format(floatval(number_format($favorite->get_product->price,2,'.','')),0,",",".")}} €
+                            <div class="row div_soldprice">
+                                <div class="soldprice">
+                                    <div class="price">
+                                        <!--<span>Precio:</span>--> 
+                                        {{number_format(floatval(number_format($favorite->get_product->price,2,'.','')),0,",",".")}} €
                                     </div>
-                                    <div>
-                                        Vendidos
+                                    <div class="sold">
+                                        10 Vendidos
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row date_favorite">
+                                Añadido: {{$favorite->created_at}}
                             </div>
                         </div>
                     </div>

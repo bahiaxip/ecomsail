@@ -15,8 +15,12 @@ rgba2 = rgba(0,178,146,1)
 	margin-top 16px
 .mtop32
 	margin-top 32px
-
+.p10
+	padding 10px
+.p5
+	padding 5px
 .btn_pry
+	font-family QuicksandB
 	background-color color1
 	color color7
 	&:hover
@@ -39,7 +43,8 @@ rgba2 = rgba(0,178,146,1)
 	&:focus
 		box-shadow 0 0 6px color6
 		color #FFF
-.btn_grey
+.btn_red
+	font-family QuicksandB
 	background-color color3
 	color color7
 	&:hover
@@ -50,11 +55,25 @@ rgba2 = rgba(0,178,146,1)
 .dflex
 	display flex
 
-/*imagen de perfile(edición)*/
-.edit_modal
-	.modal-header
+#loading
+	background-color rgba(255,255,255,.9);
+	display none
+	height 100%
+	position absolute
+	width 100%
+	z-index 1
+//edit_user
+/*imagen de perfil(edición)*/
+.edit_user
+	font-family QuicksandR
+	label
+		font-family QuicksandB
+	.header
+		align-items center
+		display flex
+		justify-content center
 		padding 1.2rem 1.1rem
-
+		position relative
 		.img_user
 			background-position 50%
 			background-size 100% auto
@@ -64,10 +83,18 @@ rgba2 = rgba(0,178,146,1)
 			object-fit contain
 			padding 5px
 			margin 5px 			
-			position:absolute;
+			position absolute;
 			width 64px
 			height 64px
-		
+		.title
+			h5
+				font-family QuicksandB
+			font-size 25px
+			p
+				font-size 14px
+				text-align center
+			span
+				font-family QuicksandB
 #modalConfirm
 	/*transition all 1s linear*/
 .fade2	
@@ -489,6 +516,8 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				
 /* carrito y favoritos, historial pedidos y direcciones */
 .cart,.favorite,.history_order,.address
+	color color8
+	font-family QuicksandR
 	.empty
 		display flex
 		justify-content center
@@ -497,9 +526,10 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			color color6
 			font-size 18px
 	.header
-		background-color color8
+		background-color color2
 		border-bottom color7 2px solid
 		color #FFF
+		font-family QuicksandB
 		padding 10px
 		.address_header
 			align-items center 
@@ -513,47 +543,91 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			font-size 12px
 			justify-content space-between			
 		.list
-			border-bottom color7 1px solid
-			padding 20px 5px
+			border-bottom color7 1px solid			
+			padding 15px 5px
+			
 			.image
 				display flex
-			.title
-				display block
-				overflow hidden
-				text-overflow ellipsis
-				white-space nowrap
-			
-			.admin_items.end
+				justify-content center				
+				img
+					min-height 125px
+					max-height 128px
+					width 100%
+			/* solo favorites */
+			.content
 				display flex
-				justify-content end
-				.delete_round
-					align-items center
-					background-color transparent
-					border color7 1px solid
-					border-radius 50%
-					color color8
-					display flex
-					height 32px
-					justify-content flex-end
-					width 32px
-					i
-						font-size 1.1em
+				flex-flow column
+				
+				.title
+					display block
+					font-size 16px
+					font-weight bold				
+					overflow hidden
+					text-overflow ellipsis
+					white-space nowrap				
 					&:hover
-						box-shadow 0 0 6px color7
-						color color6
-					
-					&:focus
-						box-shadow 0 0 6px color7
-						color color6
-			.div_price
-				padding:10px
-				.price
+						color color1
+					a
+						&:hover
+							color color1
+				
+				.admin_items.end
 					display flex
-					justify-content space-between
+					justify-content end
+					.delete_round
+						align-items center
+						background-color transparent
+						border color7 1px solid
+						border-radius 50%
+						color color8
+						display flex
+						height 32px
+						justify-content flex-end
+						width 32px
+						i
+							font-size 1.1em
+						&:hover
+							box-shadow 0 0 6px color7
+							color color6
+						
+						&:focus
+							box-shadow 0 0 6px color7
+							color color6
+				
+				.div_soldprice
+					padding:10px
+					.soldprice
+						display flex
+						justify-content space-between
+						.price
+							color color6
+							font-family QuicksandB
+							font-size 22px
+							span
+								color color8
+								font-size 14px
+						.sold
+							align-items center
+							display flex
+							font-size 14px
+				.date_favorite
+					align-items end
+					display flex
+					font-size 14px
+					height 100%
+					justify-content end
+					margin-right 4px
+				/* fin solo favorites */
+					
+			/* solo pedidos */
+			.div_orders
+				display:flex
+				
+			/* fin solo pedidos */
 			.div_quantity
 				.quantity
 					display flex
-					justify-content center
+					margin-top 10px
 					width 100%
 					input
 						margin auto 5px
@@ -825,6 +899,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	transform translate(-50%,-50%);
 	top 120px 
 	z-index 1
+	transition opacity 1s linear
 	.alert
 		min-width 700px
 
@@ -863,6 +938,10 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			
 	.alert.alert-success,.alert.alert-danger
 		min-width 300px
+
+	.favorite .div_list .list .content				
+		.div_soldprice .soldprice
+			display block
 	
 			
 			
@@ -871,6 +950,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	.div_products_list
 		.products
 			width 42%
+	//edit_user
+	.edit_user
+		.header
+			justify-content space-between
+			.img_user
+				position:relative
 
 /* font-face */
 @font-face

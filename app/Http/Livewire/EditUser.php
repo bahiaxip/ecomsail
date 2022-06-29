@@ -6,8 +6,10 @@ use Livewire\Component;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
 use Auth;
+use Livewire\WithFileUploads;
 class EditUser extends Component
 {
+    use WithFileUploads;
     //edit_user
     //redeclarado y pasado a $user_id2   
     public $user_id;
@@ -33,7 +35,7 @@ class EditUser extends Component
     protected $prov;
     protected $municip;
     //fin edit_user
-    public $typealert;
+    public $typealert='success';
 
     public function mount(){
         $this->user_id = Auth::id();
@@ -63,11 +65,12 @@ class EditUser extends Component
             $this->country=$user->country;
             $this->province=$user->province;
             $this->city = $user->city;
+
         }
     }
     public function update(){
         //ocultamos el loading duplicado que se ha iniciado
-        $this->emit('loading','loading_user');
+        $this->emit('loading','loading');
         //dd($this->profile_image);
         if($this->user_id){
             $validated = $this->validate([
@@ -113,9 +116,12 @@ class EditUser extends Component
                     ]);
                 }
             }
-            /*
+            $this->edit_user();
             $this->typealert = 'success';
             session()->flash('message','Usuario actualizado correctamente');
+            $this->emit('message_opacity');
+            //$this->clear2();
+            /*
             $this->emit('message_opacity');
             $this->clear2();
             $this->emit('editUser');
@@ -126,8 +132,8 @@ class EditUser extends Component
 
     //limpiar datos de formulario
     public function clear(){
-        
-        $this->user_id='';
+        //anulamos el reset a user_id
+        //$this->user_id='';
         $this->nick='';
         $this->name='';
         $this->surname='';
@@ -144,6 +150,7 @@ class EditUser extends Component
     //fin_edit_user
     public function render()
     {
-        return view('livewire.home.edituser')->extends('layouts.main');
+        $data=['iteration'=>$this->iteration];
+        return view('livewire.home.edituser',$data)->extends('layouts.main');
     }
 }

@@ -20,7 +20,7 @@
     @include('livewire.home.fastview_item')
     @include('layouts.nav_user')
 
-    @include('livewire.home.edit_user')
+    {{--@include('livewire.home.edit_user')--}}
 
 
     

@@ -17,21 +17,24 @@
     @include('layouts.nav_user')
     @include('livewire.addresses.create')
     @include('livewire.addresses.confirm')
-    @include('livewire.addresses.edit_user')
-    <div class="container">
-        <div class="row mtop32 address">
+    {{--@include('livewire.addresses.edit_user')--}}
+    <div class="container" x-data="cart()" x-init="start()" x-cloak>
+        <div class="row mtop32 address"
+        x-show="show2"
+        x-transition:enter.duration.1000ms
+        >
             <div class="col-md-12 shadow">
                 <div class="header">
                     <div class="address_header">
                         <h5><i class="fa-solid fa-location-arrow"></i> DIRECCIONES</h5>
-                        <button class="btn btn_pry" data-bs-toggle="modal" data-bs-target="#addAddress" >
+                        <button class="btn btn-sm btn_pry" data-bs-toggle="modal" data-bs-target="#addAddress" >
                             Crear
                         </button>
                     </div>
                 </div>
                 @if(!$addresses)
                     <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-                        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+                        <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
                     </div>
                 @endif
                 @php $sum=0;$total=0; @endphp

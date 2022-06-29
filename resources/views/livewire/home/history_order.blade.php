@@ -16,7 +16,7 @@
     </div>
     @include('layouts.nav_user')
     {{-- para no incluir $user_id2 a todo el home usamos el modal de cart --}}
-    @include('livewire.cart.edit_user')
+    {{--@include('livewire.cart.edit_user')--}}
     <div class="container" x-data="cart()" x-init="start()" x-cloak>
         <div class="row history_order mtop32 address" 
         x-show="show2"
@@ -36,7 +36,7 @@
                 @else
                 <div class="div_list">                    
                     @foreach($orders as $order)
-                    <div class="row" style="padding:10px">
+                    <div class="row p10">
                         <div class="col-12" >
                             <div class="order_num" >
                                 <div>
@@ -48,12 +48,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row list" style="padding:10px">
+                    <div class="row list p10">
                         <div class="col-md-9" style="display:flex">
                             
                                 @foreach($orders_items[$order->id] as $order_item)
-                                <div style="display:flex" title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
-                                    <img src="{{url($order_item->path_tag.$order_item->image)}}" alt="" width="100">
+                                <div class="image"  title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
+                                    <img src="{{url($order_item->path_tag.$order_item->image)}}" alt="" class="p10">
                                 </div>
                                 @endforeach
                             
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="btn btn_grey" style="padding:4px 50px">
+                                <button class="btn btn_red" style="padding:4px 50px">
                                     Eliminar
                                 </button>
                             </div>

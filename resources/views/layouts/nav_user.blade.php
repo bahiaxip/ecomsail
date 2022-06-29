@@ -142,13 +142,13 @@
             </ul>
             @else
             <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton2" style="" >
-                <li style="">
+                <li class="dropdown_menu_user">
                     <a href="/login" class="dropdown-item" >
                         <i class="fa-solid fa-user"></i>
                         Iniciar sesión                        
                     </a>
                 </li>
-                <li style="">
+                <li class="dropdown_menu_user">
                     <a href="/register" class="dropdown-item" >
                         <i class="fa-solid fa-user-plus"></i>
                         Registrarse                        

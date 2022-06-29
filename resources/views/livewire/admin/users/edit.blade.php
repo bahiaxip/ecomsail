@@ -17,13 +17,13 @@
       </div>
       <!-- loading cuando comienza la edición -->
       @if(!$user_id)
-      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(255,255,255,.9);z-index:999;" >
+        <img src="{{url('icons/loading/dualball_loading.svg')}}" alt="" style="margin:auto" width="80">
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
-      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(255,255,255,.9);z-index:999" >
+        <img src="{{url('icons/loading/dualball_loading.svg')}}" alt="" style="margin:auto" width="80">
       </div>
       <div class="modal-body" >
         

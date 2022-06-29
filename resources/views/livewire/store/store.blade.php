@@ -56,10 +56,11 @@
                     </div>
                 @endforeach
                 </div>
+                <div class="row">
+                    {{$products->render()}}
+                </div>
             </div>
-            <div class="row">
-            	{{$products->render()}}
-            </div>
+            
         </div>
     @include('layouts.footer')           
     </div>

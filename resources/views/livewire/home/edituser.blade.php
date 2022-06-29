@@ -1,7 +1,8 @@
-<div style="position:relative;height:100vh">
+<div style="position:relative;height:100vh" class="edit_user">
+  @section('title','Editar usuario')
   <!-- loading cuando actualizamos edición -->
-    <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-      <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+    <div id="loading"  >
+      <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>
     <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
         <div class="alert alert-{{$typealert}}" >            
@@ -19,10 +20,10 @@
         </div>
     </div>
     @include('layouts.nav_user')
-    <!-- loading cuando comienza la edición -->
+    <!-- loading cuando comienza la edición (al no ser modal en esta vista no es necesario) -->
     @if(!$user_id)
     <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-      <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>
     @endif
 
@@ -30,18 +31,24 @@
 
     <div class="container" x-data="cart()" x-init="start()" x-cloak>
         <div class="row">
-          <div class="col-12">
-                <div class="modal-header justify-content-center" style="position:relative">
+          <div class="col-12 mtop16">
+                <div class="header">
                   @if(!$thumb)
+                  <!--
                   <img src="{{url('images/default2.png')}}" alt="" width="64" style="position:absolute;left:10px;margin-top:5px">
+                -->
+                  <div style="position:absolute;left:10px;margin-top:5px;font-size:3rem">
+                      <i class="fa-solid fa-user"  ></i>  
+                  </div>
+                  
                   @else
                   <div class="img_user" style="background-image:url({{url('storage/'.$thumb)}})">
                       <!--<img src="{{url('storage/'.$thumb)}}" alt="" style="" class="img_user">-->
                   </div>
                   @endif
-                  <div class="modal-title h5 justify-self-center" >
-                    Editar Usuario
-                    <p style="font-size:12px;text-align:center">E-Mail: {{$email}}</p>
+                  <div class="title">
+                    <h5>Editar Usuario</h5>
+                    <p><span>E-Mail:</span> {{$email}}</p>
                   </div>
                   
                 </div>
@@ -114,7 +121,7 @@
                           <p class="text-danger">{{$message}}</p>
                           @enderror
                           <div wire:loading wire:target="profile_image">
-                              <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                              <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
                           </div>
                       </div>
                       <div class="col-md-6">
@@ -137,7 +144,7 @@
                     </div>
                     <div class="row" wire:loading wire:target="country">
                         <div class="col-md-12 justify-content-center"   style="position:absolute;background-color:rgba(255,255,255,.8);width:99%;min-height:20px;margin:auto;">
-                            <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:20px auto" width="32">
+                            <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:20px auto" width="32">
                         </div>
                     </div>
 
@@ -191,7 +198,7 @@
                             <p class="text-danger">{{$message}}</p>
                             @enderror
                             <div wire:loading wire:target="province">
-                              <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                              <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
                           </div>
                         </div>
                     </div>
