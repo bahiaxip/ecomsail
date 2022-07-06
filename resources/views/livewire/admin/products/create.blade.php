@@ -106,7 +106,7 @@
           <div class="row mtop16">
             <div class="col-md-6">
               {{ Form::label('short_detail','Descripción corta')}}
-              {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 40])}}
+              {{ Form::text('short_detail',null,['class' => 'form-control','wire:model' => 'short_detail','maxlength' => 300])}}
               @error('short_detail')
                 <p class="text-danger">{{$message}}</p>
                 @enderror

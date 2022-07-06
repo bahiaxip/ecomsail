@@ -39,7 +39,7 @@
             <div class="col-xl-8 shadow" style="position:relative">
                 <!-- loading cuando actualizamos edición -->
                 <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.5);z-index:999" >
-                    <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+                    <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
                 </div>
                 <div style="width:100%">
                 <div class="header">
@@ -87,6 +87,18 @@
                                     </button>
                                 </div>
                             </div>
+                            @if($oi->combinations != "null")
+                            <div class="row">
+                                @foreach(json_decode($oi->combinations) as $comb)
+                                @php 
+                                $attribute = App\Models\Attribute::findOrFail($comb->value);
+                                @endphp
+                                <div class="col-12">
+                                    <strong>{{$attribute->parentattr->name}} :</strong> {{$attribute->name}}
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="row div_price" >
                                 <div class="price" >
                                     <div>
@@ -125,7 +137,7 @@
             </div>
             <div class="col-xl-3 shadow">
                 <div class="resum">
-                    <span class="left">{{$sum}} Productos</span>
+                    <span class="left">{{$sum}} @if($sum==1)Producto @else Productos @endif</span>
                     <span class="right">{{$total}} €</span>
                 </div>
                 <div class="resum">
@@ -191,24 +203,24 @@
 
                             <div class="row">
                                 <div class="div_btn_payment input">
-                                    <i class="fa-solid fa-check"></i>
-                                    <button class="btn btn_payment" onclick="set_payment(this)">
+                                    <i class="fa-solid fa-check @if($payment_selected == 1) active @endif"></i>
+                                    <button class="btn btn_payment @if($payment_selected == 1) active @endif" onclick="set_payment(this)">
                                         <input type="radio" name="payment_method" wire:model.defer="payment_selected" value="1">
                                             Tarjeta
                                         </input>
                                     </button>
                                 </div>
                                 <div class="div_btn_payment input">
-                                    <i class="fa-solid fa-check"></i>
-                                    <button class="btn btn_payment" onclick="set_payment(this)">
+                                    <i class="fa-solid fa-check @if($payment_selected == 2) active @endif"></i>
+                                    <button class="btn btn_payment @if($payment_selected == 2) active @endif" onclick="set_payment(this)">
                                         <input type="radio" name="payment_method" wire:model.defer="payment_selected" value="2">
                                             Transferencia
                                         </input>
                                     </button>
                                 </div>
                                 <div class="div_btn_payment input">
-                                    <i class="fa-solid fa-check"></i>
-                                    <button class="btn btn_payment" onclick="set_payment(this)">
+                                    <i class="fa-solid fa-check @if($payment_selected == 3) active @endif"></i>
+                                    <button class="btn btn_payment @if($payment_selected == 3) active @endif" onclick="set_payment(this)">
                                         <input type="radio" name="payment_method" class=" " wire:model.defer="payment_selected" value="3">
                                             Paypal
                                         </input>

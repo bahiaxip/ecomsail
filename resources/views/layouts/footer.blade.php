@@ -8,8 +8,44 @@
 			</div>
 		</div>
 		@endif
-		
+		<div class="row">
+            <div class="col-12 col_offers" style="">
+                <div class="container">
+                    <div class="row title" >
+                        <h5>Descubre nuestras ofertas</h5>
+                    </div>
+                    <div class="row offers" >
+                        <div class="col-md-3">
+                            <div class="box_image">
+                                <img src="{{url('images/products/video/lg_oled.jpg')}}" alt="" >    
+                            </div>
+                            
+                            <p >Televisores</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="box_image">
+                                <img src="{{url('images/products/video/headphones.jpg')}}" alt="" >
+                            </div>
+                            <p>Auriculares</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="box_image">
+                                <img src="{{url('images/products/video/garden2.jpg')}}" alt="">
+                            </div>
+                            <p>Jardín</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="box_image">
+                                <img src="{{url('images/products/video/furniture.jpg')}}" alt="">
+                            </div>
+                            <p>Limpieza</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<div class="container info">
+
 			
 			<div class="row">
 				<div class="col-md-3 col-4" >
@@ -30,10 +66,10 @@
 				</div>
 				<div class="col-md-3 col-4" >
 					<div class="header">
-						<i class="fa-solid fa-certificate"></i>
+						<i class="fa-solid fa-percent"></i>
 					</div>
 					<div class="text">
-						<p class="mtop10">Protección del comprador</p>						
+						<p class="mtop10">Grandes descuentos</p>
 					</div>
 				</div>
 				

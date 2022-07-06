@@ -6,7 +6,7 @@ color6 = #494949
 color7 = #E3E3E3
 color8 = #696969
 
-.lat, .lat
+.lat
 	width 10%
 	/* genérico */
 	li
@@ -18,6 +18,7 @@ color8 = #696969
 			&:focus
 				color color2
 		a.active
+			/*background-color rgba(0,178,146,.3)*/
 			background-color color2
 			color #FFF
 			
@@ -33,6 +34,13 @@ color8 = #696969
 				background-color color2
 				box-shadow none
 				color #FFF
+/* la clase categories permite mostrar el fondo del menú de
+categorías, mientras que donde no está este menú es preferible
+mantener el 10%*/
+.lat.categories
+	width auto
+	
+
 .lat_left
 	li
 		float left
@@ -50,9 +58,10 @@ color8 = #696969
 .box_nav_user
 	background-color rgba(240,240,240,.9)
 	display flex
-.nav_user
-	
+.nav_user	
 	display flex
+	font-family QuicksandB
+	
 	justify-content center
 	width 80%
 	ul
@@ -157,6 +166,11 @@ color8 = #696969
 			&:focus
 				background-color color2
 				color #FFF
+/*no necesario, sustituido por la clase .lat.categories
+@media only screen and (max-width 1600px)
+	.lat
+		width 15%
+*/
 @media only screen and (max-width 992px)
 	.nav_user
 		ul

@@ -57,7 +57,9 @@
         </div>
         @endif
     @endauth
-    
+    <div class="btn_floatup" onclick="up()">        
+        <i class="fa-solid fa-circle-arrow-up"></i>
+    </div>
     @if(session()->has('message') && !session()->has('only_component'))
     <div class="container">
         <div class="alert alert-@isset($typealert){{$typealert}}@else{{'success'}} @endisset hide" >

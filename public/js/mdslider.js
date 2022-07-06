@@ -42,6 +42,8 @@ class MDSlider {
 
 			md_slider_nav_next ? md_slider_nav_next.addEventListener('click',function(){
 				this.navigation('next')}.bind(this)) : null;
+
+			this.slide();
 		})
 	}
 	
@@ -55,6 +57,13 @@ class MDSlider {
 			this.items[i].style.display = 'flex';			
 		}
 		console.log('Slider Activo: '+this.slider_active+' - Total Slides: '+this.elements);
+	}
+	//intervalo de slider
+	slide(){
+		setInterval(()=>{
+			this.navigation('next');	
+		},6000);
+		
 	}	
 
 	navigation(action){
@@ -71,8 +80,23 @@ class MDSlider {
 				}
 				//this.slider_active = this.slider_active -1;			
 			}
+			//para primer slider dirigir al último slider
+			else{
+
+				this.slider_active=this.elements ;
+				//this.slider_active = this.slider_active - 1;
+				console.log("slider_active: ",this.slider_active)
+				
+				for(let i=0;i<this.items.length;i++){					
+					let pos = parseInt(this.items[i].style.left) - 100* this.elements;
+					this.items[i].style.left = pos+'%';
+				}
+				
+
+				console.log("no es")
+			}
 		}
-		if(action == 'next'){		
+		if(action == 'next'){			
 			if(this.slider_active < this.elements){
 				this.slider_active = this.slider_active + 1;
 				console.log("slider_active: ",this.slider_active)
@@ -84,8 +108,20 @@ class MDSlider {
 					//console.log('Slide #' + i + ' Pos: '+ items[i].style.left);
 					//items[i].style.left = pos+'%';
 					//items[i].style.display = 'flex';
+				}				
+				
+			}else{
+				//para último slider, volver al principio
+				this.slider_active=0;
+				//se puede hacer con show() o con el for()
+				//this.show();
+				for(let i=0;i<this.items.length;i++){
+					//var pos = i * 100;
+					let pos = parseInt(this.items[i].style.left) + 100 * this.elements;
+					this.items[i].style.left = pos+'%';				
 				}
-				//this.slider_active = this.slider_active + 1;
+
+				
 			}
 		}
 		//this.active();
@@ -95,6 +131,8 @@ class MDSlider {
 
 }
 
+/*
 function navigation(){
 console.log('hola')
 }
+*/

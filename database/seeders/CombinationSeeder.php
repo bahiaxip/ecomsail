@@ -17,13 +17,13 @@ class CombinationSeeder extends Seeder
             'name' => 'Color > Blanco',            
             'list_ids' => 4,
             'amount' => 0,
-            'product_id' => 1
+            'product_id' => 2
         ]);
         Combination::create([
             'name' => 'Color > Gris',
             'list_ids' => 5,
             'amount' => 0,
-            'product_id' => 1
+            'product_id' => 2
         ]);        
     }
 }

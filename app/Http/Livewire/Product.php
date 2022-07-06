@@ -81,29 +81,42 @@ class Product extends Component
                 //las combinaciones están preparadas para que solo se pueda crear
                 //atributo>valor, es decir no puede traer 2 valores del mismo
                 //atributo, pero si puede traer varios atributos>valor en la misma combinación:
-                //con distinto atributo padre se puede:
-                // Color>blanco,Talla>S...
-                //con el mismo atributo padre no se puede
-                //Color>blanco,Color>gris,Color>rojo...
+                //Pot tanto...
+                    //con distinto atributo padre se puede:
+                    // Color>blanco,Talla>S...
+                    //con el mismo atributo padre no se puede
+                    //Color>blanco,Color>gris,Color>rojo...
                 //convertimos en array las listas de cada combinación                
                 $attr_list_ids = explode(",",$comb->list_ids);
                     //recorremos el array de listas de cada combinación
                     foreach($attr_list_ids as $key=>$attr_id){
                         $attribute=Attribute::findOrFail($attr_id);
                         //if($k==8 && $key==2)
+                        //Establecemos el nombre del atributo
+                        //padre, que en la vista será necesario
+                        //comprobar el atributo name, ya que es
+                        //el único de tipo string
                         if(!isset($list[$attribute->type])){
                             $list[$attribute->type]['name']=$attribute->parentattr->name;
+
                             //$this->option[$attribute->type];
                         }else{
                             //$this->option[$attribute->type];
                         }
+                        $color;
+                        //si existe valor en el campo color añadimos al array
+                        if($attribute->color){
+                            $color = $attribute->color;
+                        }
                             $list[$attribute->type][] =[
                                 'id' => $attribute->id,
-                                'name' => $attribute->name
+                                'name' => $attribute->name,
+                                'color' => $color
                             ];
-                            
+                        
                             
                     }
+                    //dd($list);
             }
             //dd($list);
             $this->combinations_list = $list;
@@ -115,6 +128,7 @@ class Product extends Component
     }
 
     public function updated(){
+        //actualizamos el precio si seleccionamos combinacion
         if($this->quantity != $this->quantity_tmp)
             $this->set_quantity();
         if($this->option != $this->computed_option){
@@ -129,7 +143,7 @@ class Product extends Component
 
     }
 
-    public function add_cart(){        
+    public function add_cart(){
         //validamos datos para crear el carrito o añadir al carrito
         $validated = $this->validate([
             'option' => 'nullable|array',
@@ -140,6 +154,7 @@ class Product extends Component
         //creamos o actualizamos el pedido
         $order = $this->create_or_update_order();
         $list=NULL;
+        
         if(count($this->option) > 0){
             foreach($this->option as $key=>$o){
                 $list[]=[
@@ -186,6 +201,16 @@ class Product extends Component
             $this->emit('message_opacity');
             return false;
         }
+        //comprobamos si existe suplemento de precio por alguna
+        // combinación mediante added_price y la añadimos al 
+        //registro para luego poder sumar o restar desde el carrito.
+        $quantity = 1;
+        $added_price=NULL;
+        if($this->quantity && $this->quantity > 1)
+            $quantity = $this->quantity; 
+        if($this->added_price){
+            $added_price = $this->added_price / $quantity;
+        }
         //si en el array $diff no existe ningún resultado(0), 
         //indicando que no existe esa combinación o simplemente no 
         //existe ese item de ese producto creamos nuevo order_item
@@ -194,6 +219,7 @@ class Product extends Component
             'quantity' => $this->quantity,
             'state_discount' => $this->product->state_discount,
             'end_discount' => $this->product->end_discount,
+            'added_price' => $added_price,
             'price_unit' => $this->product->price,
             'total' => $this->price_tmp,
             'title' => $product->name,

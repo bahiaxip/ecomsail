@@ -14,15 +14,15 @@
             <i class="fa-solid fa-bars"></i>
         </a>
         <ul class="dropdown-menu">            
-            <a href="{{url('/')}}" class="dropdown-item"  data-toggle="dropdown">
+            <a href="{{route('home')}}" class="dropdown-item"  data-toggle="dropdown">
                 INICIO
             </a>
-            <a href="{{url('/store')}}" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
-            <a href="{{url('/')}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
+            <a href="{{route('store')}}" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
+            <a href="{{route('offers')}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
         </ul>
     </div>
     
-    <div class="lat dropdown show">
+    <div class="lat @isset($categories) categories @endisset dropdown show">
         @isset($categories)
         <li class="nav-item " >
             <a href="#" class="nav-link categories dropdown-toggle" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">
@@ -71,7 +71,7 @@
                 <div class="layer_nav"></div>
             </li>
             <li class="">
-                <a href="{{url('/')}}" class="nav-link @if(Route::is('home')) active @endif">
+                <a href="{{route('offers')}}" class="nav-link @if(Route::is('offers')) active @endif">
                     <span>OFERTAS</span>
                 </a>
                 <div class="layer_nav"></div>
@@ -108,13 +108,7 @@
                 <i class="fas fa-user"></i>
             </a>
             @auth
-            <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton2" style="" >
-                <li class="dropdown_menu_user">
-                    <a class="dropdown-item" href="{{route('edit_user')}}">
-                        <i class="fa-solid fa-user-pen"></i>
-                        Perfil
-                    </a>
-                </li>
+            <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton2" style="" >                
                 <li class="dropdown_menu_user">
                     <a href="{{route('favorites')}}" class="dropdown-item" >
                         <i class="fa-solid fa-star"></i>
@@ -124,13 +118,19 @@
                 <li class="dropdown_menu_user">
                     <a href="{{route('history_orders')}}" class="dropdown-item" >
                         <i class="fa-solid fa-rectangle-list"></i>
-                        Historial de pedidos
+                        Pedidos
                     </a>
                 </li>
                 <li class="dropdown_menu_user">
                     <a href="/address/{{auth()->id()}}" class="dropdown-item" >
                         <i class="fa-solid fa-location-arrow"></i>
                         Direcciones                        
+                    </a>
+                </li>
+                <li class="dropdown_menu_user">
+                    <a class="dropdown-item" href="{{route('edit_user')}}">
+                        <i class="fa-solid fa-user-pen"></i>
+                        Perfil
                     </a>
                 </li>
                 <li class="dropdown_menu_user">

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute;
 use Auth,Str;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
@@ -243,6 +243,7 @@ class Cart extends Component
     }
 
     public function change_quantity($operator,$id){
+        
             if($operator == 'plus' )
                 $this->quantity[$id]['quantity']++;
             elseif($operator == 'minus' && $this->quantity[$id]['quantity'] > 1)
@@ -267,8 +268,22 @@ class Cart extends Component
     public function update_order_item($id,$quantity){
         $order_item = Order_Item::findOrFail($id);
         if($order_item){
+            $added_price=0;
+            //comprobar added_price para añadirle el suplemento 
+            if($order_item->added_price){
+                $added_price = $order_item->added_price;
+            }
+            //comprobación de combinaciones
+            /*
+            if($order_item->combinations != "null"){
+                $list_combinations = $order_item->combinations;
+                dd(json_decode($order_item->combinations));
+            }else{
+                dd("NO existen combinaciones");
+            }
+            */
             $order_item->quantity = $quantity;
-            $order_item->total = $order_item->price_unit * $quantity;
+            $order_item->total = ($order_item->price_unit * $quantity) + ($added_price * $quantity);
             $order_item->save();
         }else{
             //mensaje de error de producto
@@ -384,12 +399,15 @@ class Cart extends Component
         
         $this->addresses = Address::where('user_id',$this->user_id)->get();
         //establecemos el input radio de las direcciones como predeterminado
-        foreach($this->addresses as $adr){
-            if($adr->default == 1){                
-                $this->address_selected = $adr->id;
-                $this->location_id = $adr->location_id;
-            }
+        if(!$this->address_selected){
+            foreach($this->addresses as $adr){
+                if($adr->default == 1){                
+                    $this->address_selected = $adr->id;
+                    $this->location_id = $adr->location_id;
+                }
+            }    
         }
+        
         //$this->orders_items = $this->get_orders_items($this->order_id);
         //$data = ['orders_items' => $orders_items,'addresses' => $this->addresses];
         //productos
@@ -401,6 +419,9 @@ class Cart extends Component
             $this->quantity[$o_items->id]['total'] = $o_items->total;
         }
         $this->quantity_tmp=$this->quantity;
+        //dd($this->payment_selected);
+        //dd($this->address_selected);
+
 
         return view('livewire.cart.cart')->extends('layouts.main',['typealert' => $this->typealert]);
     }

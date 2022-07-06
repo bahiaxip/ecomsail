@@ -17,8 +17,8 @@
     @include('layouts.nav_user')
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         <div class="btn_return">
-            <button onclick="history.back()" class="btn btn-sm btn_pry">
-                <i class="fa-solid fa-left-long"></i> Atrás
+            <button onclick="history.back()" class="btn btn-sm btn_grey">
+                <i class="fa-solid fa-left-long"></i> Volver
             </button>
         </div>
         <!--
@@ -78,19 +78,26 @@
                           
                           @foreach($comb as $k => $c)
                             @if($k != 'name')
-                                <div class="item">                                  
+                                <div class="item">
+                            <!-- si es el atributo color se comprueba si existe color-->
+                                    @if($c['color'])
+                                    <div style="width:30px;height:30px;background-color:{{$c['color']}};border:#494949 1px solid;margin-left:2px;margin-right:2px;position:relative">
+                                        <input class="mylabel"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  style="position: absolute;width: 100%;height: 100%"/>
+                                    </div>
+                                    @else
                                     <input class="mylabel"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  />
                                     <label for="" >
                                       {{$c['name']}}
                                     </label>
                                   {{--{{$c['name']}}--}}
+                                    @endif
                                   
                                 </div>
                             @endif
                           @endforeach
                         </div>
 
-                        <!--
+                        {{--
                           <select name="{{$comb['name']}}" id="" class="form-select form-select-sm">          
                                 @foreach($comb as $k => $c)
                                   @if($k != 'name' && $k !== 'id')
@@ -98,7 +105,7 @@
                                   @endif
                                 @endforeach
                           </select>
-                          -->
+                          --}}
                       @endforeach
                     @endif
                 </div>
@@ -148,8 +155,39 @@
                     @endif
                 </div>
                 <div class="row mtop32">
-                    <h5>Descripción</h5>
-                     <p>{!!$prod->detail!!}</p>
+                    <nav>
+                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Descripción</button>              
+                              <button class="nav-link" id="nav-details-tab" data-bs-toggle="tab" data-bs-target="#nav-details" type="button" role="tab" aria-controls="nav-details" aria-selected="false">Detalles</button>
+
+                              <button class="nav-link" id="nav-feedback-tab" data-bs-toggle="tab" data-bs-target="#nav-feedback" type="button" role="tab" aria-controls="nav-feedback" aria-selected="false">Valoraciones</button>  
+                          </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" wire:ignore.self>
+                            <div class="row mtop16 p10">        
+                                {!!$prod->short_detail!!}
+                            </div>
+                        </div>
+
+                        
+                        <div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab" wire:ignore.self>
+                            <div class="row mtop16 detail" >
+                                {!!$prod->detail!!}
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="tab-pane fade" id="nav-feedback" role="tabpanel" aria-labelledby="nav-feedback-tab" wire:ignore.self>
+                            <div class="row">
+                                valoraciones
+                            </div>
+                        </div>                        
+                    </div>
+                    
+                    {{--
+                    
+                    --}}
                 </div>
             </div>
         </div>

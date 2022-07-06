@@ -9,13 +9,16 @@
 			<div class="col-md-7 col-sm-12 slider_left">
 				<div class="content">
 					<div class="cinside">
-						<h2>Las mejores marcas en ropa deportiva</h2>
+						<!--<h2>Las mejores marcas en ropa deportiva</h2>
 						<p>Descuentos hasta un 40%</p>
+						-->
+						<h2>Tendencias para estas vacaciones</h2>
+						<p>Descuentos en ropa de baño hasta un 40%</p>
 					</div>					
 				</div>
 			</div>
 			<div class="col-md-5 col-sm-12">
-				<img src="{{ url('/images/ropa_deportiva.jpg')}}" alt="" class="img-fluid">
+				<img src="{{ url('/images/products/video/fashion_bikini.jpg')}}" alt="" class="img-fluid">
 			</div>
 		</div>		
 	</div>
@@ -46,6 +49,21 @@
 			</div>
 			<div class="col-md-5 col-sm-12">
 				<img src="{{ url('/images/appliance_2.jpg')}}" alt="" class="img-fluid">
+			</div>
+		</div>		
+	</div>
+	<div class="md-slider-item" >
+		<div class="row">
+			<div class="col-md-7 col-sm-12 slider_left">
+				<div class="content">
+					<div class="cinside">
+						<h2>Decora tu estancia</h2>
+						<p>Aprovecha nuestros descuentos en decoración</p>
+					</div>					
+				</div>
+			</div>
+			<div class="col-md-5 col-sm-12">
+				<img src="{{ url('/images/products/video/furniture.jpg')}}" alt="" class="img-fluid">
 			</div>
 		</div>		
 	</div>	

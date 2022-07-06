@@ -50,6 +50,13 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 2
         ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'candy_CMDDS',
+            'image' => 'appliance/fridges/candy_CMDDS/candy_CMDDS_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 2
+        ]);
         //Product 3
         ImagesProducts::create([
             'path_tag' => 'images/products/',
@@ -299,21 +306,14 @@ class ProductsGallerySeeder extends Seeder
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_GSR12-15_2',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_2.jpg',
+            'image' => 'tools/drill/bosch_IXO/bosch_IXO_2.jpg',
             'file_ext' => 'jpg',
             'product_id' => 17
-        ]);
+        ]);        
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_GSR12-15_2',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_3.jpg',
-            'file_ext' => 'jpg',
-            'product_id' => 17
-        ]);
-        ImagesProducts::create([
-            'path_tag' => 'images/products/',
-            'file_name' =>'bosch_GSR12-15_2',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_4.jpg',
+            'image' => 'tools/drill/bosch_IXO/bosch_IXO_3.jpg',
             'file_ext' => 'jpg',
             'product_id' => 17
         ]);
@@ -321,14 +321,21 @@ class ProductsGallerySeeder extends Seeder
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_IXO',
-            'image' => 'tools/drill/bosch_IXO/bosch_IXO_2.jpg',
+            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_2.jpg',
             'file_ext' => 'jpg',
             'product_id' => 18
         ]);
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_IXO',
-            'image' => 'tools/drill/bosch_IXO/bosch_IXO_3.jpg',
+            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 18
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'bosch_IXO',
+            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_4.jpg',
             'file_ext' => 'jpg',
             'product_id' => 18
         ]);

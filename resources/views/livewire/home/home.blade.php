@@ -35,6 +35,13 @@
                 </div>
             
                 <div class="div_products_list mtop32">
+                    <div class="row">
+                        <div class="col" style="text-align:left">
+                            <p style="font-family:QuicksandB;font-size:22px">
+                                Últimos productos
+                            </p>
+                        </div>
+                    </div>
                 @foreach($products as $prod)    
                     <div class="products mtop32">
                         <a href="{{ url('/product/'.$prod->id) }}" class="image" wire:click="">
@@ -72,6 +79,7 @@
                 </div>
             </div>
         </div>
+        
     @include('layouts.footer')           
     </div>
     

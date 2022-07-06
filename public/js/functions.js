@@ -1084,5 +1084,23 @@ function toggleDropdown(){
     }
     
 }
+//botón flotante 
+let btn_floatup = document.querySelector('.btn_floatup');
+window.addEventListener('scroll',function(e){
+    //console.log("scrolling...",window.scrollY)
+    if(window.scrollY > 200){
+        btn_floatup.style.opacity = '1';
+        //console.log("mostrar botón")
+    }else{
+        btn_floatup.style.opacity = '0';
+        //console.log("ocultar botón")
+    }
+})
+function up(){
+    window.scrollTo({
+        top:0,
+        behavior:'smooth',
+    });
+}
 
 

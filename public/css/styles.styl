@@ -5,7 +5,10 @@ color4 = #489bf8
 color6 = #494949
 color7 = #E3E3E3
 color8 = #696969
+color9 = #D3D3D3
+color10 = #F3F3F3
 rgba2 = rgba(0,178,146,1)
+
 
 .mauto
 	margin auto
@@ -52,9 +55,25 @@ rgba2 = rgba(0,178,146,1)
 	&:focus
 		box-shadow 0 0 6px color3
 		color #FFF
+.btn_floatup
+	bottom 30px
+	cursor pointer
+	opacity 0
+	position fixed
+	right 30px
+	transition all .5s linear
+	z-index 1
+	i
+		font-size 3em
+	
 .dflex
 	display flex
-
+.detail	
+	ul
+		padding 10px
+		list-style square inside
+		
+			
 #loading
 	background-color rgba(255,255,255,.9);
 	display none
@@ -108,6 +127,33 @@ rgba2 = rgba(0,178,146,1)
 	width 80%
 	margin auto
 	padding-bottom 30px
+
+/* row ofertas */	
+.col_offers
+	background-color #494949 
+	min-height 300px
+	.title
+		color #FFF
+		font-size 36px
+		
+		margin 30px auto
+		text-align center
+	.offers
+		margin 30px auto
+		.box_image
+			height 200px
+			img
+				border-radius 8px				
+				height 100% 
+				margin auto
+				padding:20px
+		p
+			color #FFF
+			text-align center
+		
+/* fin row ofertas */	
+
+
 .div_products_list
 	display block
 	text-align center
@@ -230,6 +276,7 @@ rgba2 = rgba(0,178,146,1)
 	padding-top 15px
 .modal_item .modal-content,.product_item
 	.btn_return
+		font-family QuicksandB		
 		margin-top 10px	
 	.title_item
 		h5
@@ -390,6 +437,8 @@ rgba2 = rgba(0,178,146,1)
 		margin 20px
 		width 60%
 		.header
+			font-family QuicksandR
+			font-size 22px
 			text-align center
 		.combinations.product_combinations			
 			width 90%
@@ -878,10 +927,106 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		align-items center
 		display flex					
 /* fin carrito de compras */
-/* panel direcciones	*/
 
+/* panel contacto */
+.contact
+	.div_title
+		
+		margin-top 32px
+		margin-bottom 20px
+		text-align center
+		.title
+			background-color color2			
+			h2
+				color #FFF
+				font-family QuicksandB
+				font-size 22px
+				
+				margin 10px
+	.boxes		
+		.div_type
+			background-color #f8f9fa
+			border color7 1px solid
+			border-radius 8px
+			display flex
+			flex-direction column
+			height 250px		
+			width 100%
+			.icon
+				align-items end
+				display flex
+				height 80px
+				justify-content center
+				i
+					color color8
+					font-size 2.5em
+			.text			
+				margin-top 10px
+				text-align center
+				p.title
+					font-size 20px
+					font-weight bold	
+				
+			.div_centered
+				display flex
+				flex-direction column
+				justify-content center
+				flex 1
+				button
+					align-items center
+					display flex
+					justify-content center
+					margin auto
+				p
+					font-family QuicksandB
+					font-size 22px
+					
+					margin auto
 			
-/* fin panel direcciones	*/
+	.questions
+		font-family QuicksandR
+		ol
+			padding 10px			
+			list-style upper-greek			
+		
+			
+/* moficamos el icono font awesome con CSS */
+		.btn_collapse_questions
+			display flex
+			font-family QuicksandR
+			justify-content center
+			padding 15px 0px
+			position relative		
+			width 100%
+			i::before
+				content "\f061"
+			&:focus			
+				background-color color10				
+		.btn_collapse_questions.parent
+			
+			background-color color9
+			color color6
+			transition all 1s linear
+			
+				
+		.btn_collapse_questions.parent:not(.collapsed)
+			background-color color9
+			color #000
+			i::before
+				display none
+			i::after
+				content "\f063"
+								
+		.collapse .content
+			margin 10px
+	
+	.collapse_parent, .collapse_child	
+		transition height .3s linear
+/* modal contacto */
+#addTicket
+	transition all .3s linear
+/* fin modal contacto */	
+/* fin panel contacto */
 
 /* panel store */
 
