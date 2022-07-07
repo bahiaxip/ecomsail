@@ -5,7 +5,7 @@
 @section('content')
 <div class="back_login">
 	<div class="header_login">
-		<img src="{{ asset('images/bolsas-de-compra.png') }}" alt="">
+		<img src="{{ asset('images/ecomsail_logo.svg') }}" alt="">
 	</div>
 	<div class="box shadow">
 		<h2>Iniciar sesión</h2>

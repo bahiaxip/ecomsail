@@ -4,7 +4,7 @@
 		@if(Route::is('home'))
 		<div class="row background" >
 			<div style="width:100%;display:flex;justify-content: center;align-items:center;position:relative">
-				<h2 style="font-size:60px;color:darkorange">Las mejores marcas en ropa deportiva</h2>
+				<h2 style="font-size:60px;color:#D3D3D3">Las mejores marcas en ropa deportiva</h2>
 			</div>
 		</div>
 		@endif

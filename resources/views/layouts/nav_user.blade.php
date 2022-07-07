@@ -1,7 +1,7 @@
 <div class="" style="width:100%;display:flex;">
     <li class="nav-item" style="float:left;list-style:none;color:orange;display:flex">
         <a href="{{url('/')}}" class="nav-link lk-home" style="color:#696969;display:flex">
-            <span>ECOMSAIL</span>
+            <span><img src="{{url('images/ecomsail_logo.svg')}}" alt="" style="max-height:40px"></span>
         </a>
     </li>
     <li style="list-style: none;margin:auto">
