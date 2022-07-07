@@ -318,14 +318,17 @@ document.addEventListener('readystatechange',() => {
         }
         
 
-
-
-
         
 
 
 })
-
+//Inicio de librería AOS
+        /*
+        window.scrollTop='0';
+        AOS.init();
+        console.log("hola")
+        AOS.refresh();
+        */
 window.livewire.on('activeCombinations',() =>{
     activeCheckboxCombinations();
 })
@@ -1086,13 +1089,19 @@ function toggleDropdown(){
 }
 //botón flotante 
 let btn_floatup = document.querySelector('.btn_floatup');
+let toggle_floatup;
 window.addEventListener('scroll',function(e){
     //console.log("scrolling...",window.scrollY)
     if(window.scrollY > 200){
-        btn_floatup.style.opacity = '1';
+        if(!toggle_floatup){
+            btn_floatup.style.opacity = '1';
+            //AOS.refresh();
+            toggle_floatup = true;
+        }
         //console.log("mostrar botón")
     }else{
         btn_floatup.style.opacity = '0';
+        toggle_floatup = false;
         //console.log("ocultar botón")
     }
 })

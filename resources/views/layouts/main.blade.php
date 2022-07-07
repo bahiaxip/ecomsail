@@ -28,6 +28,9 @@
     ....->links('pagination::bootstrap-4') 
     -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css" integrity="sha512-l7qZAq1JcXdHei6h2z8h8sMe3NbMrmowhOl+QkP3UhifPpCW2MC4M0i26Y8wYpbz1xD9t61MLT9L1N773dzlOA==" crossorigin="anonymous" />
+    <!-- CSS librería AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <!--<link rel="stylesheet" href="css/main.css" > -->
     <!-- font.awesome -->
     <script src="https://kit.fontawesome.com/8588bc45a2.js" crossorigin="anonymous"></script>
@@ -42,12 +45,15 @@
 
     <script src="{{url('/js/mdslider.js')}}"></script>
     
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+      
     @livewireStyles
     <style>
     [x-cloak] { 
       display: none !important;
    }
+
+
     </style>
 </head>
 <body>
@@ -148,6 +154,9 @@
         }
     }
 
+    //Inicio de librería AOS
+    //AOS.init();
+    console.log("hola")
 
     
     </script>

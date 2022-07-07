@@ -15,26 +15,27 @@
                         <h5>Descubre nuestras ofertas</h5>
                     </div>
                     <div class="row offers" >
-                        <div class="col-md-3">
+
+                        <div  class="col-md-3">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/lg_oled.jpg')}}" alt="" >    
                             </div>
                             
                             <p >Televisores</p>
                         </div>
-                        <div class="col-md-3">
+                        <div  class="col-md-3">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/headphones.jpg')}}" alt="" >
                             </div>
                             <p>Auriculares</p>
                         </div>
-                        <div class="col-md-3">
+                        <div  class="col-md-3">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/garden2.jpg')}}" alt="">
                             </div>
                             <p>Jardín</p>
                         </div>
-                        <div class="col-md-3">
+                        <div  class="col-md-3">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/furniture.jpg')}}" alt="">
                             </div>
@@ -86,7 +87,7 @@
 	</div>
 	<div class="end">
 		<div class="options">
-			<div class="column">				
+			<div data-aos="fade-up" data-aos-offset="100" class="column">				
 				<div class="links">
 					<div>
 						<i class="fa-solid fa-circle-question"></i>
@@ -96,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="column">
+			<div data-aos="fade-up" data-aos-offset="150" class="column">
 				
 				<div class="links">
 					<div>
@@ -109,7 +110,7 @@
 				</div>
 			</div>
 
-			<div class="column">
+			<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="200" class="column">
 				<div class="links">
 					<div>
 						<i class="fa-solid fa-trophy"></i>
