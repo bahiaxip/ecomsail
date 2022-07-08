@@ -33,7 +33,7 @@
                 <div wire:ignore>
                     @include('livewire.home.slider_home')    
                 </div>
-            
+                
                 <div class="div_products_list mtop32">
                     <div class="row">
                         <div class="col" style="text-align:left">
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        
+
     @include('layouts.footer')           
     </div>
     

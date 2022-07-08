@@ -52,7 +52,7 @@
     [x-cloak] { 
       display: none !important;
    }
-
+   
 
     </style>
 </head>
@@ -155,7 +155,7 @@
     }
 
     //Inicio de librería AOS
-    //AOS.init();
+    AOS.init();
     console.log("hola")
 
     

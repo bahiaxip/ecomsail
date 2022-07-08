@@ -1095,7 +1095,7 @@ window.addEventListener('scroll',function(e){
     if(window.scrollY > 200){
         if(!toggle_floatup){
             btn_floatup.style.opacity = '1';
-            //AOS.refresh();
+            AOS.refresh();
             toggle_floatup = true;
         }
         //console.log("mostrar botón")
@@ -1112,4 +1112,8 @@ function up(){
     });
 }
 
+
+window.livewire.on('title', (data)=>{
+    document.title = data.title;
+})
 

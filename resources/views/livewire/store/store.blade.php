@@ -1,6 +1,6 @@
 <div class="store" style="position:relative">
 
-	@section('title', 'Tienda')
+	@section('title', $title ?? 'Todos los productos')
 	@include('layouts.nav_user')
     @if(!$start)
     <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.9);z-index:999" >

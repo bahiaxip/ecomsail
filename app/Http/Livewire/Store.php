@@ -18,6 +18,8 @@ class Store extends Component
     //categories para nav_user
     public $categories;
     public $limit_page;
+    public $title;
+    public $data;
     
     public function mount($category=null,$subcategory=null){
         /*
@@ -27,28 +29,60 @@ class Store extends Component
             dd("existe subcategory");        
         }
         */
-        if($category)
+
+        if($category){
             $this->category = $category;
+        }
         if($subcategory)
             $this->subcategory = $subcategory;
         //categories para el menú de nav_user
         $this->categories = Category::where('status',1)->where('type',0)->get();
         $this->limit_page = 15;
+        $title = $this->getTitle();
+        if($title){
+            $this->title = $this->getTitle();    
+        }
+        
         
     }
     public function set_category(){
         $this->start = false;
+        
+        $title;        
         if($this->category != $this->computed_category){            
             $this->subcategory = null;
+            
         }
         if(!$this->category && $this->subcategory){
             $this->category = Category::findOrFail($this->subcategory)->type;
         }
 
         $this->resetPage();
+        $title = $this->getTitle();        
+        $this->emit('title',['title' => $title]);
+        
 
     }
-    
+    public function getTitle(){
+        //pasamos el nuevo título de store
+        $name_category;
+        $name_subcategory;
+        $title=null;
+        if($this->category){
+            $name_category = Category::findOrFail($this->category)->name;
+            $title = $name_category;
+        }
+        if($this->subcategory){
+            $name_subcategory = Category::findOrFail($this->subcategory)->name;
+            $title = $name_category.' > '.$name_subcategory;
+        }
+        return $title;
+
+    }
+
+    public function updated(){
+        
+    }
     public function render()
     {
         $categories_list = Category::where('status',1)->where('type',0)->pluck('name','id');
