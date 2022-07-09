@@ -10,6 +10,7 @@
 		</ul>
 		@endauth
 	</div>
+	<!--
 	<div class="nav_center">
 		<ul class="list">
 			<li>
@@ -44,6 +45,7 @@
 			</li>
 		</ul>
 	</div>
+-->
 	<div class=" nav_lat nav_right">
 		<ul>					
 			<li style="margin:auto 50px" >				

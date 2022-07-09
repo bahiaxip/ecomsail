@@ -279,8 +279,7 @@ class Attribute extends Component
             $this->emit('addValue');
     }
 
-    public function edit($id,$type=0){
-
+    public function edit($id,$type=0){        
         if($this->filter_type == 2):
             $res=Attr::onlyTrashed()->where('id',$id)->first();
         else:
@@ -298,6 +297,9 @@ class Attribute extends Component
         $this->color = $res->color;
         $this->typealert="success";
         $this->emit('description2',$this->description);
+        //establecemos el color de la paleta colorpicker
+        if($this->color)
+            $this->emit('colorpicker',['id' =>$this->attr_id,'color' => $this->color]);
     }
     //actualiza atributo y valor mediante $type
     public function update(){

@@ -6,7 +6,7 @@
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <meta name="route_name" content={{ Route::currentRouteName() }}>
     <title>EcomSail - @yield('title')</title>
-    <link rel="shortcut icon" href="{{url('images/avicon_ecomsail.svg')}}">
+    <link rel="shortcut icon" href="{{url('images/favicon_ecomsail.svg')}}">
     <!-- bootstrap csss -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--nav top -->

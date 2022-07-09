@@ -303,6 +303,7 @@ document.addEventListener('readystatechange',() => {
         }
 
         if(route == 'list_attributes'){
+            /*
             console.log("attr");
             //$('#colorpicker').css('background-color','#FFFFFF');
             //$('#colorpicker').colorpicker('setValue','#FFF');
@@ -311,6 +312,7 @@ document.addEventListener('readystatechange',() => {
             //$('#colorpicker').colpickSetColor('ffffff');
             $('#colorpicker').val('#FFFFFF')
             console.log($('#colorpicker'))
+            */
     
         }
         if(route == "list_products"){
@@ -1092,18 +1094,21 @@ let btn_floatup = document.querySelector('.btn_floatup');
 let toggle_floatup;
 window.addEventListener('scroll',function(e){
     //console.log("scrolling...",window.scrollY)
-    if(window.scrollY > 200){
-        if(!toggle_floatup){
-            btn_floatup.style.opacity = '1';
-            AOS.refresh();
-            toggle_floatup = true;
+    if(btn_floatup){
+        if(window.scrollY > 200){
+            if(!toggle_floatup){
+                btn_floatup.style.opacity = '1';
+                AOS.refresh();
+                toggle_floatup = true;
+            }
+            //console.log("mostrar botón")
+        }else{
+            btn_floatup.style.opacity = '0';
+            toggle_floatup = false;
+            //console.log("ocultar botón")
         }
-        //console.log("mostrar botón")
-    }else{
-        btn_floatup.style.opacity = '0';
-        toggle_floatup = false;
-        //console.log("ocultar botón")
     }
+    
 })
 function up(){
     window.scrollTo({
@@ -1116,4 +1121,14 @@ function up(){
 window.livewire.on('title', (data)=>{
     document.title = data.title;
 })
+window.livewire.on('colorpicker',(data) => {
+    console.log('hola',$('.colorpicker_'+data.id));
+    $('.colorpicker_'+data.id).val(data.color)
+
+})
+if($('#colorpicker')){
+   
+}
+
+
 

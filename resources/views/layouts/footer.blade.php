@@ -1,13 +1,6 @@
 <div style="width:100%" class="footer" x-show="show2"
             x-transition:enter.duration.1000ms>
 	<div class="first">
-		@if(Route::is('home'))
-		<div class="row background" >
-			<div style="width:100%;display:flex;justify-content: center;align-items:center;position:relative">
-				<h2 style="font-size:60px;color:#D3D3D3">Las mejores marcas en ropa deportiva</h2>
-			</div>
-		</div>
-		@endif
 		<div class="row" >
             <div class="col-12 col_offers" >
                 <div class="container" style="">
@@ -16,26 +9,26 @@
                     </div>
                     <div class="row offers"  >
 
-                        <div data-aos="fade-up-right" data-aos-offset="100" class="col-md-3">
+                        <div data-aos="fade-up-right" data-aos-offset="100" class="col-md-6 col-lg-3 div_box_image">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/lg_oled.jpg')}}" alt="" >    
                             </div>
                             
                             <p >Televisores</p>
                         </div>
-                        <div data-aos="fade-right" data-aos-offset="300" class="col-md-3">
+                        <div data-aos="fade-right" data-aos-offset="300" class="col-md-6 col-lg-3 div_box_image">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/headphones.jpg')}}" alt="" >
                             </div>
                             <p>Auriculares</p>
                         </div>
-                        <div data-aos="fade-left" data-aos-offset="300" class="col-md-3">
+                        <div data-aos="fade-left" data-aos-offset="300" class="col-md-6 col-lg-3 div_box_image">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/garden2.jpg')}}" alt="">
                             </div>
                             <p>Jardín</p>
                         </div>
-                        <div data-aos="fade-up-left" data-aos-offset="100" class="col-md-3">
+                        <div data-aos="fade-up-left" data-aos-offset="100" class="col-md-6 col-lg-3 div_box_image">
                             <div class="box_image">
                                 <img src="{{url('images/products/video/furniture.jpg')}}" alt="">
                             </div>
@@ -45,6 +38,14 @@
                 </div>
             </div>
         </div>
+		@if(Route::is('home'))
+		<div class="row background" >
+			<div  style="width:100%;display:flex;justify-content: center;align-items:center;position:relative;margin-bottom:10px">
+				<h2 data-aos="fade-right" data-aos-offset="100" data-aos-duration="1000" style="font-size:60px;color:#E3E3E3;font-family:QuicksandB">Las mejores marcas en ropa deportiva</h2>
+			</div>
+		</div>
+		@endif
+		
 		<div class="container info">
 
 			
