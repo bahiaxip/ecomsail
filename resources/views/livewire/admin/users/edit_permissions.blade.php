@@ -8,13 +8,13 @@
       </div>
       <!-- loading cuando comienza la edición -->
       @if(!$this->permissions3)
-      <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      <div class="div_loading loading_edit"  >
+        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" >
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
-      <div id="loading_permissions" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      <div id="loading_permissions" class="div_loading loading_update" >
+        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" >
       </div>
       
       <div class="modal-body permissions">

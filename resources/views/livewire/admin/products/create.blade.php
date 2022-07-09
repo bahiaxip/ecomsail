@@ -8,8 +8,8 @@
         </div>
       </div>
       <!-- loading cuando actualizamos edición -->
-      <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-        <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+      <div id="loading" class="div_loading loading_update">
+        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       <div class="modal-body">
         <form enctype="multipart/form-data">
@@ -62,7 +62,7 @@
             </div>
             <!-- no funciona -->
             <div wire:loading wire:target="subcats">
-                  <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                  <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
               </div>
           </div>
           

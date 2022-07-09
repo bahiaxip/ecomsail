@@ -81,6 +81,16 @@ rgba2 = rgba(0,178,146,1)
 	position absolute
 	width 100%
 	z-index 1
+.div_loading
+	background-color rgba(255,255,255,.9)	
+	height 100%
+	position absolute
+	width 100%
+	z-index 10
+.div_loading.loading_update
+	display none
+.div_loading.loading_edit
+	display flex
 //edit_user
 /*imagen de perfil(edición)*/
 .edit_user
@@ -1028,8 +1038,9 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	.collapse_parent, .collapse_child	
 		transition height .3s linear
 /* modal contacto */
-#addTicket
+.fade
 	transition all .3s linear
+
 /* fin modal contacto */	
 /* fin panel contacto */
 

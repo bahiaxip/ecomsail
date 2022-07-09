@@ -9,8 +9,8 @@
             
         </div>
         <!-- loading cuando actualizamos edición -->
-        <div id="loading_sendemail" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
-            <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="80">
+        <div id="loading_sendemail" class="div_loading loading_edit">
+            <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="80">
         </div>
         <div class="modal-body">
             <div class="row">

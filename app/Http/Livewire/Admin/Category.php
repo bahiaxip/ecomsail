@@ -471,10 +471,11 @@ class Category extends Component
         $this->email_export='';
     }
 
-    //en principio no necesario, asignado al botón Agregar Categoría
+    //necesario para limpiar el textarea (CKEDITOR) cuando se cancela la creación
+    //de uno nuevo
 
     public function setckeditor(){
-        //$this->emit('description1');
+        $this->emit('description1');
     }
 
     //exportar archivo PDF al navegador del usuario

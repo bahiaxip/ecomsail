@@ -3,8 +3,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       @if(!$orderIdTmp)
-          <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:1" >
-              <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="100">
+          <div class="div_loading loading_edit">
+              <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
           </div>
       @endif
       <div class="modal-header justify-content-center">

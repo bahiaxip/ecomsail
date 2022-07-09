@@ -37,6 +37,8 @@ if (btnCreateProducts)
 window.livewire.on('description1',(data=null)=>{
         
     //CKEDITOR.on('instanceReady',function(){
+    //para no generar conflictos entre los 2 textarea (CKEDITOR), diferenciamos
+    //entre friendly_edit1 para el atributo padre y friendly_edit1_value para el valor
         CKEDITOR.instances.friendly_edit1.setData("");
         if(data == 'value'){
             CKEDITOR.instances.friendly_edit1_value.setData("");
@@ -1121,14 +1123,26 @@ function up(){
 window.livewire.on('title', (data)=>{
     document.title = data.title;
 })
+//pasando en la edición de atributo el color almacenado en la base de datos
+//al div de fondo del input colorpicker
 window.livewire.on('colorpicker',(data) => {
     console.log('hola',$('.colorpicker_'+data.id));
     $('.colorpicker_'+data.id).val(data.color)
 
 })
-if($('#colorpicker')){
-   
+/* anulado, para modificar la transición del cierre es necesario modificar
+los estilos de .fade o .hide o ambos, quizás mejor un bootstrap desde 0*/
+/*
+function show_modal_ticket(){
+    $('#addTicket').modal('show');    
 }
+function hide_modal_ticket(){
+    $('#addTicket').modal({
+        hide:true,
+        duration:'slow'
+    })   
+}
+*/
 
 
 

@@ -51,7 +51,9 @@ body
 	padding-bottom 0px
 	border 0px
 /* fin estilos mensajes de error */
-
+/* sobreescribimos la clase .fade del modal de bootstrap*/
+.fade
+	transition all .3s linear
 .btn_sail
 	align-items center	
 	color #E7E7E7
@@ -96,7 +98,20 @@ body
 	display flex
 .mauto
 	margin auto
-	
+/* iconos de carga (loading...)*/
+.div_loading
+	background-color rgba(255,255,255,.9)	
+	height 100%
+	position absolute
+	width 100%
+	z-index 10
+	img
+		margin auto
+		width 80px
+.div_loading.loading_update
+	display none
+.div_loading.loading_edit
+	display flex
 .content
 	background-color #D3D3D3
 	display flex
