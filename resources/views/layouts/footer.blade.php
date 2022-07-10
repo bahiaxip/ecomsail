@@ -1,5 +1,6 @@
 <div style="width:100%" class="footer" x-show="show2"
             x-transition:enter.duration.1000ms>
+    @include('layouts.methods_payment')
 	<div class="first">
 		<div class="row" >
             <div class="col-12 col_offers" >
@@ -78,9 +79,9 @@
 				<div class="col-md-3 col-12" >
 					
 					<div class="images" style="display:flex;justify-content: space-around;">
-						<img src="{{url('icons/payment/mastercard.svg')}}" alt="" width="32">
-						<img src="{{url('icons/payment/visa.svg')}}" alt="" >
-						<img src="{{url('icons/payment/paypal.svg')}}" alt="" >
+						<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
+						<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:64px" >
+						<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:75px">
 					</div>
 				</div>
 			</div>
@@ -104,9 +105,16 @@
 					<div>
 						<i class="fa-solid fa-circle-question"></i>
 						Atención al cliente
-						<p class="mtop10" >Contacto</p>
+						<p class="mtop10" >
+							<a href="{{route('contact')}}">Contacto</a>
+						</p>
+						<p class="mtop10">
+							<button data-bs-toggle="modal" data-bs-target="#payment">Métodos de pago</button>
+						</p>
+						<!--
 						<p class="mtop10" >Envíos y entregas</p>
 						<p class="mtop10">Devoluciones</p>
+						-->
 					</div>
 				</div>
 			</div>

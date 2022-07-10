@@ -1,4 +1,4 @@
-<div style="position: relative;overflow-x:hidden">
+<div style="position: relative;overflow:hidden">
 
     @section('title','Inicio')
     <div class="message_opacity" >

@@ -93,6 +93,14 @@ rgba2 = rgba(0,178,146,1)
 	display flex
 //edit_user
 /*imagen de perfil(edición)*/
+
+/* modals */
+.fade
+	transition all .3s linear
+
+/* fin modals */
+
+
 .edit_user
 	font-family QuicksandR
 	label
@@ -1037,13 +1045,41 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	
 	.collapse_parent, .collapse_child	
 		transition height .3s linear
-/* modal contacto */
-.fade
-	transition all .3s linear
-
-/* fin modal contacto */	
+/	
 /* fin panel contacto */
-
+/* modal method payment */
+.method_payment
+	.btn_collapse_payment
+		
+		display block
+		font-family QuicksandR
+		justify-content center
+		margin auto
+		padding 15px 30px
+		position relative		
+		width 100%
+		i::before
+			content "\f105"		
+	.btn_collapse_payment.parent
+		
+		margin 5px auto		
+		font-weight bold
+		transition height 1s linear
+	.btn_collapse_payment.parent:not(.collapsed)
+		i::before
+				display none
+			i::after
+				content "\f107"
+	.collapse_parent
+		color color8
+		padding 10px 20px
+		transition height .3s linear
+		ul
+			list-style inside
+	button
+		font-family QuicksandB		
+		
+/* fin modal method payment */
 /* panel store */
 
 	
