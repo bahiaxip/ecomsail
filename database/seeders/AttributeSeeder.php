@@ -39,6 +39,10 @@ class AttributeSeeder extends Seeder
                 'hex' => '#FFFFFF'
             ],
             [
+                'text'=>'negro',
+                'hex' => '#000000'
+            ],
+            [
                 'text'=>'gris',
                 'hex' => '#494949'
             ],
@@ -80,7 +84,7 @@ class AttributeSeeder extends Seeder
             ],
         ];
         
-        $tallas = ['S','M','L','XL','XXL','XXXL'];
+        $tallas = ['XS','S','M','L','XL','XXL','XXXL'];
         $flexometros = ['3M','5M','8M'];
 
         foreach($colores as $key =>$color){

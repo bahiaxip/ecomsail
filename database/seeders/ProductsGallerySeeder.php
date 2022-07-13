@@ -354,6 +354,64 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 19
         ]);
-        //Product 20
+        //Product 31
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'nike_iconfutura',
+            'image' => 'clothes/t-shirt/nike_iconfutura/nike_iconfutura_black_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 31
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'nike_iconfutura',
+            'image' => 'clothes/t-shirt/nike_iconfutura/nike_iconfutura_white.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 31
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'nike_iconfutura',
+            'image' => 'clothes/t-shirt/nike_iconfutura/nike_iconfutura_white_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 31
+        ]);
+        //Product 32
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'nike_dri-fit_strike',
+            'image' => 'clothes/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_green.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 33
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'nike_dri-fit_strike',
+            'image' => 'clothes/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_blue.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 33
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'nike_dri-fit_strike',
+            'image' => 'clothes/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_white.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 33
+        ]);
+        //product 34
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'FC_Barcelona',
+            'image' => 'clothes/t-shirt/FC_Barcelona/FC_Barcelona_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 34
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'FC_Barcelona',
+            'image' => 'clothes/t-shirt/FC_Barcelona/FC_Barcelona_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 34
+        ]);
     }
 }

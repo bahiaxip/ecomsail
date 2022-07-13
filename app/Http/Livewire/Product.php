@@ -103,16 +103,16 @@ class Product extends Component
                         }else{
                             //$this->option[$attribute->type];
                         }
-                        $color;
+                        $color=NULL;
                         //si existe valor en el campo color añadimos al array
-                        if($attribute->color){
+                        if($attribute->color != null){                            
                             $color = $attribute->color;
                         }
-                            $list[$attribute->type][] =[
-                                'id' => $attribute->id,
-                                'name' => $attribute->name,
-                                'color' => $color
-                            ];
+                        $list[$attribute->type][] =[
+                            'id' => $attribute->id,
+                            'name' => $attribute->name,
+                            'color' => $color
+                        ];
                         
                             
                     }
@@ -306,7 +306,7 @@ class Product extends Component
     }
     public function render()
     {
-        
+        //dd($this->combinations_list);
         $this->computed_option = $this->option;
         $favorite = Favorite::where('user_id',$this->user_id)->where('product_id',$this->product_id)->first();
         if($favorite)

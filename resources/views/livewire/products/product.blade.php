@@ -78,7 +78,7 @@
                           
                           @foreach($comb as $k => $c)
                             @if($k != 'name')
-                                <div class="item">
+                                <div class="item {{$c['name']}}">
                             <!-- si es el atributo color se comprueba si existe color-->
                                     @if($c['color'])
                                     <div style="width:30px;height:30px;background-color:{{$c['color']}};border:#494949 1px solid;margin-left:2px;margin-right:2px;position:relative">

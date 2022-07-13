@@ -738,6 +738,45 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes/t-shirt/nike_swsh/nike_swsh.jpg',
         ]);
+        $product[] = Product::create([
+            'name' => 'Camiseta Dri-fit Strike',
+            'slug' => Str::slug('Camiseta Dri-fit Strike'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 9,
+            'price' => 35,
+            'stock' => 30,
+            'short_detail' => 'Camiseta deportiva para mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Nike</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+                <li><strong>Tecnolog&iacute;a:&nbsp;</strong>Dri-fit</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_black.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Camiseta FC Barcelona',
+            'slug' => Str::slug('Camiseta FC Barcelona'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 9,
+            'price' => 101,
+            'stock' => 30,
+            'short_detail' => 'Camiseta para mujer, equipación oficial FC Barcelona 2021/2022',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Nike</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster, transpirable</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/t-shirt/FC_Barcelona/FC_Barcelona.jpg',
+        ]);
 
         $count_product = count($product);
         for($i=0;$i<$count_product;$i++){
