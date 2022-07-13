@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Product, App\Models\Category, App\Models\Combination, App\Models\Attribute, App\Models\ImagesProducts, App\Models\Order, App\Models\Order_Item, App\Models\Visitor, App\Models\User;
 use Auth,Str;
+use App\Models\Carousel;
 //use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities;
 
 //use  Livewire\WithFileUploads;
@@ -314,13 +315,13 @@ class Home extends Component
 
     public function render()
     {
-
+        $sliders = Carousel::where('status',1)->get();
         $this->computed_option = $this->option;
 
         //destacados
         $products = Product::where('status',1)->orderBy('id','desc')->paginate(15);
         $categories = Category::where('status',1)->where('type',0)->get();
-        $data = ['products' => $products,'categories' => $categories];
+        $data = ['products' => $products,'categories' => $categories,'sliders' => $sliders];
 
         //el slider falla con el layouts.app por duplicado de la clase content
         return view('livewire.home.home',$data)->extends('layouts.main');

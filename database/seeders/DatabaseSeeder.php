@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             CombinationSeeder::class,
             ProductsGallerySeeder::class,
-            MetaTagSeeder::class
+            MetaTagSeeder::class,
+            CarouselSeeder::class
         ]);
         
     }

@@ -12,7 +12,7 @@
 	-->
 	
 	<div class="logo">
-		<img src="{{ asset('images/bolsa.png') }}" alt="">
+		<img src="{{ asset('images/favicon_ecomsail.svg') }}" alt="" style="padding:5px">
 	</div>
 	
 	<div class="options mtop16">
@@ -93,6 +93,14 @@
 				</a>
 			</li>
 			@endif
+			<li>
+				<a href="{{route('carousel',['filter_type' => 1])}}">
+					<i class="fa-solid fa-images"></i> 
+					<span class="d-none d-lg-inline-flex">
+						Carousel
+					</span>
+				</a>
+			</li>
 			
 			<li>
 				<a href="{{route('settings')}}">

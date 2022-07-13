@@ -40,7 +40,7 @@
     <div class="header">            
         @include('layouts.nav')
     </div>
-    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations','list_cities','list_home','list_orders','list_invoices','settings']))
+    @if(Route::is(['list_users','list_categories','list_products','list_attributes','list_locations','list_cities','list_home','list_orders','list_invoices','carousel','settings']))
     <div class="content">
         <div class="sectionL">
             {{--@include('layouts.sidebar')--}}

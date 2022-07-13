@@ -52,6 +52,8 @@ Route::group([
 		//Facturas
 		Route::get('/invoices/{filter_type}/{order_id?}', \App\Http\Livewire\Admin\Invoice::class)->name('list_invoices');
 
+		//Carousel
+		Route::get('/carousel/{filter_type}',\App\Http\Livewire\Admin\Carousel::class)->name('carousel');
 		//Ajustes
 		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('settings');
 	}

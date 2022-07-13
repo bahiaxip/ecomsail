@@ -78,8 +78,13 @@ body
 		
 .btn_sry
 	background-color color2
+	color #E7E7E7
+	font-family QuicksandB
+	&:hover
+		color #FFF
 	&:focus
 		box-shadow 0 0 6px color2
+		color #FFF
 
 .btn_primary
 	align-items center
@@ -94,6 +99,15 @@ body
 	i
 		display flex
 		margin 2px 2px 0px 0px
+.btn_red
+	font-family QuicksandB
+	background-color color3
+	color color7
+	&:hover
+		color #FFF
+	&:focus
+		box-shadow 0 0 6px color3
+		color #FFF
 .dflex
 	display flex
 .mauto
@@ -742,6 +756,68 @@ body
 	
 /* fin botón de subir galería de imágenes (settings) */
 
+/* carousel */
+.sliders
+	.box_slider		
+		background-color:#E3E3E3
+		margin auto
+		outline #D3D3D3 1px solid
+		padding 15px 0
+		.slider
+			display flex
+			margin 5px auto
+			.col_arrows
+				align-items center
+				display flex
+				justify-content center
+				width 20%
+				.div_arrows
+					display block
+					margin auto
+					.arrow
+						padding 10px 0px
+			.div_image
+				align-items center
+				display flex
+				width 85%
+				.image
+					margin auto
+					max-height 150px
+					min-height 75px
+			.body
+				width 70%
+				.main_title,.second_title
+					margin-left 15px
+					h2,p
+						color #494949
+					h2
+						font-size 18px
+					p
+						font-size 15px
+			.actions
+				width 30%
+				button
+					display flex
+					margin auto
+			.actions_hidden
+				display none
+				margin auto
+				width 20%
+				button
+					display flex
+					margin auto
+					span.title,span.title_hidden
+						margin auto
+			.mid
+				display flex
+			.mid.left
+				width 40%
+			.mid.right
+				width 60%
+		
+/* fin carousel */
+
+
 /* ajustes de configuración (admin)*/
 .admin_settings
 	.admin_panels
@@ -793,8 +869,28 @@ body
 			text-align center
 			.panel_settings
 				width 98%
-				
-	
+	.sliders .box_slider .slider
+		display block
+	.sliders .box_slider .slider 
+		.mid.left,.mid.right
+			width 100%
+	.sliders .box_slider .slider .col_arrows
+		width 15%
+	.sliders .box_slider .slider .div_image
+		width 65%
+	.sliders .box_slider .slider .actions_hidden
+		display block
+	.sliders .box_slider .slider .body
+		width 100%	
+	.sliders .box_slider .slider .actions
+		display none
+
+@media only screen and (max-width 600px)
+	.sliders .box_slider .slider .actions_hidden
+		span.title
+			display none
+		span.title_hidden
+			display block
 						
 
 				

@@ -5,11 +5,11 @@ var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
 'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity',
-'editCity','fastview','addAddress'
+'editCity','fastview','addAddress','addSlider','editSlider'
 ];
 var description = document.querySelector('#friendly_edit1');
 //distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
-//es necesario añadir datos al array
+//es necesario añadir datos al array events
 events.forEach((event)=>{        
     window.livewire.on(event,()=>{
         console.log("event: ",event+' cerramos modal')
