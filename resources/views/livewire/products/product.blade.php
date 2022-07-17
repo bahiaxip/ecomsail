@@ -81,7 +81,7 @@
                                 <div class="item {{$c['name']}}">
                             <!-- si es el atributo color se comprueba si existe color-->
                                     @if($c['color'])
-                                    <div style="width:30px;height:30px;background-color:{{$c['color']}};border:#494949 1px solid;margin-left:2px;margin-right:2px;position:relative">
+                                    <div style="width:25px;height:25px;background-color:{{$c['color']}};border:#494949 1px solid;margin-left:2px;margin-right:2px;position:relative;border-radius:50%">
                                         <input class="mylabel"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  style="position: absolute;width: 100%;height: 100%"/>
                                     </div>
                                     @else

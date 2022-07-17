@@ -44,7 +44,7 @@ class AttributeSeeder extends Seeder
             ],
             [
                 'text'=>'gris',
-                'hex' => '#494949'
+                'hex' => '#BEBEBE'
             ],
             [
                 'text'=>'azul',
@@ -52,7 +52,7 @@ class AttributeSeeder extends Seeder
             ],
             [
                 'text'=>'verde',
-                'hex' => '#00FF00'
+                'hex' => '#008000'
             ],
             [
                 'text'=>'rojo',
@@ -82,6 +82,87 @@ class AttributeSeeder extends Seeder
                 'text'=>'plata',
                 'hex' => '#E3E4E5'
             ],
+            [
+                'text'=>'azul marino',
+                'hex' => '#000080'
+            ],
+            [
+                'text'=>'azul oscuro',
+                'hex' => '#00008B'
+            ],
+            [
+                'text'=>'verde oscuro',
+                'hex' => '#006400'
+            ],
+            [
+                'text'=>'rosa',
+                'hex' => '#E3E4E5'
+            ],
+            [
+                'text'=>'rojo oscuro',
+                'hex' => '#8B0000'
+            ],
+            [
+                'text'=>'crema',
+                'hex' => '#F5FFFA'
+            ],
+            [
+                'text'=>'marfil',
+                'hex' => '#FFFFF0'
+            ],
+            [
+                'text'=>'gris claro',
+                'hex' => '#D3D3D3'
+            ],
+            [
+                'text'=>'naranja oscuro',
+                'hex' => '#FF8C00'
+            ],
+            [
+                'text'=>'azul claro',
+                'hex' => '#ADD8E6'
+            ],
+            [
+                'text'=>'violeta',
+                'hex' => '#EE82EE'
+            ],
+            [
+                'text'=>'violeta oscuro',
+                'hex' => '#8400D3'
+            ],
+            [
+                'text'=>'rosa',
+                'hex' => '#FFC0CB'
+            ],
+            [
+                'text'=>'rojo vino',
+                'hex' => '#83072D'
+            ],
+            [
+                'text'=>'turquesa',
+                'hex' => '#40E0D0'
+            ],
+            [
+                'text'=>'turquesa oscuro',
+                'hex' => '#00CED1'
+            ],
+            [
+                'text'=>'salmón',
+                'hex' => '#FA8072'
+            ],
+            [
+                'text'=>'chocolate',
+                'hex' => '#D2691E'
+            ],
+            [
+                'text'=>'fucsia',
+                'hex' => '#FF00FF'
+            ],
+            [
+                'text'=>'burdeos',
+                'hex' => '#641C34'
+            ],
+
         ];
         
         $tallas = ['XS','S','M','L','XL','XXL','XXXL'];

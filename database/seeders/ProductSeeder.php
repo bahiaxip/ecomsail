@@ -777,6 +777,133 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes/t-shirt/FC_Barcelona/FC_Barcelona.jpg',
         ]);
+        $product[] = Product::create([
+            'name' => 'Vestido de mujer Berylove',
+            'slug' => Str::slug('Vestido de mujer Berylove'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 11,
+            'price' => 55,
+            'stock' => 10,
+            'short_detail' => 'Vestido Berylove para eventos:fiestas, bodas...',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Berylove</li>
+                <li><strong>Material:&nbsp;</strong>94% Nylon, 6% Licra</li>                
+                <li><strong>Diseño:&nbsp;</strong>Moderno con transparencias</li>
+                <li><strong>Parte superior:&nbsp;</strong>Encaje floral</li>
+                <li><strong>Falda:&nbsp;</strong>De gasa, acampanado</li>
+                <li><strong>Cierre:&nbsp;</strong>Cinturón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/dress/berylove/berylove_violeta.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Vestido Lápiz Grace Karin',
+            'slug' => Str::slug('Vestido Lápiz Grace Karin'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 11,
+            'price' => 66,
+            'stock' => 15,
+            'short_detail' => 'Vestido Lápiz Grace Karin para eventos:fiestas, bodas...',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Grace Karin</li>
+                <li><strong>Material:&nbsp;</strong>95% Poliéster, 5% Elastano</li>                
+                <li><strong>Diseño:&nbsp;</strong>Moderno</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_blanco.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Vestido Vintage Grace Karin',
+            'slug' => Str::slug('Vestido Vintage Grace Karin'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 11,
+            'price' => 66,
+            'stock' => 15,
+            'short_detail' => 'Vestido plisado Grace Karin para eventos:fiestas, bodas...',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Grace Karin</li>
+                <li><strong>Material:&nbsp;</strong>Sintético</li>                
+                <li><strong>Diseño:&nbsp;</strong>Moderno, plisado, escote en V</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cruzado</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_rojo.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Vestido de mujer Lacoste',
+            'slug' => Str::slug('Vestido de mujer Lacoste'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 11,
+            'price' => 66,
+            'stock' => 15,
+            'short_detail' => 'Vestido polo de mujer Lacoste',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lacoste</li>
+                <li><strong>Material:&nbsp;</strong>100% algodón</li>                
+                <li><strong>Diseño:&nbsp;</strong>Elegante, acampanado</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones y cinturón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/dress/vestido_lacoste_polo/vestido_lacoste_polo_azul_marino.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Vestido de mujer Ever-Pretty',
+            'slug' => Str::slug('Vestido de mujer Ever-Pretty'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 11,
+            'price' => 57.5,
+            'stock' => 15,
+            'short_detail' => 'Vestido de Fiesta Ever-Pretty',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Ever-Pretty</li>
+                <li><strong>Material:&nbsp;</strong>95% Poliéster, 5% elastano</li>                
+                <li><strong>Diseño:&nbsp;</strong>Elegante, abertura lateral</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_azul_marino.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Vestido murciélago Grace Karin',
+            'slug' => Str::slug('Vestido murciélago Grace Karin'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 11,
+            'price' => 42,
+            'stock' => 25,
+            'short_detail' => 'Vestido murciélago de mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Grace Karin</li>
+                <li><strong>Material:&nbsp;</strong>95% Poliéster, 5% elastano</li>                
+                <li><strong>Diseño:&nbsp;</strong>Manga de murciélago</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_negro.jpg',
+        ]);
 
         $count_product = count($product);
         for($i=0;$i<$count_product;$i++){

@@ -65,7 +65,8 @@ rgba2 = rgba(0,178,146,1)
 	z-index 1
 	i
 		font-size 3em
-	
+.dblock
+	display block
 .dflex
 	display flex
 .detail	
@@ -369,7 +370,7 @@ rgba2 = rgba(0,178,146,1)
 				color color7
 				display flex
 				float left
-				font-size .8em
+				/*font-size .8em*/
 				margin-top 4px
 				height 32px
 				justify-content center
@@ -443,17 +444,17 @@ rgba2 = rgba(0,178,146,1)
 			justify-content center
 			margin auto
 			padding 0 15px
+			max-width 400px
 			
 			img
 				align-items center
 				margin 0 auto
 				
-				max-width 400px
-				max-height 800px
+				
 				/* responsive
 				width 100%
 				*/
-				width 95%
+				max-height 500px
 				padding 0 30px
 	.product
 		display block
@@ -484,7 +485,7 @@ rgba2 = rgba(0,178,146,1)
 						color color6
 						margin 5px
 						outline color7 1px solid
-						padding 2px 8px
+						padding 2px 15px
 						
 					input[type=radio]:checked + label
 						background-color color1
@@ -1101,7 +1102,56 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		min-width 700px
 
 /* fin mensaje de error */
-			
+/* offers */
+.offers
+	.box_categories
+		align-items center
+		background-color rgba(0,178,146,1)
+		color #E3E3E3
+		display flex
+		justify-content center
+		height 80px
+		.div_category
+			border-radius 8px
+			cursor pointer
+			display block
+			.category
+				align-items center
+				border-radius 5px
+				display flex
+				height 50px
+				justify-content center
+				margin auto 25px			
+				width 50px
+				.icon
+					background-position center
+					background-repeat no-repeat
+					background-size 100%
+					display flex
+					height 50px
+					width 50px
+				.icon_appliance
+					background-image url('../icons/cat_icons/others/appliance_E3E3E3.svg')
+				.icon_garden
+					background-image url('../icons/cat_icons/others/garden_E3E3E3.svg')
+				
+			&:hover
+				.icon_appliance
+					background-image url('../icons/cat_icons/others/appliance.svg')
+				.icon_garden
+					background-image url('../icons/cat_icons/others/garden.svg')
+				
+			.title
+				
+				display flex
+				font-size 13px
+				font-weight bold
+				justify-content center
+			&:hover
+				background-color rgba(0,0,0,.1)
+				color #FFF
+		
+/* fin offers */
 @media only screen and (max-width 1200px)
 	.box_products
 			width 90%

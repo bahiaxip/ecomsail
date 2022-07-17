@@ -413,5 +413,274 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 34
         ]);
+        //product 35
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_negro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_amarillo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_azul.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_azul_claro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_blanco.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_azul_marino.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_gris.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_rojo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'berylove',
+            'image' => 'clothes/dress/berylove/berylove_rosa.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 35
+        ]);
+
+        //product 36
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_negro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 36
+        ]);        
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_azul.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 36
+        ]);        
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_rojo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 36
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_rosa.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 36
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_verde.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 36
+        ]);
+
+        //product 37
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_negro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 37
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_blanco.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 37
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_rosa.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 37
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_rojo_vino.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 37
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'grace_karin',
+            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_azul_marino.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 37
+        ]);
+
+        //product 38
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'vestido_lacoste_polo',
+            'image' => 'clothes/dress/vestido_lacoste_polo/vestido_lacoste_polo_azul_marino_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 38
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'vestido_lacoste_polo',
+            'image' => 'clothes/dress/vestido_lacoste_polo/vestido_lacoste_polo_rojo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 38
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'vestido_lacoste_polo',
+            'image' => 'clothes/dress/vestido_lacoste_polo/vestido_lacoste_polo_rojo_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 38
+        ]);
+        //product 39
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_azul_marino_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_burdeos.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_burdeos_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_negro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_negro_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_morado_oscuro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_morado_oscuro_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_verde_oscuro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_verde_oscuro_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 39
+        ]);
+        //product 40
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_negro_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 40
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_rojo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 40
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_rosa.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 40
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_burdeos.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 40
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_azul_marino.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 40
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'ever-pretty_fiesta_largo',
+            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_verde_oscuro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 40
+        ]);
+
     }
 }
