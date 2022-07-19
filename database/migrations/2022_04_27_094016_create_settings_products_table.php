@@ -21,7 +21,7 @@ class CreateSettingsProductsTable extends Migration
             $table->unsignedDecimal('width')->nullable();
             $table->unsignedDecimal('height')->nullable();
             $table->unsignedDecimal('weight')->nullable();
-            
+            $table->string('type_show')->nullable();
             //archivo adicional
             $table->string('path_root')->nullable(); //ruta imagen o icono
             $table->string('path_tag')->nullable(); //parte de la ruta
@@ -29,6 +29,7 @@ class CreateSettingsProductsTable extends Migration
             $table->string('file_ext')->nullable(); //extensión de imagen
             $table->string('attachment_file')->nullable(); //nombre de archivo aleatorio
             $table->string('thumb')->nullable(); //miniatura de imagen
+            
 
             //$table->text('aditional_detail')->nullable();
             //para integer también válido: integer(...)->unsigned();

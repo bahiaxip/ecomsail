@@ -904,7 +904,916 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_negro.jpg',
         ]);
-
+        $product[] = Product::create([
+            'name' => "Vaqueros Levi's 501 Ironwood Overt",
+            'slug' => Str::slug("Vaqueros Levi's 501 Ironwood Overt"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 65,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Levi's 501 Ironwood Overt",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Levi's</li>
+                <li><strong>Material:&nbsp;</strong>98% Algodón, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/levis_501_ironwood_overt/ironwood_overt.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Levi's 501 Black 80701",
+            'slug' => Str::slug("Vaqueros Levi's 501 Black 80701"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 66,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Levi's 501 Black 80701",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Levi's</li>
+                <li><strong>Material:&nbsp;</strong>94% Algodón, 5% Poliéster, 1% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/levis_501_black_80701/black_80701.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Levi's 501 Canyon Kings",
+            'slug' => Str::slug("Vaqueros Levi's 501 Canyon Kings"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 66,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Levi's 501 Canyon Kings",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Levi's</li>
+                <li><strong>Material:&nbsp;</strong>94% Algodón, 5% Poliéster, 1% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/levis_501_canyon_kings/canyon_kings.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Levi's 501 Levis Marlon",
+            'slug' => Str::slug("Vaqueros Levi's 501 Levis Marlon"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 66,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Levi's 501 Levis Marlon",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Levi's</li>
+                <li><strong>Material:&nbsp;</strong>94% Algodón, 5% Poliéster, 1% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/levis_501_levis_marlon/levis_marlon.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Pepe Jeans Stanley Jeans",
+            'slug' => Str::slug("Vaqueros Pepe Jeans Stanley Jeans"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 66,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Pepe Jeans Stanley Jeans Denim",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>
+                <li><strong>Material:&nbsp;</strong>92% Algodón, 6% Poliéster, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/pepe_jeans_stanley_jeans_denim/stanley_jeans_denim.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Pepe Jeans Kingston Zip",
+            'slug' => Str::slug("Vaqueros Pepe Jeans Kingston Zip"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 62,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Pepe Jeans Kingston Zip 000 Denim",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>
+                <li><strong>Material:&nbsp;</strong>81% Algodón, 17% Poliéster, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/pepe_jeans_kingston_zip_000_denim/kingston_zip_000_denim.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Pepe Jeans Finsbuty Jeans",
+            'slug' => Str::slug("Vaqueros Pepe Jeans Finsbury Jeans"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 42,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Pepe Jeans Finsbury Jeans 000 Denim",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>
+                <li><strong>Material:&nbsp;</strong>81% Algodón, 17% Poliéster, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/pepe_jeans_finsbury_jeans_000_denim/finsbury_jeans_000_denim.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Lee Straight Fit Xm Jeans",
+            'slug' => Str::slug("Vaqueros Lee Straight Fit Xm Jeans"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 45,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Lee Straight Fit Xm Jeans Maddox",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lee</li>
+                <li><strong>Material:&nbsp;</strong>97% Algodón, 3% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/lee_straight_fit_xm_jeans_maddox/straight_fit_xm_jeans_maddox.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Lee Elly Jeans Dark Daisy",
+            'slug' => Str::slug("Vaqueros Lee Elly Jeans Dark Daisy"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 45,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Lee Elly Jeans Dark Daisy",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lee</li>
+                <li><strong>Material:&nbsp;</strong>84% Algodón, 14% Poliéster, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/lee_elly_jeans_dark_daisy/elly_jeans_dark_daisy.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Pepe Jeans Regent Jeans Denim",
+            'slug' => Str::slug("Vaqueros Pepe Jeans Regent Jeans Denim"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 45,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Pepe Jeans Regent Jeans Denim",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lee</li>
+                <li><strong>Material:&nbsp;</strong>98% Algodón, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/pepe_jeans_regent_jeans_denim/regent_jeans_denim.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Vaqueros Pepe Jeans Mary Jeans Denim",
+            'slug' => Str::slug("Vaqueros Pepe Mary Regent Jeans Denim"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 10,
+            'price' => 45,
+            'stock' => 25,
+            'short_detail' => "Vaqueros Pepe Jeans Mary Jeans Denim",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lee</li>
+                <li><strong>Material:&nbsp;</strong>99% Algodón, 1% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/jeans/pepe_jeans_mary_jeans_denim/mary_jeans_denim.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Lavadora Balay 3TS885BE',            
+            'slug' => Str::slug('Lavadora Balay 3TS885BE'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 20,
+            'price' => 480,
+            'stock' => 7,
+            'short_detail' => 'Lavadora Balay 3TS885BE, Carga frontal, Blanco',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Balay</li>                
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Capacidad:&nbsp;</strong>8Kg.</li>
+                <li><strong>Velocidad:&nbsp;</strong>1400 RPM</li>
+                <li><strong>Clase energética:</strong> C</li>
+                <li><strong>Dimensiones:&nbsp;</strong>59 x 59.8 x 85 (cm)</li>
+                <li><strong>Peso:</strong> 69Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/washers/balay_3TS885BE/balay_3TS885BE.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Lavadora Indesit EWC61251WSPTN',            
+            'slug' => Str::slug('Lavadora Indesit EWC61251WSPTN'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 20,
+            'price' => 278,
+            'stock' => 7,
+            'short_detail' => 'Lavadora Indesit EWC61251WSPTN, Carga frontal, Blanco',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Indesit</li>                
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Capacidad:&nbsp;</strong>6Kg.</li>
+                <li><strong>Velocidad:&nbsp;</strong>1200 RPM</li>
+                <li><strong>Clase energética:</strong> F</li>
+                <li><strong>Dimensiones:&nbsp;</strong>60 x 59.5 x 84 (cm)</li>
+                <li><strong>Peso:</strong> 50Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/washers/indesit_EWC61251WSPTN/indesit_EWC61251WSPTN.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Lavadora Whirpool FFB8458WV',            
+            'slug' => Str::slug('Lavadora Whirpool FFB8458WV'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 20,
+            'price' => 525,
+            'stock' => 7,
+            'short_detail' => 'Lavadora Whirpool FFB8458WV, Carga frontal, Blanco',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Whirpool</li>                
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Capacidad:&nbsp;</strong>8Kg.</li>
+                <li><strong>Velocidad:&nbsp;</strong>1400 RPM</li>
+                <li><strong>Clase energética:</strong> B</li>
+                <li><strong>Dimensiones:&nbsp;</strong>63 x 59.5 x 84.5 (cm)</li>
+                <li><strong>Peso:</strong> 67Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/washers/whirpool_FFB8458WV/whirpool_FFB8458WV.jpg',
+        ]);        
+        $product[] = Product::create([
+            'name' => 'Placa de inducción Balay 3EB865FR',            
+            'slug' => Str::slug('Placa de inducción Balay 3EB865FR'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 21,
+            'price' => 350,
+            'stock' => 7,
+            'short_detail' => 'Placa de inducción Balay 3EB865FR, 3 zonas, negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Balay</li>                
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico, Inducción</li>
+                <li><strong>Potencia:&nbsp;</strong>4600 vatios</li>
+                <li><strong>Panel:&nbsp;</strong>táctil</li>
+                <li><strong>Clase energética:</strong> C</li>
+                <li><strong>Dimensiones:&nbsp;</strong>5 x 59.2 x 52 (cm)</li>
+                <li><strong>Peso:</strong> 11Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/cooking/balay_3EB865FR/balay_3EB865FR.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Placa de fogones Beko HIGG64103SX',            
+            'slug' => Str::slug('Placa de fogones Beko HIGG64103SX'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 21,
+            'price' => 85,
+            'stock' => 7,
+            'short_detail' => 'Placa de fogones Beko HIGG64103SX, 4 fuegos, Gas, Inox',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Beko</li>
+                <li><strong>Color:&nbsp;</strong>Acero inoxidable</li>
+                <li><strong>Tipo:&nbsp;</strong>Gas</li>                
+                <li><strong>Panel:&nbsp;</strong>Analógico</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>8 x 60 x 52 (cm)</li>
+                <li><strong>Peso:</strong> 10Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/cooking/beko_HIGG64103SX/beko_HIGG64103SX.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Placa vitrocerámica Teka TZ6415',            
+            'slug' => Str::slug('Placa vitrocerámica Teka TZ6415'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 21,
+            'price' => 198,
+            'stock' => 15,
+            'short_detail' => 'Placa vitrocerámica Teka TZ6415, 4 zonas, negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Teka</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Potencia:&nbsp;</strong>5000 vatios</li>
+                <li><strong>Panel:&nbsp;</strong>táctil</li>
+                <li><strong>Clase energética:</strong> C</li>
+                <li><strong>Dimensiones:&nbsp;</strong>6.3 x 60 x 51 (cm)</li>
+                <li><strong>Peso:</strong> 9Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/cooking/balay_3EB865FR/balay_3EB865FR.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Placa vitrocerámica Candy CH63CC',            
+            'slug' => Str::slug('Placa vitrocerámica Candy CH63CC'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 21,
+            'price' => 176,
+            'stock' => 30,
+            'short_detail' => 'Placa vitrocerámica Candy CH63CC, 3 zonas, negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Candy</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Potencia:&nbsp;</strong>5500 vatios</li>
+                <li><strong>Panel:&nbsp;</strong>táctil</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>4 x 59 x 52 (cm)</li>
+                <li><strong>Peso:</strong> 7.3Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/cooking/candy_CH63CC/candy_CH63CC.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Aspiradora Rowenta Swift Power RO2981',            
+            'slug' => Str::slug('Aspiradora Rowenta Swift Power RO2981'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 22,
+            'price' => 115,
+            'stock' => 10,
+            'short_detail' => 'Aspiradora Rowenta Swift Power Total Care, 1.5L, Multicolor',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Rowenta</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Ruido:&nbsp;</strong>77dB</li>
+                <li><strong>Potencia:&nbsp;</strong>750 vatios</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>45 x 28.4 x 33.8 (cm)</li>
+                <li><strong>Peso:</strong> 5Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/vacuum_cleaner/rowenta_swift_power_total_care/rowenta_R02981.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Aspiradora Cecotec Vertical Conga Popstar',            
+            'slug' => Str::slug('Aspiradora Cecotec Vertical Conga Popstar'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 22,
+            'price' => 115,
+            'stock' => 10,
+            'short_detail' => 'Aspiradora Cecotec Vertical, 800ML, Multicolor',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Cecotec</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Tipo:&nbsp;</strong>Ciclónico, sin bolsa</li>
+                <li><strong>Ruido:&nbsp;</strong>77dB</li>
+                <li><strong>Potencia:&nbsp;</strong>800 vatios</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>15 x 23.7 x 110 (cm)</li>
+                <li><strong>Peso:</strong> 2Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/vacuum_cleaner/cecotec_conga_popstar/cecotec_conga_popstar.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Aspiradora Orbegozo Ap 8030',
+            'slug' => Str::slug('Aspiradora Orbegozo Ap 8030'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 22,
+            'price' => 115,
+            'stock' => 10,
+            'short_detail' => 'Aspiradora Orbegozo Ap 8030, 2L, Negro y azul',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Orbegozo</li>
+                <li><strong>Color:&nbsp;</strong>Negro y azul</li>
+                <li><strong>Tipo:&nbsp;</strong>Ciclónico, sin bolsa</li>
+                <li><strong>Ruido:&nbsp;</strong>78dB</li>
+                <li><strong>Potencia:&nbsp;</strong>800 vatios</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>27 x 40 x 30 (cm)</li>
+                <li><strong>Peso:</strong> 4.84Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/vacuum_cleaner/orbegozo_ap_8030/orbegozo_ap_8030.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Aspiradora Karcher 1000W',
+            'slug' => Str::slug('Aspiradora Karcher 1000W'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 22,
+            'price' => 85,
+            'stock' => 10,
+            'short_detail' => 'Aspiradora Karcher 1000W, Seco y húmedo, 17L, Amarillo, con ruedas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Karcher</li>
+                <li><strong>Color:&nbsp;</strong>Amarillo y negro</li>
+                <li><strong>Tipo:&nbsp;</strong>Seco y húmedo</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>34.9 x 32.8 x 49 (cm)</li>
+                <li><strong>Peso:</strong> 6Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/vacuum_cleaner/karcher_1000w/karcher_1000w.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Aspiradora Xiaomi Robot Vacuum',
+            'slug' => Str::slug('Aspiradora Xiaomi Robot Vacuum'),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 22,
+            'price' => 200,
+            'stock' => 10,
+            'short_detail' => 'Aspiradora Xiaomi Robot Vacuum, Fregasuelos, Blanco, navegación inteligente',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Batería:&nbsp;</strong>2600mAh Litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Seco</li>
+                <li><strong>Ruido:&nbsp;</strong>10dB</li>
+                <li><strong>Potencia:&nbsp;</strong>1000 vatios</li>
+                <li><strong>Dimensiones:&nbsp;</strong>35 x 35 x 9.4 (cm)</li>
+                <li><strong>Peso:</strong> 3.6Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'appliance/vacuum_cleaner/xiaomi_robot_vacuum/xiaomi_robot_vacuum.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Ordenador sobremesa HP Victus 15L',
+            'slug' => Str::slug('Ordenador sobremesa HP Victus 15L'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 29,
+            'price' => 1100,
+            'stock' => 10,
+            'short_detail' => 'Ordenador sobremesa HP Victus 15L, 5700G, 16GB, 1TB + 512SSD',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>HP</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Procesador:&nbsp;</strong>AMD 5700G</li>
+                <li><strong>Memoria:&nbsp;</strong>16GB DDR4</li>
+                <li><strong>Almacenamiento HDD SATA:&nbsp;</strong>1000GB</li>
+                <li><strong>Almacenamiento SSD:&nbsp;</strong>512GB</li>
+                <li><strong>Tarjeta gráfica:&nbsp;</strong>NVIDIA GeForce RTX 3060 12GB GDDR6</li>
+                <li><strong>Tarjeta de red:&nbsp;</strong>Ethernet, wifi</li>
+                <li><strong>Puertos:&nbsp;</strong>4 USB 2.0, 3 USB 3.2</li>
+                <li><strong>Altura:&nbsp;</strong>337 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>155 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>297.3 (mm)</li>
+                <li><strong>Peso:</strong> 6.3Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/desktop/hp_victus_15L/hp_victus_15L.webp',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Ordenador sobremesa IdeaCentre AIO 3',
+            'slug' => Str::slug('Ordenador sobremesa IdeaCentre AIO 3'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 29,
+            'price' => 650,
+            'stock' => 10,
+            'short_detail' => 'Ordenador sobremesa IdeaCentre AIO 3, 4500U, 8GB, 512 SSD, Windows 10 Home',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lenovo</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Procesador:&nbsp;</strong>AMD Ryzen 5 4500U</li>
+                <li><strong>Memoria:&nbsp;</strong>2 X 4GB SO-DIMM DDR4</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>512GB SSD</li>                
+                <li><strong>Tarjeta gráfica:&nbsp;</strong>Integrada AMD Radeon Graphics</li>
+                <li><strong>Pantalla:&nbsp;</strong>23.8" FullHD 1920 X 1080</li>
+                <li><strong>Accesorios:&nbsp;</strong>Teclador y ratón</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Windows 10</li>
+                <li><strong>Altura:&nbsp;</strong>700 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>55 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>25 (mm)</li>
+                <li><strong>Peso:</strong> 6Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/desktop/lenovo_ideacentre_aio3/lenovo_ideacentre_aio3.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Ordenador sobremesa MSI mag Infinite',
+            'slug' => Str::slug('Ordenador sobremesa MSI mag Infinite'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 29,
+            'price' => 1439,
+            'stock' => 10,
+            'short_detail' => 'Ordenador sobremesa MSI mag Infinite, i7 10700, 16GB, 1TB SSD, GeForce RTX 3060, Windows 10 Home',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>MSI</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Procesador:&nbsp;</strong>Intel Core 7 10700</li>
+                <li><strong>Memoria:&nbsp;</strong>2 X 12GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>1TB SSD</li>                
+                <li><strong>Tarjeta gráfica:&nbsp;</strong>NVIDIA GeForce RTX 3060</li>
+                <li><strong>Puertos:&nbsp;</strong>4 USB 2.0, 2 USB 3.0</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Windows 10 Home</li>
+                <li><strong>Altura:&nbsp;</strong>450 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>407 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>17.4 (mm)</li>
+                <li><strong>Peso:</strong> 10Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/desktop/msi_mag_infinite/msi_mag_infinite.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Ordenador portátil HP Victus 16-e0090ns',
+            'slug' => Str::slug('Ordenador portátil HP Victus 16-e0090ns'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 30,
+            'price' => 999,
+            'stock' => 10,
+            'short_detail' => 'Ordenador portátil HP Victus 16-e0090ns, 5800H, 16GB, 512GB SSD, RTX 3050Ti',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>HP</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Procesador:&nbsp;</strong>AMD Ryzen 7 5800H</li>
+                <li><strong>Memoria:&nbsp;</strong>2 X 8GB DDR4</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>512GB SSD</li>                
+                <li><strong>Tarjeta gráfica:&nbsp;</strong>NVIDIA GeForce RTX 3050Ti</li>
+                <li><strong>Cámara:&nbsp;</strong>Cámara HP Wide Vision 720p HD</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 4 celdas, 70Wh</li>
+                <li><strong>Puertos:&nbsp;</strong>2 USB 2.0, 1 USB 3.0, 1 HDMI, 1 RJ45</li>
+                <li><strong>Pantalla:&nbsp;</strong>16.1" FullHD 1920 X 1080 144Hz</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Windows</li>
+                <li><strong>Altura:&nbsp;</strong>23.5 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>370 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>260 (mm)</li>
+                <li><strong>Peso:</strong> 2.5Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/portable/hp_victus_16-e0090ns/hp_victus_16-e0090ns.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Ordenador portátil MSI Katana GF66 12UD-081XES',
+            'slug' => Str::slug('Ordenador portátil MSI Katana GF66 12UD-081XES'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 30,
+            'price' => 999,
+            'stock' => 10,
+            'short_detail' => 'Ordenador portátil MSI Katana GF66 12UD-081XES, i7 12700H, 16GB, 512GB SSD, RTX 3050Ti',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>MSI</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Procesador:&nbsp;</strong>Intel Core 7 12700H</li>
+                <li><strong>Memoria:&nbsp;</strong>2 X 8GB DDR4</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>512GB SSD</li>                
+                <li><strong>Tarjeta gráfica:&nbsp;</strong>NVIDIA GeForce RTX 3050Ti</li>
+                <li><strong>Cámara:&nbsp;</strong>HD type 30fps 720p HD</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 3 celdas, 53Wh</li>
+                <li><strong>Puertos:&nbsp;</strong>2 USB 3.0 type-A, 1 USB 3.0 type-C, 1 HDMI</li>
+                <li><strong>Pantalla:&nbsp;</strong>15.6" FullHD 1920 X 1080</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Windows</li>
+                <li><strong>Altura:&nbsp;</strong>24.9 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>359 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>259 (mm)</li>
+                <li><strong>Peso:</strong> 2.25Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/portable/msi_katana_gf66_12ud_081xes/msi_katana_gf66_12ud_081xes.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Ordenador portátil Acer Nitro AN515-57-75M9',
+            'slug' => Str::slug('Ordenador portátil Acer Nitro AN515-57-75M9'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 30,
+            'price' => 1001,
+            'stock' => 10,
+            'short_detail' => 'Ordenador portátil Acer Nitro AN515-57-75M9, i7 11800H, 16GB, 512GB SSD, RTX 3050Ti',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Acer</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Procesador:&nbsp;</strong>Intel Core 7 11800H</li>
+                <li><strong>Memoria:&nbsp;</strong>1 X 16GB DDR4</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>512GB SSD</li>                
+                <li><strong>Tarjeta gráfica:&nbsp;</strong>NVIDIA GeForce RTX 3050Ti</li>
+                <li><strong>Cámara:&nbsp;</strong>HD Camera</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 4 celdas, 57Wh</li>
+                <li><strong>Puertos:&nbsp;</strong>2 USB 3.0 type-A, 1 USB 2.0 type-C, 1 HDMI, 1 RJ45</li>
+                <li><strong>Pantalla:&nbsp;</strong>15.6" FullHD 1920 X 1080 144Hz</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Sin sistema operativo</li>
+                <li><strong>Altura:&nbsp;</strong>23.9 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>363 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>255 (mm)</li>
+                <li><strong>Peso:</strong> 2.4Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/portable/acer_nitro_an515_57_75m9/acer_nitro_an515_57_75m9.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Disco duro Seagate Barracuda 3.5"',
+            'slug' => Str::slug('Disco duro Seagate Barracuda 3.5"'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 31,
+            'price' => 45,
+            'stock' => 10,
+            'short_detail' => 'Disco duro Seagate Barracuda 3.5", 1TB SATA3',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Seagate</li>
+                <li><strong>Tipo:&nbsp;</strong>HHD</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Capacidad:&nbsp;</strong>1000GB</li>
+                <li><strong>Velocidad:&nbsp;</strong>7200 RPM</li>
+                <li><strong>Interfaz:&nbsp;</strong>Serial ATA III</li>
+                <li><strong>Consumo:&nbsp;</strong>5.3W</li>
+                <li><strong>Altura:&nbsp;</strong>20.17 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>101.6 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>147 (mm)</li>
+                <li><strong>Peso:</strong> 400g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/storage/seagate_barracuda/seagate_barracuda.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Disco duro Samsung 870 EVO',
+            'slug' => Str::slug('Disco duro Samsung 870 EVO'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 31,
+            'price' => 110,
+            'stock' => 10,
+            'short_detail' => 'Disco duro Samsung 870 EVO SSD 2.5", 1TB SATA3, Negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Samsung</li>
+                <li><strong>Tipo:&nbsp;</strong>SSD</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Capacidad:&nbsp;</strong>1000GB</li>
+                <li><strong>Velocidad lectura:&nbsp;</strong>560 MB/s</li>
+                <li><strong>Velocidad escritura:&nbsp;</strong>530 MB/s</li>
+                <li><strong>Interfaz:&nbsp;</strong>Serial ATA III</li>                
+                <li><strong>Altura:&nbsp;</strong>7 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>100 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>70 (mm)</li>
+                <li><strong>Peso:</strong> 86g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/storage/samsung_870_evo/samsung_870_evo.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Disco duro Kioxia Exceria 480GB',
+            'slug' => Str::slug('Disco duro Kioxia Exceria 480GB'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 31,
+            'price' => 110,
+            'stock' => 10,
+            'short_detail' => 'Disco duro Kioxia Exceria 2.5", 480GB SATA3, Negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Kioxia</li>
+                <li><strong>Tipo:&nbsp;</strong>SSD</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Capacidad:&nbsp;</strong>1000GB</li>
+                <li><strong>Velocidad lectura:&nbsp;</strong>555 MB/s</li>
+                <li><strong>Velocidad escritura:&nbsp;</strong>540 MB/s</li>
+                <li><strong>Interfaz:&nbsp;</strong>Serial ATA III</li>                
+                <li><strong>Altura:&nbsp;</strong>7 (mm)</li>
+                <li><strong>Anchura:&nbsp;</strong>100 (mm)</li>
+                <li><strong>Profundidad:&nbsp;</strong>70 (mm)</li>
+                <li><strong>Peso:</strong> 46g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'computers/storage/kioxia_exceria_480GB/kioxia_exceria_480GB.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Manguera de jardín Cellfast Economic',
+            'slug' => Str::slug('Manguera de jardín Cellfast Economic'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 33,
+            'price' => 25,
+            'stock' => 10,
+            'short_detail' => 'Manguera de jardín Cellfast Economic, 1/2" 20M',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Cellfast</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Longitud:&nbsp;</strong>20 m.</li>
+                <li><strong>Presión de trabajo:&nbsp;</strong>8 bar</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/hose/hose_cellfast_20m/hose_cellfast_20m.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Manguera de jardín Natrain',
+            'slug' => Str::slug('Manguera de jardín Natrain'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 33,
+            'price' => 22,
+            'stock' => 10,
+            'short_detail' => 'Manguera de jardín Natrain, 15M',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Natrain</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Longitud:&nbsp;</strong>15 m.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/hose/hose_natrain_15m/hose_natrain_15m.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Manguera de jardín Gardena Comfort FLEX',
+            'slug' => Str::slug('Manguera de jardín Gardena Comfort FLEX'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 33,
+            'price' => 38,
+            'stock' => 10,
+            'short_detail' => 'Manguera de jardín Gardena Comfort FLEX, 15M',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Gardena</li>
+                <li><strong>Material:&nbsp;</strong>PVC</li>
+                <li><strong>Color:&nbsp;</strong>Gris y naranja</li>
+                <li><strong>Longitud:&nbsp;</strong>15 m.</li>
+                <li><strong>Presión de trabajo:&nbsp;</strong>25 bar</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/hose/hose_gardena_flex_15m/hose_gardena_flex_15m.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Piscina hinchable INTEX Easy Set 366 X 76',
+            'slug' => Str::slug('Piscina hinchable INTEX Easy Set 366 X 76'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 34,
+            'price' => 76,
+            'stock' => 10,
+            'short_detail' => 'Piscina hinchable INTEX Easy Set 366 X 76, circular',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Intex</li>
+                <li><strong>Material:&nbsp;</strong>PVC</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Ancho:&nbsp;</strong>366 cm.</li>
+                <li><strong>Altura:&nbsp;</strong>76 cm.</li>
+                <li><strong>Capacidad:&nbsp;</strong>5621 L.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/swim/swim_intex_366x76/swim_intex_366x76.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Piscina hinchable Bestrip 300 X 170',
+            'slug' => Str::slug('Piscina hinchable Bestrip 300 X 170'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 34,
+            'price' => 89,
+            'stock' => 10,
+            'short_detail' => 'Piscina hinchable Bestrip 300 X 170, rectangular',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Bestrip</li>
+                <li><strong>Material:&nbsp;</strong>PVC</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Ancho:&nbsp;</strong>300 cm.</li>                
+                <li><strong>Altura:&nbsp;</strong>76 cm.</li>
+                <li><strong>Profundidad:&nbsp;</strong>170 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/swim/swim_bestrip_300x170/swim_bestrip_300x170.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Piscina desmontable INTEX 457X122',
+            'slug' => Str::slug('Piscina desmontable INTEX 457X122'),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 34,
+            'price' => 89,
+            'stock' => 10,
+            'short_detail' => 'Piscina desmontable INTEX 457X122, circular',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>INTEX</li>
+                <li><strong>Material lona:&nbsp;</strong>PVC</li>
+                <li><strong>Material estructura:&nbsp;</strong>Acero</li>
+                <li><strong>Color:&nbsp;</strong>Azul y blanco</li>
+                <li><strong>Ancho:&nbsp;</strong>457 cm.</li>                
+                <li><strong>Altura:&nbsp;</strong>122 cm.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/swim/swim_intex_457x122/swim_intex_457x122.jpg',
+        ]);
         $count_product = count($product);
         for($i=0;$i<$count_product;$i++){
             $settings_prod = SettingsProducts::create([

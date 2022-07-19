@@ -191,11 +191,21 @@ class CategorySeeder extends Seeder
             Category::create([
                 'status' => 1,
                 'type' => 4,
+                'name' =>'Placas/Fogones',
+                'file_name' => 'Televisor.png',
+                'image' => 'cooking_food.svg',
+                'path_tag' => '/icons/cat_icons/appliance/',
+            ]);
+            /*
+            Category::create([
+                'status' => 1,
+                'type' => 4,
                 'name' =>'Televisores',
                 'file_name' => 'Televisor.png',
                 'image' => 'tv.png',
                 'path_tag' => '/icons/cat_icons/appliance/',
             ]);
+            */
             Category::create([
                 'status' => 1,
                 'type' => 4,
@@ -261,6 +271,14 @@ class CategorySeeder extends Seeder
             Category::create([
                 'status' => 1,
                 'type' => 6,
+                'name' =>'Ordenadores sobremesa',
+                'file_name' => 'Ordenadores_sobremesa.png',
+                'image' => 'portable.png',
+                'path_tag' => '/icons/cat_icons/computing/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 6,
                 'name' =>'Ordenadores portátiles',
                 'file_name' => 'Ordenadores_portatiles.png',
                 'image' => 'portable.png',
@@ -288,7 +306,7 @@ class CategorySeeder extends Seeder
             Category::create([
                 'status' => 1,
                 'type' => 7,
-                'name' =>'Mangueras',
+                'name' =>'Riego',
                 'file_name' => 'Mangueras.png',
                 'image' => 'hose.png',
                 'path_tag' => '/icons/cat_icons/garden/',
