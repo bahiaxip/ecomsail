@@ -1684,7 +1684,7 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Cellfast Economic',
             'slug' => Str::slug('Manguera de jardín Cellfast Economic'),
             'status' => 1,
-            'category_id' => 6,
+            'category_id' => 7,
             'subcategory_id' => 33,
             'price' => 25,
             'stock' => 10,
@@ -1706,7 +1706,7 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Natrain',
             'slug' => Str::slug('Manguera de jardín Natrain'),
             'status' => 1,
-            'category_id' => 6,
+            'category_id' => 7,
             'subcategory_id' => 33,
             'price' => 22,
             'stock' => 10,
@@ -1727,7 +1727,7 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Gardena Comfort FLEX',
             'slug' => Str::slug('Manguera de jardín Gardena Comfort FLEX'),
             'status' => 1,
-            'category_id' => 6,
+            'category_id' => 7,
             'subcategory_id' => 33,
             'price' => 38,
             'stock' => 10,
@@ -1749,7 +1749,7 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina hinchable INTEX Easy Set 366 X 76',
             'slug' => Str::slug('Piscina hinchable INTEX Easy Set 366 X 76'),
             'status' => 1,
-            'category_id' => 6,
+            'category_id' => 7,
             'subcategory_id' => 34,
             'price' => 76,
             'stock' => 10,
@@ -1772,7 +1772,7 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina hinchable Bestrip 300 X 170',
             'slug' => Str::slug('Piscina hinchable Bestrip 300 X 170'),
             'status' => 1,
-            'category_id' => 6,
+            'category_id' => 7,
             'subcategory_id' => 34,
             'price' => 89,
             'stock' => 10,
@@ -1795,7 +1795,7 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina desmontable INTEX 457X122',
             'slug' => Str::slug('Piscina desmontable INTEX 457X122'),
             'status' => 1,
-            'category_id' => 6,
+            'category_id' => 7,
             'subcategory_id' => 34,
             'price' => 89,
             'stock' => 10,
@@ -1813,6 +1813,216 @@ class ProductSeeder extends Seeder
             </ul>',
             'path_tag' => '/images/products/',
             'image' => 'garden/swim/swim_intex_457x122/swim_intex_457x122.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cortacésped Bosch Home and Garden ARM 3200',
+            'slug' => Str::slug('Cortacésped Bosch Home and Garden ARM 3200'),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 35,
+            'price' => 135,
+            'stock' => 10,
+            'short_detail' => 'Cortacésped Bosch Home and Garden ARM 3200, Eléctrico, Verde',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Bosch</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Capacidad:&nbsp;</strong>31 L.</li>
+                <li><strong>Potencia:&nbsp;</strong>1200W</li>
+                <li><strong>Ajustable:&nbsp;</strong>3 ajustes de corte (20-40-60mm.)</li>
+                <li><strong>Ancho de corte:&nbsp;</strong>32cm.</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Anchura:&nbsp;</strong>60 cm.</li>
+                <li><strong>Altura:&nbsp;</strong>39 cm.</li>
+                <li><strong>Longitud:&nbsp;</strong>27 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>8.5 Kg.</li>
+                <li><strong>Incluye:&nbsp;</strong>Cuchilla adicional.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/mower/bosch_arm_3200/bosch_arm_3200.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cortacésped Einhell GC EM 1536',
+            'slug' => Str::slug('Cortacésped Einhell GC EM 1536'),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 35,
+            'price' => 89,
+            'stock' => 10,
+            'short_detail' => 'Cortacésped Einhell GC EM 1536, Eléctrico, Rojo y negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Einhell</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Capacidad:&nbsp;</strong>38 L.</li>
+                <li><strong>Potencia:&nbsp;</strong>1500W</li>
+                <li><strong>Ajustable:&nbsp;</strong>5 ajustes de corte (25-65mm.)</li>
+                <li><strong>Ancho de corte:&nbsp;</strong>36cm.</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Anchura:&nbsp;</strong>72 cm.</li>
+                <li><strong>Altura:&nbsp;</strong>45 cm.</li>
+                <li><strong>Longitud:&nbsp;</strong>32.5 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>10 Kg.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/mower/einhell_gc_em_1536/einhell_gc_em_1536.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cortacésped BlackAndDecker BEMW351',
+            'slug' => Str::slug('Cortacésped BlackAndDecker BEMW351'),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 35,
+            'price' => 78,
+            'stock' => 10,
+            'short_detail' => 'Cortacésped BlackAndDecker BEMW351, Eléctrico, Negro y naranja',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>BlackAndDecker</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Capacidad:&nbsp;</strong>30 L.</li>
+                <li><strong>Potencia:&nbsp;</strong>1000W</li>
+                <li><strong>Ajustable:&nbsp;</strong>5 ajustes de corte (25-65mm.)</li>
+                <li><strong>Ancho de corte:&nbsp;</strong>32cm.</li>
+                <li><strong>Color:&nbsp;</strong>Negro y naranja</li>
+                <li><strong>Anchura:&nbsp;</strong>63.7 cm.</li>
+                <li><strong>Altura:&nbsp;</strong>33.5 cm.</li>
+                <li><strong>Longitud:&nbsp;</strong>35.6 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>3.63 Kg.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/mower/blackanddecker_bemw351/blackanddecker_bemw351.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cortacésped Greenworks G40LM35K',
+            'slug' => Str::slug('Cortacésped Greenworks G40LM35K'),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 35,
+            'price' => 78,
+            'stock' => 10,
+            'short_detail' => 'Cortacésped Greenworks G40LM35K, Eléctrico, Verde y negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Greenworks</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Capacidad:&nbsp;</strong>30 L.</li>
+                <li><strong>Potencia:&nbsp;</strong>1000W</li>                
+                <li><strong>Ancho de corte:&nbsp;</strong>35cm.</li>
+                <li><strong>Color:&nbsp;</strong>Negro y naranja</li>
+                <li><strong>Anchura:&nbsp;</strong>40.2 cm.</li>
+                <li><strong>Altura:&nbsp;</strong>101 cm.</li>
+                <li><strong>Longitud:&nbsp;</strong>121.7.6 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>16.6 Kg.</li>
+                <li><strong>Incluye:&nbsp;</strong>Batería de repuesto 2.5Ah</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'garden/mower/greenworks_G40LM35K/greenworks_G40LM35K.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cepillo de dientes Oral-B Pro 3500',
+            'slug' => Str::slug('Cepillo de dientes Oral-B Pro 3500'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 37,
+            'price' => 55,
+            'stock' => 10,
+            'short_detail' => 'Cepillo de dientes Oral-B Pro 3500, eléctrico, negro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Braun Oral-B</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Nº de modos de cepillado:&nbsp;</strong>3</li>
+                <li><strong>Temporizador:&nbsp;</strong>Temporizador de 2 minutos</li>
+                <li><strong>Dimensiones del paquete:&nbsp;</strong>17 x 9.4 x 24 cm</li>
+                <li><strong>Peso:&nbsp;</strong>333g.</li>
+                <li><strong>Incluye:&nbsp;</strong>Funda de viaje</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/toothbrushes/oral_b_pro_3500/oral_b_pro_3500.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cepillo de dientes Xiaomi MI SMART T500',
+            'slug' => Str::slug('Cepillo de dientes Xiaomi MI SMART T500'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 37,
+            'price' => 45,
+            'stock' => 10,
+            'short_detail' => 'Cepillo de dientes Xiaomi MI SMART T500, eléctrico, blanco',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Nº de modos de cepillado:&nbsp;</strong>3</li>
+                <li><strong>Temporizador de cepillado:&nbsp;</strong>Sí</li>
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Sensor:&nbsp;</strong>Sensor de presión</li>
+                <li><strong>Dimensiones del paquete:&nbsp;</strong>13 x 4.1 x 21 cm</li>
+                <li><strong>Peso:&nbsp;</strong>200g.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/toothbrushes/xiaomi_mi_smart_t500/xiaomi_mi_smart_t500.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cepillo de dientes Philips Sonicare 2',
+            'slug' => Str::slug('Cepillo de dientes Philips Sonicare 2'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 37,
+            'price' => 59,
+            'stock' => 10,
+            'short_detail' => 'Cepillo de dientes Philips Sonicare 2, eléctrico, blanco',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Philips</li>
+                <li><strong>Tipo:&nbsp;</strong>Eléctrico</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Nº de modos de cepillado:&nbsp;</strong>1</li>
+                <li><strong>Temporizador de cepillado:&nbsp;</strong>Temporizador de 2 minutos</li>
+                <li><strong>Sensor:&nbsp;</strong>Sensor de presión</li>
+                <li><strong>Dimensiones del paquete:&nbsp;</strong>22 x 6.4 x 17 cm</li>
+                <li><strong>Peso:&nbsp;</strong>471g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/toothbrushes/philips_sonicare2/philips_sonicare2.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Pintalabios OULAC Metálico',
+            'slug' => Str::slug('Pintalabios OULAC Metálico'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 38,
+            'price' => 12,
+            'stock' => 10,
+            'short_detail' => 'Pintalabios OULAC Metálico, impermeable, larga duración',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>OULAC</li>
+
+                <li><strong>Dimensiones del paquete:&nbsp;</strong>7.7 x 2.4 x 2.4 cm</li>
+                <li><strong>Peso:&nbsp;</strong>40g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/lipstick_OULAC_metal.jpg',
         ]);
         $count_product = count($product);
         for($i=0;$i<$count_product;$i++){

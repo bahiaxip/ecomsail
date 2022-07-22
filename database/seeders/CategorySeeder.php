@@ -75,9 +75,9 @@ class CategorySeeder extends Seeder
         Category::create([
             'status' => 1,
             'type' => 0,
-            'name' =>'Belleza',
-            'file_name' => 'Belleza.png',
-            'image' => 'beauty.png',
+            'name' =>'Cuidado personal',
+            'file_name' => 'Toothbrush.png',
+            'image' => 'electric-toothbrush.png',
             'path_tag' => '/icons/cat_icons/',
         ]);
 
@@ -336,14 +336,14 @@ class CategorySeeder extends Seeder
                 'path_tag' => '/icons/cat_icons/garden/',
             ]);
 
-            //Belleza
+            //Cuidado personal
             Category::create([
                 'status' => 1,
                 'type' => 8,
-                'name' =>'Cuidado del cabello',
-                'file_name' => 'Cuidado_del_cabello.png',
-                'image' => 'hair_care.png',
-                'path_tag' => '/icons/cat_icons/beauty/',
+                'name' =>'Cepillos de dientes',
+                'file_name' => 'Cepillos de dientes.png',
+                'image' => 'electric-toothbrush.png',
+                'path_tag' => '/icons/cat_icons/personal_care/',
             ]);
             Category::create([
                 'status' => 1,
@@ -351,7 +351,7 @@ class CategorySeeder extends Seeder
                 'name' =>'Maquillaje',
                 'file_name' => 'Maquillaje.png',
                 'image' => 'make-up.png',
-                'path_tag' => '/icons/cat_icons/beauty/',
+                'path_tag' => '/icons/cat_icons/personal_care/',
             ]);
             Category::create([
                 'status' => 1,
@@ -359,7 +359,7 @@ class CategorySeeder extends Seeder
                 'name' =>'Perfumes',
                 'file_name' => 'Perfumes.png',
                 'image' => 'fragance.png',
-                'path_tag' => '/icons/cat_icons/beauty/',
+                'path_tag' => '/icons/cat_icons/personal_care/',
             ]);
         
 

@@ -145,6 +145,7 @@ rgba2 = rgba(0,178,146,1)
 .box_products
 	width 80%
 	margin auto
+	min-height 100vh
 	padding-bottom 30px
 
 /* row ofertas */	
@@ -182,6 +183,15 @@ rgba2 = rgba(0,178,146,1)
 	display block
 	text-align center
 	width 100%
+	select
+		font-family QuicksandB
+		font-size 16px		
+		option:checked
+			background-color color2
+			color #FFF
+		option:not(:checked)
+			background-color #FFF
+			
 	.products .layer
 		background-color rgba(230,230,230,.1)
 		display block

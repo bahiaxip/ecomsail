@@ -11,9 +11,10 @@ class Store extends Component
 
     public $typealert='success';
     public $category;
-    public $subcategory;
+    public $subcategory;    
     public $computed_category;
     public $computed_subcategory;
+    //switch para mostrar/ocultar icono de carga
     public $start = false;
     //categories para nav_user
     public $categories;
@@ -34,7 +35,8 @@ class Store extends Component
             $this->category = $category;
         }
         if($subcategory)
-            $this->subcategory = $subcategory;
+            $this->subcategory = $subcategory;            
+        
         //categories para el menú de nav_user
         $this->categories = Category::where('status',1)->where('type',0)->get();
         $this->limit_page = 15;
@@ -74,8 +76,8 @@ class Store extends Component
         }
         if($this->subcategory){
             $name_subcategory = Category::findOrFail($this->subcategory)->name;
-            $title = $name_category.' > '.$name_subcategory;
-        }
+            $title = $name_category.' > '.$name_subcategory;            
+        }        
         return $title;
 
     }
@@ -86,26 +88,27 @@ class Store extends Component
     public function render()
     {
         $categories_list = Category::where('status',1)->where('type',0)->pluck('name','id');
+        
         if($this->category){
-            //dd($this->subcategory);
-            
-            $subcategories_list = Category::where('status',1)->where('type',$this->category)->pluck('name','id');
+            //dd($this->subcategory);            
+            $subcategories_list = Category::where('status',1)->where('type',$this->category)->pluck('name','id');            
             if(!$this->subcategory)
                 $subcategories_list->prepend('Seleccione...',0);
 
         }else{
+            //si se accede desde el enlace (sin ninguna categoría ni 
+            //subcategoría seleccionada) creamos arrays con el texto 
+            //"Seleccione..." y obtenemos la consulta de todas las subcategorías
             $categories_list->prepend('Seleccione...',0);
             $subcategories_list = Category::where('status',1)->where('type','!=',0)->pluck('name','id');
             $subcategories_list->prepend('Seleccione...',0);
-
-            
         }
 
         if($this->category){
             //actualizamos la copia 
             $this->computed_category = $this->category;
             if($this->subcategory){
-                //actualizamos la copia
+                //actualizamos la copia 
                 $this->computed_subcategory = $this->subcategory;
 
                 $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);                

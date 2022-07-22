@@ -13,31 +13,43 @@
             x-show="show2"
             x-transition:enter.duration.1000ms
             >
-                <div class="div_products_list mtop32">
-                	<div style="display:flex;justify-content: center;">
+                <div class="div_products_list mtop16">
+                	<div style="display:flex;justify-content: center;font-family:QuicksandB">
+                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
+                            <a href="#" class="" style="margin:5px"> Novedades</a>
+                        </div>
+                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
+                            <a href="#" class="" style="margin:5px"> Vendidos</a>
+                        </div>
+                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
+                            <a href="#" class="" style="margin:5px"> Precio</a>
+                        </div>
+                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
+                            <a href="#" class="" style="margin:5px"> Mejor valorados</a>
+                        </div>
+                        
+                		
+            		</div>
+                    <div style="display:flex;justify-content: center;margin-top:10px">
                         <div style="margin:auto 10px">
                             {{ Form::select('category',$categories_list,null,['class' => 'form-select','wire:model' => 'category','wire:change' => 'set_category'])}}
                         </div>
 
                         <div style="margin:auto 10px">
                             
-                            <select name="subcategory" id="subcategory" class="form-select" wire:model="subcategory" wire:change="set_category">
+                            <select name="subcategory" id="subcategory" class="form-select" wire:model.defer="subcategory" wire:change="set_category">
+                                
                                 @foreach($subcategories_list as $key=>$sl)
-                                <option wire:key="{{$key}}" value="{{$key}}">{{$sl}}</option>
+                                
+                                <option wire:key="{{$key}}" value="{{$key}}" class="option">{{--@if($key != 0)&#x2714;&nbsp; @endif--}} {{$sl}}</option>
+                                
                                 @endforeach
+                                
                             </select>
                             {{--
                             {{ Form::select('subcategory',$subcategories_list,null,['class' => 'form-select','wire:model' => 'subcategory','wire:change' => 'set_category'])}}
                             --}}
                             
-                        </div>
-                		
-            		</div>
-                    <div class="mtop16" style="display:flex;justify-content: center;">
-                        <div style="outline:#D3D3D3 1px solid;padding: 5px;border-radius:5px;">
-                            <a href="#" class="" style="margin:5px"> Vendidos</a>
-                            <a href="#" class=""> Promo</a>
-                            <a href="#" class=""> Precio</a>
                         </div>
                     </div>
                 @if($products->count()==0)

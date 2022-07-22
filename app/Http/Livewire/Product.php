@@ -96,7 +96,9 @@ class Product extends Component
                         //padre, que en la vista será necesario
                         //comprobar el atributo name, ya que es
                         //el único de tipo string
+                        
                         if(!isset($list[$attribute->type])){
+
                             $list[$attribute->type]['name']=$attribute->parentattr->name;
 
                             //$this->option[$attribute->type];

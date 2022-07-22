@@ -1321,5 +1321,175 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 78
         ]);
+        //product 79
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/bosch_arm_3200/bosch_arm_3200_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 79
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/bosch_arm_3200/bosch_arm_3200_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 79
+        ]);
+        //product 80
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/einhell_gc_em_1536/einhell_gc_em_1536_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 80
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/einhell_gc_em_1536/einhell_gc_em_1536_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 80
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/einhell_gc_em_1536/einhell_gc_em_1536_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 80
+        ]);
+        //product 81
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/blackanddecker_bemw351/blackanddecker_bemw351_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 81
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Bosch Home and Garden ARM 3200',
+            'image' => 'garden/mower/blackanddecker_bemw351/blackanddecker_bemw351_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 81
+        ]);
+        //product 82
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Greeworks G40LM35K',
+            'image' => 'garden/mower/greenworks_G40LM35K/greenworks_G40LM35K_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 82
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Greeworks G40LM35K',
+            'image' => 'garden/mower/greenworks_G40LM35K/greenworks_G40LM35K_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 82
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Greeworks G40LM35K',
+            'image' => 'garden/mower/greenworks_G40LM35K/greenworks_G40LM35K_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 82
+        ]);
+        //product 83
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Oral B Pro 3500',
+            'image' => 'personal_care/toothbrushes/oral_b_pro_3500/oral_b_pro_3500_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 83
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Oral B Pro 3500',
+            'image' => 'personal_care/toothbrushes/oral_b_pro_3500/oral_b_pro_3500_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 83
+        ]);
+        //product 84
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Xiaomi MI Smart T500',
+            'image' => 'personal_care/toothbrushes/xiaomi_mi_smart_t500/xiaomi_mi_smart_t500_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 84
+        ]);
+        //product 85
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Philips Sonicare 2',
+            'image' => 'personal_care/toothbrushes/philips_sonicare2/philips_sonicare2_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 85
+        ]);
+        //product 86
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Philips Sonicare 2',
+            'image' => 'personal_care/toothbrushes/philips_sonicare2/philips_sonicare2_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 86
+        ]);
+        //product 87
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/cosmopolis.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/be_happy.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/dangerous.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/guilty_pleasure.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/love_particle.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/hawai_summer.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/pure_envy.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Pintalabios OULAC',
+            'image' => 'personal_care/makeup/lipstick_OULAC_metal/sugar_plum.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
     }
 }
