@@ -159,7 +159,7 @@
                     </li>
                 </ul>            
             </li>
-            @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
+            @if(helper()->testPermission(Auth::user()->permissions,'add_attributes')== true)
                 <li>
                     <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addAttribute" wire:click.prevent="setckeditor"><i class="fa-solid fa-plus"></i> 
                         <span class="d-none d-md-inline">Agregar Atributo</span>

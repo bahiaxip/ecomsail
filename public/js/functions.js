@@ -287,6 +287,7 @@ document.addEventListener('readystatechange',() => {
                 }
                 
             })
+            //establecer combinación por defecto al mostrar producto
             if(route == 'product'){
     
                 let combinationNodes = document.querySelectorAll('.combinations_items');
@@ -294,8 +295,13 @@ document.addEventListener('readystatechange',() => {
                 console.log("llega a product")
                 console.log(combinations);
                 combinations.forEach((item)=>{
-                    console.log(item);
-                    item.firstElementChild.firstElementChild.click();
+                    console.log("item: ",item);
+                    if(item.firstElementChild.firstElementChild.getElementsByClassName="color"){
+                        console.log(item.firstElementChild.firstElementChild)
+                        console.log("es color");
+                        
+                    }
+                    item.firstElementChild.firstElementChild.firstElementChild.click();
                 })
                 
             }
@@ -1144,5 +1150,21 @@ function hide_modal_ticket(){
 }
 */
 
+function setBorderToCombSelected(data){
+    let combinationNodes = document.querySelectorAll('.combinations_items');
+    let combinations = [].slice.call(combinationNodes);
+    
+    combinations.forEach((item)=>{
+        item.firstElementChild.firstElementChild.style.outline='none';
+    })
+    console.log("data:",data)
+    setTimeout(()=>{
 
+        //data.style.outline='#494949 1px solid';
+        //data.firstElementChild.click();
+
+
+    },100)
+    
+}
 

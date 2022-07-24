@@ -55,7 +55,7 @@ class MetaTagSeeder extends Seeder
             'background'=> '#FFFFFF',
             'tag_id' => 1
         ]);
-        //métodos de pago
+        //Métodos de pago
         MetaTag::create([
             'name' => 'Tarjeta',
             'background'=> '#FFFFFF',
@@ -71,6 +71,5 @@ class MetaTagSeeder extends Seeder
             'background'=> '#FFFFFF',
             'tag_id' => 2
         ]);
-
     }
 }

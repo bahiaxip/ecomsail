@@ -383,8 +383,9 @@ class Product extends Component
             $settings_prod = SettingsProducts::where('product_id',$id)->first();
         endif;
         //dd(SettingsProducts::where('product_id',$id)->get());
-        if($settings_prod->availability)
-            $this->availability = $settings_prod->availability;
+        //availability inicia con 1(online y tienda), por defecto
+        
+        $this->availability = $settings_prod->availability;
         $this->product_state = $settings_prod->product_state;
         //es necesario pasarlo como boolean,así que usamos filter_var para convertir a bool
         //$this->not_minstock = $settings_prod->not_minstock;

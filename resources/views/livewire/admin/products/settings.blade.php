@@ -28,14 +28,14 @@
             <div class="row mtop16">                
                 <div class="col-md-6">
                   {{ Form::label('availability','Disponibilidad')}}
-                  {{ Form::select('availability',[0=>'Online y tienda',1=>'Sólo Online',2=>'Sólo tienda'],null,['class' => 'form-select','wire:model' => 'availability'])}}
+                  {{ Form::select('availability',get_availability(),null,['class' => 'form-select','wire:model' => 'availability'])}}
                   @error('availability')
                     <p class="text-danger">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="col-md-6">
                     {{ Form::label('product_state','Estado de producto')}}
-                    {{ Form::select('product_state',[0=>'Nuevo',1=>'Usado',2=>'Reacondicionado'],null,['class' => 'form-select','wire:model.defer' => 'product_state'])}}
+                    {{ Form::select('product_state',get_product_state(),null,['class' => 'form-select','wire:model.defer' => 'product_state'])}}
                   @error('product_state')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
@@ -155,7 +155,7 @@
             <div class="row mtop16">
                 <div class="col-md-6">
                   {{ Form::label('partial_price','Precio(Imp.exc.)') }}
-                  {{ Form::number('partial_price',0,['class' => 'form-control','wire:model.defer' =>'partial_price','step' =>'any','min' => 0]) }}
+                  {{ Form::number('partial_price',0,['class' => 'form-control','wire:model.defer' =>'partial_price','step' =>'any','min' => 0,'disabled']) }}
                   @error('partial_price')
                   <p class="text-danger">{{$message}}</p>
                   @enderror

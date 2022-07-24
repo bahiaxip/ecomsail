@@ -130,18 +130,7 @@ class Product extends Component
     }
 
     public function updated(){
-        //actualizamos el precio si seleccionamos combinacion
-        if($this->quantity != $this->quantity_tmp)
-            $this->set_quantity();
-        if($this->option != $this->computed_option){
-            $this->set_price_combinations();
-            $this->price_tmp = $this->product->price * $this->quantity;
-            if($this->added_price){
-                 $this->added_price = $this->added_price * $this->quantity;   
-            }
-            $this->price_tmp = $this->added_price + $this->price_tmp;
-            //$this->dispatchBrowserEvent('contentChanged');
-        }
+        
 
     }
 

@@ -13,7 +13,8 @@ class CombinationSeeder extends Seeder
      */
     public function run()
     {
-        //product 2
+    //product 2
+        //Color
         Combination::create([
             'name' => 'Color > Blanco',            
             'list_ids' => 5,
@@ -24,9 +25,11 @@ class CombinationSeeder extends Seeder
             'name' => 'Color > Gris',
             'list_ids' => 7,
             'amount' => 0,
+            'added_price' => 2,
             'product_id' => 2
         ]);
-        //product 31
+    //product 31
+        //Color
         Combination::create([
             'name' => 'Color > Blanco',            
             'list_ids' => 5,
@@ -39,7 +42,8 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 31
         ]);
-        //product 33
+    //product 33
+        //Color
         Combination::create([
             'name' => 'Color > Negro',            
             'list_ids' => 6,
@@ -64,72 +68,73 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 33
         ]);
-        /*
+        //Talla
         Combination::create([
             'name' => 'Talla > XS',
-            'list_ids' => 28,
+            'list_ids' => 37,
             'amount' => 0,
             'product_id' => 33
         ]);
         Combination::create([
             'name' => 'Talla > S',
-            'list_ids' => 30,
+            'list_ids' => 38,
             'amount' => 0,
             'product_id' => 33
         ]);
         Combination::create([
             'name' => 'Talla > M',
-            'list_ids' => 31,
+            'list_ids' => 39,
             'amount' => 0,
             'product_id' => 33
         ]);
         Combination::create([
             'name' => 'Talla > L',
-            'list_ids' => 32,
+            'list_ids' => 40,
             'amount' => 0,
             'product_id' => 33
         ]);
         Combination::create([
             'name' => 'Talla > XL',
-            'list_ids' => 33,
+            'list_ids' => 41,
             'amount' => 0,
             'product_id' => 33
         ]);
-        */
-        //product 34
-        /*
+        
+    //product 34
+        
         Combination::create([
             'name' => 'Talla > XS',
-            'list_ids' => 28,
+            'list_ids' => 37,
             'amount' => 0,
             'product_id' => 34
         ]);
         Combination::create([
             'name' => 'Talla > S',
-            'list_ids' => 30,
+            'list_ids' => 38,
             'amount' => 0,
             'product_id' => 34
         ]);
         Combination::create([
             'name' => 'Talla > M',
-            'list_ids' => 31,
+            'list_ids' => 39,
             'amount' => 0,
             'product_id' => 34
         ]);
         Combination::create([
             'name' => 'Talla > L',
-            'list_ids' => 32,
+            'list_ids' => 40,
             'amount' => 0,
             'product_id' => 34
         ]);
         Combination::create([
             'name' => 'Talla > XL',
-            'list_ids' => 33,
+            'list_ids' => 41,
             'amount' => 0,
             'product_id' => 34
         ]);
-        */
-        //product 35
+        
+    //product 35
+        //Color
         Combination::create([
             'name' => 'Color > Blanco',            
             'list_ids' => 5,
@@ -191,7 +196,7 @@ class CombinationSeeder extends Seeder
             'product_id' => 35
         ]);
 
-        //product 36
+    //product 36
         Combination::create([
             'name' => 'Color > Blanco',
             'list_ids' => 5,
@@ -208,18 +213,21 @@ class CombinationSeeder extends Seeder
             'name' => 'Color > Amarillo',
             'list_ids' => 11,
             'amount' => 0,
+            'added_price' => 2,
             'product_id' => 36
         ]);
         Combination::create([
             'name' => 'Color > Azul',
             'list_ids' => 8,
             'amount' => 0,
+            'added_price' => 2,
             'product_id' => 36
         ]);
         Combination::create([
             'name' => 'Color > Lila',
             'list_ids' => 14,
             'amount' => 0,
+            'added_price' => 2,
             'product_id' => 36
         ]);
         Combination::create([
@@ -240,39 +248,40 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 36
         ]);
-        /*
+        //Talla
         Combination::create([
             'name' => 'Talla > XS',
-            'list_ids' => 28,
+            'list_ids' => 37,
             'amount' => 0,
             'product_id' => 36
         ]);
         Combination::create([
             'name' => 'Talla > S',
-            'list_ids' => 30,
+            'list_ids' => 38,
             'amount' => 0,
             'product_id' => 36
         ]);
         Combination::create([
             'name' => 'Talla > M',
-            'list_ids' => 31,
+            'list_ids' => 39,
             'amount' => 0,
             'product_id' => 36
         ]);
         Combination::create([
             'name' => 'Talla > L',
-            'list_ids' => 32,
+            'list_ids' => 40,
             'amount' => 0,
             'product_id' => 36
         ]);
         Combination::create([
             'name' => 'Talla > XL',
-            'list_ids' => 33,
+            'list_ids' => 41,
             'amount' => 0,
             'product_id' => 36
         ]);
-        */
-        //product 36
+        
+    //product 36
+        //Color
         Combination::create([
             'name' => 'Color > Blanco',
             'list_ids' => 5,
@@ -316,39 +325,40 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 37
         ]);
-        /*
+        //Talla
         Combination::create([
             'name' => 'Talla > XS',
-            'list_ids' => 28,
+            'list_ids' => 37,
             'amount' => 0,
             'product_id' => 37
         ]);
         Combination::create([
             'name' => 'Talla > S',
-            'list_ids' => 30,
+            'list_ids' => 38,
             'amount' => 0,
             'product_id' => 37
         ]);
         Combination::create([
             'name' => 'Talla > M',
-            'list_ids' => 31,
+            'list_ids' => 39,
             'amount' => 0,
             'product_id' => 37
         ]);
         Combination::create([
             'name' => 'Talla > L',
-            'list_ids' => 32,
+            'list_ids' => 40,
             'amount' => 0,
             'product_id' => 37
         ]);
         Combination::create([
             'name' => 'Talla > XL',
-            'list_ids' => 33,
+            'list_ids' => 41,
             'amount' => 0,
             'product_id' => 37
         ]);
-        */
-        //product 38
+        
+    //product 38
+        //Color
         Combination::create([
             'name' => 'Color > Azul',
             'list_ids' => 8,
@@ -362,33 +372,34 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 38
         ]);
-        /*
+        //Talla
         Combination::create([
             'name' => 'Talla > S',
-            'list_ids' => 30,
+            'list_ids' => 38,
             'amount' => 0,
             'product_id' => 38
         ]);
         Combination::create([
             'name' => 'Talla > M',
-            'list_ids' => 31,
+            'list_ids' => 39,
             'amount' => 0,
             'product_id' => 38
         ]);
         Combination::create([
             'name' => 'Talla > L',
-            'list_ids' => 32,
+            'list_ids' => 40,
             'amount' => 0,
             'product_id' => 38
         ]);
         Combination::create([
             'name' => 'Talla > XL',
-            'list_ids' => 33,
+            'list_ids' => 41,
             'amount' => 0,
             'product_id' => 38
         ]);
-        */
-        //product 39
+        
+    //product 39
+        //Color
         Combination::create([
             'name' => 'Color > Azul marino',
             'list_ids' => 17,
@@ -419,7 +430,7 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 39
         ]);
-        //product 40
+    //product 40
         Combination::create([
             'name' => 'Color > Negro',
             'list_ids' => 6,
@@ -430,18 +441,21 @@ class CombinationSeeder extends Seeder
             'name' => 'Color > Rojo',
             'list_ids' => 10,
             'amount' => 0,
+            'added_price' => 1,
             'product_id' => 40
         ]);
         Combination::create([
             'name' => 'Color > Rosa',
             'list_ids' => 28,
             'amount' => 0,
+            'added_price' => 1,
             'product_id' => 40
         ]);
         Combination::create([
             'name' => 'Color > Burdeos',
             'list_ids' => 36,
             'amount' => 0,
+            'added_price' => 1,
             'product_id' => 40
         ]);
         Combination::create([

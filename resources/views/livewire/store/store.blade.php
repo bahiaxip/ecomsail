@@ -14,18 +14,18 @@
             x-transition:enter.duration.1000ms
             >
                 <div class="div_products_list mtop16">
-                	<div style="display:flex;justify-content: center;font-family:QuicksandB">
-                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
-                            <a href="#" class="" style="margin:5px"> Novedades</a>
+                	<div class="filters_products">
+                        <div class="filter_product">
+                            <a href="#"> Novedades</a>
                         </div>
-                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
-                            <a href="#" class="" style="margin:5px"> Vendidos</a>
+                        <div class="filter_product">
+                            <a href="#"> Vendidos</a>
                         </div>
-                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
-                            <a href="#" class="" style="margin:5px"> Precio</a>
+                        <div class="filter_product">
+                            <a href="#"> Precio</a>
                         </div>
-                        <div style="outline:#D3D3D3 1px solid;padding: 8px;border-radius:5px;margin:auto 5px">
-                            <a href="#" class="" style="margin:5px"> Mejor valorados</a>
+                        <div class="filter_product">
+                            <a href="#"> Mejor valorados</a>
                         </div>
                         
                 		
@@ -41,7 +41,7 @@
                                 
                                 @foreach($subcategories_list as $key=>$sl)
                                 
-                                <option wire:key="{{$key}}" value="{{$key}}" class="option">{{--@if($key != 0)&#x2714;&nbsp; @endif--}} {{$sl}}</option>
+                                <option wire:key="{{$key}}" value="{{$key}}" onmouseenter="changeColor('hola')" class="option">{{--@if($key != 0)&#x2714;&nbsp; @endif--}} {{$sl}}</option>
                                 
                                 @endforeach
                                 

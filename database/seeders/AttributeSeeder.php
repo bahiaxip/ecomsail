@@ -102,8 +102,8 @@ class AttributeSeeder extends Seeder
                 'hex' => '#006400'
             ],
             [
-                'text'=>'rosa',
-                'hex' => '#E3E4E5'
+                'text'=>'verde claro',
+                'hex' => '#90EE90'
             ],
             [
                 'text'=>'rojo oscuro',

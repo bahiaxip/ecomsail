@@ -8,4 +8,18 @@ function get_actionslist($filter_type){
 	}
 	return $list;
 }
+function get_availability(){
+	return [
+		1 => 'Online y tienda',
+		2 => 'Sólo Online',
+		3 => 'Sólo tienda'
+	];
+}
+function get_product_state(){
+	return [
+		1 => 'Nuevo',
+		2 => 'Usado',
+		3 => 'Reacondicionado'
+	];
+}
 ?>

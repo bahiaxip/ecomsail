@@ -26,6 +26,8 @@ class CreateCategoriesTable extends Migration
             $table->string('file_ext')->nullable(); //extensión de imagen
             $table->string('image')->nullable(); //nombre imagen o icono (puede ser aleatorio y no coincidir con el file_name y file_ext)
             $table->string('thumb')->nullable(); //miniatura de imagen o otro icono
+            //mantenemos icon_hexcode. Sería necesario sustituir los métodos
+            //pluck() por get([...]) para los selectsgit 
             $table->string('icon_hexcode')->nullable();
             $table->softDeletes();
             $table->timestamps();

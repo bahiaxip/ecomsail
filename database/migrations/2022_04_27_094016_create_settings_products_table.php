@@ -11,11 +11,14 @@ class CreateSettingsProductsTable extends Migration
      *
      * @return void
      */
+    /*
+    availability: 1 -> Online y tienda, 2 -> solo online, 3 -> solo tienda
+    */
     public function up()
     {
         Schema::create('settings_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('availability')->default(0); 
+            $table->integer('availability')->default(1); 
             $table->integer('product_state')->default(0);           
             $table->unsignedDecimal('long')->nullable();
             $table->unsignedDecimal('width')->nullable();
