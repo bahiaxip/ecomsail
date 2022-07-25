@@ -18,9 +18,11 @@ class Permissions {
 	}
 
 	public $permissions_list = [
+        /*
         'home' =>[
             'list_home' => null,
         ],
+        */
         'users' => [
             'list_users' => null,
             'add_users' => null,

@@ -18,7 +18,8 @@ Route::group([
 	'middleware' => ['auth','admin'],
 	'prefix'=>'/admin'
 	],function(){
-		Route::get('/home',\App\Http\Livewire\Admin\Home::class)->name('list_home');
+		Route::get('/home',\App\Http\Livewire\Admin\Home::class)->name('list_home')
+			->middleware('role_permissions');
 
 		//categories
 		Route::get('/categories/{filter_type}/{subcat?}',\App\Http\Livewire\Admin\Category::class)

@@ -298,7 +298,7 @@ class CombinationSeeder extends Seeder
             'name' => 'Color > Azul',
             'list_ids' => 8,
             'amount' => 0,
-            'product_id' => 36
+            'product_id' => 37
         ]);
         
         Combination::create([
