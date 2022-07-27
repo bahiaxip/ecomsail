@@ -349,7 +349,7 @@
                   <div class="row mtop16 boxes">
                       
                         <div class="panel shadow"  style="display:flex;justify-content:space-between;padding:0">
-                            <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse_{{$at->id}}" aria-expanded="false" aria-controls="collapseExample" type="button" style="text-align:left;">
+                            <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse_{{$at->id}}" aria-expanded="false" aria-controls="collapseExample" type="button" style="text-align:left;" onclick="passData(this)">
                               <i class="fas fa-tags"></i>
                               {{$at->name}}
                               <i class="fa-solid fa-chevron-down" style="float:right"></i>  
@@ -371,7 +371,7 @@
                                   @else
                                     @foreach($at->values() as $a)
                                       <div class="form-check values">
-                                        {{ Form::radio('list_'.$a->parentattr->id,true,null,['class' => 'form-check-input','id' => 'list_'.$a->id,'onclick' =>"addValue('$a->id','$a->name',".$a->parentattr->id.",this,)" ]) }}
+                                        {{ Form::checkbox('list_'.$a->parentattr->id,true,null,['class' => 'form-check-input','id' => 'list_'.$a->id,'onclick' =>"addValue('$a->id','$a->name',".$a->parentattr->id.",this,)" ]) }}
                                         {{ Form::label('list_'.$a->id,$a->name) }}
                                       </div>
                                     @endforeach

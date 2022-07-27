@@ -534,15 +534,65 @@ function addValue(value_id,value_name,parent_id,el=null){
     */
 
     //si es el primero añadimos a la lista, si no es el primero comprobamos si pertenecen 
-    //al mismo padre, ya que, al ser input radio solo puede haber uno seleccionado del mismo grupo
+    //al mismo padre
     if(filteredList.length == 0){
         list_combinations.push({id:value_id,name:value_name,parent_id:parent_id});
+        console.log("es el primero");
     }else{
-        filteredList = list_combinations.filter(item => item.parent_id != parent_id)
-        filteredList.push({id:value_id,name:value_name,parent_id:parent_id})
-        list_combinations = filteredList;
+        //aseguramos que son del mismo padre (aunque no se debería poder al desactivar los botones collapse)
+        //let list = list_combinations.filter(item => item.parent_id == parent_id && item.id != value_id)
+        let list=false;
+        filteredList.forEach((item) => {
+            console.log("item: ",item)
+            if(item.id == value_id){
+                filteredList = filteredList.filter(item => item.id != value_id);
+                //eliminamos el id de la lista
+                list=true;
+            }
+        })
+        if(!list)
+            filteredList.push({id:value_id,name:value_name,parent_id:parent_id})
+
+        console.log("pasa al segundo: ",filteredList)
     }
+    list_combinations = filteredList;
+    //identificamos el elemento .boxes como selected para poder desactivar el resto
+    let parentSelected = el.parentNode.parentNode.parentNode.parentNode;
+    parentSelected.classList.add('selected')
+    //desactivamos el resto de collapses
+    inactiveCollapses(el)
+    
+    testValues();
     setListValues();
+    
+}
+//desactivamos y cerramos los menús collapse de atributos excepto el seleccionado(selected)
+function inactiveCollapses(){
+    let boxesNode = document.querySelectorAll('.boxes');
+    let boxes = [].slice.call(boxesNode);
+    //console.log(boxes)  
+    boxes.map((box)=>{  
+        if(!box.classList.contains('selected')){
+            //desactivamos botones 
+            box.firstElementChild.firstElementChild.setAttribute('disabled','disabled');
+            let show = box.querySelector('.collapse.show');
+            if(show){
+                show.classList.remove('show');
+            }
+        }
+    })
+}
+//activar todos los botones collapses desactivados(disabled)
+function activeAllCollapses(){
+    let boxesNode = document.querySelectorAll('.boxes');
+    let boxes = [].slice.call(boxesNode);
+    boxes.map((box)=>{ 
+        if(box.classList.contains('selected'))
+            box.classList.remove('selected');
+        if(box.firstElementChild.firstElementChild.getAttribute('disabled') == 'disabled'){
+            box.firstElementChild.firstElementChild.removeAttribute('disabled');
+        }
+    })
 }
 function setListValues(){
     let list=[];
@@ -554,6 +604,44 @@ function setListValues(){
     })
     let panel = document.querySelector('#panel_combinations');
     panel.innerHTML=list.join(' ');
+}
+//cerrar todos los collapse sin modificar nada
+function closeAllCollapse(){
+    let boxesNode = document.querySelectorAll('.boxes');
+    let boxes = [].slice.call(boxesNode);
+    boxes.map((box)=>{
+        let show = box.querySelector('.collapse.show');
+        if(show){
+            show.classList.remove('show');
+        }
+    })
+}
+//comprueba si existe algún checkbox marcado/seleccionado
+function revise_boxes(){
+    let boxesNode = document.querySelectorAll('.boxes');
+    let boxes = [].slice.call(boxesNode);
+    let checked_values=[];
+    let data = false;
+    boxes.map((box)=>{        
+        let valuesNode = box.querySelectorAll('.values');
+        let values = [].slice.call(valuesNode);
+        const checked_values = (child) => child.firstElementChild.checked;        
+        if(values.some(checked_values))
+            data=true;        
+        console.log("checked_values: ",checked_values)
+    });
+    return data;
+    
+}
+function testValues(){
+    let test = revise_boxes();
+    //si no existe ningún checkbox marcado activamos todos los buttons collapse
+    //y eliminamos la clase selected del elemento boxes
+    if(!test){
+        activeAllCollapses();
+        console.log("test: ",test)
+    }
+    
 }
 function deleteValue(id,name){    
     list_combinations = list_combinations.filter(item => item.id != id)
@@ -568,7 +656,7 @@ function clearPanelCombinations(){
 
 }
 //resetear todos los checkbox de valores de los atributos para crear las combinaciones
-async function clearValues(){
+function clearValues(){
     let boxesNode = document.querySelectorAll('.boxes');
     let boxes = [].slice.call(boxesNode);
     //console.log(boxes)  
@@ -585,7 +673,10 @@ async function clearValues(){
 //mostrar/ocultar modal de confirmación para la eliminación de combinación o galería
 //para pasar el id de combinación usamos la variable combIdTmp
 //para detectar si es galería o combinación pasamos gallery
+//¿¿ Necesario cerrar los collapses antes de mostrar el modal ??
 function confirmComb(id){
+    //cerramos todos los collapse
+    closeAllCollapse()
         let confirmComb = document.querySelector('#confirmComb');
         let btn_delete =confirmComb.querySelector('#btn_delete');    
         combIdTmp = id;
@@ -1167,4 +1258,11 @@ function setBorderToCombSelected(data){
     },100)
     
 }
+let combination_selected;
+function passData(data){
+    //data.disabled=true;
+    //data.classList.add('selected');
+    console.log("data: ",data)
+}
+
 

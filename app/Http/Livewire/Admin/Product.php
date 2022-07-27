@@ -800,6 +800,9 @@ class Product extends Component
         $this->emit('combinations');
     }
     */
+    //el método createCombinations ha sido convertido: Tan solo se pueden añadir
+    //a la misma vez valores del mismo atributo padre y las combinaciones se crearán
+    //de uno en uno, es decir, un valor por cada combinación
     public function createCombinations($data,$product_id){
         $parent;
         $name_list = [];
@@ -808,25 +811,21 @@ class Product extends Component
         $switchbol = false;
         //la cantidad de atributos seleccionados
         $counter_data = count($data);
+        //$data: lista de elementos seleccionados
         foreach($data as $d){
-            $at = Attr::findOrFail($d['id']);            
+            
+            //obtenemos el registro de cada uno de los valores seleccionados
+            $at = Attr::findOrFail($d['id']);
+
             $parent[$at->type] = $at->id;
+            //lista de combinaciones de la db del producto
             $combinations = Comb::where('product_id',$product_id)->get();
             //comprobamos si ya existe el mismo valor en una combinación
             foreach($combinations as $comb){
-
+        //$list: lista de valores que tiene cada una de las combinaciones convertida a array                
                 $list = explode(",",$comb->list_ids);
-                //si las combinaciones que ya existen tienen
-                //una cantidad de valores distinta a la combinación
-                //que se desea crear devolvemos mensaje de error
-                if($counter_data != count($list)){
-                    $this->typealert = 'danger';
-                        session()->flash('message2',"La combinación debe tener la misma cantidad de valores que las combinaciones existentes");
-                        $this->emit('combinations');
-                        return;
-                }
 
-                foreach($list as $l){
+                foreach($list as $l){                
                     //si ya existe el mismo valor en una de las combinaciones
                     //devolvemos mensaje de error, así nos aseguramos de que 
                     //nunca haya valores duplicados
@@ -837,13 +836,28 @@ class Product extends Component
                         return;
                     }
                 }
-            }   
+            }            
+            /*
             $name_list[] = $at->parentattr->name.' > '.$at->name;
             $id_list[] = $at->id;
+            */
+            $name_list = $at->parentattr->name.' > '.$at->name;
+
+            $product = Prod::findOrFail($product_id);
+            $price = $product->price;
+            $comb = Comb::create([
+                'name' => $name_list,
+                'list_ids' => $at->id,
+                'amount' => 0,
+                'product_id' => $product_id,
+                'final_price' => 0.00
+            ]);
+
         }
         
         //obtenemos el precio del producto para añadirlo a la combinación
         //en la creación
+        /*
         $product = Prod::findOrFail($product_id);
         $price = $product->price;
         $name_list_string = implode(",",$name_list);
@@ -855,6 +869,7 @@ class Product extends Component
             'product_id' => $product_id,
             'final_price' => 0.00
         ]);
+        */
         $this->combinations = Comb::where('product_id',$product_id)->get();
         $this->emit('combinations');
 
