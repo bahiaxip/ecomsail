@@ -248,6 +248,7 @@ class Product extends Component
     //características seleccionadas
     public function set_price_combinations(){
         $list_values = [];
+        //dd($this->option);
         //recorremos los boxes seleccionados
         foreach($this->option as $o){
             //$o es el attribute_id que representa el valor(subatributo)
@@ -298,6 +299,7 @@ class Product extends Component
     public function render()
     {
         //dd($this->combinations_list);
+        $this->set_price_combinations();
         $this->computed_option = $this->option;
         $favorite = Favorite::where('user_id',$this->user_id)->where('product_id',$this->product_id)->first();
         if($favorite)
