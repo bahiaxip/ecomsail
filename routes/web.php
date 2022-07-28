@@ -25,8 +25,7 @@ Route::get('/', function () {
 //Route::get('/',[HomeController::class,'home'])->name('home');
 Route::get('/',Home::class)->name('home');
 
-//cart
-Route::get('/cart',Cart::class)->name('cart');
+
 
 //product
 Route::get('/product/{id}',Product::class)->name('product');
@@ -54,6 +53,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/favorites',Favorite::class)->name('favorites');
     //addresses
     Route::get('/address/{id}',Address::class)->name('address');
+    //cart
+    Route::get('/cart',Cart::class)->name('cart');
 });
 Route::get('/login',[LoginController::class,'login'])->name('login');
 Route::post('/login',[LoginController::class,'loginIn'])->name('login');

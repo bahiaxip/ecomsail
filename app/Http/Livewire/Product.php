@@ -130,8 +130,22 @@ class Product extends Component
     }
 
     public function updated(){
-        
+        if(!$this->quantity){
+            //$this->quantity = 1;
+         //actualizamos el precio si seleccionamos combinacion
+        }
+        if($this->quantity != $this->quantity_tmp)
+            $this->set_quantity();
+        if($this->option != $this->computed_option){
+            $this->set_price_combinations();
+            $this->price_tmp = $this->product->price * $this->quantity;
 
+            if($this->added_price){
+                 $this->added_price = $this->added_price * $this->quantity;   
+            }
+            $this->price_tmp = $this->added_price + $this->price_tmp;
+            //$this->dispatchBrowserEvent('contentChanged');
+        }
     }
 
     public function add_cart(){
@@ -249,7 +263,7 @@ class Product extends Component
     public function set_price_combinations(){
         $list_values = [];
         //recorremos los boxes seleccionados
-        foreach($this->option as $o){
+        foreach($this->option as $o){            
             //$o es el attribute_id que representa el valor(subatributo)
             //generamos un array de los valores
             $list_values[] = $o;            
@@ -269,8 +283,9 @@ class Product extends Component
         }else{
             $sum = 0;
             foreach($list_values as $value){
-                $partial_combination = Combination::where('list_ids',$value)->first();
-                if($partial_combination){
+                
+                $partial_combination = Combination::where('list_ids',$value)->where('product_id',$this->product_id)->first();                
+                if($partial_combination){                    
                     $sum = $sum + $partial_combination->added_price;
                 }
             }
@@ -297,6 +312,7 @@ class Product extends Component
     }
     public function render()
     {
+        //dd($this->option);
         //dd($this->combinations_list);
         $this->computed_option = $this->option;
         $favorite = Favorite::where('user_id',$this->user_id)->where('product_id',$this->product_id)->first();

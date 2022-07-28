@@ -73,6 +73,9 @@
                       @foreach($combinations_list as $key=>$comb)
                         <div class="combinations_name ">
                             {{Form::label($comb['name'],$comb['name'])}}
+                            @if($option)
+                            {{$option[$key]}}
+                            @endif
                         </div>
                         <div class="combinations_items">
                           
@@ -131,7 +134,7 @@
                         <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus')">
                           <i class="fas fa-minus"></i>
                         </a>
-                        {{ Form::text('quantity',1,['class' => ' form-control-sm','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity']) }}
+                        {{ Form::text('quantity',1,['class' => ' form-control-sm','min' => 1,'id' => 'add_to_cart_quantity','wire:model'=> 'quantity','disabled']) }}
                         <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus')">
                           <i class="fas fa-plus"></i>
                         </a>

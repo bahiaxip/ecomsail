@@ -22,4 +22,17 @@ function get_product_state(){
 		3 => 'Reacondicionado'
 	];
 }
+//llamada desde el nav_user (icono de cesta dentro de barra de navegación)
+//para mostrar la cantidad de productos en el carrito temporal
+function getCountOrders(){
+	$id = Auth::id();
+	if($id){
+		$order = new \App\Models\Order;
+		$order_tmp = $order->where('user_id',$id)->where('status',0)->first();
+		$order_item = new \App\Models\Order_Item;	
+		$count = $order_item->where('user_id',$id)->where('order_id',$order_tmp->id)->count();
+		return $count;
+	}
+	
+}
 ?>

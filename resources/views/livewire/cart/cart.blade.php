@@ -102,7 +102,11 @@
                             <div class="row div_price" >
                                 <div class="price" >
                                     <div>
-                                        <span style="font-size:12px"></span> {{number_format(floatval(number_format($oi->total,2,'.','')),0,",",".")}} €
+                                        <span style="font-size:12px"></span> 
+                                        {{--
+                                        number_format(floatval(number_format($oi->total,2,'.','')),0,",",".")
+                                        --}} {{--€--}}
+                                        {{floatval(number_format($oi->total,2,'.',''))}}€
                                     </div>
                                     <div class="div_quantity">
                                         <div class="quantity">
