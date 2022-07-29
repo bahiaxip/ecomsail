@@ -10,6 +10,8 @@ class Store extends Component
     use WithPagination;
 
     public $typealert='success';
+    //si mantenmos category a 0 o null, la primera selección regresa erróneamente 
+    //al primer elemento de la lista(Ropa), después de cargar los productos correctamente
     public $category;
     public $subcategory;    
     public $computed_category;
@@ -31,7 +33,7 @@ class Store extends Component
         }
         */
 
-        if($category){
+        if($category){            
             $this->category = $category;
         }
         if($subcategory)
@@ -39,31 +41,31 @@ class Store extends Component
         
         //categories para el menú de nav_user
         $this->categories = Category::where('status',1)->where('type',0)->get();
+        //limite de productos por página
         $this->limit_page = 15;
         $title = $this->getTitle();
         if($title){
             $this->title = $this->getTitle();    
         }
-        
-        
     }
     public function set_category(){
         $this->start = false;
         
         $title;        
-        if($this->category != $this->computed_category){            
-            $this->subcategory = null;
-            
+        if($this->category != $this->computed_category && $this->category != 0){
+            $this->subcategory = null;            
         }
-        if(!$this->category && $this->subcategory){
+
+        if(!$this->category && $this->subcategory && $this->category != 0){        
             $this->category = Category::findOrFail($this->subcategory)->type;
+        }
+        if($this->category == 0){
+            $this->computed_category = null;
         }
 
         $this->resetPage();
         $title = $this->getTitle();        
         $this->emit('title',['title' => $title]);
-        
-
     }
     public function getTitle(){
         //pasamos el nuevo título de store
@@ -71,15 +73,19 @@ class Store extends Component
         $name_subcategory;
         $title=null;
         if($this->category){
+
             $name_category = Category::findOrFail($this->category)->name;
             $title = $name_category;
         }
         if($this->subcategory){
             $name_subcategory = Category::findOrFail($this->subcategory)->name;
-            $title = $name_category.' > '.$name_subcategory;            
-        }        
+            if(!$this->category){
+               $title = $name_subcategory;
+            }else{
+                $title = $name_category.' > '.$name_subcategory;
+            }
+        }
         return $title;
-
     }
 
     public function updated(){
@@ -87,27 +93,33 @@ class Store extends Component
     }
     public function render()
     {
+
+        //dd($this->category);
         $categories_list = Category::where('status',1)->where('type',0)->pluck('name','id');
+        $categories_list->prepend('Seleccione...',0);
         
         if($this->category){
-            //dd($this->subcategory);            
+                       
             $subcategories_list = Category::where('status',1)->where('type',$this->category)->pluck('name','id');            
             if(!$this->subcategory)
                 $subcategories_list->prepend('Seleccione...',0);
 
         }else{
+            
             //si se accede desde el enlace (sin ninguna categoría ni 
             //subcategoría seleccionada) creamos arrays con el texto 
             //"Seleccione..." y obtenemos la consulta de todas las subcategorías
-            $categories_list->prepend('Seleccione...',0);
+            
             $subcategories_list = Category::where('status',1)->where('type','!=',0)->pluck('name','id');
             $subcategories_list->prepend('Seleccione...',0);
         }
-
+        //dd($this->category);
         if($this->category){
+
             //actualizamos la copia 
             $this->computed_category = $this->category;
             if($this->subcategory){
+
                 //actualizamos la copia 
                 $this->computed_subcategory = $this->subcategory;
 
@@ -117,11 +129,17 @@ class Store extends Component
             }
             
         }else{
-            $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
+            if($this->subcategory){
+                $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);
+            }else{
+            //dd($this->category);
+                $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
+            }
         }
 
         $this->start=true;
-        $data = ['products' => $products,'categories_list' => $categories_list,'subcategories_list' => $subcategories_list];
+        //dd($this->category);
+        $data = ['products' => $products,'categories_list' => $categories_list,'subcategories_list' => $subcategories_list,'computed_cat' => $this->computed_category];
         return view('livewire.store.store',$data)->extends('layouts.main');
     }
 }

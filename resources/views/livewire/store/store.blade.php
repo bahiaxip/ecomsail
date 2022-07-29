@@ -31,8 +31,35 @@
                 		
             		</div>
                     <div style="display:flex;justify-content: center;margin-top:10px">
-                        <div style="margin:auto 10px">
+                        <div class="" style="margin:auto 10px">
+                            {{--
                             {{ Form::select('category',$categories_list,null,['class' => 'form-select','wire:model' => 'category','wire:change' => 'set_category'])}}
+                            --}}
+                            {{--
+                            Debido a un error con livewire en la primera selección de
+                            category, ha sido necesario añadir un if-else para aislar 
+                            el valor 0. Posiblemente el error esté relacionado con
+                            el valor 0 de category, al realizar las comprobaciones, ya sea en set_category() o en render() reconoce category cuando es 0 y no debería reconocerlo, revisar en caso de error.
+                            --}}
+                            
+                            <select name="category" id="category" class="form-select" wire:model="category" wire:change="set_category">
+                                @if($categories_list)
+                                @foreach($categories_list as $key=>$c)
+                                @if($key == 0)
+                                    @if(!$computed_cat)
+                                    <option wire:key="{{$key}}"  value="{{$key}}">
+                                        {{$c}}
+                                    </option>
+                                    @endif
+                                @else
+                                    <option   value="{{$key}}">
+                                        {{$c}}
+                                    </option>
+                                @endif
+                                @endforeach
+                                @endif
+                            </select>
+                            
                         </div>
 
                         <div style="margin:auto 10px">
