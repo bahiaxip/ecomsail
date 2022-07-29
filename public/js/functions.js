@@ -326,12 +326,42 @@ document.addEventListener('readystatechange',() => {
         if(route == "list_products"){
             
         }
+
         
 
         
 
 
 })
+//efectos hover con javascript según sean imágenes o icons font awesome
+if(route == 'offers'){
+    //comprobamos si es elemento font awesome(<i>) o imagen y establecemos
+    //la correspondiente
+    let divCategoriesNodes = document.querySelectorAll('.div_category');
+    let divCategories = [].slice.call(divCategoriesNodes);
+    let icon_hover=[];
+    let icon = [];
+    divCategories.map((category,counter)=>{
+        //si es elemento i de font awesome
+        if(!category.getElementsByTagName('i')[0]){
+            icon_hover[counter] = category.getElementsByTagName('input')[0].getAttribute('data_icon');
+            icon[counter] = category.querySelector('.icon').style.backgroundImage;
+
+            console.log(counter)
+            category.addEventListener('mouseover',()=>{
+                category.querySelector('.icon').style.backgroundImage="url("+icon_hover[counter]+")"
+            })
+            category.addEventListener('mouseout',()=>{
+                category.querySelector('.icon').style.backgroundImage=icon[counter];
+            })            
+        //si es imagen
+        }else{
+            console.log("existe")
+        }
+        
+    })
+    console.log("offers: ",divCategories)
+}
 //Inicio de librería AOS
         /*
         window.scrollTop='0';

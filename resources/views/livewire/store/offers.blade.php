@@ -11,10 +11,31 @@
             x-transition:enter.duration.1000ms
             >
             <div class="box_categories mtop16" >
-            	<div class="dflex">
+            	<div class="nav_offers_categories">
+            		@foreach($categories as $c)
+	            		@if($c->icon_awesome_offer || $c->icon_image_offer)
+	            		<div class="div_category">
+			        		<div class="category">
+			        			@if($c->icon_awesome_offer)
+			        			{!!$c->icon_awesome_offer!!}
+			        			@else
+			        			<div class="icon" style="background-image:url({{url('icons/cat_icons/'.$c->icon_image_offer)}});">
+			        				
+			        			</div>
+			        			<input type="hidden" name="icon_hover_{{$c->id}}" data_icon="{{url('icons/cat_icons/'.$c->icon_image_offer_hover)}}">
+			        			@endif
+			        		</div>
+			        		<span class="title">
+			        			{{$c->title_offer}}
+			        		</span>
+		        		</div>
+		        		@endif
+            		@endforeach
+            		{{--
             		<div class="div_category">
 		        		<div class="category">
-		        			<i class="fa-solid fa-shirt" style="font-size:2em;"></i>
+		        			
+		        			<i class="fa-solid fa-shoe-prints" style="font-size:2em;"></i>
 		        		</div>
 		        		<span class="title">
 		        			Ropa
@@ -71,6 +92,7 @@
 		        			Belleza
 		        		</span>
 	        		</div>
+	        		--}}
         		</div>
             </div>
             <div class="container">
