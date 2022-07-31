@@ -64,7 +64,7 @@
                 <div class="layer_nav"></div>
             </li>
             <li class="">
-                <a href="{{route('store')}}" class="nav-link @if(Route::is('store')) active @endif">
+                <a href="{{route('store')}}" class="nav-link {{Route::currentRouteName()}}@if(Route::is('store') ||Route::is('livewire.message')) active @endif">
                     
                     <span>TIENDA</span>
                 </a>
