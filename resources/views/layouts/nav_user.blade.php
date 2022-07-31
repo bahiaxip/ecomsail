@@ -98,8 +98,10 @@
         @auth
         <li>
             <a href="{{url('/cart')}}" class="nav-link lk-home" >
-                <i class="fas fa-bag-shopping"></i> 
-                
+                <i class="fas fa-bag-shopping"></i>
+                <span style="font-size:12px">
+                    ({{getCountOrders()}})
+                </span>
             </a>
         </li>
         @endauth

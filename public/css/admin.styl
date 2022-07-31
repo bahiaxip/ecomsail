@@ -863,7 +863,7 @@ body
 				display inline-flex				
 				width 45%
 	
-@media only screen and (max-width 772px)
+@media only screen and (max-width 767px)
 	.admin_settings
 		.admin_panels
 			text-align center
@@ -884,6 +884,11 @@ body
 		width 100%	
 	.sliders .box_slider .slider .actions
 		display none
+	/* dar margin a los col-md-6 pares */
+	.add_category
+		.row
+			.col-md-6:nth-child(even)				
+				margin-top 16px
 
 @media only screen and (max-width 600px)
 	.sliders .box_slider .slider .actions_hidden
@@ -891,6 +896,7 @@ body
 			display none
 		span.title_hidden
 			display block
+	
 						
 
 				

@@ -28,6 +28,8 @@ class Category extends Component
     public $file_name;
     public $cat_id=0;
     public $description;
+    public $icon_awesome_offer;
+    public $icon_image_offer;
     //public $categories;
     public $catIdTmp;
 
@@ -74,6 +76,8 @@ class Category extends Component
     //variable exclusiva para mostrar el botón volver al recargar página en
     //subcategorías que no contienen resultados, y por tanto no existe $subcatlist['name']
     public $btn_back;
+
+
 
     public function mount($filter_type){
         
@@ -223,7 +227,11 @@ class Category extends Component
             'type' => 'required',
             'status' => 'required',
             'icon' => 'nullable',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'title_offer' => 'nullable',
+            'icon_awesome_offer' => 'nullable',
+            'icon_image_offer' => 'nullable|image',
+            'icon_image_offer_hover' => 'nullable|image'
         ]);
         $icon='images/categoria.png';
         $icon_name='categoria.png';
@@ -248,7 +256,11 @@ class Category extends Component
             'file_name' => $icon_name,
             'file_ext' => $ext,
             'image' => $icon,
-            'thumb' => $thumb
+            'thumb' => $thumb,
+            'title_offer' => $validated['title_offer'],
+            'icon_awesome_offer' => $validated['icon_awesome_offer'],
+            'icon_image_offer' => $validated['icon_image_offer'],
+            'icon_image_offer_hover' => $validated['icon_image_offer_hover']
 
         ]);        
         if($validated['icon'] !== null){
