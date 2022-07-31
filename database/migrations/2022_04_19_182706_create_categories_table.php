@@ -26,6 +26,7 @@ class CreateCategoriesTable extends Migration
             $table->string('file_ext')->nullable(); //extensión de imagen
             $table->string('image')->nullable(); //nombre imagen o icono (puede ser aleatorio y no coincidir con el file_name y file_ext)
             $table->string('thumb')->nullable(); //miniatura de imagen o otro icono
+            $table->integer('offer')->nullable();
             $table->string('title_offer')->nullable();
             $table->string('icon_awesome_offer')->nullable();
             $table->string('icon_image_offer')->nullable();

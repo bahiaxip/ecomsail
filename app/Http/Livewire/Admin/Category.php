@@ -13,6 +13,8 @@ use App\Functions\Export;
 use Str,PDF,Excel,Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Listado;
+//validaciones para icono de ofertas(revisar para optimizar...)
+use App\Rules\IconAwesomeOffer;
 class Category extends Component
 {
     use WithFileUploads;
@@ -28,8 +30,13 @@ class Category extends Component
     public $file_name;
     public $cat_id=0;
     public $description;
+    //offers
+    public $offer;
+    public $title_offer;
     public $icon_awesome_offer;
     public $icon_image_offer;
+    public $icon_image_offer_hover;
+    
     //public $categories;
     public $catIdTmp;
 
@@ -220,6 +227,7 @@ class Category extends Component
 
     //creación de categoría/subcategoría
     public function store(){
+        
         $this->emit('loading','loading');
         //$this->emit('description1',$this->description);
         $validated = $this->validate([
@@ -228,11 +236,12 @@ class Category extends Component
             'status' => 'required',
             'icon' => 'nullable',
             'description' => 'nullable',
+            'offer' =>'nullable|boolean',
             'title_offer' => 'nullable',
-            'icon_awesome_offer' => 'nullable',
+            'icon_awesome_offer' => ['nullable', new IconAwesomeOffer],
             'icon_image_offer' => 'nullable|image',
             'icon_image_offer_hover' => 'nullable|image'
-        ]);
+        ]);        
         $icon='images/categoria.png';
         $icon_name='categoria.png';
         $thumb='categoria.png';
@@ -243,8 +252,7 @@ class Category extends Component
             $icon='images/subcategoria.png';
             $icon_name='subcategoria.png';
             $thumb='subcategoria.png';
-        }
-
+        }        
 //comprobar si existe otro slug igual
         $category = Cat::create([
             'name' => $validated['name'],
@@ -257,12 +265,13 @@ class Category extends Component
             'file_ext' => $ext,
             'image' => $icon,
             'thumb' => $thumb,
+            'offer' => $validated['offer'],
             'title_offer' => $validated['title_offer'],
             'icon_awesome_offer' => $validated['icon_awesome_offer'],
             'icon_image_offer' => $validated['icon_image_offer'],
             'icon_image_offer_hover' => $validated['icon_image_offer_hover']
 
-        ]);        
+        ]);
         if($validated['icon'] !== null){
 //comprobar si existe imagen y eliminar la anterior
             $icon_name = $this->icon->getClientOriginalName();
@@ -284,6 +293,7 @@ class Category extends Component
                 'path_tag' => $path_tag                
             ]);
         }
+
         $this->typealert="success";
         //el session()->flash() genera error con el setData de ckeditor
         //para solucionarlo realizamos el setData() cuando abre el modal
@@ -313,6 +323,9 @@ class Category extends Component
         $this->type=$cat->type;        
         $this->status=$cat->status;
         $this->description = $cat->description;
+        $this->offer = $cat->offer;
+        $this->title_offer = $cat->title_offer;
+        $this->icon_awesome_offer = $cat->icon_awesome_offer;
         $this->file_name = $cat->file_name;
         //$this->icon = $cat->image;
 
@@ -330,7 +343,12 @@ class Category extends Component
                 'type' => 'required',
                 'status' => 'required',
                 'icon' => 'nullable|image',
-                'description' => 'nullable|string'
+                'description' => 'nullable|string',
+                'offer' =>'nullable|boolean',
+                'title_offer' => 'nullable|string',
+                'icon_awesome_offer' => ['nullable', new IconAwesomeOffer],
+                'icon_image_offer' => 'nullable|image',
+                'icon_image_offer_hover' => 'nullable|image'
             ]);
             $icon;
             $icon_name;
@@ -346,7 +364,12 @@ class Category extends Component
                     'slug' => Str::slug($validated['name']),
                     'type' => $validated['type'],                
                     'status' => $validated['status'],                
-                    'description' => $validated['description']
+                    'description' => $validated['description'],
+                    'offer' => $validated['offer'],
+                    'title_offer' => $validated['title_offer'],
+                    'icon_awesome_offer' => $validated['icon_awesome_offer'],
+                    'icon_image_offer' => $validated['icon_image_offer'],
+                    'icon_image_offer_hover' => $validated['icon_image_offer_hover']
                 ]);
             }else{
                 
@@ -370,6 +393,11 @@ class Category extends Component
                     'thumb' => $iconlesspublic,
                     'file_name' => $icon_name,
                     'description' => $this->description,
+                    'offer' => $validated['offer'],
+                    'title_offer' => $validated['title_offer'],
+                    'icon_awesome_offer' => $validated['icon_awesome_offer'],
+                    'icon_image_offer' => $validated['icon_image_offer'],
+                    'icon_image_offer_hover' => $validated['icon_image_offer_hover'],
                     'file_ext' => $ext,
                     'path_tag' => $path_tag
                 ]);    
@@ -460,6 +488,11 @@ class Category extends Component
         $this->type=0;
         $this->status=0;
         $this->description="";
+        $this->offer = "";
+        $this->title_offer= "";
+        $this->icon_awesome_offer = "";
+        $this->icon_image_offer = null;
+        $this->icon_image_offer_hover = null;
 //revisar si es necesario limpiar icon,thumb...
         $this->icon = null;
         $this->file_name="";

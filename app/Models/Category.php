@@ -15,7 +15,7 @@ class Category extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'categories';
 
-    protected $fillable = ['name','type','status','slug','description','image','file_name','thumb','file_ext','path_root','path_tag','title_offer','icon_awesome_offer','icon_image_offer','icon_image_offer_hover','icon_hexcode'];
+    protected $fillable = ['name','type','status','slug','description','image','file_name','thumb','file_ext','path_root','path_tag','offer','title_offer','icon_awesome_offer','icon_image_offer','icon_image_offer_hover','icon_hexcode'];
     protected $hidden = ['created_at','updated_at'];
 
     public function prod(){

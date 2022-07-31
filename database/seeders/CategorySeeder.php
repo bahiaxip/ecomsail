@@ -21,8 +21,10 @@ class CategorySeeder extends Seeder
             'file_name' => 'Ropa.png',
             'image' => 'clothes.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Ropa',
-            'icon_awesome_offer' => '<i class="fa-solid fa-shirt"></i>'
+            'icon_awesome_offer' => '<i class="fa-solid fa-shirt"></i>',
+
         ]);
         Category::create([
             'status' => 1,
@@ -31,6 +33,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'Herramientas.png',
             'image' => 'tools.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Herramientas',
             'icon_awesome_offer' => '<i class="fa-solid fa-toolbox"></i>',
         ]);
@@ -41,6 +44,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'calzado.png',
             'image' => 'footwear.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Calzado',
             'icon_awesome_offer' => '<i class="fa-solid fa-shoe-prints"></i>',            
         ]);
@@ -52,6 +56,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'electrodómesticos.png',
             'image' => 'appliance.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Electrohogar',            
             'icon_image_offer' => 'others/appliance_E3E3E3.svg',
             'icon_image_offer_hover' => 'others/appliance.svg',
@@ -64,6 +69,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'Alimentación.png',
             'image' => 'food.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>NULL,            
             'icon_awesome_offer' => NULL, 
         ]);
@@ -74,6 +80,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'Informatica.png',
             'image' => 'computing.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Informática',
             'icon_awesome_offer' => '<i class="fa-solid fa-laptop"></i>',
         ]);
@@ -84,6 +91,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'Jardin.png',
             'image' => 'garden.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Jardín',
             'icon_awesome_offer' => '<i class="fa-solid fa-tree-city"></i>',
         ]);
@@ -94,6 +102,7 @@ class CategorySeeder extends Seeder
             'file_name' => 'Toothbrush.png',
             'image' => 'electric-toothbrush.png',
             'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
             'title_offer' =>'Cuidado personal',
             'icon_awesome_offer' => '<i class="fa-solid fa-heart-pulse"></i>',
         ]);
