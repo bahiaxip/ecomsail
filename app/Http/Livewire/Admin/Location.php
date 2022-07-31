@@ -23,6 +23,7 @@ class Location extends Component
     public $country_name;
     public $status;
     public $zone;
+    public $vat;
     public $prefix_phone;
     public $coin;
     public $icon;
@@ -125,9 +126,9 @@ class Location extends Component
             case '0':                
             case '1':                
                 $init_query = ($this->search_data) ?
-                    Loc::where('name','LIKE',$search_data)->orderBy($col_order,$order)
+                    Loc::where('name','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
                     :
-                    Loc::orderBy($col_order,$order);
+                    Loc::where('status',$filter_type)->orderBy($col_order,$order);
                 break;            
             case '3':
                 $init_query = ($this->search_data) ?
@@ -155,6 +156,8 @@ class Location extends Component
             $this->country_name=$location->name;
             $this->status = $location->status;
             $this->zone = $location->zone;
+            if($location->vat)
+                $this->vat = $location->vat;
             $this->isocode_alpha2 = $location->isocode_alpha2;
             $this->isocode_num = $location->isocode_num;
             $this->prefix_phone = $location->prefix_phone;
@@ -240,6 +243,7 @@ class Location extends Component
         $this->name='';
         $this->status=0;
         $this->zone=null;
+        $this->vat = null;
         $this->icon=null;        
         $this->isocode_alpha2=null;
         $this->isocode_num=null;

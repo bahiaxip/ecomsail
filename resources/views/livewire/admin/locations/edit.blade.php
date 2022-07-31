@@ -65,10 +65,16 @@
                 </div>
                   
               </div>      
-              <div class="col-md-6">
+              <div class="col-md-3">
                   <label for="status">Estado</label>
                   <div class="input-group">                    
                     {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
+                  </div>  
+              </div>
+              <div class="col-md-3">
+                  <label for="vat">IVA</label>
+                  <div class="input-group">                    
+                    {{ Form::number('vat',null,['class' => 'form-select', 'wire:model' => 'vat','min'=>1,'step' => 1])}}
                   </div>  
               </div>
           </div>

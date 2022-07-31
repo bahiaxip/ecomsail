@@ -21,7 +21,7 @@ class LocationSeeder extends Seeder
             Location::create([
                 'name' => $c['nombre'],
                 'status' => 0,
-                'zone' => $c['zone'],
+                'zone' => $c['zone'],                
                 'path_tag'=>'icons/flags_icons/',
                 'icon' => $c['icon'],
                 'icon_code' => $c['icon_code'],
@@ -32,15 +32,15 @@ class LocationSeeder extends Seeder
         $locations = Location::where('zone',1)->get();
         foreach($locations as $loc){
             $loc->update([
-                'status' => 1
+                'status' => 1,
+                'vat' => 21
             ]);    
         }
         //actualizamos datos de España 
         $location_spain = Location::find(58);
         $location_spain->update([            
             'prefix_phone' => 34,
-            'coin' => '€',
-            'vat' => 21
+            'coin' => '€',            
         ]);
     }
 }
