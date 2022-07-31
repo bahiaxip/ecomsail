@@ -210,17 +210,28 @@ rgba2 = rgba(0,178,146,1)
 	select:focus
 		box-shadow 0px 0px 6px color2
 		
-	.products .layer
-		background-color rgba(230,230,230,.1)
-		display block
-		height 100%
-		position absolute
-		transition background 0.2s linear
-		width 100%
-		z-index 1
-		&:hover
-			background-color rgba(230,230,230,0)
-		
+	
+	.products 
+		.layer
+			background-color rgba(230,230,230,.1)
+			display block
+			height 100%			
+			position absolute
+			transition background 0.2s linear
+			width 100%
+			z-index 1
+			&:hover
+				background-color rgba(230,230,230,0)				
+			.content				
+				padding-left 10px
+				padding-top 10px
+				width 100%
+				span
+					background-color lightgreen
+					font-family QuicksandB
+					padding 8px 15px
+					margin auto
+			
 			
 			
 	.products
@@ -246,10 +257,9 @@ rgba2 = rgba(0,178,146,1)
 			width 100%
 			
 			/* anulado layer */
-			/*
+			
 			.layer
-				background-color rgba(0,0,0,.1)
-				
+				background-color rgba(0,0,0,.9)
 				border-radius 6px
 				cursor pointer			
 				display none			
@@ -290,7 +300,7 @@ rgba2 = rgba(0,178,146,1)
 						button
 							color #FFF
 							margin-bottom 5px
-			*/		
+					
 			img
 				padding 25px
 				max-height 200px

@@ -10,7 +10,7 @@ class Offer extends Component
 
     public function render()
     {
-        $categories = Category::where('status',1)->where('type',0)->get();
+        $categories = Category::where('status',1)->where('type',0)->where('offer',1)->get();
         $data = ['categories'=>$categories];
         return view('livewire.store.offers',$data)->extends('layouts.main');
     }

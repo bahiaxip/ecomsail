@@ -84,9 +84,17 @@
                 @else
                     @foreach($products as $prod)    
                         <div class="products mtop32">
-                        	<a href="{{ url('/product/'.$prod->id) }}" class="image" >
-                        		<div class="layer"></div>
-                        	</a>
+                            @if($prod->infoprice->discount_type == 1
+                                && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+                            <a href="{{ url('/product/'.$prod->id) }}" class="layer" >
+                                <div class="content">
+                                    <span>
+                                        -{{$prod->infoprice->discount}}%            
+                                    </span>
+                                </div>
+                            </a>
+                            @endif
+                        	
                             <a href="{{ url('/product/'.$prod->id) }}" class="image" >
                                 {{--
                                 <div class="layer">
