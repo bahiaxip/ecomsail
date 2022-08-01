@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             "email"=>"bahiaxip@hotmail.com",
             "password"=>bcrypt("calibra55"),
             'role' => 1,
-            'permissions' => '{"admin_panel":"true","list_users":"true","edit_users":"true","admin_permissions":"true"}',
+            'permissions' => '{"list_home":"true","admin_panel":"true","list_users":"true","edit_users":"true","admin_permissions":"true"}',
             'status' => 1           
         ]);
         

@@ -315,7 +315,7 @@ class Home extends Component
 
     public function render()
     {
-        $sliders = Carousel::where('status',1)->get();
+        $sliders = Carousel::where('status',1)->orderBy('position')->get();
         $this->computed_option = $this->option;
 
         //destacados
