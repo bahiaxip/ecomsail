@@ -2025,13 +2025,72 @@ class ProductSeeder extends Seeder
             'image' => 'personal_care/makeup/lipstick_OULAC_metal/lipstick_OULAC_metal.jpg',
         ]);
         $count_product = count($product);
+        /*
         for($i=0;$i<$count_product;$i++){
+            if()
             $settings_prod = SettingsProducts::create([
                 'product_id' => $product[$i]->id
             ]);
             $infoprice_prod = InfopriceProducts::create([
                 
                 'product_id' => $product[$i]->id
+            ]);
+        }
+        */
+        foreach($product as $pro){
+
+            $settings_prod = SettingsProducts::create([
+                'product_id' => $pro->id
+            ]);
+            
+            $discount_type = 0;
+            $discount = 15;
+            $init_discount = NULL;
+            $end_discount = NULL;
+            switch($pro->id){
+                case '1':
+                    $discount_type = 1;
+                    $discount = 15;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-08-01';            
+                    break;
+                case '3':
+                    $discount_type = 1;
+                    $discount = 22;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2022-08-10';
+                    break;
+                case '9':
+                    $discount_type = 1;
+                    $discount = 20;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-08-01';
+                    break;
+                case '11':
+                    $discount_type = 1;
+                    $discount = 12;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-08-01';
+                    break;
+                case '18':
+                    $discount_type = 1;
+                    $discount = 12;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2022-11-01';
+                    break;
+                case '34':
+                    $discount_type = 1;
+                    $discount = 25;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2022-09-01';
+                    break;
+            }
+            $infoprice_prod = InfopriceProducts::create([
+                'discount_type' => $discount_type,
+                'discount' => $discount,
+                'init_discount' => $init_discount,
+                'end_discount' => $end_discount,
+                'product_id' => $pro->id                    
             ]);
         }
 

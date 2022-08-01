@@ -227,7 +227,8 @@ rgba2 = rgba(0,178,146,1)
 				padding-top 10px
 				width 100%
 				span
-					background-color lightgreen
+					background-color color2
+					color #FFF
 					font-family QuicksandB
 					padding 8px 15px
 					margin auto
@@ -328,7 +329,8 @@ rgba2 = rgba(0,178,146,1)
 			.price
 				color #000
 				display flex
-				font-family Arial
+				font-family Ubuntu
+				font-size 20px
 				font-weight bold
 				justify-content center
 /* fin home */
@@ -607,6 +609,11 @@ como existen 2 uno es el carousel de product y otro el modal de product
 */
 /* comunes para los 2 carouseles*/
 .product_slick,.productmodal_slick
+	/* para centrar verticalmente las imágenes más pequeñas sobreescribimos
+	la clase slick-track de la librería slick */
+	.slick-track
+		align-items center
+		display flex
 	.slick-arrow
 		align-items center
 		

@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             ZoneSeeder::class,
             ProvinceSeeder::class,
-            CitySeeder::class,
+            //CitySeeder::class,
             CategorySeeder::class,
             AttributeSeeder::class,
             ProductSeeder::class,

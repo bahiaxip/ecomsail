@@ -79,58 +79,68 @@
                             
                         </div>
                     </div>
-                @if($products->count()==0)
+                    <div class="mtop16">
+                    @if($products->count()==0)
                     <p>No existen productos</p>
-                @else
-                    @foreach($products as $prod)    
-                        <div class="products mtop32">
-                            @if($prod->infoprice->discount_type == 1
-                                && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
-                            <a href="{{ url('/product/'.$prod->id) }}" class="layer" >
-                                <div class="content">
-                                    <span>
-                                        -{{$prod->infoprice->discount}}%            
-                                    </span>
-                                </div>
-                            </a>
-                            @endif
-                        	
-                            <a href="{{ url('/product/'.$prod->id) }}" class="image" >
-                                {{--
-                                <div class="layer">
-                                    <div class="favorite">
-                                        <div class="icon">
-                                            <i class="fa-solid fa-star"></i>
+                    @else
+                        @foreach($products as $prod)    
+                            <div class="products mtop32">
+                                @if($prod->infoprice->discount_type == 1
+                                    && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+                                <a href="{{ url('/product/'.$prod->id) }}" class="layer" >
+                                    <div class="content">
+                                        <span>
+                                            -{{$prod->infoprice->discount}}%            
+                                        </span>
+                                    </div>
+                                </a>
+                                @endif
+                            	
+                                <a href="{{ url('/product/'.$prod->id) }}" class="image" >
+                                    {{--
+                                    <div class="layer">
+                                        <div class="favorite">
+                                            <div class="icon">
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="plus">
+                                            <div class="plus_btn">
+                                                <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
+                                                    <i class="fa-solid fa-eye"></i> Vista rápida
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="plus">
-                                        <div class="plus_btn">
-                                            <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
-                                                <i class="fa-solid fa-eye"></i> Vista rápida
-                                            </button>
-                                        </div>
+                                    --}}
+                                    <img src="{{$prod->path_tag.$prod->image}}" alt="">
+                                </a>
+                                <a href="{{ url('/product/'.$prod->id) }}" title="{{$prod->name}}">
+                                    <div class="title">
+                                    
+                                        {{$prod->name}}
+                                    
                                     </div>
-                                </div>
-                                --}}
-                                <img src="{{$prod->path_tag.$prod->image}}" alt="">
-                            </a>
-                            <a href="{{ url('/product/'.$prod->id) }}" title="{{$prod->name}}">
-                                <div class="title">
+                                    <div class="price">
+                                    @if($prod->infoprice->discount_type == 1
+                                    && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+
+                                        <span style="text-decoration:line-through;color:#434343">{{ floatval(number_format($prod->price,2,'.',',')) }}€</span>
+                                            &nbsp;
+                                        <span>{{ floatval(number_format($prod->price,2,'.',',')) }}€</span>
+                                    @else
+                                        <span>{{ floatval(number_format($prod->price,2,'.',',')) }}€</span>
+                                    @endif
+                                    </div>                                
+                                </a>
                                 
-                                    {{$prod->name}}
-                                
-                                </div>
-                                <div class="price">
-                                    <span>{{$prod->price}} €</span>
-                                </div>
-                            </a>
-                            
-                        </div>
-                        <div wire:loading wire:target="products">
-                            <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
-                        </div>
-                    @endforeach
-                @endif
+                            </div>
+                            <div wire:loading wire:target="products">
+                                <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+                            </div>
+                        @endforeach
+                    @endif
+                    </div>
                 </div>
 
                 <div class="row">
