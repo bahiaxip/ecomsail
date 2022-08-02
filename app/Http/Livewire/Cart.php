@@ -265,6 +265,7 @@ class Cart extends Component
             
         
     }
+    //actualización de order_item
     public function update_order_item($id,$quantity){
         $order_item = Order_Item::findOrFail($id);
         if($order_item){

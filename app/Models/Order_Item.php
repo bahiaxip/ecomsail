@@ -11,7 +11,7 @@ class Order_Item extends Model
 
     protected $table = 'orders_items';
     protected $fillable = [
-        'combinations','quantity','discount_status','end_discount','added_price','price_unit','total','title','path_tag','image','user_id','product_id','order_id'
+        'combinations','quantity','state_discount','end_discount','added_price','price_unit','total','title','path_tag','image','user_id','product_id','order_id'
     ];
     protected $hidden = ['created_at','updated_at'];
 

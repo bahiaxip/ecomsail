@@ -159,7 +159,7 @@ class Product extends Component
         //creamos o actualizamos el pedido
         $order = $this->create_or_update_order();
         $list=NULL;
-        
+        //comprobamos si existe combinación y si existe creamos el array de combinaciones
         if(count($this->option) > 0){
             foreach($this->option as $key=>$o){
                 $list[]=[
@@ -171,7 +171,9 @@ class Product extends Component
 
         $orders_items = Order_Item::where('order_id',$order->id)->where('product_id',$this->product_id)->get();
         if($orders_items->count() > 0){
-            $diff = [];            
+            $diff = []; 
+            //comprobamos si ya existe un producto igual, en caso de contener 
+            //combinaciones se comprueba si es la misma combinación
             foreach($orders_items as $key => $oi){
                 if($oi->combinations != "null"){                    
             //obtenemos el resultado de cada comparación  entre la 
@@ -199,6 +201,7 @@ class Product extends Component
                 return false;
             }
         }
+        //si no existe un producto con ese id en la db se devuelve mensaje de error
         $product = Prod::findOrFail($this->product_id);
         if(!$product){
             $this->typealert = 'danger';
@@ -211,10 +214,18 @@ class Product extends Component
         //registro para luego poder sumar o restar desde el carrito.
         $quantity = 1;
         $added_price=NULL;
+        $state_discount = 0;
+        $end_discount = NULL;
         if($this->quantity && $this->quantity > 1)
             $quantity = $this->quantity; 
         if($this->added_price){
             $added_price = $this->added_price / $quantity;
+        }
+        //comprobamos si existe descuento y lo añadimos al order_item
+        if($product->infoprice->discount_type
+            && date('Y-m-d') >= $product->infoprice->init_discount && date('Y-m-d') <= $product->infoprice->end_discount){
+            $state_discount = $product->infoprice->discount_type;
+            $end_discount = $product->infoprice->end_discount;
         }
         //si en el array $diff no existe ningún resultado(0), 
         //indicando que no existe esa combinación o simplemente no 
@@ -222,8 +233,8 @@ class Product extends Component
         $order_item = Order_Item::create([
             'combinations' => json_encode($list),
             'quantity' => $this->quantity,
-            'state_discount' => $this->product->state_discount,
-            'end_discount' => $this->product->end_discount,
+            'state_discount' => $state_discount,
+            'end_discount' => $end_discount,
             'added_price' => $added_price,
             'price_unit' => $this->product->price,
             'total' => $this->price_tmp,
@@ -239,10 +250,7 @@ class Product extends Component
         //$this->emit('fastview');
         $this->typealert = 'success';
         session()->flash('message2','Producto añadido al carrito correctamente');
-        
     }
-
-    
 
     public function create_or_update_order(){
         $user_id = Auth::id();

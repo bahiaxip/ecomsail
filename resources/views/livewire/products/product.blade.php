@@ -60,11 +60,33 @@
                 
             </div>
             <div class="product">
-                <div class="header">
+                <div class="header" style="position:relative">
+                    
                     <h2>{{$prod->name}}</h2>
+                    @if($prod->infoprice->discount_type == 1
+                        && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+                    <div style="position:absolute;display:flex;height:100%;width:100%;margin:auto;justify-content:end">
+                        <span style="background-color:rgba(0,178,146,1);color: #FFF;display:flex;padding:20px;align-items:center">
+                            -{{$prod->infoprice->discount}}%
+                        </span>
+                    </div>
+                    @endif
+                    
                 </div>
-                <div class="price">
-                    <span>{{$price_tmp}} €</span> 
+                <div class="price mtop16">
+                    @if($prod->infoprice->discount_type == 1
+                        && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+                    <span>
+                        {{ floatval(number_format(($price_tmp*((100-$prod->infoprice->discount)/100)),2,'.','')) }}€
+                    </span>
+                    <span style="text-decoration:line-through;color:#696969">
+                        {{$price_tmp}} €
+                    </span>
+                    @else
+                    <span>
+                        {{$price_tmp}} €
+                    </span>
+                    @endif
                     <p>(Impuestos incluidos)</p>
                 </div>
 

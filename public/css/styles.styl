@@ -721,6 +721,21 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					min-height 125px
 					max-height 128px
 					width 100%
+			/* solo cart */
+			.div_price .price
+				.main
+					display flex					
+					span.through
+						text-decoration line-through 
+						color #696969
+					.discount
+						background-color color2;
+						color #FFF
+						font-weight bold
+						margin auto
+						padding 8px
+						
+			/* fin cart */
 			/* solo favorites */
 			.content
 				display flex
@@ -771,6 +786,9 @@ como existen 2 uno es el carousel de product y otro el modal de product
 							color color6
 							font-family QuicksandB
 							font-size 22px
+							.main
+								display flex
+								justify-content space-between
 							span
 								color color8
 								font-size 14px
@@ -1264,7 +1282,9 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	.offers	.box_categories		
 		.nav_offers_categories
 			max-width 80%
-						
+@media only screen and (max-width 1200px)
+	.section_finish		
+		margin 32px auto 0px auto
 @media only screen and (max-width 1200px)
 	.box_products
 			width 90%

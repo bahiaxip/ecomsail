@@ -101,12 +101,33 @@
                             @endif
                             <div class="row div_price" >
                                 <div class="price" >
-                                    <div>
-                                        <span style="font-size:12px"></span> 
+                                    <div class="main {{$oi->total}}">
+                                    @if($oi->product->infoprice->discount_type == 1
+                                    && date('Y-m-d') >= $oi->product->infoprice->init_discount && date('Y-m-d') <= $oi->product->infoprice->end_discount)
+                                        <div>
+                                        <span>
+                                            {{ floatval(number_format((floatval($oi->total)*((100-15)/100)),2,'.','')) }}€
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <span class="through" >{{ floatval(number_format($oi->total,2,'.','')) }}€
+                                        </span>
+                                        </div>
+                                        <div class="discount">
+                                            <span>
+                                                -{{$oi->product->infoprice->discount}}%            
+                                            </span>
+                                        </div>
+                                    
+                                    @else
+                                    
+                                    <span style="font-size:12px"> 
                                         {{--
                                         number_format(floatval(number_format($oi->total,2,'.','')),0,",",".")
                                         --}} {{--€--}}
                                         {{floatval(number_format($oi->total,2,'.',''))}}€
+                                    </span>
+                                    @endif
+                                        
                                     </div>
                                     <div class="div_quantity">
                                         <div class="quantity">
@@ -139,7 +160,7 @@
                 </div>
                 @endif
             </div>
-            <div class="col-xl-3 shadow">
+            <div class="col-md-6 col-xl-3 shadow section_finish">
                 <div class="resum">
                     <span class="left">{{$sum}} @if($sum==1)Producto @else Productos @endif</span>
                     <span class="right">{{$total}} €</span>

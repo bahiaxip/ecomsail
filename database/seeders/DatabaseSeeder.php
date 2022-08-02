@@ -27,8 +27,6 @@ class DatabaseSeeder extends Seeder
             'status' => 1           
         ]);
         
-        
-        
         $this->call([
             LocationSeeder::class,
             ZoneSeeder::class,
