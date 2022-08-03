@@ -56,8 +56,9 @@ class Product extends Component
         
         $this->price_tmp = $this->product->price * $this->quantity;        
         if($this->added_price){
-            $this->set_price_combinations();
+            $this->set_price_combinations();            
             $this->added_price = $this->added_price * $this->quantity;
+            //dd($this->added_price);
         }
         $this->price_tmp = $this->price_tmp + $this->added_price;
         //$this->price_tmp = $this->item->price + $this->added_price;
@@ -136,15 +137,17 @@ class Product extends Component
         }
         if($this->quantity != $this->quantity_tmp)
             $this->set_quantity();
+
         if($this->option != $this->computed_option){
+            //dd($this->computed_option);
             $this->set_price_combinations();
             $this->price_tmp = $this->product->price * $this->quantity;
-
-            if($this->added_price){
-                 $this->added_price = $this->added_price * $this->quantity;   
+            $total_added_price = 0;
+            if($this->added_price){                
+                $total_added_price = $this->added_price * $this->quantity;
             }
-            $this->price_tmp = $this->added_price + $this->price_tmp;
-            //$this->dispatchBrowserEvent('contentChanged');
+            $this->price_tmp = $total_added_price + $this->price_tmp;
+            //$this->dispatchBrowserEvent('contentChanged');            
         }
     }
 
@@ -154,7 +157,7 @@ class Product extends Component
             'option' => 'nullable|array',
             'option.*' => 'integer',
             'quantity' => 'required|integer'
-        ]);
+        ]);        
         //$product = Product::findOrFail($this->product_id);
         //creamos o actualizamos el pedido
         $order = $this->create_or_update_order();
@@ -219,7 +222,8 @@ class Product extends Component
         if($this->quantity && $this->quantity > 1)
             $quantity = $this->quantity; 
         if($this->added_price){
-            $added_price = $this->added_price / $quantity;
+            //$added_price = $this->added_price / $quantity;
+            $added_price = $this->added_price;
         }
         //comprobamos si existe descuento y lo añadimos al order_item
         if($product->infoprice->discount_type
@@ -297,8 +301,9 @@ class Product extends Component
                 if($partial_combination){                    
                     $sum = $sum + $partial_combination->added_price;
                 }
-            }
+            }            
             $this->added_price = $sum;
+            //dd($this->added_price);
         }
     }
 
