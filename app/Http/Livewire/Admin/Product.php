@@ -83,6 +83,8 @@ class Product extends Component
     public $combinations;
     //id de combinación para eliminar mediante confirmación
     public $combtmp_id;
+    //padres de combinaciones
+    public $parent_combinations;
     public $images_products;
 
     //importe adicional de combinaciones
@@ -130,7 +132,6 @@ class Product extends Component
         'category' => 'categoría',
         'detail' => 'descripción',
         'image' => 'imagen'
-
     ];
 
 //comprobar antes si existen categorías, si no, mostrar enlace a crear categoría
@@ -942,6 +943,33 @@ class Product extends Component
 
         $attributes = Attr::where('status',1)->where('type',0)->orderBy('id','asc')->get();
         $this->combinations = Comb::where('product_id',$this->prod_id)->get();
+        if($this->combinations->count() > 0){
+            $parent = [];
+            //dd(count($this->combinations));
+            foreach($this->combinations as $c){
+                $list = explode(",",$c->list_ids);
+                foreach($list as $l){
+                    $attr = Attr::findOrFail($l);
+                    if($attr){
+                        //si es el primero
+                        if(count($parent) == 0){
+                            $parent[$attr->parentattr->id]=$attr->parentattr->name;
+                        }else{
+                            if(!isset($parent[$attr->parentattr->id])){
+                                $parent[$attr->parentattr->id]=$attr->parentattr->name;        
+                            }else{
+
+                            }
+                            
+                        }
+
+                    }
+                    
+                }                
+                
+            }
+            $this->parent_combinations = $parent;
+        }
 
 
         $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type,'iteration'=>$this->iteration,'attributes' => $attributes];

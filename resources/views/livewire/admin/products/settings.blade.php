@@ -254,6 +254,21 @@
                     </div>
                     <div class="mtop16">
                         <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" onclick="">Crear combinación</button>
+                        <div>
+                          @if($parent_combinations && count($parent_combinations) > 0)
+                            @foreach($parent_combinations as $key => $parent)
+                              <label for="parent_{{$key}}">
+                                  {{$parent}}
+                              </label>
+                              <select>
+                                  <option value="">Colores</option>
+                                  <option value="">Botones</option>
+                                  <option value="">Desplegable</option>
+                              </select>
+                            @endforeach
+                          @endif
+                          
+                        </div>
                     </div>
                 </div>
                 @if(session()->has('message2'))
