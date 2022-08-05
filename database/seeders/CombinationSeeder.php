@@ -470,5 +470,81 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 40
         ]);
+    //product 87
+        Combination::create([
+            'name' => 'Color > Verde',
+            'list_ids' => 9,
+            'amount' => 0,
+            'product_id' => 87
+        ]);
+        Combination::create([
+            'name' => 'Color > Amarillo',
+            'list_ids' => 11,
+            'amount' => 0,
+            'product_id' => 87
+        ]);
+        Combination::create([
+            'name' => 'Color > Azul marino',
+            'list_ids' => 17,
+            'amount' => 0,
+            'product_id' => 87
+        ]);
+        Combination::create([
+            'name' => 'Color > Blanco',
+            'list_ids' => 5,
+            'amount' => 0,
+            'product_id' => 87
+        ]);
+        Combination::create([
+            'name' => 'Color > Rojo',
+            'list_ids' => 10,
+            'amount' => 0,
+            'product_id' => 87
+        ]);
+    //product 89
+        Combination::create([
+            'name' => 'Color > Azul marino',
+            'list_ids' => 17,
+            'amount' => 0,
+            'product_id' => 89
+        ]);
+        Combination::create([
+            'name' => 'Color > Blanco',
+            'list_ids' => 5,
+            'amount' => 0,
+            'product_id' => 89
+        ]);
+        Combination::create([
+            'name' => 'Color > Negro',
+            'list_ids' => 6,
+            'amount' => 0,
+            'product_id' => 89
+        ]);
+    //product 90
+        Combination::create([
+            'name' => 'Color > Azul marino',
+            'list_ids' => 17,
+            'amount' => 0,
+            'product_id' => 90
+        ]);
+        Combination::create([
+            'name' => 'Color > Rojo',
+            'list_ids' => 10,
+            'amount' => 0,
+            'product_id' => 90
+        ]);
+        Combination::create([
+            'name' => 'Color > Azul',
+            'list_ids' => 8,
+            'amount' => 8,
+            'product_id' => 90
+        ]);
+        Combination::create([
+            'name' => 'Color > Blanco',
+            'list_ids' => 5,
+            'amount' => 0,
+            'product_id' => 90
+        ]);
     }
+
 }

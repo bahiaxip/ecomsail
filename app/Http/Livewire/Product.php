@@ -10,6 +10,7 @@ class Product extends Component
 
     public $product_id;
     public $option = [];
+    public $option_name = [];
     public $combinations_list;
     public $quantity = 1;
     public $quantity_tmp=1;
@@ -150,6 +151,14 @@ class Product extends Component
             //$this->dispatchBrowserEvent('contentChanged');            
         }
     }
+
+    //set_value() sustituido a render directamente (solo con PHP)
+    /*
+    public function set_value($value_id){
+        $value = Attribute::findOrFail($this->option[$value_id]);
+        $this->emit('setNameValue',$value_id,$value->name);
+    }
+    */
 
     public function add_cart(){
         //validamos datos para crear el carrito o añadir al carrito
@@ -330,6 +339,18 @@ class Product extends Component
         //dd($this->combinations_list);
         $this->set_price_combinations();
         $this->computed_option = $this->option;
+        
+        //mostramos el título del valor seleccionado a continuación
+        //del nombre del atributo padre
+        if(count($this->option) > 0){
+            foreach($this->option as $key=>$op){
+                $attribute = Attribute::findOrFail($op);
+                $this->option_name[$key] =$attribute->name;
+            }
+            //dd($this->option_name);
+        }
+
+        
         $favorite = Favorite::where('user_id',$this->user_id)->where('product_id',$this->product_id)->first();
         if($favorite)
             $this->favorite = true;

@@ -125,12 +125,12 @@
                                     @if($prod->infoprice->discount_type == 1
                                     && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
                                         
-                                        <span>{{ floatval(number_format(($prod->price*((100-$prod->infoprice->discount)/100)),2,'.',',')) }}€</span>
+                                        <span>{{ floatval(number_format(($prod->price*((100-$prod->infoprice->discount)/100)),2,'.','')) }}€</span>
                                         &nbsp;&nbsp;
-                                        <span style="text-decoration:line-through;color:#696969">{{ floatval(number_format($prod->price,2,'.',',')) }}€</span>
+                                        <span style="text-decoration:line-through;color:#696969">{{ floatval(number_format($prod->price,2,'.','')) }}€</span>
                                             
                                     @else
-                                        <span>{{ floatval(number_format($prod->price,2,'.',',')) }}€</span>
+                                        <span>{{ floatval(number_format($prod->price,2,'.','')) }}€</span>
                                     @endif
                                     </div>                                
                                 </a>

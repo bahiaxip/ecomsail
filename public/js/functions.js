@@ -1294,5 +1294,14 @@ function passData(data){
     //data.classList.add('selected');
     console.log("data: ",data)
 }
+//setNameValue() sustituido a render directamente (solo con PHP)
+//establecemos el nombre del valor seleccionado a continuación del nombre
+//del atributo padre, 
+/*
+window.livewire.on('setNameValue',(valueId,valueName)=>{
+    //document.querySelector('.comb_'+valueId).getElementsByTagName('span')[0].innerHTML=valueName;
+})
+*/
+
 
 

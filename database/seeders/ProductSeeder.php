@@ -1124,6 +1124,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes/jeans/pepe_jeans_mary_jeans_denim/mary_jeans_denim.jpg',
         ]);
+        
         $product[] = Product::create([
             'name' => 'Lavadora Balay 3TS885BE',            
             'slug' => Str::slug('Lavadora Balay 3TS885BE'),
@@ -2024,6 +2025,86 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/makeup/lipstick_OULAC_metal/lipstick_OULAC_metal.jpg',
         ]);
+        $product[] = Product::create([
+            'name' => "Polo Kappa Uomo Peleot",
+            'slug' => Str::slug("Polo Kappa Uomo Peleot"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 13,
+            'price' => 35,
+            'stock' => 20,
+            'short_detail' => "Polo Kappa Uomo Peleot, Manga corta",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Kappa</li>
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_verde.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Polo Levi's Mineral Black",
+            'slug' => Str::slug("Polo Levi's Mineral Black"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 13,
+            'price' => 38,
+            'stock' => 20,
+            'short_detail' => "Polo Levi's Mineral Black, Manga corta",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Levi's</li>
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/polo_shirt/polo_levis_mineral_black/polo_levis_mineral_black.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Polo Lacoste DH3201",
+            'slug' => Str::slug("Polo Lacoste DH3201"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 13,
+            'price' => 92,
+            'stock' => 20,
+            'short_detail' => "Polo Lacoste, Manga corta, Hombre",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lacoste</li>
+                <li><strong>Material:&nbsp;</strong>98% Poliéster, 2% Elastano</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/polo_shirt/polo_lacoste_dh3201/polo_lacoste_azul_marino.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Polo Adidas Tiro17",
+            'slug' => Str::slug("Polo Adidas Tiro17"),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 13,
+            'price' => 32,
+            'stock' => 20,
+            'short_detail' => "Polo Adidas Tiro17, Manga corta, Hombre",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Adidas</li>
+                <li><strong>Material:&nbsp;</strong>58% Algodón, 42% Poliéster</li>                
+                <li><strong>Cierre:&nbsp;</strong>Botones</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'clothes/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_azul_marino.jpg',
+        ]);
         $count_product = count($product);
         /*
         for($i=0;$i<$count_product;$i++){
@@ -2078,11 +2159,47 @@ class ProductSeeder extends Seeder
                     $init_discount = '2022-08-01';
                     $end_discount = '2022-11-01';
                     break;
+                case '19':
+                    $discount_type = 1;
+                    $discount = 10;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2022-11-01';
+                    break;
                 case '34':
                     $discount_type = 1;
                     $discount = 25;
                     $init_discount = '2022-08-01';
-                    $end_discount = '2022-09-01';
+                    $end_discount = '2023-02-01';
+                    break;
+                case '37':
+                    $discount_type = 1;
+                    $discount = 15;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-02-01';
+                    break;
+                case '54':
+                    $discount_type = 1;
+                    $discount = 12;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-02-01';
+                    break;
+                case '63':
+                    $discount_type = 1;
+                    $discount = 5;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-02-01';
+                    break;
+                case '66':
+                    $discount_type = 1;
+                    $discount = 15;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-02-01';
+                    break;
+                case '76':
+                    $discount_type = 1;
+                    $discount = 5;
+                    $init_discount = '2022-08-01';
+                    $end_discount = '2023-02-01';
                     break;
             }
             $infoprice_prod = InfopriceProducts::create([

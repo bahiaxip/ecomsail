@@ -1483,5 +1483,100 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 86
         ]);
+        //product 87
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Polo Kappa',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_verde_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Polo Kappa',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_verde_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Polo Kappa',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_amarillo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Polo Kappa',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_azul.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Polo Kappa',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_blanco.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Polo Kappa',
+            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_rojo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 87
+        ]);
+        //product 88        
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Levi's",
+            'image' => 'clothes/polo_shirt/polo_levis_mineral_black/polo_levis_mineral_black_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 88
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Levi's",
+            'image' => 'clothes/polo_shirt/polo_levis_mineral_black/polo_levis_mineral_black_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 88
+        ]);
+        //product 89
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Lacoste",
+            'image' => 'clothes/polo_shirt/polo_lacoste_dh3201/polo_lacoste_blanco.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 89
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Lacoste",
+            'image' => 'clothes/polo_shirt/polo_lacoste_dh3201/polo_lacoste_negro.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 89
+        ]);
+        //product 90
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Adidas tiro17",
+            'image' => 'clothes/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_rojo.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 90
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Adidas tiro17",
+            'image' => 'clothes/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_azul.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 90
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Adidas tiro17",
+            'image' => 'clothes/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_blanco.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 90
+        ]);
     }
 }

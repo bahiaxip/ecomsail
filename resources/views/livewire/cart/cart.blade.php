@@ -106,7 +106,7 @@
                                     && date('Y-m-d') >= $oi->product->infoprice->init_discount && date('Y-m-d') <= $oi->product->infoprice->end_discount)
                                         <div>
                                         <span>
-                                            {{ floatval(number_format((floatval($oi->total)*((100-15)/100)),2,'.','')) }}€
+                                            {{ floatval(number_format((floatval($oi->total)*((100-20)/100)),2,'.','')) }}€
                                         </span>
                                         &nbsp;&nbsp;
                                         <span class="through" >{{ floatval(number_format($oi->total,2,'.','')) }}€
@@ -150,7 +150,16 @@
                     </div>
                         @php
                         $sum = $sum + $oi->quantity;
-                        $total = $total + $oi->total;
+//si existe descuento aplicarlo
+                        if($oi->state_discount == 1 && date('Y-m-d')<= $oi->end_discount){
+                            $discount = 20;
+                            $tax = (100-$discount)/100;
+                            $total = $total + ($oi->total*$tax);
+
+                        }else{
+                            $total = $total + $oi->total;    
+                        }
+                        
                         $this->total = $total;
                         @endphp
                     @endforeach

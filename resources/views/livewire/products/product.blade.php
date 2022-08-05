@@ -93,10 +93,15 @@
                 <div class="combinations product_combinations" >
                     @if($combinations_list && count($combinations_list) > 0)
                       @foreach($combinations_list as $key=>$comb)
-                        <div class="combinations_name ">
+                        <div class="combinations_name comb_{{$key}}">
                             {{Form::label($comb['name'],$comb['name'])}}
                             @if($option)
-                            {{$option[$key]}}
+        {{-- mostrar color mediante click --}}
+                            <span>
+                                @if($option_name[$key])
+                                    {{$option_name[$key]}}
+                                @endif
+                            </span>
                             @endif
                         </div>
                         <div class="combinations_items">
@@ -112,7 +117,7 @@
                                 
                                     <div class="color"  onclick="setBorderToCombSelected(this)">
                                     
-                                        <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};"/>
+                                        <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" />
                                         <label for="" class="label" style="background-color:{{$c['color']}};">
                                             <!-- mostramos icono con CSS (after)-->
                                             <span></span>
@@ -126,7 +131,7 @@
                                 @else
                                 <div class="item">
                                     <div>
-                                        <input class="mylabel"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  />
+                                        <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" />
                                         <label for="" style="background-color:orange;">
                                           {{$c['name']}}
                                         </label>
