@@ -21,6 +21,7 @@ class CreateCombinationsTable extends Migration
             $table->integer('product_id');
             $table->decimal('added_price',11,2)->default('0.00');
             $table->decimal('final_price',11,2)->default('0.00');
+            $table->integer('type_selection')->default(1);
             $table->integer('checked')->default(0);
             $table->timestamps();
         });

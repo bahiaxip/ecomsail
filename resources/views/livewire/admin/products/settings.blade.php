@@ -255,18 +255,22 @@
                     <div class="mtop16">
                         <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" onclick="">Crear combinación</button>
                         <div>
-                          @if($parent_combinations && count($parent_combinations) > 0)
-                            @foreach($parent_combinations as $key => $parent)
-                              <label for="parent_{{$key}}">
-                                  {{$parent}}
-                              </label>
-                              <select>
-                                  <option value="">Colores</option>
-                                  <option value="">Botones</option>
-                                  <option value="">Desplegable</option>
-                              </select>
-                            @endforeach
-                          @endif
+                          
+                            @if($parent_combinations && count($parent_combinations) > 0)
+                              @foreach($parent_combinations as $key => $parent)
+                                <label for="parent_{{$key}}">
+                                    {{$parent}}
+                                </label>
+                                <select wire:change="edit_type_selection({{$key}},$event.target.value)">
+                                    <option value="1">Desplegable</option>
+                                    <option value="2">Botones</option>
+                                    <option value="3">Colores</option>
+                                </select>
+                              @endforeach
+                              {{count($parent_combinations)}}
+                              {{$prod_id}}
+                            @endif
+                          
                           
                         </div>
                     </div>
@@ -498,7 +502,7 @@
       </div>
 
       <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear_settings()" onclick="clearActiveTabs()">Cancelar</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear_settings" onclick="clearActiveTabs()">Cancelar</button>
           <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update_settings_products({{$prod_id}},deliveryTime)" onclick="clearActiveTabs(switchDetail2)">Actualizar</button>          
       </div>
     </div>

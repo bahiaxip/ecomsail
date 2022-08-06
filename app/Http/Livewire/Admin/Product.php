@@ -421,9 +421,41 @@ class Product extends Component
         //pasamos el contenido del textarea de ckeditor
         
         //combinations
-        $this->combinations = Comb::where('product_id',$id)->get();
+        $this->show_attributes($id);
         //imágenes de productos (galería)
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
+    }
+    //creamos array con los atributos padre de todas las combinaciones y poder 
+    //mostrar select para modificar el tipo de selección de la combinación del producto
+    public function show_attributes($id){
+        $this->combinations = Comb::where('product_id',$id)->get();
+        //comprobamos si existen combinaciones del producto
+        if($this->combinations->count() > 0){
+            $parent = [];
+            //recorremos la lista de atributos(list_ids) y comprobamos
+            //y añadimos los padres en un array
+            foreach($this->combinations as $c){
+                $list = explode(",",$c->list_ids);
+                foreach($list as $l){
+                    $attr = Attr::findOrFail($l);
+                    if($attr){
+                        //si es el primero
+                        if(count($parent) == 0){
+                            $parent[$attr->parentattr->id]=$attr->parentattr->name;
+                        }else{
+                            if(!isset($parent[$attr->parentattr->id])){
+                                $parent[$attr->parentattr->id]=$attr->parentattr->name;
+                            }
+                        }
+                    }
+                }
+            }
+            //establecemos el array de atributos padre: parent[id_atributo_padre => nombre_atributo_padre, ...]
+            $this->parent_combinations = $parent;
+        }
+    }
+    public function edit_type_selection($id,$data){
+        dd($id);
     }
 
     public function update_settings_products($id,$delivery_time){
@@ -746,6 +778,7 @@ class Product extends Component
         //$this->emit('userUpdated');
         //iteration es necesario resetear el caché del input file
         $this->iteration=null;
+
     }
 
     public function clear2(){
@@ -775,6 +808,9 @@ class Product extends Component
         $this->discount=null;
         $this->init_discount=null;
         $this->end_discount=null;
+        $this->combinations = null;
+        
+        $this->parent_combinations=null;        
     }
     /*
     //crear combinaciones
@@ -846,12 +882,16 @@ class Product extends Component
 
             $product = Prod::findOrFail($product_id);
             $price = $product->price;
+            $type_selection=2;
+            //si el atributo padre es color asignamos 1
+            if($at->parentattr->id == 1)
             $comb = Comb::create([
                 'name' => $name_list,
                 'list_ids' => $at->id,
                 'amount' => 0,
                 'product_id' => $product_id,
-                'final_price' => 0.00
+                'final_price' => 0.00,
+                'type_selection' => 2
             ]);
 
         }
@@ -930,6 +970,7 @@ class Product extends Component
 
     public function render()
     {
+        
         $this->subcats = null;        
         if($this->category != 0){
             $this->subcats = Category::where('status',1)->where('type',$this->category)->orderBy('id','desc')->pluck('name','id');    
@@ -942,7 +983,10 @@ class Product extends Component
         $cats->prepend('Ninguna', 0);
 
         $attributes = Attr::where('status',1)->where('type',0)->orderBy('id','asc')->get();
-        $this->combinations = Comb::where('product_id',$this->prod_id)->get();
+        
+        //$this->combinations = Comb::where('product_id',$this->prod_id)->get();
+
+        /*
         if($this->combinations->count() > 0){
             $parent = [];
             //dd(count($this->combinations));
@@ -970,6 +1014,8 @@ class Product extends Component
             }
             $this->parent_combinations = $parent;
         }
+        */
+        
 
 
         $data = ['products' => $query,'cats'=> $cats,'filter_type' => $this->filter_type,'iteration'=>$this->iteration,'attributes' => $attributes];
