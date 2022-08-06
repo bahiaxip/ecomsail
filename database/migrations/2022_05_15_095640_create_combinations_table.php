@@ -16,11 +16,12 @@ class CreateCombinationsTable extends Migration
         Schema::create('combinations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('list_ids');            
+            $table->string('list_ids');
+            $table->integer('parent_attr');
             $table->integer('amount');
             $table->integer('product_id');
             $table->decimal('added_price',11,2)->default('0.00');
-            $table->decimal('final_price',11,2)->default('0.00');
+            $table->decimal('final_price',11,2)->default('0.00');            
             $table->integer('checked')->default(0);
             $table->timestamps();
         });

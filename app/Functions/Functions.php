@@ -37,4 +37,13 @@ function getCountOrders(){
 		return $count;
 	}
 }
+/* anulado 
+function get_type_selection_combination(){
+	return [
+		1 => 'Desplegable',
+		2 => 'Botones',
+		3 => 'Colores'
+	];
+}
+*/
 ?>

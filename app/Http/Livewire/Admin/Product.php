@@ -421,7 +421,9 @@ class Product extends Component
         //pasamos el contenido del textarea de ckeditor
         
         //combinations
-        $this->show_attributes($id);
+        $this->combinations = Comb::where('product_id',$id)->get();
+        $this->get_type_selection();
+        //$this->show_attributes($id);
         //imágenes de productos (galería)
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
     }
@@ -459,8 +461,20 @@ class Product extends Component
             $this->parent_combinations = $parent;
         }
     }
-    public function edit_type_selection($id,$data){
-        dd($id);
+
+    //obtener colección de parent_combinations de todas las  combinaciones 
+    //de un producto
+    public function get_type_selection(){
+        $parent_comb = ParentComb::where('product_id',$this->prod_id)->get();
+        $this->parent_combinations = $parent_comb;      
+    }
+    //establecer el tipo de selección de las combinaciones con el mismo atributo 
+    //padre  de un producto
+    public function set_type_selection($id,$data){
+        $parent_comb = ParentComb::findOrFail($id);
+        $parent_comb->update([
+            'type_selection' => $data
+        ]);
     }
 
     public function update_settings_products($id,$delivery_time){
@@ -892,10 +906,11 @@ class Product extends Component
             $price = $product->price;
             $type_selection=2;
             //si el atributo padre es color asignamos 1
-            if($at->parentattr->id == 1)
+            //if($at->parentattr->id == 1)
             $comb = Comb::create([
                 'name' => $name_list,
                 'list_ids' => $at->id,
+                'parent_attr' => $at->parentattr->id,
                 'amount' => 0,
                 'product_id' => $product_id,
                 'final_price' => 0.00,
@@ -907,10 +922,12 @@ class Product extends Component
             if(!$parent_comb){                
                 ParentComb::create([
                     'parent_id' => $at->parentattr->id,
+                    'parent_name' => $at->parentattr->name,
                     'type_selection' =>  2,
                     'product_id' => $product_id
                 ]);
             }
+            $this->get_type_selection();
 
 
         }
@@ -941,6 +958,8 @@ class Product extends Component
 //revisar que se hace con el precio: el precio de la combinación puede ser independiente
     //eliminar combinación
     public function deleteComb($id){
+        //comprobamos si es la última combinacion con el mismo atributo padre
+        //
         if($id){
             $comb = Comb::findOrFail($id);
             $comb->delete();
@@ -1002,8 +1021,8 @@ class Product extends Component
         $cats->prepend('Ninguna', 0);
 
         $attributes = Attr::where('status',1)->where('type',0)->orderBy('id','asc')->get();
-        
-        //$this->combinations = Comb::where('product_id',$this->prod_id)->get();
+        //recargamos combinaciones por si eliminamos
+        $this->combinations = Comb::where('product_id',$this->prod_id)->get();
 
         /*
         if($this->combinations->count() > 0){

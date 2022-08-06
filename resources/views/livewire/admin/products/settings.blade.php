@@ -256,19 +256,17 @@
                         <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" onclick="">Crear combinación</button>
                         <div>
                           
-                            @if($parent_combinations && count($parent_combinations) > 0)
+                            @if($parent_combinations && $parent_combinations->count() > 0)
                               @foreach($parent_combinations as $key => $parent)
                                 <label for="parent_{{$key}}">
-                                    {{$parent}}
+                                    {{$parent->parent_name}}
                                 </label>
-                                <select wire:change="edit_type_selection({{$key}},$event.target.value)">
-                                    <option value="1">Desplegable</option>
-                                    <option value="2">Botones</option>
-                                    <option value="3">Colores</option>
+                                <select wire:change="set_type_selection({{$parent->id}},$event.target.value)" >
+                                    <option value="1" @if($parent->type_selection == 1) {{'selected'}} @endif>Desplegable</option>
+                                    <option value="2" @if($parent->type_selection == 2) {{'selected'}} @endif>Botones</option>
+                                    <option value="3" @if($parent->type_selection == 3) {{'selected'}} @endif>Colores</option>
                                 </select>
-                              @endforeach
-                              {{count($parent_combinations)}}
-                              {{$prod_id}}
+                              @endforeach                   
                             @endif
                           
                           

@@ -16,6 +16,7 @@ class CreateParentCombinationsTable extends Migration
         Schema::create('parent_combinations', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id');
+            $table->string('parent_name');
             $table->integer('type_selection')->default(0);
             $table->integer('product_id');
             $table->timestamps();
