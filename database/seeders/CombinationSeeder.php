@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Combination;
+use App\Models\Combination, App\Models\ParentCombinations as ParentComb;
+
 class CombinationSeeder extends Seeder
 {
     /**
@@ -30,6 +31,12 @@ class CombinationSeeder extends Seeder
             'added_price' => 2,
             'product_id' => 2
         ]);
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
+            'product_id' => 2
+        ]);
     //product 31
         //Color
         Combination::create([
@@ -44,6 +51,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 6,
             'parent_attr' => 1,
             'amount' => 0,
+            'product_id' => 31
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
             'product_id' => 31
         ]);
     //product 33
@@ -74,6 +88,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 5,
             'parent_attr' => 1,
             'amount' => 0,
+            'product_id' => 33
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
             'product_id' => 33
         ]);
         //Talla
@@ -112,6 +133,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 33
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 2,
+            'parent_name' => 'Talla',
+            'type_selection' => 2,
+            'product_id' => 33
+        ]);
         
     //product 34
         
@@ -148,6 +176,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 41,
             'parent_attr' => 2,
             'amount' => 0,
+            'product_id' => 34
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 2,
+            'parent_name' => 'Talla',
+            'type_selection' => 2,
             'product_id' => 34
         ]);
         
@@ -223,6 +258,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 35
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
+            'product_id' => 35
+        ]);
 
     //product 36
         Combination::create([
@@ -284,6 +326,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 36
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
+            'product_id' => 36
+        ]);
         //Talla
         Combination::create([
             'name' => 'Talla > XS',
@@ -318,6 +367,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 41,
             'parent_attr' => 2,
             'amount' => 0,
+            'product_id' => 36
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 2,
+            'parent_name' => 'Talla',
+            'type_selection' => 2,
             'product_id' => 36
         ]);
         
@@ -373,6 +429,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 37
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
+            'product_id' => 37
+        ]);
         //Talla
         Combination::create([
             'name' => 'Talla > XS',
@@ -409,6 +472,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 37
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 2,
+            'parent_name' => 'Talla',
+            'type_selection' => 2,
+            'product_id' => 37
+        ]);
         
     //product 38
         //Color
@@ -425,6 +495,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 10,
             'parent_attr' => 1,
             'amount' => 0,
+            'product_id' => 38
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
             'product_id' => 38
         ]);
         //Talla
@@ -455,6 +532,13 @@ class CombinationSeeder extends Seeder
             'parent_attr' => 2,
             'amount' => 0,
             'product_id' => 38
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 2,
+            'parent_name' => 'Talla',
+            'type_selection' => 2,
+            'product_id' => 39
         ]);
         
     //product 39
@@ -492,6 +576,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 19,
             'parent_attr' => 1,
             'amount' => 0,
+            'product_id' => 39
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
             'product_id' => 39
         ]);
     //product 40
@@ -540,6 +631,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 40
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
+            'product_id' => 40
+        ]);
     //product 87
         Combination::create([
             'name' => 'Color > Verde',
@@ -576,6 +674,13 @@ class CombinationSeeder extends Seeder
             'amount' => 0,
             'product_id' => 87
         ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
+            'product_id' => 87
+        ]);
     //product 89
         Combination::create([
             'name' => 'Color > Azul marino',
@@ -596,6 +701,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 6,
             'parent_attr' => 1,
             'amount' => 0,
+            'product_id' => 89
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
             'product_id' => 89
         ]);
     //product 90
@@ -625,6 +737,13 @@ class CombinationSeeder extends Seeder
             'list_ids' => 5,
             'parent_attr' => 1,
             'amount' => 0,
+            'product_id' => 90
+        ]);
+        //parent_combinations
+        ParentComb::create([
+            'parent_id' => 1,
+            'parent_name' => 'Color',
+            'type_selection' => 3,
             'product_id' => 90
         ]);
     }

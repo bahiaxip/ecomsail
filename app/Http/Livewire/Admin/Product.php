@@ -913,21 +913,28 @@ class Product extends Component
                 'parent_attr' => $at->parentattr->id,
                 'amount' => 0,
                 'product_id' => $product_id,
-                'final_price' => 0.00,
-                'type_selection' => 2
+                'final_price' => 0.00,                
             ]);
             //si no existe registro del producto de ese atributo
-            //padre, se crea
+            //padre, se crea uno.
             $parent_comb = ParentComb::where('product_id',$product_id)->where('parent_id',$at->parentattr->id)->first();
+            $type_selection = 2;
+            //si el Atributo padre es Color (atributo->id = 1 en la db)
+            //asignamos el type_selection a 3
+            if($at->parentattr->id == 1){
+                $type_selection = 3;
+            }
             if(!$parent_comb){                
                 ParentComb::create([
                     'parent_id' => $at->parentattr->id,
                     'parent_name' => $at->parentattr->name,
-                    'type_selection' =>  2,
+                    'type_selection' =>  $type_selection,
                     'product_id' => $product_id
                 ]);
+                //actualizamos parent_combinations
+                $this->get_type_selection();
             }
-            $this->get_type_selection();
+            
 
 
         }
@@ -958,19 +965,41 @@ class Product extends Component
 //revisar que se hace con el precio: el precio de la combinación puede ser independiente
     //eliminar combinación
     public function deleteComb($id){
-        //comprobamos si es la última combinacion con el mismo atributo padre
-        //
+        //comprobamos si es la última combinacion con el mismo atributo padre, para eliminar el registro
+        //del parent_combinations
+        /*
+        if($this->combinations){
+            $list = [];
+            foreach($this->combinations as $c){
+                if(!in_array($c->parent_attr,($list)))
+                $list[] = $c->parent_attr;
+            }
+            dd($list);
+        }*/
         if($id){
             $comb = Comb::findOrFail($id);
-            $comb->delete();
+            
+            if($comb){
+                $comb_same_parent = Comb::where('product_id',$this->prod_id)->where('parent_attr',$comb->parent_attr)->count();
+                if($comb_same_parent <= 1){
+                    $parent_comb = ParentComb::where('product_id',$this->prod_id)->where('parent_id',$comb->parent_attr)->first();
+                    $parent_comb->delete();
+                    //actualizamos el parent_combinations
+                    $this->get_type_selection();
+                }
+                $comb->delete();
+            }
+
         }
-            $this->typealert = 'danger';
-            session()->flash('message2',"Combinación eliminada correctamente");
-            //$this->clear2();
+        
+        $this->typealert = 'danger';
+        session()->flash('message2',"Combinación eliminada correctamente");
+        //$this->clear2();
     }
     //eliminamos imágenes de la galería y recargamos galería y drag&drop
     public function deleteGallery($id){
         if($id){
+            dd($id);
             $image = ImagesProducts::findOrFail($id);
             $image->delete();            
         }
