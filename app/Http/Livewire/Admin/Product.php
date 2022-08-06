@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 use App\Functions\Export;
 use App\Models\Product as Prod;
 use Illuminate\Http\Request;
-use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts, App\Models\Attribute as Attr, App\Models\Combination as Comb, App\Models\ImagesProducts;
+use App\Models\Category, App\Models\SettingsProducts, App\Models\InfopriceProducts, App\Models\Attribute as Attr, App\Models\Combination as Comb, App\Models\ImagesProducts, App\Models\ParentCombinations as ParentComb;
 use Str,PDF,Excel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Listado;
@@ -425,6 +425,11 @@ class Product extends Component
         //imágenes de productos (galería)
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
     }
+    //anulación debido a cambio de metodología, a través de una 
+    //nueva tabla (parent_combinations), para establecer a todas 
+    //las combinaciones del mismo atributo padre de un producto
+    //un tipo de selección distinta(colores, desplegable, botones)
+
     //creamos array con los atributos padre de todas las combinaciones y poder 
     //mostrar select para modificar el tipo de selección de la combinación del producto
     public function show_attributes($id){
@@ -857,8 +862,11 @@ class Product extends Component
             $parent[$at->type] = $at->id;
             //lista de combinaciones de la db del producto
             $combinations = Comb::where('product_id',$product_id)->get();
+
             //comprobamos si ya existe el mismo valor en una combinación
             foreach($combinations as $comb){
+        //comprobamos si existe ya un valor
+
         //$list: lista de valores que tiene cada una de las combinaciones convertida a array                
                 $list = explode(",",$comb->list_ids);
 
@@ -893,6 +901,17 @@ class Product extends Component
                 'final_price' => 0.00,
                 'type_selection' => 2
             ]);
+            //si no existe registro del producto de ese atributo
+            //padre, se crea
+            $parent_comb = ParentComb::where('product_id',$product_id)->where('parent_id',$at->parentattr->id)->first();
+            if(!$parent_comb){                
+                ParentComb::create([
+                    'parent_id' => $at->parentattr->id,
+                    'type_selection' =>  2,
+                    'product_id' => $product_id
+                ]);
+            }
+
 
         }
         

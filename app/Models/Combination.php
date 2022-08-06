@@ -11,7 +11,7 @@ class Combination extends Model
 
     protected $table = 'combinations';
     protected $fillable = [
-        'name','list_ids','amount','product_id','added_price','final_price','type_selection','checked'
+        'name','list_ids','amount','product_id','added_price','final_price','checked'
     ];
 
     protected $hidden = ['created_at','updated_at'];
