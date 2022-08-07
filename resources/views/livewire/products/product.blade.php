@@ -98,48 +98,86 @@
                             @if($option)
         {{-- mostrar color mediante click --}}
                             <span>
-                                @if($option_name[$key])
+                                @isset($option_name[$key])
                                     {{$option_name[$key]}}
-                                @endif
+                                @endisset
                             </span>
                             @endif
                         </div>
+
                         <div class="combinations_items">
-                          
-                          @foreach($comb as $k => $c)
-                            @if($k != 'name')
-                                @if($comb[0]['color'])
-                                <div class="item_color">
-                            <!-- si el primer registro de la combinación 
-                            dispone de color se muestran los que tengan algún color (mediante un div con fondo del color)-->
+                            @php
+                                $type = 2;
+                            @endphp
+                            @if($parent_combinations->count() > 0)
+                                @foreach($parent_combinations as $pc)
+                                    @if($pc->parent_id == $key)
+                                        @php $type=$pc->type_selection @endphp
+                                    @endif
+                                @endforeach
+                            @endif
+                            @if($type == 3)
+                                @foreach($comb as $k => $c)                          
+                                    @if($k != 'name')
+                                    {{-- establecemos $type para después asignar el tipo de selección del producto (desplegable,botones o divs de colores) --}}
+                                        
+                                        {{--@if($comb[0]['color'])--}}
+                                        
+                                    <div class="item_color {{$type}}">
+                                    <!-- si el primer registro de la combinación 
+                                    dispone de color se muestran los que tengan algún color (mediante un div con fondo del color)-->
+                                        
+                                        @if($c['color'])
+                                            
+                                            <div class="color {{$key}}"  onclick="setBorderToCombSelected(this)">
+                                            
+                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" />
+                                                <label for="" class="label" style="background-color:{{$c['color']}};">
+                                                    <!-- mostramos icono con CSS (after)-->
+                                                    <span></span>
+                                                    <!--
+                                                    <span class="hexa_icon" style="margin:auto;font-size:10px">&#10004; </span>
+                                                    -->
+                                                </label>
+                                            </div>
+                                        @endif
                                     
-                                    @if($c['color'])
-                                
-                                    <div class="color"  onclick="setBorderToCombSelected(this)">
-                                    
-                                        <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" />
-                                        <label for="" class="label" style="background-color:{{$c['color']}};">
-                                            <!-- mostramos icono con CSS (after)-->
-                                            <span></span>
-                                            <!--
-                                            <span class="hexa_icon" style="margin:auto;font-size:10px">&#10004; </span>
-                                            -->
-                                        </label>
                                     </div>
                                     @endif
+                                @endforeach
+                            @elseif($type == 2)
+                                @foreach($comb as $k => $c)
+                                    @if($k != 'name')
+                                        <div class="item">
+                                            <div>
+                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" />
+                                                <label for="" style="background-color:orange;">
+                                                  {{$c['name']}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            
+                            @else
+                                <div class="col-auto">
+                                <select name="" id="" class="form-select form-select-sm" wire:model="option.{{$key}}">
+                                    
+                                
+                                @foreach($comb as $k => $c)
+                                    @if($k != 'name')
+                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                            
+                                        
+                                        
+                                            
+                                        
+                                    @endif
+                                @endforeach
+                                </select>
                                 </div>
-                                @else
-                                <div class="item">
-                                    <div>
-                                        <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" />
-                                        <label for="" style="background-color:orange;">
-                                          {{$c['name']}}
-                                        </label>
-                                    </div>
-                                </div>
-                                @endif
+                                
                             @endif
-                          @endforeach
                         </div>
 
                         {{--

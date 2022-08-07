@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts, App\Models\Favorite;
+use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts, App\Models\Favorite, App\Models\ParentCombinations as ParentComb;
 use Auth;
 class Product extends Component
 {
@@ -12,6 +12,7 @@ class Product extends Component
     public $option = [];
     public $option_name = [];
     public $combinations_list;
+    public $parent_combinations;
     public $quantity = 1;
     public $quantity_tmp=1;
     public $product;
@@ -124,11 +125,14 @@ class Product extends Component
             }
             //dd($list);
             $this->combinations_list = $list;
+            $this->parent_combinations = ParentComb::where('product_id',$this->product_id)->get();
+            //dd($this->parent_combinations);
             //dd($this->combinations_list = $list);
 
         }else{
             $this->combinations_list=[];
         }
+        
     }
 
     public function updated(){
