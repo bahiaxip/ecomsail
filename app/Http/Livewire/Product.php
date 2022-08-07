@@ -230,6 +230,7 @@ class Product extends Component
         //registro para luego poder sumar o restar desde el carrito.
         $quantity = 1;
         $added_price=NULL;
+        $discount = 0;
         $state_discount = 0;
         $end_discount = NULL;
         if($this->quantity && $this->quantity > 1)
@@ -242,6 +243,7 @@ class Product extends Component
         if($product->infoprice->discount_type
             && date('Y-m-d') >= $product->infoprice->init_discount && date('Y-m-d') <= $product->infoprice->end_discount){
             $state_discount = $product->infoprice->discount_type;
+            $discount = $product->infoprice->discount;
             $end_discount = $product->infoprice->end_discount;
         }
         //si en el array $diff no existe ningún resultado(0), 
@@ -251,6 +253,7 @@ class Product extends Component
             'combinations' => json_encode($list),
             'quantity' => $this->quantity,
             'state_discount' => $state_discount,
+            'discount' => $discount,
             'end_discount' => $end_discount,
             'added_price' => $added_price,
             'price_unit' => $this->product->price,

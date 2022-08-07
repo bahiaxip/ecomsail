@@ -106,7 +106,7 @@
                                     && date('Y-m-d') >= $oi->product->infoprice->init_discount && date('Y-m-d') <= $oi->product->infoprice->end_discount)
                                         <div>
                                         <span>
-                                            {{ floatval(number_format((floatval($oi->total)*((100-20)/100)),2,'.','')) }}€
+                                            {{ floatval(number_format((floatval($oi->total)*((100-$oi->discount)/100)),2,'.','')) }}€
                                         </span>
                                         &nbsp;&nbsp;
                                         <span class="through" >{{ floatval(number_format($oi->total,2,'.','')) }}€
@@ -152,7 +152,7 @@
                         $sum = $sum + $oi->quantity;
 //si existe descuento aplicarlo
                         if($oi->state_discount == 1 && date('Y-m-d')<= $oi->end_discount){
-                            $discount = 20;
+                            $discount = $oi->discount;
                             $tax = (100-$discount)/100;
                             $total = $total + ($oi->total*$tax);
 
@@ -172,7 +172,8 @@
             <div class="col-md-6 col-xl-3 shadow section_finish">
                 <div class="resum">
                     <span class="left">{{$sum}} @if($sum==1)Producto @else Productos @endif</span>
-                    <span class="right">{{$total}} €</span>
+                    <span class="right">{{floatval(number_format($total,2,'.',''))}} €</span>
+                    
                 </div>
                 <div class="resum">
                     <span class="left">Transporte</span>

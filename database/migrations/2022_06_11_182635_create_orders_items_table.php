@@ -18,6 +18,7 @@ class CreateOrdersItemsTable extends Migration
             $table->text('combinations')->nullable();
             $table->integer('quantity')->default(1);
             $table->integer('state_discount')->default(0);
+            $table->integer('discount')->nullable();
             $table->date('end_discount')->nullable();
             $table->decimal('added_price')->nullable();
             $table->decimal('price_unit');
