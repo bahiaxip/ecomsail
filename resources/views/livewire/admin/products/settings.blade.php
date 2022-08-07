@@ -1,6 +1,6 @@
 <!-- Modal crear producto -->
 <div wire:ignore.self class="modal fade " id="settings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-xl product_settings">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <div class="modal-title h5">
@@ -243,7 +243,7 @@
             </div>
           </div>
 
-          <div class="tab-pane fade" id="nav-combinations" role="tabpanel" aria-labelledby="nav-combinations-tab" wire:ignore.self>
+          <div class="tab-pane fade combinations" id="nav-combinations" role="tabpanel" aria-labelledby="nav-combinations-tab" wire:ignore.self>
             <div class="row mtop16">
               @include('livewire.admin.products.confirm_combinations')
               <div class="col-md-9" style="position:relative">
@@ -252,25 +252,30 @@
                     {{ Form::label('generate','Generar combinaciones')}}
                     <div class="panel shadow" id="panel_combinations" style="width:98%;min-height:50px;border: #D3D3D3 1px solid;border-radius:4px;padding:10px;margin:auto">
                     </div>
-                    <div class="mtop16">
+                    <div class="mtop16 ">
                         <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" onclick="">Crear combinación</button>
-                        <div>
-                          
-                            @if($parent_combinations && $parent_combinations->count() > 0)
-                              @foreach($parent_combinations as $key => $parent)
-                                <label for="parent_{{$key}}">
-                                    {{$parent->parent_name}}
-                                </label>
-                                <select wire:change="set_type_selection({{$parent->id}},$event.target.value)" >
-                                    <option value="1" @if($parent->type_selection == 1) {{'selected'}} @endif>Desplegable</option>
-                                    <option value="2" @if($parent->type_selection == 2) {{'selected'}} @endif>Botones</option>
-                                    <option value="3" @if($parent->type_selection == 3) {{'selected'}} @endif>Colores</option>
-                                </select>
-                              @endforeach                   
-                            @endif
-                          
-                          
+                        @if($parent_combinations && $parent_combinations->count() > 0)
+                        <div class="shadow p10">
+                            <label class="mtop16" for="" style="font-size:16px;width:100%">
+                              <i class="fa-solid fa-list"></i>
+                              Tipo de selector
+                            </label>
+                            <div class="type_selection">
+                                  @foreach($parent_combinations as $key => $parent)
+                                  <div class="mtop10">
+                                    <label for="parent_{{$key}}">
+                                        {{$parent->parent_name}}
+                                    </label>
+                                    <select wire:change="set_type_selection({{$parent->id}},$event.target.value)" class="form-select form-select-sm" >
+                                        <option value="1" @if($parent->type_selection == 1) {{'selected'}} @endif>Desplegable</option>
+                                        <option value="2" @if($parent->type_selection == 2) {{'selected'}} @endif>Botones</option>
+                                        <option value="3" @if($parent->type_selection == 3) {{'selected'}} @endif>Colores</option>
+                                    </select>
+                                  </div>
+                                  @endforeach
+                            </div>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @if(session()->has('message2'))
@@ -317,8 +322,13 @@
                                     <td class="added_price">
                                         {{ Form::number('added_price',$comb->added_price,['class' => 'form-control form-control-sm','disabled','onchange' => 'update_added_price(this)']) }}
                                     </td>
+                                    {{--
                                     <td class="final_price">
                                         {{ Form::number('final_price',$comb->final_price,['class' => 'form-control form-control-sm','disabled','onchange' => 'update_final_price(this)']) }}
+                                    </td>
+                                    --}}
+                                    <td class="stock">
+                                        {{ Form::number('stock_comb',$comb->stock,['class' => 'form-control form-control-sm','disabled','onchange' => 'update_stock(this)','max' => $stock_final + $comb->stock,'min' => 0]) }}
                                     </td>
                                     <td>
                                         <div class="admin_items" style="display:flex">
@@ -333,7 +343,7 @@
                                           <div class="edit_comb_update" style="display:none">
                                               <button class="btn btn-sm edit" onclick="editComb({{$comb->id}},true)" >
                                               <i class="fa-solid fa-xmark"></i>
-                                              <button class="btn btn-sm edit" wire:click="save({{$comb->id}},added_price,final_price)" >
+                                              <button class="btn btn-sm edit" wire:click="save({{$comb->id}},added_price,stock)" >
                                               <i class="fa-solid fa-check"></i>
                                             </button>
                                           </div>

@@ -546,8 +546,11 @@ let galleryIdTmp;
 let added_price_tmp;
 //importe total de combinaciones (temporal, solo para la edición de precio)
 let final_price_tmp;
+//stock temporal de combinaciones
+let stock_tmp;
+//(final_price anulado, añadido stock)
 //globales que pasaremos para actualizar los 2 input de precio en save() en PHP
-let added_price, final_price
+let added_price, final_price, stock;
 //añadir valor al panel de combinaciones
 function addValue(value_id,value_name,parent_id,el=null){
 //Revisar si es necesario
@@ -726,13 +729,17 @@ function editComb(id,cancel=null){
     resetEditComb();
     let tr = document.querySelector('.tr_'+id);
     let input = tr.querySelector('.added_price').getElementsByTagName('input')[0];
-    let input2 = tr.querySelector('.final_price').getElementsByTagName('input')[0];
+    //anulado
+    //let input2 = tr.querySelector('.final_price').getElementsByTagName('input')[0];
+    let input2 = tr.querySelector('.stock').getElementsByTagName('input')[0];
     //si se pulsa cancelar no se actualiza el valor del input
     if(!cancel){
         //si es editar, en lugar de cancelar la edición, almacenamos en global
         //para poder recuperar el valor que se encontraba al editar si se desea cancelar
         added_price_tmp = input.value;
-        final_price_tmp = input2.value;
+        //anulado final_price_tmp
+        //final_price_tmp = input2.value;
+        stock_tmp = input2.value;
         openEditComb(tr,input,input2)
     }else{
         closeEditComb(tr,input,input2) 
@@ -759,10 +766,14 @@ function closeEditComb(t,el,el2){
     //t.querySelector('.delete').style.display='flex';
     //recuperamos los valores anteriores a la edición 
     el.value=added_price_tmp;
-    el2.value=final_price_tmp;
+    //anulado
+    //el2.value=final_price_tmp;
+    el2.value=stock_tmp;
     //reseteamos las globales
     added_price_tmp = null;
-    final_price_tmp = null;
+    //anulado
+    //final_price_tmp = null;
+    stock_tmp = null;
 }
 //resetea todos los botones de edición de combinaciones y desactiva todos los inputs de precio
 //devolviendo el valor que tenía el último en el caso de que se haya dejado abierto
@@ -781,7 +792,9 @@ function resetEditComb(){
             if(counter==0)
                 item.value=added_price_tmp;
             if(counter==1)
-                item.value = final_price_tmp;
+                //sustituido por stock
+                //item.value = final_price_tmp;
+                item.value = stock_tmp;
         }
         item.disabled=true;
     })
@@ -804,6 +817,9 @@ function update_added_price(data){
 }
 function update_final_price(data){
     final_price = data.value;
+}
+function update_stock(data){
+    stock = data.value;
 }
 
 //al dar problemas con el input radio para poder activar/desactivar 

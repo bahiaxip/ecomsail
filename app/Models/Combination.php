@@ -13,7 +13,7 @@ class Combination extends Model
     //el parentattr se ha añadido debido a la modificación
     //restringiendo las combinaciones a un solo atributo>valor por combinación
     protected $fillable = [
-        'name','list_ids','parent_attr','amount','product_id','added_price','final_price','checked'
+        'name','list_ids','parent_attr','amount','product_id','stock','added_price','final_price','checked'
     ];
 
     protected $hidden = ['created_at','updated_at'];

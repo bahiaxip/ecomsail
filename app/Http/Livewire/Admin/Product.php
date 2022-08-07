@@ -29,7 +29,10 @@ class Product extends Component
     public $iteration;
     public $code;
     public $price;
+    //stock total del producto
     public $stock;
+    //stock después de restar los stock de todas las combinaciones
+    public $stock_final;
     public $state_discount;
     
     public $short_detail;
@@ -89,8 +92,9 @@ class Product extends Component
 
     //importe adicional de combinaciones
     public $added_price;
+    //anulado $final_price y añadido stock
     public $final_price;
-
+    public $stock_comb;
     
     //campo de búsqueda (wire:model)
     public $search_data;
@@ -366,6 +370,21 @@ class Product extends Component
         //renderizamos la lista del drag&drop, por si hubiera algunas añadidas
         $this->emit('reload_images',$id);
     }
+    //obtener el stock final disponible después de sumar todos los stocks
+    //de todas las combinaciones y restar del total. Después, en la vista
+    //sumamos el stock de cada combinación para restringir el máximo de cada uno
+    public function get_stockfinal($id,$total){
+        $combs = Comb::where('product_id',$id)->get();
+        $stock_final = $total;
+        if($combs->count() > 0){
+            $sum = 0;
+            foreach($combs as $comb){
+                $sum = $sum + $comb->stock;
+            }
+            $stock_final = $total - $sum;
+        }
+        return $stock_final;
+    }
 
     public function edit_settings_product($id){
         //$temp = SettingsProducts::where('product_id',5)->first();
@@ -375,8 +394,16 @@ class Product extends Component
         //para el precio $prod
         $prod = Prod::findOrFail($id);        
         $this->price = $prod->price;
+        $this->stock = $prod->stock;
+        $this->stock_final = $this->get_stockfinal($this->prod_id,$this->stock);
+        
+        //recorremos todas las combinaciones para obtener los stock
+        // asignados y sumarlos, la resta definirá el máximo de stock final 
+        //de cualquier combinación.
+
         //distinguimos estado de reciclaje del resto de estados en settings
         $settings_prod;
+        
         
         if($this->filter_type == 2):
             $settings_prod = SettingsProducts::onlyTrashed()->where('product_id',$id)->first();
@@ -794,6 +821,7 @@ class Product extends Component
         $this->code = null;
         $this->short_detail = null;
         $this->detail = '';
+        $this->stock = null;
         //$this->emit('userUpdated');
         //iteration es necesario resetear el caché del input file
         $this->iteration=null;
@@ -904,7 +932,7 @@ class Product extends Component
 
             $product = Prod::findOrFail($product_id);
             $price = $product->price;
-            $type_selection=2;
+            
             //si el atributo padre es color asignamos 1
             //if($at->parentattr->id == 1)
             $comb = Comb::create([
@@ -1009,19 +1037,30 @@ class Product extends Component
         $this->emit('reload_images',$this->prod_id);
     }
     //actualizar los precios de la combinación seleccionada
-    public function save($id,$added_price,$final_price){
+    //sustituido final_price por stock
+    //public function save($id,$added_price,$final_price){
+    public function save($id,$added_price,$stock){        
+        /*
         if(!$final_price)
             $final_price = 0.00;
         if($added_price)
             $final_price = $added_price+$final_price;
-        
+        */
+        if(!$added_price)
+            $added_price = 0;
+        if(!$stock)
+            $stock = 0;
         
         $comb = Comb::findOrFail($id);
         //dd($id);
         $comb->update([
             'added_price' => $added_price,
-            'final_price' => $final_price
+            //'final_price' => $final_price
+            'stock' => $stock
         ]);
+        //actualizamos el stock disponible para cualquier combinación
+        $this->stock_final = $this->get_stockfinal($this->prod_id,$this->stock);
+        //dd($this->stock_final);
         //$this->combinations = Comb::where('product_id',$this->prod_id)->get();
     }
 
