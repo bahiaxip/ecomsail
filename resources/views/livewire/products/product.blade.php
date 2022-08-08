@@ -76,18 +76,27 @@
                 <div class="price mtop16">
                     @if($prod->infoprice->discount_type == 1
                         && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
-                    <span>
+                    <span>                        
                         {{ floatval(number_format(($price_tmp*((100-$prod->infoprice->discount)/100)),2,'.','')) }}€
+                        @if($prod->stock == 0)
+                        {{'Sin stock'}}
+                        @endif
                     </span>
                     <span style="text-decoration:line-through;color:#696969">
                         {{$price_tmp}} €
                     </span>
                     @else
-                    <span>
-                        {{$price_tmp}} €
+                    <span>                        
+                        {{ floatval(number_format($price_tmp,2,',',''))}} €
                     </span>
                     @endif
                     <p>(Impuestos incluidos)</p>
+
+                    @if($prod->stock == 0)
+                    <p style="font-size:14px;font-weight:bold">
+                        {{'Sin stock'}}
+                    </p>
+                    @endif
                 </div>
 
                 <div class="combinations product_combinations" >
@@ -108,6 +117,7 @@
                         <div class="combinations_items">
                             @php
                                 $type = 2;
+
                             @endphp
                             @if($parent_combinations->count() > 0)
                                 @foreach($parent_combinations as $pc)
@@ -131,7 +141,7 @@
                                             
                                             <div class="color {{$key}}"  onclick="setBorderToCombSelected(this)">
                                             
-                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" />
+                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" @if($c['stock'] == 0) {{'disabled'}} @endif/>
                                                 <label for="" class="label" style="background-color:{{$c['color']}};">
                                                     <!-- mostramos icono con CSS (after)-->
                                                     <span></span>
@@ -150,7 +160,7 @@
                                     @if($k != 'name')
                                         <div class="item">
                                             <div>
-                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" />
+                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  @if($c['stock'] == 0) {{'disabled'}} @endif/>
                                                 <label for="" style="background-color:orange;">
                                                   {{$c['name']}}
                                                 </label>
@@ -166,7 +176,7 @@
                                 
                                 @foreach($comb as $k => $c)
                                     @if($k != 'name')
-                                        <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                        <option value="{{$c['id']}}" @if($c['stock'] == 0) {{'disabled'}} @endif>{{$c['name']}} </option>
                                             
                                         
                                         
@@ -206,7 +216,8 @@
                       </div>
                     </div>
                     <div class="col-xl-7 quantity_btn">
-                      <button type="button" class="btn " wire:click="add_cart" @guest disabled @endguest @guest title="Inicie sesión para añadir productos al carrito" @endguest>
+                      <button type="button" class="btn " wire:click="add_cart" @guest disabled title="Inicie sesión para añadir productos al carrito" @endguest  @if($prod->stock == 0 || $sum_stock == 0)
+                        {{'disabled'}} title="Producto sin stock" @endif>
                         <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                       {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
                       --}}

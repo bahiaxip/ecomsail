@@ -608,7 +608,7 @@ class Product extends Component
             'price' => ['required','numeric','regex:/^(\d+)(,\d{1,2}|\.\d{1,2})?$/'],
             'status' => 'required',
             'code' => 'nullable',
-            'stock' => 'required|gt:0',
+            'stock' => 'required|integer',
             'short_detail' => 'required',
             'detail' => 'required',
             'image' => 'nullable|image'

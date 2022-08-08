@@ -5,10 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Product, App\Models\Category;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
 class Store extends Component
 {
     use WithPagination;
-
+    public $page_tmp;
     public $typealert='success';
     //si mantenmos category a 0 o null, la primera selección regresa erróneamente 
     //al primer elemento de la lista(Ropa), después de cargar los productos correctamente
@@ -25,6 +26,7 @@ class Store extends Component
     public $data;
     
     public function mount($category=null,$subcategory=null){
+        $this->page_tmp = $this->page;
         /*
         if($category && !$subcategory){
             dd("hay solo category");
@@ -32,7 +34,7 @@ class Store extends Component
             dd("existe subcategory");        
         }
         */
-
+        
         if($category){            
             $this->category = $category;
         }
@@ -47,6 +49,18 @@ class Store extends Component
         if($title){
             $this->title = $this->getTitle();    
         }
+    }
+    //método de pagination de Livewire, permite realizar scroll Top al pasar página.
+    //Con setPage() comprobamos si es cambio de página o cambio en alguno de los 
+    //selects. Además, el trait WithPagination incorpora $this->page permitiendo 
+    //prescindir de pasar $page como parámetro.
+    public function setPage($page){
+        if($page != $this->page_tmp){
+            $this->emit('$refresh');
+        }else{
+            $this->page_tmp = $page;
+        }
+        
     }
     public function set_category(){
         $this->start = false;
@@ -88,12 +102,9 @@ class Store extends Component
         return $title;
     }
 
-    public function updated(){
-        
-    }
+    
     public function render()
-    {
-
+    {        
         //dd($this->category);
         $categories_list = Category::where('status',1)->where('type',0)->pluck('name','id');
         $categories_list->prepend('Seleccione...',0);

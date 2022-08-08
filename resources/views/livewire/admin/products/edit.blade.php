@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-6">
                   {{ Form::label('stock','Stock')}}
-                  {{ Form::number('stock',1,['class' => 'form-control','wire:model' => 'stock'])}}
+                  {{ Form::number('stock',1,['class' => 'form-control','wire:model' => 'stock','min' => 0])}}
                   @error('stock')
                     <p class="text-danger">{{$message}}</p>
                   @enderror

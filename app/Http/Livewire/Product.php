@@ -23,10 +23,15 @@ class Product extends Component
     public $user_id;
     public $typealert='success';
     public $favorite;
+    public $sum_stock;
     public function mount($id){        
         $this->product_id = $id;
         $this->product = Prod::findOrFail($this->product_id);
         $this->price_tmp = $this->product->price;
+        //establecemos al sum_stock el stock total
+        $this->sum_stock = $this->product->stock;
+        //con setCombinations generamos la lista de combinaciones y actualizamos 
+        //sum_stock si existe alguna combinación
         $this->setCombinations();
         $this->counter=0;
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
@@ -39,6 +44,7 @@ class Product extends Component
             session()->flash('message','Se originó un error con la autenticación de usuario, inicie sesión');
         }
         */
+
         
     }
     public function hydrate(){        
@@ -79,16 +85,28 @@ class Product extends Component
     public function setCombinations(){
         $combinations = Combination::where('product_id',$this->product_id)->get();
         if($combinations->count() > 0){
+            //creamos un sum_stock que suma todos los stock, si no existe ningún
+            //stock de ninguna combinaciónnos permitirá desactivar el botón de agregar al carrito
+            $sum_stock = 0;
             //revisamos coincidencias del mismo atributo
-            foreach($combinations as $k=>$comb){                
-                //las combinaciones están preparadas para que solo se pueda crear
-                //atributo>valor, es decir no puede traer 2 valores del mismo
-                //atributo, pero si puede traer varios atributos>valor en la misma combinación:
-                //Pot tanto...
-                    //con distinto atributo padre se puede:
-                    // Color>blanco,Talla>S...
-                    //con el mismo atributo padre no se puede
-                    //Color>blanco,Color>gris,Color>rojo...
+            foreach($combinations as $k=>$comb){  
+                $sum_stock = $sum_stock + $comb->stock;
+                //anulado: solo se puede un atributo valor por cada 
+                //combinación, esto invalida el siguiente párrafo 
+                //explicativo, sin embargo se mantiene la misma estructura
+                //del array.
+
+                    //párrafo explicativo:
+                    /*las combinaciones están preparadas para que solo se pueda crear
+                    atributo>valor, es decir no puede traer 2 valores del mismo
+                    atributo, pero si puede traer varios atributos>valor en la misma combinación:
+                    Por tanto...
+                        con distinto atributo padre se puede:
+                         Color>blanco,Talla>S...
+                        con el mismo atributo padre no se puede
+                        Color>blanco,Color>gris,Color>rojo...
+                    */
+
                 //convertimos en array las listas de cada combinación                
                 $attr_list_ids = explode(",",$comb->list_ids);
                     //recorremos el array de listas de cada combinación
@@ -116,13 +134,15 @@ class Product extends Component
                         $list[$attribute->type][] =[
                             'id' => $attribute->id,
                             'name' => $attribute->name,
-                            'color' => $color
+                            'color' => $color,
+                            'stock' => $comb->stock
                         ];
                         
                             
                     }
                     //dd($list);
             }
+            $this->sum_stock = $sum_stock;
             //dd($list);
             $this->combinations_list = $list;
             $this->parent_combinations = ParentComb::where('product_id',$this->product_id)->get();

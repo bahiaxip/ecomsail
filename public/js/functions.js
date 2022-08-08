@@ -362,6 +362,9 @@ if(route == 'offers'){
     })
     console.log("offers: ",divCategories)
 }
+if(route == 'store'){
+    
+}
 //Inicio de librería AOS
         /*
         window.scrollTop='0';
@@ -1318,6 +1321,9 @@ window.livewire.on('setNameValue',(valueId,valueName)=>{
     //document.querySelector('.comb_'+valueId).getElementsByTagName('span')[0].innerHTML=valueName;
 })
 */
-
+window.livewire.on('$refresh',()=>{
+    window.scrollTo({top:0,behavior:'smooth'})
+    console.log("nada")
+})
 
 
