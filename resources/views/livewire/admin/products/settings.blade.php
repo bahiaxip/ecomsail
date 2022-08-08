@@ -306,7 +306,7 @@
                                 <td>ID</td>
                                 <td>Nombre</td>
                                 <td width="80">Precio adicional</td>
-                                <td width="80">Precio final</td>
+                                <td width="80">Stock</td>
                                 <td width="80">Acciones</td>
                               </tr>
                             </thead>

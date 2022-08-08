@@ -92,7 +92,7 @@
                     @endif
                     <p>(Impuestos incluidos)</p>
 
-                    @if($prod->stock == 0)
+                    @if($prod->stock == 0 || count($combinations_list) > 0 && $sum_stock == 0)
                     <p style="font-size:14px;font-weight:bold">
                         {{'Sin stock'}}
                     </p>
@@ -141,7 +141,7 @@
                                             
                                             <div class="color {{$key}}"  onclick="setBorderToCombSelected(this)">
                                             
-                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" @if($c['stock'] == 0) {{'disabled'}} @endif/>
+                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" @if($c['stock'] <= 0) {{'disabled'}} @endif/>
                                                 <label for="" class="label" style="background-color:{{$c['color']}};">
                                                     <!-- mostramos icono con CSS (after)-->
                                                     <span></span>
@@ -160,7 +160,7 @@
                                     @if($k != 'name')
                                         <div class="item">
                                             <div>
-                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  @if($c['stock'] == 0) {{'disabled'}} @endif/>
+                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  @if($c['stock'] <= 0) {{'disabled'}} @endif/>
                                                 <label for="" style="background-color:orange;">
                                                   {{$c['name']}}
                                                 </label>

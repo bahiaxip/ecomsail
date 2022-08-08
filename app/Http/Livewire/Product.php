@@ -54,8 +54,40 @@ class Product extends Component
         }
         $this->counter++;
     }
+    //comprueba si existe combinación y en caso afirmativo comprueba si existe stock suficiente
+    //$bol determina si se debe añadir a quantity uno más, ya que aun no se ha actualizado
+    public function testStock($bol){
+        if($this->parent_combinations && $this->parent_combinations->count() > 0){
+            //se comprueba el stock total
+            if(count($this->option) > 1){
+
+            }else{
+                $quantity = $this->quantity;
+                foreach($this->option as $key => $op){
+                    $comb = Combination::where('product_id',$this->product_id)->where('list_ids',$op)->first();
+
+                    if($bol)
+                        $quantity++;
+                    if($comb->stock >= $quantity)
+                        return true;
+                }
+            }
+            
+        }else{
+            if($this->product->stock >= $this->quantity)
+                return true;
+        }
+        return false;
+    }
 
     public function change_quantity($operator){
+        //si existen combinaciones
+        if(!$this->testStock(true) && $operator == 'plus'){
+            //dd("no existe stock suficiente");
+            return;
+        }
+            
+
         $this->quantity_tmp = $this->quantity;
         if($operator == 'plus' )
             $this->quantity++;
@@ -164,6 +196,14 @@ class Product extends Component
             $this->set_quantity();
 
         if($this->option != $this->computed_option){
+
+            //comprobamos con testStock por si la combinación seleccionada
+            //es distinta y no dispone de stock suficiente, en ese caso pasamos
+            //cantidad a 1, ya que si no tuviera ninguna no sería seleccionable
+            if(!$this->testStock(false)){
+                $this->quantity = 1;            
+            }
+            
             //dd($this->computed_option);
             $this->set_price_combinations();
             $this->price_tmp = $this->product->price * $this->quantity;
