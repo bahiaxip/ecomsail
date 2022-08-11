@@ -65,6 +65,7 @@ window.livewire.on('loading',(data)=>{
 
 window.livewire.on('combinations',()=>{
     clearPanelCombinations();
+    active_combinations();
 })
 
 //Añadir link en la url
@@ -536,6 +537,7 @@ function clearActiveTabs(detail=null){
     })
     clearValues();
 }
+
 
 
             /*bloque de métodos para generar combinaciones*/
@@ -1325,5 +1327,27 @@ window.livewire.on('$refresh',()=>{
     window.scrollTo({top:0,behavior:'smooth'})
     console.log("nada")
 })
+//método que permite mantener la pestaña de combinaciones cuando se pulsa el 
+//botón Crear Combinaciones sin ninguna combinación(vacío)
+window.livewire.on('active_combinations',()=>{
+    active_combinations();
+})
+
+function active_combinations(){
+    let navtabsNodes = document.querySelectorAll('.nav-tabs button');
+    let navtabs = [].slice.call(navtabsNodes);
+    navtabs.map((item,index)=>{
+        //comprobamos si existen las clases active y show en alguna de las pestañas
+        //exceptuando la primera
+        console.log("item: ",item);
+
+        if(item.classList.contains('active') ){
+            item.classList.remove('active');
+        }
+    })
+    navtabs[2].classList.add('active');
+    //clearActiveTabs();
+    console.log("active_combinations");
+}
 
 

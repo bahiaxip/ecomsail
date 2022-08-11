@@ -253,7 +253,7 @@
                     <div class="panel shadow" id="panel_combinations" style="width:98%;min-height:50px;border: #D3D3D3 1px solid;border-radius:4px;padding:10px;margin:auto">
                     </div>
                     <div class="mtop16 ">
-                        <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" onclick="">Crear combinación</button>
+                        <button class="btn btn-primary" wire:click="createCombinations(list_combinations,{{$prod_id}})" >Crear combinación</button>
                         @if($parent_combinations && $parent_combinations->count() > 0)
                         <div class="shadow p10">
                             <label class="mtop16" for="" style="font-size:16px;width:100%">
