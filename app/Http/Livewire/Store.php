@@ -24,6 +24,8 @@ class Store extends Component
     public $limit_page;
     public $title;
     public $data;
+    //Filtros especiales(Novedades,Vendidos,Precio,Valorados)
+    public $special_filter;
     
     public function mount($category=null,$subcategory=null){
         $this->page_tmp = $this->page;
@@ -101,6 +103,32 @@ class Store extends Component
         }
         return $title;
     }
+    public function set_special_filter($type){        
+        if($type){
+            $this->special_filter=$type;
+        }
+    }
+    public function set_query_special_filter($type){
+        $special_filter;
+
+        if($type){
+            switch($type){
+                case 'news':
+                    $special_filter = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
+                    break;
+                case 'sold':
+                    $special_filter = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
+                    break;
+                case 'price':
+                    $special_filter = Product::where('status',1)->orderBy('price','desc')->paginate($this->limit_page);
+                    break;
+                case 'feed':
+                    $special_filter = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
+                    break;
+            }            
+        }
+        return $special_filter;
+    }
 
     
     public function render()
@@ -135,8 +163,12 @@ class Store extends Component
                 $this->computed_subcategory = $this->subcategory;
 
                 $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);                
-            }else{                
-                $products = Product::where('status',1)->where('category_id',$this->category)->orderBy('id','asc')->paginate($this->limit_page);
+            }else{
+                
+                
+                $products = Product::where('status',1)->where('category_id',$this->category)->orderBy('id','asc')->paginate($this->limit_page);    
+                
+                
             }
             
         }else{
@@ -144,7 +176,21 @@ class Store extends Component
                 $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);
             }else{
             //dd($this->category);
-                $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
+                //dd("anda");
+                if($this->special_filter){
+
+                    
+                    $products = $this->set_query_special_filter($this->special_filter);
+                    /*
+                    
+                    */
+                    
+
+                }else{
+                    $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
+                }
+
+                
             }
         }
 

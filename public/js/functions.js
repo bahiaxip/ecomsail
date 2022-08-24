@@ -288,22 +288,55 @@ document.addEventListener('readystatechange',() => {
                 }
                 
             })
-            //establecer combinación por defecto al mostrar producto
+            //establecer combinación/es por defecto al mostrar producto
             if(route == 'product'){
-    
+                let counter = 0;
+                //obtenemos la lista de combinaciones
                 let combinationNodes = document.querySelectorAll('.combinations_items');
                 let combinations = [].slice.call(combinationNodes);
-                console.log("llega a product")
-                console.log(combinations);
-                combinations.forEach((item)=>{
-                    console.log("item: ",item);
+                //console.log(combinations);
+                //recorremos cada div de combinaciones (p.ej: Color) en busca
+                //de un input que no tenga el atributo disabled=true y hacemos clic
+                combinations.forEach((item)=>{                    
+                    //console.log(item);
+                    /*
                     if(item.firstElementChild.firstElementChild.getElementsByClassName="color"){
                         console.log(item.firstElementChild.firstElementChild)
                         console.log("es color");
-                        
                     }
-                    item.firstElementChild.firstElementChild.firstElementChild.click();
+                    */                    
+                    //si existe algún input enabled(sin el atributo disabled), añadido en la vista,
+                    //se pulsa el primero
+                    if(item.querySelectorAll('div input:enabled').length > 0 ){
+                        console.log("tiene")
+                        //console.log(item.querySelector('div input:enabled').value)
+                        item.querySelector('div input:enabled').click();
+                        counter++;
+                    }else if(item.querySelector('div select').length > 0){
+                        let select = item.querySelectorAll('.sel1');
+                        //if(select.querySelectorAll('option')){
+                            //let options = [...select[0].options].map(o => o.value);
+                            //console.log("tiene: ",options)
+                            console.log("vamos: ",counter);
+                        console.log(item.querySelector('div select'))
+                        let value = item.querySelector('.sel1 option:enabled').value;
+                        console.log("VALUE: ",value);
+                        item.querySelector('.sel1').value = value; 
+                        item.querySelector('.sel1').checked="checked";
+                        item.querySelector('.sel1').selected="selected";
+                        item.querySelector('div select').click();
+                        //item.querySelector('div select option:enabled').value="100";
+                        //item.querySelector('div select option:enabled').selected="selected";
+                        //}
+                        //console.log("select0: ",select[0].querySelectorAll('.option_comb'));
+                        counter++;
+                        //item.querySelector('div select option:enabled')
+                    }else{
+                        console.log("no tiene: ",item.querySelectorAll('div input:enabled'))
+                    }
+                    
                 })
+                console.log("counter: ",counter)
                 
             }
             
@@ -333,6 +366,125 @@ document.addEventListener('readystatechange',() => {
         
 
 
+})
+//
+window.livewire.on('setValue',(value,parent,option)=>{
+    console.log("value: ",value);
+    console.log("parent: ",parent);
+    console.log("first_key_option: ",Object.keys(option)[0]);
+    
+    let firstKeyOption; 
+//si existe parent es que se ha pulsado y no es al inicio de carga    
+    if(parent){
+        //si 
+        console.log("existe parent");  
+        console.log(option[parent]);    
+    }
+    if(option){
+        firstKeyOption = Object.keys(option)[0];
+    }
+
+    //creamos array de todos los elementos "combinations_items"
+    let combinationNodes = document.querySelectorAll('.combinations_items');
+    let combinations = [].slice.call(combinationNodes);
+    console.log(combinations)
+    let counter;
+    combinations.forEach((comb) => {
+        /*
+        if(comb.querySelectorAll('div input:enabled').length > 0 ){
+            console.log("tiene")
+            console.log(comb.querySelector('div input:enabled').value)
+            //comb.querySelector('div input:enabled').click();
+            counter++;
+        }else if(comb.querySelector('div select').length > 0){
+            let select = comb.querySelectorAll('.sel1');
+            //if(select.querySelectorAll('option')){
+                //let options = [...select[0].options].map(o => o.value);
+                //console.log("tiene: ",options)
+            //console.log(item.querySelector('div select'))
+            //item.querySelector('div select').value=99;    
+            //}
+            console.log(select[0].querySelectorAll('.option_comb'));
+            counter++;
+            //item.querySelector('div select option:enabled')
+        }else{
+            console.log("no tiene: ",comb.querySelectorAll('div input:enabled'))
+        }
+        return;
+        */
+        
+        let selected;        
+        //si el elemento del array contiene una clase identificada con el atributo padre
+        //o con el mismo que hemos pulsado ignoramos
+        if(comb.classList.contains('items_'+parent) || comb.classList.contains('items_'+firstKeyOption)){
+            console.log("parent: ",comb)
+        }else if(comb.querySelector('div select')){            
+            let opEnabledNodes = comb.querySelectorAll('div select option:enabled');
+            let opEnabled = [].slice.call(opEnabledNodes);
+            console.log("opEnabled: ",opEnabled);
+
+            if(opEnabled.length > 0){                
+                
+                for(let op in opEnabled){
+                    //si el mismo que está seleccionado se encuentra en el array
+                    //de los enabled pasamos matchEnabled a true para no hacer nada.
+                    //Si no se encuentra entre los enabled obtenemos el primero
+                    //y lo activamos
+                    let matchEnabled = false;
+                    opEnabled.forEach((option) =>{
+
+                        if(option.value == option[op]){
+                            matchEnabled = true;
+                        }
+                        console.log("option value: ",option.value)
+                    });
+                    if(!matchEnabled){
+                        console.log("MATCHENABLED es false")
+                        console.log(comb.querySelector('div select option:enabled'))
+                        let value = comb.querySelector('div select option:enabled').value;
+
+                        //comb.querySelector('div select').value = "200";
+                        //comb.querySelector('div select option:enabled').click();
+                    }
+                }
+                console.log("option: ",option)
+            }
+            console.log(comb.querySelectorAll('div select option:enabled'))
+
+        }else{
+        //si no es la comprobación anterior entonces almacenamos en un array 
+        //todos los input enabled
+            let allNodes = comb.querySelectorAll('div input:enabled');
+            let all =[].slice.call(allNodes);
+            console.log("all: ",all)
+            //si el valor 
+            if(all.length > 0){
+                for(let op in option){
+                //si la key no es la primera de options y es distinta al atributo padre
+                //del valor seleccionado, comprobamos si su valor coincide con alguno
+                //de los inputs enabled
+                    if(op != firstKeyOption && op != parent){
+                        let matchEnabled = false;
+                        all.forEach((input) =>{
+                            if(input.value == option[op]){
+                                matchEnabled = true;
+                            }
+                        })
+                        //si existe matchEnabled indica que el input seleccionado
+                        //está enabled, si no, seleccionamos el primero
+                        
+                        if(!matchEnabled){
+                            let doc = comb.querySelector('div input:enabled');
+                            doc.click();
+                        }
+                    }
+                    console.log("atributo padre del option: ",op);
+                    console.log("valor del option: ",option[op])
+                }
+            }
+        }
+        
+    })
 })
 //efectos hover con javascript según sean imágenes o icons font awesome
 if(route == 'offers'){

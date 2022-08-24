@@ -1147,7 +1147,7 @@ class Product extends Component
             //si no existe registro del producto de ese atributo
             //padre, se crea uno.
 
-/*
+
             $parent_comb = ParentComb::where('product_id',$product_id)->where('parent_id',$at->parentattr->id)->first();
             $type_selection = 2;
             //si el Atributo padre es Color (atributo->id = 1 en la db)
@@ -1165,7 +1165,7 @@ class Product extends Component
                 //actualizamos parent_combinations
                 $this->get_type_selection();
             }
-*/            
+            
 
 
         }

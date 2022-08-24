@@ -12,6 +12,9 @@ class Product extends Component
     public $option = [];
     public $option_name = [];
     public $combinations_list;
+    public $selected_value;
+    public $selected_parentvalue;
+    public $selected_comb;
     public $parent_combinations;
     public $quantity = 1;
     public $quantity_tmp=1;
@@ -23,7 +26,10 @@ class Product extends Component
     public $user_id;
     public $typealert='success';
     public $favorite;
+    //suma de todos los stock para restingir el botón de "Agregar al carrito"
     public $sum_stock;
+
+    
     public function mount($id){        
         $this->product_id = $id;
         $this->product = Prod::findOrFail($this->product_id);
@@ -54,6 +60,10 @@ class Product extends Component
         }
         $this->counter++;
     }
+
+    public function testStock2(){
+
+    }
     //comprueba si existe combinación y en caso afirmativo comprueba si existe stock suficiente
     //$bol determina si se debe añadir a quantity uno más, ya que aun no se ha actualizado
     public function testStock($bol){
@@ -81,12 +91,28 @@ class Product extends Component
     }
 
     public function change_quantity($operator){
-        //si existen combinaciones
+        //(anulado,antiguo) si existen combinaciones
+        /*
         if(!$this->testStock(true) && $operator == 'plus'){
             //dd("no existe stock suficiente");
             return;
         }
+        */
+        //comprobar si existe stock suficiente de ese producto o de esa combinación 
+        //para poder seguir aumentando la cantidad.
+        if($operator == 'plus'){
+            //si existe combinación...
+            if($this->selected_comb){
+                if($this->selected_comb->stock <= $this->quantity){
+                    return;
+                }
+            //si no existe combinación se comprueba el stock del producto
+            }else if($this->product->stock <= $this->quantity){
+                return;
+            }
             
+
+        }  
 
         $this->quantity_tmp = $this->quantity;
         if($operator == 'plus' )
@@ -97,12 +123,12 @@ class Product extends Component
         $this->price_tmp = $this->product->price * $this->quantity;        
         if($this->added_price){
             $this->set_price_combinations();            
-            $this->added_price = $this->added_price * $this->quantity;
-            //dd($this->added_price);
+            $this->added_price = $this->added_price * $this->quantity;            
         }
         $this->price_tmp = $this->price_tmp + $this->added_price;
         //$this->price_tmp = $this->item->price + $this->added_price;
         //$this->dispatchBrowserEvent('contentChanged2');
+            
     }
 
     public function set_quantity(){        
@@ -114,13 +140,57 @@ class Product extends Component
         $this->price_tmp = $this->price_tmp + $this->added_price;
     }
 
-    public function setCombinations(){
-        $combinations = Combination::where('product_id',$this->product_id)->get();
+    //El método setCombinations establece la lista o listas de combinaciones
+    //generando un array por cada atributo padre que exista en todas las 
+    //combinaciones y cada uno de estos arrays contiene:
+    //1.- Una clave>valor que especifíca el nombre del atributo padre ('name' => nombre_atr_padre)
+    //2.- Un array por cada atributo hijo que pertenezca al mismo atributo padre
+    //Nota: Necesario indicar que la primera lista de combinaciones va a //distinguirse del resto, ya que, independientemente de la pulsación en el 
+    //resto de combinaciones, solo con que exista una combinación posible se 
+    //mostrará como enabled y al pulsarse el resto de combinaciones automátmente,
+    //se pulsarán en el primer input enabled si es que el que se encontraba
+    //seleccionado no lo es. De esta forma evitamos tener que ir pulsando
+    //muchas combinaciones para conseguir que se activen los de la primera lista.
+
+    public function setCombinations($data=null){
+
+        
+        if($this->option){
+            //dd($this->option);
+            $parent_option = array_keys($this->option)[0];
+            $value_option = $this->option[$parent_option];                
+        }
+        if($data){
+            //obtenemos el índice del primer option que corresponde
+            //al padre de la primera lista de combinaciones
+            
+            //obtenemos el registro del valor(attributo hijo) de $data
+            $attribute_param = Attribute::findOrFail($data);
+            //dd("data");
+            $combinations = Combination::where('product_id',$this->product_id)->get();
+            $parent = $attribute_param->type;
+            //convertimos en array cada list_ids de cada combinación
+            /*
+            foreach($combinations as $key => $c){
+                $list_ids = explode(",",$c->list_ids);
+                if(in_array($data,$list_ids)){
+                    //unset($combinations[$key]);
+                }
+            }
+            */
+
+            
+        }else{
+            $combinations = Combination::where('product_id',$this->product_id)->get();
+        }
+        
         if($combinations->count() > 0){
+
             //creamos un sum_stock que suma todos los stock, si no existe ningún
-            //stock de ninguna combinaciónnos permitirá desactivar el botón de agregar al carrito
+            //stock de ninguna combinación nos permitirá desactivar el botón de agregar al carrito
             $sum_stock = 0;
-            //revisamos coincidencias del mismo atributo
+            //revisamos coincidencias del mismo atributo en cada combinación
+            //$list_ids1=[];
             foreach($combinations as $k=>$comb){  
                 $sum_stock = $sum_stock + $comb->stock;
                 //anulado: solo se puede un atributo valor por cada 
@@ -141,53 +211,194 @@ class Product extends Component
 
                 //convertimos en array las listas de cada combinación                
                 $attr_list_ids = explode(",",$comb->list_ids);
-                    //recorremos el array de listas de cada combinación
-                    foreach($attr_list_ids as $key=>$attr_id){
-                        $attribute=Attribute::findOrFail($attr_id);
-                        //if($k==8 && $key==2)
-                        //Establecemos el nombre del atributo
-                        //padre, que en la vista será necesario
-                        //comprobar el atributo name, ya que es
-                        //el único de tipo string
-                        
-                        if(!isset($list[$attribute->type])){
+                //recorremos el array de listas de cada combinación
+                foreach($attr_list_ids as $key=>$attr_id){
+                    $attribute=Attribute::findOrFail($attr_id);
+                    //if($k==8 && $key==2)
+                    //Establecemos el nombre del atributo
+                    //padre, que en la vista será necesario
+                    //comprobar el atributo name, ya que es
+                    //el único de tipo string
+                    
+                    //si no existe un array con ese índice lo creamos y 
+                    //añadimos el valor de su atributo padre  a la clave 'name'
+                    if(!isset($list[$attribute->type])){
+                        $list[$attribute->type]['name']=$attribute->parentattr->name;
+                        //$this->option[$attribute->type];
+                    }else{
+                        //$this->option[$attribute->type];
+                    }
+                    $color=NULL;
+                    //si existe valor en el campo color añadimos al array
+                    if($attribute->color != null){                            
+                        $color = $attribute->color;
+                    }
+                    $disabled = false;
+                    //si existe parámetro y el padre del atributo 
+                    //pasado por parámetro(que pertenece al elemento seleccionado en la primera lista de combinaciones) 
+                    //es distinto del obtenido por la combinación 
+                    //se comprueban para asignar como disabled
+                    if($data){
+//revisar si debería ser en lugar del atributo de $data, el atributo de 
+//selected_parentvalue generado en el método set_value(), que sería el padre
+//del atributo pulsado
 
-                            $list[$attribute->type]['name']=$attribute->parentattr->name;
-
-                            //$this->option[$attribute->type];
+//es necesario comprobar si el stock de la combinación es 0 y por tanto
+//será disabled, pk de esa forma se asignará el primero que si tenga stock
+//y se deberá sumar el added_price, para ello es necesario comprobar si 
+//el array option con el valor del mismo atributo padre de la lista creada
+//tiene stock 0, entonces pasar al siguiente que tenga stock > 0.
+                        if($parent_option != $attribute->type){
+                            //$disable=true
+                            //si existe ese atributo en la combinación
+                            
+                            if(in_array($value_option,$attr_list_ids)){
+                                //if(!in_array($attribute->id,$list_ids1)){
+                                    $list[$attribute->type][] =[
+                                        'id' => $attribute->id,
+                                        'name' => $attribute->name,
+                                        'parent' => $attribute->type,
+                                        'color' => $color,
+                                        'stock' => $comb->stock,
+                                        'disabled' => $disabled,
+                                        'selected' => false
+                                    ];
+                                //}
+                                //$list_ids1[] = $attribute->id;
+                            }
                         }else{
-                            //$this->option[$attribute->type];
+
+                            $list[$attribute->type][] =[
+                                'id' => $attribute->id,
+                                'name' => $attribute->name,
+                                'parent' => $attribute->type,
+                                'color' => $color,
+                                'stock' => $comb->stock,
+                                'disabled' => $disabled,
+                                'selected' => false
+                            ];
+
                         }
-                        $color=NULL;
-                        //si existe valor en el campo color añadimos al array
-                        if($attribute->color != null){                            
-                            $color = $attribute->color;
-                        }
+                    }else{
+
                         $list[$attribute->type][] =[
                             'id' => $attribute->id,
                             'name' => $attribute->name,
+                            'parent' => $attribute->type,
                             'color' => $color,
-                            'stock' => $comb->stock
+                            'stock' => $comb->stock,
+                            'disabled' => $disabled,
+                            'selected' => false
                         ];
-                        
-                            
                     }
-                    //dd($list);
+                }
             }
-            $this->sum_stock = $sum_stock;
             //dd($list);
+            foreach($list as $k=>$l){
+                $list2= [];
+                $list_ids = [];
+                //dd($l);
+                $list2['name'] = $l['name'];
+                if($this->option){
+                    //recorremos el array creado y comprobamos los duplicados
+                    //solo los de la primera lista de combinaciones. Si ya se 
+                    //existe uno no añadimos más, pero lo comprobamos por si
+                    //el stock del duplicado es mayor, si es así sustituimos 
+                    //por el de más stock, es importante pk si no lo hacemos
+                    //la vista tomará en cuenta el primero y si el stock es 0
+                    //aparecerá disabled
+        //si alguna de las listas no tiene stock en ninguno de sus valores que 
+        //coincida con uno de la primera lista combinaciones se pasa a disabled
+        //el de la primera lista
+                    foreach($l as $m => $c){
+                        if($m != 'name'){
+                            if($parent_option == $c['parent']){
+                        //si el elemento no existe en la lista se crea
+                                if(!in_array($c['id'],$list_ids)){  
+                                    $list2[]=$c;
+                                    $list_ids[] = $c['id'];
+                                }else{
+                        //si existe se comprueba si tiene mayor stock
+                        //y en caso afirmativo se actuliza por el de la lista
+                                    if(count($list2) > 0){
+                                    
+                                        for($i=0;$i<count($list2)-1;$i++){
+                                            
+                                            if($c['id'] == $list2[$i]['id']){
+                                                
+                                                if($c['stock'] > $list2[$i]['stock']){
+                                                    $list2[$i] = $c;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }else{                                
+                                if(!in_array($c['id'],$list_ids)){  
+                                    $list2[]=$c;
+                                    $list_ids[] = $c['id'];
+                                }else{
+                        //si existe se comprueba si tiene mayor stock
+                        //y en caso afirmativo se actuliza por el de la lista
+                                    if(count($list2) > 0){
+                                    
+                                        for($i=0;$i<count($list2)-1;$i++){
+                                            
+                                            if($c['id'] == $list2[$i]['id']){
+                                                
+                                                if($c['stock'] > $list2[$i]['stock']){
+                                                    $list2[$i] = $c;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                    $list[$k] = $list2;    
+                }else{
+                    //para el primer inicio de carga del producto con combinaciones
+                    //pero que aun no se iniciado la pulsación automática de la primera
+                    //combinación
+                    foreach($l as $m => $c){
+                        if($m != 'name'){
+                                if(!in_array($c['id'],$list_ids)){  
+                                    $list2[]=$c;
+                                    $list_ids[] = $c['id'];
+                                }else{                        
+                                    if(count($list2) > 0){                  
+                                        for($i=0;$i<count($list2)-1;$i++){
+                                            if($c['id'] == $list2[$i]['id']){
+                                                if($c['stock'] > $list2[$i]['stock']){
+                                                    $list2[$i] = $c;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                        }
+                    }
+                    $list[$k] = $list2;
+                }
+            }            
+            //dd($list);            
+            $this->sum_stock = $sum_stock;
             $this->combinations_list = $list;
             $this->parent_combinations = ParentComb::where('product_id',$this->product_id)->get();
-            //dd($this->parent_combinations);
-            //dd($this->combinations_list = $list);
-
         }else{
             $this->combinations_list=[];
         }
-        
     }
 
+
     public function updated(){
+       
+        //dd($this->option);
         if(!$this->quantity){
             //$this->quantity = 1;
          //actualizamos el precio si seleccionamos combinacion
@@ -196,13 +407,17 @@ class Product extends Component
             $this->set_quantity();
 
         if($this->option != $this->computed_option){
-
+            
+            
             //comprobamos con testStock por si la combinación seleccionada
             //es distinta y no dispone de stock suficiente, en ese caso pasamos
             //cantidad a 1, ya que si no tuviera ninguna no sería seleccionable
+
+            /*
             if(!$this->testStock(false)){
                 $this->quantity = 1;            
             }
+            */
             
             //dd($this->computed_option);
             $this->set_price_combinations();
@@ -212,17 +427,46 @@ class Product extends Component
                 $total_added_price = $this->added_price * $this->quantity;
             }
             $this->price_tmp = $total_added_price + $this->price_tmp;
-            //$this->dispatchBrowserEvent('contentChanged');            
+            //$this->dispatchBrowserEvent('contentChanged');
+            
+        }
+    }
+    //establecer combinacíon seleccionada ($this->option)
+    public function select_combination(){
+        $list_values = [];        
+        foreach($this->option as $o){
+            $list_values[] = $o;            
+        }
+        $list_values_string = implode(",",$list_values);
+        
+        $combination = Combination::where('product_id',$this->product_id)->where('list_ids',$list_values_string)->first();
+        if($combination){
+            $this->selected_comb = $combination;
         }
     }
 
-    //set_value() sustituido a render directamente (solo con PHP)
-    /*
-    public function set_value($value_id){
-        $value = Attribute::findOrFail($this->option[$value_id]);
-        $this->emit('setNameValue',$value_id,$value->name);
+    //set_value()
+    public function set_value($value_id,$data=null){
+        if($data){
+            $this->option[$data] = $value_id;
+            //dd($value_id);
+        }
+        //dd($value_id);
+        $this->selected_value = $value_id;
+        //dd($this->selected_value);
+        $value = Attribute::findOrFail($value_id);
+        $this->selected_parentvalue = $value->type;
+        if($this->option){
+            $this->setCombinations($value_id);
+            $this->select_combination();
+        }
+
+        //dd($this->combinations_list);
+        $this->emit('setValue',$this->selected_value,$this->selected_parentvalue,$this->option);
+        //dd($value->type);
+        //$this->emit('setValue',$value_id,$value->type,$this->option);
     }
-    */
+    
 
     public function add_cart(){
         //validamos datos para crear el carrito o añadir al carrito
@@ -349,6 +593,7 @@ class Product extends Component
     //Establece el suplemento de precio (si hubiere) de cada una de las 
     //características seleccionadas
     public function set_price_combinations(){
+
         $list_values = [];
         //dd($this->option);
         //recorremos los boxes seleccionados
@@ -357,7 +602,22 @@ class Product extends Component
             //generamos un array de los valores
             $list_values[] = $o;            
         }
+        
         $list_values_string = implode(",",$list_values);
+        //dd($this->option);
+        $combination = Combination::where('product_id',$this->product_id)->where('list_ids',$list_values_string)->first();
+
+        if($combination){
+            
+            //dd("hay combinación");
+            $this->added_price = $combination->added_price;
+            //dd($this->option);
+        }else{
+        //si existen combinaciones y la combinación seleccionada no devuelve 
+        //resultado, añadir al elemento del precio un "No disponible" o similar.
+            //dd("no hay combinación");
+        }
+    /*
         //comprobamos si existe un suplemento de precio 
         //primero comprobamos si existe una combinación que coincida
         //con todos los valores o si es solo un único valor de un único atributo
@@ -381,6 +641,7 @@ class Product extends Component
             $this->added_price = $sum;
             //dd($this->added_price);
         }
+    */
     }
 
     public function add_favorite(){
@@ -402,9 +663,9 @@ class Product extends Component
     }
     public function render()
     {
-        //dd($this->option);
         //dd($this->combinations_list);
-        $this->set_price_combinations();
+    //revisar por si es necesario
+        //$this->set_price_combinations();
         $this->computed_option = $this->option;
         
         //mostramos el título del valor seleccionado a continuación

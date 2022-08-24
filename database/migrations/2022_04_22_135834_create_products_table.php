@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->date('init_date_discount')->nullable();
             $table->date('end_date_discount')->nullable();
             $table->text('detail');
+            $table->integer('sold')->default(0);
             $table->string('path_root')->nullable();
             $table->string('path_tag')->nullable();
             $table->string('file_name')->nullable();

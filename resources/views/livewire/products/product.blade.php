@@ -102,7 +102,7 @@
                 <div class="combinations product_combinations" >
                     @if($combinations_list && count($combinations_list) > 0)
                       @foreach($combinations_list as $key=>$comb)
-                        <div class="combinations_name comb_{{$key}}">
+                        <div class="combinations_name comb_{{$key}} ">
                             {{Form::label($comb['name'],$comb['name'])}}
                             @if($option)
         {{-- mostrar color mediante click --}}
@@ -114,7 +114,7 @@
                             @endif
                         </div>
 
-                        <div class="combinations_items">
+                        <div class="combinations_items items_{{$key}}">
                             @php
                                 $type = 2;
 
@@ -133,7 +133,7 @@
                                         
                                         {{--@if($comb[0]['color'])--}}
                                         
-                                    <div class="item_color {{$type}}">
+                                    <div class="item_color {{$type}} {{count($comb)}}">
                                     <!-- si el primer registro de la combinación 
                                     dispone de color se muestran los que tengan algún color (mediante un div con fondo del color)-->
                                         
@@ -141,7 +141,7 @@
                                             
                                             <div class="color {{$key}}"  onclick="setBorderToCombSelected(this)">
                                             
-                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" style="background-color:{{$c['color']}};" @if($c['stock'] <= 0) {{'disabled'}} @endif/>
+                                                <input class="mylabel_color"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}" wire:click="set_value({{$c['id']}})" style="background-color:{{$c['color']}};" @if($c['stock'] <= 0 || $c['disabled'] == true) {{'disabled'}} @endif/>
                                                 <label for="" class="label" style="background-color:{{$c['color']}};">
                                                     <!-- mostramos icono con CSS (after)-->
                                                     <span></span>
@@ -160,7 +160,7 @@
                                     @if($k != 'name')
                                         <div class="item">
                                             <div>
-                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:model="option.{{$key}}"  @if($c['stock'] <= 0) {{'disabled'}} @endif/>
+                                                <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:click="set_value({{$c['id']}})" wire:model="option.{{$key}}"  @if($c['stock'] <= 0 || $c['disabled'] == true) {{'disabled'}} @endif/>
                                                 <label for="" style="background-color:orange;">
                                                   {{$c['name']}}
                                                 </label>
@@ -171,12 +171,12 @@
                             
                             @else
                                 <div class="col-auto">
-                                <select name="" id="" class="form-select form-select-sm" wire:model="option.{{$key}}">
+                                <select name="" id="" class="form-select form-select-sm sel1" wire:model="option.{{$key}}" wire:click="set_value($event.target.value,{{$key}})">
                                     
                                 
                                 @foreach($comb as $k => $c)
                                     @if($k != 'name')
-                                        <option value="{{$c['id']}}" @if($c['stock'] == 0) {{'disabled'}} @endif>{{$c['name']}} </option>
+                                        <option value="{{$c['id']}}" @if($c['stock'] == 0) {{'disabled'}} @endif wire:click="set_value({{$c['id']}})" class="option_comb">{{$c['name']}} </option>
                                             
                                         
                                         
