@@ -67,4 +67,5 @@ Route::post('/images2',[HomeController::class,'images'])->name('images');
 
 
 //Tienda
+//Route::get('/store/{category?}/{subcategory?}/{type?}',Store::class)->name('store');
 Route::get('/store/{category?}/{subcategory?}',Store::class)->name('store');

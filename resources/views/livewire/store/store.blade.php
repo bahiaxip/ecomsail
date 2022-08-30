@@ -143,10 +143,16 @@
                     @endif
                     </div>
                 </div>
-
-                <div class="row">
+                @if(!$switch_special_filter)
+                <div class="row">                    
                     {{$products->render()}}
                 </div>
+                @endif
+                @if($inf_scroll_plus)
+                <div class="row">                    
+                    <button class="btn btn_pry" wire:click="inf_scroll">Más</button>
+                </div>
+                @endif
             </div>
             
         </div>

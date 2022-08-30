@@ -14,7 +14,8 @@ class Store extends Component
     //si mantenmos category a 0 o null, la primera selección regresa erróneamente 
     //al primer elemento de la lista(Ropa), después de cargar los productos correctamente
     public $category;
-    public $subcategory;    
+    public $subcategory;
+    public $type;
     public $computed_category;
     public $computed_subcategory;
     //switch para mostrar/ocultar icono de carga
@@ -26,9 +27,31 @@ class Store extends Component
     public $data;
     //Filtros especiales(Novedades,Vendidos,Precio,Valorados)
     public $special_filter;
+    //temporal para poder mostrar más resultados del mismo tipo con infinite scroll
+    public $special_filter_tmp;
+    //switch_special_filter permite ocultar la paginación
+    public $switch_special_filter=false;
+    //switch_special_filter permite ocultar el botón de "Más" del infinite scroll
+    public $inf_scroll_plus=false;
+    //inf_scroll_counter indica cuantas veces se debe aumentar los resultados con infinite scroll
+    public $inf_scroll_counter;
+    public $inf_scroll_max;
+    //identificador que permite cambiar de mayor precio a menor precio
+    public $price_order;
+
     
-    public function mount($category=null,$subcategory=null){
+    public function mount($category=null,$subcategory=null,$type=null){
+        //if($type)
+            //$this->type = $type;
+        //establecemos el primer contador del infinite scroll
+        $this->inf_scroll_counter=1;
+        //establecemos el máximo de resultados para mostrar el botón de "Mäs"
+        $this->inf_scroll_max = 20;
+        $this->price_order = "desc";
+        //$this->page (generado por laravel/livewire y pagination);        
         $this->page_tmp = $this->page;
+
+        
         /*
         if($category && !$subcategory){
             dd("hay solo category");
@@ -52,19 +75,30 @@ class Store extends Component
             $this->title = $this->getTitle();    
         }
     }
-    //método de pagination de Livewire, permite realizar scroll Top al pasar página.
-    //Con setPage() comprobamos si es cambio de página o cambio en alguno de los 
-    //selects. Además, el trait WithPagination incorpora $this->page permitiendo 
+
+    public function inf_scroll(){
+        $this->inf_scroll_counter++;
+        $this->special_filter = $this->special_filter_tmp;
+    }
+    
+    //El método setPage() de Livewire es el encargado de enviar a la página, en lugar de
+    //sobreescribir este método sobreescribimos el método gotoPage($page) y comprobamos 
+    //si es cambio de página o cambio de los select y establecemos el método $refresh en
+    // JavaScript para establecer el scroll a 0.
+    //Además, el trait WithPagination incorpora $this->page permitiendo 
     //prescindir de pasar $page como parámetro.
-    public function setPage($page){
+    
+    public function gotoPage($page){
         if($page != $this->page_tmp){
-            $this->emit('$refresh');
-        }else{
-            $this->page_tmp = $page;
+            $this->setPage($page);            
         }
-        
+        $this->emit('$refresh');
+        $this->page_tmp = $page;
     }
     public function set_category(){
+        //necesario para diferenciar de la colección de productos genérica y para que el
+        // método render() de paginación no entre en conflicto.
+        $this->switch_special_filter=false;
         $this->start = false;
         
         $title;        
@@ -103,24 +137,52 @@ class Store extends Component
         }
         return $title;
     }
-    public function set_special_filter($type){        
+    public function set_special_filter($type){            
         if($type){
+            if($this->special_filter_tmp == $type){                
+                if($this->price_order == "asc"){
+                    $this->price_order = "desc";    
+                }else{
+                    $this->price_order = "asc";    
+                }
+                
+            }
+            //si necesitamos que vuelva a desc si pulsamos otro botón de listas mantener el else siguiente:
+            /* 
+            else{
+                $this->price_order = "desc";
+            }
+            */
+            //reseteamos el infinite scroll a 1
+            $this->inf_scroll_counter=1;
             $this->special_filter=$type;
+            $this->special_filter_tmp=$type;
+            $this->switch_special_filter=true;
+            $this->category=null;
+            $this->subcategory=null;
+            $this->computed_category = null;
         }
     }
     public function set_query_special_filter($type){
         $special_filter;
+        $amount = 15*$this->inf_scroll_counter;
+        //mostrar o ocultar el botón de "Más" según la máxima cantidad de productos permitidos
+        if($amount <= $this->inf_scroll_max){
+            $this->inf_scroll_plus = true;
+        }else{
+            $this->inf_scroll_plus = false;
+        }
 
         if($type){
             switch($type){
                 case 'news':
-                    $special_filter = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
+                    $special_filter = Product::where('status',1)->orderBy('id','desc')->take($amount)->get();
                     break;
                 case 'sold':
-                    $special_filter = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
+                    $special_filter = Product::where('status',1)->orderBy('id','desc')->take($amount)->get();
                     break;
                 case 'price':
-                    $special_filter = Product::where('status',1)->orderBy('price','desc')->paginate($this->limit_page);
+                    $special_filter = Product::where('status',1)->orderBy('price',$this->price_order)->take($amount)->get();
                     break;
                 case 'feed':
                     $special_filter = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
@@ -132,7 +194,8 @@ class Store extends Component
 
     
     public function render()
-    {        
+    {
+
         //dd($this->category);
         $categories_list = Category::where('status',1)->where('type',0)->pluck('name','id');
         $categories_list->prepend('Seleccione...',0);
@@ -153,8 +216,14 @@ class Store extends Component
             $subcategories_list->prepend('Seleccione...',0);
         }
         //dd($this->category);
-        if($this->category){
+        if($this->special_filter){
 
+            $products = $this->set_query_special_filter($this->special_filter);
+            $this->special_filter=null;
+            
+
+        }
+        if($this->category){
             //actualizamos la copia 
             $this->computed_category = $this->category;
             if($this->subcategory){
@@ -174,23 +243,9 @@ class Store extends Component
         }else{
             if($this->subcategory){
                 $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);
-            }else{
-            //dd($this->category);
-                //dd("anda");
-                if($this->special_filter){
-
-                    
-                    $products = $this->set_query_special_filter($this->special_filter);
-                    /*
-                    
-                    */
-                    
-
-                }else{
-                    $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
-                }
-
-                
+            }else if(!$this->switch_special_filter){
+                $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
+                //$this->switch_special_filter=false;
             }
         }
 
