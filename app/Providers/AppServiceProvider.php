@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+//Stripe
+use App\Models\Cashier\User;
+use Laravel\Cashier\Cashier;
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -25,7 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //Stripe
+        Cashier::useCustomerModel(User::class);
         
     }
 }

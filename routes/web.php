@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController, App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\HomeController, App\Http\Controllers\LoginController,App\Http\Controllers\PaymentController;
+use App\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,3 +69,5 @@ Route::post('/images2',[HomeController::class,'images'])->name('images');
 //Tienda
 //Route::get('/store/{category?}/{subcategory?}/{type?}',Store::class)->name('store');
 Route::get('/store/{category?}/{subcategory?}',Store::class)->name('store');
+Route::get('/payment', '\App\Http\Controllers\PaymentController@index')->name('payment');
+Route::post('single-charge','\App\Http\Controllers\PaymentController@singleCharge')->name('single.charge');
