@@ -31,7 +31,7 @@ function getCountOrders(){
 		$order = new \App\Models\Order;
 		$order_tmp = $order->where('user_id',$id)->where('status',0)->first();
 		$order_item = new \App\Models\Order_Item;
-		if($order_item->count() > 0){
+		if($order_item->count() > 0 && $order_tmp && $order_tmp->count() > 0){
 			$count = $order_item->where('user_id',$id)->where('order_id',$order_tmp->id)->count();
 		}	
 		return $count;

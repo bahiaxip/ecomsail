@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute, App\Models\Combination;
 use Auth,Str;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
@@ -148,14 +148,17 @@ class Cart extends Component
             'comment' => 'nullable',
             'sum' => 'required|integer'
         ]);
+    //Para crear la factura, necesitamos la dirección Address para
+    //obtener el IVA y los productos que componen la factura, 
+    //falta revisar los descuentos
         $address = Address::findOrFail($this->address_selected);
         if(!$address->get_location->vat){
-            $this->typealert = 'success';
+            $this->typealert = 'alert';
             session()->flash('message','Su país no dispone de IVA para generar la factura');
             $this->emit('message_opacity');
             return;
         }
-
+        //obtenemos el iva del país
         $location_vat = $address->get_location->vat;
 
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
@@ -165,7 +168,8 @@ class Cart extends Component
         $net = (float)$this->set_vat_to_price($this->total,$location_vat,'minus');
         
         $message;
-        $typealert;        
+        $typealert;
+        //actualizamos pedido
         $order->update([
             'status'=>1,
             'order_num' => $rand,
@@ -178,57 +182,19 @@ class Cart extends Component
             'quantity' => $validated['sum']
         ]);
         
-//creamos factura, necesitamos la dirección Address para
-//el iva y los productos que componen la factura y revisar
-//los descuentos
+
         $orders_items = Order_Item::where('order_id',$order->id)->get();
-        foreach($orders_items as $order_item){
-            History_Order_Item::create([
-                'combinations' => $order_item->combinations,
-                'quantity' => $order_item->quantity,
-                'state_discount' => $order_item->state_discount,
-                'end_discount' => $order_item->end_discount,
-                'price_unit' => $order_item->price_unit,
-                'total' => $order_item->total,
-                'title' => $order_item->title,
-                'path_tag' => $order_item->path_tag,
-                'image' => $order_item->image,
-                'user_id' => $order_item->user_id,
-                'product_id' => $order_item->product_id,
-                'order_id' => $order_item->order_id,
-                'order_item_id' => $order_item->id
-            ]);
-            //creamos el registro de producto vendido
-            $counter=0;
-            $counter_sold_product = Sold_Product::where('product_id',$order_item->product_id)->count();
-            if($counter_sold_product > 0){
-                $counter=$counter_sold_product;
-            }
-            Sold_Product::create([
-                'sold_nums' => $counter+1,
-                'product_id' => $order_item->product_id
-            ]);
-        }
-        if($orders_items->count() > 0){
-            //crear la factura y guardarla en pdf en el directorio
-            $total;
-            $sum = 0;
-            $total_items = 0;
-            foreach($orders_items as $oi){
-                $total = $oi->total;
-
-                $total_items = $total_items +$oi->quantity;
-
-            }
-            
-            $invoice = Invoice::create([
-                'status' => 1,
-                'net' => floatval($net),
-                'vat' => $location_vat,
-                'total' =>$this->total,
-                'quantity' =>$total_items,
-                'order_id' => $order->id            
-            ]);
+        $totals = $this->get_total_items($orders_items);        
+        $totals['location_vat'] = $location_vat;
+        $totals['net'] = $net;
+        //creamos la factura
+        $invoice = $this->create_invoice($totals,$order->id);
+        
+                   
+        
+        $new_tables = $this->create_and_update_tables($orders_items);
+        
+        if($new_tables && $invoice){
             
             $typealert = 'success';
             $message = 'Compra realizada correctamente';
@@ -236,11 +202,162 @@ class Cart extends Component
             $typealert = 'danger';
             $message = 'No existen productos asociados a este pedido';
         }
+        
         $this->typealert = $typealert;
         session()->flash('message',$message);
         $this->emit('message_opacity');
 //falta el clear()
     }
+
+    //creamos los registros de:
+    //historial, vendidos
+    //actualizamos registros de:
+    //producto, combinación (si existe)
+//devolver array con typealert y message en lugar de solamente false
+    public function create_and_update_tables($orders_items){
+        //comprobación de al menos un producto en el pedido
+        if($orders_items && $orders_items->count() > 0){
+            //creamos el historial del pedido
+            //
+            //
+            foreach($orders_items as $order_item){
+            //reducimos el stock general del producto y la combinación
+            //(si existe),
+            //el stock de esa combinación, la misma cantidad que quantity
+                $reduce = $this->reduce_stock($order_item);
+                if(!$reduce)
+                    return false;
+    //falta:
+    //comprobación de configuración para enviar 
+    //notificación y email al admin
+    //enviar email de confirmación al cliente
+    //enviar email con factura al cliente
+
+            //creamos el historial de cada item                
+                $history = $this->set_history_order($order_item);
+                if(!$history)
+                    return false;
+            //creamos el registro de producto vendido
+                $sold_product = $this->set_sold_product($order_item->product_id);
+                if(!$sold_product)
+                    return false;
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function reduce_stock($order_item){
+        if($order_item->combinations != "null"){
+        //decodificamos en un array de objetos
+            $decoded_combinations = json_decode($order_item->combinations);
+            $list_comb=[];
+            //creamos un array recorriendo el array de objetos ($comb)
+            foreach($decoded_combinations as $comb){
+                $list_comb[] = $comb->value;
+            }
+            //convertimos en string
+            $list_ids = implode(',',$list_comb);
+
+            //obtenemos la combinación mediante el string y la columna list_ids
+            $match_comb = Combination::where('list_ids',$list_ids)->first();
+            if(!$match_comb)
+                return false;                    
+            $comb_stock = $match_comb->stock;
+            //reducimos el stock de la combinación y actualizamos combinación
+            if($comb_stock > $order_item->quantity){
+                $updated_stock = $comb_stock - $order_item->quantity;
+                $match_comb->update([
+                    'stock' => $updated_stock
+                ]);
+            }else{                        
+                return false;
+            }
+        }
+        //reducimos el stock global del producto
+        $product = Product::findOrFail($order_item->product_id);
+        $global_stock = $product->stock;
+        if($global_stock > $order_item->quantity){
+            $updated_global_stock = $global_stock - $order_item->quantity;
+            $product->update([
+                'stock' => $updated_global_stock
+            ]);
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    //crear historial del pedido
+    public function set_history_order($order_item){
+        $history = History_Order_Item::create([
+            'combinations' => $order_item->combinations,
+            'quantity' => $order_item->quantity,
+            'state_discount' => $order_item->state_discount,
+            'end_discount' => $order_item->end_discount,
+            'price_unit' => $order_item->price_unit,
+            'total' => $order_item->total,
+            'title' => $order_item->title,
+            'path_tag' => $order_item->path_tag,
+            'image' => $order_item->image,
+            'user_id' => $order_item->user_id,
+            'product_id' => $order_item->product_id,
+            'order_id' => $order_item->order_id,
+            'order_item_id' => $order_item->id
+        ]);
+        if($history)
+            return true;
+        else
+            return false;
+    }
+    //crear producto vendido
+    public function set_sold_product($order_item_product_id){
+        $counter=0;
+        $counter_sold_product = Sold_Product::where('product_id',$order_item_product_id)->count();
+        if($counter_sold_product > 0){
+            $counter=$counter_sold_product;
+        }
+        $sold_product = Sold_Product::create([
+            'sold_nums' => $counter+1,
+            'product_id' => $order_item_product_id
+        ]);
+        if($sold_product)
+            return true;
+        else
+            return false;
+    }
+    //obtener la cantidad total de productos y el precio total 
+    //del pedido sumando el total de todos los items
+    public function get_total_items($orders_items){
+        $total=0;
+        $sum = 0;
+        $total_items = 0;
+        //recorremos todos los items asociados al pedido
+        foreach($orders_items as $oi){
+            if(!$oi || !$oi->total){
+                return false;
+            }
+            $total = $total + $oi->total;
+            $total_items = $total_items +$oi->quantity;
+        }
+
+        return ['total' => $total,'total_items' => $total_items];
+    }
+//crear la factura y guardarla en pdf en el directorio
+    public function create_invoice($totals,$order_id){
+
+        $invoice = Invoice::create([
+            'status' => 1,
+            'net' => floatval($totals['net']),
+            'vat' => $totals['location_vat'],
+            'total' =>$this->total,
+            'quantity' =>$totals['total_items'],
+            'order_id' => $order_id
+        ]);
+        return $invoice;
+    }
+    
 
     public function change_quantity($operator,$id){
         
