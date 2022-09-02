@@ -835,6 +835,9 @@ function testValues(){
 }
 function deleteValue(id,name){    
     list_combinations = list_combinations.filter(item => item.id != id)
+    //desactivamos el checkbox de la lista de atributos
+    let check = document.querySelector('#list_'+id);
+    check.checked=false;    
     setListValues();    
 }
 //resetea el div de generar combinaciones
