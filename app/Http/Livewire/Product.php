@@ -68,19 +68,26 @@ class Product extends Component
     //$bol determina si se debe añadir a quantity uno más, ya que aun no se ha actualizado
     public function testStock($bol){
         if($this->parent_combinations && $this->parent_combinations->count() > 0){
+            
             //se comprueba el stock total
-            if(count($this->option) > 1){
+            //if(count($this->option) > 1){
+            if(count($this->parent_combinations) > count($this->option)){
 
             }else{
-                $quantity = $this->quantity;
-                foreach($this->option as $key => $op){
-                    $comb = Combination::where('product_id',$this->product_id)->where('list_ids',$op)->first();
 
+                $quantity = $this->quantity;
+
+                //foreach($this->option as $key => $op){
+                    $imp = implode(',',$this->option);
+                    
+                    $comb = Combination::where('product_id',$this->product_id)->where('list_ids',$imp)->first();
+
+                    //dd($comb);
                     if($bol)
                         $quantity++;
                     if($comb->stock >= $quantity)
                         return true;
-                }
+                //}
             }
             
         }else{
@@ -142,7 +149,7 @@ class Product extends Component
 
     //El método setCombinations establece la lista o listas de combinaciones
     //generando un array por cada atributo padre que exista en todas las 
-    //combinaciones y cada uno de estos arrays contiene:
+    //combinaciones. Cada uno de estos arrays contiene:
     //1.- Una clave>valor que especifíca el nombre del atributo padre ('name' => nombre_atr_padre)
     //2.- Un array por cada atributo hijo que pertenezca al mismo atributo padre
     //Nota: Necesario indicar que la primera lista de combinaciones va a //distinguirse del resto, ya que, independientemente de la pulsación en el 
@@ -162,7 +169,8 @@ class Product extends Component
         }
         if($data){
             //obtenemos el índice del primer option que corresponde
-            //al padre de la primera lista de combinaciones
+            //al padre de la primera lista de combinaciones que se muestra
+            //desde el panel de usuario
             
             //obtenemos el registro del valor(attributo hijo) de $data
             $attribute_param = Attribute::findOrFail($data);
@@ -404,7 +412,7 @@ class Product extends Component
          //actualizamos el precio si seleccionamos combinacion
         }
         if($this->quantity != $this->quantity_tmp)
-            $this->set_quantity();
+            //$this->set_quantity();
 
         if($this->option != $this->computed_option){
             
@@ -413,13 +421,14 @@ class Product extends Component
             //es distinta y no dispone de stock suficiente, en ese caso pasamos
             //cantidad a 1, ya que si no tuviera ninguna no sería seleccionable
 
+ //anulado temporalmente
             /*
             if(!$this->testStock(false)){
                 $this->quantity = 1;            
             }
             */
-            
-            //dd($this->computed_option);
+
+            /*
             $this->set_price_combinations();
             $this->price_tmp = $this->product->price * $this->quantity;
             $total_added_price = 0;
@@ -427,12 +436,15 @@ class Product extends Component
                 $total_added_price = $this->added_price * $this->quantity;
             }
             $this->price_tmp = $total_added_price + $this->price_tmp;
+            */
             //$this->dispatchBrowserEvent('contentChanged');
             
         }
     }
     //establecer combinacíon seleccionada ($this->option)
-    public function select_combination(){
+    //si pasamos data además de establecer la combinación en 
+    //la global de componente "selected_comb" tb la devolvemos.
+    public function select_combination($data = null){
         $list_values = [];        
         foreach($this->option as $o){
             $list_values[] = $o;            
@@ -442,7 +454,11 @@ class Product extends Component
         $combination = Combination::where('product_id',$this->product_id)->where('list_ids',$list_values_string)->first();
         if($combination){
             $this->selected_comb = $combination;
+            if($data)
+                return $combination;
         }
+
+        
     }
 
     //set_value()
@@ -458,8 +474,29 @@ class Product extends Component
         $this->selected_parentvalue = $value->type;
         if($this->option){
             $this->setCombinations($value_id);
-            $this->select_combination();
+            $comb_id;
+            //si el stock de la combinación es menor al establecido en cantidad
+            //antes de seleccionar una combinación distinta actualizamos quantity a 1
+            $c = $this->select_combination(true);            
+            if($c && $c->stock < $this->quantity){
+                    $this->quantity = 1;
+            }
+            
+            //actualizar precio adicional de la combinación
+//se podría optimizar el set_price_combinations pasando como parámetro
+//el id de la combinación mediante $c->id del "select_combination(true)"
+
+            $this->set_price_combinations();
+            //actualizar precio con la cantidad
+            $this->price_tmp = $this->product->price * $this->quantity;
+            $total_added_price = 0;
+            if($this->added_price){                
+                $total_added_price = $this->added_price * $this->quantity;
+            }
+            //dd($this->price_tmp);
+            $this->price_tmp = $total_added_price + $this->price_tmp;
         }
+
 
         //dd($this->combinations_list);
         $this->emit('setValue',$this->selected_value,$this->selected_parentvalue,$this->option);
@@ -590,8 +627,9 @@ class Product extends Component
         return $order;
     }
 
-    //Establece el suplemento de precio (si hubiere) de cada una de las 
-    //características seleccionadas
+    //Establece el suplemento de precio (si hubiere) de la combinación 
+    //seleccionada en $this->added_price, los descuentos se calculan en la vista
+    //y en la factura
     public function set_price_combinations(){
 
         $list_values = [];

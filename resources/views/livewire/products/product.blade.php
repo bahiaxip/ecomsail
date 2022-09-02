@@ -76,8 +76,20 @@
                 <div class="price mtop16">
                     @if($prod->infoprice->discount_type == 1
                         && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
-                    <span>                        
-                        {{ floatval(number_format(($price_tmp*((100-$prod->infoprice->discount)/100)),2,'.','')) }}€
+                    <span>
+                    {{-- descuento se debe hacer al precio sin IVA --}}    
+                        @php
+                        $vat = 21;
+                        $oper_vat = 100/($vat+100);
+                        $net = $price_tmp*$oper_vat;
+                        $discount = $prod->infoprice->discount;
+                        $oper_discount = 100/($discount+100);
+                        $discounted_net = $net * $oper_discount;
+                        $final_discounted = $discounted_net *((100+$vat)/100);
+                        
+                        @endphp                    
+                        {{-- floatval(number_format(($net*((100-$prod->infoprice->discount)/100)),2,'.','')) --}}
+                        {{floatval(number_format($final_discounted,2,'.',''))}}€
                         @if($prod->stock == 0)
                         {{'Sin stock'}}
                         @endif
