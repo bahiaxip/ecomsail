@@ -148,6 +148,7 @@ class Cart extends Component
             'comment' => 'nullable',
             'sum' => 'required|integer'
         ]);
+        $error = NULL;
     //Para crear la factura, necesitamos la dirección Address para
     //obtener el IVA y los productos que componen la factura, 
     //falta revisar los descuentos
@@ -164,6 +165,7 @@ class Cart extends Component
         $order = Order::where('user_id',$this->user_id)->where('status','0')->first();
         //generamos un nombre de pedido aleatorio y convertimos a mayúsculas
         $rand= strtoupper(Str::random(20));
+//REvisar el descuento aquí
         //obtenemos el subtotal(total sin impuestos) para el pedido(Order) y para la factura(Invoice)
         $net = (float)$this->set_vat_to_price($this->total,$location_vat,'minus');
         
@@ -184,23 +186,47 @@ class Cart extends Component
         
 
         $orders_items = Order_Item::where('order_id',$order->id)->get();
-        $totals = $this->get_total_items($orders_items);        
+        $totals = $this->get_total_items($orders_items);
+        
+        if(!$totals)
+            $error = [
+                'status' => 'error',
+                'typealert' => 'danger',
+                'message' => 'Error: Productos del pedido',
+                'function' => 'get_total_items()'
+            ];
         $totals['location_vat'] = $location_vat;
         $totals['net'] = $net;
         //creamos la factura
-        $invoice = $this->create_invoice($totals,$order->id);
+        if(!$error){            
+            $invoice = $this->create_invoice($totals,$order->id);
+            if(!$invoice)
+                $error = [
+                    'status' => 'error',
+                    'typealert' => 'danger',
+                    'message' => 'Error: Creación factura',
+                    'function' => 'create_invoice()'
+                ];
+        }
         
-                   
+        if(!$error){
+            $new_tables = $this->create_and_update_tables($orders_items);
+            if(!$new_tables)
+                $error = [
+                    'status' => 'error',
+                    'typealert' => 'danger',
+                    'message' => 'Error: actualizando stock',
+                    'function' => 'create_and_update_tables()'
+                ];
+        }
         
-        $new_tables = $this->create_and_update_tables($orders_items);
-        
-        if($new_tables && $invoice){
-            
-            $typealert = 'success';
-            $message = 'Compra realizada correctamente';
+        //if($new_tables && $invoice){
+        if($error){            
+            $typealert = $error['typealert'];
+            $message = $error['message'].' (Function: '.$error['function'].')';
         }else{
-            $typealert = 'danger';
-            $message = 'No existen productos asociados a este pedido';
+            $typealert = 'success';
+            $message = 'Compra realizada correctamente';    
         }
         
         $this->typealert = $typealert;
@@ -209,10 +235,8 @@ class Cart extends Component
 //falta el clear()
     }
 
-    //creamos los registros de:
-    //historial, vendidos
-    //actualizamos registros de:
-    //producto, combinación (si existe)
+    //creamos los registros de: historial, vendidos
+    //actualizamos registros de: producto, combinación (si existe)
 //devolver array con typealert y message en lugar de solamente false
     public function create_and_update_tables($orders_items){
         //comprobación de al menos un producto en el pedido
@@ -221,10 +245,9 @@ class Cart extends Component
             //
             //
             foreach($orders_items as $order_item){
-            //reducimos el stock general del producto y la combinación
-            //(si existe),
-            //el stock de esa combinación, la misma cantidad que quantity
+            //reducimos el stock general del producto y la combinación(si existe)            
                 $reduce = $this->reduce_stock($order_item);
+                //dd($reduce);
                 if(!$reduce)
                     return false;
     //falta:
@@ -247,26 +270,29 @@ class Cart extends Component
             return false;
         }
     }
-
+    //reduce el stock global y el de la combinación(si existe) del producto.
     public function reduce_stock($order_item){
         if($order_item->combinations != "null"){
         //decodificamos en un array de objetos
             $decoded_combinations = json_decode($order_item->combinations);
+            
             $list_comb=[];
             //creamos un array recorriendo el array de objetos ($comb)
             foreach($decoded_combinations as $comb){
                 $list_comb[] = $comb->value;
             }
+            
             //convertimos en string
             $list_ids = implode(',',$list_comb);
 
             //obtenemos la combinación mediante el string y la columna list_ids
             $match_comb = Combination::where('list_ids',$list_ids)->first();
+            
             if(!$match_comb)
                 return false;                    
             $comb_stock = $match_comb->stock;
             //reducimos el stock de la combinación y actualizamos combinación
-            if($comb_stock > $order_item->quantity){
+            if($comb_stock >= $order_item->quantity && $comb_stock > 0){
                 $updated_stock = $comb_stock - $order_item->quantity;
                 $match_comb->update([
                     'stock' => $updated_stock
@@ -278,7 +304,7 @@ class Cart extends Component
         //reducimos el stock global del producto
         $product = Product::findOrFail($order_item->product_id);
         $global_stock = $product->stock;
-        if($global_stock > $order_item->quantity){
+        if($global_stock >= $order_item->quantity && $global_stock > 0){
             $updated_global_stock = $global_stock - $order_item->quantity;
             $product->update([
                 'stock' => $updated_global_stock
@@ -346,7 +372,9 @@ class Cart extends Component
     }
 //crear la factura y guardarla en pdf en el directorio
     public function create_invoice($totals,$order_id){
-
+        //$invoice=NULL;
+        if(!isset($totals['net']) || !isset($totals['location_vat']))
+            return false;
         $invoice = Invoice::create([
             'status' => 1,
             'net' => floatval($totals['net']),
@@ -355,6 +383,7 @@ class Cart extends Component
             'quantity' =>$totals['total_items'],
             'order_id' => $order_id
         ]);
+        
         return $invoice;
     }
     
@@ -385,6 +414,7 @@ class Cart extends Component
     //actualización de order_item
     public function update_order_item($id,$quantity){
         $order_item = Order_Item::findOrFail($id);
+        dd($order_item->id);
         if($order_item){
             $added_price=0;
             //comprobar added_price para añadirle el suplemento 

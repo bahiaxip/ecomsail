@@ -880,7 +880,7 @@ function confirmGallery(id){
     confirmGallery.classList.toggle('showconfirm2');    
     
 }
-//método principal que llama desde los botones de edit de cada combinación
+//método principal que llama desde los botones de edit de cada combinación (sección administración, "combinaciones")
 function editComb(id,cancel=null){
     //primero reseteamos todos por si se ha dejado alguno sin cerrar o actualizar
     resetEditComb();
@@ -940,18 +940,18 @@ function resetEditComb(){
     console.log("allinputsnode: ",allInputsNode);
     let allInputs =[].slice.call(allInputsNode);
     //con counter establecemos que el primer item desactivado pertenece a added_price
-    //y el segundo a final_price
-    let counter = 0;
+    //y el segundo a final_price    
     allInputs.map((item,index)=>{
         //si existe alguno desactivado se desactiva y se devuelve su valor original
         if(item.disabled == false){
-            console.log(index)
-            if(counter==0)
+            if(item.name == "added_price"){
+                console.log("added_price")
                 item.value=added_price_tmp;
-            if(counter==1)
-                //sustituido por stock
-                //item.value = final_price_tmp;
+            }
+            if(item.name == "stock_comb"){
+                console.log("stock_comb")
                 item.value = stock_tmp;
+            }
         }
         item.disabled=true;
     })
