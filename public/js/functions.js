@@ -902,9 +902,8 @@ function editComb(id,cancel=null){
         closeEditComb(tr,input,input2) 
     }
     clearPanelCombinations();
-    
 }
-//editar combinación de un solo registro de la tabla de combinaciones
+//editar una combinación de la tabla de combinaciones (sección administración)
 function openEditComb(t,el,el2){
     el.disabled = false;
     el2.disabled = false;
@@ -943,15 +942,14 @@ function resetEditComb(){
     //y el segundo a final_price    
     allInputs.map((item,index)=>{
         //si existe alguno desactivado se desactiva y se devuelve su valor original
+        //mediante el valor del atributo "name" del input
         if(item.disabled == false){
-            if(item.name == "added_price"){
-                console.log("added_price")
+            if(item.name == "added_price")                
                 item.value=added_price_tmp;
-            }
-            if(item.name == "stock_comb"){
-                console.log("stock_comb")
+            
+            if(item.name == "stock_comb")                
                 item.value = stock_tmp;
-            }
+            
         }
         item.disabled=true;
     })
@@ -976,6 +974,7 @@ function update_final_price(data){
     final_price = data.value;
 }
 function update_stock(data){
+    console.log("update_stock")
     stock = data.value;
 }
 

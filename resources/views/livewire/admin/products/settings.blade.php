@@ -320,7 +320,7 @@
                                       {{$comb->name}}
                                     </td>
                                     <td class="added_price">
-                                        {{ Form::number('added_price',$comb->added_price,['class' => 'form-control form-control-sm','disabled','onchange' => 'update_added_price(this)']) }}
+                                        {{ Form::number('added_price',$comb->added_price,['class' => 'form-control form-control-sm','disabled','step' => '1','onchange' => 'update_added_price(this)','onkeydown' => 'return false']) }}
                                     </td>
                                     {{--
                                     <td class="final_price">
@@ -328,7 +328,7 @@
                                     </td>
                                     --}}
                                     <td class="stock">
-                                        {{ Form::number('stock_comb',$comb->stock,['class' => 'form-control form-control-sm','disabled','onchange' => 'update_stock(this)','max' => $stock_final + $comb->stock,'min' => 0]) }}
+                                        {{ Form::number('stock_comb',$comb->stock,['class' => 'form-control form-control-sm','disabled','onkeydown' => 'return false','step' => 1,'onchange' => 'update_stock(this)','max' => $stock_final + $comb->stock,'min' => 0]) }}
                                     </td>
                                     <td>
                                         <div class="admin_items" style="display:flex">
