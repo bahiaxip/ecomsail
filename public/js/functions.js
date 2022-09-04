@@ -312,7 +312,8 @@ document.addEventListener('readystatechange',() => {
                         //console.log(item.querySelector('div input:enabled').value)
                         item.querySelector('div input:enabled').click();
                         counter++;
-                    }else if(item.querySelector('div select').length > 0){
+                    }else if(item.querySelector('div select') 
+                        && item.querySelector('div select').length > 0){
                         let select = item.querySelectorAll('.sel1');
                         //if(select.querySelectorAll('option')){
                             //let options = [...select[0].options].map(o => o.value);
@@ -366,6 +367,9 @@ document.addEventListener('readystatechange',() => {
         
 
 
+})
+window.livewire.on('maxParentCombinations',()=>{
+    setInputDisabled();
 })
 //
 window.livewire.on('setValue',(value,parent,option)=>{
@@ -710,6 +714,7 @@ let stock_tmp;
 let added_price, final_price, stock;
 //añadir valor al panel de combinaciones
 function addValue(value_id,value_name,parent_id,el=null){
+    console.log("el: ",el)
 //Revisar si es necesario
     //filtramos si ya existe en la lista de combinaciones el input seleccionado para no repetirlo
     let filteredList=list_combinations;
@@ -734,12 +739,15 @@ function addValue(value_id,value_name,parent_id,el=null){
         let list=false;
         filteredList.forEach((item) => {
             console.log("item: ",item)
+            //filtramos, por si se ha vuelto a pulsar y ya estaba en la lista
+            //se elimina
             if(item.id == value_id){
                 filteredList = filteredList.filter(item => item.id != value_id);
                 //eliminamos el id de la lista
                 list=true;
             }
         })
+        //si no está duplicado
         if(!list)
             filteredList.push({id:value_id,name:value_name,parent_id:parent_id})
 
@@ -748,12 +756,14 @@ function addValue(value_id,value_name,parent_id,el=null){
     list_combinations = filteredList;
     //identificamos el elemento .boxes como selected para poder desactivar el resto
     let parentSelected = el.parentNode.parentNode.parentNode.parentNode;
+    console.log("parentSelected: ",parentSelected)
     parentSelected.classList.add('selected')
     //desactivamos el resto de collapses
     inactiveCollapses(el)
     
     testValues();
     setListValues();
+    setInputDisabled();
     
 }
 //desactivamos y cerramos los menús collapse de atributos excepto el seleccionado(selected)
@@ -761,14 +771,32 @@ function inactiveCollapses(){
     let boxesNode = document.querySelectorAll('.boxes');
     let boxes = [].slice.call(boxesNode);
     //console.log(boxes)  
-    boxes.map((box)=>{  
-        if(!box.classList.contains('selected')){
+    boxes.map((box)=>{
+        console.log("box: ",box)
+        if(!box.classList.contains('selected') 
+            //&& box.firstElementChild.firstElementChild.getAttribute('maxCombination')=='false'
+        ){
+            
             //desactivamos botones 
             box.firstElementChild.firstElementChild.setAttribute('disabled','disabled');
             let show = box.querySelector('.collapse.show');
             if(show){
                 show.classList.remove('show');
             }
+        }
+        
+    })
+}
+//desactivar las listas desplegables de atributos si han alcanzado el límite
+function setInputDisabled(){
+    //comprueba el valor de maxCombination y si es false se desactiva, es una método
+    //para poner límite a las listas de combinaciones del mismo padre
+    let boxesNode = document.querySelectorAll('.boxes');
+    let boxes = [].slice.call(boxesNode);
+    //console.log(boxes)  
+    boxes.map((box)=>{
+        if(box.firstElementChild.firstElementChild.getAttribute('maxCombination')=='false'){
+            box.firstElementChild.firstElementChild.setAttribute('disabled','disabled');
         }
     })
 }
@@ -788,7 +816,7 @@ function setListValues(){
     let list=[];
     list_combinations.map((item)=>{
         let comb = `<button type="button" class="btn btn-primary btn-sm" style="margin:2px auto;vertical-align:middle">
-            ${item.name} <span class="badge text-bg-secondary" onclick="deleteValue(${item.id},'${item.name}')">X</span>
+            ${item.name} <span class="badge text-bg-secondary" onclick="deleteValue(${item.id},'${item.name}',${item.parent_id})">X</span>
         </button>`;        
         list.push(comb);
     })
@@ -833,14 +861,13 @@ function testValues(){
     }
     
 }
-function deleteValue(id,name){    
-    list_combinations = list_combinations.filter(item => item.id != id)
-    //desactivamos el checkbox de la lista de atributos
+function deleteValue(id,name,parent_id){    
+    //desactivamos el checkbox de la lista de atributos y llamamos al addValue()
     let check = document.querySelector('#list_'+id);
-    check.checked=false;    
-    setListValues();    
+    check.checked=false;
+    addValue(id,name,parent_id,check);
 }
-//resetea el div de generar combinaciones
+//resetea el panel de combinaciones
 function clearPanelCombinations(){
     let panel = document.querySelector('#panel_combinations');
     panel.innerHTML = "";    

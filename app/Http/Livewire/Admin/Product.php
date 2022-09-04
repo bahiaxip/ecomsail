@@ -128,6 +128,11 @@ class Product extends Component
     //rendir el mismo modal para eliminación y para restauración evitando duplicar 
     public $count_prod;
 
+    //lista de ids de padres presentes en las combinaciones, para limitar
+    //la cantidad de listas del mismo padre
+    public $list_parents_limit;
+    //cantidad límite de listas de combinaciones con el mismo padre
+    public $limit_parent_combinations = 2;
 
     public $subcats;
     //personalizamos el nombre del atributo de los mensajes de error
@@ -138,12 +143,15 @@ class Product extends Component
         'image' => 'imagen'
     ];
 
+    
+
 //comprobar antes si existen categorías, si no, mostrar enlace a crear categoría
     public function mount($filter_type){
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
         $this->listname = 'products';
         $this->checkpdf = 1;
+
     }
     
     public function updated(){
@@ -450,9 +458,23 @@ class Product extends Component
         //combinations
         $this->combinations = Comb::where('product_id',$id)->get();
         $this->get_type_selection();
+//Estableciendo límite de listas de combinaciones
+        if($this->parent_combinations->count() >= $this->limit_parent_combinations){
+            $list = [];
+            foreach($this->parent_combinations as $pc){                
+                $list[] = $pc->parent_id;
+            }
+            $this->list_parents_limit = $list;
+            
+        //generamos una variable para no permitir más combinaciónes, o más bien,
+        //desactivar siempre las pestañas que no sean de uno de los padres 
+        //existentes en parent_combinations;
+        }
         //$this->show_attributes($id);
         //imágenes de productos (galería)
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
+        //desactivamos(disabled) las listas de atributos si rebasan el límite establecido
+        $this->emit('maxParentCombinations');
     }
     //anulación debido a cambio de metodología, a través de una 
     //nueva tabla (parent_combinations), para establecer a todas 
@@ -493,7 +515,7 @@ class Product extends Component
     //de un producto
     public function get_type_selection(){
         $parent_comb = ParentComb::where('product_id',$this->prod_id)->get();
-        $this->parent_combinations = $parent_comb;      
+        $this->parent_combinations = $parent_comb;
     }
     //establecer el tipo de selección de las combinaciones con el mismo atributo 
     //padre  de un producto
@@ -920,274 +942,279 @@ class Product extends Component
     //a la misma vez valores del mismo atributo padre y las combinaciones se crearán
     //de uno en uno, es decir, un valor por cada combinación
     public function createCombinations($data,$product_id){
-        //si no existen valores selccionados mantenemos la pestaña y detenemos
-        if(!$data){
-            $this->emit('active_combinations');
-            return false;            
-        }
-        $parent;
-        $name_list = [];
-        $id_list = [];
-        $parent = [];
-        $switchbol = false;
-        //dd($data);
-        //la cantidad de atributos seleccionados
-        $counter_data = count($data);
-        //$data: lista de elementos seleccionados
-        $combinations = Comb::where('product_id',$product_id)->get();
-        foreach($data as $key => $d){
-
+//añadimos un tope de 2 listas con el mismo atributo padre
+        if($this->parent_combinations->count() <= 2){
+            //si no existen valores selccionados mantenemos la pestaña y detenemos
+            if(!$data){
+                $this->emit('active_combinations');
+                return false;            
+            }
+            $parent;
+            $name_list = [];
+            $id_list = [];
+            $parent = [];
+            $switchbol = false;
             //dd($data);
-            //obtenemos el registro de cada uno de los valores seleccionados
-            $at = Attr::findOrFail($d['id']);
+            //la cantidad de atributos seleccionados
+            $counter_data = count($data);
+            //$data: lista de elementos seleccionados
+            $combinations = Comb::where('product_id',$product_id)->get();
 
-    //primero comprobamos si alguno de los valores seleccionados ya se encuentra 
-    //en alguna de las combinaciones, en ese caso detenemos.
-            //lista de combinaciones de la db del producto
-            
-            $same_value=false;
-            if($combinations->count() > 0){
+            foreach($data as $key => $d){
+
+                //dd($data);
+                //obtenemos el registro de cada uno de los valores seleccionados
+                $at = Attr::findOrFail($d['id']);
+
+        //primero comprobamos si alguno de los valores seleccionados ya se encuentra 
+        //en alguna de las combinaciones, en ese caso detenemos.
+                //lista de combinaciones de la db del producto
                 
-                //$combinations = Comb::where('product_id',$product_id)->get();
-                foreach($combinations as $comb){
-                    $list_not_parents=[];
-            //convertimos el campo list_ids a array y comprobamos si algunos de
-            //los valores del array ya existe.
+                $same_value=false;
+                if($combinations->count() > 0){
+                    
+                    //$combinations = Comb::where('product_id',$product_id)->get();
+                    foreach($combinations as $comb){
+                        $list_not_parents=[];
+                //convertimos el campo list_ids a array y comprobamos si algunos de
+                //los valores del array ya existe.
 
-            //$list: lista de valores que tiene cada una de las combinaciones convertida a array                
-                    $list = explode(",",$comb->list_ids);
-                    $list_name = explode(",",$comb->name);
+                //$list: lista de valores que tiene cada una de las combinaciones convertida a array                
+                        $list = explode(",",$comb->list_ids);
+                        $list_name = explode(",",$comb->name);
 
-                    foreach($list as $k => $l){
-                        
-                        //si ya existe el mismo valor en una de las combinaciones
-                        //devolvemos mensaje de error, así nos aseguramos de que 
-                        //nunca haya valores duplicados
-                        if($l == $at->id){
-                            $this->typealert = 'danger';
-                            session()->flash('message2',"Ya existe ese valor");
-                            $this->emit('combinations');
-                            $same_value = true;
-                            break;
+                        foreach($list as $k => $l){
+                            
+                            //si ya existe el mismo valor en una de las combinaciones
+                            //devolvemos mensaje de error, así nos aseguramos de que 
+                            //nunca haya valores duplicados
+                            if($l == $at->id){
+                                $this->typealert = 'danger';
+                                session()->flash('message2',"Ya existe ese valor");
+                                $this->emit('combinations');
+                                $same_value = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if($same_value){
-                    return false;
-                }
-                
-                
-                foreach($combinations as $comb){
-
-                    $lista = $this->testListDuplicate($product_id);
+                    if($same_value){
+                        return false;
+                    }
                     
-            //convertimos el campo list_ids a array y comprobamos si existe ya //el mismo valor
-                    $same_parent = false;
                     
-            //$list: lista de valores que tiene cada una de las combinaciones convertida a array 
-                                   
-                    $list = explode(",",$comb->list_ids);
-                    $list_name = explode(",",$comb->name);
-                    //$list2[] = $list;
-                    $counter_values = 0;
+                    foreach($combinations as $comb){
 
-                    foreach($list as $k => $l){
-                        if($k == 0){
-                            //dd($list);
-                        }
-                    //if($this->testValueInCombinations($product_id,$at->id)){
-                    //cantidad de elementos list_ids (atributos) de la combinación
-                            
+                        $lista = $this->testListDuplicate($product_id);
                         
-                        //obtenemos el registro(DB) de cada uno de los valores de list_ids (en formato array)
-                        $at_comb = Attr::findOrFail($l);
-            //comprobamos si los elementos seleccionados tienen el mismo 
-            //atributo padre. Como solo se pueden seleccionar valores del 
-            //mismo padre en una selección, revisando el primero es suficiente.
-                        if($at_comb->type == $d['parent_id']){
-                //si es del mismo padre se crean las combinaciones 
-                //nuevas, copiando el $list y $list_name y sustituyendo el valor
-                //de los que tienen el mismo atributo padre por el nuevo.
-                            
-                            $list[$k] = $at->id;
-                            $list_name[$k] = $at->parentattr->name.' > '.$at->name;
-                            $lista2 = $lista;
-                            $lista2[] = $list;
-                            
-                            $unique = array_unique($lista2,SORT_REGULAR);
-                            //dd($unique);
-                            if(count($lista2) == count($unique)){
+                //convertimos el campo list_ids a array y comprobamos si existe ya //el mismo valor
+                        $same_parent = false;
+                        
+                //$list: lista de valores que tiene cada una de las combinaciones convertida a array 
+                                       
+                        $list = explode(",",$comb->list_ids);
+                        $list_name = explode(",",$comb->name);
+                        //$list2[] = $list;
+                        $counter_values = 0;
+
+                        foreach($list as $k => $l){
+                            if($k == 0){
+                                //dd($list);
+                            }
+                        //if($this->testValueInCombinations($product_id,$at->id)){
+                        //cantidad de elementos list_ids (atributos) de la combinación
                                 
                             
+                            //obtenemos el registro(DB) de cada uno de los valores de list_ids (en formato array)
+                            $at_comb = Attr::findOrFail($l);
+                //comprobamos si los elementos seleccionados tienen el mismo 
+                //atributo padre. Como solo se pueden seleccionar valores del 
+                //mismo padre en una selección, revisando el primero es suficiente.
+                            if($at_comb->type == $d['parent_id']){
+                    //si es del mismo padre se crean las combinaciones 
+                    //nuevas, copiando el $list y $list_name y sustituyendo el valor
+                    //de los que tienen el mismo atributo padre por el nuevo.
+                                
+                                $list[$k] = $at->id;
+                                $list_name[$k] = $at->parentattr->name.' > '.$at->name;
+                                $lista2 = $lista;
+                                $lista2[] = $list;
+                                
+                                $unique = array_unique($lista2,SORT_REGULAR);
+                                //dd($unique);
+                                if(count($lista2) == count($unique)){
+                                    
+                                
+                                
+                                //dd(count($lista) == count(array_unique($lista2)));
+                                //convertimos a string
+                                $list_name = implode(",",$list_name);
+                                $list = implode(',',$list);
+                                //creamos combinación nueva
+                                $comb = Comb::create([
+                                    'name' => $list_name,
+                                    'list_ids' => $list,
+                                    'parent_attr' => $at->parentattr->id,
+                                    'amount' => 0,
+                                    'product_id' => $product_id,
+                                    'final_price' => 0.00,                
+                                ]);
+                                }
+                                //con parent=true rompemos el foreach de combinaciones
+                                $same_parent = true;
+
+                                //con break rompemos el foreach de list_ids
+                                //break;
+                    
+                                //dd("es el mismo padre");
+                                
+                                
+                            }
+                            $counter_values ++;
+                            if($k == 1){
+                                //dd($list);
+                            }
                             
-                            //dd(count($lista) == count(array_unique($lista2)));
+                            //dd($at_comb->type);
+                            if($at_comb->type != $d['parent_id']){
+                                $list_not_parents[] = $at->id;
+                            }
+                            //almacenar los atributos no duplicados 
+                            
+                            /*
+                            else{
+                                //if($list[$k])
+                                    $list_name[$k] = $list_name[$k].', '.$at->parentattr->name.' > '.$at->name;
+                                    $list[$k] = $list[$k].','.$at->id;
+                                    $comb->update([
+                                        'name' => $list_name[$k],
+                                        'list_ids' => $list[$k],
+                                    ]);
+                                
+                                //si no es el mismo padre, habrá que actualizar las combinaciones actuales añadiendo el nuevo valor
+                                //dd("no es el mismo padre");
+                                $parent = false;
+                            }
+                            */
+                        //}
+                        }                    
+                        if($same_parent){
+
+                            if($counter_values == 1){
+                                if(count($data) == 1){
+                                    break;    
+                                }else{
+                                    
+                                }
+                                
+                            }elseif($counter_values == 2){
+                                //dd($lista);
+                                //revisar todos los atributos que no sean el padre y repetirlos
+                                //dd($list_not_parents);
+                            }
+                            //break;
+                            
+                        }else{
+                            $list_name[$k] = $list_name[$k].', '.$at->parentattr->name.' > '.$at->name;
+                            $list[$k] = $list[$k].','.$at->id;
                             //convertimos a string
                             $list_name = implode(",",$list_name);
                             $list = implode(',',$list);
-                            //creamos combinación nueva
-                            $comb = Comb::create([
+                            $comb->update([
                                 'name' => $list_name,
                                 'list_ids' => $list,
-                                'parent_attr' => $at->parentattr->id,
-                                'amount' => 0,
-                                'product_id' => $product_id,
-                                'final_price' => 0.00,                
                             ]);
-                            }
-                            //con parent=true rompemos el foreach de combinaciones
-                            $same_parent = true;
-
-                            //con break rompemos el foreach de list_ids
-                            //break;
-                
-                            //dd("es el mismo padre");
-                            
                             
                         }
-                        $counter_values ++;
-                        if($k == 1){
-                            //dd($list);
-                        }
-                        
-                        //dd($at_comb->type);
-                        if($at_comb->type != $d['parent_id']){
-                            $list_not_parents[] = $at->id;
-                        }
-                        //almacenar los atributos no duplicados 
-                        
+                        //dd($comb->name);
                         /*
-                        else{
-                            //if($list[$k])
-                                $list_name[$k] = $list_name[$k].', '.$at->parentattr->name.' > '.$at->name;
-                                $list[$k] = $list[$k].','.$at->id;
-                                $comb->update([
-                                    'name' => $list_name[$k],
-                                    'list_ids' => $list[$k],
-                                ]);
-                            
-                            //si no es el mismo padre, habrá que actualizar las combinaciones actuales añadiendo el nuevo valor
-                            //dd("no es el mismo padre");
-                            $parent = false;
+                        if($parent){
+                            break;
                         }
-                        */
-                    //}
-                    }                    
-                    if($same_parent){
+                        */                    
+                    
+                    }
+                    
+                    //si tienen el mismo padre añadimos nuevas combinaciones
+                }else{
+                    $name_list = $at->parentattr->name.' > '.$at->name;
 
-                        if($counter_values == 1){
-                            if(count($data) == 1){
-                                break;    
-                            }else{
-                                
-                            }
+                    //$product = Prod::findOrFail($product_id);
+                    //$price = $product->price;
+                                    
+                    $comb = Comb::create([
+                        'name' => $name_list,
+                        'list_ids' => $at->id,
+                        'parent_attr' => $at->parentattr->id,
+                        'amount' => 0,
+                        'product_id' => $product_id,
+                        'final_price' => 0.00,                
+                    ]);        
+                }
+                /*
+                $name_list[] = $at->parentattr->name.' > '.$at->name;
+                $id_list[] = $at->id;
+                */
+            /*$name_list = $at->parentattr->name.' > '.$at->name;
+
+            $product = Prod::findOrFail($product_id);
+            $price = $product->price;
                             
-                        }elseif($counter_values == 2){
-                            //dd($lista);
-                            //revisar todos los atributos que no sean el padre y repetirlos
-                            //dd($list_not_parents);
-                        }
-                        //break;
-                        
-                    }else{
-                        $list_name[$k] = $list_name[$k].', '.$at->parentattr->name.' > '.$at->name;
-                        $list[$k] = $list[$k].','.$at->id;
-                        //convertimos a string
-                        $list_name = implode(",",$list_name);
-                        $list = implode(',',$list);
-                        $comb->update([
-                            'name' => $list_name,
-                            'list_ids' => $list,
-                        ]);
-                        
-                    }
-                    //dd($comb->name);
-                    /*
-                    if($parent){
-                        break;
-                    }
-                    */                    
-                
+            $comb = Comb::create([
+                'name' => $name_list,
+                'list_ids' => $at->id,
+                'parent_attr' => $at->parentattr->id,
+                'amount' => 0,
+                'product_id' => $product_id,
+                'final_price' => 0.00,                
+            ]);
+            */
+    //se debe comprobar si ya existe un parentcomb con ese padre, si no se crea
+                //si no existe registro del producto de ese atributo
+                //padre, se crea uno.
+
+
+                $parent_comb = ParentComb::where('product_id',$product_id)->where('parent_id',$at->parentattr->id)->first();
+                $type_selection = 2;
+                //si el Atributo padre es Color (atributo->id = 1 en la db)
+                //asignamos el type_selection a 3
+                if($at->parentattr->id == 1){
+                    $type_selection = 3;
+                }
+                if(!$parent_comb){                
+                    ParentComb::create([
+                        'parent_id' => $at->parentattr->id,
+                        'parent_name' => $at->parentattr->name,
+                        'type_selection' =>  $type_selection,
+                        'product_id' => $product_id
+                    ]);
+                    //actualizamos parent_combinations
+                    $this->get_type_selection();
                 }
                 
-                //si tienen el mismo padre añadimos nuevas combinaciones
-            }else{
-                $name_list = $at->parentattr->name.' > '.$at->name;
 
-                //$product = Prod::findOrFail($product_id);
-                //$price = $product->price;
-                                
-                $comb = Comb::create([
-                    'name' => $name_list,
-                    'list_ids' => $at->id,
-                    'parent_attr' => $at->parentattr->id,
-                    'amount' => 0,
-                    'product_id' => $product_id,
-                    'final_price' => 0.00,                
-                ]);        
+
             }
-            /*
-            $name_list[] = $at->parentattr->name.' > '.$at->name;
-            $id_list[] = $at->id;
-            */
-        /*$name_list = $at->parentattr->name.' > '.$at->name;
-
-        $product = Prod::findOrFail($product_id);
-        $price = $product->price;
-                        
-        $comb = Comb::create([
-            'name' => $name_list,
-            'list_ids' => $at->id,
-            'parent_attr' => $at->parentattr->id,
-            'amount' => 0,
-            'product_id' => $product_id,
-            'final_price' => 0.00,                
-        ]);
-        */
-//se debe comprobar si ya existe un parentcomb con ese padre, si no se crea
-            //si no existe registro del producto de ese atributo
-            //padre, se crea uno.
-
-
-            $parent_comb = ParentComb::where('product_id',$product_id)->where('parent_id',$at->parentattr->id)->first();
-            $type_selection = 2;
-            //si el Atributo padre es Color (atributo->id = 1 en la db)
-            //asignamos el type_selection a 3
-            if($at->parentattr->id == 1){
-                $type_selection = 3;
-            }
-            if(!$parent_comb){                
-                ParentComb::create([
-                    'parent_id' => $at->parentattr->id,
-                    'parent_name' => $at->parentattr->name,
-                    'type_selection' =>  $type_selection,
-                    'product_id' => $product_id
-                ]);
-                //actualizamos parent_combinations
-                $this->get_type_selection();
-            }
-            
-
-
-        }
         
-        //obtenemos el precio del producto para añadirlo a la combinación
-        //en la creación
-        /*
-        $product = Prod::findOrFail($product_id);
-        $price = $product->price;
-        $name_list_string = implode(",",$name_list);
-        $id_list_string = implode(",",$id_list);        
-        $comb = Comb::create([
-            'name' => $name_list_string,
-            'list_ids' => $id_list_string,
-            'amount' => 0,
-            'product_id' => $product_id,
-            'final_price' => 0.00
-        ]);
-        */
-        $this->combinations = Comb::where('product_id',$product_id)->get();
-        $this->emit('combinations');
-
+            //obtenemos el precio del producto para añadirlo a la combinación
+            //en la creación
+            /*
+            $product = Prod::findOrFail($product_id);
+            $price = $product->price;
+            $name_list_string = implode(",",$name_list);
+            $id_list_string = implode(",",$id_list);        
+            $comb = Comb::create([
+                'name' => $name_list_string,
+                'list_ids' => $id_list_string,
+                'amount' => 0,
+                'product_id' => $product_id,
+                'final_price' => 0.00
+            ]);
+            */
+            $this->combinations = Comb::where('product_id',$product_id)->get();
+            $this->emit('combinations');    
+        }else{
+            dd($this->parent_combinations[0]);
+        }
     }
     public function clearCombinations(){
         //list_combinations=[];
