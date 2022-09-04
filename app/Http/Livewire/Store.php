@@ -96,6 +96,7 @@ class Store extends Component
         $this->page_tmp = $page;
     }
     public function set_category(){
+        $this->inf_scroll_plus = false;
         //necesario para diferenciar de la colección de productos genérica y para que el
         // método render() de paginación no entre en conflicto.
         $this->switch_special_filter=false;
@@ -105,10 +106,14 @@ class Store extends Component
         if($this->category != $this->computed_category && $this->category != 0){
             $this->subcategory = null;            
         }
-
-        if(!$this->category && $this->subcategory && $this->category != 0){        
+        //si no existe categoría y se selecciona subcategoría se obtiene la 
+        //categoría y se estable en $category.
+        if(!$this->category && $this->subcategory ){
             $this->category = Category::findOrFail($this->subcategory)->type;
         }
+
+        if(!$this->category)
+            $this->category = 0;
         if($this->category == 0){
             $this->computed_category = null;
         }

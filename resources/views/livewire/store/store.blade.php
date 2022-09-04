@@ -16,16 +16,16 @@
                 <div class="div_products_list mtop16">
                 	<div class="filters_products">
                         <div class="filter_product">
-                            <a href="#" wire:click="set_special_filter('news')"> Novedades</a>
+                            <a href="javascript:void(0)" wire:click="set_special_filter('news')"> Novedades</a>
                         </div>
                         <div class="filter_product" wire:click="set_special_filter('sold')">
-                            <a href="#"> Vendidos</a>
+                            <a href="javascript:void(0)"> Vendidos</a>
                         </div>
                         <div class="filter_product" wire:click="set_special_filter('price')">
-                            <a href="#"> Precio</a>
+                            <a href="javascript:void(0)"> Precio</a>
                         </div>
                         <div class="filter_product" wire:click="set_special_filter('feed')">
-                            <a href="#"> Mejor valorados</a>
+                            <a href="javascript:void(0)"> Mejor valorados</a>
                         </div>
                         
                 		
