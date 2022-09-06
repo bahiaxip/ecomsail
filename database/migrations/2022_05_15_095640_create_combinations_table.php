@@ -17,7 +17,7 @@ class CreateCombinationsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('list_ids');
-            $table->integer('parent_attr');
+            $table->string('parent_attr');
             $table->integer('amount');
             $table->integer('product_id');
             $table->integer('stock')->default(0);

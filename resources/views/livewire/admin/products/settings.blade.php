@@ -376,7 +376,7 @@
                   <div class="row mtop16 boxes">
                       
                         <div class="panel shadow"  style="display:flex;justify-content:space-between;padding:0">
-                            <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse_{{$at->id}}" aria-expanded="false" aria-controls="collapseExample" type="button" style="text-align:left;" onclick="passData(this)" maxCombination="@if($list_parents_limit && in_array($at->id,$list_parents_limit)){{'true'}}@else{{'false'}}@endif">
+                            <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse_{{$at->id}}" aria-expanded="false" aria-controls="collapseExample" type="button" style="text-align:left;" onclick="passData(this)" maxCombination="@if(!$switch_parent_combinations || $list_parents_limit && in_array($at->id,$list_parents_limit)){{'true'}}@else{{'false'}}@endif">
                               <i class="fas fa-tags"></i>
                               {{$at->name}}
                               <i class="fa-solid fa-chevron-down" style="float:right"></i>  

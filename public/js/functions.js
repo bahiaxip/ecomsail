@@ -787,13 +787,13 @@ function inactiveCollapses(){
         
     })
 }
-//desactivar las listas desplegables de atributos si han alcanzado el límite
+//desactivar las listas desplegables de atributos si han alcanzado el límite establecido
 function setInputDisabled(){
     //comprueba el valor de maxCombination y si es false se desactiva, es una método
     //para poner límite a las listas de combinaciones del mismo padre
     let boxesNode = document.querySelectorAll('.boxes');
     let boxes = [].slice.call(boxesNode);
-    //console.log(boxes)  
+    console.log(boxes)  
     boxes.map((box)=>{
         if(box.firstElementChild.firstElementChild.getAttribute('maxCombination')=='false'){
             box.firstElementChild.firstElementChild.setAttribute('disabled','disabled');
@@ -1513,7 +1513,7 @@ window.livewire.on('$refresh',()=>{
 window.livewire.on('active_combinations',()=>{
     active_combinations();
 })
-
+//activar la pestaña combinaciones
 function active_combinations(){
     let navtabsNodes = document.querySelectorAll('.nav-tabs button');
     let navtabs = [].slice.call(navtabsNodes);

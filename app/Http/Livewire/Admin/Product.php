@@ -88,6 +88,9 @@ class Product extends Component
     public $combtmp_id;
     //padres de combinaciones
     public $parent_combinations;
+    //boolean para identificar si se ha llegado al límite de listas de
+    //combinaciones con el mismo padre
+    public $switch_parent_combinations = false;
     public $images_products;
 
     //importe adicional de combinaciones
@@ -459,22 +462,72 @@ class Product extends Component
         $this->combinations = Comb::where('product_id',$id)->get();
         $this->get_type_selection();
 //Estableciendo límite de listas de combinaciones
+        /*
         if($this->parent_combinations->count() >= $this->limit_parent_combinations){
+            //indicamos que existe alguna combinación
+            $this->switch_parent_combinations = false;
             $list = [];
             foreach($this->parent_combinations as $pc){                
                 $list[] = $pc->parent_id;
             }
-            $this->list_parents_limit = $list;
+            //comprobamos si ya existe el límite de listas de combinaciones
+            //y
+            if(count($list) >= $this->limit_parent_combinations){
+                $this->list_parents_limit = $list;    
+            }else{
+                $this->list_parents_limit = null;
+            }
+
+
+            
             
         //generamos una variable para no permitir más combinaciónes, o más bien,
         //desactivar siempre las pestañas que no sean de uno de los padres 
         //existentes en parent_combinations;
+        }else{
+            //indicamos que NO existe ninguna combinación
+            $this->switch_parent_combinations = false;
+            //dd($this->parent_combinations->count());
         }
+        */
+        $this->set_limit_combinations();
+
+        
         //$this->show_attributes($id);
         //imágenes de productos (galería)
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
         //desactivamos(disabled) las listas de atributos si rebasan el límite establecido
         $this->emit('maxParentCombinations');
+    }
+    //revisamos si se ha alcanzado el límite de listas de combinaciones
+    //
+    public function set_limit_combinations(){
+        if($this->parent_combinations->count() >= $this->limit_parent_combinations){
+            //indicamos que existe alguna combinación
+            $this->switch_parent_combinations = true;
+            $list = [];
+            foreach($this->parent_combinations as $pc){                
+                $list[] = $pc->parent_id;
+            }
+            //comprobamos si ya existe el límite de listas de combinaciones
+            //y
+            if(count($list) >= $this->limit_parent_combinations){
+                $this->list_parents_limit = $list;    
+            }else{
+                $this->list_parents_limit = null;
+            }
+
+
+            
+            
+        //generamos una variable para no permitir más combinaciónes, o más bien,
+        //desactivar siempre las pestañas que no sean de uno de los padres 
+        //existentes en parent_combinations;
+        }else{
+            //indicamos que NO existe ninguna combinación
+            $this->switch_parent_combinations = false;
+            //dd($this->parent_combinations->count());
+        }
     }
     //anulación debido a cambio de metodología, a través de una 
     //nueva tabla (parent_combinations), para establecer a todas 
@@ -518,7 +571,9 @@ class Product extends Component
         $this->parent_combinations = $parent_comb;
     }
     //establecer el tipo de selección de las combinaciones con el mismo atributo 
-    //padre  de un producto
+    //padre  de un producto. Pueden ser círculos con fondo de color o botones.
+    //El select se encuentra anulado temporalmente, es necesario desarrollar la fórmula
+    //para realizar click() de forma automatizada en el select
     public function set_type_selection($id,$data){
         $parent_comb = ParentComb::findOrFail($id);
         $parent_comb->update([
@@ -906,46 +961,40 @@ class Product extends Component
         $this->emit('combinations');
     }
     */
+    //obtenemos un array que contiene todos los list_ids en formato array
     public function testListDuplicate($product_id,$list2=null){
         $combinations = Comb::where('product_id',$product_id)->get();
         $data = true;
 
         $list2 = [];
         foreach($combinations as $key => $comb){
-            
-
             //convertimos el campo list_ids a array y comprobamos si algunos de
             //los valores del array ya existe.
             //$list: lista de valores que tiene cada una de las combinaciones convertida a array                
             $list = explode(",",$comb->list_ids);
             $list_name = explode(",",$comb->name);            
             $list2[] = $list;
-            
-            if(count($list2) > 1){
-                
-                foreach($list2 as $l){
-                    
+            /*
+            if(count($list2) > 1){                
+                foreach($list2 as $l){                    
                     $convert = implode(",",$l);
                     if($convert == $comb->list_ids){
                         //dd($comb->list_ids);
                     }
-                    
-                    
                 }
                 //$dif = array_diff($list,$list2[0]);                
             }
+            */
         }
         return $list2;
     }
-
-    //el método createCombinations ha sido convertido: Tan solo se pueden añadir
-    //a la misma vez valores del mismo atributo padre y las combinaciones se crearán
-    //de uno en uno, es decir, un valor por cada combinación
+    //crear combinaciones (límite 2)
     public function createCombinations($data,$product_id){
 //añadimos un tope de 2 listas con el mismo atributo padre
-        if($this->parent_combinations->count() <= 2){
+        if($this->parent_combinations->count() <= $this->limit_parent_combinations){
             //si no existen valores selccionados mantenemos la pestaña y detenemos
             if(!$data){
+                //activamos la pestaña de combinaciones
                 $this->emit('active_combinations');
                 return false;            
             }
@@ -961,19 +1010,19 @@ class Product extends Component
             $combinations = Comb::where('product_id',$product_id)->get();
 
             foreach($data as $key => $d){
-
                 //dd($data);
                 //obtenemos el registro de cada uno de los valores seleccionados
                 $at = Attr::findOrFail($d['id']);
 
-        //primero comprobamos si alguno de los valores seleccionados ya se encuentra 
-        //en alguna de las combinaciones, en ese caso detenemos.
+        
                 //lista de combinaciones de la db del producto
                 
                 $same_value=false;
                 if($combinations->count() > 0){
-                    
-                    //$combinations = Comb::where('product_id',$product_id)->get();
+                //primero comprobamos si alguno de los valores seleccionados ya se 
+                //encuentra en alguna de las combinaciones, en ese caso enviamos
+                //mensaje y detenemos.
+                    $lista3 = [];
                     foreach($combinations as $comb){
                         $list_not_parents=[];
                 //convertimos el campo list_ids a array y comprobamos si algunos de
@@ -982,7 +1031,7 @@ class Product extends Component
                 //$list: lista de valores que tiene cada una de las combinaciones convertida a array                
                         $list = explode(",",$comb->list_ids);
                         $list_name = explode(",",$comb->name);
-
+                        $lista3[] = $list;
                         foreach($list as $k => $l){
                             
                             //si ya existe el mismo valor en una de las combinaciones
@@ -997,6 +1046,7 @@ class Product extends Component
                             }
                         }
                     }
+                    //si existe el mismo valor detenemos
                     if($same_value){
                         return false;
                     }
@@ -1004,7 +1054,10 @@ class Product extends Component
                     
                     foreach($combinations as $comb){
 
-                        $lista = $this->testListDuplicate($product_id);
+                        //$lista = $this->testListDuplicate($product_id);
+                        $lista = $lista3;
+
+                        //dd($lista);
                         
                 //convertimos el campo list_ids a array y comprobamos si existe ya //el mismo valor
                         $same_parent = false;
@@ -1013,6 +1066,8 @@ class Product extends Component
                                        
                         $list = explode(",",$comb->list_ids);
                         $list_name = explode(",",$comb->name);
+                        $list_parent = explode(",",$comb->parent_attr);
+
                         //$list2[] = $list;
                         $counter_values = 0;
 
@@ -1036,6 +1091,7 @@ class Product extends Component
                                 
                                 $list[$k] = $at->id;
                                 $list_name[$k] = $at->parentattr->name.' > '.$at->name;
+
                                 $lista2 = $lista;
                                 $lista2[] = $list;
                                 
@@ -1116,12 +1172,15 @@ class Product extends Component
                         }else{
                             $list_name[$k] = $list_name[$k].', '.$at->parentattr->name.' > '.$at->name;
                             $list[$k] = $list[$k].','.$at->id;
+                            $list_parent[] = $at->type;                            
+                            $parentattr = implode(",",$list_parent);
                             //convertimos a string
                             $list_name = implode(",",$list_name);
                             $list = implode(',',$list);
                             $comb->update([
                                 'name' => $list_name,
                                 'list_ids' => $list,
+                                'parent_attr' => $parentattr,
                             ]);
                             
                         }
@@ -1213,8 +1272,10 @@ class Product extends Component
             $this->combinations = Comb::where('product_id',$product_id)->get();
             $this->emit('combinations');    
         }else{
-            dd($this->parent_combinations[0]);
+            //enviar mensaje se ha llegado al límite de combinaciones
         }
+        $this->set_limit_combinations();
+        $this->emit('maxParentCombinations');
     }
     public function clearCombinations(){
         //list_combinations=[];
@@ -1222,38 +1283,48 @@ class Product extends Component
 
 //revisar que se hace con el precio: el precio de la combinación puede ser independiente
     //eliminar combinación
-    public function deleteComb($id){
-        //comprobamos si es la última combinacion con el mismo atributo padre, para eliminar el registro
-        //del parent_combinations
-        /*
-        if($this->combinations){
-            $list = [];
-            foreach($this->combinations as $c){
-                if(!in_array($c->parent_attr,($list)))
-                $list[] = $c->parent_attr;
-            }
-            dd($list);
-        }*/
+    public function deleteComb($id){        
         if($id){
-            $comb = Comb::findOrFail($id);
-            
+            //combinación seleccionada
+            $comb = Comb::findOrFail($id);            
             if($comb){
-                $comb_same_parent = Comb::where('product_id',$this->prod_id)->where('parent_attr',$comb->parent_attr)->count();
-                //si es la última combinación con un padre determinado 
-                //eliminamos el registro de parent_combinations
-                /*
-                if($comb_same_parent <= 1){
-                    $parent_comb = ParentComb::where('product_id',$this->prod_id)->where('parent_id',$comb->parent_attr)->first();
-                    $parent_comb->delete();
-                    //actualizamos el parent_combinations
-                    $this->get_type_selection();
+                //array de padres de la combinación seleccionada
+                $selected_parents = explode(",",$comb->parent_attr);
+                //todas las combinaciones del producto
+                $combs = Comb::where('product_id',$this->prod_id)->get();
+                //contador de coincidencias de combinación que contiene valores de un 
+                //mismo atributo padre
+                $match_parent = [];
+                foreach($combs as $c){
+                    //array de padres de cada una de las combinaciones del producto
+                    $list_parents = explode(",",$c->parent_attr);
+                    foreach($selected_parents as $sp){
+                        //$sp: valor del atributo padre (Color: 1, Talla:2,...)
+                        //de la combinación seleccionada
+                        if(in_array($sp,$list_parents)){
+                            //si ya existe un elemento con el mismo índice sumamos 1.
+                            if(isset($match_parent[$sp]))
+                                $match_parent[$sp]=$match_parent[$sp] + 1;
+                            else
+                                $match_parent[$sp]=1;
+                        }
+                    }
                 }
-                */
+                //comprobamos el contador de coincidencias si es tan solo 1
+                //eliminamos el registro de "parent_combinations"
+                foreach($match_parent as $k => $m){
+                    if($m == 1){
+                        $parent_comb = ParentComb::where('product_id',$this->prod_id)
+                            ->where('parent_id',$k)->first();
+                        if($parent_comb)
+                            $parent_comb->delete();
+                    }
+                }
                 $comb->delete();
             }
-
         }
-        
+        //actualizamos las opciones de selección
+        $this->get_type_selection();
         $this->typealert = 'danger';        
         session()->flash('message2',"Combinación eliminada correctamente");
         $this->emit('active_combinations');
