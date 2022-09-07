@@ -261,7 +261,7 @@ class Cart extends Component
                 if(!$history)
                     return false;
             //creamos el registro de producto vendido
-                $sold_product = $this->set_sold_product($order_item->product_id);
+                $sold_product = $this->set_sold_product($order_item->product_id,$order_item->quantity);
                 if(!$sold_product)
                     return false;
             }
@@ -338,16 +338,22 @@ class Cart extends Component
             return false;
     }
     //crear producto vendido
-    public function set_sold_product($order_item_product_id){
+    public function set_sold_product($order_item_product_id,$quantity){
         $counter=0;
-        $counter_sold_product = Sold_Product::where('product_id',$order_item_product_id)->count();
-        if($counter_sold_product > 0){
-            $counter=$counter_sold_product;
+        $sold_product = Sold_Product::where('product_id',$order_item_product_id)->first();
+        if($sold_product && $sold_product->count() > 0){
+            $sold_nums = $sold_product->sold_nums;
+            $sum = $sold_nums + $quantity;
+            $sold_product->update([
+                'sold_nums' => $sum
+            ]);
+        }else{
+            $sold_product = Sold_Product::create([
+                'sold_nums' => $counter+$quantity,
+                'product_id' => $order_item_product_id
+            ]);    
         }
-        $sold_product = Sold_Product::create([
-            'sold_nums' => $counter+1,
-            'product_id' => $order_item_product_id
-        ]);
+        
         if($sold_product)
             return true;
         else

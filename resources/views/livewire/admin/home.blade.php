@@ -117,7 +117,7 @@ function generateGraphic(months,totalMonths){
         data: {
             labels: months,
             datasets: [{
-                label: '# of Votes',
+                label: 'ventas €',
                 data: totalMonths,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

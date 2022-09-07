@@ -48,17 +48,15 @@ class Home extends Component
             $total[] = $sum;
 
         }
+        
         $this->total_months = $total;
         //dd($this->total_months);
     }
 
     public function get_visitors_today(){
         $visitors = Visitor::whereDay('created_at',$this->day_today)->get();
-        
         return $visitors->count();
-        
     }
-
     
     public function render()
     {
