@@ -203,6 +203,20 @@ if(route == 'cart'){
     set_payment();
 }
 
+if(route == 'home'){
+    //anulado
+    //$('.mislick').slick();
+}
+//actualizamos la gráfica actual de ChartJS por la seleccionada
+window.livewire.on('chart',(label,data)=>{    
+    chartJS.data.datasets[0].data = data;
+    chartJS.data.datasets[0].label = label;
+    chartJS.update();
+    console.log(data);
+    //myChart.data.datasets.data
+    //myChart.update();
+})
+
 document.addEventListener('readystatechange',() => {  
 
 //document.addEventListener('DOMContentLoaded',() => {

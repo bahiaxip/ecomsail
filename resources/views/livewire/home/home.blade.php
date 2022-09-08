@@ -100,11 +100,15 @@
             </div>
             
         </div>
-        <div style="display:block;width:90%;margin:auto">
-                <h4>Más Vendidos</h5>
-                <div class="div_products_list" style="display:flex;flex-flow:row nowrap;overflow:auto">
+        <div style="display:block;width:92%;margin:auto">
+                <h2 style="font-size:22px">Más Vendidos</h2>
+                <div class="div_products_list mtop16" style="display:inline-flex;flex-flow:row nowrap;overflow:auto;position:relative">
+                    <div style="position:sticky;top:50%;left:5%;transform:translate(-50%,-50%);z-index:10">
+                        <button class="btn btn_pry">Left</button>
+                    </div>
+                    
                     @foreach($sold_products as $sold)
-                    <div class="products mtop32" style="min-width:200px">
+                    <div class="products mtop32" style="margin:auto 20px;max-width:150px;">
                         @if($sold->product->infoprice->discount_type == 1
                             && date('Y-m-d') >= $sold->product->infoprice->init_discount && date('Y-m-d') <= $sold->product->infoprice->end_discount)
                         <a href="{{ url('/product/'.$prod->id) }}" wire:click="" class="layer">
@@ -155,6 +159,9 @@
                         </a>
                     </div>
                     @endforeach
+                    <div style="position:sticky;top:50%;right:5%;transform:translate(-50%,-50%);z-index:10">
+                        <button class="btn btn_pry">Right</button>
+                    </div>
                 </div>
             </div>
 

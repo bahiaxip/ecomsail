@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-md-3 ">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" wire:click="set_type_graphic('orders')">
                         Pedidos hoy
                     </div>
                     <div class="card-body">
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" wire:click="set_type_graphic('visitors')">
                         Visitas hoy
                     </div>
                     <div class="card-body">
@@ -75,21 +75,21 @@
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" wire:click="set_type_graphic('cart')">
                         Valor del carrito
                     </div>
                     <div class="card-body">
-                        {{$cart}} €
+                        {{floatval(number_format($cart,2,'.',''))}} €
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" wire:click="set_type_graphic('sales')">
                         Ventas hoy
                     </div>
                     <div class="card-body">
-                        {{$subtotal}} € <span>(Imp.excl.)</span>
+                        {{floatval(number_format($subtotal,2,'.',''))}} € <span>(Imp.excl.)</span>
                     </div>
                 </div>
             </div>
@@ -108,11 +108,14 @@
     let totalMonths = @js($total_months);
     let months = @js($months);
 
+let chartJS;
+
 generateGraphic(months,totalMonths);
+
 function generateGraphic(months,totalMonths){
 
     const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
+    chartJS = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: months,
@@ -146,6 +149,7 @@ function generateGraphic(months,totalMonths){
             }
         }
     });
+    
 }
 </script>
 @endpush
