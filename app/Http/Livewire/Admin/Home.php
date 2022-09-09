@@ -17,6 +17,7 @@ class Home extends Component
     public $months;
     public $total_months;
     public $selected_type;
+    public $switch_chart = false;
 
     public function mount(){        
         $this->user_id = Auth::id();
@@ -38,10 +39,12 @@ class Home extends Component
         $this->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
         //iniciamos la gráfica de pedidos
         $this->set_type_graphic('orders');
+        $this->switch_chart = true;
     }
 
     
     public function set_type_graphic($type){
+        $this->switch_chart = false;
         //actualizamos si el tipo seleccionado es distinto al tipo actual.
         if($this->selected_type != $type){
             $this->selected_type = $type;
@@ -67,7 +70,9 @@ class Home extends Component
                 }
             }
             $this->total_months = $total;
+
             $this->emit('chart',$label,$this->total_months);
+            $this->switch_chart = true;
         }
         
     }
@@ -130,6 +135,7 @@ class Home extends Component
     
     public function render()
     {
+        
         return view('livewire.admin.home');
     }
 }

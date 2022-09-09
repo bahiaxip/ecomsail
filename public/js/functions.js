@@ -207,14 +207,21 @@ if(route == 'home'){
     //anulado
     //$('.mislick').slick();
 }
+
 //actualizamos la gráfica actual de ChartJS por la seleccionada
-window.livewire.on('chart',(label,data)=>{    
+window.livewire.on('chart',(label,data)=>{
+    //chartJS.destroy()
+    //Chart.defaults.responsive = true;
+    
+    //modificamos los datos de la gráfica
     chartJS.data.datasets[0].data = data;
     chartJS.data.datasets[0].label = label;
-    chartJS.update();
+    //en lugar de update() que genera un animación incorrecta,
+    //usar reset(), para más información de métodos:
+    //https://www.chartjs.org/docs/2.6.0/developers/api.html
+    chartJS.reset();
+    
     console.log(data);
-    //myChart.data.datasets.data
-    //myChart.update();
 })
 
 document.addEventListener('readystatechange',() => {  

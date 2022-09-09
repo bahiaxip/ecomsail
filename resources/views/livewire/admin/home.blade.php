@@ -50,11 +50,11 @@
     </div>
     @endif
 
-    <div class="container">
+    <div class="container home">
         <div class="row">
-            <div class="col-md-3 ">
+            <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header" wire:click="set_type_graphic('orders')">
+                    <div class="card-header @if($selected_type == 'orders' ) active @endif" wire:click="set_type_graphic('orders')" >
                         Pedidos hoy
                     </div>
                     <div class="card-body">
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header" wire:click="set_type_graphic('visitors')">
+                    <div class="card-header @if($selected_type == 'visitors' ) active @endif" wire:click="set_type_graphic('visitors')">
                         Visitas hoy
                     </div>
                     <div class="card-body">
@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header" wire:click="set_type_graphic('cart')">
+                    <div class="card-header @if($selected_type == 'cart' ) active @endif" wire:click="set_type_graphic('cart')">
                         Valor del carrito
                     </div>
                     <div class="card-body">
@@ -85,7 +85,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header" wire:click="set_type_graphic('sales')">
+                    <div class="card-header @if($selected_type == 'sales' ) active @endif" wire:click="set_type_graphic('sales')">
                         Ventas hoy
                     </div>
                     <div class="card-body">
@@ -94,12 +94,18 @@
                 </div>
             </div>
         </div>
-        <div class="row mtop16" style="background-color:rgba(255,255,255,.1)">
-            <div class="col-12">
-                <canvas id="myChart"  style="position: relative; height:100vh; width:100vw"></canvas>
-            </div>
-            
+        @if(!$switch_chart)
+            <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.9);z-index:999" >
+            <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
         </div>
+        @else
+            <div class="row mtop16 div_chart" style="background-color:rgba(255,255,255,.1)">
+                <div class="col-12 chart">
+                    <canvas id="myChart"   style="position: relative; height:100vh; width:100vw"></canvas>
+                </div>
+                
+            </div>
+        @endif
     </div>
 
 </div>
@@ -109,8 +115,10 @@
     let months = @js($months);
 
 let chartJS;
-
+Chart.defaults.maintainAspectRatio = true;
 generateGraphic(months,totalMonths);
+console.log("Chart: ",Chart.defaults)
+//Chart.defaults.responsive = false;
 
 function generateGraphic(months,totalMonths){
 
@@ -120,32 +128,56 @@ function generateGraphic(months,totalMonths){
         data: {
             labels: months,
             datasets: [{
-                label: 'ventas €',
+                label: 'Pedidos',
                 data: totalMonths,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                borderColor: [                    
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }]
         },
         options: {
+            plugins:{
+                legend:{
+                    display:true,
+                    labels:{
+                        //boxWidth por defecto: 40
+                        //boxWidth: 50,
+                        //color text por defecto negro
+                        //color:'rgba(54, 162, 235, 1)',
+                        
+                        /*
+                        generateLabels: function(chart) {
+                            labels = Chart.defaults.global.legend.labels.generateLabels(chart);
+                            for (var key in labels) {
+                              labels[key].text = "Hello World";
+                              labels[key].fillStyle  = "rgba(133, 4, 12, 0.7)";
+                              labels[key].strokeStyle = "rgba(33, 44, 22, 0.7)"; 
+                            }
+                            return labels;
+                        }
+                        */
+                    }
+                }
+            },
             scales: {
                 y: {
-                    beginAtZero: true
-                }
+                    beginAtZero: false
+                },
             }
         }
     });
