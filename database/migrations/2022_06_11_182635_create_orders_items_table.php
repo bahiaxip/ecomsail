@@ -16,6 +16,7 @@ class CreateOrdersItemsTable extends Migration
         Schema::create('orders_items', function (Blueprint $table) {
             $table->id();            
             $table->text('combinations')->nullable();
+            $table->text('combinations_text')->nullable();
             $table->integer('quantity')->default(1);
             $table->integer('state_discount')->default(0);
             $table->integer('discount')->nullable();
