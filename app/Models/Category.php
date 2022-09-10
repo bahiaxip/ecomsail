@@ -21,6 +21,9 @@ class Category extends Model
     public function prod(){
         return $this->hasMany(Product::class,'category_id','id');
     }
+    public function prod_from_subcat(){
+        return $this->hasMany(Product::class,'subcategory_id','id');    
+    }
     //mediante array (@foreach...@endforeach) se puede obtener los datos de la 
     //subcategoría
     public function subcat(){

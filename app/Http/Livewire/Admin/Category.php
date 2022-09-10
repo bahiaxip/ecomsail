@@ -109,11 +109,12 @@ class Category extends Component
                 $this->count_cat = Cat::where('type',$l)->count();
                 if($this->count_cat == 0){
                     //comprobamos si esta categoría tiene productos asociados ( no se podrá eliminar )
-                    $this->count_cat = Product::where('category_id',$l)->count();
+                    $this->count_cat = Product::where('category_id',$l)
+                                    ->orWhere('subcategory_id',$l)->count();
                 }
                 if($this->count_cat >0){
                     $this->typealert = 'danger';
-                    session()->flash('message','No ha sido posible eliminar las categorías. Alguna de las categorías seleccionadas tienen sucategorías o productos asociados');
+                    session()->flash('message','No ha sido posible eliminar las categorías. Alguna de las categorías seleccionadas tienen subcategorías o productos asociados');
                     $this->emit('massiveConfirm');
                     $this->selected_list=[];
                     $this->emit('clearcheckbox');
@@ -415,12 +416,14 @@ class Category extends Component
     public function saveCatId($cat_id,$action){        
         $this->catIdTmp=$cat_id;
         $this->actionTmp = $action;
+        
         if($cat_id != 0){
             //comprobamos si esta categoría tiene subcategorías ( no se podrá eliminar ) - mediante count_cat comprobamos en la vista
             $this->count_cat = Cat::where('type',$cat_id)->count();
             if($this->count_cat == 0){
                 //comprobamos si esta categoría tiene productos asociados ( no se podrá eliminar )
-                $this->count_cat = Product::where('category_id',$cat_id)->count();
+                $this->count_cat = Product::where('category_id',$cat_id)
+                            ->orWhere('subcategory_id',$cat_id)->count();
             }
         }  
     }

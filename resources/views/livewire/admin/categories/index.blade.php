@@ -219,7 +219,10 @@
                         @if(!$subcat)
                         Cantidad
                         @endif
-                    </td>           
+                    </td>
+                    <td>
+                        Productos asoc.
+                    </td>
                     <td class="max d-none d-md-table-cell">
                         <a href="#" wire:click="setColAndOrder('description')">
                             Descripción
@@ -246,6 +249,13 @@
                     <td>
                         @if(!$subcat)
                         <span>{{$cat->subcatlength()}}</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if(!$subcat)
+                        {{$cat->prod->count()}}
+                        @else
+                        {{$cat->prod_from_subcat->count()}}
                         @endif
                     </td>
                     <!--

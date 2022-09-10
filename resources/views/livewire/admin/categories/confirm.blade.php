@@ -12,7 +12,7 @@
             <div class="modal-title h5 ">¿Seguro que desea eliminar el registro seleccionado?
           </div>
         @else
-            <div class="modal-title h5 ">No es posible eliminar esta categoria porque tiene sucategorías o productos asociados
+            <div class="modal-title h5 ">No es posible eliminar esta categoria porque tiene subcategorías o productos asociados
           </div>  
         @endif
       </div>      
