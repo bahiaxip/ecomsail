@@ -19,6 +19,9 @@ class Order extends Model
     
     protected $hidden = ['created_at','updated_at'];
     
+    public function get_orders_items(){
+        return $this->hasMany(Order_Item::class,'order_id','id');
+    }
     public function get_location(){
         return $this->belongsTo(Location::class,'location','id');
     }

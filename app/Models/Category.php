@@ -18,9 +18,11 @@ class Category extends Model
     protected $fillable = ['name','type','status','slug','description','image','file_name','thumb','file_ext','path_root','path_tag','offer','title_offer','icon_awesome_offer','icon_image_offer','icon_image_offer_hover','icon_hexcode'];
     protected $hidden = ['created_at','updated_at'];
 
+    //obtener productos desde categorías
     public function prod(){
         return $this->hasMany(Product::class,'category_id','id');
     }
+    //obtener productos desde subcategorías
     public function prod_from_subcat(){
         return $this->hasMany(Product::class,'subcategory_id','id');    
     }

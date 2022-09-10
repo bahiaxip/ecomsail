@@ -156,8 +156,8 @@
             </thead>
             <tbody>                
                 @if($orders->count() > 0)
-                    @foreach($orders as $order)
-                    <tr>
+                    @foreach($orders as $key=>$order)
+                    <tr style="cursor:pointer" >
                         <td width="50">
                             {{Form::checkbox($order->id,"true",null,['class' => 'form-check-input','onclick' =>'selectCheckbox('.$order->id.',this)','class' => 'checkbox'])}}
                         </td>
@@ -201,6 +201,9 @@
                         <td>
                             <div class="admin_items">
                             @if($filter_type != 2)
+                                <button class="btn btn-sm scat" data-bs-toggle="collapse" href="#collapse_{{$key}}" title="Mostrar productos del pedido">
+                                        &#11015;
+                                </button>
                                 @if(helper()->testPermission(Auth::user()->permissions,'list_orders')== true)
                                     <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="invoices({{$order->id}})" title="Ir a facturas">
                                         <i class="fa-solid fa-file-invoice"></i>
@@ -220,8 +223,40 @@
                             @endif
 
                             </div>
-                        </td>
+                        </td>                        
                     </tr>
+                    <tr class="collapse" id="collapse_{{$key}}">
+
+                    <td colspan="11">
+                        {{-- obtenemos los items desde el model y los recorremos --}}
+                        @php $data = $order->get_orders_items @endphp
+                        @foreach($data as $d)
+                        
+                        <div class="row list" >
+                            <div class="col-3">                            
+                                <img src="{{ url($d->path_tag.$d->image) }}" alt="{{ $d->title }}" width="32">
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                {{$d->title}}
+                                {{$d->combinations}}
+                                </div>
+                                
+                                <div class="row">
+                                {{$d->quantity}}
+                                </div>
+                                
+                                <div class="row div_price" >
+                                    <div class="price" >
+                                        {{$d->total}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        @endforeach
+                    </td>
+                </tr>
                     @endforeach
                 @endif
                 <tr>

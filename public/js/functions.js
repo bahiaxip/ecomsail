@@ -1498,7 +1498,20 @@ function hide_modal_ticket(){
     })   
 }
 */
-
+/*
+if(route == 'list_orders'){
+    let checksNodes = document.querySelectorAll('.checking');
+    let checks = [].slice.call(checksNodes);
+    checks.map((item)=>{
+        item.addEventListener('click',(e)=>{
+            e.preventDefault();
+            e.stopPropagation();
+            console.log(item)    
+        })
+    })
+    console.log("orders: ",checks)
+}
+*/
 function setBorderToCombSelected(data){
     let combinationNodes = document.querySelectorAll('.combinations_items');
     let combinations = [].slice.call(combinationNodes);

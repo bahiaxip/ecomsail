@@ -937,7 +937,158 @@ body
 		span.title_hidden
 			display block
 	
-						
+.div_list
+	/* order_num solo en history_order */
+	.order_num
+		border-bottom #696969 1px solid
+		display flex
+		font-size 12px
+		justify-content space-between			
+.list
+	border-bottom color7 1px solid			
+	padding 15px 5px
+	
+	.image
+		display flex
+		justify-content center				
+		img
+			min-height 125px
+			max-height 128px
+			width 100%
+	/* solo cart */
+	.div_price .price
+		.main
+			display flex					
+			span.through
+				text-decoration line-through 
+				color #696969
+			.discount
+				background-color color2;
+				color #FFF
+				font-weight bold
+				margin auto
+				padding 8px
+				
+	/* fin cart */
+	/* solo favorites */
+	.content
+		display flex
+		flex-flow column
+		
+		.title
+			display block
+			font-size 16px
+			font-weight bold				
+			overflow hidden
+			text-overflow ellipsis
+			white-space nowrap				
+			&:hover
+				color color1
+			a
+				&:hover
+					color color1
+		
+		.admin_items.end
+			display flex
+			justify-content end
+			.delete_round
+				align-items center
+				background-color transparent
+				border color7 1px solid
+				border-radius 50%
+				color color8
+				display flex
+				height 32px
+				justify-content flex-end
+				width 32px
+				i
+					font-size 1.1em
+				&:hover
+					box-shadow 0 0 6px color7
+					color color6
+				
+				&:focus
+					box-shadow 0 0 6px color7
+					color color6
+		
+		.div_soldprice
+			padding:10px
+			.soldprice
+				display flex
+				justify-content space-between
+				.price
+					color color6
+					font-family QuicksandB
+					font-size 22px
+					.main
+						display flex
+						justify-content space-between
+					span
+						color color8
+						font-size 14px
+				.sold
+					align-items center
+					display flex
+					font-size 14px
+		.date_favorite
+			align-items end
+			display flex
+			font-size 14px
+			height 100%
+			justify-content end
+			margin-right 4px
+		/* fin solo favorites */
+			
+	/* solo pedidos */
+	.div_orders
+		display:flex
+		
+	/* fin solo pedidos */
+	.div_quantity
+		.quantity
+			display flex
+			margin-top 10px
+			width 100%
+			input
+				margin auto 5px
+				max-width 80px
+				min-width 30px
+				width 50px
+				
+				
+			.amount_action
+				align-items center
+				background-color #696969
+				border-radius 50%
+				color color7
+				display flex
+				float left
+				font-size .8em
+				margin-top 4px
+				height 22px
+				justify-content center
+				text-decoration none
+				width 22px
+				min-width 22px				
+				&:first-child
+					margin-right 8px
+				&:last-child
+					margin-left 8px
+				&:active
+					box-shadow 0 0 6px color6
+					color #FFF
+				i
+					font-size .9em
+	.col_price
+		align-items center
+		display flex
+		justify-content center
+		
+	.total
+		display block
+		font-size 1.2em
+		font-weight bold
+		text-align center				
 
 				
 
