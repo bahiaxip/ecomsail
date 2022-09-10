@@ -83,6 +83,7 @@ class Category extends Component
     //variable exclusiva para mostrar el botón volver al recargar página en
     //subcategorías que no contienen resultados, y por tanto no existe $subcatlist['name']
     public $btn_back;
+    public $switch_type;
 
 
 
@@ -101,7 +102,7 @@ class Category extends Component
     public function set_action_massive($list_ids,$action_selected){        
         $action = $action_selected;
         $list = $list_ids;
-
+        
         foreach($list as $l){
             if($l != 0){
                 //comprobamos si esta categoría tiene subcategorías ( no se podrá eliminar ) - mediante count_cat comprobamos en la vista
@@ -331,8 +332,7 @@ class Category extends Component
 
         $this->thumb = $cat->thumb;
         $this->typealert="success";
-        $this->emit('description2',$this->description);        
-
+        $this->emit('description2',$this->description);
     }
     //actualización de categoría/subcategoría
     public function update(){
@@ -434,11 +434,21 @@ class Category extends Component
         $this->search_data='';
     }
     //no utlizado
-    /*
+    
     public function updated(){
-        //$this->description="eooo";
+        
+        //si establecemos categoría padre como ninguna, se puede acceder a la
+        //sección de ofertas, si seleccionamos alguna categoría ya existente 
+        //se restringe el acceso, esto se hace desde la vista.
+        //Mediante la variable offer establecemos el switch de ofertas a false para
+        //desactivarlo cuando seleccionamos una categoría ya existente (cualquiera distinta a Ninguna)
+        if($this->type != 0){
+            //$this->emit('editor_destroy');
+            $this->offer = false;
+            
+        }
     }
-    */
+    
 
     //eliminación de categoría
     public function delete(){

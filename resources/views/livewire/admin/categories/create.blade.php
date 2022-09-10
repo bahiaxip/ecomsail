@@ -56,8 +56,8 @@
                   <p class="text-danger">{{$message}}</p>
                   @enderror
                   <div wire:loading wire:target="icon">
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
-                </div>
+                      <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+                  </div>
                   
               </div>      
               <div class="col-md-6">
@@ -67,12 +67,20 @@
                   </div>  
               </div>
           </div>
+
           
-          <div class="row mtop16">
+          
+          <div class="row mtop16 offer">
               <div class="col-md-6">
-                  {{Form::label('offer','Oferta')}}
+                  <div class="dflex">
+                      {{Form::label('offer','Ofertas')}}
+                      <span class="info" title="Incluir enlace en la barra de la sección Ofertas. Solo categorías padre">
+                          <i class="fa-solid fa-circle-info"></i>  
+                      </span>
+                  </div>
+
                   <div class="form-check form-switch">
-                      <input name="offer" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" wire:model="offer">
+                      <input name="offer" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" wire:model="offer" {{ $type == 0 ? '':'disabled'}}>
                   </div>
               </div>
           </div>
@@ -80,7 +88,7 @@
           <div class="row mtop16">
             <div class="col-md-6">              
                   <label for="customFile">Título de oferta</label>
-                  {!! Form::text('title_offer',null,['class' =>'form-control','wire:model'=>"title_offer"])!!}
+                  {!! Form::text('title_offer',null,['class' =>'form-control','wire:model'=>"title_offer", "disabled" => ($offer) ? false:true])!!}
                   @error('title_offer')
                   <p class="text-danger">{{$message}}</p>
                   @enderror
@@ -93,15 +101,14 @@
                       <input class="form-control" type="file" id="formFile" wire:model="icon">
                     </div>-->
                   
-                  {!! Form::text('icon_awesome_offer',null,['class' =>'form-control','wire:model'=>"icon_awesome_offer",'placeholder' => '<i class="fa-solid fa-shirt"></i>'])!!}
+                  {!! Form::text('icon_awesome_offer',null,['class' =>'form-control','wire:model'=>"icon_awesome_offer",'placeholder' => '<i class="fa-solid fa-shirt"></i>', "disabled" => ($offer) ? false:true])!!}
                   @error('icon_awesome_offer')
                   <p class="text-danger">{{$message}}</p>
                   @enderror                  
               </div>
-              
-                   
-              
           </div>
+
+          
           {{--
           <div class="row mtop16">
               <div class="col-md-6">

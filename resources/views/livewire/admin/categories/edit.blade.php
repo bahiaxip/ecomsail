@@ -1,6 +1,6 @@
 <!-- Modal crear usuario -->
 <div wire:ignore.self class="modal fade " id="editCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg edit_category">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <div class="modal-title h5">
@@ -38,10 +38,11 @@
               -->
               {{ Form::select('type',$cats,null,['class' => 'form-select', 'wire:model' => 'type'])}}
             	</div>
-          <!--<div class="form-group">
+          {{--<div class="form-group">
             <label for="status">Estado</label>
             {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
-          </div>-->
+          </div>
+          --}}
           </div>
           <div class="row mtop16">
               <div class="col-md-6">
@@ -66,11 +67,17 @@
                   </div>  
               </div>
           </div>
-          <div class="row mtop16">
+          
+          <div class="row mtop16 offer">
               <div class="col-md-6">
-                {{Form::label('offer','Oferta')}}
+                  <div class="dflex">
+                      {{Form::label('offer','Oferta')}}
+                      <span class="info" title="Incluir enlace en la barra de la sección Ofertas. Solo categorías padre">
+                          <i class="fa-solid fa-circle-info"></i>  
+                      </span>
+                  </div>
                   <div class="form-check form-switch">
-                      <input name="offer" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" wire:model="offer">
+                      <input name="offer" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" wire:model="offer" {{ $type == 0 ? '':'disabled'}}>
                   </div>
               </div>
           </div>
@@ -96,7 +103,7 @@
                   @enderror                  
               </div>
           </div>
-
+          
 
           <div class="row mtop16">
               <div class="col-md-12" wire:ignore>
@@ -122,6 +129,7 @@
                       ]
                     });
                     CKEDITOR.instances.friendly_edit2.on('change',function(e){
+                        console.log("nada");
                         @this.description=this.getData();
                     });
                 })

@@ -24,6 +24,11 @@ window.livewire.on('description',(data)=>{
     console.log(CKEDITOR.instances.friendly_edit1.getData());
 })
 */
+window.livewire.on('editor_destroy',()=>{
+    console.log("destroy")
+    CKEDITOR.instances.friendly_edit1.destroy();
+    editor_init('friendly_edit1');
+})
 let btnCreateProducts = document.querySelector('#btn_create_products');
 if (btnCreateProducts)
     btnCreateProducts.addEventListener('click',()=>{

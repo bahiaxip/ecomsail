@@ -55,10 +55,16 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header @if($selected_type == 'orders' ) active @endif" wire:click="set_type_graphic('orders')" >
-                        Pedidos hoy
+                        Pedidos
                     </div>
-                    <div class="card-body">
-                        {{$count_orderstoday}}
+                    <div class="card-body">                        
+                        <div class="link_graphics" >
+                            <div>
+                                {{$count_orderstoday}}
+                            </div>
+                            <div class="label_today">{{'Pedido'}}@if($count_orderstoday>1 || $count_orderstoday==0 ){{'s'}} @endif hoy
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -66,10 +72,16 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header @if($selected_type == 'visitors' ) active @endif" wire:click="set_type_graphic('visitors')">
-                        Visitas hoy
+                        Visitas 
                     </div>
-                    <div class="card-body">
-                        {{$visitors_today}}
+                    <div class="card-body">                        
+                        <div class="link_graphics" >
+                            <div>
+                                {{$visitors_today}}
+                            </div>
+                            <div class="label_today">{{'Visita'}}@if($visitors_today>1 || $visitors_today == 0){{'s'}} @endif hoy
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,17 +91,32 @@
                         Valor del carrito
                     </div>
                     <div class="card-body">
-                        {{floatval(number_format($cart,2,'.',''))}} €
+                        
+                        <div class="link_graphics" >
+                            <div>
+                                {{floatval(number_format($cart,2,'.',''))}} €
+                            </div>
+                            <div class="label_today">{{'Valor'}}@if($cart>1 || $cart == 0){{'es'}} @endif hoy
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header @if($selected_type == 'sales' ) active @endif" wire:click="set_type_graphic('sales')">
-                        Ventas hoy
+                        Ventas
                     </div>
                     <div class="card-body">
-                        {{floatval(number_format($subtotal,2,'.',''))}} € <span>(Imp.excl.)</span>
+                         
+                        <div class="link_graphics" >
+                            <div>
+                                {{floatval(number_format($subtotal,2,'.',''))}} €
+                                <span class="label_today">(Imp.excl.)</span>
+                            </div>
+                            <div class="label_today">{{'Venta'}}@if($subtotal>1 || $subtotal == 0){{'s'}} @endif hoy
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,7 +203,7 @@ function generateGraphic(months,totalMonths){
             },
             scales: {
                 y: {
-                    beginAtZero: false
+                    beginAtZero: false,
                 },
             }
         }
