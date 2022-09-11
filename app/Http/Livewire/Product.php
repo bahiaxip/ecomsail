@@ -516,6 +516,7 @@ class Product extends Component
         //creamos o actualizamos el pedido
         $order = $this->create_or_update_order();
         $list=NULL;
+        $comb_name = NULL;
         //comprobamos si existe combinación y si existe creamos el array de combinaciones
         if(count($this->option) > 0){
             foreach($this->option as $key=>$o){
@@ -523,6 +524,13 @@ class Product extends Component
                     'attribute' => $key,
                     'value' => $o
                 ];
+                $atr = Attribute::findOrFail($o);
+                if($atr){
+                    $comb_name[]=[
+                        'name' => $atr->parentattr->name,
+                        'value' => $atr->name
+                    ];
+                }
             }
         }        
 
@@ -592,6 +600,7 @@ class Product extends Component
         //existe ese item de ese producto creamos nuevo order_item
         $order_item = Order_Item::create([
             'combinations' => json_encode($list),
+            'combinations_text' => json_encode($comb_name),
             'quantity' => $this->quantity,
             'state_discount' => $state_discount,
             'discount' => $discount,

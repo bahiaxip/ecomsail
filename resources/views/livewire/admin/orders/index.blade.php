@@ -47,7 +47,6 @@
             </li>
         </ul>
         <ul class="add">
-            
             <li>
                 <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" id="dropdownMenuLink" onclick="showMenuExport()" aria-expanded="false" >
                     <span class="d-none d-md-inline">Exportar</span>
@@ -186,7 +185,13 @@
                             {{ $order->total }}
                         </td>
                         <td>
-                            {{ $order->payment_method }}
+                            @if($order->payment_method == 1)
+                                {{ 'Tarjeta' }}
+                            @elseif($order->payment_method == 2)
+                                {{'Transferencia'}}
+                            @elseif($order->payment_method == 3)
+                                {{'Paypal'}}
+                            @endif
                         </td>
                         <td>
                             @if($order->order_state != 0)
@@ -201,7 +206,7 @@
                         <td>
                             <div class="admin_items">
                             @if($filter_type != 2)
-                                <button class="btn btn-sm scat" data-bs-toggle="collapse" href="#collapse_{{$key}}" title="Mostrar productos del pedido">
+                                <button class="btn btn-sm scat" onclick="show_items({{$key}})" title="Mostrar productos del pedido">
                                         &#11015;
                                 </button>
                                 @if(helper()->testPermission(Auth::user()->permissions,'list_orders')== true)
@@ -221,40 +226,51 @@
                                     </button>
                                 @endif
                             @endif
-
                             </div>
                         </td>                        
                     </tr>
-                    <tr class="collapse" id="collapse_{{$key}}">
-
-                    <td colspan="11">
+                    <tr class="order_item" id="collapse_{{$key}}" >
+                    <td colspan="11" >
+                        
                         {{-- obtenemos los items desde el model y los recorremos --}}
                         @php $data = $order->get_orders_items @endphp
                         @foreach($data as $d)
                         
                         <div class="row list" >
-                            <div class="col-3">                            
-                                <img src="{{ url($d->path_tag.$d->image) }}" alt="{{ $d->title }}" width="32">
+                            <div class="col-2" >                            
+                                <img class="image" src="{{ url($d->path_tag.$d->image) }}" alt="{{ $d->title }}" style="max-width:32px;max-height:70px">
                             </div>
-                            <div class="col-9">
+                            <div class="col-8">
                                 <div class="row">
-                                {{$d->title}}
-                                {{$d->combinations}}
+                                {{$d->title}}                              
                                 </div>
-                                
+                                @if($d->combinations_text != 'null')
                                 <div class="row">
-                                {{$d->quantity}}
+                                    @php
+                                    $text = json_decode($d->combinations_text);
+                                    @endphp                                    
+                                    @foreach($text as $t)
+                                    {{$t->name}} : {{$t->value}}
+                                    @endforeach
                                 </div>
-                                
-                                <div class="row div_price" >
+                                @endif
+                            </div>
+                            <div class="col-2">
+                                <div class="row div_price">
                                     <div class="price" >
-                                        {{$d->total}}
+                                    x {{$d->quantity}}
+                                    
                                     </div>
                                 </div>
-                                
+                                <div class="row div_price" >
+                                    <div class="price" >
+                                        {{floatval(number_format($d->total,2,'.',''))}}€
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @endforeach
+                        
                     </td>
                 </tr>
                     @endforeach

@@ -1512,6 +1512,16 @@ if(route == 'list_orders'){
     console.log("orders: ",checks)
 }
 */
+function show_items(index){
+    //let selector = '#'+index;
+    let tr = document.querySelector('#collapse_'+index);    
+    if(tr.classList.contains('activ')){
+        tr.classList.remove('activ')
+    }else{
+        tr.classList.add('activ');
+    }
+
+}
 function setBorderToCombSelected(data){
     let combinationNodes = document.querySelectorAll('.combinations_items');
     let combinations = [].slice.call(combinationNodes);

@@ -86,7 +86,7 @@
                         <input class="form-control" type="file" id="formFile" wire:model="icon">
                       </div>-->
                     
-                    {!! Form::file('image',['class' =>'form-control','accept' =>'image/*','wire:model'=>"image",'type'=>'file'])!!}
+                    {!! Form::file('image',['class' =>'form-control','accept' =>'image/*','wire:model'=>"image",'type'=>'file','disabled'])!!}
                     @error('image')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
