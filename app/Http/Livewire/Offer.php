@@ -15,7 +15,7 @@ class Offer extends Component
     public $limit_page;
 
     public function mount(){
-        $this->limit_page = 15;
+        $this->limit_page = config('ecomsail.items_per_page') ?? 15;
         $this->typealert = 'success';
     }
     

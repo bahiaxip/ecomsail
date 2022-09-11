@@ -102,71 +102,73 @@
             </div>
             
         </div>
+        @if($sold_products->count() > 0)
         <div style="display:block;width:92%;margin:auto">
-                <h2 style="font-size:22px">Más Vendidos</h2>
-                <div class="div_products_list mtop16" style="display:inline-flex;flex-flow:row nowrap;overflow:auto;position:relative">
-                    <div style="position:sticky;top:50%;left:5%;transform:translate(-50%,-50%);z-index:10">
-                        <button class="btn btn_pry">Left</button>
-                    </div>
-                    
-                    @foreach($sold_products as $sold)
-                    <div class="products mtop32" style="margin:auto 20px;max-width:150px;">
-                        @if($sold->product->infoprice->discount_type == 1
-                            && date('Y-m-d') >= $sold->product->infoprice->init_discount && date('Y-m-d') <= $sold->product->infoprice->end_discount)
-                        <a href="{{ url('/product/'.$prod->id) }}" wire:click="" class="layer">
-                            <div class="content">
-                                <span>
-                                    -{{$sold->product->infoprice->discount}}%            
-                                </span>
-                            </div>
-                        </a>
-                        @endif
-                        <a href="{{ url('/product/'.$sold->id) }}" class="image" wire:click="">
-                            {{--
-                            <div class="layer">
-                                <div class="favorite">
-                                    <div class="icon">
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="plus">
-                                    <div class="plus_btn">
-                                        <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
-                                            <i class="fa-solid fa-eye"></i> Vista rápida
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            --}}
-                            <img src="{{$sold->product->path_tag.$sold->product->image}}" alt="">
-                        </a>
-                        <a href="{{ url('/product/'.$sold->id) }}" title="{{$sold->product->name}}">
-                            <div class="title">
-                                {{$sold->product->name}}
-                            </div>
-                            <div class="price">
-                                @if($sold->product->infoprice->discount_type == 1
-                                    && date('Y-m-d') >= $sold->product->infoprice->init_discount && date('Y-m-d') <= $sold->product->infoprice->end_discount)
-                                <span>
-                                    {{ floatval(number_format(($sold->product->price*((100-$sold->product->infoprice->discount)/100)),2,'.',',')) }}€
-                                </span>
-                                &nbsp;&nbsp;
-                                <span style="text-decoration:line-through;color:#696969">
-                                    {{ floatval(number_format($sold->product->price,2,'.',',')) }}€
-                                </span>
-                                @else
-                                    <span>{{ floatval(number_format($sold->product->price,2,'.',',')) }}€</span>
-                                @endif
-                            </div>
-                        </a>
-                    </div>
-                    @endforeach
-                    <div style="position:sticky;top:50%;right:5%;transform:translate(-50%,-50%);z-index:10">
-                        <button class="btn btn_pry">Right</button>
-                    </div>
-                    <input id="auto" type="hidden" value="{{Config::get('ecomsail.owner_name')}}">
+            <h2 style="font-size:22px">Más Vendidos</h2>
+            <div class="div_products_list mtop16" style="display:inline-flex;flex-flow:row nowrap;overflow:auto;position:relative">
+                <div style="position:sticky;top:50%;left:5%;transform:translate(-50%,-50%);z-index:10">
+                    <button class="btn btn_pry">Left</button>
                 </div>
+                
+                @foreach($sold_products as $sold)
+                <div class="products mtop32" style="margin:auto 20px;max-width:150px;">
+                    @if($sold->product->infoprice->discount_type == 1
+                        && date('Y-m-d') >= $sold->product->infoprice->init_discount && date('Y-m-d') <= $sold->product->infoprice->end_discount)
+                    <a href="{{ url('/product/'.$prod->id) }}" wire:click="" class="layer">
+                        <div class="content">
+                            <span>
+                                -{{$sold->product->infoprice->discount}}%            
+                            </span>
+                        </div>
+                    </a>
+                    @endif
+                    <a href="{{ url('/product/'.$sold->id) }}" class="image" wire:click="">
+                        {{--
+                        <div class="layer">
+                            <div class="favorite">
+                                <div class="icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="plus">
+                                <div class="plus_btn">
+                                    <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
+                                        <i class="fa-solid fa-eye"></i> Vista rápida
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        --}}
+                        <img src="{{$sold->product->path_tag.$sold->product->image}}" alt="">
+                    </a>
+                    <a href="{{ url('/product/'.$sold->id) }}" title="{{$sold->product->name}}">
+                        <div class="title">
+                            {{$sold->product->name}}
+                        </div>
+                        <div class="price">
+                            @if($sold->product->infoprice->discount_type == 1
+                                && date('Y-m-d') >= $sold->product->infoprice->init_discount && date('Y-m-d') <= $sold->product->infoprice->end_discount)
+                            <span>
+                                {{ floatval(number_format(($sold->product->price*((100-$sold->product->infoprice->discount)/100)),2,'.',',')) }}€
+                            </span>
+                            &nbsp;&nbsp;
+                            <span style="text-decoration:line-through;color:#696969">
+                                {{ floatval(number_format($sold->product->price,2,'.',',')) }}€
+                            </span>
+                            @else
+                                <span>{{ floatval(number_format($sold->product->price,2,'.',',')) }}€</span>
+                            @endif
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+                <div style="position:sticky;top:50%;right:5%;transform:translate(-50%,-50%);z-index:10">
+                    <button class="btn btn_pry">Right</button>
+                </div>
+                <input id="auto" type="hidden" value="{{Config::get('ecomsail.owner_name')}}">
             </div>
+        </div>
+        @endif
 
     @include('layouts.footer')           
     </div>

@@ -190,7 +190,7 @@
 	                    	<div class="row mtop26">
 	                    		<div class="col-12">
 	                    	
-		                            {{Form::label('button_adding_product','Mostrar botón al añadir producto')}}
+		                            {{Form::label('button_adding_product','Mostrar link al añadir producto')}}
 		                        	<div class="form-check form-switch">
 		                                <input name="button_adding_product" class="form-check-input mtop12" type="checkbox" role="switch" id="button_adding_product" @if(Config::get('ecomsail.button_adding_product') == 'on') checked @endif>
 		                            </div>

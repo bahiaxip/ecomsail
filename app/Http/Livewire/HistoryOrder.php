@@ -14,10 +14,11 @@ class HistoryOrder extends Component
     //public $orders;
     public $user_id;
     public $typealert= 'success';
-    public $limit_page=15;
+    public $limit_page;
 
     public function mount(){
         $this->user_id = Auth::id();
+        $this->limit_page = config('ecomsail.items_per_page') ?? 15;
     }
     
     public function render()

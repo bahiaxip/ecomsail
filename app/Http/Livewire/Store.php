@@ -69,7 +69,7 @@ class Store extends Component
         //categories para el menú de nav_user
         $this->categories = Category::where('status',1)->where('type',0)->get();
         //limite de productos por página
-        $this->limit_page = 15;
+        $this->limit_page = config('ecomsail.items_per_page') ?? 15;
         $title = $this->getTitle();
         if($title){
             $this->title = $this->getTitle();    

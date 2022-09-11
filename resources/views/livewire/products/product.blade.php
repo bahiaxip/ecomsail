@@ -244,7 +244,9 @@
                         <div class="container ">
                             <div class="product_message alert alert-{{$typealert}}">            
                                 <p >{{session('message2')}}</p>
+                                @if(config('ecomsail.button_adding_product') =='on')
                                 <a class="btn btn-sm btn_pry" href="{{url('/cart')}}">Ver el carrito</a>
+                                @endif
                                 @if($errors->any())
                                 <ul>
                                     @foreach($errors->all() as $error)

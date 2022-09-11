@@ -39,6 +39,7 @@ class Home extends Component
     public $main_slider;
     public $autoslide;
     public $time_interval;
+    public $limit_page;
 
 //error si no hay combinaciones
 
@@ -53,6 +54,7 @@ class Home extends Component
         }catch(Exception $ex){
             dd($ex->getMessage());
         }
+        $this->limit_page = config('ecomsail.items_per_page') ?? 15;
     }
     //insertamos datos del visitante cada vez que accede al home (de usuario)
     public function set_new_visitor(){
@@ -329,8 +331,9 @@ class Home extends Component
         $this->computed_option = $this->option;
 
         //destacados
-        $products = Product::where('status',1)->orderBy('id','desc')->paginate(15);
+        $products = Product::where('status',1)->orderBy('id','desc')->paginate($this->limit_page);
         $categories = Category::where('status',1)->where('type',0)->get();
+//necesario ordenar los vendidos con más cantidad
         $sold_products = Sold_Product::all();
         $data = ['products' => $products,'categories' => $categories,'sliders' => $sliders,'sold_products' => $sold_products];
 

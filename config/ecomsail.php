@@ -1,7 +1,7 @@
 <?php 
 return [
 'owner_name' => 'Fernando',
-'title_site' => 'ecomsail',
+'title_site' => 'Ecomsail',
 'url_site' => 'https://ecomsail.bahiaxip.com',
 'email_site' => 'bahiaxip@hotmail.com',
 'phone_site' => '6276466256',
@@ -11,9 +11,9 @@ return [
 'instagram' => 'Instagram',
 'youtube' => 'Youtube',
 'main_slider' => 'on',
-'time_interval' => '1',
-'button_adding_product' => 'on',
-'items_per_page' => '5',
+'time_interval' => '6',
+'autoslide' => 'on',
+'items_per_page' => '10',
 'payment_target' => 'on',
 'payment_paypal' => 'on',
 'send_email' => 'on',
