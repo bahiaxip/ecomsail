@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product, App\Models\Category, App\Models\Combination, App\Models\Attribute, App\Models\ImagesProducts, App\Models\Order, App\Models\Order_Item, App\Models\Visitor, App\Models\User, App\Models\Sold_Product;
 use Auth,Str;
 use App\Models\Carousel;
+//use Config;
 //use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities;
 
 //use  Livewire\WithFileUploads;
@@ -13,7 +14,7 @@ class Home extends Component
 {
     //use WithFileUploads;
 
-    public $hola;
+    
 
     public $name;
     public $item;
@@ -35,9 +36,18 @@ class Home extends Component
     public $added_price=0;
     public $typealert='success';
 
+    public $main_slider;
+    public $autoslide;
+    public $time_interval;
+
 //error si no hay combinaciones
 
     public function mount(){
+        //comprobamos ajustes establecidos del slider (MDSlider)
+        $this->main_slider = config('ecomsail.main_slider');
+        $this->autoslide = config('ecomsail.autoslide');
+        $this->time_interval = config('ecomsail.time_interval');
+        
         try{
             $this->set_new_visitor();
         }catch(Exception $ex){

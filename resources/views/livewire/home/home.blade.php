@@ -30,9 +30,11 @@
             x-show="show2"
             x-transition:enter.duration.1000ms
             >
+                @if($main_slider == 'on')
                 <div wire:ignore>
                     @include('livewire.home.slider_home')    
                 </div>
+                @endif
                 
                 <div class="div_products_list mtop32">
                     <div class="row">
@@ -162,6 +164,7 @@
                     <div style="position:sticky;top:50%;right:5%;transform:translate(-50%,-50%);z-index:10">
                         <button class="btn btn_pry">Right</button>
                     </div>
+                    <input id="auto" type="hidden" value="{{Config::get('ecomsail.owner_name')}}">
                 </div>
             </div>
 
@@ -171,7 +174,24 @@
 </div>
 
 <script>
-    
+    //obtenemos los valores de ajustes del slider
+
+    var config;
+    var slider;
+    document.addEventListener('livewire:load', function () {
+        mainSlider = @this.main_slider;
+        if(mainSlider == 'on'){
+            config = {
+                autoslide : @this.autoslide,
+                timeInterval : @this.time_interval
+            }
+            console.log(config)
+            slider = new MDSlider(config);    
+        }
+        
+        
+    })
+    //var data = @this.autoslide;
     /*
     function modalFastview(){
        console.log($('.productmodal_slick'))
@@ -221,7 +241,8 @@
         }
         console.log("modal: ",$('.productmodal_slick'))
     }
-    var slider = new MDSlider();
+    console.log("config es: ",config)
+    
 
     
 </script>

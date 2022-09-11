@@ -11,7 +11,7 @@ class Carousel extends Model
 
     protected $table = 'carousels';
     protected $fillable = [
-        'status','title','text','path_root','path_tag','file_name','file_ext','image','thumb','position','user_id'
+        'status','title','text','path_root','path_tag','file_name','file_ext','image','thumb','position','autoslide','time_interval','user_id'
     ];
     protected $hidden = ['created_at','updated_at'];
 }

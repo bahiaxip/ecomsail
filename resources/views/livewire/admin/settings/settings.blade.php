@@ -163,15 +163,21 @@
 		                            </div>	
 	                    		</div>
 	                    	</div>
-	                    	<div class="row mtop16">
-	                    		<div class="col-md-12">
-	                    			{{Form::label('products_slider','Slider de productos')}}
-		                		    <div class="form-check form-switch">
-		                                <input name="products_slider" class="form-check-input mtop10" type="checkbox" role="switch" id="products_slider" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.products_slider') == 'on') checked @endif>
-		                            </div>	
-	                    		</div>
-	                        	
-	                    	</div>
+	                    	<div class="row mtop26">
+					            <div class="col-md-12">
+					            	{{Form::label('time_interval','Intervalo')}}
+					                {{Form::number('time_interval',Config::get('ecomsail.time_interval'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+					            </div>
+					            
+					        </div>
+					        <div class="row mtop20">
+					            <div class="col-md-12">
+					                {{Form::label('autoslide','Autoslide')}}
+					                <div class="form-check form-switch">
+					                    <input name="autoslide" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" @if(Config::get('ecomsail.autoslide') == 'on') checked @endif>
+					                </div>  
+					            </div>
+					        </div>
 	                        
 	                    	{{--<div class="row mtop16">
 	                    		<div class="col-12">
@@ -198,12 +204,14 @@
 	                    		</div>
 	                    	</div>
 
+	                    	{{--
 	                    	<div class="row mtop16">
 	                    		<div class="col-12">
 	                    			{{Form::label('position_coin','Posición de la moneda')}}
 	                		    	{{ Form::select('position_coin',[0=>'Derecha',1=>'Izquierda'],Config::get('ecomsail.position_coin'),['class' => 'form-select'])}}
 	                    		</div>
 	                    	</div>
+	                    	--}}
 
 	                    </div>
 	                </div>

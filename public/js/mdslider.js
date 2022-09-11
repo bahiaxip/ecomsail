@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded',function(){
 class MDSlider {
 	
 		
-	constructor(){
-		
+	constructor(config){
+		this.autoslide = config.autoslide;
+//comprobar si es entero
+		this.timeInterval = config.timeInterval * 1000;		
 		this.slider_active = 0;
 		this.elements = 0;
 		this.items;
@@ -60,9 +62,12 @@ class MDSlider {
 	}
 	//intervalo de slider
 	slide(){
-		setInterval(()=>{
-			this.navigation('next');	
-		},6000);
+		if(this.autoslide == 'on'){
+			setInterval(()=>{
+				this.navigation('next');	
+			},this.timeInterval);	
+		}
+		
 		
 	}	
 
