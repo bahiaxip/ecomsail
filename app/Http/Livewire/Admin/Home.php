@@ -44,9 +44,12 @@ class Home extends Component
 
     
     public function set_type_graphic($type){
-        $this->switch_chart = false;
+        
         //actualizamos si el tipo seleccionado es distinto al tipo actual.
+
         if($this->selected_type != $type){
+            //dd("anda");
+            $this->switch_chart = false;
             $this->selected_type = $type;
             $label;
             if($type){
@@ -74,7 +77,6 @@ class Home extends Component
             $this->emit('chart',$label,$this->total_months);
             $this->switch_chart = true;
         }
-        
     }
 
     public function get_visitors_today(){

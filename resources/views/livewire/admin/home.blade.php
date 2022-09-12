@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header @if($selected_type == 'orders' ) active @endif" wire:click="set_type_graphic('orders')" >
+                    <div class="card-header @if($selected_type == 'orders' ) active @endif" wire:click.prevent="set_type_graphic('orders')" >
                         Pedidos
                     </div>
                     <div class="card-body">                        
@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header @if($selected_type == 'visitors' ) active @endif" wire:click="set_type_graphic('visitors')">
+                    <div class="card-header @if($selected_type == 'visitors' ) active @endif" wire:click.prevent="set_type_graphic('visitors')">
                         Visitas 
                     </div>
                     <div class="card-body">                        
@@ -121,18 +121,20 @@
                 </div>
             </div>
         </div>
-        @if(!$switch_chart)
-            <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.9);z-index:999" >
-            <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
-        </div>
-        @else
-            <div class="row mtop16 div_chart" style="background-color:rgba(255,255,255,.1)">
+        
+        
+            <div class="row mtop16 div_chart" style="background-color:rgba(255,255,255,.1);position:relative">
+                @if(!$switch_chart)
+                <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.1);z-index:999" >
+                    <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
+                </div>
+                @else
                 <div class="col-12 chart">
                     <canvas id="myChart"   style="position: relative; height:100vh; width:100vw"></canvas>
                 </div>
-                
+                @endif        
             </div>
-        @endif
+        
     </div>
 
 </div>

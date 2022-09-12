@@ -10,7 +10,6 @@ return [
 'twitter' => 'Twitter',
 'instagram' => 'Instagram',
 'youtube' => 'Youtube',
-'main_slider' => 'on',
 'time_interval' => '6',
 'autoslide' => 'on',
 'items_per_page' => '10',
