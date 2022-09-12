@@ -237,6 +237,7 @@
                         <div class="card card-body box_payment" >
 
                             <div class="row">
+                                
                                 <div class="div_btn_payment input">
                                     <i class="fa-solid fa-check @if($payment_selected == 1) active @endif"></i>
                                     <button class="btn btn_payment @if($payment_selected == 1) active @endif" onclick="set_payment(this)">
@@ -245,6 +246,8 @@
                                         </input>
                                     </button>
                                 </div>
+                                
+                                @if(config('ecomsail.payment_transfer') == 'on')
                                 <div class="div_btn_payment input">
                                     <i class="fa-solid fa-check @if($payment_selected == 2) active @endif"></i>
                                     <button class="btn btn_payment @if($payment_selected == 2) active @endif" onclick="set_payment(this)">
@@ -253,6 +256,8 @@
                                         </input>
                                     </button>
                                 </div>
+                                @endif
+                                @if(config('ecomsail.payment_paypal') == 'on')
                                 <div class="div_btn_payment input">
                                     <i class="fa-solid fa-check @if($payment_selected == 3) active @endif"></i>
                                     <button class="btn btn_payment @if($payment_selected == 3) active @endif" onclick="set_payment(this)">
@@ -260,7 +265,8 @@
                                             Paypal
                                         </input>
                                     </button>
-                                </div>                                
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

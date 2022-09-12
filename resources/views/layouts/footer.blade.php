@@ -78,14 +78,28 @@
 				
 				<div class="col-md-3 col-12" >
 					
-					<div class="images" style="display:flex;justify-content: space-around;">
+					<div class="images" style="display:flex;justify-content: space-around;">						
 						<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
-						<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:64px" >
-						<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:75px">
+						<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:70px" >
+						@if(config('ecomsail.payment_paypal'))
+						<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:110px">
+						@endif
 					</div>
 				</div>
 			</div>
+			
 		</div>
+		{{--
+		<div class="row" style="min-height:100px">
+			<div class="col-md-12" style="margin:auto">
+				<div class="images" style="display:flex;justify-content: space-around;">
+					<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
+					<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:64px" >
+					<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:75px">
+				</div>
+			</div>
+		</div>
+		--}}
 	</div>
 	<div class="end">
 		<div class="options">

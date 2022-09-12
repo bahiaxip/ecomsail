@@ -223,6 +223,7 @@
 	                        Pagos
 	                    </div>
 	                    <div class="card-body">
+	                    	{{--
 	                    	<div class="row">
 	                    		<div class="col-12">
 		                    		{{Form::label('payment_target','Pago con tarjeta')}}
@@ -231,6 +232,7 @@
 		                            </div>
 		                    	</div>
 	                    	</div>
+	                    	--}}
 	                    	<div class="row mtop16">
 	                    		<div class="col-12">
 	                    			{{Form::label('payment_transfer','Pago por transferencia')}}

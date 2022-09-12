@@ -13,7 +13,6 @@ return [
 'time_interval' => '6',
 'autoslide' => 'on',
 'items_per_page' => '10',
-'payment_target' => 'on',
 'payment_paypal' => 'on',
 'send_email' => 'on',
 'send_not' => 'on',
