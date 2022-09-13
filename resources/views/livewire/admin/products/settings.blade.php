@@ -138,7 +138,7 @@
             <div class="row mtop16">
                 <div class="col-md-6">
                   {{ Form::label('type_tax','Tipo de impuesto')}}
-                  {{ Form::select('type_tax',[0=>'Estándar',1=>'Tasa reducida',2=>'Tasa cero'],null,['class' => 'form-select','wire:model.defer' => 'type_tax'])}}
+                  {{ Form::select('type_tax',[0=>'Estándar',1=>'Tasa reducida',2=>'Tasa cero'],null,['class' => 'form-select','wire:model.defer' => 'type_tax','wire:click' => 'set_tax'])}}
                   @error('type_tax')
                     <p class="text-danger">{{$message}}</p>
                   @enderror
@@ -510,8 +510,8 @@
       </div>
 
       <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" wire:click.prevent="clear_settings" onclick="clearActiveTabs()">Cancelar</button>
-          <button type="button" class="btn btn-sm back_livewire2 btn-primary" wire:click.prevent="update_settings_products({{$prod_id}},deliveryTime)" onclick="clearActiveTabs(switchDetail2)">Actualizar</button>          
+          <button type="button" class="btn btn-sm btn_sry " data-bs-dismiss="modal" wire:click.prevent="clear_settings" onclick="clearActiveTabs()">Cancelar</button>
+          <button type="button" class="btn btn-sm btn_pry fbold" wire:click.prevent="update_settings_products({{$prod_id}},deliveryTime)" onclick="clearActiveTabs(switchDetail2)">Actualizar</button>          
       </div>
     </div>
   </div>

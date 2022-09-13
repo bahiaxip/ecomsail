@@ -1512,6 +1512,9 @@ if(route == 'list_orders'){
     console.log("orders: ",checks)
 }
 */
+//establecer el impuesto en la sección Precios de configuración del producto
+//obtenidos mediante la variable taxes, declarada desde la vista de product/settings
+
 function show_items(index){
     //let selector = '#'+index;
     let tr = document.querySelector('#collapse_'+index);    
@@ -1559,8 +1562,9 @@ window.livewire.on('$refresh',()=>{
 })
 //método que permite mantener la pestaña de combinaciones cuando se pulsa el 
 //botón Crear Combinaciones sin ninguna combinación(vacío)
-window.livewire.on('active_combinations',()=>{
-    active_combinations();
+window.livewire.on('activeTabConfigProduct',(num)=>{
+    //active_combinations();
+    activeTabConfigProduct(num);
 })
 //activar la pestaña combinaciones
 function active_combinations(){
@@ -1578,6 +1582,21 @@ function active_combinations(){
     navtabs[2].classList.add('active');
     //clearActiveTabs();
     console.log("active_combinations");
+}
+function activeTabConfigProduct(num){
+    console.log("num: ",num);
+    let navtabsNodes = document.querySelectorAll('.nav-tabs button');
+    let navtabs = [].slice.call(navtabsNodes);
+    navtabs.map((item,index)=>{
+        //comprobamos si existen las clases active y show en alguna de las pestañas
+        //exceptuando la primera
+        console.log("item: ",item);
+
+        if(item.classList.contains('active') ){
+            item.classList.remove('active');
+        }
+    })
+    navtabs[num].classList.add('active');
 }
 
 

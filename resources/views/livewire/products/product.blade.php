@@ -268,12 +268,27 @@
                               <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Descripción</button>              
                               <button class="nav-link" id="nav-details-tab" data-bs-toggle="tab" data-bs-target="#nav-details" type="button" role="tab" aria-controls="nav-details" aria-selected="false">Detalles</button>
 
-                              <button class="nav-link" id="nav-feedback-tab" data-bs-toggle="tab" data-bs-target="#nav-feedback" type="button" role="tab" aria-controls="nav-feedback" aria-selected="false">Valoraciones</button>  
+                              <button class="nav-link" id="nav-dimensions-tab" data-bs-toggle="tab" data-bs-target="#nav-dimensions" type="button" role="tab" aria-controls="nav-dimensions" aria-selected="false">Dimensiones</button>
+
+                              <button class="nav-link" id="nav-feedback-tab" data-bs-toggle="tab" data-bs-target="#nav-feedback" type="button" role="tab" aria-controls="nav-feedback" aria-selected="false">Valoraciones</button>
                           </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" wire:ignore.self>
-                            <div class="row mtop16 p10">        
+                            <div class="row mtop16 p10">
+                                @if(config('ecomsail.state_product') == 'on')
+                                <div style="width:100%;padding: 10px 0">
+                                    <span style="font-weight: bold;">Estado:</span> 
+                                    @if($prod->settings->product_state == 0)
+                                    {{'Nuevo'}}
+                                    @elseif($prod->settings->product_state == 1)
+                                    {{'Usado'}}
+                                    @else
+                                    {{'Reacondicionado'}}
+                                    @endif
+                                </div>
+                                @endif
+                                
                                 {!!$prod->short_detail!!}
                             </div>
                         </div>
@@ -284,13 +299,24 @@
                                 {!!$prod->detail!!}
                             </div>
                         </div>
-                        
+                        <div class="tab-pane fade" id="nav-dimensions" role="tabpanel" aria-labelledby="nav-dimensions-tab" wire:ignore.self>
+                            <div class="row mtop16">
+                                <div class="col-12">
+                                    <p>Longitud: <span>{{($prod->settings->long) ? floatval(number_format($prod->settings->long,2,'.','')).'cm.' : 'N/A'}}</span></p>
+                                    <p>Anchura: <span>{{($prod->settings->width) ? floatval(number_format($prod->settings->width,2,'.','')).'cm.' : 'N/A'}}</span></p>
+                                    <p>Altura: <span>{{($prod->settings->long) ? floatval(number_format($prod->settings->long,2,'.','')).'cm.' : 'N/A'}}</span></p>
+                                    <p>Peso: <span>{{($prod->settings->weight) ? floatval(number_format($prod->settings->weight,2,'.','')).'Kg.' : 'N/A'}}</span></p>    
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
                         
                         <div class="tab-pane fade" id="nav-feedback" role="tabpanel" aria-labelledby="nav-feedback-tab" wire:ignore.self>
                             <div class="row">
-                                valoraciones
+                                No disponible
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     
                     {{--

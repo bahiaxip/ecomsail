@@ -38,7 +38,7 @@
         >
             <div class="col-xl-8 shadow" style="position:relative">
                 <!-- loading cuando actualizamos edición -->
-                <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.5);z-index:999" >
+                <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(255,255,255,.3);z-index:999" >
                     <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
                 </div>
                 <div style="width:100%">

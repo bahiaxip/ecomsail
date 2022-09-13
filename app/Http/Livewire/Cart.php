@@ -4,12 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute, App\Models\Combination;
-use Auth,Str;
+use Auth,Str,PDF;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
+use App\Mail\Factura;
 
 use  Livewire\WithFileUploads;
-
+use Illuminate\Support\Facades\Mail;
 class Cart extends Component
 {
     use WithFileUploads;
@@ -60,6 +61,8 @@ class Cart extends Component
     //fin edit_user
 
     public $orders_items;
+    public $pdf_tmp;
+
 
 //falta establecer la combinación de cada producto    
     public function mount(){        
@@ -110,6 +113,7 @@ class Cart extends Component
     }
 
     public function get_orders_items($id){
+//no sería necesaria la búsqueda del índice "user_id"
         return Order_Item::where('order_id',$id)->where('user_id',Auth::id())->get();
     }
     public function save_product_id($id){
@@ -140,8 +144,77 @@ class Cart extends Component
         }
         return number_format($result,2,'.','');
     }
+    //enviar factura al realizar el pago del pedido.
+    //destino:  admin y usuario loqueado
+    public function send_email($products_invoice,$order_name){
+        //email de destino seleccionado
+        $to = [];
+        
+        //si el switch de ajustes está activado enviamos email al admin
+        if(config('ecomsail.send_email') == 'on'){
+            //obtenemos el correo electrónico del administrador
+            $admin_email = config('ecomsail.email_site');        
+            if($admin_email){
+                $to[] = ['email' => $admin_email,'name' => 'admin'];    
+            }
+            $this->savePDF($products_invoice,$order_name);
 
-    public function finish_order(){        
+        }
+        //si el switch de ajustes está activado enviamos la notificación al admin
+        if(config('ecomsail.send_not') == 'on'){
+            //creamos la notificación
+            
+        }
+        $customer_email = Auth::user()->email;
+            if($customer_email){
+                $to[] = ['email' => $customer_email,'name' => 'customer'];
+            }
+        //podemos añadir más destinatarios añadiendo a $to[].
+
+        //si no se obtiene ningún correo devolvemos false para enviar 
+        //mensaje error
+        if(count($to) == 0){
+            return false;
+        }
+
+        //obtenemos el correo electrónico del cliente
+        //array con nombre
+            /*
+            $to=[
+                ['email' =>'mangergormiti@gmail.com','name'=> 'admin'],
+                ['email'=>'mundaxip@gmail.com','name' => 'customer']
+            ];
+            */
+        //array abreviado
+            //$to = ['mangergormiti@gmail.com','mundaxip@gmail.com'];
+        
+        //Envío de factura por Mail
+        Mail::to($to)
+                //copia a otros destinatarios
+                //->cc(['mangergormiti@gmail.com'])
+                //copia oculta a otros destinatarios
+                //->bcc(['mangergormiti@gmail.com'])
+                ->send(new Factura($products_invoice,"dato"));
+        return true;
+    }
+    //guardar el archivo PDF en el server para después poder enviar por correo 
+    //como archivo adjunto
+    public function savePDF($orders_items,$order_name){
+        $path_date=date('Y-m-d');
+        $path_date2 = date('Y-m-d H:i:s');
+        $user_id = Auth::id();
+        $user = Auth::user()->name;
+        //$attributes=$this->set_type_query(true);
+        
+        $view="livewire.products.export";
+        //generamos el nombre del archivo pdf
+        $pdf_name = $order_name.'_'.$path_date.'pdf';
+        //almacenamos el pdf_tmp para después eliminarlo
+        $this->pdf_tmp = $pdf_name;
+        $pdf= PDF::loadView($view,['orders_items'=>$orders_items,'order_name' => $order_name,'date' => $path_date2]);
+        $pdf->save($pdf_name);
+    }
+    public function finish_order(){
         $this->emit('loading','loading');
         $validated = $this->validate([
             'payment_selected' => 'required',
@@ -183,11 +256,9 @@ class Cart extends Component
             'order_comment' => $validated['comment'],
             'quantity' => $validated['sum']
         ]);
-        
-
+//se podría obtener mediante get_orders_items()
         $orders_items = Order_Item::where('order_id',$order->id)->get();
         $totals = $this->get_total_items($orders_items);
-        
         if(!$totals)
             $error = [
                 'status' => 'error',
@@ -195,9 +266,25 @@ class Cart extends Component
                 'message' => 'Error: Productos del pedido',
                 'function' => 'get_total_items()'
             ];
+//quizás debería realizarse al final en envío de E-Mail
+        //enviamos el E-Mail
+        if(!$error){
+            $send_email = $this->send_email($orders_items,$order->order_num);
+
+            if(!$send_email){
+                $error = [
+                    'status' => 'error',
+                    'typealert' => 'danger',
+                    'message' => 'Error: Envío de E-Mail',
+                    'function' => 'send_email()'
+                ];
+            }
+        }
+
+        
         $totals['location_vat'] = $location_vat;
         $totals['net'] = $net;
-        //creamos la factura
+        //creamos el registro de la factura
         if(!$error){            
             $invoice = $this->create_invoice($totals,$order->id);
             if(!$invoice)

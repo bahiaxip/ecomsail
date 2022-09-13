@@ -300,7 +300,9 @@ class Users extends Component
     }
     //actualización de permisos de usuario
     public function update_permissions($data){
-        $this->emit('loading','loading');
+        //genera errores si no es user bahiaxip, no necesario, ya que
+        //realizamos una redirección 
+        //$this->emit('loading','loading');
         $user = User::findOrFail($data['id']);
         //eliminamos id y token del array
         unset($data['id']);

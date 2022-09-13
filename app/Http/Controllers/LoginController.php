@@ -80,7 +80,10 @@ class LoginController extends Controller
             $user->email = e($request->input('email'));
             $user->password = Hash::make($request->input('pass'));
             $user->image = 'images/default2.png';
-            $user->permissions = json_encode(['list_home' => 'true']);
+//provisionalmente administrador
+            $user->role = 1;
+//provisionalmente algunos permisos
+            $user->permissions = json_encode(['list_home' => 'true','admin_permissions' => 'true','admin_panel' => 'true','list_users'=> 'true']);
             if($user->save()):
                 return redirect('/login')->with(['message' => 'El usuario ha sido registrado con éxito','typealert' =>'success']);
             endif;  

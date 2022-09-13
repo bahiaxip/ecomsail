@@ -995,7 +995,7 @@ class Product extends Component
             //si no existen valores selccionados mantenemos la pestaña y detenemos
             if(!$data){
                 //activamos la pestaña de combinaciones
-                $this->emit('active_combinations');
+                $this->emit('activeTabConfigProduct',2);
                 return false;            
             }
             $parent;
@@ -1327,7 +1327,7 @@ class Product extends Component
         $this->get_type_selection();
         $this->typealert = 'danger';        
         session()->flash('message2',"Combinación eliminada correctamente");
-        $this->emit('active_combinations');
+        $this->emit('activeTabConfigProduct',2);
         //$this->clear2();
     }
     //eliminamos imágenes de la galería y recargamos galería y drag&drop
@@ -1378,6 +1378,18 @@ class Product extends Component
 
         
         
+    }
+
+    public function set_tax(){
+        //almacenamos las tasas
+        $taxes = [
+            config('ecomsail.standard_tax'),
+            config('ecomsail.reduce_tax'),
+            config('ecomsail.zero_tax'),
+        ];
+        //obtenemos la tasa seleccionada mediante el tipo de tasa seleccionado
+        $this->tax = $taxes[$this->type_tax];
+        $this->emit('activeTabConfigProduct',1);
     }
 
     public function render()

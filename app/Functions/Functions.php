@@ -47,4 +47,12 @@ function get_type_selection_combination(){
 }
 */
 
+function get_taxes(){
+	return [
+		1 => config('ecomsail.standard_tax'),
+		2 => config('ecomsail.standard_tax'),
+		3 => config('ecomsail.standard_tax'),
+	];
+}
+
 ?>

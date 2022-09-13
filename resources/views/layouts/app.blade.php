@@ -65,7 +65,7 @@
                 @if(session()->has('message') && !session()->has('only_component'))                
                 <div class="container">
 
-                    <div class="alert alert-@if($typealert){{$typealert}}@else {{success}} @endif hide" >
+                    <div class="alert alert-@isset($typealert){{$typealert}}@else{{'success'}} @endisset hide" >
                         {{ Session::get('message') }}
                         @if($errors->any())
                         <ul>

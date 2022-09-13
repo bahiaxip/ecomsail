@@ -26,6 +26,7 @@
             </div>
         </div>
         <div class="row boxes" >
+            @if(config('ecomsail.email_site'))
             <div class="col-md-6">
                 <div class="div_type shadow">
                     <div class="icon">
@@ -42,7 +43,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            @endif
+            @if(config('ecomsail.phone_site'))
+            <div class="col-md-6 mauto">
                 <div class="div_type">
                     <div class="icon">
                         <i class="fa-solid fa-phone"></i>
@@ -52,11 +55,21 @@
                         <p>Consulta mediante llamada telefónica</p>
                     </div>
                     <div class="div_centered">
-                        <p>+34 XXX XX XX XX</p>
+                        <p>{{config('ecomsail.phone_site')}}</p>
                         
                     </div>
+                    @if(config('ecomsail.whatsapp'))
+                    <div class="div_centered">
+                        <p>
+                            <i class="fa-brands fa-whatsapp"></i>
+                            {{config('ecomsail.whatsapp')}}
+                        </p>
+                    </div>
+                    @endif
                 </div>
             </div>
+            
+            @endif
             
         </div>
         

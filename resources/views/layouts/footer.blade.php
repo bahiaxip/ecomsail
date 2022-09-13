@@ -149,11 +149,32 @@
 				<p>SÍGUENOS</p>
 			</div>
 			<div class="links rrss" >
-				<img src="{{url('icons/rrss/linkedin.svg')}}" alt="" class="uptop5">
-				<img src="{{url('icons/rrss/instagram.svg')}}" alt="">
-				<img src="{{url('icons/rrss/twitter.svg')}}" alt="">
-				<img src="{{url('icons/rrss/whatsapp.svg')}}" alt="">
-				<img src="{{url('icons/rrss/facebook.svg')}}" alt="">
+				@if(config('ecomsail.linkedin'))
+				<a href="{{url(config('ecomsail.linkedin'))}}" target="_blank">
+					<img src="{{url('icons/rrss/linkedin.svg')}}" alt="" class="uptop5">
+				</a>
+				@endif
+				@if(config('ecomsail.instagram'))
+				<a href="{{url(config('ecomsail.instagram'))}}" target="_blank">
+					<img src="{{url('icons/rrss/instagram.svg')}}" alt="">
+				</a>
+				@endif
+				@if(config('ecomsail.twitter'))
+				<a href="{{url(config('ecomsail.twitter'))}}" target="_blank">
+					<img src="{{url('icons/rrss/twitter.svg')}}" alt="">
+				</a>
+				@endif
+				@if(config('ecomsail.whatsapp'))
+				<a href="{{route('contact')}}" target="_blank">
+					<img src="{{url('icons/rrss/whatsapp.svg')}}" alt="">
+				</a>
+				@endif
+
+				@if(config('ecomsail.facebook'))
+				<a href="{{url(config('ecomsail.facebook'))}}" target="_blank">
+					<img src="{{url('icons/rrss/facebook.svg')}}" alt="">
+				</a>
+				@endif
 			</div>			
 		</div>
 	</div>

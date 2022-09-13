@@ -13,7 +13,8 @@
         </a>
     </li>
     @endsection
-
+    {{-- mensaje en layouts.app.blade con redirección --}}
+    {{--
     @if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -32,15 +33,21 @@
         </div>
     </div>
     @endif
-    <div class="admin_settings mtop32" style="width:100%">
+    --}}
+    <div class="admin_settings mtop32" style="width:100%;position:relative">
     	<form wire:submit.prevent="save_settings(Object.fromEntries(new FormData($event.target)))">
+    		@if($switch_loading)
+			<div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.1);z-index:999" >
+                <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
+            </div>
+            @else
     		<div class="admin_panels" >
     		
 	    		<div class="panel_settings">
 	    			<div class="card">
 	                    <div class="card-header">
 	                    	<i class="fa-solid fa-screwdriver-wrench"></i>
-	                        AJUSTES
+	                        ADMINISTRADOR
 	                    </div>
 	                    <div class="card-body">
 	                    	<div class="">
@@ -95,7 +102,7 @@
 	    		<div class="panel_settings" >
 	    			<div class="card">
 	                    <div class="card-header">
-	                    	<i class="fa-solid fa-envelope"></i>
+	                    	<i class="fa-brands fa-battle-net"></i>
 	                        RRSS 
 	                    </div>
 	                    <div class="card-body">
@@ -105,7 +112,7 @@
 	                    			<span class="input-group-text">
 	                    				<i class="fa-brands fa-whatsapp"></i>
 	                    			</span>
-	                		    	{{Form::text('whatsapp',Config::get('ecomsail.whatsapp'),['class' => 'form-control'])}}
+	                		    	{{Form::tel('whatsapp',Config::get('ecomsail.whatsapp'),['class' => 'form-control'])}}
 	                			</div>
 	                    	</div>
 	                    	<div class="mtop16">
@@ -114,7 +121,7 @@
 	                    			<span class="input-group-text">
 	                    				<i class="fa-brands fa-facebook"></i>
 	                    			</span>
-	                		    	{{Form::text('facebook',Config::get('ecomsail.facebook'),['class' => 'form-control'])}}
+	                		    	{{Form::url('facebook',Config::get('ecomsail.facebook'),['class' => 'form-control'])}}
 	                			</div>
 	                    	</div>
 	                    	<div class="mtop16">
@@ -123,7 +130,7 @@
 	                    			<span class="input-group-text">
 	                    				<i class="fa-brands fa-twitter"></i>
 	                    			</span>
-	                		    	{{Form::text('twitter',Config::get('ecomsail.twitter'),['class' => 'form-control'])}}
+	                		    	{{Form::url('twitter',Config::get('ecomsail.twitter'),['class' => 'form-control'])}}
 	                			</div>
 	                    	</div>
 	                    	<div class="mtop16">
@@ -132,9 +139,19 @@
 	                    			<span class="input-group-text">
 	                    				<i class="fa-brands fa-instagram"></i>
 	                    			</span>
-	                		    	{{Form::text('instagram',Config::get('ecomsail.instagram'),['class' => 'form-control'])}}
+	                		    	{{Form::url('instagram',Config::get('ecomsail.instagram'),['class' => 'form-control'])}}
 	                			</div>
 	                    	</div>
+	                    	<div class="mtop16">
+	                    		{{Form::label('linkedin','Linkedin')}}
+	                    		<div class="input-group">
+	                    			<span class="input-group-text">
+	                    				<i class="fa-brands fa-linkedin"></i>
+	                    			</span>
+	                		    	{{Form::url('linkedin',Config::get('ecomsail.linkedin'),['class' => 'form-control'])}}
+	                			</div>	                			
+	                    	</div>
+	                    	{{--
 	                    	<div class="mtop16">
 	                    		{{Form::label('youtube','Youtube')}}
 	                    		<div class="input-group">
@@ -142,8 +159,9 @@
 	                    				<i class="fa-brands fa-youtube"></i>
 	                    			</span>
 	                		    	{{Form::text('youtube',Config::get('ecomsail.youtube'),['class' => 'form-control'])}}
-	                			</div>
+	                			</div>	                			
 	                    	</div>
+	                    	--}}
 	                    </div>
 	                </div>
 	    		</div>
@@ -157,27 +175,24 @@
 	                    <div class="card-body">
 	                    	<div class="row">
 	                    		<div class="col-md-12">
-	                    			{{Form::label('main_slider','Slider principal')}}
+	                    			{{Form::label('state_product','Mostrar estado del producto')}}
 		                		    <div class="form-check form-switch">
-		                                <input name="main_slider" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.main_slider') == 'on') checked @endif>
+		                                <input name="state_product" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.state_product') == 'on') checked @endif>
 		                            </div>	
 	                    		</div>
 	                    	</div>
-	                    	<div class="row mtop26">
-					            <div class="col-md-12">
-					            	{{Form::label('time_interval','Intervalo')}}
-					                {{Form::number('time_interval',Config::get('ecomsail.time_interval'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
-					            </div>
-					            
-					        </div>
-					        <div class="row mtop20">
-					            <div class="col-md-12">
-					                {{Form::label('autoslide','Autoslide')}}
-					                <div class="form-check form-switch">
-					                    <input name="autoslide" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" @if(Config::get('ecomsail.autoslide') == 'on') checked @endif>
-					                </div>  
-					            </div>
-					        </div>
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('coin','Moneda')}}
+	                        		{{Form::text('coin',Config::get('ecomsail.coin'),['class' => 'form-control'])}}	
+	                    		</div>
+	                    	</div>
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('position_coin','Posición de la moneda')}}
+	                		    	{{ Form::select('position_coin',[0=>'Derecha',1=>'Izquierda'],Config::get('ecomsail.position_coin'),['class' => 'form-select'])}}
+	                    		</div>
+	                    	</div>
 	                        
 	                    	{{--<div class="row mtop16">
 	                    		<div class="col-12">
@@ -216,11 +231,12 @@
 	                    </div>
 	                </div>
 	    		</div>
+
 	    		<div class="panel_settings" >
 	    			<div class="card">
 	                    <div class="card-header">
-	                    	<i class="fa-solid fa-envelope"></i>
-	                        Pagos
+	                    	<i class="fa-solid fa-credit-card"></i>
+	                        PAGOS
 	                    </div>
 	                    <div class="card-body">
 	                    	{{--
@@ -272,10 +288,97 @@
 	                    </div>
 	                </div>
 	    		</div>
+	    		
 	    	</div>
+	    	<div class="admin_panels" >
+	    		<div class="panel_settings">
+	    			<div class="card">
+	                    <div class="card-header">
+	                    	<i class="fa-solid fa-coins"></i>
+	                        TASAS
+	                    </div>
+	                    <div class="card-body">
+	                    	{{--
+	                    	<div class="row">
+	                    		<div class="col-12">
+		                    		{{Form::label('payment_target','Pago con tarjeta')}}
+		                        	<div class="form-check form-switch">
+		                                <input name="payment_target" class="form-check-input mtop10" type="checkbox" role="switch" id="payment_target" @if(Config::get('ecomsail.payment_target') == 'on') checked @endif>
+		                            </div>
+		                    	</div>
+	                    	</div>
+	                    	--}}
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('standard_tax','Tasa estándar')}}
+	                    			{{Form::number('standard_tax',Config::get('ecomsail.standard_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+	                    		</div>
+	                    	</div>
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('reduce_tax','Tasa reducida')}}
+	                    			{{Form::number('reduce_tax',Config::get('ecomsail.reduce_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+	                    		</div>
+	                    	</div>
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('zero_tax','Tasa cero')}}
+	                    			{{Form::number('zero_tax',Config::get('ecomsail.zero_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+	                    		</div>
+	                    	</div>
+
+	                    </div>
+	                </div>
+	    		</div>
+	    		<div class="panel_settings">
+	    			<div class="card">
+	                    <div class="card-header">
+	                    	<i class="fa-solid fa-images"></i>
+	                        CAROUSEL
+	                    </div>
+	                    <div class="card-body">
+	                    	{{--
+	                    	<div class="row">
+	                    		<div class="col-12">
+		                    		{{Form::label('payment_target','Pago con tarjeta')}}
+		                        	<div class="form-check form-switch">
+		                                <input name="payment_target" class="form-check-input mtop10" type="checkbox" role="switch" id="payment_target" @if(Config::get('ecomsail.payment_target') == 'on') checked @endif>
+		                            </div>
+		                    	</div>
+	                    	</div>
+	                    	--}}
+	                    	<div class="row">
+	                    		<div class="col-md-12">
+	                    			{{Form::label('main_slider','Slider principal')}}
+		                		    <div class="form-check form-switch">
+		                                <input name="main_slider" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.main_slider') == 'on') checked @endif>
+		                            </div>	
+	                    		</div>
+	                    	</div>
+	                    	<div class="row mtop26">
+					            <div class="col-md-12">
+					            	{{Form::label('time_interval','Intervalo')}}
+					                {{Form::number('time_interval',Config::get('ecomsail.time_interval'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+					            </div>
+					            
+					        </div>
+					        <div class="row mtop20">
+					            <div class="col-md-12">
+					                {{Form::label('autoslide','Autoslide')}}
+					                <div class="form-check form-switch">
+					                    <input name="autoslide" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" @if(Config::get('ecomsail.autoslide') == 'on') checked @endif>
+					                </div>  
+					            </div>
+					        </div>
+
+	                    </div>
+	                </div>
+	    		</div>
+	    	</div>
+	    	@endif
 	    	<div class="buttons mtop16">
 	    		<button type="submit" class="btn btn_pry">
-	    			Guardar
+	    			Actualizar
 	    		</button>
 	    	</div>
     	</form>

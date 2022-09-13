@@ -6,10 +6,16 @@ use Livewire\Component;
 
 class Settings extends Component
 {
-    public $typealert;
+    public $typealert = 'success';
+    //revisar en servidor si funciona el loading...
+    public $switch_loading = false;
+    
+    public function mount($message=null){
+        
+    }
 
     public function save_settings($data){
-        
+        $this->switch_loading = true;
         if(!file_exists(config_path().'/cms.php')):
             fopen(config_path().'/ecomsail.php','w');
             //return config_path();
@@ -30,16 +36,21 @@ class Settings extends Component
         fwrite($file,'?>'.PHP_EOL);
         fclose($file);
 //añadimos sleep() para que se muestren los datos actualizados al recargar la página,
+//ya que es necesario generar un archivo en PHP y generamos redirect() en lugar de session
 //a la espera de otra solución
 
-        sleep(3);
+        sleep(5);
         $this->typealert = 'success';
-        session()->flash('message','La configuración ha sido actualizada');
+        return redirect()->route('settings')->with('message','La configuración ha sido actualizada');
+        
+        //session()->flash('message','La configuración ha sido actualizada');
+
 
         //return back()->with('message','Las configuraciones han sido guardadas con éxito')->with('typealert','success');
     }
     public function render()
     {
+        $this->switch_loading = false;
         return view('livewire.admin.settings.settings');
     }
 }
