@@ -140,8 +140,9 @@ class Product extends Component
     public $subcats;
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
-        'short_detail' => 'descipción corta',
+        'short_detail' => 'descripción corta',
         'category' => 'categoría',
+        'subcategory' => 'subcategoría',
         'detail' => 'descripción',
         'image' => 'imagen'
     ];

@@ -17,6 +17,14 @@ class Permissions {
 		}
 	}
 
+    public function testRole($role,$permission){
+        $query = Permission_Role::where('role_id',$role)->where('permission_id',$permission)->first();
+        if($query->count() > 0)
+            return false;
+        else
+            return true;
+    }
+
 	public $permissions_list = [
         /*
         'home' =>[

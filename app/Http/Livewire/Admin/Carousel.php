@@ -20,6 +20,13 @@ class Carousel extends Component
     public $total_sliders;
     public $typealert;
 
+    //personalizamos el nombre del atributo de los mensajes de error
+    protected $validationAttributes = [
+        'main_title' => 'título',
+        'second_title' => 'título adicional',
+        'image' => 'imagen'
+    ];
+
     public function mount($filter_type){        
         $this->filter_type = $filter_type;
         $this->set_total_sliders();

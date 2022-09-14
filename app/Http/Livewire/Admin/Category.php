@@ -85,6 +85,12 @@ class Category extends Component
     public $btn_back;
     public $switch_type;
 
+    //personalizamos el nombre del atributo de los mensajes de error
+    protected $validationAttributes = [
+        'main_title' => 'título',
+        'second_title' => 'título adicional',
+        'image' => 'imagen'
+    ];
 
 
     public function mount($filter_type){

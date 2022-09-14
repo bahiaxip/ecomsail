@@ -76,6 +76,12 @@ class Attribute extends Component
     //archivo temporal para poder eliminar el archivo Excel descargado, ya que 
     //al sobreescribir genera error.
     public $file_tmp;
+
+    //personalizamos el nombre del atributo de los mensajes de error
+    protected $validationAttributes = [
+        'parent_attr' => 'atributo padre',
+    ];
+
     public function mount($filter_type){
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';

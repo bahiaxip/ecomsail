@@ -15,6 +15,9 @@ class Settings extends Component
     }
 
     public function save_settings($data){
+//posible validación
+
+        
         $this->switch_loading = true;
         if(!file_exists(config_path().'/cms.php')):
             fopen(config_path().'/ecomsail.php','w');
