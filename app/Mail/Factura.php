@@ -17,13 +17,22 @@ class Factura extends Mailable
      * @return void
      */
 
-    public $productos_factura;
-    public $destino;
+    public $shared_data;
+    public $view;
+    public $file;
+    public $order_name;
+    public $name;
+    public $date;
 
-    public function __construct($productos_factura,$destino)
-    {
-        $this->productos_factura=$productos_factura;
-        $this->destino=$destino;
+    public function __construct($shared_data,$view,$file,$order_name,$name)
+    {        
+        $this->shared_data=$shared_data;
+        $this->view=$view;
+        $this->file = $file;
+        $this->order_name = $order_name;
+        $this->name = $name;
+        $this->date = date('Y-m-d');
+        
     }
 
     /**
@@ -33,9 +42,16 @@ class Factura extends Mailable
      */
     public function build()
     {
-        return $this->view('livewire.products.factura')
+        
+        $mail = $this->view('livewire.products.'.$this->view)
             //ecomsail en lugar de sistemadeventas
                     ->from("bahiaxip@hotmail.com")
-                    ->subject("Nuevo mensaje de Ecomsail ");
+                    ->subject("Pedido realizado")
+                    ->attach(public_path($this->file),
+                        [
+                            'as'=>$this->file,
+                            'mime'=>'application/pdf'
+                        ]);                    
+        return $mail;
     }
 }

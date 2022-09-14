@@ -148,28 +148,38 @@ class Cart extends Component
     //destino:  admin y usuario loqueado
     public function send_email($products_invoice,$order_name){
         //email de destino seleccionado
+        $user_name = Auth::user()->name;
+        $admin_name="";
+        if(config('ecomsail.admin_name')){
+            $admin_name = config('ecomsail.admin_name');
+        }
         $to = [];
-        
+        //generamos el archivo en PDF
+        $this->savePDF($products_invoice,$order_name);
         //si el switch de ajustes está activado enviamos email al admin
         if(config('ecomsail.send_email') == 'on'){
             //obtenemos el correo electrónico del administrador
-            $admin_email = config('ecomsail.email_site');        
+            $admin_email = config('ecomsail.email_site');
+            $title_site = config('ecomsail.title_site');
             if($admin_email){
-                $to[] = ['email' => $admin_email,'name' => 'admin'];    
-            }
-            $this->savePDF($products_invoice,$order_name);
-
+                //$to[] = ['email' => $admin_email,'name' => 'admin'];
+                Mail::to($admin_email, $title_site ?? '')
+                ->send(new Factura('','admin_email',$this->pdf_tmp,$order_name,$admin_name));
+            }            
+            //falta condicional por si falla el servidor de correo
+            
         }
         //si el switch de ajustes está activado enviamos la notificación al admin
         if(config('ecomsail.send_not') == 'on'){
             //creamos la notificación
             
         }
+        //podemos añadir más destinatarios añadiendo a $to[].
         $customer_email = Auth::user()->email;
             if($customer_email){
                 $to[] = ['email' => $customer_email,'name' => 'customer'];
             }
-        //podemos añadir más destinatarios añadiendo a $to[].
+        
 
         //si no se obtiene ningún correo devolvemos false para enviar 
         //mensaje error
@@ -194,7 +204,10 @@ class Cart extends Component
                 //->cc(['mangergormiti@gmail.com'])
                 //copia oculta a otros destinatarios
                 //->bcc(['mangergormiti@gmail.com'])
-                ->send(new Factura($products_invoice,"dato"));
+                ->send(new Factura($products_invoice,"invoice",$this->pdf_tmp,$order_name,$user_name));
+        if(file_exists(public_path($this->pdf_tmp))){
+            unlink(public_path($this->pdf_tmp));    
+        }
         return true;
     }
     //guardar el archivo PDF en el server para después poder enviar por correo 
@@ -213,6 +226,7 @@ class Cart extends Component
         $this->pdf_tmp = $pdf_name;
         $pdf= PDF::loadView($view,['orders_items'=>$orders_items,'order_name' => $order_name,'date' => $path_date2]);
         $pdf->save($pdf_name);
+        
     }
     public function finish_order(){
         $this->emit('loading','loading');
@@ -295,7 +309,8 @@ class Cart extends Component
                     'function' => 'create_invoice()'
                 ];
         }
-        
+    //creamos los registros de: historial, vendidos
+    //actualizamos registros de: producto, combinación (si existe)
         if(!$error){
             $new_tables = $this->create_and_update_tables($orders_items);
             if(!$new_tables)
@@ -306,8 +321,7 @@ class Cart extends Component
                     'function' => 'create_and_update_tables()'
                 ];
         }
-        
-        //if($new_tables && $invoice){
+        //enviamos mensaje        
         if($error){            
             $typealert = $error['typealert'];
             $message = $error['message'].' (Function: '.$error['function'].')';
@@ -324,6 +338,7 @@ class Cart extends Component
 
     //creamos los registros de: historial, vendidos
     //actualizamos registros de: producto, combinación (si existe)
+    //notificación de stock mínimo si está activado
 //devolver array con typealert y message en lugar de solamente false
     public function create_and_update_tables($orders_items){
         //comprobación de al menos un producto en el pedido
@@ -483,10 +498,41 @@ class Cart extends Component
 
     public function change_quantity($operator,$id){
         
-            if($operator == 'plus' )
-                $this->quantity[$id]['quantity']++;
+            if($operator == 'plus' ){
+                $order_item = Order_Item::findOrFail($id);
+                if($order_item){
+                //si el stock global del producto es mayor que la cantidad actual,
+                //indica que podemos aumentar por lo menos 1                
+                    if($order_item->product->stock > $this->quantity[$id]['quantity']){
+                //comprobamos si el order item tiene combinaciones(combinations != 'null')
+                // y comprobamos el stock de esa combinación 
+                        if($order_item->combinations != 'null'){
+                            $list_combinations = json_decode($order_item->combinations);
+                            //dd($list_combinations);
+                            $list_ids = [];
+                            if(count($list_combinations) > 0){
+                                foreach($list_combinations as $lc){
+                                    $list_ids[] = $lc->value;
+                                }
+                                //obtenemos combinación con el list_ids del order_item
+                                //para saber si dispone de stock suficiente
+                                $combination = Combination::where('list_ids',implode($list_ids))->where('product_id',$order_item->product_id)->first();
+                                if($combination->stock > $this->quantity[$id]['quantity']){
+                                    $this->quantity[$id]['quantity']++;    
+                                }
+                            }
+                            
+                        }else{
+                            $this->quantity[$id]['quantity']++;
+                        }
+                        
+                    }
+                }
+                
+            }
             elseif($operator == 'minus' && $this->quantity[$id]['quantity'] > 1)
                 $this->quantity[$id]['quantity']--;
+            
             $this->update_order_item($id,$this->quantity[$id]['quantity']);
             
 //faltan la comprobacion de combinaciones y su added_price
@@ -504,10 +550,10 @@ class Cart extends Component
             
         
     }
-    //actualización de order_item
+    //actualización de order_item (quantity, total)
     public function update_order_item($id,$quantity){
         $order_item = Order_Item::findOrFail($id);
-        dd($order_item->id);
+        //dd($order_item->id);
         if($order_item){
             $added_price=0;
             //comprobar added_price para añadirle el suplemento 
@@ -635,6 +681,14 @@ class Cart extends Component
     }
     //fin_edit_user
 
+    //creamos el array quantity con 2 propiedades: quantity y total estableciendo
+    //el id del order_item como índice 
+    public function set_list_quantity_and_total_by_id(){
+        foreach($this->orders_items as $o_items){
+            $this->quantity[$o_items->id]['quantity'] = $o_items->quantity;
+            $this->quantity[$o_items->id]['total'] = $o_items->total;
+        }
+    }
     public function render()
     {
         
@@ -655,10 +709,9 @@ class Cart extends Component
         $this->order_id = $this->get_order()->id;
         $this->orders_items = $this->get_orders_items($this->order_id);
         
-        foreach($this->orders_items as $o_items){
-            $this->quantity[$o_items->id]['quantity'] = $o_items->quantity;
-            $this->quantity[$o_items->id]['total'] = $o_items->total;
-        }
+        //creamos el array quantity con las propiedades quantity y total        
+        $this->set_list_quantity_and_total_by_id();
+        
         $this->quantity_tmp=$this->quantity;
         //dd($this->payment_selected);
         //dd($this->address_selected);

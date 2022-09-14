@@ -51,12 +51,12 @@
 	                    </div>
 	                    <div class="card-body">
 	                    	<div class="">
-	                    		{{Form::label('owner_name','Nombre')}}
+	                    		{{Form::label('admin_name','Nombre')}}
 	                    		<div class="input-group">
 	                    			<span class="input-group-text">
 	                    				<i class="fa-solid fa-keyboard"></i>
 	                    			</span>
-	                		    	{{Form::text('owner_name',Config::get('ecomsail.owner_name'),['class' => 'form-control'])}}
+	                		    	{{Form::text('admin_name',Config::get('ecomsail.admin_name'),['class' => 'form-control'])}}
 	                			</div>
 	                    	</div>
 	                    	<div class="mtop16">

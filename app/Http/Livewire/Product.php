@@ -513,7 +513,7 @@ class Product extends Component
             'quantity' => 'required|integer'
         ]);        
         //$product = Product::findOrFail($this->product_id);
-        //creamos o actualizamos el pedido
+        //creamos o actualizamos el pedido temporal
         $order = $this->create_or_update_order();
         $list=NULL;
         $comb_name = NULL;
@@ -533,7 +533,7 @@ class Product extends Component
                 }
             }
         }        
-
+//el product_id no sería necesario en la consulta
         $orders_items = Order_Item::where('order_id',$order->id)->where('product_id',$this->product_id)->get();
         if($orders_items->count() > 0){
             $diff = []; 
@@ -637,7 +637,7 @@ class Product extends Component
     }
 
     //Establece el suplemento de precio (si hubiere) de la combinación 
-    //seleccionada en $this->added_price, los descuentos se calculan en la vista
+    //seleccionada en $this->added_price. Los descuentos se calculan en la vista
     //y en la factura
     public function set_price_combinations(){
 

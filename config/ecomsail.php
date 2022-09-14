@@ -1,6 +1,6 @@
 <?php 
 return [
-'owner_name' => 'Fernando',
+'admin_name' => 'Fernando',
 'title_site' => 'Ecomsail',
 'url_site' => 'https://ecomsail.bahiaxip.com',
 'email_site' => 'manu@gmail.com',

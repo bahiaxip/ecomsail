@@ -1,7 +1,24 @@
-<p style="font-size:20px">Desde EcomSail le agradecemos su confianza. Ya puede descargar su factura.</p>
+<div>
+	<img src="{{url('images/ecomsail_logo.png')}}" alt="{{public_path('images/ecomsail_logo.png')}}" width="250">
+</div>
+<div style="font-size:18px;margin-top:10px">
+<p >
+<span style="font-weight: bold">¡Hola {{$name}}!</span>
+</p>
+<p>
+Ya puedes descargar tu factura del pedido {{$order_name}} incluida en este mensaje o de tu lista de pedidos desde tu panel de usuario.
+</p>
+<p>
+	Para cualquier consulta relacionada con tu pedido puedes hacerla desde la sección de Contacto. Te agradecemos tu confianza en Ecomsail.
+</p>
+<p>
+	Un saludo,
+	El equipo de EcomSail
+</p>
+</div>
 
 <div>
-	@if($productos_factura->count()!=0)
+	@if($shared_data->count()!=0)
 <?php $sum=0; ?>
 <table style="font-size:20px;width:800px;" class="table table-hover">
 	<thead style="background:rgba(110,110,110,1);
@@ -18,7 +35,7 @@
 
 	
 	<tbody style="background-color:#EEE9E9;text-align:center">
-		@foreach($productos_factura as $pro)
+		@foreach($shared_data as $pro)
 		<tr>
 			<td style="padding:10px">{{$pro->id}}</td>
 			<td>{{$pro->title}}</td>
@@ -33,7 +50,7 @@
 				@endforeach
 			@endif
 			</td>
-			
+
 			<td>{{$pro->price_unit}}</td>
 			<td>{{$pro->quantity}}</td>
 			<td>{{$pro->total}}</td>
