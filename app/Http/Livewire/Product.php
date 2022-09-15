@@ -28,7 +28,8 @@ class Product extends Component
     public $favorite;
     //suma de todos los stock para restingir el botón de "Agregar al carrito"
     public $sum_stock;
-
+    //buscador global
+    public $search_product;
     
     public function mount($id){        
         $this->product_id = $id;
@@ -50,15 +51,20 @@ class Product extends Component
             session()->flash('message','Se originó un error con la autenticación de usuario, inicie sesión');
         }
         */
-
-        
     }
+
+
     public function hydrate(){        
         if($this->counter == 0){
             
             //$this->emit('slick2');
         }
         $this->counter++;
+    }
+
+    //redirección del buscador genérico
+    public function go_to_search(){
+        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
     }
 
     public function testStock2(){

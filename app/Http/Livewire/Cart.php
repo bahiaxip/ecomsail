@@ -62,7 +62,8 @@ class Cart extends Component
 
     public $orders_items;
     public $pdf_tmp;
-
+    //buscador global
+    public $search_product;
 
 //falta establecer la combinación de cada producto    
     public function mount(){        
@@ -78,6 +79,10 @@ class Cart extends Component
         
 
         
+    }
+    //redirección del buscador genérico
+    public function go_to_search(){
+        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
     }
     /*
     public function set_payment($type){

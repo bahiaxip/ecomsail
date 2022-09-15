@@ -36,7 +36,9 @@ class EditUser extends Component
     protected $municip;
     //fin edit_user
     public $typealert='success';
-
+    //buscador global
+    public $search_product;
+    
     public function mount(){
         $this->user_id = Auth::id();
         //Class Países solo utilizada para obtener los paises (array all)
@@ -47,6 +49,11 @@ class EditUser extends Component
         $this->municip = new Municipalities();
         $this->municipies_list = $this->municip->cities;
         $this->edit_user();
+    }
+
+    //redirección del buscador genérico
+    public function go_to_search(){
+        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
     }
 
     //edit_user

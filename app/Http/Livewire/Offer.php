@@ -13,10 +13,17 @@ class Offer extends Component
     public $offer;
     public $cat_id;
     public $limit_page;
-
+    //buscador global
+    public $search_product;
+    
     public function mount(){
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
         $this->typealert = 'success';
+    }
+
+    //redirección del buscador genérico
+    public function go_to_search(){
+        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
     }
     
     public function set_offer($cat_id){

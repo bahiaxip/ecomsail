@@ -62,7 +62,7 @@
                             
                         </div>
 
-                        <div style="margin:auto 10px">
+                        <div style="margin:auto 10px" class="{{$subcategory}} {{$category}}">
                             
                             <select name="subcategory" id="subcategory" class="form-select" wire:model.defer="subcategory" wire:change="set_category">
                                 

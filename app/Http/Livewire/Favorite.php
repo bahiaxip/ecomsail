@@ -12,9 +12,16 @@ class Favorite extends Component
     
     public $user_id;
     public $typealert = 'success';
-
+    //buscador global
+    public $search_product;
+    
     public function mount(){
         $this->user_id = Auth::id();
+    }
+
+    //redirección del buscador genérico
+    public function go_to_search(){
+        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
     }
 
     public function render()

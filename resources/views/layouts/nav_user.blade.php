@@ -5,7 +5,7 @@
         </a>
     </li>
     <li style="list-style: none;margin:auto">
-        <input type="search" name="search" class="form-control" size="100" placeholder="Buscar...">
+        <input type="search" name="search" class="form-control" size="100" placeholder="Buscar..." wire:model="search_product" wire:keydown.enter = "go_to_search">
     </li>
 </div>
 <div class="container-fluid box_nav_user" >

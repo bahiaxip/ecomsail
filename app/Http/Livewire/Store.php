@@ -39,10 +39,17 @@ class Store extends Component
     //identificador que permite cambiar de mayor precio a menor precio
     public $price_order;
 
-    
+    public $search_product;
+    public $search_query;
     public function mount($category=null,$subcategory=null,$type=null){
-        //if($type)
-            //$this->type = $type;
+    //el parámetro type es exclusivo del buscador genérico, que contiene 
+    //la cadena a buscar. Disponible en todos los componentes de usuario
+        if($type){
+            $this->search_product = $type;
+            $this->search_query = true;
+        }
+        else
+            $this->search_query = false;
         //establecemos el primer contador del infinite scroll
         $this->inf_scroll_counter=1;
         //establecemos el máximo de resultados para mostrar el botón de "Mäs"
@@ -75,6 +82,14 @@ class Store extends Component
             $this->title = $this->getTitle();    
         }
     }
+    
+    public function updated(){
+        
+        //dd("antes0");
+        
+    }
+
+    
 
     public function inf_scroll(){
         $this->inf_scroll_counter++;
@@ -95,16 +110,29 @@ class Store extends Component
         $this->emit('$refresh');
         $this->page_tmp = $page;
     }
+    //limpiamos y desactivamos la consulta del buscador (en caso de existir
+    //una consulta anterior)
+    public function reset_searcher(){
+        if($this->search_product){
+            $this->search_product = '';
+            $this->search_query = false;
+        }
+    }
     public function set_category(){
+        
+        //si existen caracteres en el buscador lo limpiamos
+        $this->reset_searcher();
+
         $this->inf_scroll_plus = false;
         //necesario para diferenciar de la colección de productos genérica y para que el
         // método render() de paginación no entre en conflicto.
         $this->switch_special_filter=false;
         $this->start = false;
         
-        $title;        
+        $title;
+
         if($this->category != $this->computed_category && $this->category != 0){
-            $this->subcategory = null;            
+            $this->subcategory = 0;            
         }
         //si no existe categoría y se selecciona subcategoría se obtiene la 
         //categoría y se estable en $category.
@@ -115,7 +143,7 @@ class Store extends Component
         if(!$this->category)
             $this->category = 0;
         if($this->category == 0){
-            $this->computed_category = null;
+            $this->computed_category = 0;
         }
 
         $this->resetPage();
@@ -142,7 +170,11 @@ class Store extends Component
         }
         return $title;
     }
-    public function set_special_filter($type){            
+    public function set_special_filter($type){
+        //si existen caracteres en el buscador lo limpiamos
+        $this->reset_searcher();
+        //si existen caracteres en el buscador lo limpiamos
+        //$this->reset_searcher();           
         if($type){
             if($this->special_filter_tmp == $type){                
                 if($this->price_order == "asc"){
@@ -198,64 +230,100 @@ class Store extends Component
     }
 
     
+    //se ejecuta antes de actualizar la variable $this->search_product
+    public function updatingSearchProduct($search_product){
+        
+        //necesario cuando venimos de categoría seleccionada
+        if($search_product){
+            $this->set_search();
+            //dd("search_product_nuevo");
+        }else{
+            $this->search_query = false;
+        }
+    }
+    public function set_search(){
+        $this->search_query = true;        
+        //if($this->category){                
+        $this->category=0;
+        //}
+        $this->subcategory=0;
+
+    }
+    
     public function render()
     {
-
-        //dd($this->category);
+        
         $categories_list = Category::where('status',1)->where('type',0)->pluck('name','id');
         $categories_list->prepend('Seleccione...',0);
         
+
+
+
         if($this->category){
-                       
+           //dd("existe category");
             $subcategories_list = Category::where('status',1)->where('type',$this->category)->pluck('name','id');            
-            if(!$this->subcategory)
+            if(!$this->subcategory){                
                 $subcategories_list->prepend('Seleccione...',0);
+            }
 
         }else{
             
             //si se accede desde el enlace (sin ninguna categoría ni 
             //subcategoría seleccionada) creamos arrays con el texto 
             //"Seleccione..." y obtenemos la consulta de todas las subcategorías
-            
             $subcategories_list = Category::where('status',1)->where('type','!=',0)->pluck('name','id');
-            $subcategories_list->prepend('Seleccione...',0);
-        }
-        //dd($this->category);
-        if($this->special_filter){
-
-            $products = $this->set_query_special_filter($this->special_filter);
-            $this->special_filter=null;
-            
+            $subcategories_list->prepend('Seleccione...',0);            
 
         }
-        if($this->category){
-            //actualizamos la copia 
+        //si existe consulta de búsqueda anulamos el resto y priorizamos
+        //la búsqueda
+        if($this->search_query){
+            //dd($this->subcategory);
+            //dd("existe search_query");
+            $products = Product::where('status',1)->where('name','LIKE','%'.$this->search_product.'%')->orderBy('id','asc')->paginate($this->limit_page);
             $this->computed_category = $this->category;
-            if($this->subcategory){
-
-                //actualizamos la copia 
-                $this->computed_subcategory = $this->subcategory;
-
-                $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);                
-            }else{
-                
-                
-                $products = Product::where('status',1)->where('category_id',$this->category)->orderBy('id','asc')->paginate($this->limit_page);    
-                
-                
-            }
-            
         }else{
-            if($this->subcategory){
-                $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);
-            }else if(!$this->switch_special_filter){
-                $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
-                //$this->switch_special_filter=false;
-            }
-        }
+            //dd($this->category);
+            if($this->special_filter){
 
-        $this->start=true;
-        //dd($this->category);
+                $products = $this->set_query_special_filter($this->special_filter);
+                $this->special_filter=null;
+                
+                
+
+            }
+            if($this->category){
+                //dd("llegando");
+                //actualizamos la copia 
+                $this->computed_category = $this->category;
+                if($this->subcategory){
+
+                    //actualizamos la copia 
+                    $this->computed_subcategory = $this->subcategory;
+
+                    $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);                
+                }else{
+                    
+                    
+                    $products = Product::where('status',1)->where('category_id',$this->category)->orderBy('id','asc')->paginate($this->limit_page);    
+                    
+                    
+                }
+                
+            }else{
+                if($this->subcategory){                    
+                    $products = Product::where('status',1)->where('subcategory_id',$this->subcategory)->orderBy('id','asc')->paginate($this->limit_page);
+                }else if(!$this->switch_special_filter){
+                    //dd("switch");
+                    $products = Product::where('status',1)->orderBy('id','asc')->paginate($this->limit_page);
+                    //$this->switch_special_filter=false;
+                }else{
+                    //dd("aqui");
+                    //dd($products);
+                }
+            }
+        }        
+        $this->start=true;        
         $data = ['products' => $products,'categories_list' => $categories_list,'subcategories_list' => $subcategories_list,'computed_cat' => $this->computed_category];
         return view('livewire.store.store',$data)->extends('layouts.main');
     }

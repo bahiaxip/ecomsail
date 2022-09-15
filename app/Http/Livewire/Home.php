@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Product, App\Models\Category, App\Models\Combination, App\Models\Attribute, App\Models\ImagesProducts, App\Models\Order, App\Models\Order_Item, App\Models\Visitor, App\Models\User, App\Models\Sold_Product;
-use Auth,Str;
+use Auth,Str,Route;
 use App\Models\Carousel;
 //use Config;
 //use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities;
@@ -40,10 +40,12 @@ class Home extends Component
     public $autoslide;
     public $time_interval;
     public $limit_page;
-
+    //buscador global
+    public $search_product;
+    
 //error si no hay combinaciones
 
-    public function mount(){
+    public function mount(){        
         //comprobamos ajustes establecidos del slider (MDSlider)
         $this->main_slider = config('ecomsail.main_slider');
         $this->autoslide = config('ecomsail.autoslide');
@@ -56,6 +58,12 @@ class Home extends Component
         }
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
     }
+    //redirección del buscador genérico
+    public function go_to_search(){
+        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
+    }
+
+    
     //insertamos datos del visitante cada vez que accede al home (de usuario)
     public function set_new_visitor(){
         
