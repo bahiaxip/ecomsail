@@ -53,7 +53,8 @@ class EditUser extends Component
 
     //redirección del buscador genérico
     public function go_to_search(){
-        return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
+        if($this->search_product)
+            return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
     }
 
     //edit_user
