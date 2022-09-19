@@ -1799,10 +1799,15 @@ function message_confirm(data){
         let title = div.querySelector('.title');
         let msge = div.querySelector('.text_message');
         //establecemos título y mensaje
-        if(data.type == 'confirm'){
+        if(data.type){
             title.innerHTML = '¿Seguro?';
-            msge.innerHTML = 'Seguro que desea eliminar el producto';
+            if(data.type == 'confirm'){                
+                msge.innerHTML = 'Seguro que desea eliminar el producto';
+            }else if(data.type == 'address'){
+                msge.innerHTML = 'Seguro que desea eliminar la dirección';
+            }
         }
+        
         //efecto inflate
         div.classList.add('inflate');
         div_message.style.opacity = 1;

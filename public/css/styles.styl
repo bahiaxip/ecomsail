@@ -34,6 +34,7 @@ rgba2 = rgba(0,178,146,1)
 		color #FFF
 .btn_sry
 	background-color color2
+	color color10
 	font-family QuicksandB
 	&:hover
 		color #FFF
@@ -135,6 +136,23 @@ rgba2 = rgba(0,178,146,1)
 				text-align center
 			span
 				font-family QuicksandB
+/* modal */
+.modal-content
+	.modal-header
+		background-color color2
+		color color10
+		font-family QuicksandB
+	label
+		color color6
+		padding-bottom 5px
+	
+	select,input
+		
+		&:focus
+			border none
+			box-shadow 1px 1px 5px rgba(0,178,146,.5),0px 1px 5px rgba(0,178,146,.5),-1px 0px 5px rgba(0,178,146,.5),0px -1px 5px rgba(0,178,146,.5)
+			outline none
+			
 #modalConfirm
 	/*transition all 1s linear*/
 .fade2	
@@ -506,6 +524,30 @@ rgba2 = rgba(0,178,146,1)
 			button:disabled
 				cursor not-allowed
 				pointer-events all 
+			.icon_product
+				align-items center
+				background-color color8
+				border-radius 50% !important			
+				cursor pointer
+				display flex
+				font-size 1.2em
+				justify-content center
+				height 40px
+				vertical-align middle
+				width 40px
+				i					
+					color color7
+					font-size .8em
+					&:hover
+						color #FFF
+		
+				&:active
+					box-shadow 0 0 6px color1
+					color color7
+			.icon_product.active
+				background-color color1
+				i
+					color #FFF
 			.icon_product.disabled
 				cursor not-allowed
 				opacity 0.7
@@ -594,30 +636,7 @@ rgba2 = rgba(0,178,146,1)
 						background-color color1
 						color #FFF
 					
-		.icon_product
-			align-items center
-			background-color color8
-			border-radius 50%			
-			cursor pointer
-			display flex
-			font-size 1.2em
-			justify-content center
-			height 40px
-			vertical-align middle
-			width 40px
-			i					
-				color color7
-				font-size .8em
-				&:hover
-					color #FFF
 		
-			&:active
-				box-shadow 0 0 6px color1
-				color color7
-		.icon_product.active
-			background-color color1
-			i
-				color #FFF
 			
 /* clases para los botones del slider slick (por defecto se encuentra transparent)
 como existen 2 uno es el carousel de product y otro el modal de product
@@ -702,9 +721,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	color color8
 	font-family QuicksandR
 	.empty
+		border:rgba(0,178,146,.2) 1px solid
+		border-radius 5px
 		display flex
 		justify-content center
-		margin-top 32px
+		padding 32px
+		margin 10px 0
 		p
 			color color6
 			font-size 18px

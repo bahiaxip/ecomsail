@@ -256,14 +256,16 @@
                       </div>
                     </div>
                     <div class="col-xl-7 quantity_btn">
-                      <button type="button" class="btn " wire:click="add_cart" @guest disabled title="Inicie sesión para añadir productos al carrito" @endguest  @if($prod->stock == 0 || $sum_stock == 0)
+                        <button type="button" class="btn" wire:click="add_cart" @guest disabled title="Inicie sesión para añadir productos al carrito" @endguest  @if($prod->stock == 0 || $sum_stock == 0)
                         {{'disabled'}} title="Producto sin stock" @endif>
-                        <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
+                            <i class="fas fa-cart-plus"></i> Agregar al carrito
+                        </button>
                       {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
                       --}}
-                        <div class="icon_product @guest disabled @endguest @if($favorite) active @endif" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest wire:click.prevent="add_favorite(switchMessageSession)">
+                      {{-- se puede utilizar la clase disabled o la clase btn de bootstrap para desactivar los estilos del botón --}}
+                        <button class="icon_product @guest disabled @endguest @if($favorite) active @endif" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest wire:click.prevent="add_favorite(switchMessageSession)" @guest disabled @endguest>
                             <i class="fas fa-star"></i> 
-                        </div>
+                        </button>
                     </div>                            
                     
                 </div>

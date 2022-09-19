@@ -1,17 +1,66 @@
 <div style="position: relative;">
-    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
-        <div class="alert alert-{{$typealert}}" style="min-width:700px">            
-            <h2 style="font-size:1em;text-align:center">{{session('message') }}</h2>
-            @if($errors->any())
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            @endif
-            <script>
-                
-            </script>
+    <div class="message_modal" >
+        <div class="message" >
+            <div>
+                @if(session('message.title'))
+                    @switch($typealert)
+                        @case('success')
+                            <span class="success">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                            @break
+                        @case('danger')
+                            <span class="danger">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </span>
+                            @break
+                        @case('info')
+                            <span class="info">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </span>
+                            @break
+                        @case('warning')
+                            <span class="warning">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            @break
+                    @endswitch
+                @else
+                    <span class="success dnone">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                    <span class="danger dnone">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </span>
+                    <span class="info dnone">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </span>
+                    <span class="warning dnone">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </span>
+                    <span class="question dnone">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </span>
+                @endif
+            </div>
+            <div>
+                <h2 class="title" style="display:flex;align-items:center">
+                    @if(session('message.title'))
+                        {{session('message.title')}}
+                    @endif
+                </h2>
+            </div>
+            <div>
+                <h3 class="text_message">
+                    @if(session('message.message'))
+                        {{ session('message.message') }}
+                    @endif
+                </h3>
+            </div>
+            
+            
+            <div class="buttons"></div>
+            
         </div>
     </div>
     @include('layouts.nav_user')
@@ -40,8 +89,8 @@
                 @php $sum=0;$total=0; @endphp
                 @if($addresses->count()==0)
                 
-                <div class="empty alert alert-success">
-                    <p class="mauto">Aun no existen direcciones</p>
+                <div class="empty  ">
+                    <p class="mauto">No existen direcciones</p>
                 </div>
                 
                 @else
@@ -84,7 +133,7 @@
                                 </div>
                                 <div class="col-md-2 actions" >
                                     <div class="delete" >
-                                        <button class="btn btn-sm delete" title="Eliminar producto" wire:click="save_address_id({{$adr->id}})" data-bs-toggle="modal" data-bs-target="#confirmDel">
+                                        <button class="btn btn-sm delete" title="Eliminar producto" onclick="message_confirm({'status':'question','id':{{$adr->id}},'type':'confirm' })" >
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
@@ -188,3 +237,12 @@
         </div>
     </div>
 </div>
+<script>
+    //eliminar producto del carrito
+    function deleteId(data){
+        cancelModal(data);
+        //mostrar loading
+        set_loading();
+        @this.delete(data.id);
+    }
+</script>

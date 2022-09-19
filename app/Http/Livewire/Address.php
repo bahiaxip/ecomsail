@@ -42,7 +42,12 @@ class Address extends Component
     public $addressTmpId;
     //buscador global
     public $search_product;
-    
+    //personalizamos el nombre del atributo de los mensajes de error
+    protected $validationAttributes = [
+        'lastname' => 'apellidos',
+        'address_home' => 'dirección',
+        'cp' => 'código postal',        
+    ]; 
     public function mount($id){
         $this->user_id = Auth::id();
     }
@@ -175,14 +180,17 @@ class Address extends Component
             }
         }
     }
+    //anulados por nuevo modal
+    /*
     public function save_address_id($id){
         $this->addressTmpId = $id;
     }
     public function clear_address_id(){
         $this->addressTmpId = null;
     }
-    public function delete(){
-        $address = Addr::findOrFail($this->addressTmpId);
+    */
+    public function delete($id){
+        $address = Addr::findOrFail($id);
         $address->delete();
         $this->typealert="success";
         session()->flash('message','La dirección ha sido eliminada correctamente');
