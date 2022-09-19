@@ -1,12 +1,28 @@
-<div class="" style="width:100%;display:flex;">
-    <li class="nav-item" style="float:left;list-style:none;color:orange;display:flex">
-        <a href="{{url('/')}}" class="nav-link lk-home" style="color:#696969;display:flex">
-            <span><img src="{{url('images/ecomsail_logo.svg')}}" alt="" style="max-height:40px"></span>
-        </a>
-    </li>
-    <li style="list-style: none;margin:auto">
-        <input type="search" name="search" class="form-control" size="100" placeholder="Buscar..." wire:model="search_product" wire:keydown.enter = "go_to_search">
-    </li>
+<div class="" style="width:100%;">
+    <div class="box_logo">
+        <li class="logo" >
+            <a href="{{url('/')}}" class="nav-link " >
+                <div class="backgrounds">
+                    {{--
+                    <img src="{{url('images/ecomsail_logo.svg')}}" alt="" style="max-height:40px">
+                    --}}
+                    {{--
+                    <span style="background-image:url('images/logo/favicon_ecomsail.svg');background-size:90%;background-position:bottom;background-repeat: no-repeat;min-width:30px;min-height:30px;padding:25px"></span>
+                    <span style="background-image:url('images/logo/ecomsail_logo_parte2.png');background-size:90%;background-position:bottom;background-repeat: no-repeat;min-width:60px;min-height:30px;padding:25px"></span>
+                    --}}
+                    
+                    <img class="logo_e" src="{{url('images/logo/favicon_ecomsail.svg')}}" alt="">
+                    
+                    
+                    <img class="logo_text" src="{{url('images/logo/ecomsail_logo_parte2.png')}}" alt="" >
+                    
+                </div>
+            </a>
+        </li>
+        <li class="search" >
+            <input type="search" name="search" class="form-control" size="100" placeholder="Buscar..." wire:model="search_product" wire:keydown.enter = "go_to_search">
+        </li>
+    </div>
 </div>
 <div class="container-fluid box_nav_user" >
     <div class="dropdown show menu_hidden">

@@ -6,6 +6,31 @@ color6 = #494949
 color7 = #E3E3E3
 color8 = #696969
 
+
+.box_logo
+	display flex
+	min-height 50px
+	width 100%
+	li
+		list-style none
+		.logo_e
+			max-height 45px
+			
+			transition all .3s linear
+			&:hover
+				transform rotate(-180deg)
+		.logo_text
+			max-height 18px
+	li.logo
+		display block
+		width:25%
+		.backgrounds
+			align-items end
+			display flex
+			
+	li.search
+		margin auto 10px auto 30px
+		width 75%
 .lat
 	width 10%
 	/* genérico */
@@ -50,6 +75,7 @@ mantener el 10%*/
 .lat_right
 	justify-content flex-end
 	display flex
+	min-width 125px
 	li	
 		display flex		
 	ul

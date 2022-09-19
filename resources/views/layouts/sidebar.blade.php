@@ -12,7 +12,8 @@
 	-->
 	
 	<div class="logo">
-		<img src="{{ asset('images/favicon_ecomsail.svg') }}" alt="" style="padding:5px">
+		{{--<img src="{{ asset('images/favicon_ecomsail.svg') }}" alt="" style="padding:5px">--}}
+		<img src="{{ asset('images/logo/favicon_ecomsail.svg') }}" alt="" style="padding:5px">
 	</div>
 	
 	<div class="options mtop16">
