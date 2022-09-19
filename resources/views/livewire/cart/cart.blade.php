@@ -4,24 +4,77 @@
     <div class="message_opacity" style="position:absolute;opacity:0;display:flex;justify-content:center;width:100%">
         <div class="alert alert-{{$typealert}}" style="width:60%">
     --}}
-    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
-        <div class="alert alert-{{$typealert}}" >
-            <h5 style="font-size:1em;text-align:center" >{{session('message') }}</h5>
-            @if($errors->any())
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            @endif
-            <script>
-                {{--
-                $('.alert').slideDown();
-                setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
-                document.querySelector('.message_opacity').style.opacity = 0;
-                --}}
-            </script>
+    <div class="message_modal" >
+        <div class="message" >
+            <div>
+                @if(session('message.title'))
+                    @switch($typealert)
+                        @case('success')
+                            <span class="success">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                            @break
+                        @case('danger')
+                            <span class="danger">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </span>
+                            @break
+                        @case('info')
+                            <span class="info">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </span>
+                            @break
+                        @case('warning')
+                            <span class="warning">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </span>
+                            @break
+                    @endswitch
+                @else
+                    <span class="success dnone">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                        
+                        <span class="danger dnone">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </span>
+                        
+                        <span class="info dnone">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </span>
+                        
+                        <span class="warning dnone">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </span>
+
+                        <span class="question dnone">
+                            <i class="fa-solid fa-circle-question"></i>
+                        </span>
+                @endif
+            </div>
+            <div>
+                <h2 class="title" style="display:flex;align-items:center">
+                    @if(session('message.title'))
+                        {{session('message.title')}}
+                    @endif
+                </h2>
+            </div>
+            <div>
+                <h3 class="text_message">
+                    @if(session('message.message'))
+                        {{ session('message.message') }}
+                    @endif
+                </h3>
+            </div>
+            
+            
+            <div class="buttons"></div>
+            
         </div>
+    </div>
+    <!-- loading cuando actualizamos edición -->
+    <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.3);z-index:999" >
+        <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
     </div>
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
@@ -37,10 +90,7 @@
             
         >
             <div class="col-xl-8 shadow" style="position:relative">
-                <!-- loading cuando actualizamos edición -->
-                <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(255,255,255,.3);z-index:999" >
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
-                </div>
+                
                 <div style="width:100%">
                 <div class="header">
                     <h5><i class="fas fa-cart-arrow-down"></i> CARRITO</h5>
@@ -81,8 +131,8 @@
                                 <div class="col-10 title">
                                     {{$oi->title}}
                                 </div>
-                                <div class="col-2 admin_items end">
-                                    <button class="btn btn-sm delete_round" title="Eliminar producto" wire:click="save_product_id({{$oi->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                                <div  class="col-2 admin_items end">
+                                    <button class="btn btn-sm delete_round" title="Eliminar producto" onclick="message_confirm({'status':'question','id':{{$oi->id}},'type':'confirm' })">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
@@ -288,8 +338,14 @@
         </div>
     </div>
 </div>
-@push('scripts')
+
 <script>
-  
+    //eliminar producto del carrito
+    function deleteId(data){
+        cancelModal(data);
+        //mostrar loading
+        set_loading();
+        @this.delete(data.id);
+    }
 </script>
-@endpush
+

@@ -1,7 +1,35 @@
 <div style="position:relative">
-    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
-        <div class="alert alert-{{$typealert}}" >
-            <h2 style="font-size:1em;text-align:center">{{session('message') }}</h2>
+    <div class="message_modal" >
+        <div class="message {{$typealert}} " >
+            <div>
+                <h2>
+                    
+                    {{session('message.title')}}                        
+                    
+                </h2>
+            </div>
+            <div>
+                <h3>{{ session('message.message') }}</h3>
+            </div>
+            <div>
+                @switch($typealert)
+                    @case('success')
+                        <span class="success">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                        @break
+                    @case('danger')
+                        <span class="danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </span>
+                        @break
+                    @case('info')
+                        <span class="info">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </span>
+                        @break
+                @endswitch
+            </div>
             @if($errors->any())
             <ul>
                 @foreach($errors->all() as $error)
@@ -233,16 +261,17 @@
                         <i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                       {{--{{ Form::submit('Agregar al carrito',['class' => 'btn btn-success'])}}
                       --}}
-                        <div class="icon_product @guest disabled @endguest @if($favorite) active @endif" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest wire:click.prevent="add_favorite">
+                        <div class="icon_product @guest disabled @endguest @if($favorite) active @endif" @guest title="Inicie sesión para añadir productos a la lista de favoritos" @endguest wire:click.prevent="add_favorite(switchMessageSession)">
                             <i class="fas fa-star"></i> 
                         </div>
                     </div>                            
                     
                 </div>
-                <div class="row mtop32">
+                {{--
+                <div class="row mtop32" style="transition: all 1s linear">
                     @if(session()->has('message2'))
-                        <div class="container ">
-                            <div class="product_message alert alert-{{$typealert}}">            
+                        <div class="container " style="transition: all 1s linear">
+                            <div class="product_message alert alert-{{$typealert}}" style="transition: all 1s linear">            
                                 <p >{{session('message2')}}</p>
                                 @if(config('ecomsail.button_adding_product') =='on')
                                 <a class="btn btn-sm btn_pry" href="{{url('/cart')}}">Ver el carrito</a>
@@ -256,13 +285,14 @@
                                 @endif
                                 <script>
                                     $('.alert').slideDown();
-                                    setTimeout(()=>{ $('.alert').slideUp(); }, 10000);
+                                    setTimeout(()=>{ $('.alert').slideUp(); }, 1000);
                                 </script>
                             </div>
                         </div>
                     @endif
                 </div>
-                <div class="row mtop32">
+                --}}
+                <div class="row mtop32 nav_tabs">
                     <nav>
                           <div class="nav nav-tabs" id="nav-tab" role="tablist">
                               <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Descripción</button>              

@@ -555,8 +555,14 @@ class Product extends Component
         //si ya existe uno que no tiene combinaciones, devolvemos 
         //mensaje y detenemos la ejecución
                 }else{
-                    $this->typealert = 'danger';
-                    session()->flash('message2','Ya existe ese producto en el carrito');
+                    $this->typealert = 'info';
+                    $data = [
+                        'message' => 'Ya existe ese producto en el carrito',
+                        'title' => 'Producto ya añadido',
+                        'status' => 'info'
+                    ];
+                    session()->flash('message',$data);
+                    $this->emit('modal',['status' => $data['status']]);
                     return false;    
                 }
             }
@@ -568,8 +574,14 @@ class Product extends Component
             if(count($test) > 0){
                 //$this->dispatchBrowserEvent('contentChanged');
                 //$this->emit('fastview');
-                $this->typealert = 'danger';
-                session()->flash('message2','Ya existe ese producto en el carrito');
+                $this->typealert = 'info';
+                $data = [
+                    'message' => 'Ya existe ese producto en el carrito',
+                    'title' => 'Añadido',
+                    'status' => 'info'
+                ];
+                session()->flash('message',$message);
+                $this->emit('modal');
                 return false;
             }
         }
@@ -578,7 +590,7 @@ class Product extends Component
         if(!$product){
             $this->typealert = 'danger';
             session()->flash('message2','No existe ese producto');
-            $this->emit('message_opacity');
+            $this->emit('modal');
             return false;
         }
         //comprobamos si existe suplemento de precio por alguna
@@ -625,8 +637,17 @@ class Product extends Component
         
         //$this->dispatchBrowserEvent('contentChanged');
         //$this->emit('fastview');
+    //necesario el typealert para realizar la animación, el envío del 
+    //status mediante el session()->flash() es más lento y la vista no renderiza
+    // el span correspondiente a tiempo.
         $this->typealert = 'success';
-        session()->flash('message2','Producto añadido al carrito correctamente');
+        $data = [
+            'message' => 'El producto ha sido añadido al carrito',
+            'title' => 'Añadido',
+            'status' => 'success'
+        ];
+        session()->flash('message', $data);
+        $this->emit('modal',['status' => $data['status']]);
     }
 
     public function create_or_update_order(){
@@ -698,22 +719,33 @@ class Product extends Component
     */
     }
 
-    public function add_favorite(){
-        //(al pulsar el botón de favoritos debe existir el $this->user_id)
-        $favorite = Favorite::where('product_id',$this->product_id)->where('user_id',$this->user_id)->first();
-        if(!$favorite){
-            Favorite::create([
-                'product_id' => $this->product_id,
-                'user_id' => $this->user_id
-            ]);
-            $message = 'El producto ha sido añadido a la lista de favoritos';
-        }else{
-            $favorite->delete();
-            $message = 'El producto ha sido eliminado de la lista de favoritos';
+    public function add_favorite($switch = null){
+        //$switch es para evitar descoordinar el mensaje del modal con la acción de
+        //añadir o eliminar favoritos
+        if(!$switch){
+            //(al pulsar el botón de favoritos debe existir el $this->user_id)
+            $favorite = Favorite::where('product_id',$this->product_id)->where('user_id',$this->user_id)->first();
+            if(!$favorite){
+                Favorite::create([
+                    'product_id' => $this->product_id,
+                    'user_id' => $this->user_id
+                ]);
+                $message = 'El producto ha sido añadido a la lista de favoritos';
+                $title = 'Añadido';
+                $status = 'success';
+            }else{
+                $favorite->delete();
+                $message = 'El producto ha sido eliminado de la lista de favoritos';
+                $title = 'Eliminado';
+                $status = 'success';
+            }
+            $this->typealert = $status;
+            $data = ['message' => $message,'title' => $title,'status' =>$status ];
+            session()->flash('message',$data);
+            //$this->emit('message_session',['status' => $status]); 
+            $this->emit('modal',['status' => $status]); 
         }
-        $this->typealert = 'success';
-        session()->flash('message',$message);
-        $this->emit('message_opacity');  
+         
     }
     public function render()
     {

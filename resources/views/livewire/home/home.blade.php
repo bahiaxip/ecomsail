@@ -1,6 +1,7 @@
 <div style="position: relative;overflow:hidden">
 
     @section('title','Inicio')
+    {{--
     <div class="message_opacity" >
         <div class="alert alert-{{$typealert}}" >            
             <h2 style="font-size:1em;text-align:center">{{session('message')}}
@@ -16,6 +17,7 @@
             </script>
         </div>
     </div>
+    --}}
     
     @include('livewire.home.fastview_item')
     @include('layouts.nav_user')

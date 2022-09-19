@@ -61,12 +61,17 @@ window.livewire.on('description3',(data)=>{
 })
 //ocultar div pasando el selector de id(#)  por parámetro(data)
 window.livewire.on('loading',(data)=>{
+    loading(data);
+    
+})
+function loading(data){
+    console.log("está llegando a loading");
     let loading = document.querySelector('#'+data);
     if(data){
         loading.style.display='none';
     }
-    
-})
+
+}
 
 window.livewire.on('combinations',()=>{
     clearPanelCombinations();
@@ -180,13 +185,192 @@ window.livewire.on('clearcheckbox',()=>{
     actionSelected=null;
     document.querySelector('#indiv_checkbox').value=0;
 })
+//mensaje modal con session (se oculta automáticamente al cabo de unos segundos)
+//switchMessageSession evita conflictos que se generan cuando se pulsa favoritos
+//cuando aun no se ha acabado completamente la animación.
+let switchMessageSession = false;
+function modal(data){
+    /*
+    if(data.confirm){
+        console.log("confirm");return;
+    }
+    */
+    if(!switchMessageSession){
+        switchMessageSession = true;
+        let div_message = document.querySelector('.message_modal');
+        let div = div_message.querySelector('.message');
+        div.classList.add('inflate');
+        div_message.style.opacity = 1;
+        div_message.style.visibility = 'visible';
+        let span;
+        if(data.status == 'success'){
+            span = div.querySelector('.success');
+            console.log("span: ",span)
+            span.style.opacity = 1;
+            span.style.transform = 'rotateX(360deg)';
+            /*animIcon.style.color = '#93edd7'*/
+        }else if(data.status == 'danger'){
+            span = div.querySelector('.danger')
+            span.style.opacity = 1;
+            //delFav.style.transform = 'rotateX(360deg)';
+        }else if(data.status == 'info'){
+            span = div.querySelector('.info')
+            span.style.opacity = 1;
+        }
+        //sustituimos el animation-play-state por eliminar y añadir la clase para inicializar
+        //div_success.style.animationPlayState = 'running'
+        if(!data.confirm){
+            setTimeout(()=>{
+                //$('.alert').slideUp();
+                div_message.style.opacity = 0;
+                div_message.style.visibility = 'hidden';
+                //reinicializamos la animación
+                setTimeout(()=>{
+                    div.classList.remove('inflate');
+                    if(data.status == 'success'){
+                        span.style.opacity = 0;
+                        span.style.transform = 'rotateX(0deg)';
+                    }else if(data.status == 'danger'){
+                        span.style.opacity = 0;
+                    }else if(data.status == 'info'){
+                        span.style.opacity = 0;
+                    }
+                    switchMessageSession = false;
+                },1000)
+            }, 3000);
+        }
+    }
+}
+window.livewire.on('modal',(data)=>{
+    modal(data);
+})
+/*
+function message_confirm(data){
+    console.log(data);
+    console.log(window.livewire);
+    return;
+    let div_message = document.querySelector('.message_modal');
+    let div = div_message.querySelector('.message');
+    let title = div.querySelector('.title');
+    let msge = div.querySelector('.text_message');
+    //establecemos título y mensaje
+    if(data.type == 'confirm_product'){
+        title.innerHTML = 'Confirmación';
+        msge.innerHTML = 'Seguro que desea eliminar el producto';
+    }
+    //efecto inflate
+    div.classList.add('inflate');
+    div_message.style.opacity = 1;
+    div_message.style.visibility = 'visible';
+    let selectorName = '.'+data.status;
+    let span = div.querySelector(selectorName);
+    console.log("selector: ",selectorName)
+    if(span){
+        span.style.opacity = 1;
+        console.log(span);
+    }
+}
+*/
+window.livewire.on('message_confirm',(data)=>{
+    //if(!switchMessageSession){
+        //switchMessageSession = true;
+        
+        
 
+        
+        
+        
+        //sustituimos el animation-play-state por eliminar y añadir la clase para inicializar
+        //div_success.style.animationPlayState = 'running'
+        /*
+        setTimeout(()=>{
+            //$('.alert').slideUp();
+            div_message.style.opacity = 0;
+            div_message.style.visibility = 'hidden';
+            
+            setTimeout(()=>{
+                //eliminamos la clase para poder reinicializar la animación
+                //en el siguiente click
+                div.classList.remove('inflate');
+                if(data.status == 'success'){
+                    span.style.opacity = 0;
+                    span.style.transform = 'rotateX(0deg)';
+                }else if(data.status == 'danger'){
+                    span.style.opacity = 0;
+                }else if(data.status == 'info'){
+                    span.style.opacity = 0;
+                }
+                //switchMessageSession = false;
+            },1000)
+            //div_success.style.animationPlayState = 'paused';
+            
+            
+            
+            
+            //div_success.style.transform = 'scale(0,0)'        
+        }, 3000);
+        */
+    //}
+})
+//mensaje modal 
 window.livewire.on('message_opacity',()=>{
-    let div_message = document.querySelector('.message_opacity');
-    div_message.style.opacity = '1';
-    setTimeout(()=>{ $('.alert').slideUp();div_message.style.opacity = 0; }, 5000);
-    
-    console.log(div_message)
+
+    if(!switchMessageSession){
+        switchMessageSession = true;
+        let div_message = document.querySelector('.message_opacity');
+        let div_success = document.querySelector('.message.success');
+        let div_danger = document.querySelector('.message.danger');
+        let div;
+        if(div_danger){
+            div = div_danger;          
+        }else{
+            div = div_success;
+        }
+        
+        let addFav = document.querySelector('.add_fav');
+        let delFav = document.querySelector('.del_fav');
+        div.classList.add('inflate');        
+
+        div_message.style.opacity = 1;
+        div_message.style.visibility = 'visible';
+        if(addFav){
+            addFav.style.opacity = 1;
+            addFav.style.transform = 'rotateX(360deg)';
+            /*animIcon.style.color = '#93edd7'*/
+        }
+        if(delFav){
+            delFav.style.opacity = 1;
+            //delFav.style.transform = 'rotateX(360deg)';
+
+        }
+        //sustituimos el animation-play-state por eliminar y añadir la clase para inicializar
+        //div_success.style.animationPlayState = 'running'
+        setTimeout(()=>{
+            //$('.alert').slideUp();
+            div_message.style.opacity = 0;
+            div_message.style.visibility = 'hidden';
+            //reinicializamos la animación
+            setTimeout(()=>{
+                div.classList.remove('inflate');
+                if(addFav){
+                    addFav.style.opacity = 0;
+                    addFav.style.transform = 'rotateX(0deg)';
+                }
+                if(delFav){
+                    delFav.style.opacity = 0;
+                    //delFav.style.transform = 'rotateX(0deg)';
+                }
+                //div_success.classList.add('inflate');
+                switchMessageSession = false;
+            },1000)
+            //div_success.style.animationPlayState = 'paused';
+            
+            
+            
+            
+            //div_success.style.transform = 'scale(0,0)'        
+        }, 4000);
+    }
 })
 if(route == 'list_home'){
     
@@ -194,6 +378,7 @@ if(route == 'list_home'){
 }
 if(route == 'cart'){
     console.log("cart")
+    console.log(window.livewire);
     //mostramos el loading duplicado al actualizar y ocultamos al comenzar el método update()
       let btn_update=document.querySelector('#btn_update');
       if(btn_update){
@@ -206,6 +391,11 @@ if(route == 'cart'){
       
     
     set_payment();
+}
+
+function set_loading(){
+    let loading = document.querySelector('#loading');
+    loading.style.display='flex';
 }
 
 if(route == 'home'){
@@ -1598,5 +1788,61 @@ function activeTabConfigProduct(num){
     })
     navtabs[num].classList.add('active');
 }
-
+//métodos para el modal
+//utilizamos JavaScript para el mensaje de confirmación, ya que desde Livewire
+// es demasiado lento
+function message_confirm(data){
+    if(!switchMessageSession){
+        switchMessageSession = true;
+        let div_message = document.querySelector('.message_modal');
+        let div = div_message.querySelector('.message');
+        let title = div.querySelector('.title');
+        let msge = div.querySelector('.text_message');
+        //establecemos título y mensaje
+        if(data.type == 'confirm'){
+            title.innerHTML = '¿Seguro?';
+            msge.innerHTML = 'Seguro que desea eliminar el producto';
+        }
+        //efecto inflate
+        div.classList.add('inflate');
+        div_message.style.opacity = 1;
+        div_message.style.visibility = 'visible';
+        let selectorName = '.'+data.status;
+        let span = div.querySelector(selectorName);
+        console.log("selector: ",selectorName)
+        if(span){
+            span.style.display='flex';
+            span.style.opacity = 1;
+            console.log(span);
+        }
+        let buttons = div.querySelector('.buttons');
+        buttons.innerHTML = `
+            <button class="btn btn_red" onclick="cancelModal({'status':'${data.status}'})"> Cancelar</button>
+            <button class="btn btn_pry" onclick="deleteId({'id':${data.id},'status':'${data.status}'})"> Eliminar</button>
+        `;
+        console.log(buttons);
+    }
+}
+function cancelModal(data){
+        
+    let div_message = document.querySelector('.message_modal');
+    let div = div_message.querySelector('.message');
+    div_message.style.opacity = 0;
+    div_message.style.visibility = 'hidden';
+    let selectorName = '.'+data.status;
+    let span = document.querySelector(selectorName);
+    setTimeout(()=>{
+        div.classList.remove('inflate');
+        if(data.status == 'success'){
+            span.style.opacity = 0;
+            span.style.transform = 'rotateX(0deg)';
+        }else if(data.status == 'danger'){
+            span.style.opacity = 0;
+        }else if(data.status == 'info'){
+            span.style.opacity = 0;
+        }
+        switchMessageSession = false;
+    },500)
+    
+}
 

@@ -7,6 +7,7 @@ color7 = #E3E3E3
 color8 = #696969
 color9 = #D3D3D3
 color10 = #F3F3F3
+color11 = #ffca7f
 rgba2 = rgba(0,178,146,1)
 
 
@@ -486,6 +487,8 @@ rgba2 = rgba(0,178,146,1)
 		.quantity_btn
 			align-items center
 			display flex
+			font-family QuicksandB
+			font-weight bold
 			justify-content center
 			
 			button
@@ -494,6 +497,8 @@ rgba2 = rgba(0,178,146,1)
 				color color7
 				margin auto 10px
 				cursor pointer
+				&:hover
+					color #FFF
 				&:active
 					box-shadow 0 0 6px color1
 					color #FFF
@@ -526,6 +531,8 @@ rgba2 = rgba(0,178,146,1)
 			.icon.disabled
 				cursor not-allowed
 				opacity 0.7
+		.nav_tabs
+			font-family Montserrat
 
 /* sobreescribimos algunas clases del product y utilizando las clases del modal fastview*/
 .div_product
@@ -555,7 +562,7 @@ rgba2 = rgba(0,178,146,1)
 		margin 20px
 		width 60%
 		.header
-			font-family QuicksandR
+			font-family Montserrat
 			font-size 22px
 			text-align center
 		.combinations.product_combinations			
@@ -590,7 +597,7 @@ rgba2 = rgba(0,178,146,1)
 		.icon_product
 			align-items center
 			background-color color8
-			border-radius 50%
+			border-radius 50%			
 			cursor pointer
 			display flex
 			font-size 1.2em
@@ -601,10 +608,12 @@ rgba2 = rgba(0,178,146,1)
 			i					
 				color color7
 				font-size .8em
+				&:hover
+					color #FFF
 		
 			&:active
 				box-shadow 0 0 6px color1
-				color #FFF
+				color color7
 		.icon_product.active
 			background-color color1
 			i
@@ -1212,18 +1221,119 @@ como existen 2 uno es el carousel de product y otro el modal de product
 
 
 /* mensaje de error */
-.message_opacity
-	left 50%
+
+
+.message_modal
+	background-color rgba(0,0,0,.5)
+	display flex
+	visibility hidden	
+	justify-content center
+	height 100vh
 	opacity 0
 	position absolute
-	transform translate(-50%,-50%);
-	top 120px 
-	z-index 1
-	transition opacity 1s linear
-	.alert
-		min-width 700px
+	width 100%
+	z-index 999
+	transition all 0.3s linear
+
+	.message
+		/*background-color rgba(122,223,194,1)*/
+		background-color #F3F3F3
+		border-radius 8px
+		display block
+		min-height 170px
+		margin auto
+		min-width 500px
+		padding 10px
+		/*transform scale(0,0)*/
+		/*transition transform 0.3s linear*/
+		z-index 999
+	.inflate
+		animation-name inflate
+		animation-duration 0.6s
+		animation-iteration-count 1
+		animation-timing-function ease-out
+		
+		/*animation-play-state paused*/
+		div
+			display flex
+			margin auto
+			min-height 50px
+			width 100%
+		
+			h2
+				align-items center
+				display flex				
+				font-family QuicksandB
+				font-size 25px
+				margin auto
+			h3
+				font-family QuicksandR
+				font-size 18px
+				margin auto
+			i				
+				font-size 2.5em
+				margin auto				
+		div span
+			display flex
+			margin auto
+			opacity 0
+			transition all 1.5s ease-in-out
+		div span.dnone
+			display none
+			
+		div span.success
+			transition all 1.5s ease-in-out
+			i
+				color rgba(122,223,194,1)
+				
+		div span.danger
+			i				
+				color rgba(255,155,194,1)
+		div span.info
+			i
+				color rgba(67,203,230,1)
+		div span.warning
+			i
+				color color11
+		
+		div span.question
+			i
+				color color2
+		
+		div.buttons
+			display flex
+			justify-content space-around
+			min-height 30px
+			padding 10px
+
+				
+/*
+.message_modal.modal_show
+	visibility visible
+	opacity 1			
+*/
 
 /* fin mensaje de error */
+/* animación inflate: efector scale con rebote al final */
+@keyframes inflate 
+	0% 
+		transform scale(0)
+	
+	50%
+		transform scale(1)
+	
+	70%
+		transform scale(0.85)
+	
+	80% 
+		transform scale(1)
+	
+	90%
+		transform scale(0.95)
+	
+	100% 
+		transform scale(1)
+	
 /* offers */
 .offers
 	.box_categories

@@ -27,7 +27,7 @@ class Cart extends Component
     public $payment_selected=1;
     public $location_id;
     public $comment;
-    public $typealert='success';
+    public $typealert;
     //lista de direcciones anotadas
     public $addresses;
 
@@ -64,6 +64,8 @@ class Cart extends Component
     public $pdf_tmp;
     //buscador global
     public $search_product;
+    //id del elemento a eliminar
+    public $id_tmp;
 
 //falta establecer la combinación de cada producto    
     public function mount(){        
@@ -122,21 +124,37 @@ class Cart extends Component
 //no sería necesaria la búsqueda del índice "user_id"
         return Order_Item::where('order_id',$id)->where('user_id',Auth::id())->get();
     }
+    //save_product_id() y clear_oi_id() no necesarios con el nuevo modal
+    //(todo desde JS)
+    /*
     public function save_product_id($id){
+        //almacenamos el id
+        
+        $this->typealert = 'success';
         $this->oiIdTmp = $id;
+        $this->id_tmp = true;
+        $data = ['status' => 'success','confirm' => true];
+        $this->emit('modal',$data);
     }
+    
     public function clear_oi_id(){
         $this->oiIdTmp='';
     }
-
-    public function delete(){
-        $oi = Order_Item::findOrFail($this->oiIdTmp);
+    */
+    public function delete($id=null){
+        $oi = Order_Item::findOrFail($id);
         $oi->delete();
         $this->typealert = 'success';
-        session()->flash('message','Producto eliminado correctamente');
-        $this->emit('message_opacity');
+        $data = [
+            'message' => 'Producto eliminado correctamente',
+            'title' => 'Eliminado',
+            'status' => 'success',
+        ];
+        session()->flash('message',$data);
+        $this->emit('modal',['status' => $data['status']]);
     }
     public function updated(){
+        //dd($this->id_tmp);
         if($this->quantity_tmp != $this->quantity){
             $this->set_quantity();
         }
@@ -247,9 +265,9 @@ class Cart extends Component
     //falta revisar los descuentos
         $address = Address::findOrFail($this->address_selected);
         if(!$address->get_location->vat){
-            $this->typealert = 'alert';
+            $this->typealert = 'danger';
             session()->flash('message','Su país no dispone de IVA para generar la factura');
-            $this->emit('message_opacity');
+            $this->emit('modal',['status' => $typealert]);
             return;
         }
         //obtenemos el iva del país
@@ -330,15 +348,22 @@ class Cart extends Component
         //enviamos mensaje        
         if($error){            
             $typealert = $error['typealert'];
+            $title = 'Error';
             $message = $error['message'].' (Function: '.$error['function'].')';
         }else{
             $typealert = 'success';
-            $message = 'Compra realizada correctamente';    
+            $title = 'Compra realizada';
+            $message = 'La compra se ha completado correctamente';    
         }
-        
         $this->typealert = $typealert;
-        session()->flash('message',$message);
-        $this->emit('message_opacity');
+        $data = [
+            'message' => $message,
+            'title' => $title,
+            'status' => $typealert,
+        ];
+        session()->flash('message',$data);
+        $this->emit('modal',['status' => $data['status']]);
+        
 //falta el clear()
     }
 
@@ -661,7 +686,7 @@ class Cart extends Component
             }
             $this->typealert = 'success';
             session()->flash('message','Usuario actualizado correctamente');
-            $this->emit('message_opacity');
+            $this->emit('modal',['status'=> 'success']);
             $this->clear2();
             $this->emit('editUser');
         }
@@ -723,6 +748,7 @@ class Cart extends Component
         //dd($this->address_selected);
 
 
-        return view('livewire.cart.cart')->extends('layouts.main',['typealert' => $this->typealert]);
+        //return view('livewire.cart.cart')->extends('layouts.main',['typealert' => $this->typealert]);
+        return view('livewire.cart.cart')->extends('layouts.main');
     }
 }
