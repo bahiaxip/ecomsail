@@ -1,4 +1,4 @@
-<div>
+<div style="overflow:hidden">
 	@section('title','Ofertas')
 
 	@include('layouts.nav_user')

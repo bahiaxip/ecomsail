@@ -1,4 +1,4 @@
-<div class="store" style="position:relative">
+<div class="store" style="position:relative;overflow:hidden">
 
 	@section('title', $title ?? 'Todos los productos')
 	@include('layouts.nav_user')
