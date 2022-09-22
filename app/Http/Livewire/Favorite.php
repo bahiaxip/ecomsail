@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 use App\Models\Favorite as Fav, App\Models\Product;
-use Auth;
+use Auth,Route;
 
 class Favorite extends Component
 {
@@ -14,9 +14,11 @@ class Favorite extends Component
     public $typealert = 'success';
     //buscador global
     public $search_product;
+    public $route_name;
     
     public function mount(){
         $this->user_id = Auth::id();
+        $this->route_name = Route::currentRouteName();
     }
 
     //redirección del buscador genérico

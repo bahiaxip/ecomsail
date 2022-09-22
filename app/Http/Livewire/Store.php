@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product, App\Models\Category;
 use Livewire\WithPagination;
 use Illuminate\Http\Request;
+use Route;
 class Store extends Component
 {
     use WithPagination;
@@ -41,7 +42,10 @@ class Store extends Component
 
     public $search_product;
     public $search_query;
+
+    public $route_name;
     public function mount($category=null,$subcategory=null,$type=null){
+
     //el parámetro type es exclusivo del buscador genérico, que contiene 
     //la cadena a buscar. Disponible en todos los componentes de usuario
         if($type){
@@ -58,7 +62,7 @@ class Store extends Component
         //$this->page (generado por laravel/livewire y pagination);        
         $this->page_tmp = $this->page;
 
-        
+        $this->route_name = Route::currentRouteName();
         /*
         if($category && !$subcategory){
             dd("hay solo category");

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-
+use Route;
 class Contact extends Component
 {
     public $typealert;
@@ -14,6 +14,10 @@ class Contact extends Component
     public $message;
     //buscador global
     public $search_product;
+    public $route_name;
+    public function mount(){
+        $this->route_name = Route::currentRouteName();
+    }
 
     //redirección del buscador genérico
     public function go_to_search(){

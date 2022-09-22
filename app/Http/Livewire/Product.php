@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts, App\Models\Favorite, App\Models\ParentCombinations as ParentComb;
-use Auth;
+use Auth,Route;
 class Product extends Component
 {
 
@@ -30,7 +30,7 @@ class Product extends Component
     public $sum_stock;
     //buscador global
     public $search_product;
-    
+    public $route_name;
     public function mount($id){        
         $this->product_id = $id;
         $this->product = Prod::findOrFail($this->product_id);
@@ -45,6 +45,7 @@ class Product extends Component
         if(Auth::id()){
             $this->user_id = Auth::id();    
         }
+        $this->route_name = Route::currentRouteName();
         /*
         else{
             $this->typealert = 'danger';

@@ -74,33 +74,43 @@
         <ul class="" >
             
             <li class="">
+                {{--
                 <a href="{{route('home')}}" class="nav-link @if(Route::is('home')) active @endif" >
                     <span>INICIO</span>
                 </a>
+                --}}
+                <a href="{{route('home')}}" class="nav-link @if($route_name == 'home') active @endif" >
+                    <span>INICIO</span>
+                </a>
+
                 <div class="layer_nav"></div>
             </li>
             <li class="">
+                {{--
                 <a href="{{route('store')}}" class="nav-link {{Route::currentRouteName()}}@if(Route::is('store') ||Route::is('livewire.message')) active @endif">
-                    
+                    <span>TIENDA</span>
+                </a>
+                --}}
+                <a href="{{route('store')}}" class="nav-link {{Route::currentRouteName()}}@if($route_name=='store'||$route_name == 'product') active @endif">
                     <span>TIENDA</span>
                 </a>
                 <div class="layer_nav"></div>
             </li>
             <li class="">
-                <a href="{{route('offers')}}" class="nav-link @if(Route::is('offers')) active @endif">
+                <a href="{{route('offers')}}" class="nav-link @if($route_name=='offers') active @endif">
                     <span>OFERTAS</span>
                 </a>
                 <div class="layer_nav"></div>
             </li>
             <li class="nav-item">
-                <a href="{{route('contact')}}" class="nav-link @if(Route::is('contact')) active @endif">
+                <a href="{{route('contact')}}" class="nav-link @if($route_name=='contact') active @endif">
                     <span>CONTACTO</span>
                 </a>
                 <div class="layer_nav"></div>
             </li>
             @auth
             <li class="nav-item">
-                <a href="{{route('cart')}}" class="nav-link @if(Route::is('cart')) active @endif">
+                <a href="{{route('cart')}}" class="nav-link @if($route_name=='cart') active @endif">
                     <span>
                         CARRITO
                     </span> 
@@ -113,7 +123,7 @@
     <div class="lat lat_right" >
         @auth
         <li>
-            <a href="{{url('/cart')}}" class="nav-link lk-home" >
+            <a href="{{url('/cart')}}" class="nav-link @if(Route::is('cart')) active @endif" >
                 <i class="fas fa-bag-shopping"></i>
                 <span style="font-size:12px">
                     ({{getCountOrders()}})
@@ -122,7 +132,7 @@
         </li>
         @endauth
         <li>
-            <a href="#" class="nav-link lk-home" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link @if($route_name=='edit_user'||$route_name=='favorites'||$route_name=='address'||$route_name=='history_orders') active @endif" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user"></i>
             </a>
             @auth

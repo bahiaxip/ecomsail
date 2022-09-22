@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Address as Addr, App\Models\Location, App\Models\Zone, App\Models\City, App\Models\Province, App\Models\History_Address;
-use Auth;
+use Auth,Route;
 use App\Functions\Prov as Pr;
 
 class Address extends Component
@@ -42,6 +42,8 @@ class Address extends Component
     public $addressTmpId;
     //buscador global
     public $search_product;
+
+    public $route_name;
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
         'lastname' => 'apellidos',
@@ -63,6 +65,7 @@ class Address extends Component
                     $counter_default++;
             }
         }
+        $this->route_name = Route::currentRouteName();
         //dd($counter_default);
     }
 
@@ -140,7 +143,7 @@ class Address extends Component
             'user_id' => Auth::id(),
             'default' => 1
         ]);
-        
+
         History_Address::create([
             'name' => $validated['name'],
             'lastname' => $validated['lastname'],

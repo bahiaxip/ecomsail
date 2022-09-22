@@ -43,6 +43,7 @@ class Home extends Component
     //buscador global
     public $search_product;
     
+    public $route_name;
 //error si no hay combinaciones
 
     public function mount(){        
@@ -57,6 +58,7 @@ class Home extends Component
             dd($ex->getMessage());
         }
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
+        $this->route_name = Route::currentRouteName();
     }
     //redirección del buscador genérico
     public function go_to_search(){

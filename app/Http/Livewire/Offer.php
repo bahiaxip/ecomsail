@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Category, App\Models\Product;
 use Livewire\WithPagination;
-
+use Route;
 class Offer extends Component
 {
     use WithPagination;
@@ -15,10 +15,13 @@ class Offer extends Component
     public $limit_page;
     //buscador global
     public $search_product;
+
+    public $route_name;
     
     public function mount(){
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
         $this->typealert = 'success';
+        $this->route_name = Route::currentRouteName();
     }
 
     //redirección del buscador genérico

@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
-use Auth;
+use Auth,Route;
 use Livewire\WithFileUploads;
 class EditUser extends Component
 {
@@ -39,6 +39,7 @@ class EditUser extends Component
     //buscador global
     public $search_product;
     
+    public $route_name;
     public function mount(){
         $this->user_id = Auth::id();
         //Class Países solo utilizada para obtener los paises (array all)
@@ -49,6 +50,7 @@ class EditUser extends Component
         $this->municip = new Municipalities();
         $this->municipies_list = $this->municip->cities;
         $this->edit_user();
+        $this->route_name = Route::currentRouteName();
     }
 
     //redirección del buscador genérico

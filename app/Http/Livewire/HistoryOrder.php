@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Order, App\Models\Order_Item, App\Models\Product, App\Models\History_Order_Item;
-use Auth;
+use Auth, Route;
 use  Livewire\WithFileUploads;
 use Livewire\WithPagination;
 class HistoryOrder extends Component
@@ -17,10 +17,11 @@ class HistoryOrder extends Component
     public $limit_page;
     //buscador global
     public $search_product;
-    
+    public $route_name;
     public function mount(){
         $this->user_id = Auth::id();
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
+        $this->route_name = Route::currentRouteName();
     }
 
     //redirección del buscador genérico

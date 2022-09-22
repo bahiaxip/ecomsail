@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute, App\Models\Combination;
-use Auth,Str,PDF;
+use Auth,Str,PDF,Route;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
 use App\Mail\Factura;
@@ -67,6 +67,8 @@ class Cart extends Component
     //id del elemento a eliminar
     public $id_tmp;
 
+    public $route_name;
+
 //falta establecer la combinación de cada producto    
     public function mount(){        
         $this->user_id = Auth::id();
@@ -77,6 +79,7 @@ class Cart extends Component
         $this->provinces_list = $this->prov->prov;
         $this->municip = new Municipalities();
         $this->municipies_list = $this->municip->cities;
+        $this->route_name = Route::currentRouteName();
     }
     //método que se ejecuta después de renderizar (exceptuando la primera vez que carga la 
     //página, en ese caso se puede usar mount()
