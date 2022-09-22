@@ -37,4 +37,8 @@ class Order extends Model
     public function get_address(){
         return $this->hasOne(Address::class,'id','selected_address');
     }
+
+    public function get_history_address(){
+        return $this->hasOne(History_Address::class,'id','selected_address');       
+    }
 }

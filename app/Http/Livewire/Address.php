@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Address as Addr, App\Models\Location, App\Models\Zone, App\Models\City, App\Models\Province;
+use App\Models\Address as Addr, App\Models\Location, App\Models\Zone, App\Models\City, App\Models\Province, App\Models\History_Address;
 use Auth;
 use App\Functions\Prov as Pr;
 
@@ -140,6 +140,28 @@ class Address extends Component
             'user_id' => Auth::id(),
             'default' => 1
         ]);
+        
+        History_Address::create([
+            'name' => $validated['name'],
+            'lastname' => $validated['lastname'],
+            'zone' => $validated['zone'],
+            'location_id' => $validated['location'],
+            'province_id' => $validated['province'],
+            'city_id' => $validated['city'],
+            'address_home' => $validated['address_home'],
+            'apartment' => $validated['apartment'],
+            'cp' => $validated['cp'],
+            'town' => $validated['town'],
+            'phone' => $validated['phone'],
+            'email' =>$validated['email'],
+            'business' => $validated['business'],
+            'nif' => $validated['nif'],
+            'title' => $validated['title'],
+            'ref' => $validated['ref'],
+            'user_id' => Auth::id(),
+            'default' => 1
+        ]);
+
         //cerrar el modal
         $this->emit('addAddress');        
         $this->set_session('success','Dirección creada','La dirección ha sido creada correctamente');

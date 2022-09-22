@@ -166,7 +166,7 @@
                         </td>
                         <td>
                             @if($order->selected_address != 0)
-                            {{ $order->get_address->name}} {{$order->get_address->lastname}}
+                            {{ $order->get_history_address->name}} {{$order->get_history_address->lastname}}
                             @else
                             {{ $order->selected_address }}
                             @endif

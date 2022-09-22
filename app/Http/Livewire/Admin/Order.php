@@ -106,7 +106,7 @@ class Order extends Component
             case '0':
             case '1':
                 $init_query = ($this->search_data) ?
-                    Ord::whereHas('get_address',function($query) use ($search_data){
+                    Ord::whereHas('get_history_address',function($query) use ($search_data){
                         $query->where('lastname','like',$search_data)
                             ->orWhere('name','like',$search_data);
                         })
@@ -119,7 +119,7 @@ class Order extends Component
                 break;
             case '2':
                 $init_query = ($this->search_data) ?
-                    Ord::onlyTrashed()->whereHas('get_address',function($query) use ($search_data){
+                    Ord::onlyTrashed()->whereHas('get_history_address',function($query) use ($search_data){
                         $query->where('lastname','like',$search_data)
                             ->orWhere('name','like',$search_data);
                         })
@@ -129,7 +129,7 @@ class Order extends Component
                 break;
             case '3':
                 $init_query = ($this->search_data) ?
-                    Ord::whereHas('get_address',function($query) use ($search_data){
+                    Ord::whereHas('get_history_address',function($query) use ($search_data){
                         $query->where('lastname','like',$search_data)
                             ->orWhere('name','like',$search_data);
                         })

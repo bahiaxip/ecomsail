@@ -184,7 +184,7 @@
                         {{ $invoice->id }}</td>                        
                     <td>
                         @if($invoice->get_order)                        
-                        {{ $invoice->get_order->get_address->name}} {{ $invoice->get_order->get_address->lastname}}
+                        {{ $invoice->get_order->get_history_address->name}} {{ $invoice->get_order->get_history_address->lastname}}
                         @endif
                     </td>
                     <td>

@@ -110,7 +110,7 @@ class Invoice extends Component
                 $init_query = ($this->search_data) ?
                     //Inv::where('order_num','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
                     Inv::whereHas('get_order',function($query) use ($search_data){
-                        $query->whereHas('get_address',function($query2) use ($search_data){
+                        $query->whereHas('get_history_address',function($query2) use ($search_data){
                             $query2->where('name','like',$search_data)
                             ->orWhere('lastname','like',$search_data);
                         });
@@ -121,7 +121,7 @@ class Invoice extends Component
             case '2':
                 $init_query = ($this->search_data) ?
                     Inv::onlyTrashed()->whereHas('get_order',function($query) use ($search_data){
-                        $query->whereHas('get_address',function($query2) use ($search_data){
+                        $query->whereHas('get_history_address',function($query2) use ($search_data){
                             $query2->where('name','like',$search_data)
                             ->orWhere('lastname','like',$search_data);;
                         });
@@ -132,7 +132,7 @@ class Invoice extends Component
             case '3':
                 $init_query = ($this->search_data) ?
                     Inv::whereHas('get_order',function($query) use ($search_data){
-                        $query->whereHas('get_address',function($query2) use ($search_data){
+                        $query->whereHas('get_history_address',function($query2) use ($search_data){
                             $query2->where('name','like',$search_data)
                             ->orWhere('lastname','like',$search_data);;
                         });
