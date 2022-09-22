@@ -1,47 +1,23 @@
 <div style="position: relative;">
-    <div class="message_modal" >
+    <div class="message_modal " >
         <div class="message" >
             <div>
-                @if(session('message.title'))
-                    @switch($typealert)
-                        @case('success')
-                            <span class="success">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                            @break
-                        @case('danger')
-                            <span class="danger">
-                                <i class="fa-solid fa-circle-xmark"></i>
-                            </span>
-                            @break
-                        @case('info')
-                            <span class="info">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </span>
-                            @break
-                        @case('warning')
-                            <span class="warning">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            @break
-                    @endswitch
-                @else
-                    <span class="success dnone">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </span>
-                    <span class="danger dnone">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </span>
-                    <span class="info dnone">
-                        <i class="fa-solid fa-circle-info"></i>
-                    </span>
-                    <span class="warning dnone">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                    </span>
-                    <span class="question dnone">
-                        <i class="fa-solid fa-circle-question"></i>
-                    </span>
-                @endif
+                <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="danger @if($typealert != 'danger') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+                <span class="info @if($typealert != 'info') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="warning @if($typealert != 'warning') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-question"></i>
+                </span>
+                
             </div>
             <div>
                 <h2 class="title" style="display:flex;align-items:center">
@@ -62,6 +38,23 @@
             <div class="buttons"></div>
             
         </div>
+        @if(session('message.title'))
+        <script>
+            console.log("msge");
+            let msge = document.querySelector('.message_modal');
+            setTimeout(()=>{
+                msge.style.visibility = 'hidden';
+                msge.style.opacity = 0;
+            },3000)
+            
+            /*
+            setTimeout(()=>{
+                cancelModal({'status':'{{$typealert}}'});
+            },3000)
+            */
+            //console.log("cancelModal")
+        </script>
+        @endif
     </div>
     @include('layouts.nav_user')
     @include('livewire.addresses.create')
@@ -133,7 +126,7 @@
                                 </div>
                                 <div class="col-md-2 actions" >
                                     <div class="delete" >
-                                        <button class="btn btn-sm delete" title="Eliminar producto" onclick="message_confirm({'status':'question','id':{{$adr->id}},'type':'confirm' })" >
+                                        <button class="btn btn-sm delete" title="Eliminar producto" onclick="message_confirm({'status':'question','id':{{$adr->id}},'type':'address' })" >
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
@@ -240,9 +233,16 @@
 <script>
     //eliminar producto del carrito
     function deleteId(data){
-        cancelModal(data);
+        //let data2 = cancelModal(data);
+        cancelModal(data).then((dato)=>{
+            console.log("async/await: ",dato);
+        })
+        
+        //resetDivModals('success');
+            
+            @this.delete(data.id);
         //mostrar loading
-        set_loading();
-        @this.delete(data.id);
+    //set_loading();
+        
     }
 </script>

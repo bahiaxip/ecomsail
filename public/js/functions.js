@@ -8,8 +8,11 @@ var events = [
 'editCity','fastview','addAddress','addSlider','editSlider'
 ];
 var description = document.querySelector('#friendly_edit1');
-//distintos events listeners recibidos por "$this->emit()" de livewire, tan solo
-//es necesario añadir datos al array events
+//creamos al inicio los distintos events listeners recibidos por "$this->emit()" de livewire,
+//de manera consecutiva se registran todos los eventos con tan solo añadir datos al array events.
+//El string añadido al array será el nombre de la cadena incluido en $this->emit(elemento_de_events)
+//Al ser la misma acción resulta más sencilla y algo optimizado.
+
 events.forEach((event)=>{        
     window.livewire.on(event,()=>{
         console.log("event: ",event+' cerramos modal')
@@ -185,65 +188,7 @@ window.livewire.on('clearcheckbox',()=>{
     actionSelected=null;
     document.querySelector('#indiv_checkbox').value=0;
 })
-//mensaje modal con session (se oculta automáticamente al cabo de unos segundos)
-//switchMessageSession evita conflictos que se generan cuando se pulsa favoritos
-//cuando aun no se ha acabado completamente la animación.
-let switchMessageSession = false;
-function modal(data){
-    /*
-    if(data.confirm){
-        console.log("confirm");return;
-    }
-    */
-    if(!switchMessageSession){
-        switchMessageSession = true;
-        let div_message = document.querySelector('.message_modal');
-        let div = div_message.querySelector('.message');
-        div.classList.add('inflate');
-        div_message.style.opacity = 1;
-        div_message.style.visibility = 'visible';
-        let span;
-        if(data.status == 'success'){
-            span = div.querySelector('.success');
-            console.log("span: ",span)
-            span.style.opacity = 1;
-            span.style.transform = 'rotateX(360deg)';
-            /*animIcon.style.color = '#93edd7'*/
-        }else if(data.status == 'danger'){
-            span = div.querySelector('.danger')
-            span.style.opacity = 1;
-            //delFav.style.transform = 'rotateX(360deg)';
-        }else if(data.status == 'info'){
-            span = div.querySelector('.info')
-            span.style.opacity = 1;
-        }
-        //sustituimos el animation-play-state por eliminar y añadir la clase para inicializar
-        //div_success.style.animationPlayState = 'running'
-        if(!data.confirm){
-            setTimeout(()=>{
-                //$('.alert').slideUp();
-                div_message.style.opacity = 0;
-                div_message.style.visibility = 'hidden';
-                //reinicializamos la animación
-                setTimeout(()=>{
-                    div.classList.remove('inflate');
-                    if(data.status == 'success'){
-                        span.style.opacity = 0;
-                        span.style.transform = 'rotateX(0deg)';
-                    }else if(data.status == 'danger'){
-                        span.style.opacity = 0;
-                    }else if(data.status == 'info'){
-                        span.style.opacity = 0;
-                    }
-                    switchMessageSession = false;
-                },1000)
-            }, 3000);
-        }
-    }
-}
-window.livewire.on('modal',(data)=>{
-    modal(data);
-})
+
 /*
 function message_confirm(data){
     console.log(data);
@@ -274,8 +219,8 @@ function message_confirm(data){
 window.livewire.on('message_confirm',(data)=>{
     //if(!switchMessageSession){
         //switchMessageSession = true;
-        
-        
+    console.log("message_confirm en acción")
+    //message_confirm(data);
 
         
         
@@ -1789,22 +1734,31 @@ function activeTabConfigProduct(num){
     navtabs[num].classList.add('active');
 }
 //métodos para el modal
-//utilizamos JavaScript para el mensaje de confirmación, ya que desde Livewire
+//utilizamos solo JavaScript (sin que renderice livewire) para el mensaje de confirmación,  ya que desde Livewire
 // es demasiado lento
 function message_confirm(data){
+    
     if(!switchMessageSession){
+
+        resetDivModals(data.status);
         switchMessageSession = true;
         let div_message = document.querySelector('.message_modal');
         let div = div_message.querySelector('.message');
+        //resetDivModals();
         let title = div.querySelector('.title');
         let msge = div.querySelector('.text_message');
         //establecemos título y mensaje
         if(data.type){
             title.innerHTML = '¿Seguro?';
-            if(data.type == 'confirm'){                
+            if(data.type == 'product'){
+                title.innerHTML = '¿Seguro?';
                 msge.innerHTML = 'Seguro que desea eliminar el producto';
             }else if(data.type == 'address'){
+                title.innerHTML = '¿Seguro?';
                 msge.innerHTML = 'Seguro que desea eliminar la dirección';
+            }else if(data.type == 'order'){
+                title.innerHTML = '¿Seguro?';
+                msge.innerHTML = 'Seguro que desea eliminar el pedido';
             }
         }
         
@@ -1814,40 +1768,166 @@ function message_confirm(data){
         div_message.style.visibility = 'visible';
         let selectorName = '.'+data.status;
         let span = div.querySelector(selectorName);
-        console.log("selector: ",selectorName)
+        console.log(span);
+        //console.log("selector: ",selectorName)
         if(span){
-            span.style.display='flex';
+            //span.style.display='flex';
+            span.classList.remove('dnone');
             span.style.opacity = 1;
-            console.log(span);
+          
         }
         let buttons = div.querySelector('.buttons');
         buttons.innerHTML = `
             <button class="btn btn_red" onclick="cancelModal({'status':'${data.status}'})"> Cancelar</button>
             <button class="btn btn_pry" onclick="deleteId({'id':${data.id},'status':'${data.status}'})"> Eliminar</button>
         `;
-        console.log(buttons);
+        switchMessageSession = false;
     }
 }
-function cancelModal(data){
+//recorre todos los span (success/danger/info/warning/question) y y asigna la clase dnone,
+//Si existe parámetro se elimina la clase "dnone" del span indicado por el parámetro
+function resetDivModals(type=null){
+    //para el método map o filter necesario convertir a array, para forEach no es necesario
+    //opción 1: [].slice.call()
+    let statusModalsNodes = document.querySelector('.message_modal .message').querySelectorAll('div span');
+    //let statusModals = [].slice.call(statusModalsNodes);
+    //opción 2: ...
+    //let statusModals = [...document.querySelector('.message_modal .message').querySelectorAll('div span')];
+    
+    statusModalsNodes.forEach((modal)=>{
+        //console.log("modal antes: ",modal)
+        //if(modal.style.display='flex'){
+        //if(!modal.classList.contains('success')){
+            modal.classList.add('dnone');
         
+        //}
+        if(type && modal.classList.contains(type)){
+            modal.classList.remove('dnone')
+        }
+    })
+}
+//mensaje modal con session (se oculta automáticamente al cabo de unos segundos)
+//switchMessageSession evita conflictos que se generan cuando se pulsa favoritos
+//cuando aun no se ha acabado completamente la animación.
+let switchMessageSession = false;
+function modal(data){
+    /*
+    if(data.confirm){
+        console.log("confirm");return;
+    }
+    */console.log("el modal: ",switchMessageSession);
+    if(!switchMessageSession){        
+        switchMessageSession = true;
+        let div_message = document.querySelector('.message_modal');
+        let div = div_message.querySelector('.message');
+        div.classList.add('inflate');
+        console.log("inflate");
+        //mostramos fondo (con transition)
+        div_message.style.opacity = 1;
+        div_message.style.visibility = 'visible';
+        let span;
+        //el resetDivModals no es necesario ya este método es lanzado desde Livewire,
+        //al acabar el método se ejecuta el método render() que renderiza el componente.
+        
+        
+        //if(data.status == 'success'){
+        //mostramos icono
+        if(data.status == 'success'){
+            resetDivModals('success');
+            span = div.querySelector('.success');
+            console.log("span: ",span)
+            //span.classList.remove('dnone');
+            span.style.opacity = 1;
+            span.style.transform = 'rotateX(360deg)';
+            /*animIcon.style.color = '#93edd7'*/
+        }else if(data.status == 'danger'){
+            span = div.querySelector('.danger')
+            span.style.opacity = 1;
+            //delFav.style.transform = 'rotateX(360deg)';
+        }else if(data.status == 'info'){
+            span = div.querySelector('.info')
+            span.style.opacity = 1;
+        }
+        console.log(data)
+        //sustituimos el animation-play-state por eliminar y añadir la clase para inicializar        
+                            //div_success.style.animationPlayState = 'running'
+        if(data.confirm === undefined){
+            console.log("llega al settimeout")
+            setTimeout(()=>{
+                //$('.alert').slideUp();
+                div_message.style.opacity = 0;
+                div_message.style.visibility = 'hidden';
+                //reinicializamos la animación
+                setTimeout(()=>{
+                    div.classList.remove('inflate');
+                    if(data.status == 'success'){
+                        span.style.opacity = 0;
+                        span.style.transform = 'rotateX(0deg)';
+                    }else if(data.status == 'danger'){
+                        span.style.opacity = 0;
+                    }else if(data.status == 'info'){
+                        span.style.opacity = 0;
+                    }
+                    switchMessageSession = false;
+                },1000)
+            }, 3000);
+        }else{
+            switchMessageSession = false;
+            console.log("siguiente: ",switchMessageSession)
+        }
+    }
+    console.log(switchMessageSession)
+}
+window.livewire.on('modal',(data)=>{
+    modal(data);
+})
+
+//no necesariá la asincronía con timeout( solo añadida para pruebas)
+async function cancelModal(data){
+    
     let div_message = document.querySelector('.message_modal');
     let div = div_message.querySelector('.message');
+    //revisar!! //en caso de error
+    if(!div_message || !div){
+        console.log("error")
+        modal({'status':'danger'})
+    }
     div_message.style.opacity = 0;
     div_message.style.visibility = 'hidden';
     let selectorName = '.'+data.status;
     let span = document.querySelector(selectorName);
-    setTimeout(()=>{
-        div.classList.remove('inflate');
-        if(data.status == 'success'){
-            span.style.opacity = 0;
-            span.style.transform = 'rotateX(0deg)';
-        }else if(data.status == 'danger'){
-            span.style.opacity = 0;
-        }else if(data.status == 'info'){
-            span.style.opacity = 0;
-        }
-        switchMessageSession = false;
-    },500)
-    
+    console.log(selectorName)
+    return await timeout(div,data,span)
+
 }
+function timeout(div,data,span){
+    return new Promise((resolve,reject) => {
+        setTimeout(()=>{
+            
+            div.classList.remove('inflate');
+            if(data.status == 'success'){
+                span.style.opacity = 0;
+                //span.style.display = 'none'
+                span.style.transform = 'rotateX(0deg)';
+            }else if(data.status == 'danger'){
+                span.style.opacity = 0;
+            }else if(data.status == 'info'){
+                span.style.opacity = 0;
+            }else if(data.status == 'question'){
+                span.style.opacity = 0;
+            }
+            switchMessageSession = false;
+            resolve(true);
+        },500);
+    })
+}
+
+//evento que proviene del método dehydrate() de livewire que inicia después
+//de ejecutarse el método render()
+window.addEventListener('eventModal', event => {
+    //console.log(event.detail.data.status)
+    modal({'status':event.detail.data.status});
+    
+            // anything you want to initialize
+})
 

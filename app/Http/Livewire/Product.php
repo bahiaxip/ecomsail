@@ -718,10 +718,15 @@ class Product extends Component
         }
     */
     }
+    public function dehydrate(){
+        if(session('message.title'))
+            $this->dispatchBrowserEvent('eventModal',['data' => ['status' => $this->typealert]]);
+    }
 
     public function add_favorite($switch = null){
+        //con el nuevo modal $switch no sería necesario
         //$switch es para evitar descoordinar el mensaje del modal con la acción de
-        //añadir o eliminar favoritos
+        //añadir o eliminar favoritos, 
         if(!$switch){
             //(al pulsar el botón de favoritos debe existir el $this->user_id)
             $favorite = Favorite::where('product_id',$this->product_id)->where('user_id',$this->user_id)->first();
@@ -739,13 +744,18 @@ class Product extends Component
                 $title = 'Eliminado';
                 $status = 'success';
             }
-            $this->typealert = $status;
-            $data = ['message' => $message,'title' => $title,'status' =>$status ];
-            session()->flash('message',$data);
-            //$this->emit('message_session',['status' => $status]); 
-            $this->emit('modal',['status' => $status]); 
+            $this->set_session($status,$title,$message);
         }
-         
+    }
+    //establecer session temporal
+    public function set_session($typealert,$title,$message){
+        $this->typealert=$typealert;
+        $data = [
+            'message' => $message,
+            'title' => $title,
+            'status' => $typealert
+        ];
+        session()->flash('message',$data);
     }
     public function render()
     {

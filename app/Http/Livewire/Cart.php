@@ -77,11 +77,15 @@ class Cart extends Component
         $this->provinces_list = $this->prov->prov;
         $this->municip = new Municipalities();
         $this->municipies_list = $this->municip->cities;
-
-        
-
-        
     }
+    //método que se ejecuta después de renderizar (exceptuando la primera vez que carga la 
+    //página, en ese caso se puede usar mount()
+    public function dehydrate()
+    {
+        if(session('message.title'))
+            $this->dispatchBrowserEvent('eventModal',['data' => ['status' => $this->typealert]]);
+    }
+
     //redirección del buscador genérico
     public function go_to_search(){
         if($this->search_product)
@@ -121,6 +125,7 @@ class Cart extends Component
     }
 
     public function get_orders_items($id){
+//comprobar si el pedido temporal aun tiene stock de todos sus items
 //no sería necesaria la búsqueda del índice "user_id"
         return Order_Item::where('order_id',$id)->where('user_id',Auth::id())->get();
     }
@@ -141,23 +146,32 @@ class Cart extends Component
         $this->oiIdTmp='';
     }
     */
-    public function delete($id=null){
-        $oi = Order_Item::findOrFail($id);
-        $oi->delete();
-        $this->typealert = 'success';
+    //establecer session temporal
+    public function set_session($typealert,$title,$message){
+        $this->typealert=$typealert;
         $data = [
-            'message' => 'Producto eliminado correctamente',
-            'title' => 'Eliminado',
-            'status' => 'success',
+            'message' => $message,
+            'title' => $title,
+            'status' => $typealert
         ];
         session()->flash('message',$data);
-        $this->emit('modal',['status' => $data['status']]);
+    }
+    public function delete($id=null){
+        $oi = Order_Item::find($id);
+        if(!$oi){
+            $this->set_session('danger','Error','Se originó un error y no se pudo eliminar el producto');
+            return false;
+        }
+        $oi->delete();
+        $this->set_session('success','Eliminado','Producto eliminado correctamente');
+        $this->typealert = 'success';
     }
     public function updated(){
         //dd($this->id_tmp);
         if($this->quantity_tmp != $this->quantity){
             $this->set_quantity();
         }
+
         
     }
     public function set_vat_to_price($total,$vat,$type){
@@ -254,6 +268,7 @@ class Cart extends Component
     }
     public function finish_order(){
         $this->emit('loading','loading');
+        
         $validated = $this->validate([
             'payment_selected' => 'required',
             'comment' => 'nullable',
@@ -265,9 +280,7 @@ class Cart extends Component
     //falta revisar los descuentos
         $address = Address::findOrFail($this->address_selected);
         if(!$address->get_location->vat){
-            $this->typealert = 'danger';
-            session()->flash('message','Su país no dispone de IVA para generar la factura');
-            $this->emit('modal',['status' => $typealert]);
+            $this->set_session('danger','Error','Su país no dispone de IVA para generar la factura');            
             return;
         }
         //obtenemos el iva del país
@@ -295,7 +308,7 @@ class Cart extends Component
             'quantity' => $validated['sum']
         ]);
 //se podría obtener mediante get_orders_items()
-        $orders_items = Order_Item::where('order_id',$order->id)->get();
+        $orders_items = Order_Item::where('order_id',$order->id)->where('checked_stock',1)->get();
         $totals = $this->get_total_items($orders_items);
         if(!$totals)
             $error = [
@@ -355,16 +368,7 @@ class Cart extends Component
             $title = 'Compra realizada';
             $message = 'La compra se ha completado correctamente';    
         }
-        $this->typealert = $typealert;
-        $data = [
-            'message' => $message,
-            'title' => $title,
-            'status' => $typealert,
-        ];
-        session()->flash('message',$data);
-        $this->emit('modal',['status' => $data['status']]);
-        
-//falta el clear()
+        $this->set_session($typealert,$title,$message);
     }
 
     //creamos los registros de: historial, vendidos
@@ -528,44 +532,56 @@ class Cart extends Component
     
 
     public function change_quantity($operator,$id){
-        
+            //dd($this->quantity);
             if($operator == 'plus' ){
-                $order_item = Order_Item::findOrFail($id);
-                if($order_item){
+                $order_item = Order_Item::find($id);
+                if(!$order_item){
+                    $this->set_session('danger','Error','Se originó un error y no se pudo modificar la cantidad');
+                    return;
+                }
+
+                
                 //si el stock global del producto es mayor que la cantidad actual,
                 //indica que podemos aumentar por lo menos 1                
-                    if($order_item->product->stock > $this->quantity[$id]['quantity']){
+                if($order_item->product->stock > $this->quantity[$id]['quantity']){
                 //comprobamos si el order item tiene combinaciones(combinations != 'null')
                 // y comprobamos el stock de esa combinación 
-                        if($order_item->combinations != 'null'){
-                            $list_combinations = json_decode($order_item->combinations);
-                            //dd($list_combinations);
-                            $list_ids = [];
-                            if(count($list_combinations) > 0){
-                                foreach($list_combinations as $lc){
-                                    $list_ids[] = $lc->value;
-                                }
-                                //obtenemos combinación con el list_ids del order_item
-                                //para saber si dispone de stock suficiente
-                                $combination = Combination::where('list_ids',implode($list_ids))->where('product_id',$order_item->product_id)->first();
-                                if($combination->stock > $this->quantity[$id]['quantity']){
-                                    $this->quantity[$id]['quantity']++;    
-                                }
+                    if($order_item->combinations != 'null'){
+                        $list_combinations = json_decode($order_item->combinations);
+                        //dd($list_combinations);
+                        $list_ids = [];
+                        if(count($list_combinations) > 0){
+                            foreach($list_combinations as $lc){
+                                $list_ids[] = $lc->value;
                             }
-                            
-                        }else{
-                            $this->quantity[$id]['quantity']++;
+                            //obtenemos combinación con el list_ids del order_item
+                            //para saber si dispone de stock suficiente
+                            $combination = Combination::where('list_ids',implode($list_ids))->where('product_id',$order_item->product_id)->first();
+                            if($combination->stock > $this->quantity[$id]['quantity']){
+                                $this->quantity[$id]['quantity']++;
+                            }
+                            else{
+                                $this->set_session('info','Stock','No existe suficiente stock');
+                                return;
+                            }
                         }
-                        
+                    }else{
+                        $this->quantity[$id]['quantity']++;
                     }
+                }else{
+                    $this->set_session('info','Stock','No existe suficiente stock');
+                    return;
                 }
-                
             }
             elseif($operator == 'minus' && $this->quantity[$id]['quantity'] > 1)
                 $this->quantity[$id]['quantity']--;
+            else{
+                $this->emit('loading','loading');
+                return;
+            }
             
             $this->update_order_item($id,$this->quantity[$id]['quantity']);
-            
+            $this->emit('loading','loading');
 //faltan la comprobacion de combinaciones y su added_price
             //en el caso de combinaciones establecidas en el producto
             /*
@@ -604,6 +620,7 @@ class Cart extends Component
             $order_item->total = ($order_item->price_unit * $quantity) + ($added_price * $quantity);
             $order_item->save();
         }else{
+            dd("error");
             //mensaje de error de producto
         }
     }
@@ -618,7 +635,8 @@ class Cart extends Component
         }
     }
 
-    //edit_user
+//edit_user
+    //método para la vista edit_user
     public function edit_user(){
         $user = User::findOrFail(Auth::id());
         if($user->id){
@@ -636,6 +654,7 @@ class Cart extends Component
             $this->city = $user->city;
         }
     }
+    //método para la vista edit_user
     public function update(){
         //ocultamos el loading duplicado que se ha iniciado
         $this->emit('loading','loading_user');
@@ -684,6 +703,7 @@ class Cart extends Component
                     ]);
                 }
             }
+            //$this->set_session('success','Actualizado','Usuario actualizado correctamente');
             $this->typealert = 'success';
             session()->flash('message','Usuario actualizado correctamente');
             $this->emit('modal',['status'=> 'success']);
@@ -692,7 +712,7 @@ class Cart extends Component
         }
 
     }
-
+    //método para la vista edit_user
     //limpiar datos de formulario
     public function clear(){
         
@@ -704,7 +724,7 @@ class Cart extends Component
         //iteration es necesario resetear el caché del input file
         $this->iteration=rand();
     }
-
+    //método para la vista edit_user
     public function clear2(){
         $this->clear();
         //resetea todos los mensajes
@@ -716,8 +736,37 @@ class Cart extends Component
     //el id del order_item como índice 
     public function set_list_quantity_and_total_by_id(){
         foreach($this->orders_items as $o_items){
-            $this->quantity[$o_items->id]['quantity'] = $o_items->quantity;
-            $this->quantity[$o_items->id]['total'] = $o_items->total;
+            //if($o_items->checked_stock == 1){
+                $this->quantity[$o_items->id]['quantity'] = $o_items->quantity;
+                $this->quantity[$o_items->id]['total'] = $o_items->total;    
+            //}
+            
+        }
+    }
+    //comprobamos si el stock del producto o la combinación del producto 
+    //dispone del stock suficiente, si no es así, actualizamos el campo
+    //checked_stock a 0, de esa forma se mostrará como desactivado y no 
+    //serán sumados en la cantidad de productos ni en el precio total.
+    //Si se pulsa "finalizar compra" los productos desactivados serán excluidos del pedido.
+    public function test_current_stock($order_items){
+        foreach($this->orders_items as $oi){
+            if($oi->combinations != 'null'){
+                //decodificamos
+                $combs = json_decode($oi->combinations);
+                $list = [];
+                foreach($combs as $c){
+                    $list[]=$c->value;
+                }
+                $list_ids=implode($list);
+                $combination = Combination::where('product_id',$oi->product_id)->where('list_ids',$list_ids)->first();
+                if($combination->stock < $oi->quantity){
+                    $oi->update(['checked_stock' => 0]);
+                }
+            }else{
+                if($oi->product->stock < $oi->quantity){
+                    $oi->update(['checked_stock' => 0]);       
+                }
+            }
         }
     }
     public function render()
@@ -739,7 +788,11 @@ class Cart extends Component
         //productos
         $this->order_id = $this->get_order()->id;
         $this->orders_items = $this->get_orders_items($this->order_id);
-        
+        //comprobamos si cada uno de los productos dispone del stock suficiente con
+        //los productos del carrito, si alguno no dispone se desactiva. 
+        //(Al ser un pedido temporal es posible que se haya agotado el stock) 
+        $this->test_current_stock($this->orders_items);
+        //dd($oi->checked_stock);
         //creamos el array quantity con las propiedades quantity y total        
         $this->set_list_quantity_and_total_by_id();
         

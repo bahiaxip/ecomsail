@@ -1,16 +1,7 @@
 <div style="position:relative">
     <div class="message_modal" >
         <div class="message {{$typealert}} " >
-            <div>
-                <h2>
-                    
-                    {{session('message.title')}}                        
-                    
-                </h2>
-            </div>
-            <div>
-                <h3>{{ session('message.message') }}</h3>
-            </div>
+            {{--
             <div>
                 @switch($typealert)
                     @case('success')
@@ -30,6 +21,35 @@
                         @break
                 @endswitch
             </div>
+            --}}
+            <div>
+                <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="danger @if($typealert != 'danger') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+                <span class="info @if($typealert != 'info') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="warning @if($typealert != 'warning') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-question"></i>
+                </span>
+            </div>
+            <div>
+                <h2>
+                    
+                    {{session('message.title')}}                        
+                    
+                </h2>
+            </div>
+            <div>
+                <h3>{{ session('message.message') }}</h3>
+            </div>
+            
             @if($errors->any())
             <ul>
                 @foreach($errors->all() as $error)

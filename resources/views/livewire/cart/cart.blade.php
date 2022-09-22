@@ -7,50 +7,21 @@
     <div class="message_modal" >
         <div class="message" >
             <div>
-                @if(session('message.title'))
-                    @switch($typealert)
-                        @case('success')
-                            <span class="success">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                            @break
-                        @case('danger')
-                            <span class="danger">
-                                <i class="fa-solid fa-circle-xmark"></i>
-                            </span>
-                            @break
-                        @case('info')
-                            <span class="info">
-                                <i class="fa-solid fa-circle-info"></i>
-                            </span>
-                            @break
-                        @case('warning')
-                            <span class="warning">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </span>
-                            @break
-                    @endswitch
-                @else
-                    <span class="success dnone">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </span>
-                        
-                        <span class="danger dnone">
-                            <i class="fa-solid fa-circle-xmark"></i>
-                        </span>
-                        
-                        <span class="info dnone">
-                            <i class="fa-solid fa-circle-info"></i>
-                        </span>
-                        
-                        <span class="warning dnone">
-                            <i class="fa-solid fa-circle-exclamation"></i>
-                        </span>
-
-                        <span class="question dnone">
-                            <i class="fa-solid fa-circle-question"></i>
-                        </span>
-                @endif
+                <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="danger @if($typealert != 'danger') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+                <span class="info @if($typealert != 'info') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="warning @if($typealert != 'warning') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-question"></i>
+                </span>
             </div>
             <div>
                 <h2 class="title" style="display:flex;align-items:center">
@@ -120,19 +91,24 @@
                         </div>
                     </div>
                     --}}
-                    <div class="row list" >
+                    <div class="row list @if(!$oi->checked_stock) {{'disabled'}} @endif" >
+                        @if(!$oi->checked_stock)
+                        <div style="position:absolute;width:100%;height:100%;background-color:rgba(255,255,255,.7);left:0;top:0;display:flex;justify-content:center;align-items: center;">
+                            <p style="color:rgb(0,178,146);font-size:25px;font-weight: bold;">Stock no disponible</p>
+                        </div>
+                        @endif
                         <div class="col-3 image">                            
                             <div title="{{$oi->id}}&#013;{{$oi->id}}€ X {{$oi->id}}">
                                 <img src="{{url($oi->product->path_tag.$oi->product->image)}}" alt="" width="100">
                             </div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-9 content_cart">
                             <div class="row">
                                 <div class="col-10 title">
                                     {{$oi->title}}
                                 </div>
                                 <div  class="col-2 admin_items end">
-                                    <button class="btn btn-sm delete_round" title="Eliminar producto" onclick="message_confirm({'status':'question','id':{{$oi->id}},'type':'confirm' })">
+                                    <button class="btn btn-sm delete_round" title="Eliminar producto" onclick="message_confirm({'status':'question','id':{{$oi->id}},'type':'product' })">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
@@ -181,14 +157,14 @@
                                     </div>
                                     <div class="div_quantity">
                                         <div class="quantity">
-                                            <a href="#" class="amount_action" wire:click.prevent="change_quantity('minus',{{$oi->id}})">
+                                            <a href="javascript:void(0)" class="amount_action" wire:click.prevent="change_quantity('minus',{{$oi->id}})" onclick="set_loading()">
                                                 <i class="fas fa-minus"></i>
                                             </a>
-                                            <input type="text" name="quantity" wire:model="quantity.{{$oi->id}}.quantity">
+                                            <input type="text" name="quantity" wire:model="quantity.{{$oi->id}}.quantity" onkeydown="return false">
                                             {{--
                                             {{Form::text('quantity',null,['class' => 'form-control','wire:model' => $quantity[$oi['id']]])}}
                                             --}}
-                                            <a href="#" class="amount_action" wire:click.prevent="change_quantity('plus',{{$oi->id}})">
+                                            <a href="javascript:void(0)" class="amount_action" wire:click.prevent="change_quantity('plus',{{$oi->id}})" onclick="set_loading()">
                                               <i class="fas fa-plus"></i>
                                             </a>
                                         </div>
@@ -198,6 +174,7 @@
                             
                         </div>
                     </div>
+                        @if($oi->checked_stock == 1)
                         @php
                         $sum = $sum + $oi->quantity;
 //si existe descuento aplicarlo
@@ -212,6 +189,7 @@
                         
                         $this->total = $total;
                         @endphp
+                        @endif
                     @endforeach
                         @php
                         $this->sum = $sum

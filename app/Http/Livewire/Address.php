@@ -50,6 +50,20 @@ class Address extends Component
     ]; 
     public function mount($id){
         $this->user_id = Auth::id();
+        $this->addresses = Addr::where('user_id',$this->user_id)->get();
+        $counter_default=0;
+        //comprobamos si ha habido algún error y existen más de una dirección por defecto, 
+        //en ese caso mantenemos solo la primera obtenida, es una forma de corregir
+        //en caso de error o conflicto anterior.
+        foreach($this->addresses as $address){
+            if($address->default == 1){
+                if($counter_default > 0)
+                    $address->update(['default' => 0]);
+                else
+                    $counter_default++;
+            }
+        }
+        //dd($counter_default);
     }
 
     //redirección del buscador genérico
@@ -126,10 +140,9 @@ class Address extends Component
             'user_id' => Auth::id(),
             'default' => 1
         ]);
-        $this->emit('addAddress');
-        $this->typealert="success";
-        session()->flash('message','La dirección ha sido guardada correctamente');
-        $this->emit('message_opacity');
+        //cerrar el modal
+        $this->emit('addAddress');        
+        $this->set_session('success','Dirección creada','La dirección ha sido creada correctamente');
         $this->clear();
     }
 
@@ -189,14 +202,55 @@ class Address extends Component
         $this->addressTmpId = null;
     }
     */
-    public function delete($id){
-        $address = Addr::findOrFail($id);
-        $address->delete();
-        $this->typealert="success";
-        session()->flash('message','La dirección ha sido eliminada correctamente');
-        $this->emit('confirmDel');
+    //método que se ejecuta después de renderizar (exceptuando la primera vez que carga la 
+    //página, en ese caso se puede usar mount()
+    public function dehydrate()
+    {
+        if(session('message.title')){
+            $this->dispatchBrowserEvent('eventModal',['data' => ['status' => $this->typealert]]);
+        }
+        //$this->dispatchBrowserEvent('initSomething',['dato'=>'dato']);
+    //if(session('message.title')){
+            
+            //$this->emit('modal',['status' => 'success']);
+    //}else{
+    //        $this->dispatchBrowserEvent('modal',['midato' => ['dato1' => 'hola','dato2'=>'hola2']]);
+            //$this->dispatchBrowserEvent('initSomething',['midato' => "datos"]);
+    //}
     }
-
+    //establecer session temporal
+    public function set_session($typealert,$title,$message){
+        $this->typealert=$typealert;
+        $data = [
+            'message' => $message,
+            'title' => $title,
+            'status' => $typealert
+        ];
+        session()->flash('message',$data);
+    }
+    public function delete($id){
+        $address = Addr::find($id);
+        //si no existe devolvemos modal de error
+        if(!$address){
+            $this->set_session('danger','Error','Se originó un error y no se pudo eliminar la dirección');
+            return false;
+        }
+        //si la dirección a eliminar es la establecida por defecto, comprobamos si existen 
+        //direcciones y establecemos la primera obtenida por defecto
+        if($address->default == 1){
+            $count_addresses = $this->addresses = Addr::where('user_id',$this->user_id)->count();
+            if($count_addresses >= 1){
+                $default_address = Addr::where('user_id',$this->user_id)->first();
+                $default_address->update(['default' => 1]);
+            }    
+        }
+        //eliminamos
+        $address->delete();
+        $this->set_session('success','Dirección eliminada','La dirección ha sido eliminada correctamente');
+        //el emit "modal" se ejecuta ahora en el método(hook de livewire) "dehydrate()"
+        //$this->emit('modal',['status' => $data['status']]);
+    }
+    //establecer dirección como predeterminada
     public function set_default($id){
         if($this->addresses->count() != 1){
             foreach($this->addresses as $adr){

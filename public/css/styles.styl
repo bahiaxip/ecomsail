@@ -746,11 +746,13 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			border-bottom #696969 1px solid
 			display flex
 			font-size 12px
-			justify-content space-between			
+			justify-content space-between
+		.list.disabled
+			pointer-events none
 		.list
 			border-bottom color7 1px solid			
 			padding 15px 5px
-			
+			position relative
 			.image
 				display flex
 				justify-content center				
@@ -759,18 +761,23 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					max-height 128px
 					width 100%
 			/* solo cart */
-			.div_price .price
-				.main
-					display flex					
-					span.through
-						text-decoration line-through 
-						color #696969
-					.discount
-						background-color color2;
-						color #FFF
-						font-weight bold
-						margin auto
-						padding 8px
+			.content_cart
+				.admin_items.end
+					pointer-events auto
+					.delete_round
+						position relative
+				.div_price .price
+					.main
+						display flex					
+						span.through
+							text-decoration line-through 
+							color #696969
+						.discount
+							background-color color2;
+							color #FFF
+							font-weight bold
+							margin auto
+							padding 8px
 						
 			/* fin cart */
 			/* solo favorites */
@@ -794,7 +801,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				.admin_items.end
 					display flex
 					justify-content end
-					.delete_round
+					.delete_round						
 						align-items center
 						background-color transparent
 						border color7 1px solid
@@ -802,7 +809,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 						color color8
 						display flex
 						height 32px
-						justify-content flex-end
+						justify-content flex-end						
 						width 32px
 						i
 							font-size 1.1em
@@ -1256,7 +1263,11 @@ como existen 2 uno es el carousel de product y otro el modal de product
 	width 100%
 	z-index 999
 	transition all 0.3s linear
-
+	.message.inflate
+		animation-name inflate
+		animation-duration 0.6s
+		animation-iteration-count 1
+		animation-timing-function ease-out
 	.message
 		/*background-color rgba(122,223,194,1)*/
 		background-color #F3F3F3
@@ -1269,11 +1280,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		/*transform scale(0,0)*/
 		/*transition transform 0.3s linear*/
 		z-index 999
-	.inflate
-		animation-name inflate
-		animation-duration 0.6s
-		animation-iteration-count 1
-		animation-timing-function ease-out
+	
 		
 		/*animation-play-state paused*/
 		div
@@ -1294,14 +1301,16 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				margin auto
 			i				
 				font-size 2.5em
-				margin auto				
+				margin auto
+		
+			
 		div span
 			display flex
 			margin auto
 			opacity 0
 			transition all 1.5s ease-in-out
 		div span.dnone
-			display none
+			display none !important
 			
 		div span.success
 			transition all 1.5s ease-in-out
