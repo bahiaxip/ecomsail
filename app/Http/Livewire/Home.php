@@ -346,7 +346,17 @@ class Home extends Component
         $categories = Category::where('status',1)->where('type',0)->get();
 //necesario ordenar los vendidos con más cantidad
         $sold_products = Sold_Product::all();
-        $data = ['products' => $products,'categories' => $categories,'sliders' => $sliders,'sold_products' => $sold_products];
+        /*
+        $offers =  Product::where('status',1)
+                    ->whereHas('infoprice',function($query){
+                        $query->where('discount_type',1)
+                        ->where('init_discount','<=',date('Y-m-d'))
+                        ->where('end_discount','>=',date('Y-m-d'));
+                    })->get()->take(20);
+        */
+        $data = ['products' => $products,'categories' => $categories,'sliders' => $sliders,'sold_products' => $sold_products,
+            //'offers' => $offers
+        ];
 
         //el slider falla con el layouts.app por duplicado de la clase content
         return view('livewire.home.home',$data)->extends('layouts.main');

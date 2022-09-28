@@ -327,7 +327,7 @@ class Store extends Component
                 }
             }
         }        
-        $this->start=true;        
+        $this->start=true;
         $data = ['products' => $products,'categories_list' => $categories_list,'subcategories_list' => $subcategories_list,'computed_cat' => $this->computed_category];
         return view('livewire.store.store',$data)->extends('layouts.main');
     }

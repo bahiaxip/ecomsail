@@ -1869,7 +1869,7 @@ function modal(data){
                         span.style.opacity = 0;
                     }
                     switchMessageSession = false;
-                },1000)
+                },300)
             }, 3000);
         }else{
             switchMessageSession = false;
@@ -1930,4 +1930,25 @@ window.addEventListener('eventModal', event => {
     
             // anything you want to initialize
 })
+
+function scroller(el,direction){
+    
+    let div;
+    if(el == 'sold_products'){
+        console.log("llega a scroller sold-products");
+        div = document.querySelector('.box_sold_products .div_products_list');    
+    }else if(el == 'offers'){
+        console.log("llega a scroller offers");
+        div = document.querySelector('.box_offers .div_products_list');
+    }else{
+        console.log("llega a return");
+        return;
+    }
+    
+    console.log(div)
+    if(direction == 'right')
+        div.scrollLeft += 100;
+    else
+        div.scrollLeft -= 100;
+}
 

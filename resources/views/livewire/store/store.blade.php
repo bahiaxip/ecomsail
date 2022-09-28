@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 @if(!$switch_special_filter)
-                <div class="row">                    
+                <div class="row pagination">
                     {{$products->render()}}
                 </div>
                 @endif
@@ -153,10 +153,11 @@
                     <button class="btn btn_pry" wire:click="inf_scroll">Más</button>
                 </div>
                 @endif
+                @include('layouts.footer')
             </div>
             
         </div>
-    @include('layouts.footer')           
+    
     </div>
     @endif
 </div>

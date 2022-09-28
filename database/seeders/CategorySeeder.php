@@ -106,6 +106,17 @@ class CategorySeeder extends Seeder
             'title_offer' =>'Cuidado personal',
             'icon_awesome_offer' => '<i class="fa-solid fa-heart-pulse"></i>',
         ]);
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Audio y vídeo',
+            'file_name' => 'audio_video.png',
+            'image' => 'audio_video.png',
+            'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
+            'title_offer' =>'Audio y vídeo',
+            'icon_awesome_offer' => '<i class="fa-solid fa-tv"></i>',
+        ]);
 
 
         //subcategories
@@ -387,6 +398,31 @@ class CategorySeeder extends Seeder
                 'file_name' => 'Perfumes.png',
                 'image' => 'fragance.png',
                 'path_tag' => '/icons/cat_icons/personal_care/',
+            ]);
+            //Audio y vídeo
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Televisores',
+                'file_name' => 'tv.png',
+                'image' => 'tv.png',
+                'path_tag' => '/icons/cat_icons/audio_video/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Monitores',
+                'file_name' => 'monitor.png',
+                'image' => 'monitor.png',
+                'path_tag' => '/icons/cat_icons/audio_video/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Auriculares',
+                'file_name' => 'earphones.png',
+                'image' => 'earphones.png',
+                'path_tag' => '/icons/cat_icons/audio_video/',
             ]);
         
 

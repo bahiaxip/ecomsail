@@ -1,44 +1,10 @@
-<div style="width:100%" class="footer" x-show="show2"
-            x-transition:enter.duration.1000ms>
+<div style="width:100%" class="footer" 
+{{--x-show="show2"
+x-transition:enter.duration.1000ms--}}
+>
     @include('layouts.methods_payment')
 	<div class="first">
-		<div class="row" >
-            <div class="col-12 col_offers" >
-                <div class="container" style="">
-                    <div class="row title" >
-                        <h5>Descubre nuestras ofertas</h5>
-                    </div>
-                    <div class="row offers"  >
-
-                        <div data-aos="fade-up-right" data-aos-offset="100" class="col-md-6 col-lg-3 div_box_image">
-                            <div class="box_image">
-                                <img src="{{url('images/products/video/lg_oled.jpg')}}" alt="" >    
-                            </div>
-                            
-                            <p >Televisores</p>
-                        </div>
-                        <div data-aos="fade-right" data-aos-offset="300" class="col-md-6 col-lg-3 div_box_image">
-                            <div class="box_image">
-                                <img src="{{url('images/products/video/headphones.jpg')}}" alt="" >
-                            </div>
-                            <p>Auriculares</p>
-                        </div>
-                        <div data-aos="fade-left" data-aos-offset="300" class="col-md-6 col-lg-3 div_box_image">
-                            <div class="box_image">
-                                <img src="{{url('images/products/video/garden2.jpg')}}" alt="">
-                            </div>
-                            <p>Jardín</p>
-                        </div>
-                        <div data-aos="fade-up-left" data-aos-offset="100" class="col-md-6 col-lg-3 div_box_image">
-                            <div class="box_image">
-                                <img src="{{url('images/products/video/furniture.jpg')}}" alt="">
-                            </div>
-                            <p>Limpieza</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		
 		@if(Route::is('home'))
 		<div class="row background" >
 			<div  style="width:100%;display:flex;justify-content: center;align-items:center;position:relative;margin-bottom:10px">
@@ -46,48 +12,46 @@
 			</div>
 		</div>
 		@endif
-		
-		<div class="container info">
-
-			
-			<div class="row">
-				<div class="col-md-3 col-4" >
-					<div class="header" style="display:flex;justify-content: center;">
-						<i class="fa-solid fa-credit-card"></i>
+		<div class="div_icons">
+			<div class="container info">
+				<div class="row">
+					<div class="col-md-3 col-4" >
+						<div class="header" style="display:flex;justify-content: center;">
+							<i class="fa-solid fa-credit-card"></i>
+						</div>
+						<div class="text">
+							<p class="mtop10">Pago seguro</p>					
+						</div>
 					</div>
-					<div class="text">
-						<p class="mtop10">Pago seguro</p>					
+					<div class="col-md-3 col-4">
+						<div class="header">
+							<i class="fa-solid fa-truck"></i>
+						</div>
+						<div class="text">
+							<p class="mtop10" >Envío a domicilio </p>					
+						</div>
 					</div>
-				</div>
-				<div class="col-md-3 col-4">
-					<div class="header">
-						<i class="fa-solid fa-truck"></i>
+					<div class="col-md-3 col-4" >
+						<div class="header">
+							<i class="fa-solid fa-percent"></i>
+						</div>
+						<div class="text">
+							<p class="mtop10">Grandes descuentos</p>
+						</div>
 					</div>
-					<div class="text">
-						<p class="mtop10" >Envío a domicilio </p>					
-					</div>
-				</div>
-				<div class="col-md-3 col-4" >
-					<div class="header">
-						<i class="fa-solid fa-percent"></i>
-					</div>
-					<div class="text">
-						<p class="mtop10">Grandes descuentos</p>
-					</div>
-				</div>
-				
-				<div class="col-md-3 col-12" >
 					
-					<div class="images" style="display:flex;justify-content: space-around;">						
-						<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
-						<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:70px" >
-						@if(config('ecomsail.payment_paypal'))
-						<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:110px">
-						@endif
+					<div class="col-md-3 col-12" >
+						
+						<div class="images" style="display:flex;justify-content: space-around;">						
+							<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
+							<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:70px" >
+							@if(config('ecomsail.payment_paypal'))
+							<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:110px">
+							@endif
+						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 		{{--
 		<div class="row" style="min-height:100px">
