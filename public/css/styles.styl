@@ -181,30 +181,32 @@ rgba2 = rgba(0,178,146,1)
 .col_offers
 	background-color #494949 
 	min-height 300px
+	font-family YoutubeB
 	.title
 		color #FFF
-		font-family QuicksandB
-		font-size 40px
 		
+		font-size 50px
+		line-height 30px
 		margin 30px 0
 		text-align center
 	.offers
 		margin 30px 0
+		a
+			cursor pointer
 		.div_box_image
 			/* sustituido por overflow-x:hidden en div global
 			max-width 90%
 			margin auto
 			*/
 			.box_image
-				height 200px
+				height 250px
 				img
 					border-radius 8px				
 					height 100% 
 					margin auto
 					padding:20px
 			p
-				color #FFF
-				font-family QuicksandR
+				color color7
 				text-align center
 		
 /* fin row ofertas */	
@@ -324,7 +326,12 @@ rgba2 = rgba(0,178,146,1)
 			height 100%
 		&:hover			
 			border-radius 6px
-			outline color7 2px solid
+			outline color9 1px solid			
+		&:active
+			color color2
+			outline color14 1px solid
+			box-shadow 1px 1px 3px color12,1px -1px 3px color12,-1px 1px 3px color12,-1px -1px 3px color12
+			
 		.image
 			align-items center
 			display flex
@@ -392,7 +399,10 @@ rgba2 = rgba(0,178,146,1)
 					
 					transform scale(1.10)
 		a
+			color color6
 			width 100%
+			&:hover
+				color #000			
 			.title				
 				display block
 				font-family Arial
@@ -401,12 +411,13 @@ rgba2 = rgba(0,178,146,1)
 				overflow hidden
 				text-align center
 				text-overflow ellipsis
+				
 			
 			.price
 				color #000
 				display flex
-				font-family Ubuntu
-				font-size 20px
+				font-family Roboto
+				font-size 24px
 				font-weight bold
 				justify-content center
 /* fin home */
@@ -1568,6 +1579,9 @@ como existen 2 uno es el carousel de product y otro el modal de product
 @font-face
 	font-family QuicksandB	
 	src url(../fonts/quicksand/Quicksand-Bold.ttf)
+@font-face
+	font-family YoutubeB	
+	src url(../fonts/youtube-sans/youtube-sans-bold.ttf)
 
 /* fin font-face */
 

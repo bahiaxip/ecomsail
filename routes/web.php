@@ -34,7 +34,7 @@ Route::get('/product/{id}',Product::class)->name('product');
 Route::get('/contact',Contact::class)->name('contact');
 
 //offer
-Route::get('/offers',Offer::class)->name('offers');
+Route::get('/offers/{offers_cat?}/{offers_subcat?}',Offer::class)->name('offers');
 //para evitar pasar array en cada ruta podemos añadir la ruta 'App\Http\Controllers'
 //en el archivo de configuración de rutas RouteServiceProvider.php en el namespace del 
 //middleware web, en el método boot()

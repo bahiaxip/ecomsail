@@ -1524,7 +1524,7 @@ window.livewire.on('reload_images',(product_id)=>{
     document.querySelector('#nav-gallery-tab').click();
 })
 
-//establecemos el input pulsando desde cualquier punto de la card de direcciones
+//establecemos el input pulsando desde cualquier punto del div card de direcciones
 
 function set_direction(el){    
     el.querySelector('.input').firstElementChild.click()
@@ -1930,22 +1930,17 @@ window.addEventListener('eventModal', event => {
     
             // anything you want to initialize
 })
-
+//función scroller para deslizar el carousel de imágenes mediante botones en el listado de 
+//"más vendidos" y "ofertas"
 function scroller(el,direction){
-    
     let div;
     if(el == 'sold_products'){
-        console.log("llega a scroller sold-products");
         div = document.querySelector('.box_sold_products .div_products_list');    
     }else if(el == 'offers'){
-        console.log("llega a scroller offers");
         div = document.querySelector('.box_offers .div_products_list');
     }else{
-        console.log("llega a return");
         return;
     }
-    
-    console.log(div)
     if(direction == 'right')
         div.scrollLeft += 100;
     else

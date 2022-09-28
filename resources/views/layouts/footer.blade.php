@@ -97,7 +97,7 @@ x-transition:enter.duration.1000ms--}}
 				</div>
 			</div>
 
-			<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="200" class="column">
+			<div data-aos="fade-up" data-aos-offset="180" data-aos-delay="150" class="column">
 				<div class="links">
 					<div>
 						<i class="fa-solid fa-trophy"></i>

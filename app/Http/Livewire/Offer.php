@@ -11,17 +11,29 @@ class Offer extends Component
     use WithPagination;
     public $typealert;
     public $offer;
-    public $cat_id;
+    //necesario nombre diferente para no generar conflicto con "cat" y "subcat" de store en el layout nav_user
+    public $offers_cat;
+    public $offers_subcat;
     public $limit_page;
     //buscador global
     public $search_product;
 
     public $route_name;
     
-    public function mount(){
+    public function mount($offers_cat = null,$offers_subcat = null){
+
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
         $this->typealert = 'success';
         $this->route_name = Route::currentRouteName();
+            
+        if(!$offers_cat)
+            $this->offers_cat = 0;
+        else
+            $this->offers_cat = $offers_cat;
+        
+        if($offers_subcat)
+            $this->offers_subcat = $offers_subcat;
+
     }
 
     //redirección del buscador genérico
@@ -31,8 +43,10 @@ class Offer extends Component
     }
     
     public function set_offer($cat_id){
+        if($this->offers_subcat)
+            $this->offers_subcat = NULL;
         if($cat_id){
-            $this->cat_id = $cat_id;            
+            $this->offers_cat = $cat_id;            
         }
     }
     public function gotoPage($page){
@@ -48,14 +62,24 @@ class Offer extends Component
         $products;
         $categories = Category::where('status',1)->where('type',0)->where('offer',1)->get();
 
-        if($this->cat_id)        
-            $products = Product::where('status',1)->where('category_id',$this->cat_id)
+        if($this->offers_subcat){
+            $this->offers_cat = 0;
+            $products = Product::where('status',1)->where('subcategory_id',$this->offers_subcat)
                     ->whereHas('infoprice',function($query){
                         $query->where('discount_type',1)
                         ->where('init_discount','<=',date('Y-m-d'))
                         ->where('end_discount','>=',date('Y-m-d'));
                     })->paginate($this->limit_page);
+        }
+        elseif($this->offers_cat)
+            $products = Product::where('status',1)->where('category_id',$this->offers_cat)
+                    ->whereHas('infoprice',function($query){
+                        $query->where('discount_type',1)
+                        ->where('init_discount','<=',date('Y-m-d'))
+                        ->where('end_discount','>=',date('Y-m-d'));
+                    })->paginate($this->limit_page);        
         else
+            //si no existe ninguna categoría establecemos la primera de la lista
             $products = Product::where('status',1)->where('category_id',$categories[0]->id)
                     ->whereHas('infoprice',function($query){
                         $query->where('discount_type',1)

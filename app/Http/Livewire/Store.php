@@ -88,12 +88,8 @@ class Store extends Component
     }
     
     public function updated(){
-        
         //dd("antes0");
-        
     }
-
-    
 
     public function inf_scroll(){
         $this->inf_scroll_counter++;
@@ -150,9 +146,7 @@ class Store extends Component
             $this->computed_category = 0;
         }
 
-        $this->resetPage();
-        $title = $this->getTitle();        
-        $this->emit('title',['title' => $title]);
+        
     }
     public function getTitle(){
         //pasamos el nuevo título de store
