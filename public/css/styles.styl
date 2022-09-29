@@ -216,7 +216,7 @@ rgba2 = rgba(0,178,146,1)
 			&:hover
 				color #FFF
 			&:focus
-				box-shadow 1px 1px 3px color8,-1px -1px 3px color8, 1px -1px 3px color8,-1px 1px 3px color8				
+				box-shadow 1px 1px 3px color8,-1px -1px 3px color8, 1px -1px 3px color8,-1px 1px 3px color8
 			i
 				display flex
 				justify-content center
@@ -241,10 +241,15 @@ rgba2 = rgba(0,178,146,1)
 			margin auto 5px
 			outline #D3D3D3 1px solid 
 			padding 8px
-			a
+			&:hover
+				color color2
+			&:focus
+				box-shadow 1px 1px 3px color2,-1px -1px 3px color2, 1px -1px 3px color2,-1px 1px 3px color2
+				color color2
+			span
 				margin 5px
-				&:hover
-					color color2
+				
+					
 	select
 		font-family QuicksandB
 		font-size 16px
@@ -256,7 +261,8 @@ rgba2 = rgba(0,178,146,1)
 		option:not(:checked)
 			background-color #FFF
 	select:focus
-		box-shadow 0px 0px 6px color2
+		box-shadow 1px 1px 3px color2,-1px -1px 3px color2, 1px -1px 3px color2,-1px 1px 3px color2
+		
 		
 	
 	.products 
@@ -296,7 +302,9 @@ rgba2 = rgba(0,178,146,1)
 			height 100%
 		&:hover			
 			border-radius 6px
-			outline color9 1px solid			
+			outline color9 1px solid
+			.title
+				color #000		
 		&:active
 			color color2
 			outline color14 1px solid
@@ -1281,6 +1289,11 @@ como existen 2 uno es el carousel de product y otro el modal de product
 .box_products	
 	.pagination
 		padding 10px
+		.hidden
+			justify-content center
+			div:first-child
+				display none
+		
 	
 
 /* fin panel store */

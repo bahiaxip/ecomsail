@@ -15,15 +15,15 @@ x-transition:enter.duration.1000ms--}}
 		<div class="div_icons">
 			<div class="container info">
 				<div class="row">
-					<div class="col-md-3 col-4" >
+					<div class="col-md-4 col-4" >
 						<div class="header" style="display:flex;justify-content: center;">
 							<i class="fa-solid fa-credit-card"></i>
 						</div>
 						<div class="text">
-							<p class="mtop10">Pago seguro</p>					
+							<p class="mtop10">Tarjeta</p>					
 						</div>
 					</div>
-					<div class="col-md-3 col-4">
+					<div class="col-md-4 col-4">
 						<div class="header">
 							<i class="fa-solid fa-truck"></i>
 						</div>
@@ -31,7 +31,7 @@ x-transition:enter.duration.1000ms--}}
 							<p class="mtop10" >Envío a domicilio </p>					
 						</div>
 					</div>
-					<div class="col-md-3 col-4" >
+					<div class="col-md-4 col-4" >
 						<div class="header">
 							<i class="fa-solid fa-percent"></i>
 						</div>
@@ -79,7 +79,7 @@ x-transition:enter.duration.1000ms--}}
 					</div>
 				</div>
 			</div>
-			<div data-aos="fade-up" data-aos-offset="150" class="column">
+			<div data-aos="fade-up" data-aos-offset="100" class="column">
 				
 				<div class="links">
 					<div>
@@ -116,10 +116,10 @@ x-transition:enter.duration.1000ms--}}
 				</div>
 				<div class="images">
 
-					<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
-					<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:70px" >
+					<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:50px" >
+					<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:80px" >
 					@if(config('ecomsail.payment_paypal'))
-					<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:110px">
+					<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:100px">
 					@endif
 				</div>
 			</div>

@@ -20,12 +20,11 @@ class Offer extends Component
 
     public $route_name;
     
-    public function mount($offers_cat = null,$offers_subcat = null){
-
+    public function mount($offers_cat = null,$offers_subcat = null){        
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
         $this->typealert = 'success';
         $this->route_name = Route::currentRouteName();
-            
+        
         if(!$offers_cat)
             $this->offers_cat = 0;
         else

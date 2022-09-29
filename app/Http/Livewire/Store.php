@@ -122,7 +122,8 @@ class Store extends Component
         
         //si existen caracteres en el buscador lo limpiamos
         $this->reset_searcher();
-
+        if($this->page != 1)
+            $this->resetPage();
         $this->inf_scroll_plus = false;
         //necesario para diferenciar de la colección de productos genérica y para que el
         // método render() de paginación no entre en conflicto.
@@ -171,8 +172,10 @@ class Store extends Component
     public function set_special_filter($type){
         //si existen caracteres en el buscador lo limpiamos
         $this->reset_searcher();
-        //si existen caracteres en el buscador lo limpiamos
-        //$this->reset_searcher();           
+        //si se encuentra en otra página que no sea la primera reseteamos paginación
+        if($this->page != 1)
+            $this->resetPage();
+        
         if($type){
             if($this->special_filter_tmp == $type){                
                 if($this->price_order == "asc"){

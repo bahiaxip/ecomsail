@@ -15,18 +15,18 @@
             >
                 <div class="div_products_list mtop16">
                 	<div class="filters_products">
-                        <div class="filter_product">
-                            <a href="javascript:void(0)" wire:click="set_special_filter('news')"> Novedades</a>
-                        </div>
-                        <div class="filter_product" wire:click="set_special_filter('sold')">
-                            <a href="javascript:void(0)"> Vendidos</a>
-                        </div>
-                        <div class="filter_product" wire:click="set_special_filter('price')">
-                            <a href="javascript:void(0)"> Precio</a>
-                        </div>
-                        <div class="filter_product" wire:click="set_special_filter('feed')">
-                            <a href="javascript:void(0)"> Mejor valorados</a>
-                        </div>
+                        <a class="filter_product" href="javascript:void(0)" wire:click="set_special_filter('news')">
+                            <span >Novedades</span>
+                        </a>
+                        <a class="filter_product" href="javascript:void(0)" wire:click="set_special_filter('sold')">
+                            <span> Vendidos</span>
+                        </a>
+                        <a class="filter_product" href="javascript:void(0)" wire:click="set_special_filter('price')">
+                            <span> Precio</span>
+                        </a>
+                        <a class="filter_product" href="javascript:void(0)" wire:click="set_special_filter('feed')">
+                            <span> Mejor valorados</span>
+                        </a>
                         
                 		
             		</div>

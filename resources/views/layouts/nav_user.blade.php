@@ -1,8 +1,9 @@
 <div class="" style="width:100%;">
     <div class="box_logo">
         <li class="logo" >
-            <a href="{{url('/')}}" class="nav-link " >
-                <div class="backgrounds">
+            <div  class="nav-link " >
+                <div class="dflex">
+                    <a href="{{url('/')}}" class="backgrounds">
                     {{--
                     <img src="{{url('images/ecomsail_logo.svg')}}" alt="" style="max-height:40px">
                     --}}
@@ -11,13 +12,14 @@
                     <span style="background-image:url('images/logo/ecomsail_logo_parte2.png');background-size:90%;background-position:bottom;background-repeat: no-repeat;min-width:60px;min-height:30px;padding:25px"></span>
                     --}}
                     
-                    <img class="logo_e" src="{{url('images/logo/favicon_ecomsail.svg')}}" alt="">
-                    
-                    
-                    <img class="logo_text" src="{{url('images/logo/ecomsail_logo_parte2.png')}}" alt="" >
+                        <img class="logo_e" src="{{url('images/logo/favicon_ecomsail.svg')}}" alt="">
+                        
+                        
+                        <img class="logo_text" src="{{url('images/logo/ecomsail_logo_parte2.png')}}" alt="" >
+                    </a>
                     
                 </div>
-            </a>
+            </div>
         </li>
         <li class="search" >
             <input type="search" name="search" class="form-control" size="100" placeholder="Buscar..." wire:model="search_product" wire:keydown.enter = "go_to_search">
@@ -97,7 +99,7 @@
                 <div class="layer_nav"></div>
             </li>
             <li class="">
-                <a href="{{route('offers')}}" class="nav-link @if($route_name=='offers') active @endif">
+                <a href="{{route('offers',['offers_cat'=> 0])}}" class="nav-link @if($route_name=='offers') active @endif">
                     <span>OFERTAS</span>
                 </a>
                 <div class="layer_nav"></div>
