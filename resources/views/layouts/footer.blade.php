@@ -40,6 +40,7 @@ x-transition:enter.duration.1000ms--}}
 						</div>
 					</div>
 					
+					{{--
 					<div class="col-md-3 col-12" >
 						
 						<div class="images" style="display:flex;justify-content: space-around;">						
@@ -50,6 +51,7 @@ x-transition:enter.duration.1000ms--}}
 							@endif
 						</div>
 					</div>
+					--}}
 				</div>
 			</div>
 		</div>
@@ -97,6 +99,7 @@ x-transition:enter.duration.1000ms--}}
 				</div>
 			</div>
 
+			{{--
 			<div data-aos="fade-up" data-aos-offset="180" data-aos-delay="150" class="column">
 				<div class="links">
 					<div>
@@ -104,6 +107,20 @@ x-transition:enter.duration.1000ms--}}
 						Promociones
 						<p class="mtop10">Cupones y Ofertas</p>
 					</div>
+				</div>
+			</div>
+			--}}
+			<div data-aos="fade-up" data-aos-offset="180" data-aos-delay="150" class="column" >
+				<div class="title_payment_icons" >
+					Pago seguro					
+				</div>
+				<div class="images">
+
+					<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:48px" >
+					<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:70px" >
+					@if(config('ecomsail.payment_paypal'))
+					<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:110px">
+					@endif
 				</div>
 			</div>
 			
