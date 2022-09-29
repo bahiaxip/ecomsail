@@ -106,17 +106,7 @@ class CategorySeeder extends Seeder
             'title_offer' =>'Cuidado personal',
             'icon_awesome_offer' => '<i class="fa-solid fa-heart-pulse"></i>',
         ]);
-        Category::create([
-            'status' => 1,
-            'type' => 0,
-            'name' =>'Audio y vídeo',
-            'file_name' => 'audio_video.png',
-            'image' => 'audio_video.png',
-            'path_tag' => '/icons/cat_icons/',
-            'offer' => 1,
-            'title_offer' =>'Audio y vídeo',
-            'icon_awesome_offer' => '<i class="fa-solid fa-tv"></i>',
-        ]);
+        
 
 
         //subcategories
@@ -399,10 +389,23 @@ class CategorySeeder extends Seeder
                 'image' => 'fragance.png',
                 'path_tag' => '/icons/cat_icons/personal_care/',
             ]);
+
+    //Categoría Audio y vídeo
+            Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Audio y vídeo',
+            'file_name' => 'audio_video.png',
+            'image' => 'audio_video.png',
+            'path_tag' => '/icons/cat_icons/',
+            'offer' => 1,
+            'title_offer' =>'Audio y vídeo',
+            'icon_awesome_offer' => '<i class="fa-solid fa-tv"></i>',
+        ]);
             //Audio y vídeo
             Category::create([
                 'status' => 1,
-                'type' => 9,
+                'type' => 40,
                 'name' =>'Televisores',
                 'file_name' => 'tv.png',
                 'image' => 'tv.png',
@@ -410,7 +413,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 9,
+                'type' => 40,
                 'name' =>'Monitores',
                 'file_name' => 'monitor.png',
                 'image' => 'monitor.png',
@@ -418,7 +421,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 9,
+                'type' => 40,
                 'name' =>'Auriculares',
                 'file_name' => 'earphones.png',
                 'image' => 'earphones.png',

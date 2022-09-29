@@ -15,7 +15,7 @@ class CarouselSeeder extends Seeder
     {
 
         Carousel::create([
-            'status' => 1,
+            'status' => 0,
             'title' => 'Tendencias para estas vacaciones',
             'text' => 'Descuentos en ropa de baño hasta un 40%',            
             'path_tag' => 'images/carousel/',
@@ -60,6 +60,18 @@ class CarouselSeeder extends Seeder
             'image' => 'furniture.jpg',
             'thumb' => 'furniture.jpg',
             'position' => 3,
+            'user_id' => 1,
+        ]);
+        Carousel::create([
+            'status' => 1,
+            'title' => 'Disfruta del cine en casa',
+            'text' => '-10% en televisores Sony',
+            'path_tag' => 'images/carousel/',
+            'file_name' => 'tv_home.jpg',
+            'file_ext' => 'jpg',
+            'image' => 'tv_home.jpg',
+            'thumb' => 'tv_home.jpg',
+            'position' => 0,
             'user_id' => 1,
         ]);
     }

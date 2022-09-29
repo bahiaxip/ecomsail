@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{url('css/slider.css') }}" >
     <link rel="stylesheet" href="{{url('css/styles.css')}}" >
     <link rel="stylesheet" href="{{url('css/footer.css')}}" >
+    <link rel="stylesheet" href="{{url('css/offers.css')}}" >
     <!-- 
     necesarios estilos de tailwind para paginación de bootstrap, aunque se puede 
     solucionar añadiendo el string 'pagination::bootstrap-4' como parámetro:
