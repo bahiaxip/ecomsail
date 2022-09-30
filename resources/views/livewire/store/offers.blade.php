@@ -95,7 +95,7 @@
 		        		--}}
 	        		</div>
 	            </div>
-	            <div class="container mtop32" >
+	            <div class="box_products_list mtop32" >
 	            	<div class="div_products_list mtop16">
 	            		<div class="mtop16">
 	            			@isset($products)
@@ -166,6 +166,7 @@
 	            	<div class="row mtop16">
 	                    {{$products->render()}}
 	                </div>
+
 	            <!--
 	            <div class="mtop16" style="">
 	            	<div style="width:100%;height:300px;">
@@ -215,6 +216,63 @@
 	            </div>
 				-->
 			</div>
+			@if($offers->count() > 0)
+            <div style="width:100%;border-top:#D3D3D3 1px solid">
+                <div class="box_offers" >
+                    <h2>Ofertas</h2>
+                    <div class="div_products_list mtop16" style="display:inline-flex;flex-flow:row nowrap;overflow:auto;position:relative">
+                        <div class="sticky left" >                            
+                            <button onclick="scroller('offers','left')">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                        </div>
+                        
+                        @foreach($offers as $offer)
+                        <div class="products mtop32" style="margin:auto 20px;max-width:150px;">
+                            @if($offer->infoprice->discount_type == 1
+                                && date('Y-m-d') >= $offer->infoprice->init_discount && date('Y-m-d') <= $offer->infoprice->end_discount)
+                            <a href="{{ url('/product/'.$offer->id) }}" wire:click="" class="layer">
+                                <div class="content">
+                                    <span>
+                                        -{{$offer->infoprice->discount}}%            
+                                    </span>
+                                </div>
+                            </a>
+                            @endif
+                            <a href="{{ url('/product/'.$offer->id) }}" class="image" wire:click="">
+                                <img src="{{$offer->path_tag.$offer->image}}" alt="">
+                            </a>
+                            <a href="{{ url('/product/'.$offer->id) }}" title="{{$offer->name}}">
+                                <div class="title">
+                                    {{$offer->name}}
+                                </div>
+                                <div class="price">
+                                    @if($offer->infoprice->discount_type == 1
+                                        && date('Y-m-d') >= $offer->infoprice->init_discount && date('Y-m-d') <= $offer->infoprice->end_discount)
+                                    <span>
+                                        {{ floatval(number_format(($offer->price*((100-$offer->infoprice->discount)/100)),2,'.',',')) }}€
+                                    </span>
+                                    &nbsp;&nbsp;
+                                    <span style="text-decoration:line-through;color:#696969">
+                                        {{ floatval(number_format($offer->price,2,'.',',')) }}€
+                                    </span>
+                                    @else
+                                        <span>{{ floatval(number_format($offer->price,2,'.',',')) }}€</span>
+                                    @endif
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+                        <div class="sticky right">                            
+                            <button onclick="scroller('offers','right')" >
+                                <i  class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <input id="auto" type="hidden" value="{{Config::get('ecomsail.owner_name')}}">
+                    </div>
+                </div>
+            </div>
+            @endif
 			@include('layouts.footer')
         </div>
 		

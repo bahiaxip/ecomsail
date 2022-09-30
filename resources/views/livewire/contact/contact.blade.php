@@ -1,9 +1,57 @@
 <div style="position:relative" class="contact">
 	@section('title','Contacto')
 
-	<div class="message_opacity" >
-        <div class="alert alert-{{$typealert}}" >            
-            <h2 style="font-size:1em;text-align:center">{{session('message')}}</h2>
+	<div class="message_modal" >
+        <div class="message {{$typealert}} " >
+            {{--
+            <div>
+                @switch($typealert)
+                    @case('success')
+                        <span class="success">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                        @break
+                    @case('danger')
+                        <span class="danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </span>
+                        @break
+                    @case('info')
+                        <span class="info">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </span>
+                        @break
+                @endswitch
+            </div>
+            --}}
+            <div>
+                <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="danger @if($typealert != 'danger') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+                <span class="info @if($typealert != 'info') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="warning @if($typealert != 'warning') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-question"></i>
+                </span>
+            </div>
+            <div>
+                <h2>
+                    
+                    {{session('message.title')}}                        
+                    
+                </h2>
+            </div>
+            <div>
+                <h3>{{ session('message.message') }}</h3>
+            </div>
+            
             @if($errors->any())
             <ul>
                 @foreach($errors->all() as $error)

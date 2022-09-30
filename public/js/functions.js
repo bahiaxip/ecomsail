@@ -1946,4 +1946,23 @@ function scroller(el,direction){
     else
         div.scrollLeft -= 100;
 }
+//obtener scroll y almacenarlo en la global "scroll"
+let scroll;
+function getScroll(){
+    scroll = window.scrollY;
+}
+window.livewire.on('set_scroll',()=>{
+    setScroll();
+})
+//establecer la posición del scroll mediante la variable "scroll"
+function setScroll(){
+    setTimeout(()=>{
+        console.log("llega");
+    //window.scroll(0,scroll)
+    window.scrollTo({'top':scroll,'behavior':'smooth'});
+},100)
+    
+}
+
+
 

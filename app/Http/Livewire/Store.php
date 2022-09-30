@@ -92,8 +92,9 @@ class Store extends Component
     }
 
     public function inf_scroll(){
+        $this->start = false;
         $this->inf_scroll_counter++;
-        $this->special_filter = $this->special_filter_tmp;
+        $this->special_filter = $this->special_filter_tmp;        
     }
     
     //El método setPage() de Livewire es el encargado de enviar a la página, en lugar de
@@ -102,12 +103,19 @@ class Store extends Component
     // JavaScript para establecer el scroll a 0.
     //Además, el trait WithPagination incorpora $this->page permitiendo 
     //prescindir de pasar $page como parámetro.
-    
+
+    //redirección del buscador genérico, en este caso se mantiene el método por si se
+    //da a enter después de una anterior búsqueda desde otra página y no se ha modificado la cadena de
+    //búsqueda aunque se podría desde el layout omitir mediante el valor de $route_name
+    public function go_to_search(){
+        if($this->search_product)
+            return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
+    }
     public function gotoPage($page){
         if($page != $this->page_tmp){
             $this->setPage($page);            
         }
-        $this->emit('$refresh');
+        //$this->emit('$refresh');
         $this->page_tmp = $page;
     }
     //limpiamos y desactivamos la consulta del buscador (en caso de existir
@@ -233,7 +241,7 @@ class Store extends Component
     
     //se ejecuta antes de actualizar la variable $this->search_product
     public function updatingSearchProduct($search_product){
-        
+
         //necesario cuando venimos de categoría seleccionada
         if($search_product){
             $this->set_search();
@@ -248,7 +256,13 @@ class Store extends Component
         $this->category=0;
         //}
         $this->subcategory=0;
+    }
 
+    public function dehydrate(){
+        //dd("anda");
+        if($this->inf_scroll_counter > 1){
+           $this->emit('set_scroll');
+        }
     }
     
     public function render()
@@ -323,7 +337,8 @@ class Store extends Component
                     //dd($products);
                 }
             }
-        }        
+        }
+
         $this->start=true;
         $data = ['products' => $products,'categories_list' => $categories_list,'subcategories_list' => $subcategories_list,'computed_cat' => $this->computed_category];
         return view('livewire.store.store',$data)->extends('layouts.main');

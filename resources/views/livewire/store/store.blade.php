@@ -149,8 +149,8 @@
                 </div>
                 @endif
                 @if($inf_scroll_plus)
-                <div class="row">                    
-                    <button class="btn btn_pry" wire:click="inf_scroll">Más</button>
+                <div class="row btn_infscroll">                    
+                    <button class="btn btn_pry infscroll" wire:click.prevent="inf_scroll" onclick="getScroll()">Cargar más</button>
                 </div>
                 @endif
                 @include('layouts.footer')

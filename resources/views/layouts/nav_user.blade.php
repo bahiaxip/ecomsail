@@ -94,7 +94,7 @@
                 </a>
                 --}}
                 <a href="{{route('store')}}" class="nav-link {{Route::currentRouteName()}}@if($route_name=='store'||$route_name == 'product') active @endif">
-                    <span>TIENDA</span>
+                    <span>PRODUCTOS</span>
                 </a>
                 <div class="layer_nav"></div>
             </li>
@@ -126,7 +126,7 @@
         @auth
         <li>
             <a href="{{url('/cart')}}" class="nav-link @if(Route::is('cart')) active @endif" >
-                <i class="fas fa-bag-shopping"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
                 <span style="font-size:12px">
                     ({{getCountOrders()}})
                 </span>

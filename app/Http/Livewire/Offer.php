@@ -85,8 +85,14 @@ class Offer extends Component
                         ->where('init_discount','<=',date('Y-m-d'))
                         ->where('end_discount','>=',date('Y-m-d'));
                     })->paginate($this->limit_page);
+        $offers =  Product::where('status',1)
+                ->whereHas('infoprice',function($query){
+                    $query->where('discount_type',1)
+                    ->where('init_discount','<=',date('Y-m-d'))
+                    ->where('end_discount','>=',date('Y-m-d'));
+                })->get()->take(20);
 
-        $data = ['categories'=>$categories,'products' => $products];
+        $data = ['categories'=>$categories,'products' => $products,'offers' => $offers];
         return view('livewire.store.offers',$data)->extends('layouts.main');
     }
 }
