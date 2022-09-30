@@ -1,18 +1,43 @@
 <div style="position:relative">
-    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
-        <div class="alert alert-{{$typealert}}" >            
-            <h2 style="font-size:1em;text-align:center">{{session('message') }}</h2>
-            @if($errors->any())
-            <ul>
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            @endif
-            <script>
-                
-            </script>
+    <div class="message_modal" >
+        <div class="message" >
+            <div>
+                <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="danger @if($typealert != 'danger') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+                <span class="info @if($typealert != 'info') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="warning @if($typealert != 'warning') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-question"></i>
+                </span>
+            </div>
+            <div>
+                <h2 class="title" style="display:flex;align-items:center">
+                    @if(session('message.title'))
+                        {{session('message.title')}}
+                    @endif
+                </h2>
+            </div>
+            <div>
+                <h3 class="text_message">
+                    @if(session('message.message'))
+                        {{ session('message.message') }}
+                    @endif
+                </h3>
+            </div>
+            <div class="buttons"></div>
         </div>
+    </div>
+    <!-- loading cuando actualizamos edición -->
+    <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.3);z-index:999" >
+        <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
     </div>
     @section('title','Favoritos')
     @include('layouts.nav_user')
@@ -28,8 +53,9 @@
                         <i class="fa-solid fa-star"></i> FAVORITOS
                     </h5>                    
                 </div>
-                @if(!$favorites)
-                <div class="empty alert alert-success">
+                
+                @if($favorites->count() == 0)
+                <div class="empty">
                     <h5>La lista de favoritos esta vacía</h5>
                 </div>
                 
@@ -67,7 +93,7 @@
                                     
                                 </div>
                                 <div class="col-2 admin_items end">
-                                    <button class="btn btn-sm delete_round" title="Eliminar {{$favorite->get_product->name}}" wire:click="save_product_id({{$favorite->id}})" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+                                    <button class="btn btn-sm delete_round" title="Eliminar {{$favorite->get_product->name}}" onclick="message_confirm({'status':'question','id':{{$favorite->id}},'type':'favorite' })">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
@@ -101,3 +127,12 @@
         </div>
     </div>
 </div>
+<script>
+    //eliminar producto del carrito
+    function deleteId(data){
+        cancelModal(data);
+        //mostrar loading
+        set_loading();
+        @this.delete(data.id);
+    }
+</script>

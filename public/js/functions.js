@@ -1735,7 +1735,7 @@ function activeTabConfigProduct(num){
 }
 //métodos para el modal
 //utilizamos solo JavaScript (sin que renderice livewire) para el mensaje de confirmación,  ya que desde Livewire
-// es demasiado lento
+// puede llegar a ser demasiado lento
 function message_confirm(data){
     
     if(!switchMessageSession){
@@ -1759,6 +1759,9 @@ function message_confirm(data){
             }else if(data.type == 'order'){
                 title.innerHTML = '¿Seguro?';
                 msge.innerHTML = 'Seguro que desea eliminar el pedido';
+            }else if(data.type == 'favorite'){
+                title.innerHTML = '¿Seguro?';
+                msge.innerHTML = 'Seguro que desea eliminar el producto de la lista de favoritos';
             }
         }
         
@@ -1788,8 +1791,11 @@ function message_confirm(data){
 //Si existe parámetro se elimina la clase "dnone" del span indicado por el parámetro
 function resetDivModals(type=null){
     //para el método map o filter necesario convertir a array, para forEach no es necesario
-    //opción 1: [].slice.call()
+
+    
     let statusModalsNodes = document.querySelector('.message_modal .message').querySelectorAll('div span');
+    //si usamos filter o map 2 opciones para convertir en array válido:
+    //opción 1: [].slice.call()
     //let statusModals = [].slice.call(statusModalsNodes);
     //opción 2: ...
     //let statusModals = [...document.querySelector('.message_modal .message').querySelectorAll('div span')];
