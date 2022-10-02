@@ -23,6 +23,10 @@
             </div>
             --}}
             <div>
+                <span class="success">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                {{--
                 <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
                     <i class="fa-solid fa-circle-check"></i>
                 </span>
@@ -38,6 +42,10 @@
                 <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
                     <i class="fa-solid fa-circle-question"></i>
                 </span>
+                <span class="trash @if($typealert != 'trash') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-trash"></i>
+                </span>
+                --}}
             </div>
             <div>
                 <h2>
@@ -276,7 +284,7 @@
                       </div>
                     </div>
                     <div class="col-xl-7 quantity_btn">
-                        <button type="button" class="btn" wire:click="add_cart" @guest disabled title="Inicie sesión para añadir productos al carrito" @endguest  @if($prod->stock == 0 || $sum_stock == 0)
+                        <button type="button" class="btn" wire:click="add_cart(switchMessageSession)" @guest disabled title="Inicie sesión para añadir productos al carrito" @endguest  @if($prod->stock == 0 || $sum_stock == 0)
                         {{'disabled'}} title="Producto sin stock" @endif>
                             <i class="fas fa-cart-plus"></i> Agregar al carrito
                         </button>

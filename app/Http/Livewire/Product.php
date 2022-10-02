@@ -513,142 +513,147 @@ class Product extends Component
     }
     
 
-    public function add_cart(){
-        //validamos datos para crear el carrito o añadir al carrito
-        $validated = $this->validate([
-            'option' => 'nullable|array',
-            'option.*' => 'integer',
-            'quantity' => 'required|integer'
-        ]);        
-        //$product = Product::findOrFail($this->product_id);
-        //creamos o actualizamos el pedido temporal
-        $order = $this->create_or_update_order();
-        $list=NULL;
-        $comb_name = NULL;
-        //comprobamos si existe combinación y si existe creamos el array de combinaciones
-        if(count($this->option) > 0){
-            foreach($this->option as $key=>$o){
-                $list[]=[
-                    'attribute' => $key,
-                    'value' => $o
-                ];
-                $atr = Attribute::findOrFail($o);
-                if($atr){
-                    $comb_name[]=[
-                        'name' => $atr->parentattr->name,
-                        'value' => $atr->name
+    public function add_cart($switch=null){
+        if(!$switch){
+            //validamos datos para crear el carrito o añadir al carrito
+            $validated = $this->validate([
+                'option' => 'nullable|array',
+                'option.*' => 'integer',
+                'quantity' => 'required|integer'
+            ]);        
+            //$product = Product::findOrFail($this->product_id);
+            //creamos o actualizamos el pedido temporal
+            $order = $this->create_or_update_order();
+            $list=NULL;
+            $comb_name = NULL;
+            //comprobamos si existe combinación y si existe creamos el array de combinaciones
+            if(count($this->option) > 0){
+                foreach($this->option as $key=>$o){
+                    $list[]=[
+                        'attribute' => $key,
+                        'value' => $o
                     ];
+                    $atr = Attribute::findOrFail($o);
+                    if($atr){
+                        $comb_name[]=[
+                            'name' => $atr->parentattr->name,
+                            'value' => $atr->name
+                        ];
+                    }
                 }
-            }
-        }        
-//el product_id no sería necesario en la consulta
-        $orders_items = Order_Item::where('order_id',$order->id)->where('product_id',$this->product_id)->get();
-        if($orders_items->count() > 0){
-            $diff = []; 
-            //comprobamos si ya existe un producto igual, en caso de contener 
-            //combinaciones se comprueba si es la misma combinación
-            foreach($orders_items as $key => $oi){
-                if($oi->combinations != "null"){                    
-            //obtenemos el resultado de cada comparación  entre la 
-            //combinación y la lista seleccionada y lo añadimos al 
-            //array $diff
-                    $diff[]=strcmp($oi->combinations,json_encode($list));
-        //si ya existe uno que no tiene combinaciones, devolvemos 
-        //mensaje y detenemos la ejecución
-                }else{
+            }        
+    //el product_id no sería necesario en la consulta
+            //comprobamos si ya existe el mismo producto en el mismo pedido (necesario para
+            //los productos con combinaciones).
+            $orders_items = Order_Item::where('order_id',$order->id)->where('product_id',$this->product_id)->get();
+            if($orders_items->count() > 0){
+                $diff = []; 
+                //comprobamos si ya existe un producto igual, en caso de contener 
+                //combinaciones se comprueba si es la misma combinación
+                foreach($orders_items as $key => $oi){
+                    if($oi->combinations != "null"){                    
+                //obtenemos el resultado de cada comparación  entre la 
+                //combinación y la lista seleccionada y lo añadimos al 
+                //array $diff
+                        $diff[]=strcmp($oi->combinations,json_encode($list));
+            //si ya existe uno que no tiene combinaciones, devolvemos 
+            //mensaje y detenemos la ejecución
+                    }else{
+
+                        
+                        $data = [
+                            'message' => 'Ya existe ese producto en el carrito',
+                            'title' => 'Producto ya añadido',
+                            'status' => 'info'
+                        ];
+                        $this->set_session($data['status'],$data['title'],$data['message']);
+                        return false;    
+                    }
+                }
+                //recorremos el array $diff, si alguno devuelve 0
+                //es que ya existe ese producto con esa combinación
+                $test = array_filter($diff,function($v,$k){
+                    return $v == 0;
+                },ARRAY_FILTER_USE_BOTH);
+                if(count($test) > 0){
+                    //$this->dispatchBrowserEvent('contentChanged');
+                    //$this->emit('fastview');
                     $this->typealert = 'info';
                     $data = [
                         'message' => 'Ya existe ese producto en el carrito',
-                        'title' => 'Producto ya añadido',
+                        'title' => 'Añadido',
                         'status' => 'info'
                     ];
-                    session()->flash('message',$data);
-                    $this->emit('modal',['status' => $data['status']]);
-                    return false;    
+                    session()->flash('message',$message);
+                    $this->emit('modal');
+                    return false;
                 }
             }
-            //recorremos el array $diff, si alguno devuelve 0
-            //es que ya existe ese producto con esa combinación
-            $test = array_filter($diff,function($v,$k){
-                return $v == 0;
-            },ARRAY_FILTER_USE_BOTH);
-            if(count($test) > 0){
-                //$this->dispatchBrowserEvent('contentChanged');
-                //$this->emit('fastview');
-                $this->typealert = 'info';
-                $data = [
-                    'message' => 'Ya existe ese producto en el carrito',
-                    'title' => 'Añadido',
-                    'status' => 'info'
-                ];
-                session()->flash('message',$message);
+            //si no existe un producto con ese id en la db se devuelve mensaje de error
+            $product = Prod::findOrFail($this->product_id);
+            if(!$product){
+                $this->typealert = 'danger';
+                session()->flash('message2','No existe ese producto');
                 $this->emit('modal');
                 return false;
             }
+            //comprobamos si existe suplemento de precio por alguna
+            // combinación mediante added_price y la añadimos al 
+            //registro para luego poder sumar o restar desde el carrito.
+            $quantity = 1;
+            $added_price=NULL;
+            $discount = 0;
+            $state_discount = 0;
+            $end_discount = NULL;
+            if($this->quantity && $this->quantity > 1)
+                $quantity = $this->quantity; 
+            if($this->added_price){
+                //$added_price = $this->added_price / $quantity;
+                $added_price = $this->added_price;
+            }
+            //comprobamos si existe descuento y lo añadimos al order_item
+            if($product->infoprice->discount_type
+                && date('Y-m-d') >= $product->infoprice->init_discount && date('Y-m-d') <= $product->infoprice->end_discount){
+                $state_discount = $product->infoprice->discount_type;
+                $discount = $product->infoprice->discount;
+                $end_discount = $product->infoprice->end_discount;
+            }
+            //si en el array $diff no existe ningún resultado(0), 
+            //indicando que no existe esa combinación o simplemente no 
+            //existe ese item de ese producto creamos nuevo order_item
+            $order_item = Order_Item::create([
+                'combinations' => json_encode($list),
+                'combinations_text' => json_encode($comb_name),
+                'quantity' => $this->quantity,
+                'state_discount' => $state_discount,
+                'discount' => $discount,
+                'end_discount' => $end_discount,
+                'added_price' => $added_price,
+                'price_unit' => $this->product->price,
+                'total' => $this->price_tmp,
+                'title' => $product->name,
+                'path_tag' => $product->path_tag,
+                'image' => $product->image,
+                'user_id' => Auth::id(),
+                'product_id' => $this->product->id,
+                'order_id' => $order->id
+            ]);
+            
+            //$this->dispatchBrowserEvent('contentChanged');
+            //$this->emit('fastview');
+        //necesario el typealert para realizar la animación, el envío del 
+        //status mediante el session()->flash() es más lento y la vista no renderiza
+        // el span correspondiente a tiempo.
+            $this->typealert = 'success';
+            $data = [
+                'message' => 'El producto ha sido añadido al carrito',
+                'title' => 'Añadido',
+                'status' => 'success'
+            ];
+            $this->set_session($data['status'],$data['title'],$data['message']);
+            //session()->flash('message', $data);
+            //$this->emit('modal',['status' => $data['status']]);
         }
-        //si no existe un producto con ese id en la db se devuelve mensaje de error
-        $product = Prod::findOrFail($this->product_id);
-        if(!$product){
-            $this->typealert = 'danger';
-            session()->flash('message2','No existe ese producto');
-            $this->emit('modal');
-            return false;
-        }
-        //comprobamos si existe suplemento de precio por alguna
-        // combinación mediante added_price y la añadimos al 
-        //registro para luego poder sumar o restar desde el carrito.
-        $quantity = 1;
-        $added_price=NULL;
-        $discount = 0;
-        $state_discount = 0;
-        $end_discount = NULL;
-        if($this->quantity && $this->quantity > 1)
-            $quantity = $this->quantity; 
-        if($this->added_price){
-            //$added_price = $this->added_price / $quantity;
-            $added_price = $this->added_price;
-        }
-        //comprobamos si existe descuento y lo añadimos al order_item
-        if($product->infoprice->discount_type
-            && date('Y-m-d') >= $product->infoprice->init_discount && date('Y-m-d') <= $product->infoprice->end_discount){
-            $state_discount = $product->infoprice->discount_type;
-            $discount = $product->infoprice->discount;
-            $end_discount = $product->infoprice->end_discount;
-        }
-        //si en el array $diff no existe ningún resultado(0), 
-        //indicando que no existe esa combinación o simplemente no 
-        //existe ese item de ese producto creamos nuevo order_item
-        $order_item = Order_Item::create([
-            'combinations' => json_encode($list),
-            'combinations_text' => json_encode($comb_name),
-            'quantity' => $this->quantity,
-            'state_discount' => $state_discount,
-            'discount' => $discount,
-            'end_discount' => $end_discount,
-            'added_price' => $added_price,
-            'price_unit' => $this->product->price,
-            'total' => $this->price_tmp,
-            'title' => $product->name,
-            'path_tag' => $product->path_tag,
-            'image' => $product->image,
-            'user_id' => Auth::id(),
-            'product_id' => $this->product->id,
-            'order_id' => $order->id
-        ]);
-        
-        //$this->dispatchBrowserEvent('contentChanged');
-        //$this->emit('fastview');
-    //necesario el typealert para realizar la animación, el envío del 
-    //status mediante el session()->flash() es más lento y la vista no renderiza
-    // el span correspondiente a tiempo.
-        $this->typealert = 'success';
-        $data = [
-            'message' => 'El producto ha sido añadido al carrito',
-            'title' => 'Añadido',
-            'status' => 'success'
-        ];
-        session()->flash('message', $data);
-        $this->emit('modal',['status' => $data['status']]);
     }
 
     public function create_or_update_order(){
@@ -743,7 +748,7 @@ class Product extends Component
                 $favorite->delete();
                 $message = 'El producto ha sido eliminado de la lista de favoritos';
                 $title = 'Eliminado';
-                $status = 'success';
+                $status = 'trash';
             }
             $this->set_session($status,$title,$message);
         }

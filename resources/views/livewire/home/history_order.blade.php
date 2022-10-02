@@ -66,8 +66,8 @@
                                     </div>
                                 </div>
                                 
-                                <button class="btn btn_red" style="padding:4px 50px">
-                                    Eliminar
+                                <button class="btn btn_pry" style="padding:4px 50px">
+                                    Añadir valoración
                                 </button>
                             </div>
                         </div>

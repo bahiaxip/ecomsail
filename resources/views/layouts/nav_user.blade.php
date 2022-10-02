@@ -30,13 +30,14 @@
     <div class="dropdown show menu_hidden">
         <a href="#" class="nav-link lk-home" type="button" id="dropdown_hidden" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-bars"></i>
+            <span>MENÚ</span>
         </a>
         <ul class="dropdown-menu">            
             <a href="{{route('home')}}" class="dropdown-item"  data-toggle="dropdown">
                 INICIO
             </a>
             <a href="{{route('store')}}" class="dropdown-item" data-toggle="dropdown">TIENDA</a>
-            <a href="{{route('offers')}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
+            <a href="{{route('offers',['offers_cat' => 0])}}" class="dropdown-item" data-toggle="dropdown">OFERTAS</a>
         </ul>
     </div>
     

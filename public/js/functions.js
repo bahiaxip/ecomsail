@@ -1763,6 +1763,7 @@ function message_confirm(data){
                 title.innerHTML = '¿Seguro?';
                 msge.innerHTML = 'Seguro que desea eliminar el producto de la lista de favoritos';
             }
+
         }
         
         //efecto inflate
@@ -1787,7 +1788,7 @@ function message_confirm(data){
         switchMessageSession = false;
     }
 }
-//recorre todos los span (success/danger/info/warning/question) y y asigna la clase dnone,
+//recorre todos los span (success/danger/info/warning/question) y asigna la clase dnone,
 //Si existe parámetro se elimina la clase "dnone" del span indicado por el parámetro
 function resetDivModals(type=null){
     //para el método map o filter necesario convertir a array, para forEach no es necesario
@@ -1838,11 +1839,14 @@ function modal(data){
         
         //if(data.status == 'success'){
         //mostramos icono
+
+        span = div_message.querySelector('span');
+        console.log("span: ",span)
         if(data.status == 'success'){
-            resetDivModals('success');
-            span = div.querySelector('.success');
-            console.log("span: ",span)
-            //span.classList.remove('dnone');
+            
+            span.className= "";
+            span.classList.add('success');
+            span.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
             span.style.opacity = 1;
             span.style.transform = 'rotateX(360deg)';
             /*animIcon.style.color = '#93edd7'*/
@@ -1851,9 +1855,18 @@ function modal(data){
             span.style.opacity = 1;
             //delFav.style.transform = 'rotateX(360deg)';
         }else if(data.status == 'info'){
-            span = div.querySelector('.info')
+            span.className= "";
+            span.classList.add('success');
+            span.innerHTML = '<i class="fa-solid fa-circle-info"></i>';            
             span.style.opacity = 1;
+        }else if(data.status == 'trash'){            
+            span.className= "";
+            span.classList.add('trash');
+            span.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+            span.style.opacity = 1;
+            span.style.transform = 'rotateX(360deg)';
         }
+
         console.log(data)
         //sustituimos el animation-play-state por eliminar y añadir la clase para inicializar        
                             //div_success.style.animationPlayState = 'running'
@@ -1864,8 +1877,7 @@ function modal(data){
                 div_message.style.opacity = 0;
                 div_message.style.visibility = 'hidden';
                 //reinicializamos la animación
-                setTimeout(()=>{
-                    div.classList.remove('inflate');
+                div.classList.remove('inflate');
                     if(data.status == 'success'){
                         span.style.opacity = 0;
                         span.style.transform = 'rotateX(0deg)';
@@ -1873,16 +1885,24 @@ function modal(data){
                         span.style.opacity = 0;
                     }else if(data.status == 'info'){
                         span.style.opacity = 0;
+                    }else if(data.status == 'trash'){
+                        span.style.opacity = 0;
+                        span.style.transform = 'rotateX(0deg)';
                     }
+                //añadimos tiempo para que las transiciones finalicen, por si se vuelve
+                //a pulsar el mismo botón de forma inmediata.
+                setTimeout(()=>{
                     switchMessageSession = false;
-                },300)
-            }, 3000);
+                    console.log("siguiente: ",switchMessageSession)
+                },800)
+            }, 2500);
         }else{
             switchMessageSession = false;
             console.log("siguiente: ",switchMessageSession)
         }
+    }else{
+        console.log("no se puede");
     }
-    console.log(switchMessageSession)
 }
 window.livewire.on('modal',(data)=>{
     modal(data);

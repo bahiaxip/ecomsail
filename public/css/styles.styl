@@ -937,6 +937,8 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				align-items center
 				display flex
 				justify-content center
+				.price
+					margin 10px
 				
 			.total
 				display block
@@ -1364,12 +1366,15 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			display flex
 			margin auto
 			opacity 0
-			transition all 1.5s ease-in-out
+			/*transition all 1.5s ease-in-out*/
+			
 		div span.dnone
-			display none !important
+			display none
 			
 		div span.success
-			transition all 1.5s ease-in-out
+			transition transform 1.5s ease-in-out
+			width 40px
+			height 40px
 			i
 				color rgba(122,223,194,1)
 				
@@ -1386,6 +1391,16 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		div span.question
 			i
 				color color2
+				
+		div span.trash
+			transition transform 1.5s ease-in-out
+			background-color rgba(122,223,194,1)
+			border-radius 50%
+			width 40px
+			height 40px
+			i
+				color #FFF
+				font-size 1em
 		
 		div.buttons
 			display flex
@@ -1440,6 +1455,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				border-radius 8px
 				cursor pointer
 				display block
+				padding 3px
 				.category
 					align-items center
 					border-radius 5px
