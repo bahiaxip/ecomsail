@@ -16,7 +16,7 @@ class ZoneSeeder extends Seeder
     {
         Zone::create([
             'name' => 'Unión Europea',
-            'path_tag' =>'icons/flags_icons/' ,
+            'path_tag' =>'ics/flags_icons/' ,
             'icon' => 'UnionEuropea',
         ]);
         Zone::create([

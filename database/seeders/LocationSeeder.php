@@ -22,7 +22,7 @@ class LocationSeeder extends Seeder
                 'name' => $c['nombre'],
                 'status' => 0,
                 'zone' => $c['zone'],                
-                'path_tag'=>'icons/flags_icons/',
+                'path_tag'=>'ics/flags_icons/',
                 'icon' => $c['icon'],
                 'icon_code' => $c['icon_code'],
                 'isocode_alpha2' => $c['isocode_alfa2']
