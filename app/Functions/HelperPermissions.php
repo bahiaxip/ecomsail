@@ -8,6 +8,9 @@
 function helper(): App\Functions\Permissions
 {
     static $helper;
-
-    return $helper ??= new App\Functions\Permissions();
+    //falla en server aunque tengo la versión 7.3 (el operador ?? debería funcionar)
+    //return $helper ??= new App\Functions\Permissions();
+    $helper = new App\Functions\Permissions();
+    if($helper)
+        return $helper;
 }
