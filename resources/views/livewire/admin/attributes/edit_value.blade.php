@@ -9,7 +9,7 @@
         </div>
       <!-- loading cuando actualizamos edición -->
         <div id="loading" class="div_loading loading_update">
-          <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+          <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
         </div>      
       <div class="modal-body">
           <form enctype="multipart/form-data">

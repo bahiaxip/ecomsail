@@ -19,10 +19,10 @@
 				        			@if($c->icon_awesome_offer)
 				        			{!!$c->icon_awesome_offer!!}
 				        			@else
-				        			<div class="icon" style="background-image:url({{url('icons/cat_icons/'.$c->icon_image_offer)}});">
+				        			<div class="icon" style="background-image:url({{url('ics/cat_icons/'.$c->icon_image_offer)}});">
 				        				
 				        			</div>
-				        			<input type="hidden" name="icon_hover_{{$c->id}}" data_icon="{{url('icons/cat_icons/'.$c->icon_image_offer_hover)}}">
+				        			<input type="hidden" name="icon_hover_{{$c->id}}" data_icon="{{url('ics/cat_icons/'.$c->icon_image_offer_hover)}}">
 				        			@endif
 				        		</div>
 				        		<span class="title">
@@ -156,7 +156,7 @@
 		                                
 		                            </div>
 		                            <div wire:loading wire:target="products">
-		                                <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+		                                <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
 		                            </div>
 		                        @endforeach
 	                    	@endif

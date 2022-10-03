@@ -10,7 +10,7 @@
 		</div>
 		<!-- loading cuando actualizamos edición -->
 		<div id="loading_user" class="div_loading loading_update">
-			<img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+			<img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
 		</div>
 		<form wire:submit.prevent="submit(Object.fromEntries(new FormData($event.target)))">
 			<div class="modal-body" >

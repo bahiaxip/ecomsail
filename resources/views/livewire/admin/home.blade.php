@@ -126,7 +126,7 @@
             <div class="row mtop16 div_chart" style="background-color:rgba(255,255,255,.1);position:relative">
                 @if(!$switch_chart)
                 <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.1);z-index:999" >
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
+                    <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
                 </div>
                 @else
                 <div class="col-12 chart">

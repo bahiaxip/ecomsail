@@ -60,7 +60,7 @@
 				<a href="{{ route('list_categories',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
 					<!--<i class="fa-solid fa-tags"></i> Categorías-->
 					<div class="icon icon_cat"></div>
-					<!--<img src="{{url('icons/grid_cat_D3D3D3.svg')}}" alt="" width="16" height="20" style="margin-right:2px;box-sizing:border-box"> -->
+					<!--<img src="{{url('ics/grid_cat_D3D3D3.svg')}}" alt="" width="16" height="20" style="margin-right:2px;box-sizing:border-box"> -->
 					<span style="width:100%" class="d-none d-lg-inline-flex">Categorías</span>
 				</a>
 			</li>

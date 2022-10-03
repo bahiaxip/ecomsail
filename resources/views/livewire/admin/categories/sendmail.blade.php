@@ -11,7 +11,7 @@
         <!-- loading cuando actualizamos edición -->
         {{--
         <div id="loading_sendemail" class="div_loading loading_edit">
-            <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="80">
+            <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="80">
         </div>
         --}}
         <div class="modal-body">

@@ -1363,7 +1363,7 @@ function showFiles(id){
                                 <i class="fa-solid fa-circle-xmark"></i>
                             </div>
                             <div class="loading_transfer" style="display: none;" >
-                                <img src="../../icons/spinner2.svg" alt="" style="margin:auto" width="80">
+                                <img src="../../ics/spinner2.svg" alt="" style="margin:auto" width="80">
                             </div>
                         </div>
                     </span> 

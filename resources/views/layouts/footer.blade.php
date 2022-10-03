@@ -116,10 +116,10 @@ x-transition:enter.duration.1000ms--}}
 				</div>
 				<div class="images">
 
-					<img src="{{url('icons/payment/mastercard.svg')}}" alt="" style="width:50px" >
-					<img src="{{url('icons/payment/visa.svg')}}" alt="" style="width:80px" >
+					<img src="{{url('ics/payment/mastercard.svg')}}" alt="" style="width:50px" >
+					<img src="{{url('ics/payment/visa.svg')}}" alt="" style="width:80px" >
 					@if(config('ecomsail.payment_paypal'))
-					<img src="{{url('icons/payment/paypal.svg')}}" alt="" style="width:100px">
+					<img src="{{url('ics/payment/paypal.svg')}}" alt="" style="width:100px">
 					@endif
 				</div>
 			</div>
@@ -132,28 +132,28 @@ x-transition:enter.duration.1000ms--}}
 			<div class="links rrss" >
 				@if(config('ecomsail.linkedin'))
 				<a href="{{url(config('ecomsail.linkedin'))}}" target="_blank">
-					<img src="{{url('icons/rrss/linkedin.svg')}}" alt="" class="uptop5">
+					<img src="{{url('ics/rrss/linkedin.svg')}}" alt="" class="uptop5">
 				</a>
 				@endif
 				@if(config('ecomsail.instagram'))
 				<a href="{{url(config('ecomsail.instagram'))}}" target="_blank">
-					<img src="{{url('icons/rrss/instagram.svg')}}" alt="">
+					<img src="{{url('ics/rrss/instagram.svg')}}" alt="">
 				</a>
 				@endif
 				@if(config('ecomsail.twitter'))
 				<a href="{{url(config('ecomsail.twitter'))}}" target="_blank">
-					<img src="{{url('icons/rrss/twitter.svg')}}" alt="">
+					<img src="{{url('ics/rrss/twitter.svg')}}" alt="">
 				</a>
 				@endif
 				@if(config('ecomsail.whatsapp'))
 				<a href="{{route('contact')}}" target="_blank">
-					<img src="{{url('icons/rrss/whatsapp.svg')}}" alt="">
+					<img src="{{url('ics/rrss/whatsapp.svg')}}" alt="">
 				</a>
 				@endif
 
 				@if(config('ecomsail.facebook'))
 				<a href="{{url(config('ecomsail.facebook'))}}" target="_blank">
-					<img src="{{url('icons/rrss/facebook.svg')}}" alt="">
+					<img src="{{url('ics/rrss/facebook.svg')}}" alt="">
 				</a>
 				@endif
 			</div>			

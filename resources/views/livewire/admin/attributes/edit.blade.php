@@ -13,7 +13,7 @@
         </div>
       <!-- loading cuando actualizamos edición -->
         <div id="loading" class="div_loading loading_update">
-          <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+          <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
         </div>      
       <div class="modal-body">
           {{ Form::hidden('attr_id',$attr_id,['wire:model' => 'attr_id']) }}
@@ -97,7 +97,7 @@
                     <p class="text-danger">{{$message}}</p>
                     @enderror
                     <div wire:loading wire:target="image">
-                        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
+                        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
                     </div>
                 </div>      
                 <div class="col-md-6">

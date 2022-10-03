@@ -22,7 +22,7 @@
       @endif
       @if(!$item || $combinations_list === null )
           <div style="display: flex;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:1" >
-              <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
+              <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
           </div>
       @endif
       @if($item)

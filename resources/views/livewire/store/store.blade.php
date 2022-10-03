@@ -4,7 +4,7 @@
 	@include('layouts.nav_user')
     @if(!$start)
     <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.9);z-index:999" >
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
     </div>
     @else
 	<div style="width:100%" x-data="cart()" x-init="start()" x-cloak>
@@ -137,7 +137,7 @@
                                 
                             </div>
                             <div wire:loading wire:target="products">
-                                <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+                                <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
                             </div>
                         @endforeach
                     @endif

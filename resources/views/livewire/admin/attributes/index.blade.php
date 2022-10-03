@@ -237,7 +237,7 @@
                         @if($at->image)
                         <img src="{{ url('/storage/'.$at->image) }}" alt="{{ $at->file_name }}" width="32">
                         @else
-                        <img src="{{ url('/icons/values.svg') }}" alt="{{ $at->file_name }}" width="32">
+                        <img src="{{ url('/ics/values.svg') }}" alt="{{ $at->file_name }}" width="32">
                         @endif
                     </td>
                     @endif
@@ -265,7 +265,7 @@
                                 @if(!$attr)
                                     @if(helper()->testPermission(Auth::user()->permissions,'list_attributes')== true)
                                     <button class="btn btn-sm scat" title="Valores" wire:click="renderValues({{ $at->id }},'{{trim($at->name)}}')">
-                                        <!--<img src="{{url('icons/attribute_white.svg')}}" alt="" width="16">-->
+                                        <!--<img src="{{url('ics/attribute_white.svg')}}" alt="" width="16">-->
                                         <div class="icon icon_value "></div>
                                     </button>
                                     @endif

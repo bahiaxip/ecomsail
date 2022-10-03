@@ -45,7 +45,7 @@
     </div>
     <!-- loading cuando actualizamos edición -->
     <div id="loading" style="display: none;width:100%;height:100%;position:absolute;left: 0;background-color: rgba(0,0,0,.3);z-index:999" >
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
     </div>
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')

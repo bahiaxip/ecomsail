@@ -10,12 +10,12 @@
 
       @if(!$location_id)
       <div class="div_loading loading_edit">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading" class="div_loading loading_update">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>      
       <div class="modal-body">
         <form enctype="multipart/form-data">
@@ -61,7 +61,7 @@
                   <p class="text-danger">{{$message}}</p>
                   @enderror
                   <div wire:loading wire:target="icon">
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
+                    <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
                 </div>
                   
               </div>      

@@ -215,7 +215,7 @@
                         @if($cat->image)
                         <img src="{{ url('/storage/'.$cat->image) }}" alt="{{ $cat->file_name }}" width="32">
                         @else
-                        <img src="{{ url('/icons/grid_cat.svg') }}" alt="{{ $cat->file_name }}" width="32">
+                        <img src="{{ url('/ics/grid_cat.svg') }}" alt="{{ $cat->file_name }}" width="32">
                         @endif
                     </td>
                     <td>{{$cat->name}}</td>
@@ -234,7 +234,7 @@
                             @if($filter_type != 2)
                                 @if(!$subcat)
                                 <button class="btn btn-sm scat" title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
-                                    <!--<img src="{{url('icons/grid_subcat.svg')}}" alt="" width="16">-->
+                                    <!--<img src="{{url('ics/grid_subcat.svg')}}" alt="" width="16">-->
                                     <div class="icon icon_subcat"></div>
                                 </button>
                                 @endif

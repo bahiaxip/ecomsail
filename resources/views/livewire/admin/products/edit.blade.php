@@ -9,12 +9,12 @@
       </div>
       @if(!$prod_id)
       <div class="div_loading loading_edit">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading" class="div_loading loading_update">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" >
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" >
       </div>
       <div class="modal-body">
         {{ Form::hidden('prod_id',null,['wire:model' => 'prod_id']) }}
@@ -81,7 +81,7 @@
                       <p class="text-danger">{{$message}}</p>
                   @enderror
                   <div wire:loading wire:target="image">
-                      <img src="{{url('icons/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+                      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -213,7 +213,7 @@
                       <p class="text-danger">{{$message}}</p>
                   @enderror
                   <div wire:loading wire:target="image">
-                      <img src="{{url('icons/spinner2.svg')}}" alt="" style="margin:auto" width="32">
+                      <img src="{{url('ics/spinner2.svg')}}" alt="" style="margin:auto" width="32">
                   </div>
                 </div>
                 <div class="col-md-6">

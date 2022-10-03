@@ -4,7 +4,7 @@
     <div class="modal-content">
       @if(!$orderIdTmp)
           <div class="div_loading loading_edit">
-              <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+              <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
           </div>
       @endif
       <div class="modal-header justify-content-center">

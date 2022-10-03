@@ -18,12 +18,12 @@
       <!-- loading cuando comienza la edición -->
       @if(!$user_id)
       <div  class="div_loading loading_edit">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading" class="div_loading loading_update">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       <div class="modal-body" >
         
@@ -91,7 +91,7 @@
                 <p class="text-danger">{{$message}}</p>
                 @enderror
                 <div wire:loading wire:target="profile_image">
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
+                    <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
                 </div>
             </div>
             <div class="col-md-6">
@@ -114,7 +114,7 @@
           </div>
           <div class="row" wire:loading wire:target="country">
               <div class="col-md-12 justify-content-center"   style="position:absolute;background-color:rgba(255,255,255,.8);width:99%;min-height:20px;margin:auto;">
-                  <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:20px auto" width="32">
+                  <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:20px auto" width="32">
               </div>
           </div>
 
@@ -168,7 +168,7 @@
                   <p class="text-danger">{{$message}}</p>
                   @enderror
                   <div wire:loading wire:target="province">
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
+                    <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
                 </div>
               </div>
           </div>

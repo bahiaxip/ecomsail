@@ -9,12 +9,12 @@
       <!-- loading cuando comienza la edición -->
       @if(!$this->permissions3)
       <div class="div_loading loading_edit"  >
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" >
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" >
       </div>
       @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading_permissions" class="div_loading loading_update" >
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" >
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" >
       </div>
       
       <div class="modal-body permissions">

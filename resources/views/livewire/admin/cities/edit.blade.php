@@ -11,13 +11,13 @@
       
       @if(!$locations)
       <div class="div_loading loading_edit">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       
       @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading" class="div_loading loading_update">
-        <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg">
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>      
       <div class="modal-body">
         {{ Form::hidden('city_id',$city_id,['wire:model' => 'city_id']) }}
@@ -60,7 +60,7 @@
                   {{ Form::label('location','País')}}
                   {{Form::select('location',$locations,null,['class' =>'form-select','wire:model' =>'location','wire:change' => 'set_province'])}}
                   <div wire:loading wire:target="location">
-                      <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
+                      <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
                   </div>
               </div>
               @isset($provinces)
@@ -84,7 +84,7 @@
                   <p class="text-danger">{{$message}}</p>
                   @enderror
                   <div wire:loading wire:target="icon">
-                    <img src="{{url('icons/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
+                    <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" style="margin:auto" width="32">
                 </div>
                   
               </div>      
