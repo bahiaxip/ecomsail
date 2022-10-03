@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Product, App\Models\History_Order_Item;
+use App\Models\Order, App\Models\Order_Item, App\Models\Product, App\Models\History_Order_Item, App\Models\Feedback_Product;
 use Auth, Route;
 use  Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -18,6 +18,12 @@ class HistoryOrder extends Component
     //buscador global
     public $search_product;
     public $route_name;
+
+    public $feed;
+    public $description;
+
+    public $product_id_tmp;
+    public $order_id_tmp;
     public function mount(){
         $this->user_id = Auth::id();
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
@@ -28,6 +34,57 @@ class HistoryOrder extends Component
     public function go_to_search(){
         if($this->search_product)
             return redirect()->route('store',['category' => 0,'subcategory'=>0,'type' =>$this->search_product]);
+    }
+
+    public function set_feedback($data){
+        $this->feed = $data;
+        
+    }
+
+    public function submit($data){        
+        $this->feed = $data['feed'];        
+        $validated = $this->validate([
+            'feed' => 'required',
+            'description' => 'required'
+        ]);
+        Feedback_Product::create([
+            'status' => 1,            
+            'feedback' => $validated['feed'],
+            'description' => $validated['description'],
+            'order_id' => $this->order_id_tmp,
+            'product_id' =>$this->product_id_tmp,
+            'user_id'=> $this->user_id
+        ]);
+        $this->emit('addFeedback');
+        $this->product_id_tmp = null;
+        $this->order_id_tmp = null;
+        $this->set_session('success','Feedback enviado','Valoración enviada correctamente');
+    }
+    //establecer session temporal
+    public function set_session($typealert,$title,$message){
+        $this->typealert=$typealert;
+        $data = [
+            'message' => $message,
+            'title' => $title,
+            'status' => $typealert
+        ];
+        session()->flash('message',$data);
+    }
+    //método que se ejecuta después de renderizar (exceptuando la primera vez que carga la 
+    //página, en ese caso se puede usar mount()
+    public function dehydrate()
+    {
+        if(session('message.title'))
+            $this->dispatchBrowserEvent('eventModal',['data' => ['status' => $this->typealert]]);
+    }
+
+    public function clear_feedback(){
+        $this->product_id_tmp=null;
+    }
+
+    public function set_data($product_id,$order_id){
+        $this->order_id_tmp = $order_id;
+        $this->product_id_tmp = $product_id;
     }
     
     public function render()

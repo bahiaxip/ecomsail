@@ -373,8 +373,10 @@
                         </div>
                         
                         <div class="tab-pane fade" id="nav-feedback" role="tabpanel" aria-labelledby="nav-feedback-tab" wire:ignore.self>
-                            <div class="row">
-                                No disponible
+                            <div class="row mtop16">
+                                <div class="col-12">
+                                    <p>No existen valoraciones</p>
+                                </div>
                             </div>
                         </div>
                     </div>

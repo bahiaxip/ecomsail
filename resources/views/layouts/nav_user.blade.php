@@ -105,12 +105,14 @@
                 </a>
                 <div class="layer_nav"></div>
             </li>
+            {{--
             <li class="nav-item">
                 <a href="{{route('contact')}}" class="nav-link @if($route_name=='contact') active @endif">
                     <span>CONTACTO</span>
                 </a>
                 <div class="layer_nav"></div>
             </li>
+            --}}
             @auth
             <li class="nav-item">
                 <a href="{{route('cart')}}" class="nav-link @if($route_name=='cart') active @endif">

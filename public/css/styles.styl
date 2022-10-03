@@ -570,7 +570,7 @@ rgba2 = rgba(0,178,146,1)
 				pointer-events all 
 			.icon_product
 				align-items center
-				background-color color8
+				background-color color1
 				border-radius 50% !important			
 				cursor pointer
 				display flex
@@ -589,9 +589,8 @@ rgba2 = rgba(0,178,146,1)
 					box-shadow 0 0 6px color1
 					color color7
 			.icon_product.active
-				background-color color1
 				i
-					color #FFF
+					color color2
 			.icon_product.disabled
 				cursor not-allowed
 				opacity 0.7
@@ -619,6 +618,15 @@ rgba2 = rgba(0,178,146,1)
 				opacity 0.7
 		.nav_tabs
 			font-family Montserrat
+			.nav-tabs
+				border-bottom color12 1px solid
+			button
+				color color6
+			button.active				
+				
+				
+				box-shadow -1px -1px 2px rgba(0,178,146,.5),1px -1px 2px rgba(0,178,146,.5)
+				color color2
 
 /* sobreescribimos algunas clases del product y utilizando las clases del modal fastview*/
 .div_product
@@ -1104,6 +1112,25 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			
 	
 */
+
+/* modal feedback */
+#addFeedback
+	.feed
+		display flex
+		justify-content center
+		span
+			color color13
+			cursor pointer
+			margin 5px 10px
+			i
+				
+				font-size 2em
+			&:hover
+				color color2
+		span.active
+			i
+				color color2
+/* fin modal feedback */
 .payment
 	#collapse_payment		
 		transition height 0.2s linear	

@@ -5,7 +5,7 @@ var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
 'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity',
-'editCity','fastview','addAddress','addSlider','editSlider'
+'editCity','fastview','addAddress','addSlider','editSlider','addFeedback'
 ];
 var description = document.querySelector('#friendly_edit1');
 //creamos al inicio los distintos events listeners recibidos por "$this->emit()" de livewire,
@@ -1988,6 +1988,18 @@ function setScroll(){
     window.scrollTo({'top':scroll,'behavior':'smooth'});
 },100)
     
+}
+
+function setFeedback(feed_num){
+    let list_feed = document.querySelector('#addFeedback').querySelector('.feed').querySelectorAll('span');
+    list_feed.forEach((feed,counter)=>{
+        console.log("counter: ",counter)
+        feed.className="";
+        if(counter < feed_num){
+            feed.classList.add('active');
+        }
+    })
+    document.getElementsByName('feed')[0].value=feed_num;
 }
 
 

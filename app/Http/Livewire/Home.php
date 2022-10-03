@@ -216,8 +216,9 @@ class Home extends Component
         //$this->emit('galleryslider');
         //$this->fastview(2);
         //$this->emit('slick');
-
     }
+
+    
     
     public function updated(){
         

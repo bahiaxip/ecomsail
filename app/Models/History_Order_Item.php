@@ -16,4 +16,8 @@ class History_Order_Item extends Model
         'combinations','quantity','discount_status','end_discount','price_unit','total','title','path_tag','image','user_id','product_id','order_id','order_item_id'
     ];
     protected $hidden = ['created_at','updated_at'];
+
+    public function feedback(){
+        return $this->hasOne(Feedback_Product::class,'id','order_id');
+    }
 }

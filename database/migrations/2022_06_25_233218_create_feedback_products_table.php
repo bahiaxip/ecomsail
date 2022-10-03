@@ -18,8 +18,8 @@ class CreateFeedbackProductsTable extends Migration
             $table->integer('status')->default(0);
             $table->string('title')->nullable();
             $table->integer('feedback')->nullable();
-            $table->text('comment')->nullable();
-            //$table->integer('product_id');
+            $table->text('description')->nullable();
+            $table->integer('product_id');
             $table->integer('order_id');
             $table->integer('user_id');
             $table->timestamps();
