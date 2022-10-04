@@ -79,12 +79,12 @@
                             
                                 @foreach($orders_items[$order->id] as $order_item)
                                 <div>
-                                    <div class="image"  title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
+                                    <div class="image {{$order_item->feedback}}"  title="{{$order_item->title}}&#013;{{$order_item->price_unit}}€ X {{$order_item->quantity}}">
                                         <img src="{{url($order_item->path_tag.$order_item->image)}}" alt="" class="p10">
                                     </div>
-                                    @if(count($orders_items[$order->id]) > 1)
-                                    <div class="{{count($orders_items)}}" style="display:flex">
-                                        <button class="btn btn-sm btn_pry mauto" wire:click="set_data({{$order_item->product_id}},{{$order->id}})" data-bs-toggle="modal" data-bs-target="#addFeedback">  Valorar
+                                    @if(count($orders_items[$order->id]) > 1 && !$order_item->feedback)
+                                    <div class="" style="display:flex">
+                                        <button class="btn btn-sm btn_pry mauto" wire:click="set_data({{$order_item->product_id}},{{$order->id}},{{$order_item->id}})" data-bs-toggle="modal" data-bs-target="#addFeedback">  Valorar
                                         </button>
                                     </div>
                                     @endif
@@ -95,14 +95,14 @@
                         </div>
                         <div class="col-md-3 col_price" >
                             <div>
-                                <div class="price {{$order_item->feedback->status}}">
+                                <div class="price {{$orders_items[$order->id][0]->feedback}}">
                                     <div style="text-align:center;font-weight:bold">
                                         Total: {{number_format(floatval(number_format($order->total,2,'.','')),0,",",".")}} €
                                     </div>
                                 </div>
                                 @if($orders_items[$order->id]->count() < 2)
-                                    @if($order_item->feedback->status == 0)
-                                        <button class="btn btn_pry" style="padding:4px 50px" data-bs-toggle="modal" data-bs-target="#addFeedback" wire:click="set_data({{$order_item->product_id}},{{$order->id}})">
+                                    @if(!$order_item->feedback)
+                                        <button class="btn btn_pry" style="padding:4px 50px" data-bs-toggle="modal" data-bs-target="#addFeedback" wire:click="set_data({{$order_item->product_id}},{{$order->id}},{{$order_item->id}})">
                                             Valorar
                                         </button>
                                     @endif

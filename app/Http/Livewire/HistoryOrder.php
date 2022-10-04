@@ -24,6 +24,7 @@ class HistoryOrder extends Component
 
     public $product_id_tmp;
     public $order_id_tmp;
+    public $order_item_id_tmp;
     public function mount(){
         $this->user_id = Auth::id();
         $this->limit_page = config('ecomsail.items_per_page') ?? 15;
@@ -47,17 +48,22 @@ class HistoryOrder extends Component
             'feed' => 'required',
             'description' => 'required'
         ]);
+        //dd($this->order_item_id_tmp);
         Feedback_Product::create([
             'status' => 1,            
             'feedback' => $validated['feed'],
             'description' => $validated['description'],
             'order_id' => $this->order_id_tmp,
+            'order_item_id' => $this->order_item_id_tmp,
             'product_id' =>$this->product_id_tmp,
             'user_id'=> $this->user_id
         ]);
         $this->emit('addFeedback');
         $this->product_id_tmp = null;
         $this->order_id_tmp = null;
+        $this->order_item_id_tmp = null;
+        $this->description = null;
+        $this->feed = null;
         $this->set_session('success','Feedback enviado','Valoración enviada correctamente');
     }
     //establecer session temporal
@@ -82,9 +88,11 @@ class HistoryOrder extends Component
         $this->product_id_tmp=null;
     }
 
-    public function set_data($product_id,$order_id){
+    public function set_data($product_id,$order_id,$order_item_id){
+
         $this->order_id_tmp = $order_id;
         $this->product_id_tmp = $product_id;
+        $this->order_item_id_tmp = $order_item_id;
     }
     
     public function render()

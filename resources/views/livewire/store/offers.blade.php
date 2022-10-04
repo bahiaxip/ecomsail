@@ -14,12 +14,12 @@
 	            	<div class="nav_offers_categories">
 	            		@foreach($categories as $c)
 		            		@if($c->icon_awesome_offer || $c->icon_image_offer)
-		            		<div class="div_category" wire:click="set_offer({{$c->id}})">
+		            		<button class="div_category @if($offers_cat == $c->id) {{'active'}} @endif" wire:click="set_offer({{$c->id}})">
 				        		<div class="category">
 				        			@if($c->icon_awesome_offer)
 				        			{!!$c->icon_awesome_offer!!}
 				        			@else
-				        			<div class="icon" style="background-image:url({{url('ics/cat_icons/'.$c->icon_image_offer)}});">
+				        			<div class="icon " @if($offers_cat == $c->id) style="background-image:url({{url('ics/cat_icons/'.$c->icon_image_offer_hover)}});" @else style="background-image:url({{url('ics/cat_icons/'.$c->icon_image_offer)}});" @endif>
 				        				
 				        			</div>
 				        			<input type="hidden" name="icon_hover_{{$c->id}}" data_icon="{{url('ics/cat_icons/'.$c->icon_image_offer_hover)}}">
@@ -28,7 +28,7 @@
 				        		<span class="title">
 				        			{{$c->title_offer}}
 				        		</span>
-			        		</div>
+			        		</button>
 			        		@endif
 	            		@endforeach
 	            		{{--

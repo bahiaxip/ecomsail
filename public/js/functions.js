@@ -317,6 +317,11 @@ window.livewire.on('message_opacity',()=>{
         }, 4000);
     }
 })
+
+//route: product
+let activeTab;
+let list_tabs;
+
 if(route == 'list_home'){
     
     let products = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto','Septiembre'];
@@ -498,12 +503,17 @@ document.addEventListener('readystatechange',() => {
                     }
                     
                 })
-                console.log("counter: ",counter)
+                //Creamos evento de las pestañas de product en panel de user para cuando se renderice
+                //se mantenga en la pestaña seleccionada.
                 
+                list_tabs = document.querySelector('.nav_tabs').querySelector('#nav-tab').querySelectorAll('button');
+                list_tabs.forEach((tab)=>{
+                    tab.addEventListener('click',()=>{
+                        getActiveTab()
+                    })
+                })
+                console.log("product: ",list_tabs)
             }
-            
-
-
         }
 
         if(route == 'list_attributes'){
@@ -652,9 +662,11 @@ window.livewire.on('setValue',(value,parent,option)=>{
     })
 })
 //efectos hover con javascript según sean imágenes o icons font awesome
+//al establecer la imagen de "nevera" para las ofertas "Electrohogar"
 if(route == 'offers'){
     //comprobamos si es elemento font awesome(<i>) o imagen y establecemos
-    //la correspondiente
+    //el correspondiente evento para mostrar la imagen con otro color necesario para el 
+    //efecto hover
     let divCategoriesNodes = document.querySelectorAll('.div_category');
     let divCategories = [].slice.call(divCategoriesNodes);
     let icon_hover=[];
@@ -665,7 +677,6 @@ if(route == 'offers'){
             icon_hover[counter] = category.getElementsByTagName('input')[0].getAttribute('data_icon');
             icon[counter] = category.querySelector('.icon').style.backgroundImage;
 
-            console.log(counter)
             category.addEventListener('mouseover',()=>{
                 category.querySelector('.icon').style.backgroundImage="url("+icon_hover[counter]+")"
             })
@@ -674,10 +685,14 @@ if(route == 'offers'){
             })            
         //si es imagen
         }else{
-            console.log("existe")
+            //console.log("existe")
         }
+        category.addEventListener('click',()=>{
+            category.classList.add('active')
+        })
         
     })
+
     console.log("offers: ",divCategories)
 }
 if(route == 'store'){
@@ -2001,15 +2016,7 @@ function setFeedback(feed_num){
     })
     document.getElementsByName('feed')[0].value=feed_num;
 }
-//Creamos evento de las pestañas de product en panel de user para cuando se renderice
-//se mantenga en la pestaña seleccionada.
-let activeTab;
-let list_tabs = document.querySelector('.nav_tabs').querySelector('#nav-tab').querySelectorAll('button');
-list_tabs.forEach((tab)=>{
-    tab.addEventListener('click',()=>{
-        getActiveTab()
-    })
-})
+//métodos solo para la vista products:
 //obtener pestaña y almacenar en activeTab
 function getActiveTab(){
     list_tabs.forEach((tab)=>{

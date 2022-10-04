@@ -21,6 +21,7 @@ class CreateFeedbackProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('product_id');
             $table->integer('order_id');
+            $table->integer('order_item_id');
             $table->integer('user_id');
             $table->timestamps();
         });

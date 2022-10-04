@@ -94,7 +94,7 @@
                     <span>TIENDA</span>
                 </a>
                 --}}
-                <a href="{{route('store')}}" class="nav-link {{Route::currentRouteName()}}@if($route_name=='store'||$route_name == 'product') active @endif">
+                <a href="{{route('store')}}" class="nav-link @if($route_name=='store'||$route_name == 'product') active @endif">
                     <span>PRODUCTOS</span>
                 </a>
                 <div class="layer_nav"></div>

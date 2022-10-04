@@ -243,9 +243,10 @@ rgba2 = rgba(0,178,146,1)
 			padding 8px
 			&:hover
 				color color2
-			&:focus
+			&:focus				
 				box-shadow 1px 1px 3px color2,-1px -1px 3px color2, 1px -1px 3px color2,-1px 1px 3px color2
-				color color2
+				
+				/*border rgba(72,97,255,.4) 1px solid*/
 			span
 				margin 5px
 	
@@ -262,6 +263,9 @@ rgba2 = rgba(0,178,146,1)
 			background-color #FFF
 	select:focus
 		box-shadow 1px 1px 3px color2,-1px -1px 3px color2, 1px -1px 3px color2,-1px 1px 3px color2
+		/*outline rgba(72,97,255,.3) 1px solid*/
+		
+		border none
 		
 		
 	
@@ -554,7 +558,7 @@ rgba2 = rgba(0,178,146,1)
 			justify-content center
 			
 			button
-				background-color color1
+				background-color color2
 				border-radius 5px
 				color color7
 				margin auto 10px
@@ -570,7 +574,7 @@ rgba2 = rgba(0,178,146,1)
 				pointer-events all 
 			.icon_product
 				align-items center
-				background-color color1
+				background-color color2
 				border-radius 50% !important			
 				cursor pointer
 				display flex
@@ -590,7 +594,7 @@ rgba2 = rgba(0,178,146,1)
 					color color7
 			.icon_product.active
 				i
-					color color2
+					color color1
 			.icon_product.disabled
 				cursor not-allowed
 				opacity 0.7
@@ -617,16 +621,17 @@ rgba2 = rgba(0,178,146,1)
 				cursor not-allowed
 				opacity 0.7
 		.nav_tabs
-			font-family Montserrat
+			font-family QuicksandR
 			.nav-tabs
 				border-bottom color12 1px solid
 			button
 				color color6
+				font-family QuicksandB
 			button.active				
-				
+				background-color color2
 				
 				box-shadow -1px -1px 2px rgba(0,178,146,.5),1px -1px 2px rgba(0,178,146,.5)
-				color color2
+				color #FFF
 
 /* sobreescribimos algunas clases del product y utilizando las clases del modal fastview*/
 .div_product
@@ -1040,7 +1045,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 									background-image url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e")
 				
 		.box_address_card.active
-			border color2 2px solid
+			border color12 2px solid
 	/*			
 	#collapse_address
 		font-family QuicksandR
@@ -1142,8 +1147,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		
 		.div_btn_payment
 			align-items center
+			border transparent 1px solid
+			border-radius 4px
 			display flex
+			font-family QuicksandB
 			justify-content center
+			
 			i
 				opacity 0
 			i.active
@@ -1155,7 +1164,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				margin 5px 8px
 				padding 2px 20px
 				position relative
-				
+			
 				input
 					cursor pointer
 					height 100%
@@ -1164,8 +1173,10 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					position absolute
 					top 0					
 					width 100%
+			&:hover
+				border color12 1px solid
 				&:hover
-					color color2
+					color #FFF
 				
 					
 			 /*sustituido por el focus*/
@@ -1523,7 +1534,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					text-align center
 				&:hover
 					background-color rgba(0,0,0,.1)
-					color #FFF					
+					color #FFF
+				
+			.div_category.active
+				background-color rgba(0,0,0,.1)
+				color #FFF
+			
 	.box_products_list
 		margin auto
 		min-height 80vh

@@ -18,6 +18,6 @@ class History_Order_Item extends Model
     protected $hidden = ['created_at','updated_at'];
 
     public function feedback(){
-        return $this->hasOne(Feedback_Product::class,'id','order_id');
+        return $this->hasOne(Feedback_Product::class,'order_item_id','id');
     }
 }

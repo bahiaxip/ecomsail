@@ -11,7 +11,7 @@ class Feedback_Product extends Model
 
     protected $table = 'feedback_products';
     protected $fillable = [
-        'status','title','feedback','description','order_id','product_id','user_id'
+        'status','title','feedback','description','order_id','product_id','user_id','order_item_id'
     ];
 
     protected $hidden = ['created_at','updated_at'];
