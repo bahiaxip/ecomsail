@@ -143,7 +143,7 @@ class Product extends Component
         $this->price_tmp = $this->price_tmp + $this->added_price;
         //$this->price_tmp = $this->item->price + $this->added_price;
         //$this->dispatchBrowserEvent('contentChanged2');
-            
+        $this->emit('activeTab');
     }
 
     public function set_quantity(){        
@@ -750,7 +750,9 @@ class Product extends Component
                 $title = 'Eliminado';
                 $status = 'trash';
             }
+            $this->emit('activeTab');
             $this->set_session($status,$title,$message);
+
         }
     }
     //establecer session temporal

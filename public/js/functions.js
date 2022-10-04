@@ -2001,6 +2001,36 @@ function setFeedback(feed_num){
     })
     document.getElementsByName('feed')[0].value=feed_num;
 }
+//Creamos evento de las pestañas de product en panel de user para cuando se renderice
+//se mantenga en la pestaña seleccionada.
+let activeTab;
+let list_tabs = document.querySelector('.nav_tabs').querySelector('#nav-tab').querySelectorAll('button');
+list_tabs.forEach((tab)=>{
+    tab.addEventListener('click',()=>{
+        getActiveTab()
+    })
+})
+//obtener pestaña y almacenar en activeTab
+function getActiveTab(){
+    list_tabs.forEach((tab)=>{
+        if(tab.classList.contains('active'))
+            activeTab = tab.getAttribute('data-tab');
+    })
+}
+//evento livewire para seleccionar pestaña
+window.livewire.on('activeTab',()=>{
+    setActiveTab();
+})
+//seleccionar pestaña mediante activeTab
+function setActiveTab(){
+    if(activeTab)
+        list_tabs.forEach((tab)=>{
+            if(tab.getAttribute('data-tab') == activeTab)
+                tab.classList.add('active');
+            else
+                tab.classList.remove('active');
+        })
+}
 
 
 

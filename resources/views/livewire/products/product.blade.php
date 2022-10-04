@@ -73,8 +73,8 @@
     @include('layouts.nav_user')
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         <div class="btn_return">
-            <button onclick="history.back()" class="btn btn-sm btn_grey">
-                <i class="fa-solid fa-left-long"></i> Volver
+            <button onclick="history.back()" class="btn_sry" style="padding:4px 16px;border-radius:4px" title="Volver atrás">
+                <i class="fa-solid fa-turn-up" style="transform:rotate(270deg);font-size:1.2em"></i>
             </button>
         </div>
         <!--
@@ -325,12 +325,12 @@
                 <div class="row mtop32 nav_tabs">
                     <nav>
                           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                              <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Descripción</button>              
-                              <button class="nav-link" id="nav-details-tab" data-bs-toggle="tab" data-bs-target="#nav-details" type="button" role="tab" aria-controls="nav-details" aria-selected="false">Detalles</button>
+                              <button class="nav-link active" data-tab="description" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Descripción</button>              
+                              <button class="nav-link" data-tab="detail" id="nav-details-tab" data-bs-toggle="tab" data-bs-target="#nav-details" type="button" role="tab" aria-controls="nav-details" aria-selected="false">Detalles</button>
 
-                              <button class="nav-link" id="nav-dimensions-tab" data-bs-toggle="tab" data-bs-target="#nav-dimensions" type="button" role="tab" aria-controls="nav-dimensions" aria-selected="false">Dimensiones</button>
+                              <button class="nav-link" data-tab="dimensions" id="nav-dimensions-tab" data-bs-toggle="tab" data-bs-target="#nav-dimensions" type="button" role="tab" aria-controls="nav-dimensions" aria-selected="false">Dimensiones</button>
 
-                              <button class="nav-link" id="nav-feedback-tab" data-bs-toggle="tab" data-bs-target="#nav-feedback" type="button" role="tab" aria-controls="nav-feedback" aria-selected="false">Valoraciones</button>
+                              <button class="nav-link" data-tab="feedback" id="nav-feedback-tab" data-bs-toggle="tab" data-bs-target="#nav-feedback" type="button" role="tab" aria-controls="nav-feedback" aria-selected="false">Valoraciones</button>
                           </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
