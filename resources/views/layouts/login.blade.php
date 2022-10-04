@@ -16,11 +16,13 @@
 </head>
 <body>
     @if(Route::is('login'))
+    {{--
     <h2>
         Hola
     </h2>
     @else
     <h2>Adiós</h2>
+    --}}
     @endif
     @section('content')
 

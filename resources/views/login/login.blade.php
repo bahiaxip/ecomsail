@@ -54,8 +54,13 @@
 		<div class="mtop16 tcenter">
 			{!! Form::submit('Login',['class' => 'btn btn_login']) !!}
 		</div>
-		<div class="forget_pass mtop16">
-			<a href="#">¿Olvidó su contraseña?</a>
+		<div class="links">
+			<div class="forget_pass mtop16">
+				<a href="#">¿Olvidó su contraseña?</a>
+			</div>			
+			<div class="forget_pass mtop16">
+				<a href="{{route('home')}}">Volver a EcomSail</a>
+			</div>
 		</div>
 		
 	</div>

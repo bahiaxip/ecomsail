@@ -92,9 +92,13 @@
 
 
 		{!! Form::close() !!}
-
-		<div class="forget_pass mtop16">
-			<a href="{{ url('/login') }}">Ir a login</a>
+		<div class="links">
+			<div class="forget_pass mtop16">
+				<a href="{{ url('/login') }}">Ir a login</a>
+			</div>
+			<div class="forget_pass mtop16">
+				<a href="{{ route('home') }}">Volver a EcomSail</a>
+			</div>
 		</div>
 		
 		
