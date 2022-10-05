@@ -73,8 +73,8 @@
     @include('layouts.nav_user')
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         <div class="btn_return">
-            <button onclick="history.back()" class="btn_sry" style="padding:4px 16px;border-radius:4px" title="Volver atrás">
-                <i class="fa-solid fa-turn-up" style="transform:rotate(270deg);font-size:1.2em"></i>
+            <button onclick="history.back()" class="btn_sry" style="padding:3px 15px;border-radius:4px" title="Volver atrás">
+                <i class="fa-solid fa-turn-up" style="transform:rotate(270deg);font-size:1.3em"></i>
             </button>
         </div>
         <!--

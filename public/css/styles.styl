@@ -558,7 +558,7 @@ rgba2 = rgba(0,178,146,1)
 			justify-content center
 			
 			button
-				background-color color2
+				background-color color1
 				border-radius 5px
 				color color7
 				margin auto 10px
@@ -574,7 +574,7 @@ rgba2 = rgba(0,178,146,1)
 				pointer-events all 
 			.icon_product
 				align-items center
-				background-color color2
+				background-color color1
 				border-radius 50% !important			
 				cursor pointer
 				display flex
@@ -594,7 +594,7 @@ rgba2 = rgba(0,178,146,1)
 					color color7
 			.icon_product.active
 				i
-					color color1
+					color color2
 			.icon_product.disabled
 				cursor not-allowed
 				opacity 0.7
@@ -989,6 +989,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			display block
 			padding 0 2px
 			.address_card
+				color #000
 				display flex
 				height 100%
 				justify-content:space-between
@@ -1012,12 +1013,12 @@ como existen 2 uno es el carousel de product y otro el modal de product
 						content ''
 						position relative
 						display inline-block
-						border 2px solid color2
+						border 2px solid color4
 						color orange
 						top -4px
 						left -1px
 						border-radius 15px
-						background-color color2
+						background-color color1
 				.actions
 					.delete
 						display flex
@@ -1045,7 +1046,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 									background-image url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e")
 				
 		.box_address_card.active
-			border color12 2px solid
+			border color1 2px solid
 	/*			
 	#collapse_address
 		font-family QuicksandR
@@ -1156,7 +1157,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 			i
 				opacity 0
 			i.active
-				color color2
+				color color1
 				opacity 1
 			.btn_payment
 				display flex
@@ -1166,6 +1167,7 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				position relative
 			
 				input
+					color orange
 					cursor pointer
 					height 100%
 					left 0
@@ -1174,14 +1176,14 @@ como existen 2 uno es el carousel de product y otro el modal de product
 					top 0					
 					width 100%
 			&:hover
-				border color12 1px solid
+				border color4 1px solid
 				&:hover
 					color #FFF
 				
 					
 			 /*sustituido por el focus*/
 			.btn_payment.active
-				color color2
+				color color1
 				
 				
 .btn_collapse
