@@ -14,7 +14,7 @@
       @endif
       <!-- loading cuando actualizamos edición -->
       <div id="loading_permissions" class="div_loading loading_update" >
-        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg" >
+        <img src="{{url('ics/loading/dualball.svg')}}" alt="dualball.svg">
       </div>
       
       <div class="modal-body permissions">
@@ -26,7 +26,7 @@
 
                   <div class="col-lg-4">                    
                     
-                    <div class="panel shadow" >
+                    <div class="panel shadow">
                       <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_home" aria-expanded="false" aria-controls="collapseExample">
                         <i class="fa-solid fa-lock"></i> Home <i class="fa-solid fa-chevron-down"></i>
                       </button>  

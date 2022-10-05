@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
             CombinationSeeder::class,
             ProductsGallerySeeder::class,
             MetaTagSeeder::class,
-            CarouselSeeder::class
+            CarouselSeeder::class,
+            RoleSeeder::class
         ]);
         
     }

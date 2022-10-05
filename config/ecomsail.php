@@ -6,7 +6,7 @@ return [
 'email_site' => 'manu@gmail.com',
 'phone_site' => '627 64 66 25',
 'whatsapp' => '627646625',
-'facebook' => '',
+'facebook' => 'http://www.google.es',
 'twitter' => '',
 'instagram' => '',
 'linkedin' => 'https://www.linkedin.com/feed/',

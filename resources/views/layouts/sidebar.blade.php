@@ -102,6 +102,14 @@
 					</span>
 				</a>
 			</li>
+			<li>
+				<a href="{{route('roles')}}">
+					<i class="fa-solid fa-shield-halved"></i> 
+					<span class="d-none d-lg-inline-flex">
+						Roles
+					</span>
+				</a>
+			</li>
 			
 			<li>
 				<a href="{{route('settings')}}">
