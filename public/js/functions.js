@@ -5,7 +5,7 @@ var events = [
 'userUpdated','editUser','addCategory','editCategory','addProduct','editProduct',
 'confirmDel','editPermissions','sendModal','sendModal2','addAttribute',
 'editAttribute','addValue','massiveConfirm','settings','editLocation','addCity',
-'editCity','fastview','addAddress','addSlider','editSlider','addFeedback'
+'editCity','fastview','addAddress','addSlider','editSlider','addFeedback','addPermission','editPermission','addRole','editRole'
 ];
 var description = document.querySelector('#friendly_edit1');
 //creamos al inicio los distintos events listeners recibidos por "$this->emit()" de livewire,

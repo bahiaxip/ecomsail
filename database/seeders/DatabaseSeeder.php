@@ -39,6 +39,8 @@ class DatabaseSeeder extends Seeder
             ProductsGallerySeeder::class,
             MetaTagSeeder::class,
             CarouselSeeder::class,
+            BoxPermissionsSeeder::class,
+            PermissionSeeder::class,
             RoleSeeder::class
         ]);
         

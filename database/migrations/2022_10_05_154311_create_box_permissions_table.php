@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateBoxPermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('box_permissions', function (Blueprint $table) {
             $table->id();
-            $table->integer('status')->nullable();
+            $table->integer('status');
             $table->string('name');
-            $table->string('slug');
-            $table->text('description')->nullable();
-            $table->string('special')->nullable();
-            $table->softDeletes();
+            $table->text('icon_awesome')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('icon_classlist')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -32,6 +30,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('box_permissions');
     }
 }

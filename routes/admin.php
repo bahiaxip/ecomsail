@@ -55,9 +55,14 @@ Route::group([
 
 		//Carousel
 		Route::get('/carousel/{filter_type}',\App\Http\Livewire\Admin\Carousel::class)->name('carousel');
+
+		
 		
 		//Roles
-		Route::get('/roles',\App\Http\Livewire\Admin\Roles::class)->name('roles');
+		Route::get('/roles/{filter_type}',\App\Http\Livewire\Admin\Roles::class)->name('roles');
+
+		//Permisos
+		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('permissions');
 		
 		//Ajustes
 		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('settings');

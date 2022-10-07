@@ -15,9 +15,12 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
+            $table->integer('status');
             $table->string('name');
             $table->string('slug');
-            $table->text('description');            
+            $table->text('description');
+            $table->integer('box_permission_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

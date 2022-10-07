@@ -102,9 +102,19 @@
 					</span>
 				</a>
 			</li>
+
 			<li>
-				<a href="{{route('roles')}}">
-					<i class="fa-solid fa-shield-halved"></i> 
+				<a href="{{route('permissions',['filter_type' => 1])}}">
+					<i class="fa-solid fa-shield"></i>
+					<span class="d-none d-lg-inline-flex">
+						Permisos
+					</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="{{route('roles',['filter_type' => 1])}}">
+					<i class="fa-solid fa-shield-halved"></i>
 					<span class="d-none d-lg-inline-flex">
 						Roles
 					</span>

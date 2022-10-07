@@ -1,17 +1,17 @@
 <!-- Modal crear usuario -->
-<div wire:ignore.self class="modal fade " id="addRole" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+<div wire:ignore.self class="modal fade " id="editRole" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <div class="modal-title h5">
-          Crear Rol
+          Editar Rol
         </div>
       </div>
       <!-- loading cuando actualizamos edición -->
       <div id="loading" style="display: none;width:100%;height:100%;position:absolute;background-color: rgba(0,0,0,.5);z-index:999" >
         <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
       </div>
-      <form wire:submit.prevent="store(Object.fromEntries(new FormData($event.target)))">
+      <form wire:submit.prevent="update(Object.fromEntries(new FormData($event.target)))">
         <div class="modal-body permissions">
             <div class="row">
                 <div class="col-md-6">
@@ -39,6 +39,8 @@
                     @enderror
                 </div>
             </div>
+          
+          	<!--<div class="form-group">-->
             <div class="row mtop16">
                 <div class="col-md-6">
                     {{Form::label('status','Estado')}}
@@ -48,8 +50,6 @@
                     @enderror
                 </div>
             </div>
-          	<!--<div class="form-group">-->
-            
                 
             <div class="row mtop16">
                 <div class="col-md-12">
@@ -64,6 +64,7 @@
                     @enderror
                 </div>
             </div>
+
             @php
             $counter = 0;
             $count_box_permissions = $box_permissions->count();
@@ -89,7 +90,33 @@
                             <h2 class="title"><i class="fas fa-box-open"></i> Productos</h2>
                           </div>
                           -->
-                            <div class="box">
+                            <div class="box">            
+                                {{--
+                                <div class="form-check">
+                                  {{ Form::checkbox('list_products',true,null,['class' => 'form-check-input','id' => 'list_products']) }}
+                                  {{ Form::label('list_products','Listar productos') }}
+                                </div>
+
+                                <div class="form-check">
+                                    {{ Form::checkbox('add_products',true,null,['class' => 'form-check-input','id' => 'add_products']) }}
+                                    {{ Form::label('add_products','Crear productos') }}
+                                </div>
+
+                                <div class="form-check">
+                                    {{ Form::checkbox('edit_products',true,null,['class' => 'form-check-input','id' => 'edit_products']) }}
+                                    {{ Form::label('edit_products','Editar productos') }}
+                                </div>
+
+                                <div class="form-check">
+                                    {{ Form::checkbox('delete_products',true,null,['class' => 'form-check-input','id' => 'delete_products']) }}
+                                    {{ Form::label('delete_products','Eliminar productos') }}
+                                </div>
+
+                                <div class="form-check">
+                                    {{ Form::checkbox('restore_products',true,null,['class' => 'form-check-input','id' => 'restore_products']) }}
+                                    {{ Form::label('restore_products','Restaurar productos') }}
+                                </div>
+                                --}}
                                 @foreach($permissions[$box_permission->id] as $p)
                                 <div class="form-check">
                                   {{ Form::checkbox($p->slug,true,null,['class' => 'form-check-input','id' => $p->slug]) }}
@@ -109,7 +136,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-sm btn-sm btn_sail btn_sry" data-bs-dismiss="modal" wire:click.prevent="clear2">Cancelar</button>
-          <button type="submit" class="btn btn-sm btn-sm btn_sail btn_pry">Crear</button>
+          <button type="submit" class="btn btn-sm btn-sm btn_sail btn_pry">Actualizar</button>
         </div>
       </form>
     </div>

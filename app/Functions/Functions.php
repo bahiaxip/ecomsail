@@ -22,6 +22,13 @@ function get_product_state(){
 		3 => 'Reacondicionado'
 	];
 }
+
+function get_current_status_select(){
+	return [
+		0 => 'Borrador',
+		1 => 'Público',		
+	];
+}
 //llamada desde el nav_user (icono de cesta dentro de barra de navegación)
 //para mostrar la cantidad de productos en el carrito temporal
 function getCountOrders(){

@@ -4,7 +4,7 @@
 	@section('path')
 	&nbsp;>&nbsp;
     <li class="list_name">
-        <a href="{{ url('admin/roles') }}">
+        <a href="{{ route('roles',['filter_type' => 1]) }}">
             <div class="icon icon_cat"></div>
             <!--<i class="fa-solid fa-columns"></i>--> 
             <span>Roles</span>
@@ -13,6 +13,8 @@
 	@endsection
 
 	@include('livewire.admin.roles.create')
+    @include('livewire.admin.roles.edit')
+    @include('livewire.admin.roles.confirm')
 
 	@if(session()->has('message'))
     <div class="container ">
@@ -43,8 +45,38 @@
             </li>
         </ul>
         <ul class="add">
+            <li>            
+                <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()"  aria-expanded="false" >
+                    <span class="d-none d-md-inline">Filtros</span>
+                    <span class="d-inline d-md-none">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </span>
+                </button>            
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
+                    <li>
+                        <a href="{{ route('roles',['filter_type' => 1]) }}" class="dropdown-item">
+                            &#x2714; Público
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('roles',['filter_type' => 0]) }}" class="dropdown-item">
+                            &#x2716; Borrador
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('roles',['filter_type' => 2]) }}" class="dropdown-item">
+                            <i class="fa-solid fa-trash"></i> Reciclaje
+                        </a>
+                    </li>
+                    <li>
+                        <a href=" {{ route('roles',['filter_type' => 3]) }}" class="dropdown-item">
+                            &#x2714;&#x2716; Todos
+                        </a>
+                    </li>
+                </ul>            
+            </li>
         	<li>
-        		<button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addRol" >
+        		<button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addRole" >
                     <i class="fa-solid fa-plus"></i> 
                     <span class="d-none d-md-inline">Crear Rol</span>
                 </a>
@@ -116,34 +148,31 @@
                     <td class="max d-none d-md-table-cell">{!! $role->description !!}</td>
                     <td>
                         <div class="admin_items">
-                        {{--
+                        
                             @if($filter_type != 2)
-                                @if(!$subcat)
-                                <button class="btn btn-sm scat" title="Subcategorías" wire:click="renderSubCat({{ $cat->id }},'{{trim($cat->name)}}')">
-                                    <!--<img src="{{url('ics/grid_subcat.svg')}}" alt="" width="16">-->
-                                    <div class="icon icon_subcat"></div>
-                                </button>
-                                @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
-                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})" title="Editar {{$cat->name}}">
+                                
+                                {{--@if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)--}}
+                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editRole" wire:click="edit({{$role->id}})" title="Editar {{$role->name}}">
                                     <i class="fa-solid fa-edit"></i>
                                 </button>
+                                {{--
                                 @endif
                                 @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
+                                --}}
                                     @if($filter_type!=2)
-                                        <button class="btn btn-sm delete" title="Eliminar {{$cat->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}},'delete')">
+                                        <button class="btn btn-sm delete" title="Eliminar {{$role->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveRoleId({{$role->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     @endif
-                                @endif
+                                {{--@endif--}}
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
-                                    <button class="btn btn-sm back_livewire2" title="Restaruar categoría" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}},'restore')">
+                                {{--@if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)--}}
+                                    <button class="btn btn-sm back_livewire2" title="Restaruar rol" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveRoleId({{$role->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>
-                                @endif
+                                {{--@endif--}}
                             @endif
-                        --}}
+                        
                         </div>
                     </td>
                 </tr>
