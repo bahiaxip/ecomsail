@@ -19,7 +19,9 @@
     </li>
     @endif
     @endsection
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_invoices')== true || helper()->testPermission(Auth::user()->permissions,'restore_invoices')== true )
+    @if(helper()->testRole(Auth::user()->role,'delete_invoices') == true
+        || helper()->testRole(Auth::user()->role,'restore_invoices') == true
+        || Auth::user()->roles->special == 'all')
         @include('livewire.admin.invoices.confirm')
     @endif
 
@@ -208,13 +210,15 @@
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_invoices')== true)
+                                @if(helper()->testRole(Auth::user()->role,'delete_invoices') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm delete" title="Eliminar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
                                     </button>
                                 @endif
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_invoices')== true)
+                                @if(helper()->testRole(Auth::user()->role,'restore_invoices') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm edit" title="Restaruar {{$invoice->id}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveInvoiceId({{$invoice->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>

@@ -10,15 +10,21 @@
     </li>
     @endsection
     
-    @if(helper()->testPermission(Auth::user()->permissions,'add_products')== true)
+    @if(helper()->testRole(Auth::user()->role,'add_products') == true
+                || Auth::user()->roles->special == 'all')
         @include('livewire.admin.products.create')
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'edit_products')== true)
+    @if(helper()->testRole(Auth::user()->role,'edit_products') == true
+                || Auth::user()->roles->special == 'all')
         @include('livewire.admin.products.edit')
         @include('livewire.admin.products.settings')
     @endif
     
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true || helper()->testPermission(Auth::user()->permissions,'restore_products')== true )
+    
+    @if(helper()->testRole(Auth::user()->role,'delete_products') == true
+        || helper()->testRole(Auth::user()->role,'restore_products') == true
+        || Auth::user()->roles->special == 'all')
+
         @include('livewire.admin.products.confirm')
     @endif
     @include('livewire.admin.products.sendmail')
@@ -109,7 +115,8 @@
                     </ul>
                 </div>
             </li>
-            @if(helper()->testPermission(Auth::user()->permissions,'add_products')== true)
+            @if(helper()->testRole(Auth::user()->role,'add_products') == true
+                || Auth::user()->roles->special == 'all')
                 <li>
                     <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
                 </li>
@@ -160,24 +167,29 @@
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_products')== true)
+                                @if(helper()->testRole(Auth::user()->role,'edit_products') == true
+                                    || Auth::user()->roles->special == 'all')
+
                                     <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#settings" wire:click="edit_settings_product({{$prod->id}})">
                                         <i class="fa-solid fa-list-check"></i>
                                     </button>
                                 @endif
                                 
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_products')== true)
+                                @if(helper()->testRole(Auth::user()->role,'edit_products') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="edit({{$prod->id}})">
                                         <i class="fa-solid fa-edit"></i>
                                     </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_products')== true)
+                                @if(helper()->testRole(Auth::user()->role,'delete_products') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm delete" title="Eliminar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}},'delete')">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 @endif
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_products')== true)
+                                @if(helper()->testRole(Auth::user()->role,'restore_products') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm edit" title="Restaruar producto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveProdId({{$prod->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>

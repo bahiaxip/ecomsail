@@ -11,7 +11,8 @@
     @endsection
     
     
-    @if(helper()->testPermission(Auth::user()->permissions,'edit_locations')== true)
+    @if(helper()->testRole(Auth::user()->role,'edit_locations') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.locations.edit')
     @endif
     {{--
@@ -179,19 +180,22 @@
                     <td>
                         <div class="admin_items">
                             @if($filter_type != 2)
-                                @if(helper()->testPermission(Auth::user()->permissions,'list_locations')== true)
+                                @if(helper()->testRole(Auth::user()->role,'list_locations') == true
+                                || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm delete" wire:click="renderCities({{$l->id}})" title="Ciudades de {{$l->name}}">
                                         <i class="fa-solid fa-city"></i>
                                     </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_locations')== true)
+                                @if(helper()->testRole(Auth::user()->role,'edit_locations') == true
+                                || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editLocation"  wire:click="edit({{$l->id}})" title="Editar {{$l->name}}">
                                         <i class="fa-solid fa-edit"></i>
                                     </button>
                                 @endif
                                                                
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_locations')== true)
+                                @if(helper()->testRole(Auth::user()->role,'restore_locations') == true
+                                || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm " title="Restaruar ubicación" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveLocId({{$cat->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>

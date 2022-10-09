@@ -30,13 +30,16 @@
     @endif
     @endsection
 
-    @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
+    @if(helper()->testRole(Auth::user()->role,'add_categories') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.categories.create')
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
+    @if(helper()->testRole(Auth::user()->role,'edit_categories') == true
+            || Auth::user()->roles->special == 'all')
     @include('livewire.admin.categories.edit')
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
+    @if(helper()->testRole(Auth::user()->role,'delete_categories') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.categories.confirm')
     @endif
     @include('livewire.admin.categories.sendmail')
@@ -185,7 +188,8 @@
                     </li>
                 </ul>            
             </li>
-            @if(helper()->testPermission(Auth::user()->permissions,'add_categories')== true)
+            @if(helper()->testRole(Auth::user()->role,'add_categories') == true
+                    || Auth::user()->roles->special == 'all')
                 <li>
                     <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()">
                         <i class="fa-solid fa-plus"></i> 
@@ -272,12 +276,14 @@
                                     <div class="icon icon_subcat"></div>
                                 </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)
+                                @if(helper()->testRole(Auth::user()->role,'edit_categories') == true
+                                    || Auth::user()->roles->special == 'all')
                                 <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editCategory" wire:click="edit({{$cat->id}})" title="Editar {{$cat->name}}">
                                     <i class="fa-solid fa-edit"></i>
                                 </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)
+                                @if(helper()->testRole(Auth::user()->role,'delete_categories') == true
+                                    || Auth::user()->roles->special == 'all')
                                     @if($filter_type!=2)
                                         <button class="btn btn-sm delete" title="Eliminar {{$cat->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
@@ -285,7 +291,8 @@
                                     @endif
                                 @endif
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)
+                                @if(helper()->testRole(Auth::user()->role,'restore_categories') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm back_livewire2" title="Restaruar categoría" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveCatId({{$cat->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>

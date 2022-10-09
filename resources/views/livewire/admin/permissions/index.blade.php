@@ -11,10 +11,18 @@
         </a>
     </li>
 	@endsection
-
-	@include('livewire.admin.permissions.create')
-    @include('livewire.admin.permissions.edit')
-    @include('livewire.admin.permissions.confirm')
+    @if(helper()->testRole(Auth::user()->role,'add_permissions') == true
+        || Auth::user()->roles->special == 'all')
+	   @include('livewire.admin.permissions.create')
+    @endif
+    @if(helper()->testRole(Auth::user()->role,'edit_permissions') == true
+            || Auth::user()->roles->special == 'all')
+        @include('livewire.admin.permissions.edit')
+    @endif
+    @if(helper()->testRole(Auth::user()->role,'delete_permissions') == true
+            || Auth::user()->roles->special == 'all')
+        @include('livewire.admin.permissions.confirm')
+    @endif
 	@if(session()->has('message'))
     <div class="container ">
         <div class="alert alert-{{$typealert}}">            
@@ -149,23 +157,29 @@
                         <div class="admin_items">
                         @if($filter_type != 2)
                             {{--@if(helper()->testPermission(Auth::user()->permissions,'edit_categories')== true)--}}
-                            <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editPermission" wire:click="edit({{$permission->id}})" title="Editar {{$permission->name}}">
-                                <i class="fa-solid fa-edit"></i>
-                            </button>
+                            @if(helper()->testRole(Auth::user()->role,'edit_permissions') == true
+                                || Auth::user()->roles->special == 'all')
+                                <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editPermission" wire:click="edit({{$permission->id}})" title="Editar {{$permission->name}}">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            @endif
                             {{--@endif--}}
-                            {{--@if(helper()->testPermission(Auth::user()->permissions,'delete_categories')== true)--}}
+                            
+                            @if(helper()->testRole(Auth::user()->role,'delete_permissions') == true
+                                || Auth::user()->roles->special == 'all')
+                                <button class="btn btn-sm delete" title="Eliminar {{$permission->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="savePermissionId({{$permission->id}},'delete')">
+                                        <i class="fa-solid fa-trash"></i>
+                                </button>
+                            @endif
                                 
-                            <button class="btn btn-sm delete" title="Eliminar {{$permission->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="savePermissionId({{$permission->id}},'delete')">
-                                    <i class="fa-solid fa-trash"></i>
-                            </button>
-                                
-                            {{--@endif--}}
-                        @else
-                            {{--@if(helper()->testPermission(Auth::user()->permissions,'restore_categories')== true)--}}
+                            
+                        @else                            
+                            @if(helper()->testRole(Auth::user()->role,'restore_permissions') == true
+                                || Auth::user()->roles->special == 'all')
                                 <button class="btn btn-sm back_livewire2" title="Restaruar permiso" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="savePermissionId({{$permission->id}},'restore')">
                                     <i class="fa-solid fa-trash-arrow-up"></i>
                                 </button>
-                            {{--@endif--}}
+                            @endif
                         @endif
                         
                         </div>

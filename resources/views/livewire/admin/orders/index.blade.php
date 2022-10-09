@@ -11,7 +11,9 @@
         </a>
     </li>
     @endsection
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_orders')== true || helper()->testPermission(Auth::user()->permissions,'restore_orders')== true )
+    @if(helper()->testRole(Auth::user()->role,'delete_orders') == true
+        || helper()->testRole(Auth::user()->role,'restore_orders') == true
+        || Auth::user()->roles->special == 'all')
         @include('livewire.admin.orders.confirm')
     @endif
     @include('livewire.admin.orders.sendmail')
@@ -209,18 +211,21 @@
                                 <button class="btn btn-sm scat" onclick="show_items({{$key}})" title="Mostrar productos del pedido">
                                         &#11015;
                                 </button>
-                                @if(helper()->testPermission(Auth::user()->permissions,'list_orders')== true)
+                                @if(helper()->testRole(Auth::user()->role,'list_orders') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#editProduct" wire:click="invoices({{$order->id}})" title="Ir a facturas">
                                         <i class="fa-solid fa-file-invoice"></i>
                                     </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_orders')== true)
+                                @if(helper()->testRole(Auth::user()->role,'delete_orders') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm delete" title="Eliminar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'delete')">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 @endif
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_orders')== true)
+                                @if(helper()->testRole(Auth::user()->role,'restore_orders') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm restore" title="Restaruar {{$order->order_num}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveOrderId({{$order->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>

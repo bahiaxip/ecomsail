@@ -24,7 +24,7 @@ class Admin
         //Auth::user(), ya que devueleve null al no haber usuario logueado, para 
         //evitarlo, modificamos el condicional if:
         //if($this->user->role == 1):
-        if($this->user && $this->user->role == 1):
+        if($this->user && $this->user->role == 1 || $this->user && $this->user->roles->special=='all'):
             return $next($request);
         else:
             return redirect('/');

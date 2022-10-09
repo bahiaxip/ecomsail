@@ -12,7 +12,7 @@ class PermissionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        
         //Análisis
         Permission::create([
             'status' => 1,

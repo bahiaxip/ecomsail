@@ -18,24 +18,30 @@
 	
 	<div class="options mtop16">
 		<ul>
-			@if(helper()->testPermission(Auth::user()->permissions,'list_home')== true)
+			{{-- anterior método de permisos sustituido por nuevo--}}
+			{{--
+			@if(helper()->testPermission(Auth::user()->permissions,'list_home')== true)--}}
+			@if(helper()->testRole(Auth::user()->role,'list_home') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_home') }}">
 					<i class="fa-solid fa-chart-line"></i> 
 					<span class="d-none d-lg-inline-flex">
-						Inicio
+						Análisis
 					</span>
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_products')== true)
+			@if(helper()->testRole(Auth::user()->role,'list_products') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_products',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-box"></i> <span class="d-none d-lg-inline-flex">Productos</span>
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_orders')== true)
+			@if(helper()->testRole(Auth::user()->role,'list_orders') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_orders',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-bag-shopping"></i> 
@@ -45,7 +51,8 @@
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_invoices')== true)
+			@if(helper()->testRole(Auth::user()->role,'list_invoices') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_invoices',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-file-invoice"></i> 
@@ -55,7 +62,8 @@
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_categories') == true)
+			@if(helper()->testRole(Auth::user()->role,'list_categories') == true
+				|| Auth::user()->roles->special == 'all')
 			<li style="position:relative;right:1px">
 				<a href="{{ route('list_categories',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
 					<!--<i class="fa-solid fa-tags"></i> Categorías-->
@@ -65,7 +73,8 @@
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_attributes') == true)
+			@if(helper()->testRole(Auth::user()->role,'list_attributes') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_attributes',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
 					<div class="icon icon_value"></div> <span class="d-none d-lg-inline-flex">
@@ -74,7 +83,8 @@
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_users')== true)
+			@if(helper()->testRole(Auth::user()->role,'list_users') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_users',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-users"></i> 
@@ -84,7 +94,8 @@
 				</a>
 			</li>
 			@endif
-			@if(helper()->testPermission(Auth::user()->permissions,'list_locations')== true)
+			@if(helper()->testRole(Auth::user()->role,'list_locations') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_locations',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-location-dot"></i> 
@@ -102,7 +113,8 @@
 					</span>
 				</a>
 			</li>
-
+			@if(helper()->testRole(Auth::user()->role,'permissions') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{route('permissions',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield"></i>
@@ -111,7 +123,9 @@
 					</span>
 				</a>
 			</li>
-
+			@endif
+			@if(helper()->testRole(Auth::user()->role,'roles') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{route('roles',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield-halved"></i>
@@ -120,7 +134,7 @@
 					</span>
 				</a>
 			</li>
-			
+			@endif
 			<li>
 				<a href="{{route('settings')}}">
 					<i class="fa-solid fa-gear"></i> 

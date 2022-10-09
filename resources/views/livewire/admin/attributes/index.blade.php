@@ -46,23 +46,28 @@
         </div>
     </div>
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'add_attributes')== true)
+    @if(helper()->testRole(Auth::user()->role,'add_attributes') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.attributes.create')
         @if($attr)
             @include('livewire.admin.attributes.create_value')
         @endif
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'edit_attributes')== true)
+@if(helper()->testRole(Auth::user()->role,'edit_attributes') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.attributes.edit')
     @endif
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_attributes')== true)
+    @if(helper()->testRole(Auth::user()->role,'delete_attributes') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.attributes.confirm')
     @endif
     
     @include('livewire.admin.attributes.sendmail')
     
-    @if(helper()->testPermission(Auth::user()->permissions,'delete_attributes') == true ||
-    helper()->testPermission(Auth::user()->permissions,'restore_attributes') == true)
+    @if(helper()->testRole(Auth::user()->role,'delete_categories') == true
+            ||helper()->testRole(Auth::user()->role,'restore_categories') == true
+            || Auth::user()->roles->special == 'all')
+    
         @include('livewire.admin.attributes.massive_confirm')
     @endif
     {{Form::hidden('hidden',null,['wire:model' => 'selected_list','id' => 'hidden_list'])}}
@@ -159,7 +164,8 @@
                     </li>
                 </ul>            
             </li>
-            @if(helper()->testPermission(Auth::user()->permissions,'add_attributes')== true)
+            @if(helper()->testRole(Auth::user()->role,'add_attributes') == true
+            || Auth::user()->roles->special == 'all')
                 <li>
                     <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addAttribute" wire:click.prevent="setckeditor"><i class="fa-solid fa-plus"></i> 
                         <span class="d-none d-md-inline">Agregar Atributo</span>
@@ -263,19 +269,22 @@
                         <div class="admin_items">
                             @if($filter_type != 2)
                                 @if(!$attr)
-                                    @if(helper()->testPermission(Auth::user()->permissions,'list_attributes')== true)
+                                    @if(helper()->testRole(Auth::user()->role,'list_attributes') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm scat" title="Valores" wire:click="renderValues({{ $at->id }},'{{trim($at->name)}}')">
                                         <!--<img src="{{url('ics/attribute_white.svg')}}" alt="" width="16">-->
                                         <div class="icon icon_value "></div>
                                     </button>
                                     @endif
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'edit_attributes')== true)
+                                @if(helper()->testRole(Auth::user()->role,'edit_attributes') == true
+                                    || Auth::user()->roles->special == 'all')
                                 <button class="btn btn-sm edit" data-bs-toggle="modal" data-bs-target="#editAttribute" wire:click="edit({{$at->id}})" title="Editar {{$at->name}}">
                                     <i class="fa-solid fa-edit"></i>
                                 </button>
                                 @endif
-                                @if(helper()->testPermission(Auth::user()->permissions,'delete_attributes')== true)
+                                @if(helper()->testRole(Auth::user()->role,'delete_attributes') == true
+                                    || Auth::user()->roles->special == 'all')
                                     @if($filter_type!=2)
                                         <button class="btn btn-sm delete" title="Eliminar {{$at->name}}" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}},'delete')">
                                             <i class="fa-solid fa-trash"></i>
@@ -283,7 +292,8 @@
                                     @endif
                                 @endif
                             @else
-                                @if(helper()->testPermission(Auth::user()->permissions,'restore_attributes')== true)
+                                @if(helper()->testRole(Auth::user()->role,'restore_attributes') == true
+                                    || Auth::user()->roles->special == 'all')
                                     <button class="btn btn-sm back_livewire2" title="Restaruar categoría" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveAttrId({{$at->id}},'restore')">
                                         <i class="fa-solid fa-trash-arrow-up"></i>
                                     </button>

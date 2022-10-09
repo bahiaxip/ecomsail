@@ -14,12 +14,14 @@
 
     <!-- los usuario se creand en register -->
     {{--@include('livewire.admin.users.create')--}}
-    @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
+    @if(helper()->testRole(Auth::user()->role,'edit_users') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.users.edit')
     @endif
     <!-- los usuarios no se pueden eliminar -->
     {{--@include('livewire.admin.users.confirm')--}}
-    @if(helper()->testPermission(Auth::user()->permissions,'admin_permissions')== true)
+    @if(helper()->testRole(Auth::user()->role,'admin_permissions') == true
+            || Auth::user()->roles->special == 'all')
         @include('livewire.admin.users.edit_permissions')
     @endif
     @include('livewire.admin.users.sendmail')
@@ -140,12 +142,14 @@
                                 <i class="fa-solid fa-pencil-alt"></i>
                             </button>
                             --}}
-                            @if(helper()->testPermission(Auth::user()->permissions,'edit_users')== true)
+                            @if(helper()->testRole(Auth::user()->role,'edit_users') == true
+                                || Auth::user()->roles->special == 'all')
                             <button class="btn btn-sm edit" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#editUser"  wire:click="edit({{$user->id}})"@else wire:click="edit(0)" @endif>
                                 <i class="fa-solid fa-edit"></i>
                             </button>
                             @endif
-                            @if(helper()->testPermission(Auth::user()->permissions,'admin_permissions')== true)
+                            @if(helper()->testRole(Auth::user()->role,'admin_permissions') == true
+                                || Auth::user()->roles->special == 'all')
                             <button class="btn btn-sm scat" title="Editar permisos de usuario" data-bs-toggle="modal" data-bs-target="#editPermissions" wire:click.prevent = 'edit_permissions({{$user->id}})'>
                                 <i class="fa-solid fa-list-check"></i>
                             </button>
