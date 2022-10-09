@@ -19,7 +19,7 @@ class Roles extends Component
     public $name;
     public $slug;
     public $description;
-    public $status;
+    public $status = 0;
     //public $special;
 
     protected $role_permissions;
@@ -96,7 +96,7 @@ class Roles extends Component
                 'name' => 'required',
                 'slug' => 'required|unique:roles',
                 'description' => 'nullable',
-                'status' => 'required|integer'
+                'status' => 'required|integer|between:0,1'
             ]);
             //creamos el registro del rol
             $role = Role::create([
@@ -110,13 +110,23 @@ class Roles extends Component
             unset($data['slug']);
             unset($data['status']);
             unset($data['description']);
+
             
             foreach($data as $k => $d){
-
-                PermissionRole::create([
-                    'permission_id' => $k,
-                    'role_id' => $role->id
-                ]);    
+                if($k == 'admin_panel')
+                    PermissionRole::create([
+                        'permission_id' => 1,
+                        'role_id' => $role->id
+                    ]);
+                else{
+                    //eliminamos el prefijo "create" para obtener el índice
+                    $index = substr($k,6);                    
+                    PermissionRole::create([
+                        'permission_id' => $index,
+                        'role_id' => $role->id
+                    ]);
+                }
+                    
             }
             $this->typealert = 'success';
             session()->flash('message','Rol creado correctamente');
@@ -151,7 +161,7 @@ class Roles extends Component
                     //validación excepto el registro actual
                     'slug' => 'required|unique:roles,slug,'.$this->role_id,
                     'description' => 'nullable',
-                    'status' => 'required|integer',
+                    'status' => 'required|integer|between:0,1',
                 ]);
                 $role->update([
                     'status' => $validated['status'],
@@ -164,12 +174,22 @@ class Roles extends Component
                 unset($data['slug']);
                 unset($data['status']);
                 unset($data['description']);
+                
                 PermissionRole::where('role_id',$this->role_id)->delete();
                 foreach($data as $k => $d){
-                    PermissionRole::create([
-                        'permission_id' => $k,
-                        'role_id' => $this->role_id
-                    ]);    
+                    if($k == 'admin_panel')
+                        PermissionRole::create([
+                            'permission_id' => 1,
+                            'role_id' => $role->id
+                        ]);
+                    else{
+                        //eliminamos el prefijo "update" para obtener el índice
+                        $index = substr($k,6);
+                        PermissionRole::create([
+                            'permission_id' => $index,
+                            'role_id' => $this->role_id
+                        ]);
+                    }
                 }
                 $this->typealert = 'success';
                 session()->flash('message','Rol actualizado correctamente');
@@ -212,7 +232,7 @@ class Roles extends Component
         $this->name = null;
         $this->slug = null;
         $this->description = null;
-        $this->status = null;
+        $this->status = 0;
     }
     public function clear2(){
         $this->clear();

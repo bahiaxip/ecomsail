@@ -12,7 +12,17 @@ class PermissionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {        
+    {
+        //Permiso genérico (distinto al resto), tan solo para acceder al 
+        //panel de administración, necesario para el middleware admin.
+        //status específico de 55 para diferenciar.
+        Permission::create([
+            'status' => 55,
+            'name' => 'Panel de administración',
+            'slug' => 'admin_panel',
+            'description' => 'Acceder al panel de administración',
+            'box_permission_id' => 0
+        ]);
         //Análisis
         Permission::create([
             'status' => 1,
@@ -141,7 +151,7 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'status' => 1,
             'name' => 'Mostrar atributos',
-            'slug' => 'list_categories',
+            'slug' => 'list_attributes',
             'description' => 'Mostrar todos los atributos',
             'box_permission_id' =>6
         ]);
@@ -193,7 +203,7 @@ class PermissionSeeder extends Seeder
             'status' => 1,
             'name' => 'Mostrar ubicaciones',
             'slug' => 'list_locations',
-            'description' => 'Mostrar todos las ubicaciones',
+            'description' => 'Mostrar todas las ubicaciones',
             'box_permission_id' =>8
         ]);
         Permission::create([
@@ -224,5 +234,114 @@ class PermissionSeeder extends Seeder
             'description' => 'Restaurar cualquier ubicación',
             'box_permission_id' =>8
         ]);
+        //Carousel
+        Permission::create([
+            'status' => 1,
+            'name' => 'Mostrar carousel',
+            'slug' => 'list_carousel',
+            'description' => 'Mostrar las imágenes del carousel principal',
+            'box_permission_id' =>9
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Crear carousel',
+            'slug' => 'create_carousel',
+            'description' => 'Crear un carousel nueva',
+            'box_permission_id' =>9
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Editar carousel',
+            'slug' => 'edit_carousel',
+            'description' => 'Editar cualquier carousel',
+            'box_permission_id' =>9
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Eliminar carousel',
+            'slug' => 'delete_carousel',
+            'description' => 'Eliminar cualquier carousel',
+            'box_permission_id' =>9
+        ]);
+        //Permisos
+        Permission::create([
+            'status' => 1,
+            'name' => 'Mostrar permisos',
+            'slug' => 'list_permissions',
+            'description' => 'Mostrar todos los permisos',
+            'box_permission_id' =>10
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Crear permisos',
+            'slug' => 'create_permissions',
+            'description' => 'Crear un permiso nuevo',
+            'box_permission_id' =>10
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Editar permisos',
+            'slug' => 'edit_permissions',
+            'description' => 'Editar cualquier permiso',
+            'box_permission_id' =>10
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Eliminar permisos',
+            'slug' => 'delete_permissions',
+            'description' => 'Eliminar cualquier permiso',
+            'box_permission_id' =>10
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Restaurar permisos',
+            'slug' => 'restore_permissions',
+            'description' => 'Restaurar cualquier permiso',
+            'box_permission_id' =>10
+        ]);
+        //Roles
+        Permission::create([
+            'status' => 1,
+            'name' => 'Mostrar roles',
+            'slug' => 'list_roles',
+            'description' => 'Mostrar todos los roles',
+            'box_permission_id' =>11
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Crear roles',
+            'slug' => 'create_roles',
+            'description' => 'Crear un rol nuevo',
+            'box_permission_id' =>11
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Editar roles',
+            'slug' => 'edit_roles',
+            'description' => 'Editar cualquier rol',
+            'box_permission_id' =>11
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Eliminar roles',
+            'slug' => 'delete_roles',
+            'description' => 'Eliminar cualquier rol',
+            'box_permission_id' =>11
+        ]);
+        Permission::create([
+            'status' => 1,
+            'name' => 'Restaurar roles',
+            'slug' => 'restore_roles',
+            'description' => 'Restaurar cualquier rol',
+            'box_permission_id' =>11
+        ]);
+        //Ajustes
+        Permission::create([
+            'status' => 1,
+            'name' => 'Mostrar ajustes',
+            'slug' => 'list_settings',
+            'description' => 'Mostrar ajustes globales',
+            'box_permission_id' =>12
+        ]);        
     }
 }

@@ -6,9 +6,8 @@
 	@section('path')
 	&nbsp;>&nbsp;
     <li class="list_name">
-        <a href="{{ route('roles',['filter_type' => 1]) }}">
-            <div class="icon icon_cat"></div>
-            <!--<i class="fa-solid fa-columns"></i>--> 
+        <a href="{{ route('list_roles',['filter_type' => 1]) }}">            
+            <i class="fa-solid fa-shield-halved"></i>
             <span>Roles</span>
         </a>
     </li>
@@ -65,22 +64,22 @@
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
                     <li>
-                        <a href="{{ route('roles',['filter_type' => 1]) }}" class="dropdown-item">
+                        <a href="{{ route('list_roles',['filter_type' => 1]) }}" class="dropdown-item">
                             &#x2714; Público
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('roles',['filter_type' => 0]) }}" class="dropdown-item">
+                        <a href="{{ route('list_roles',['filter_type' => 0]) }}" class="dropdown-item">
                             &#x2716; Borrador
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('roles',['filter_type' => 2]) }}" class="dropdown-item">
+                        <a href="{{ route('list_roles',['filter_type' => 2]) }}" class="dropdown-item">
                             <i class="fa-solid fa-trash"></i> Reciclaje
                         </a>
                     </li>
                     <li>
-                        <a href=" {{ route('roles',['filter_type' => 3]) }}" class="dropdown-item">
+                        <a href=" {{ route('list_roles',['filter_type' => 3]) }}" class="dropdown-item">
                             &#x2714;&#x2716; Todos
                         </a>
                     </li>

@@ -21,10 +21,10 @@
 			{{-- anterior método de permisos sustituido por nuevo--}}
 			{{--
 			@if(helper()->testPermission(Auth::user()->permissions,'list_home')== true)--}}
-			@if(helper()->testRole(Auth::user()->role,'list_home') == true
+			@if(helper()->testRole(Auth::user()->role,'show_analysis') == true
 				|| Auth::user()->roles->special == 'all')
 			<li>
-				<a href="{{ route('list_home') }}">
+				<a href="{{ route('show_analysis') }}">
 					<i class="fa-solid fa-chart-line"></i> 
 					<span class="d-none d-lg-inline-flex">
 						Análisis
@@ -105,18 +105,21 @@
 				</a>
 			</li>
 			@endif
+			@if(helper()->testRole(Auth::user()->role,'list_carousel') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
-				<a href="{{route('carousel',['filter_type' => 1])}}">
+				<a href="{{route('list_carousel',['filter_type' => 1])}}">
 					<i class="fa-solid fa-images"></i> 
 					<span class="d-none d-lg-inline-flex">
 						Carousel
 					</span>
 				</a>
 			</li>
-			@if(helper()->testRole(Auth::user()->role,'permissions') == true
+			@endif
+			@if(helper()->testRole(Auth::user()->role,'list_permissions') == true
 				|| Auth::user()->roles->special == 'all')
 			<li>
-				<a href="{{route('permissions',['filter_type' => 1])}}">
+				<a href="{{route('list_permissions',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield"></i>
 					<span class="d-none d-lg-inline-flex">
 						Permisos
@@ -124,10 +127,10 @@
 				</a>
 			</li>
 			@endif
-			@if(helper()->testRole(Auth::user()->role,'roles') == true
+			@if(helper()->testRole(Auth::user()->role,'list_roles') == true
 				|| Auth::user()->roles->special == 'all')
 			<li>
-				<a href="{{route('roles',['filter_type' => 1])}}">
+				<a href="{{route('list_roles',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield-halved"></i>
 					<span class="d-none d-lg-inline-flex">
 						Roles
@@ -135,14 +138,17 @@
 				</a>
 			</li>
 			@endif
+			@if(helper()->testRole(Auth::user()->role,'list_settings') == true
+				|| Auth::user()->roles->special == 'all')
 			<li>
-				<a href="{{route('settings')}}">
+				<a href="{{route('list_settings')}}">
 					<i class="fa-solid fa-gear"></i> 
 					<span class="d-none d-lg-inline-flex">
 						Ajustes
 					</span>
 				</a>
 			</li>
+			@endif
 		</ul>
 	</div>
 </div>

@@ -47,6 +47,18 @@
                     <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="col-md-6">
+                    {{Form::label('admin_panel','Panel de administración')}}
+                    <div class="form-check form-switch">
+                        <input name="admin_panel" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" checked>
+                    </div>  
+                    {{--
+                    {{Form::select('admin_panel',get_current_status_select(),null,['class' => 'form-select','wire:model' => 'status'])}}
+                    --}}
+                    @error('admin_panel')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
             </div>
           	<!--<div class="form-group">-->
             
@@ -81,7 +93,7 @@
                 <div class="col-lg-4 ">
                     <div class="panel shadow">
                         <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$box_permission->name}}" aria-expanded="false" aria-controls="collapseExample">
-                          <i class="fas fa-box-open"></i> {{$box_permission->name}} <i class="fa-solid fa-chevron-down"></i>
+                          {!!$box_permission->icon_awesome!!} {{$box_permission->name}} <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <div class="collapse" id="collapse_{{$box_permission->name}}">
                           <!--
@@ -92,8 +104,9 @@
                             <div class="box">
                                 @foreach($permissions[$box_permission->id] as $p)
                                 <div class="form-check">
-                                  {{ Form::checkbox($p->id,true,null,['class' => 'form-check-input','id' => $p->slug]) }}
-                                  {{ Form::label($p->slug,$p->name) }}
+
+                                  {{ Form::checkbox('create'.$p->id,true,null,['class' => 'form-check-input','id' => 'create'.$p->id]) }}
+                                  {{ Form::label('create'.$p->id,$p->name) }}
                                 </div>
                                 @endforeach
                             </div>

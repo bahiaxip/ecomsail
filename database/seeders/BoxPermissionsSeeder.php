@@ -61,6 +61,30 @@ class BoxPermissionsSeeder extends Seeder
             'name' => 'Ubicaciones',
             'icon_awesome' => '<i class="fas fa-location-dot"></i>'
         ]);
+        //Carousel
+        DB::table('box_permissions')->insert([
+            'status' => '1',
+            'name' => 'Carousel',
+            'icon_awesome' => '<i class="fas fa-images"></i>'
+        ]);
+        //Permisos
+        DB::table('box_permissions')->insert([
+            'status' => '1',
+            'name' => 'Permisos',
+            'icon_awesome' => '<i class="fa-solid fa-shield"></i>'
+        ]);
+        //Roles
+        DB::table('box_permissions')->insert([
+            'status' => '1',
+            'name' => 'Roles',
+            'icon_awesome' => '<i class="fa-solid fa-shield-halved"></i>'
+        ]);
+        //Ajustes
+        DB::table('box_permissions')->insert([
+            'status' => '1',
+            'name' => 'Ajustes',
+            'icon_awesome' => '<i class="fa-solid fa-gear"></i>'
+        ]);
         
     }
 }

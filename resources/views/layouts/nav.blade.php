@@ -3,7 +3,7 @@
 		@auth
 		<ul>
 			<li>
-				<a href="{{ route('list_home') }}">
+				<a href="{{ route('show_analysis') }}">
 					<i class="fa-solid fa-user-shield"></i> Admin
 				</a>
 			</li>

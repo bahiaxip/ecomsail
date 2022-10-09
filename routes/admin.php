@@ -18,7 +18,7 @@ Route::group([
 	'middleware' => ['auth','admin'],
 	'prefix'=>'/admin'
 	],function(){
-		Route::get('/home',\App\Http\Livewire\Admin\Home::class)->name('list_home')
+		Route::get('/home',\App\Http\Livewire\Admin\Home::class)->name('show_analysis')
 			->middleware('role_permissions');
 
 		//categories
@@ -55,18 +55,18 @@ Route::group([
 		Route::get('/invoices/{filter_type}/{order_id?}', \App\Http\Livewire\Admin\Invoice::class)->name('list_invoices');
 
 		//Carousel
-		Route::get('/carousel/{filter_type}',\App\Http\Livewire\Admin\Carousel::class)->name('carousel');
+		Route::get('/carousel/{filter_type}',\App\Http\Livewire\Admin\Carousel::class)->name('list_carousel');
 
 		
 		
 		//Roles
-		Route::get('/roles/{filter_type}',\App\Http\Livewire\Admin\Roles::class)->name('roles')->middleware('role_permissions');
+		Route::get('/roles/{filter_type}',\App\Http\Livewire\Admin\Roles::class)->name('list_roles')->middleware('role_permissions');
 
 		//Permisos
-		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('permissions')->middleware('role_permissions');
+		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('list_permissions')->middleware('role_permissions');
 		
 		//Ajustes
-		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('settings');
+		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('list_settings');
 	}
 
 

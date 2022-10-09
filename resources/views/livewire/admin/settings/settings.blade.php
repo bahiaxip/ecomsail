@@ -6,9 +6,8 @@
     @section('path')
     &nbsp;>&nbsp;
     <li class="list_name">
-        <a href="{{ url('admin/settings') }}">
-            <div class="icon icon_cat"></div>
-            <!--<i class="fa-solid fa-columns"></i>--> 
+        <a href="{{ url('admin/settings') }}">            
+            <i class="fa-solid fa-gear"></i>
             <span>Ajustes</span>
         </a>
     </li>

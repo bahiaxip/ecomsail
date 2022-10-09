@@ -4,9 +4,8 @@
 	@section('path')
     &nbsp;>&nbsp;
     <li class="list_name">
-        <a href="{{ route('carousel',['filter_type' => 1]) }}">
-            <div class="icon icon_cat"></div>
-            <!--<i class="fa-solid fa-columns"></i>--> 
+        <a href="{{ route('list_carousel',['filter_type' => 1]) }}">            
+            <i class="fa-solid fa-images"></i>
             <span>Carousel</span>
         </a>
     </li>
@@ -53,17 +52,17 @@
                 </button>            
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
                     <li>
-                        <a href="{{ route('carousel',['filter_type' => 1]) }}" class="dropdown-item">
+                        <a href="{{ route('list_carousel',['filter_type' => 1]) }}" class="dropdown-item">
                             &#x2714; Público
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('carousel',['filter_type' => 0]) }}" class="dropdown-item">
+                        <a href="{{ route('list_carousel',['filter_type' => 0]) }}" class="dropdown-item">
                             &#x2716; Borrador
                         </a>
                     </li>
                     <li>
-                        <a href=" {{ route('carousel',['filter_type' => 3]) }}" class="dropdown-item">
+                        <a href=" {{ route('list_carousel',['filter_type' => 3]) }}" class="dropdown-item">
                             &#x2714;&#x2716; Todos
                         </a>
                     </li>

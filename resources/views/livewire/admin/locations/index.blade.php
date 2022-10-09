@@ -5,7 +5,7 @@
     &nbsp;>&nbsp;
     <li class="list_name">
         <a href="{{ route('list_locations',['filter_type' => 1]) }}">
-            <i class="fa-solid fa-columns"></i> <span>Ubicaciones</span>
+            <i class="fa-solid fa-location-dot"></i> <span>Ubicaciones</span>
         </a>
     </li>
     @endsection

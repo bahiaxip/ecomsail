@@ -27,7 +27,7 @@ class Permissions
         //if($this->user->role == 1):
     //modificamos el middleware al cambiar el sistema de permisos a roles
         //if($this->user && $this->user->role == 1 && $this->permissions->testPermission($this->user->permissions,Route::currentRouteName()) == true):
-        if($this->user && $this->user->role == 1 && $this->permissions->testRole($this->user->role,Route::currentRouteName()) == true 
+        if($this->user && $this->permissions->testRole($this->user->role,Route::currentRouteName()) == true 
             || $this->user && $this->user->roles->special == 'all'):
             return $next($request);
         else:

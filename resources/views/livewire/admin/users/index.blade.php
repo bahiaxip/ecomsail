@@ -6,7 +6,7 @@
     &nbsp;>&nbsp;
     <li class="list_name">
         <a href="{{ route('list_users',['filter_type' => 1]) }}">
-            <i class="fa-solid fa-columns"></i> <span>Usuarios</span>
+            <i class="fa-solid fa-users"></i> <span>Usuarios</span>
         </a>
     </li>
     @endsection

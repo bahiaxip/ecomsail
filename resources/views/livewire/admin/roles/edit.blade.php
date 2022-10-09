@@ -49,6 +49,18 @@
                     <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="col-md-6">
+                    {{Form::label('admin_panel','Panel de administración')}}
+                    <div class="form-check form-switch">
+                        <input name="admin_panel" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" @if(helper()->testRole($role_id,'admin_panel') || Auth::user()->roles->special == 'all') checked @endif>
+                    </div>  
+                    {{--
+                    {{Form::select('admin_panel',get_current_status_select(),null,['class' => 'form-select','wire:model' => 'status'])}}
+                    --}}
+                    @error('admin_panel')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
             </div>
                 
             <div class="row mtop16">
@@ -82,7 +94,7 @@
                 <div class="col-lg-4 ">
                     <div class="panel shadow {{$role_id}}">
                         <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$box_permission->name}}" aria-expanded="false" aria-controls="collapseExample">
-                          <i class="fas fa-box-open"></i> {{$box_permission->name}} <i class="fa-solid fa-chevron-down"></i>
+                          {!!$box_permission->icon_awesome!!} {{$box_permission->name}} <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <div class="collapse" id="collapse_{{$box_permission->name}}">
                           <!--
@@ -118,10 +130,12 @@
                                 </div>
                                 --}}
                                 @foreach($permissions[$box_permission->id] as $p)
-                                <div class="form-check">
-                                  {{ Form::checkbox($p->id,true,(helper()->testRole($role_id,$p->slug) || $role_special == 'all') ? 'checked' : '' ,['class' => 'form-check-input','id' => $p->slug]) }}
-                                  {{ Form::label($p->slug,$p->name) }}
-                                </div>
+                                    @if($p->id != 0)
+                                    <div class="form-check">
+                                      {{ Form::checkbox('update'.$p->id,true,(helper()->testRole($role_id,$p->slug) || $role_special == 'all') ? 'checked' : '' ,['class' => 'form-check-input','id' => 'update'.$p->id]) }}
+                                      {{ Form::label('update'.$p->id,$p->name) }}
+                                    </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
