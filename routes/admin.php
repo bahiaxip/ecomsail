@@ -28,7 +28,8 @@ Route::group([
 
 		//users
 		Route::get('/users/{filter_type}',\App\Http\Livewire\Admin\Users::class)->name('list_users')
-			->middleware('role_permissions');
+			->middleware('role_permissions')
+			;
 
 
 		//Products
@@ -59,10 +60,10 @@ Route::group([
 		
 		
 		//Roles
-		Route::get('/roles/{filter_type}',\App\Http\Livewire\Admin\Roles::class)->name('roles');
+		Route::get('/roles/{filter_type}',\App\Http\Livewire\Admin\Roles::class)->name('roles')->middleware('role_permissions');
 
 		//Permisos
-		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('permissions');
+		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('permissions')->middleware('role_permissions');
 		
 		//Ajustes
 		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('settings');

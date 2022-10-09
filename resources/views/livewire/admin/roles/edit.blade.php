@@ -80,7 +80,7 @@
                 @endif
 
                 <div class="col-lg-4 ">
-                    <div class="panel shadow">
+                    <div class="panel shadow {{$role_id}}">
                         <button class="btn w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$box_permission->name}}" aria-expanded="false" aria-controls="collapseExample">
                           <i class="fas fa-box-open"></i> {{$box_permission->name}} <i class="fa-solid fa-chevron-down"></i>
                         </button>
@@ -119,7 +119,7 @@
                                 --}}
                                 @foreach($permissions[$box_permission->id] as $p)
                                 <div class="form-check">
-                                  {{ Form::checkbox($p->slug,true,null,['class' => 'form-check-input','id' => $p->slug]) }}
+                                  {{ Form::checkbox($p->id,true,(helper()->testRole($role_id,$p->slug) || $role_special == 'all') ? 'checked' : '' ,['class' => 'form-check-input','id' => $p->slug]) }}
                                   {{ Form::label($p->slug,$p->name) }}
                                 </div>
                                 @endforeach

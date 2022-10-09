@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\Permission as Perm, App\Models\Box, App\Models\Role;
-use Auth;
+use Auth,Str;
 use Livewire\WithPagination;
 class Permission extends Component
 {
@@ -105,17 +105,22 @@ class Permission extends Component
     }
 
     public function store(){
+
+        //generamos slug antes de la validación
+        if($this->slug){
+            $this->slug = Str::slug($this->slug);
+        }
         $validated = $this->validate([            
             'name' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:permissions',
             'box_permission' => 'required|gt:0',
             'description' => 'required',
             'status' => 'required|integer'
 
-        ]);
+        ]);        
         Perm::create([            
             'name' => $validated['name'],
-            'slug' => $validated['slug'],
+            'slug' => Str::slug($validated['slug']),
             'box_permission_id' => $validated['box_permission'],
             'description' => $validated['description'],
             'status' => $validated['status'],
@@ -211,6 +216,12 @@ class Permission extends Component
         $this->resetValidation();
     }
 
+    public function updated(){
+        //si se encuentra en otra página resetea, si no, el buscador
+        //no realiza correctamente la búsqueda
+        if($this->search_data)
+            $this->resetPage();
+    }
     //botón X de buscador para eliminar datos de búsqueda
     public function clearSearch(){
         $this->search_data='';

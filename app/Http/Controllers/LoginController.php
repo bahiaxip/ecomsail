@@ -81,7 +81,7 @@ class LoginController extends Controller
             $user->password = Hash::make($request->input('pass'));
             $user->image = 'images/default2.png';
 //provisionalmente administrador
-            $user->role = 1;
+            $user->role = 3;
 //provisionalmente algunos permisos
             $user->permissions = json_encode(['list_home' => 'true','admin_permissions' => 'true','admin_panel' => 'true','list_users'=> 'true']);
             if($user->save()):

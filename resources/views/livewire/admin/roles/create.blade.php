@@ -92,7 +92,7 @@
                             <div class="box">
                                 @foreach($permissions[$box_permission->id] as $p)
                                 <div class="form-check">
-                                  {{ Form::checkbox($p->slug,true,null,['class' => 'form-check-input','id' => $p->slug]) }}
+                                  {{ Form::checkbox($p->id,true,null,['class' => 'form-check-input','id' => $p->slug]) }}
                                   {{ Form::label($p->slug,$p->name) }}
                                 </div>
                                 @endforeach

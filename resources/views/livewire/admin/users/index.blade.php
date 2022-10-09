@@ -111,7 +111,7 @@
 
     <div class="div_table shadow mtop16">
         <table class="table table-hover">
-            <thead>
+            <thead class="{{Auth::user()->roles->special}}">
                 <th width="64"></th>
                 <th>Nick</th>
                 <th>Nombre</th>

@@ -6,6 +6,7 @@ use Closure,Auth,Route;
 use Illuminate\Http\Request;
 use App\Functions\Permissions as role_permissions;
 
+
 class Permissions
 {
     /**
@@ -24,7 +25,10 @@ class Permissions
         //Auth::user(), ya que devueleve null al no haber usuario logueado, para 
         //evitarlo, modificamos el condicional if:
         //if($this->user->role == 1):
-        if($this->user && $this->user->role == 1 && $this->permissions->testPermission($this->user->permissions,Route::currentRouteName()) == true):
+    //modificamos el middleware al cambiar el sistema de permisos a roles
+        //if($this->user && $this->user->role == 1 && $this->permissions->testPermission($this->user->permissions,Route::currentRouteName()) == true):
+        if($this->user && $this->user->role == 1 && $this->permissions->testRole($this->user->role,Route::currentRouteName()) == true 
+            || $this->user && $this->user->roles->special == 'all'):
             return $next($request);
         else:
             //enviar un mensaje de: "No tiene acceso a esta zona..."

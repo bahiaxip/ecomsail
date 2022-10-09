@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Functions;
-
+use App\Models\PermissionRole, App\Models\Permission;
 class Permissions {
 
 	public function testPermission($json,$key){
@@ -17,12 +17,20 @@ class Permissions {
 		}
 	}
 
-    public function testRole($role,$permission){
-        $query = Permission_Role::where('role_id',$role)->where('permission_id',$permission)->first();
-        if($query->count() > 0)
-            return false;
-        else
-            return true;
+    public function testRole($role,$permission_slug){
+        $permission = Permission::where('slug',$permission_slug)->first();
+        if($permission){
+            $permission_id = $permission->id;
+            $query = PermissionRole::where('role_id',$role)->where('permission_id',$permission_id)->first();
+            
+            if($query && $query->count() > 0)
+                return true;
+            else
+                return false;
+        }
+        
+        
+        
     }
 
 	public $permissions_list = [

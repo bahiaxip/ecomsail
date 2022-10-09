@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Role, App\Models\Permission as Perm, App\Models\User;
+use Livewire\WithPagination;
+use App\Models\Role, App\Models\Permission as Perm, App\Models\User, App\Models\PermissionRole;
 use Illuminate\Support\Facades\DB;
 use App\Functions\Permissions as Permis;
 
-use Auth;
+use Auth, Str;
 class Roles extends Component
 {
+    use WithPagination;
 
     public $limit_page=10;
     public $search_data;
@@ -29,6 +31,7 @@ class Roles extends Component
     public $selectedCol;
     public $order_type;
     public $role_id;
+    public $role_special;
 
     public function mount($filter_type){
         $this->filter_type = $filter_type;
@@ -82,25 +85,44 @@ class Roles extends Component
         return $role;
     }
 
-    public function store($data){        
-        //validamos datos del rol        
-        $validated = $this->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'description' => 'nullable',
-            'status' => 'required|integer'
-        ]);
-        //creamos el registro del rol
-        Role::create([
-            'status' => $validated['status'],
-            'name' => $validated['name'],
-            'slug' => $validated['slug'],
-            'description' => $validated['description']
-        ]);
-        $this->typealert = 'success';
-        session()->flash('message','Rol creado correctamente');
-        $this->emit('addRole');
-        $this->clear2();
+    public function store($data){
+        if($data){
+
+            if($data['slug']){
+                $data['slug'] = Str::slug($data['slug']);
+            }
+            //validamos datos del rol        
+            $validated = $this->validate([
+                'name' => 'required',
+                'slug' => 'required|unique:roles',
+                'description' => 'nullable',
+                'status' => 'required|integer'
+            ]);
+            //creamos el registro del rol
+            $role = Role::create([
+                'status' => $validated['status'],
+                'name' => $validated['name'],
+                'slug' => $validated['slug'],
+                'description' => $validated['description']
+            ]);
+            //eliminamos los datos no necesarios para después recorrer el array
+            unset($data['name']);
+            unset($data['slug']);
+            unset($data['status']);
+            unset($data['description']);
+            
+            foreach($data as $k => $d){
+
+                PermissionRole::create([
+                    'permission_id' => $k,
+                    'role_id' => $role->id
+                ]);    
+            }
+            $this->typealert = 'success';
+            session()->flash('message','Rol creado correctamente');
+            $this->emit('addRole');
+            $this->clear2();
+        }
     }
 
     public function edit($id){
@@ -111,18 +133,23 @@ class Roles extends Component
             $this->slug = $role->slug;
             $this->description = $role->description;
             $this->status = $role->status;
+            $this->role_special = $role->special;
         }        
 
     }
 
     public function update($data){
-        if($this->role_id){
+        if($this->role_id && $data){
+            if($data['slug']){
+                $data['slug'] = Str::slug($data['slug']);
+            }
             $role = Role::find($this->role_id);
             if($role){
                 //validamos datos del rol        
                 $validated = $this->validate([
                     'name' => 'required',
-                    'slug' => 'required',
+                    //validación excepto el registro actual
+                    'slug' => 'required|unique:roles,slug,'.$this->role_id,
                     'description' => 'nullable',
                     'status' => 'required|integer',
                 ]);
@@ -132,9 +159,22 @@ class Roles extends Component
                     'slug' => $validated['slug'],
                     'description' => $validated['description']
                 ]);
+                //eliminamos los datos no necesarios para después recorrer el array
+                unset($data['name']);
+                unset($data['slug']);
+                unset($data['status']);
+                unset($data['description']);
+                PermissionRole::where('role_id',$this->role_id)->delete();
+                foreach($data as $k => $d){
+                    PermissionRole::create([
+                        'permission_id' => $k,
+                        'role_id' => $this->role_id
+                    ]);    
+                }
                 $this->typealert = 'success';
                 session()->flash('message','Rol actualizado correctamente');
                 $this->emit('editRole');
+                $this->clear2();
             }
         }
         
@@ -181,6 +221,15 @@ class Roles extends Component
 
     public function clearSearch(){
         $this->search_data = '';
+
+    }
+
+    public function updated(){
+        //si se encuentra en otra página resetea, si no, el buscador
+        //no realiza correctamente la búsqueda
+        
+        if($this->search_data)
+            $this->resetPage();
 
     }
 
