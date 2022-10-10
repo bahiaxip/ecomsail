@@ -84,6 +84,12 @@
               </div>
           </div>
           <div class="row mtop16">
+              <div class="col-md-6">
+                  {{Form::label('status','Estado')}}
+                  {{Form::select('status',get_current_status_select(),null,['class' => 'form-select','wire:model' => 'status'])}}
+              </div>
+          </div>
+          <div class="row mtop16">
             <div class="col-md-6">
                 <label for="profile_image" >Imagen</label>
                 {!! Form::file('profile_image',['class' =>'form-control','id' => $iteration,'accept' =>'image/*','wire:model' => 'profile_image'])!!}

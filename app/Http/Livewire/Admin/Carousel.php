@@ -19,6 +19,7 @@ class Carousel extends Component
     public $sliderIdTmp;
     public $total_sliders;
     public $typealert;
+    public $role_user;
 
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
@@ -30,6 +31,7 @@ class Carousel extends Component
     public function mount($filter_type){        
         $this->filter_type = $filter_type;
         $this->set_total_sliders();
+        $this->role_user = Auth::user()->role;
     }
     //establecemos el total de sliders con status público (status = 1)
     public function set_total_sliders(){

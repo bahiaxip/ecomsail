@@ -30,7 +30,7 @@
     @endif
     @endsection
 
-    @if(helper()->testRole(Auth::user()->role,'add_categories') == true
+    @if(helper()->testRole(Auth::user()->role,'create_categories') == true
             || Auth::user()->roles->special == 'all')
         @include('livewire.admin.categories.create')
     @endif
@@ -188,7 +188,7 @@
                     </li>
                 </ul>            
             </li>
-            @if(helper()->testRole(Auth::user()->role,'add_categories') == true
+            @if(helper()->testRole(Auth::user()->role,'create_categories') == true
                     || Auth::user()->roles->special == 'all')
                 <li>
                     <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addCategory" wire:click="setckeditor()">

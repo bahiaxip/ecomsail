@@ -10,7 +10,7 @@
     </li>
     @endsection
     
-    @if(helper()->testRole(Auth::user()->role,'add_products') == true
+    @if(helper()->testRole(Auth::user()->role,'create_products') == true
                 || Auth::user()->roles->special == 'all')
         @include('livewire.admin.products.create')
     @endif
@@ -115,7 +115,7 @@
                     </ul>
                 </div>
             </li>
-            @if(helper()->testRole(Auth::user()->role,'add_products') == true
+            @if(helper()->testRole(Auth::user()->role,'create_products') == true
                 || Auth::user()->roles->special == 'all')
                 <li>
                     <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Crear Producto</a>    

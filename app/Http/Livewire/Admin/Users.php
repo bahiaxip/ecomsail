@@ -5,8 +5,8 @@ namespace App\Http\Livewire\Admin;
 //use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 //Paises
-use App\Functions\Paises;
-use App\Functions\Prov as Pr, App\Functions\Municipalities;
+use App\Functions\Paises, App\Functions\Functions;
+use App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\Role;
 //método para testear acceso a bloques en función del permiso del usuario
 use App\Functions\Permissions as Permis;
 use App\Models\User;
@@ -30,6 +30,7 @@ class Users extends Component
     public $email;
     public $profile_image;
     public $thumb;
+    public $status;
     //iteration es necesario resetear el caché del input file
     public $iteration;
     public $phone;
@@ -70,7 +71,8 @@ class Users extends Component
     public $selectedCol;
     //anulado 
     //public $data_tmp;
-
+    
+    
     //pdf/excel
     protected $pdf;
     public $checkpdf;
@@ -80,8 +82,13 @@ class Users extends Component
     public $listname;
     //nombre de usuario para envió de email
     public $username;
-
+    //id de user temporal para eliminar
     public $userIdTmp;
+
+    //roles
+    public $role;
+    //lista de roles para el select de edición de rol del usuario
+    public $roles;
 
     public function mount($filter_type){
         
@@ -217,10 +224,11 @@ class Users extends Component
                 //(se podría evitar la consulta $user y llamar al método user del modelo 
                 //Profile belongsTo...)
                 //asignación de datos mediante consulta a tabla users 
+                $this->status = $user->status;
                 $this->nick = $user->nick;
                 $this->name=$user->name;
                 $this->email=$user->email;
-                
+               
                 $this->surname=$user->lastname;
                 //$this->image=$user->image;
                 $this->thumb = $user->thumb;
@@ -241,6 +249,7 @@ class Users extends Component
         //dd($this->profile_image);
         if($this->user_id){
             $validated = $this->validate([
+                'status' => 'required',
                 'nick' => 'required',
                 'name' => 'required',
                 'surname' => 'required',
@@ -248,12 +257,14 @@ class Users extends Component
                 'country' => 'nullable',
                 'province' => 'nullable',
                 'city' => 'nullable',
-                'profile_image' =>'nullable|image'
+                'profile_image' =>'nullable|image',
+
             ]);
             
             if($this->user_id){
                 $user = User::where('id',$this->user_id)->first();
                 $user->update([
+                    'status' => $validated['status'],
                     'nick' => $validated['nick'],
                     'name' => $validated['name'],                
                     'lastname' => $validated['surname'],
@@ -289,14 +300,33 @@ class Users extends Component
         }
 
     }
+
+    public function edit_roles($id){
+        $user = User::find($id);
+        if($user){
+            $this->user_id = $id;
+            $this->role = $user->role;
+            $this->roles = Role::where('status',1)->pluck('name','id');
+        }
+    }
+    public function update_roles(){
+        if($this->user_id){
+            $user = User::find($this->user_id);
+            $user->update(['role'=> $this->role]);
+        }
+        session()->flash('message','Usuario actualizado correctamente');
+        $this->clear2();
+        $this->emit('userRole');
+    }
     //edición de permisos de usuario
     public function edit_permissions($id){        
-        $user = User::findOrFail($id);
-        $data = $user->permissions;
-        //dd($data);
-        $this->permissions3 = $data;
-        $this->role_permissions = new Permis();
-        $this->user_id = $id;
+        $user = User::find($id);
+        if($user){
+            $data = $user->permissions;            
+            $this->permissions3 = $data;
+            $this->role_permissions = new Permis();
+            $this->user_id = $id;    
+        }
     }
     //actualización de permisos de usuario
     public function update_permissions($data){
@@ -338,12 +368,14 @@ class Users extends Component
     public function clear(){
         
         $this->user_id='';
+        $this->status = null;
         $this->nick='';
         $this->name='';
         $this->surname='';
         $this->profile_image=null;
         //iteration es necesario resetear el caché del input file
         $this->iteration=rand();
+        $this->role = null;
     }
 
     public function clear2(){

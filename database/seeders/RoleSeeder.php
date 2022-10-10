@@ -31,7 +31,7 @@ class RoleSeeder extends Seeder
             'slug' => 'editor',
             'description' => 'Navegar, crear y editar en panel de administración'
         ]);
-        $permissions_editor = [1,2,3,4,5,8,11,14,15,16,19,20,21,24,25,26,27,28];
+        $permissions_editor = [1,2,3,4,5,8,11,14,15,16,19,20,21,24,25,26,27,28,31,32,33];
         foreach($permissions_editor as $pe){
             PermissionRole::create([
                 'permission_id' => $pe,
@@ -45,7 +45,7 @@ class RoleSeeder extends Seeder
             'slug' => 'suscriptor',
             'description' => 'Navegar en panel de administración'
         ]);
-        $permissions_suscriptor = [1,2,3,8,11,14,19,24,26];
+        $permissions_suscriptor = [1,2,3,8,11,14,19,24,26,31,35,40];
         foreach($permissions_suscriptor as $ps){
             PermissionRole::create([
                 'permission_id' => $ps,

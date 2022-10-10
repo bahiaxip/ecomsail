@@ -37,7 +37,7 @@ Route::group([
 			->middleware('role_permissions');
 
 		//Attributes
-		Route::get('/attributes/{filter_type}/{attr?}',\App\Http\Livewire\Admin\Attribute::class)->name('list_attributes');
+		Route::get('/attributes/{filter_type}/{attr?}',\App\Http\Livewire\Admin\Attribute::class)->name('list_attributes')->middleware('role_permissions');
 		
 
 		//Locations
@@ -49,13 +49,13 @@ Route::group([
 			->middleware('role_permissions');
 
 		//Pedidos
-		Route::get('/orders/{filter_type}', \App\Http\Livewire\Admin\Order::class)->name('list_orders');
+		Route::get('/orders/{filter_type}', \App\Http\Livewire\Admin\Order::class)->name('list_orders')->middleware('role_permissions');
 
 		//Facturas
-		Route::get('/invoices/{filter_type}/{order_id?}', \App\Http\Livewire\Admin\Invoice::class)->name('list_invoices');
+		Route::get('/invoices/{filter_type}/{order_id?}', \App\Http\Livewire\Admin\Invoice::class)->name('list_invoices')->middleware('role_permissions');
 
 		//Carousel
-		Route::get('/carousel/{filter_type}',\App\Http\Livewire\Admin\Carousel::class)->name('list_carousel');
+		Route::get('/carousel/{filter_type}',\App\Http\Livewire\Admin\Carousel::class)->name('list_carousel')->middleware('role_permissions');
 
 		
 		
@@ -66,7 +66,7 @@ Route::group([
 		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('list_permissions')->middleware('role_permissions');
 		
 		//Ajustes
-		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('list_settings');
+		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('list_settings')->middleware('role_permissions');
 	}
 
 

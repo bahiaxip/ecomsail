@@ -53,7 +53,7 @@
                 <nav class="paths">
                     <ul >
                         <li>
-                            <a href="{{ route('list_users',['filter_type' => 1]) }}">
+                            <a href="{{ route('show_analysis') }}">
                                 <i class="fa-solid fa-columns"></i> Admin
                             </a>
                         </li>

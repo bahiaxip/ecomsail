@@ -12,7 +12,7 @@
         </a>
     </li>
 	@endsection
-    @if(helper()->testRole(Auth::user()->role,'add_roles') == true
+    @if(helper()->testRole(Auth::user()->role,'create_roles') == true
             || Auth::user()->roles->special == 'all')
 	   @include('livewire.admin.roles.create')
     @endif
@@ -85,12 +85,15 @@
                     </li>
                 </ul>            
             </li>
+            @if(helper()->testRole(Auth::user()->role,'create_roles') == true
+                    || Auth::user()->roles->special == 'all')
         	<li>
         		<button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addRole" >
                     <i class="fa-solid fa-plus"></i> 
                     <span class="d-none d-md-inline">Crear Rol</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 	<div class="div_table shadow mtop16">

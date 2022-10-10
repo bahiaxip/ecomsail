@@ -37,7 +37,10 @@
         </div>
     </div>
     @endif
-    @include('livewire.admin.carousel.create')
+    @if(helper()->testRole($role_user,'create_carousel') == true 
+            || Auth::user()->roles->special == 'all')
+        @include('livewire.admin.carousel.create')
+    @endif
     @include('livewire.admin.carousel.edit')
     @include('livewire.admin.carousel.confirm')
     <div class="filters mtop16">
@@ -68,13 +71,15 @@
                     </li>
                 </ul>            
             </li>            
-            
+            @if(helper()->testRole($role_user,'create_carousel') == true 
+            || Auth::user()->roles->special == 'all')
             <li>
                 <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addSlider" >
                     <i class="fa-solid fa-plus"></i> 
                     <span class="d-none d-md-inline">Crear Slider</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
     <div class="sliders mtop16">
@@ -83,6 +88,8 @@
     		<div class="slider">
                 <div class="mid left">
                     <div class="col_arrows">
+                        @if(helper()->testRole($role_user,'edit_carousel') == true 
+                            || Auth::user()->roles->special == 'all')
                         <div class="div_arrows" >
                             <div class="arrow" wire:click="set_position({{$slider->id}},'up')">
                                 <a href="javascript:void(0)">
@@ -94,7 +101,8 @@
                                     <i class="fa-solid fa-arrow-down"></i>
                                 </a>
                             </div>
-                        </div>                    
+                        </div>
+                        @endif
                     </div>
 
                     <div class="div_image" >
@@ -103,6 +111,8 @@
                     @endif
                     </div>
                     <div class="actions_hidden">
+                        @if(helper()->testRole($role_user,'edit_carousel') == true 
+                            || Auth::user()->roles->special == 'all')
                         <div class="mtop16">
                             <button class="btn btn-sm btn_sry"  data-bs-toggle="modal" data-bs-target="#editSlider" wire:click="edit({{$slider->id}})">
                                 <span class="title_hidden">
@@ -117,6 +127,9 @@
                                 
                             </button>
                         </div>
+                        @endif
+                        @if(helper()->testRole($role_user,'delete_carousel') == true 
+                            || Auth::user()->roles->special == 'all')
                         <div class="mtop16">
                             <button class="btn btn-sm btn_red" style="display:flex;margin:auto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveSliderId({{$slider->id}})">
                                 <span class="title_hidden">
@@ -130,6 +143,7 @@
                                 
                             </button>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="mid right">
@@ -145,16 +159,22 @@
                         
                     </div>
                     <div class="actions" >
+                        @if(helper()->testRole($role_user,'edit_carousel') == true 
+                            || Auth::user()->roles->special == 'all')
                         <div class="mtop16">
                             <button class="btn btn-sm btn_sry"  data-bs-toggle="modal" data-bs-target="#editSlider" wire:click="edit({{$slider->id}})">
                                 Editar
                             </button>
                         </div>
+                        @endif
+                        @if(helper()->testRole($role_user,'delete_carousel') == true 
+                            || Auth::user()->roles->special == 'all')
                         <div class="mtop16">
                             <button class="btn btn-sm btn_red" style="display:flex;margin:auto" data-bs-toggle="modal" data-bs-target="#confirmDel" wire:click="saveSliderId({{$slider->id}})">
                                 Eliminar
                             </button>
                         </div>
+                        @endif
                     </div>
                 </div>
     			

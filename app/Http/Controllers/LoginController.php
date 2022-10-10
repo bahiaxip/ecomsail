@@ -74,6 +74,7 @@ class LoginController extends Controller
             return back()->withErrors($validator)->with(['message'=>'Se originó un error','typealert' => 'danger']);
         else:
             $user = new User();
+            $user->status = 1;
             $user->nick = e($request->input('nick'));
             $user->name = e($request->input('name'));
             $user->lastname = e($request->input('lastname'));

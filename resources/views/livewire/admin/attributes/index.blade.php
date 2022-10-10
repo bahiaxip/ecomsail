@@ -46,7 +46,7 @@
         </div>
     </div>
     @endif
-    @if(helper()->testRole(Auth::user()->role,'add_attributes') == true
+    @if(helper()->testRole(Auth::user()->role,'create_attributes') == true
             || Auth::user()->roles->special == 'all')
         @include('livewire.admin.attributes.create')
         @if($attr)
@@ -164,7 +164,7 @@
                     </li>
                 </ul>            
             </li>
-            @if(helper()->testRole(Auth::user()->role,'add_attributes') == true
+            @if(helper()->testRole(Auth::user()->role,'create_attributes') == true
             || Auth::user()->roles->special == 'all')
                 <li>
                     <button class="btn btn-sm btn_sail btn_pry" data-bs-toggle="modal" data-bs-target="#addAttribute" wire:click.prevent="setckeditor"><i class="fa-solid fa-plus"></i> 

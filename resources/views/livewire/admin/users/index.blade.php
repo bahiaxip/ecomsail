@@ -17,6 +17,7 @@
     @if(helper()->testRole(Auth::user()->role,'edit_users') == true
             || Auth::user()->roles->special == 'all')
         @include('livewire.admin.users.edit')
+        @include('livewire.admin.users.roles')
     @endif
     <!-- los usuarios no se pueden eliminar -->
     {{--@include('livewire.admin.users.confirm')--}}
@@ -147,13 +148,19 @@
                             <button class="btn btn-sm edit" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#editUser"  wire:click="edit({{$user->id}})"@else wire:click="edit(0)" @endif>
                                 <i class="fa-solid fa-edit"></i>
                             </button>
+
+                                <button class="btn btn-sm scat" @if(!$user_id) data-bs-toggle="modal" data-bs-target="#userRole"  wire:click="edit_roles({{$user->id}})"@else wire:click="edit(0)" @endif>
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </button>
                             @endif
+                            {{--
                             @if(helper()->testRole(Auth::user()->role,'admin_permissions') == true
                                 || Auth::user()->roles->special == 'all')
                             <button class="btn btn-sm scat" title="Editar permisos de usuario" data-bs-toggle="modal" data-bs-target="#editPermissions" wire:click.prevent = 'edit_permissions({{$user->id}})'>
                                 <i class="fa-solid fa-list-check"></i>
                             </button>
                             @endif
+                            --}}
                         </div>
                     </td>
                 </tr>
