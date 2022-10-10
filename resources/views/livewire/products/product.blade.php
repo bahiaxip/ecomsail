@@ -71,6 +71,7 @@
         </div>
     </div>
     @include('layouts.nav_user')
+    @include('livewire.products.modal_feedback')
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         <div class="btn_return">
             <button onclick="history.back()" class="btn_sry" style="padding:3px 15px;border-radius:4px" title="Volver atrás">
@@ -374,9 +375,24 @@
                         
                         <div class="tab-pane fade" id="nav-feedback" role="tabpanel" aria-labelledby="nav-feedback-tab" wire:ignore.self>
                             <div class="row mtop16">
-                                <div class="col-12">
-                                    <p>No existen valoraciones</p>
-                                </div>
+                                @if($feed_products && $feed_products->count() > 0)
+                                    @foreach($feed_products as $feed)
+                                        <div class="col-12">
+                                            <p>{{$feed->product->name}}</p><span>estrellas:{{$feed->feedback}}</span>
+                                            <p>{{$feed->description}}</p>
+                                        </div>
+
+                                    @endforeach
+                                    <div class="row mtop16">
+                                        <div class="col-auto mauto" >
+                                            <button class="btn btn_pry text-white" wire:click="show_feedback" data-bs-toggle="modal" data-bs-target="#productFeedback">Más valoraciones</button>
+                                        </div>
+                                    </div>
+                                @else
+                                    
+                                        <p>No existen valoraciones</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

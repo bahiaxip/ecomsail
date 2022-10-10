@@ -3,10 +3,13 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts, App\Models\Favorite, App\Models\ParentCombinations as ParentComb;
+use App\Models\Product as Prod, App\Models\Combination, App\Models\Attribute, App\Models\Order, App\Models\Order_Item, App\Models\ImagesProducts, App\Models\Favorite, App\Models\ParentCombinations as ParentComb, App\Models\Feedback_Product as FeedProd;
 use Auth,Route;
+
+use Livewire\WithPagination;
 class Product extends Component
 {
+    use WithPagination;
 
     public $product_id;
     public $option = [];
@@ -31,6 +34,8 @@ class Product extends Component
     //buscador global
     public $search_product;
     public $route_name;
+    //todas las valoraciones del producto con paginación para el modal de valoraciones
+    public $switch_feed_products;
     public function mount($id){        
         $this->product_id = $id;
         $this->product = Prod::findOrFail($this->product_id);
@@ -765,6 +770,12 @@ class Product extends Component
         ];
         session()->flash('message',$data);
     }
+
+    public function show_feedback(){
+        $this->switch_feed_products = true;
+        
+
+    }
     public function render()
     {
         //dd($this->combinations_list);
@@ -788,7 +799,13 @@ class Product extends Component
             $this->favorite = true;
         else
             $this->favorite = false;
-        $data = ['prod' => $this->product,'combinations_list' => $this->combinations_list];
+        $feed_products = FeedProd::where('status',1)->where('product_id',$this->product_id)->take(3)->get();
+        $total_feed_products=null;
+        if($this->switch_feed_products)
+            $total_feed_products = FeedProd::where('status',1)->where('product_id',$this->product_id)->paginate(10);
+        
+        
+        $data = ['prod' => $this->product,'combinations_list' => $this->combinations_list,'feed_products' => $feed_products,'total_feed_products' => $total_feed_products];
         return view('livewire.products.product',$data)->extends('layouts.main',['typealert'=>$this->typealert]);
     }
         
