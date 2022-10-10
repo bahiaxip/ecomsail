@@ -64,6 +64,11 @@ Route::group([
 
 		//Permisos
 		Route::get('/permissions/{filter_type}',\App\Http\Livewire\Admin\Permission::class)->name('list_permissions')->middleware('role_permissions');
+
+		//Notificaciones
+		Route::get('/notifications/{filter_type}',\App\Http\Livewire\Admin\Notification::class)->name('list_notifications')
+			//->middleware('role_permissions')
+		;
 		
 		//Ajustes
 		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('list_settings')->middleware('role_permissions');

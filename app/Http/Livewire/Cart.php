@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute, App\Models\Combination;
+use App\Models\Order, App\Models\Order_Item, App\Models\Address, App\Models\Invoice, App\Models\History_Order_Item, App\Models\Product, App\Models\Sold_Product, App\Models\Attribute, App\Models\Combination, App\Models\Notification;
 use Auth,Str,PDF,Route;
 //edit_user
 use App\Functions\Paises, App\Functions\Prov as Pr, App\Functions\Municipalities, App\Models\User;
@@ -371,6 +371,14 @@ class Cart extends Component
             $title = 'Compra realizada';
             $message = 'La compra se ha completado correctamente';    
         }
+    //notificaciones
+        $notification = Notification::create([
+            'status' => 1,
+            'title' => 'Compra realizada',
+            'description' => 'Pedido ... completado',
+            'type' => 'purchase',
+            'user_id' => $this->user_id
+        ]);
         $this->set_session($typealert,$title,$message);
     }
 

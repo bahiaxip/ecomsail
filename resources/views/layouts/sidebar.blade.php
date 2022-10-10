@@ -138,6 +138,16 @@
 				</a>
 			</li>
 			@endif
+
+			<li>
+				<a href="{{route('list_notifications',['filter_type' => 1])}}">
+					<i class="fa-solid fa-shield-halved"></i>
+					<span class="d-none d-lg-inline-flex">
+						Notificaciones
+					</span>
+				</a>
+			</li>
+
 			@if(helper()->testRole(Auth::user()->role,'list_settings') == true
 				|| Auth::user()->roles->special == 'all')
 			<li>

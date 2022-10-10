@@ -431,7 +431,7 @@ class Category extends Component
                 $this->count_cat = Product::where('category_id',$cat_id)
                             ->orWhere('subcategory_id',$cat_id)->count();
             }
-        }  
+        }
     }
     //quizás sea necesario establecer a null el catIdTmp en el método mount() al recargar la página
     public function clearCatId(){
