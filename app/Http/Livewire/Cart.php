@@ -375,7 +375,7 @@ class Cart extends Component
         $notification = Notification::create([
             'status' => 1,
             'title' => 'Compra realizada',
-            'description' => 'Pedido ... completado',
+            'description' => 'Pedido '. $order->order_num.' completado',
             'type' => 'purchase',
             'user_id' => $this->user_id
         ]);

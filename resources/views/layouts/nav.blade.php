@@ -1,4 +1,4 @@
-<nav class="navtop" style="display:flex">
+<nav class="navtop" style="display:flex">	
 	<div class="nav_lat nav_left">
 		@auth
 		<ul>
@@ -49,13 +49,23 @@
 	<div class=" nav_lat nav_right">
 		<ul>					
 			<li style="margin:auto 50px" >				
-				<a href="{{ route('home') }}" >
-					<div class="position-relative">
-						<i class="fa-solid fa-bell"></i>
-						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-	    					99+
-	    					<span class="visually-hidden">unread messages</span>
+				<a href="{{ route('list_notifications',['filter_type' => 1]) }}" title="Notificaciones">
+					<div class="position-relative div_notification">
+						<i class="fa-solid fa-bell {{\App\Models\User::find(Auth::id())->unseen_notifications}}" ></i>
+						@php
+						$unseen = \App\Models\User::find(Auth::id())->unseen_notifications;
+						@endphp
+								
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger @if($unseen == 0) dnone @endif" id="notification">
+							{{-- necesitamos User en lugar de Auth para que actulice en tiempo real--}}
+							@if($unseen > 0)
+								<span class="unseen_not">{{\App\Models\User::find(Auth::id())->unseen_notifications}}+</span>
+    						
+	    						<span class="visually-hidden">unread messages</span>
+    						@endif
 	  					</span>
+
+						
 	  				</div>
 				</a>
 			</li>
@@ -68,3 +78,48 @@
 		</ul>
 	</div>
 </nav>
+
+<script>
+	var notifications;
+	console.log('{{Route::currentRouteName()}}')
+	setInterval(()=>{
+		let div_not = document.querySelector('.div_notification');
+		let not = document.querySelector('#notification');
+		let unseen_not;
+		if(not)
+			unseen_not =  not.querySelector('.unseen_not');
+	    $.ajax({
+	    //opción1: token con headers
+	    	//headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"},	    	
+	    	type:'POST',
+	    	url:"/ajax",
+    	//opción2: token con data
+	    	data:{
+	    		"_token": "{{ csrf_token() }}"
+    		},
+	    	success:function(data){
+	    		//solo si es número actualiza
+	    		if(typeof(data) =='number'){
+    			//si el valor de data es distinto al valor del span notification 
+	    		//actualizamos	    			
+	    			if(parseInt(unseen_not.innerHTML) != data){
+	    				
+	    			
+		    			not.classList.remove('dnone');
+			    		if(unseen_not){
+		    				unseen_not.innerHTML = ` ${data}+ `;
+			    		}else{
+			    			not.innerHTML = `
+			    				<span class="unseen_not">${data}+</span>
+								<span class="visually-hidden">unread messages</span>
+			    			`;
+			    		}
+			    	}else{
+			    		console.log("no actualiza")
+			    	}
+	    		}
+	    	}
+	    });
+	},5000)
+	
+</script>

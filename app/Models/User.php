@@ -33,8 +33,9 @@ class User extends Authenticatable
         'province',
         'city',
         'permissions',
-        'role'
-
+        'role',
+        'unseen_notifications',
+        'last_seen_notification'
     ];
 
     /**

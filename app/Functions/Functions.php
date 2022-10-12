@@ -1,4 +1,8 @@
 <?php
+
+use App\Models\Notification as Not, App\Models\User;
+use Auth;
+
 function get_actionslist($filter_type){
 	$list;
 	if($filter_type == 2){
@@ -61,5 +65,39 @@ function get_taxes(){
 		3 => config('ecomsail.standard_tax'),
 	];
 }
+
+//mostrar notificaciones en nav_blade (icono de notificaciones)
+//función llamada desde AuthServiceProvider.php
+function update_notifications($data = null){
+	//comprobamos si el user es admin
+	if(Auth::user()){
+		$auth_user = Auth::user();
+    	$user = User::find($auth_user->id);            
+	    //comprobamos si es admin o tiene acceso total
+	    if($user->role == 1 || $user->roles()->special == 'all'){
+	        //obtenemos la última notificación vista por el usuario
+	        $last_user_not = $user->last_seen_notification;
+	        
+	        //obtenemos la última notificación global
+	        $last_global_not = Not::orderBy('id','desc')->first();
+
+	        //si es mayor el id de la notificación global que la vista por el user
+	        //contamos el total de notificaciones que el user no ha visto y las almacenamos
+	        if($last_global_not->id > $last_user_not){
+	            $unseen_nots = Not::where('id','>',$last_user_not)->count();                    
+	            $user->update(['unseen_notifications' => $unseen_nots]);
+	            if($data){
+	            	return $unseen_nots;
+	            }
+	        }
+	    }
+	}
+    
+        
+
+    
+}
+//get_notifications();
+//dd("anda");
 
 ?>

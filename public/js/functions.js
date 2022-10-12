@@ -2040,5 +2040,17 @@ function setActiveTab(){
         })
 }
 
+window.livewire.on('delete_notifications',()=>{
+    delete_notifications();
+})
+//eliminamos el elemento span de notificaciones al acceder a la sección de notificaciones
+//indicando que se han revisado las nuevas notificaciones
+function delete_notifications(){
+    let unseen_not = document.querySelector('.unseen_not');
+    if(unseen_not)
+        unseen_not.remove();
+}
+
+
 
 

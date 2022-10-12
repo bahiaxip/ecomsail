@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-use App\Models\Notification as Not;
+use App\Models\Notification as Not, App\Models\User;
 use Auth;
 class Notification extends Component
 {
@@ -30,6 +30,17 @@ class Notification extends Component
         $this->filter_type = $filter_type;
         $this->order_type = 'asc';
         $this->listname = 'notifications';
+        $user = User::find($this->user_id);
+        //si existían notificaciones sin revisar actualizamos
+        if($user->unseen_notifications > 0){
+            //obtenemos el id de la última notificación global
+            $last_global_not = Not::orderBy('id','desc')->first();
+            $user->update([
+                'unseen_notifications' => 0,
+                'last_seen_notification' => $last_global_not->id
+            ]);
+            $this->emit('delete_notifications');
+        }
 
     }
 
@@ -53,7 +64,13 @@ class Notification extends Component
             case '0':
             case '1':
                 $init_query = ($this->search_data) ?
-                    Not::where('title','LIKE',$search_data)->where('status',$this->filter_type)
+                    Not::where('status',$this->filter_type)
+                        ->where(function ($query) use ($search_data){
+                            $query->where('title','LIKE',$search_data);
+                            $query->orWhere('description','LIKE',$search_data);  
+                        })
+                        //->orWhere('title','LIKE',$search_data)
+                        //->orWhere('description','LIKE',$search_data)
                     :
                     Not::where('status',$filter_type);
                 break;

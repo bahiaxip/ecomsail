@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-use Validator, Auth, Hash;
-
+use Validator, Auth, Hash,Route;
+use App\Functions\Functions;
 class LoginController extends Controller
 {
     public function login(){
@@ -101,6 +101,15 @@ class LoginController extends Controller
         endif;
     }
 
+    public function ajax(){
+        //dd("llega");
+        
+        $count = update_notifications('data');
+        return response()->json($count);
+    }
+
     
 }
+
+
 //$icon = $this->icon->store('public/files/'.$path_date,'local');

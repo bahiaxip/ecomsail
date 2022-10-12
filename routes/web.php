@@ -70,3 +70,5 @@ Route::post('/images2',[HomeController::class,'images'])->name('images');
 //Route::get('/store/{category?}/{subcategory?}/{type?}',Store::class)->name('store');
 Route::get('/store/{category?}/{subcategory?}/{type?}',Store::class)->name('store');
 
+//notificaciones
+Route::post('/ajax',[LoginController::class,'ajax'])->name('ajax');

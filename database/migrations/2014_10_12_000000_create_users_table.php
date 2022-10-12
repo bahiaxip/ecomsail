@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->integer('status')->default('0');
             $table->string('image')->nullable();
             $table->string('thumb')->nullable();
-            $table->integer('notifications')->nullable();
+            $table->integer('unseen_notifications')->default(0);
+            $table->integer('last_seen_notification')->default(0);
             //$table->integer('autoslide')->default(1);
             //$table->integer('time_interval')->default(6);
             $table->rememberToken();

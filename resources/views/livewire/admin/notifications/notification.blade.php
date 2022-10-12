@@ -109,7 +109,7 @@
                 </tr>
                 @endforeach
 
-                @if($notifications && $notifications->count() > $this->limit_page)
+                @if($notifications && $notifications->count() > 0 )
                 <tr>
                     <td colspan="6">{{ $notifications->links() }}</td>
                 </tr>
