@@ -53,7 +53,7 @@
                         <i class="fa-solid fa-bag-shopping"></i> PEDIDOS
                     </h5>                    
                 </div>
-                @if($orders->count() == 0)
+                @if(!$orders || $orders->count() == 0)
                 <div class="empty alert alert-success">
                     <h5>Aun no existen pedidos</h5>
                 </div>
@@ -95,18 +95,20 @@
                         </div>
                         <div class="col-md-3 col_price" >
                             <div>
+
                                 <div class="price {{$orders_items[$order->id][0]->feedback}}">
                                     <div style="text-align:center;font-weight:bold">
                                         Total: {{number_format(floatval(number_format($order->total,2,'.','')),0,",",".")}} €
                                     </div>
                                 </div>
-                                @if($orders_items[$order->id]->count() < 2)
+
+                                {{--@if($orders_items[$order->id]->count() < 2)
                                     @if(!$order_item->feedback)
                                         <button class="btn btn_pry" style="padding:4px 50px" data-bs-toggle="modal" data-bs-target="#addFeedback" wire:click="set_data({{$order_item->product_id}},{{$order->id}},{{$order_item->id}})">
                                             Valorar
                                         </button>
                                     @endif
-                                @endif
+                                @endif--}}
                             </div>
                         </div>
                     </div>
