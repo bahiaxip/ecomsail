@@ -74,7 +74,8 @@ function update_notifications($data = null){
 		$auth_user = Auth::user();
     	$user = User::find($auth_user->id);            
 	    //comprobamos si es admin o tiene acceso total
-	    if($user->role == 1 || $user->roles()->special == 'all'){
+	    //if($user->role == 1 || $user->roles()->special == 'all'){
+    	if($user->role == 1 ){
 	        //obtenemos la última notificación vista por el usuario
 	        $last_user_not = $user->last_seen_notification;
 	        

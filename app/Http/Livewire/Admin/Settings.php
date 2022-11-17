@@ -11,7 +11,14 @@ class Settings extends Component
     public $switch_loading = false;
     
     public function mount($message=null){
-        
+        session()->flash('message',$message);
+    }
+     public function dehydrate()
+    {
+        /*
+        if(session('message'))
+            dd(session()->get('message'));
+        */
     }
 
     public function save_settings($data){
@@ -44,7 +51,7 @@ class Settings extends Component
 
         sleep(5);
         $this->typealert = 'success';
-        return redirect()->route('settings')->with('message','La configuración ha sido actualizada');
+        return redirect()->route('list_settings',['message' => 'La configuración ha sido actualizada']);
         
         //session()->flash('message','La configuración ha sido actualizada');
 

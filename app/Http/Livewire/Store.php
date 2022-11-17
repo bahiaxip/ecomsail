@@ -178,6 +178,7 @@ class Store extends Component
         return $title;
     }
     public function set_special_filter($type){
+        $this->start=false;
         //si existen caracteres en el buscador lo limpiamos
         $this->reset_searcher();
         //si se encuentra en otra página que no sea la primera reseteamos paginación

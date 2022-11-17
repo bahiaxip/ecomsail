@@ -20,7 +20,6 @@
         @include('livewire.admin.products.settings')
     @endif
     
-    
     @if(helper()->testRole(Auth::user()->role,'delete_products') == true
         || helper()->testRole(Auth::user()->role,'restore_products') == true
         || Auth::user()->roles->special == 'all')

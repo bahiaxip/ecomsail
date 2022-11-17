@@ -71,7 +71,7 @@ Route::group([
 		;
 		
 		//Ajustes
-		Route::get('/settings',\App\Http\Livewire\Admin\Settings::class)->name('list_settings')->middleware('role_permissions');
+		Route::get('/settings/{message?}',\App\Http\Livewire\Admin\Settings::class)->name('list_settings')->middleware('role_permissions');
 	}
 
 

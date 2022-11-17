@@ -18,11 +18,11 @@
       </div>      
       <div class="modal-footer justify-content-center">
 
-        <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal" wire:click="clearProdId()">Cancelar</button>
+        <button type="button" class="btn btn-sm btn_sail  btn_sry" data-bs-dismiss="modal" wire:click="clearProdId()">Cancelar</button>
         @if($actionTmp == 'restore')
-        <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="restore({{$prodIdTmp}})">Restaurar</button>
+        <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="restore({{$prodIdTmp}})">Restaurar</button>
         @else
-        <button type="button" class="btn btn-sm btn-primary text-white" data-dismiss="modal" wire:click="delete()">Eliminar</button>
+        <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="delete()">Eliminar</button>
         @endif
       </div>
     </div>
