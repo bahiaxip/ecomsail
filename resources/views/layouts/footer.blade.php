@@ -69,61 +69,65 @@ x-transition:enter.duration.1000ms--}}
 	</div>
 	<div class="end">
 		<div class="options">
-			<div data-aos="fade-up" data-aos-offset="100" class="column">				
-				<div class="links">
-					<div>
-						<i class="fa-solid fa-circle-question"></i>
-						EcomSail
-						<p class="mtop10">Guía de compra</p>
-						<p class="mtop10">Unirse a EcomSail</p>
+			<div class="otrodiv">
+				<div class="div_links">
+					<div data-aos="fade-up" data-aos-offset="100" class="column">				
+						<div class="links">
+							<div>
+								<i class="fa-solid fa-circle-question"></i>
+								EcomSail
+								<p class="mtop10">Guía de compra</p>
+								<p class="mtop10">Unirse a EcomSail</p>
+							</div>
+						</div>
+					</div>
+					<div data-aos="fade-up" data-aos-offset="100" class="column">
+						
+						<div class="links">
+							<div>
+								<i class="fa-solid fa-circle-question"></i>
+								Atención al cliente
+								<p class="mtop10" >
+									<a href="{{route('contact')}}">Contacto</a>
+								</p>
+								<p class="mtop10">
+									<button data-bs-toggle="modal" data-bs-target="#payment">Métodos de pago</button>
+								</p>
+								<!--
+								<p class="mtop10" >Envíos y entregas</p>
+								<p class="mtop10">Devoluciones</p>
+								-->
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div data-aos="fade-up" data-aos-offset="100" class="column">
-				
-				<div class="links">
-					<div>
-						<i class="fa-solid fa-circle-question"></i>
-						Atención al cliente
-						<p class="mtop10" >
-							<a href="{{route('contact')}}">Contacto</a>
-						</p>
-						<p class="mtop10">
-							<button data-bs-toggle="modal" data-bs-target="#payment">Métodos de pago</button>
-						</p>
-						<!--
-						<p class="mtop10" >Envíos y entregas</p>
-						<p class="mtop10">Devoluciones</p>
-						-->
+				{{--
+				<div data-aos="fade-up" data-aos-offset="180" data-aos-delay="150" class="column">
+					<div class="links">
+						<div>
+							<i class="fa-solid fa-trophy"></i>
+							Promociones
+							<p class="mtop10">Cupones y Ofertas</p>
+						</div>
 					</div>
 				</div>
-			</div>
+				--}}
+				<div class="div_payment">
+					<div data-aos="fade-up" data-aos-offset="100" data-aos-delay="150" class="column" >
+						<div class="title_payment_icons" >
+							Pago seguro					
+						</div>
+						<div class="images">
 
-			{{--
-			<div data-aos="fade-up" data-aos-offset="180" data-aos-delay="150" class="column">
-				<div class="links">
-					<div>
-						<i class="fa-solid fa-trophy"></i>
-						Promociones
-						<p class="mtop10">Cupones y Ofertas</p>
+							<img src="{{url('ics/payment/mastercard.svg')}}" alt="" style="width:50px" >
+							<img src="{{url('ics/payment/visa.svg')}}" alt="" style="width:80px" >
+							@if(config('ecomsail.payment_paypal'))
+							<img src="{{url('ics/payment/paypal.svg')}}" alt="" style="width:100px">
+							@endif
+						</div>
 					</div>
 				</div>
 			</div>
-			--}}
-			<div data-aos="fade-up" data-aos-offset="100" data-aos-delay="150" class="column" >
-				<div class="title_payment_icons" >
-					Pago seguro					
-				</div>
-				<div class="images">
-
-					<img src="{{url('ics/payment/mastercard.svg')}}" alt="" style="width:50px" >
-					<img src="{{url('ics/payment/visa.svg')}}" alt="" style="width:80px" >
-					@if(config('ecomsail.payment_paypal'))
-					<img src="{{url('ics/payment/paypal.svg')}}" alt="" style="width:100px">
-					@endif
-				</div>
-			</div>
-			
 		</div>
 		<div class="comunity" data-aos="fade-up" data-aos-offset="100" data-aos-delay="200">			
 			<div class="header rrss">
@@ -160,7 +164,7 @@ x-transition:enter.duration.1000ms--}}
 		</div>
 	</div>
 	<div class="copy">
-		<p>&copy; 2022 EcomSail S.L. Todos los derechos reservados</p>
+		<p>Desarrollado por <a href="bahiaxip.com">bahiaxip.com</a> &copy; 2022 EcomSail S.L. </p>
 	</div>
 
 </div>

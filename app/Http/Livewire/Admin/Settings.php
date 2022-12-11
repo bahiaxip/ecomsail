@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-
+use Artisan;
 class Settings extends Component
 {
     public $typealert = 'success';
@@ -48,8 +48,10 @@ class Settings extends Component
 //añadimos sleep() para que se muestren los datos actualizados al recargar la página,
 //ya que es necesario generar un archivo en PHP y generamos redirect() en lugar de session
 //a la espera de otra solución
-
-        sleep(5);
+        //refrescamos el archivo para que se muestre al redireccionar, probando
+        //si no es necesario el sleep()
+        //Artisan::call('config:clear')
+        //sleep(5);
         $this->typealert = 'success';
         return redirect()->route('list_settings',['message' => 'La configuración ha sido actualizada']);
         

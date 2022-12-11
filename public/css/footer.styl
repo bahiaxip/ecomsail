@@ -88,29 +88,38 @@ rgba2 = rgba(0,178,146,1)
 			display flex
 			justify-content space-between
 			width 70%
-			.column
+			.otrodiv
 				display flex
-				flex-flow row wrap
-				width 33%
-				.title_payment_icons					
+				width 100%
+				.div_links
+					width 66%
+				.div_payment 
+					width 33%
+				.div_payment,.div_links
 					display flex
-					justify-content center
-					width 100%
-				.images
-					background-color color10
-					border-radius 4px
-					display flex
-					justify-content space-around
-					width 100%
-				.links
-					color color7
-					display flex
-					justify-content center
-					width 100%
-					p
-						margin-left 15px
-					a:hover,button:hover
-						color #FFF
+					.column
+						display flex
+						flex-flow row wrap
+						width 100%
+						.title_payment_icons					
+							display flex
+							justify-content center
+							width 100%
+						.images
+							background-color color10
+							border-radius 4px
+							display flex
+							justify-content space-around
+							width 100%
+						.links
+							color color7
+							display flex
+							justify-content center
+							width 100%
+							p
+								margin-left 15px
+							a:hover,button:hover
+								color #FFF
 		.comunity
 			width 30%
 			
@@ -150,6 +159,8 @@ rgba2 = rgba(0,178,146,1)
 			
 
 @media only screen and (max-width 1200px)
+	.box_products
+		width 100%
 	.footer
 		.end
 			display block
@@ -158,13 +169,27 @@ rgba2 = rgba(0,178,146,1)
 			.comunity
 				margin-top 30px
 				width 100%
+@media only screen and (max-width 900px)
+	.footer .end .options
+		.otrodiv
+			display block
+			.div_links
+				width 100%
+			.div_payment
+				width 100%
+		
+			.column
+				margin-top 25px
 				
-@media only screen and (max-width 600px)
+@media only screen and (max-width 400px)
 	.footer
 		.end
-			.options
-				display block
-				.column
-					margin-top 25px
+			.options .otrodiv
+				.div_links
+					display block
+					.column
+						margin-top 25px
+
+
 				
 				

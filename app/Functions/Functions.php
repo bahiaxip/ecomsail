@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Notification as Not, App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 function get_actionslist($filter_type){
 	$list;
