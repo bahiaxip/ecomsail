@@ -45,6 +45,11 @@
         </div>
     </div>
     @endif
+    @if(!$users)
+    <div class="loading" id="loading"  >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="filters mtop16">
         
     
@@ -193,7 +198,7 @@
             </tbody>
         </table>
     </div>
-
+    @endif
     <!--
     <div class="container">
         <div class="row">

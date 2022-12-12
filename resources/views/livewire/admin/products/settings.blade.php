@@ -387,32 +387,28 @@
                             
                         </div>
                         <div class="collapse" id="collapse_{{$at->id}}">
-                                <!--
-                                <div class="header">
-                                  <h2 class="title"> Categorías</h2>
-                                </div>
-                                -->
-                                <div class="box mtop16 boxes_values" >
-                                  @if($at->values()->count() == 0)
-                                      <p>No existen valores, debe crear valores para crear combinaciones de sus productos</p>
-                                  @else
-                                    @foreach($at->values() as $a)
-                                      <div class="form-check values">
-                                        {{ Form::checkbox('list_'.$a->parentattr->id,true,null,['class' => 'form-check-input','id' => 'list_'.$a->id,'onclick' =>"addValue('$a->id','$a->name',".$a->parentattr->id.",this,)" ]) }}
-                                        {{ Form::label('list_'.$a->id,$a->name) }}
-                                      </div>
-                                    @endforeach
-                                    @endif
-                                </div>
+                            <!--
+                            <div class="header">
+                              <h2 class="title"> Categorías</h2>
                             </div>
-                      
-                  
+                            -->
+                            <div class="box mtop16 boxes_values" >
+                              @if($at->values()->count() == 0)
+                                  <p>No existen valores, debe crear valores para crear combinaciones de sus productos</p>
+                              @else
+                                @foreach($at->values() as $a)
+                                  <div class="form-check values">
+                                    {{ Form::checkbox('list_'.$a->parentattr->id,true,null,['class' => 'form-check-input','id' => 'list_'.$a->id,'onclick' =>"addValue('$a->id','$a->name',".$a->parentattr->id.",this,)" ]) }}
+                                    {{ Form::label('list_'.$a->id,$a->name) }}
+                                  </div>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
                   </div>
                   @endforeach
                 @endif
-                
               </div>
-
             </div>
 
             {{-- si queremos cada 3 --}}
@@ -480,7 +476,10 @@
                 @endforeach
               </div>
               @endif
-              <div class="back_upload" style="" ondrop="dropHandler(event,{{$prod_id}})" ondragover="dragOverHandler(event)">
+
+              <div class="back_upload"  ondrop="dropHandler(event,{{$prod_id}})" ondragover="dragOverHandler(event)">
+                  
+                  
                   <div class="box" id="box_transfer" style="/*box-shadow:1px 1px 1px black, -1px 1px 1px black,1px 1px 15px black inset;*/">
                     <span class="left" style="display: none" onclick="scrollGalleryLeft()">
                         <i class="fa-solid fa-circle-arrow-left"></i>
@@ -489,14 +488,22 @@
                         <i class="fa-solid fa-circle-arrow-right"></i>
                     </span>
                   </div>
+
                   <div class="info_upload" >
                     <p class="text" >Max. 2 MB</p>
                     <button class="btn" type="button">Soltar imagen aquí</button>
                   </div>
+
                   <div class="back_images" >
                   <!-- añadir display:flex si es más alta que ancha, necesario 
                     para que se vea el icono close en ese tipo de imágenes-->
                   </div>
+                </div>
+                <div class="div_btn_addfile">
+                    <div class="btn_addfile" style="color:orange;font-family:system-ui" onclick="document.getElementById('inputfile').click()">
+                        <span></span>
+                    </div>
+                    <input type="file" name="image" data_id="{{$prod_id}}" id="inputfile">
                 </div>
                 <div class="div_btn_gallery">
                     <button class="btn btn-sm btn-primary" onclick="uploadImage({{$prod_id}})">

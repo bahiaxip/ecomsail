@@ -43,8 +43,12 @@
     @endif
     @include('livewire.admin.carousel.edit')
     @include('livewire.admin.carousel.confirm')
+    @if(!$sliders)
+    <div class="loading" id="loading"  >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="filters mtop16">
-        
         <ul class="add">
             <li>            
                 <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" type="button" id="dropdownMenu2" onclick="showMenuFilters()"  aria-expanded="false" >
@@ -182,4 +186,5 @@
     	</div>
         @endforeach
     </div>
+    @endif
 </div>

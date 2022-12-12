@@ -50,7 +50,7 @@ class Settings extends Component
 //a la espera de otra solución
         //refrescamos el archivo para que se muestre al redireccionar, probando
         //si no es necesario el sleep()
-        //Artisan::call('config:clear')
+        Artisan::call('config:clear');
         //sleep(5);
         $this->typealert = 'success';
         return redirect()->route('list_settings',['message' => 'La configuración ha sido actualizada']);

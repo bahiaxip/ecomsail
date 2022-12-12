@@ -1,4 +1,4 @@
-<div>
+<div >
     @section('title','Productos')
 
     @section('path')
@@ -46,6 +46,11 @@
         </div>
     </div>
     @endif
+    @if(!$products)
+    <div class="loading" id="loading"  >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="filters mtop16">
         <ul class="addL">
             <li>
@@ -169,7 +174,7 @@
                                 @if(helper()->testRole(Auth::user()->role,'edit_products') == true
                                     || Auth::user()->roles->special == 'all')
 
-                                    <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#settings" wire:click="edit_settings_product({{$prod->id}})">
+                                    <button class="btn btn-sm scat" data-bs-toggle="modal" data-bs-target="#settings" wire:click="edit_settings_product({{$prod->id}})" >
                                         <i class="fa-solid fa-list-check"></i>
                                     </button>
                                 @endif
@@ -230,6 +235,7 @@
             </tbody>
         </table>
     </div>
+    @endif
 </div>
 @push('scripts')
 <script>

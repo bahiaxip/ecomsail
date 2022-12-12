@@ -499,6 +499,8 @@ class Product extends Component
         $this->images_products = ImagesProducts::where('product_id',$id)->get();
         //desactivamos(disabled) las listas de atributos si rebasan el límite establecido
         $this->emit('maxParentCombinations');
+        //no es necesario cargarlo aquí, se puede cargar al iniciar products
+        //$this->emit('inputFile');
     }
     //revisamos si se ha alcanzado el límite de listas de combinaciones
     //

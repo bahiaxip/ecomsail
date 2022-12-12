@@ -45,7 +45,11 @@
         </div>
     </div>
     @endif
-
+    @if(!$invoices)
+    <div class="loading" id="loading"  >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="filters mtop16">
         <ul class="addL">
             <li>
@@ -260,6 +264,7 @@
             </tbody>
         </table>
     </div>
+    @endif
 </div>
 @push('scripts')
 <script>

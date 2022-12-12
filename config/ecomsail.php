@@ -20,6 +20,7 @@ return [
 'standard_tax' => '21',
 'reduce_tax' => '4',
 'zero_tax' => '0',
+'main_slider' => 'on',
 'time_interval' => '5',
 'autoslide' => 'on',
 ]

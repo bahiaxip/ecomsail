@@ -513,7 +513,8 @@ document.addEventListener('readystatechange',() => {
                         getActiveTab()
                     })
                 })
-                console.log("product: ",list_tabs)
+                
+
             }
         }
 
@@ -531,7 +532,22 @@ document.addEventListener('readystatechange',() => {
     
         }
         if(route == "list_products"){
-            
+            //input file de galería en configuración de producto
+            setInputFile();
+            function setInputFile(){
+                console.log("mi file");
+                let inputFile = document.querySelector('#inputfile');
+
+                console.log("entra: ",inputFile);
+                inputFile.onchange = function(){
+                    let id = this.getAttribute('data_id');
+                    console.log(id);
+                    let file = inputFile.files[0];
+                    showAndStoreFile(file,id);
+                    
+                    
+                }    
+            }
         }
 
         
@@ -1283,9 +1299,16 @@ function dropHandler(event,id){
     //Pasar el evento a removeDragData para limpiar
     removeDragData(event);
 }
+//no necesario
+//window.livewire.on('inputFile',()=>{ })
+
+
+
+
 
 //valida el archivo dataTransfer
 function showAndStoreFile(file,id){
+    
     //si listImages (que es un Input() del padre) es distinto a listFiles 
     //reseteamos listFiles para que no se mantenga al crear un nuevo alojamiento
     if(listImages.length != listFiles.length){
@@ -1379,7 +1402,7 @@ function showFiles(id){
                                 <i class="fa-solid fa-circle-xmark"></i>
                             </div>
                             <div class="loading_transfer" style="display: none;" >
-                                <img src="../../ics/spinner2.svg" alt="" style="margin:auto" width="80">
+                                <img src="../../ics/loading/dualball.svg" alt="" style="margin:auto" width="80">
                             </div>
                         </div>
                     </span> 
