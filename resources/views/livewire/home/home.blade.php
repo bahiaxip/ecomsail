@@ -25,7 +25,11 @@
     {{--@include('livewire.home.edit_user')--}}
 
 
-    
+    @if(!$products || !$categories || !$sliders || !$sold_products)
+    <div class="loading" id="loading"  >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div style="width:100%" x-data="cart()" x-init="start()" x-cloak >
         <div
         x-show="show2"
@@ -252,6 +256,7 @@
         </div>
            
     </div>
+    @endif
     
 </div>
 
