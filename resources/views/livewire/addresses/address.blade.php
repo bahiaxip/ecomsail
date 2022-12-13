@@ -1,4 +1,4 @@
-<div style="position: relative;">
+<div>
     <div class="message_modal " >
         <div class="message" >
             <div>
@@ -60,6 +60,11 @@
     @include('livewire.addresses.create')
     @include('livewire.addresses.confirm')
     {{--@include('livewire.addresses.edit_user')--}}
+    @if(!$addresses || !$zones || !$locations)
+    <div class="loading"   >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="container" x-data="cart()" x-init="start()" x-cloak>
         <div class="row mtop32 address"
         x-show="show2"
@@ -229,6 +234,7 @@
             --}}
         </div>
     </div>
+    @endif
 </div>
 <script>
     //eliminar producto del carrito

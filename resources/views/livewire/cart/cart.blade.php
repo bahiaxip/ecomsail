@@ -50,7 +50,11 @@
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
     @include('livewire.cart.edit_user')
-
+    @if($products || !$categories || !$sliders || !$sold_products)
+    <div class="loading"   >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="container" x-data="cart()" x-init="start()" x-cloak >
         <div class="row mtop32 cart justify-content-between" 
             x-show="show2"
@@ -315,6 +319,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 
 <script>

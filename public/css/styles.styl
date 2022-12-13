@@ -1586,8 +1586,26 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				width 40px
 			i
 				font-size 1.8em
-					
+@media only screen and (max-width 900px)
+	.div_products_list
+		.products
+			width calc(95% / 3)
+
+@media only screen and (max-width 768px)
+	.div_products_list
+		.products
+			width calc(95% / 2)
+			
+	.alert.alert-success,.alert.alert-danger
+		min-width 300px
+
+	.favorite .div_list .list .content				
+		.div_soldprice .soldprice
+			display block
+
+				
 @media only screen and (max-width 600px)
+	
 	.offers	.box_categories	.nav_offers_categories				
 		.div_category .category
 			.icon
@@ -1597,24 +1615,6 @@ como existen 2 uno es el carousel de product y otro el modal de product
 				font-size 1.5em
 	/* para nav_user (pasado a nav_user.styl)
 /*@media only screen and (max-width 992px)*/
-	
-	
-			
-	
-	
-
-@media only screen and (max-width 768px)
-	.div_products_list
-		.products
-			width calc(95% / 3)
-			
-	.alert.alert-success,.alert.alert-danger
-		min-width 300px
-
-	.favorite .div_list .list .content				
-		.div_soldprice .soldprice
-			display block
-	
 			
 			
 		

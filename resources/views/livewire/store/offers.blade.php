@@ -3,7 +3,11 @@
 
 	@include('layouts.nav_user')
 
-
+	@if(!$categories  || !$products || !$offers)
+    <div class="loading"   >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
 	<div class="offers" style="" x-data="cart()" x-init="start()" x-cloak>
 		<div  >
             <div 
@@ -275,6 +279,6 @@
             @endif
 			@include('layouts.footer')
         </div>
-		
 	</div>
+	@endif
 </div>

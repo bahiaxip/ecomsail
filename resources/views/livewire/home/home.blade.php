@@ -1,4 +1,4 @@
-<div style="position: relative;overflow:hidden">
+<div style="overflow:hidden">
 
     @section('title','Inicio')
     {{--
@@ -25,8 +25,8 @@
     {{--@include('livewire.home.edit_user')--}}
 
 
-    @if(!$products || !$categories || !$sliders || !$sold_products)
-    <div class="loading" id="loading"  >
+    @if($products || !$categories || !$sliders || !$sold_products)
+    <div class="loading"   >
       <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>
     @else

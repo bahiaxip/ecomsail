@@ -1,8 +1,8 @@
-<div class="store" style="position:relative;overflow:hidden">
+<div class="store" style="overflow:hidden">
 
 	@section('title', $title ?? 'Todos los productos')
 	@include('layouts.nav_user')
-    @if(!$start)
+    @if(!$products || !$categories_list || !$subcategories_list )
     <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.9);z-index:999" >
         <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
     </div>

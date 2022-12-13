@@ -1,4 +1,4 @@
-<div style="position:relative">
+<div >
     <div class="message_modal" >
         <div class="message" >
             <div>
@@ -42,6 +42,11 @@
     @section('title','Favoritos')
     @include('layouts.nav_user')
     {{--@include('livewire.cart.edit_user')--}}
+    @if(!$favorites)
+    <div class="loading"   >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="container" x-data="cart()" x-init="start()" x-cloak>
         <div class="row mtop32 favorite"
         x-show="show2"
@@ -126,6 +131,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 <script>
     //eliminar producto del carrito

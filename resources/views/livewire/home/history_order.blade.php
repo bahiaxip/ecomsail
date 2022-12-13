@@ -1,4 +1,4 @@
-<div style="position:relative">
+<div>
     <div class="message_modal" >
         <div class="message" >
             <div>
@@ -42,6 +42,11 @@
     @include('livewire.home.modal_feedback')
     {{-- para no incluir $user_id2 a todo el home usamos el modal de cart --}}
     {{--@include('livewire.cart.edit_user')--}}
+    @if(!$orders || !$orders_items)
+    <div class="loading"   >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div class="container" x-data="cart()" x-init="start()" x-cloak>
         <div class="row history_order mtop32 address" 
         x-show="show2"
@@ -122,6 +127,6 @@
                 @endif
             </div>
         </div>
-        
     </div>
+    @endif
 </div>

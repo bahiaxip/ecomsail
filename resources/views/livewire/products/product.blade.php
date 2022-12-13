@@ -1,4 +1,4 @@
-<div style="position:relative">
+<div style="">
     <div class="message_modal" >
         <div class="message {{$typealert}} " >
             {{--
@@ -72,6 +72,11 @@
     </div>
     @include('layouts.nav_user')
     @include('livewire.products.modal_feedback')
+    @if(!$prod  || !$feed_products )
+    <div class="loading"   >
+      <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
+    </div>
+    @else
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         <div class="btn_return">
             <button onclick="history.back()" class="btn_sry" style="padding:3px 15px;border-radius:4px" title="Volver atrás">
@@ -404,6 +409,7 @@
             </div>
         </div>
     </div>
+    @endif
     
 </div>
 
