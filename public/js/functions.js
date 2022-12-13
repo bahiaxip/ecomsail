@@ -424,13 +424,14 @@ document.addEventListener('readystatechange',() => {
             //o cuando se llama a los métodos history.back(), history.forward(), history.go()
             window.addEventListener('popstate',(e)=>{
                 //console.log(e.state);
-                console.log(e.state)
+                console.log("e.state: ",e.state)
                 
             //se comprueba la ruta para detectar si es categoría o subcategoría y cambiar el title
             //se usa el evento popstate como alternativa a la variable route establecida al comienzo del layout con el tag meta
             //además de modificar el title popstate permite obtener si se ha pulsado el botón atrás o adelante en el navegador
             //y redirigimos con window.location para que no genere errores
-                if(e.path[0].route == 'list_categories'){
+
+                if(e.state && e.path[0].route == 'list_categories'){
                     
                     //obtener ruta exceptuando la raíz : location.pathname
                     if(window.location.pathname){

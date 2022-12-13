@@ -136,6 +136,7 @@ class Store extends Component
         //necesario para diferenciar de la colección de productos genérica y para que el
         // método render() de paginación no entre en conflicto.
         $this->switch_special_filter=false;
+        //ignorado temporalmente en la vista, sustituido por otro loading
         $this->start = false;
         
         $title;
@@ -154,8 +155,6 @@ class Store extends Component
         if($this->category == 0){
             $this->computed_category = 0;
         }
-
-        
     }
     public function getTitle(){
         //pasamos el nuevo título de store

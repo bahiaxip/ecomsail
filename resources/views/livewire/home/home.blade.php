@@ -25,7 +25,7 @@
     {{--@include('livewire.home.edit_user')--}}
 
 
-    @if($products || !$categories || !$sliders || !$sold_products)
+    @if(!$products || !$categories || !$sliders || !$sold_products)
     <div class="loading"   >
       <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>
