@@ -791,9 +791,8 @@ class Cart extends Component
                     $this->address_selected = $adr->id;
                     $this->location_id = $adr->location_id;
                 }
-            }    
+            }
         }
-        
         //$this->orders_items = $this->get_orders_items($this->order_id);
         //$data = ['orders_items' => $orders_items,'addresses' => $this->addresses];
         //productos

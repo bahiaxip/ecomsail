@@ -26,7 +26,7 @@
 
 
     @if(!$products || !$categories || !$sliders || !$sold_products)
-    <div class="loading"   >
+    <div class="loading" id="loading2"  >
       <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>
     @else

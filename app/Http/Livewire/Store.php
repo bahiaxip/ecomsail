@@ -19,7 +19,7 @@ class Store extends Component
     public $type;
     public $computed_category;
     public $computed_subcategory;
-    //switch para mostrar/ocultar icono de carga
+    //switch para mostrar/ocultar icono de carga, ignorando temporalmente
     public $start = false;
     //categories para nav_user
     public $categories;
@@ -338,7 +338,7 @@ class Store extends Component
                 }
             }
         }
-
+        //$products = 0;
         $this->start=true;
         $data = ['products' => $products,'categories_list' => $categories_list,'subcategories_list' => $subcategories_list,'computed_cat' => $this->computed_category];
         return view('livewire.store.store',$data)->extends('layouts.main');

@@ -75,7 +75,7 @@ function update_notifications($data = null){
     	$user = User::find($auth_user->id);            
 	    //comprobamos si es admin o tiene acceso total
 	    //if($user->role == 1 || $user->roles()->special == 'all'){
-    	/*
+    	
     	if($user->role == 1 ){
 	        //obtenemos la última notificación vista por el usuario
 	        $last_user_not = $user->last_seen_notification;
@@ -85,7 +85,7 @@ function update_notifications($data = null){
 
 	        //si es mayor el id de la notificación global que la vista por el user
 	        //contamos el total de notificaciones que el user no ha visto y las almacenamos
-	        if($last_global$last_global_not->id > $last_user_not){
+	        if($last_global_not && $last_global_not->id > $last_user_not){
 	            $unseen_nots = Not::where('id','>',$last_user_not)->count();                    
 	            $user->update(['unseen_notifications' => $unseen_nots]);
 	            if($data){
@@ -93,7 +93,7 @@ function update_notifications($data = null){
 	            }
 	        }
 	    }
-	    */
+	    
 	}
     
         

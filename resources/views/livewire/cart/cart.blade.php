@@ -50,7 +50,7 @@
     @include('livewire.cart.modal_confirm')
     @include('layouts.nav_user')
     @include('livewire.cart.edit_user')
-    @if($products || !$categories || !$sliders || !$sold_products)
+    @if(!$order_id || !$orders_items)
     <div class="loading"   >
       <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>

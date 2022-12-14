@@ -69,81 +69,78 @@
                                 @foreach($subcategories_list as $key=>$sl)
                                 
                                 <option wire:key="{{$key}}" value="{{$key}}" onmouseenter="changeColor('hola')" class="option">{{--@if($key != 0)&#x2714;&nbsp; @endif--}} {{$sl}}</option>
+                                
                                 @endforeach
+                                
                             </select>
                             {{--
                             {{ Form::select('subcategory',$subcategories_list,null,['class' => 'form-select','wire:model' => 'subcategory','wire:change' => 'set_category'])}}
                             --}}
                         </div>
                     </div>
-                    @if(!$products || !$categories_list || !$subcategories_list )
-                    <div id="loading" style="display: flex;width:100%;height:100vh;position:absolute;left: 0;background-color: rgba(255,255,255,.9);z-index:999" >
-                        <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="100">
-                    </div>
-                    @else
                     <div class="mtop16">
-                        @if($products->count()==0)
-                        <p>No existen productos</p>
-                        @else
-                            @foreach($products as $prod)    
-                                <div class="products mtop32">
+                    @if($products->count()==0)
+                    <p>No existen productos</p>
+                    @else
+                        @foreach($products as $prod)    
+                            <div class="products mtop32">
+                                @if($prod->infoprice->discount_type == 1
+                                    && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+                                <a href="{{ url('/product/'.$prod->id) }}" class="layer" >
+                                    <div class="content">
+                                        <span>
+                                            -{{$prod->infoprice->discount}}%            
+                                        </span>
+                                    </div>
+                                </a>
+                                @endif
+                            	
+                                <a href="{{ url('/product/'.$prod->id) }}" class="image" >
+                                    {{--
+                                    <div class="layer">
+                                        <div class="favorite">
+                                            <div class="icon">
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="plus">
+                                            <div class="plus_btn">
+                                                <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
+                                                    <i class="fa-solid fa-eye"></i> Vista rápida
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    --}}
+                                    <img loading="lazy" src="{{$prod->path_tag.$prod->image}}" alt="">
+                                </a>
+                                <a href="{{ url('/product/'.$prod->id) }}" title="{{$prod->name}}">
+                                    <div class="title">
+                                    
+                                        {{$prod->name}}
+                                    
+                                    </div>
+                                    <div class="price">
                                     @if($prod->infoprice->discount_type == 1
-                                        && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
-                                    <a href="{{ url('/product/'.$prod->id) }}" class="layer" >
-                                        <div class="content">
-                                            <span>
-                                                -{{$prod->infoprice->discount}}%            
-                                            </span>
-                                        </div>
-                                    </a>
-                                    @endif
-                                	
-                                    <a href="{{ url('/product/'.$prod->id) }}" class="image" >
-                                        {{--
-                                        <div class="layer">
-                                            <div class="favorite">
-                                                <div class="icon">
-                                                    <i class="fa-solid fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <div class="plus">
-                                                <div class="plus_btn">
-                                                    <button class="btn btn-sm btn_pry"  wire:click.prevent="fastview({{$prod->id}})">
-                                                        <i class="fa-solid fa-eye"></i> Vista rápida
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        --}}
-                                        <img src="{{$prod->path_tag.$prod->image}}" alt="">
-                                    </a>
-                                    <a href="{{ url('/product/'.$prod->id) }}" title="{{$prod->name}}">
-                                        <div class="title">
+                                    && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
                                         
-                                            {{$prod->name}}
-                                        
-                                        </div>
-                                        <div class="price">
-                                        @if($prod->infoprice->discount_type == 1
-                                        && date('Y-m-d') >= $prod->infoprice->init_discount && date('Y-m-d') <= $prod->infoprice->end_discount)
+                                        <span>{{ floatval(number_format(($prod->price*((100-$prod->infoprice->discount)/100)),2,'.','')) }}€</span>
+                                        &nbsp;&nbsp;
+                                        <span style="text-decoration:line-through;color:#696969">{{ floatval(number_format($prod->price,2,'.','')) }}€</span>
                                             
-                                            <span>{{ floatval(number_format(($prod->price*((100-$prod->infoprice->discount)/100)),2,'.','')) }}€</span>
-                                            &nbsp;&nbsp;
-                                            <span style="text-decoration:line-through;color:#696969">{{ floatval(number_format($prod->price,2,'.','')) }}€</span>
-                                                
-                                        @else
-                                            <span>{{ floatval(number_format($prod->price,2,'.','')) }}€</span>
-                                        @endif
-                                        </div>                                
-                                    </a>
-                                </div>
-                                <div wire:loading wire:target="products">
-                                    <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
+                                    @else
+                                        <span>{{ floatval(number_format($prod->price,2,'.','')) }}€</span>
+                                    @endif
+                                    </div>                                
+                                </a>
+                                
+                            </div>
+                            <div wire:loading wire:target="products">
+                                <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+                            </div>
+                        @endforeach
                     @endif
+                    </div>
                 </div>
                 @if(!$switch_special_filter)
                 <div class="row pagination">
@@ -157,7 +154,9 @@
                 @endif
                 @include('layouts.footer')
             </div>
+            
         </div>
+    
     </div>
     @endif
 </div>

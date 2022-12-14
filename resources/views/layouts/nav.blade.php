@@ -50,16 +50,17 @@
 		<ul>					
 			<li style="margin:auto 50px" >				
 				<a href="{{ route('list_notifications',['filter_type' => 1]) }}" title="Notificaciones">
-					<div class="position-relative div_notification">
-						<i class="fa-solid fa-bell {{\App\Models\User::find(Auth::id())->unseen_notifications}}" ></i>
-						@php
+					@php
 						$unseen = \App\Models\User::find(Auth::id())->unseen_notifications;
-						@endphp
+					@endphp
+					<div class="position-relative div_notification">
+						<i class="fa-solid fa-bell {{$unseen}}" ></i>
+						
 								
 						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger @if($unseen == 0) dnone @endif" id="notification">
-							{{-- necesitamos User en lugar de Auth para que actulice en tiempo real--}}
+							{{-- necesitamos User en lugar de Auth para que actualice en tiempo real--}}
 							@if($unseen > 0)
-								<span class="unseen_not">{{\App\Models\User::find(Auth::id())->unseen_notifications}}+</span>
+								<span class="unseen_not">{{$unseen}}+</span>
     						
 	    						<span class="visually-hidden">unread messages</span>
     						@endif
@@ -88,6 +89,7 @@
 		let unseen_not;
 		if(not)
 			unseen_not =  not.querySelector('.unseen_not');
+
 	    $.ajax({
 	    //opción1: token con headers
 	    	//headers:{'X-CSRF-TOKEN': "{{csrf_token()}}"},	    	
@@ -98,17 +100,31 @@
 	    		"_token": "{{ csrf_token() }}"
     		},
 	    	success:function(data){
+	    		console.log("data: ",data)
+	    		console.log("unseen_not: ",unseen_not)
 	    		//solo si es número actualiza
-	    		if(typeof(data) =='number'){
+	    		if(typeof(data) =='number' && !unseen_not){
+	    			console.log("es número y el unseen_not es null")
+	    			not.classList.remove('dnone');
+	    			not.innerHTML = `
+	    				<span class="unseen_not">${data}+</span>
+						<span class="visually-hidden">unread messages</span>
+	    			`;
+	    		}else if(typeof(data) =='number'){
+
+	    			console.log("es número y el unseen_not es número también")
     			//si el valor de data es distinto al valor del span notification 
-	    		//actualizamos	    			
+	    		//actualizamos
 	    			if(parseInt(unseen_not.innerHTML) != data){
 	    				
 	    			
 		    			not.classList.remove('dnone');
 			    		if(unseen_not){
+			    			console.log("no es el primero")
 		    				unseen_not.innerHTML = ` ${data}+ `;
 			    		}else{
+    			//eliminar!! nunca llega aquí
+			    			console.log("Es el primero")
 			    			not.innerHTML = `
 			    				<span class="unseen_not">${data}+</span>
 								<span class="visually-hidden">unread messages</span>
@@ -117,9 +133,11 @@
 			    	}else{
 			    		console.log("no actualiza")
 			    	}
-	    		}
+	    		}else{
+			    	console.log("no hay ninguno")
+		    	}
 	    	}
 	    });
-	},5000)
+	},20000)
 	
 </script>
