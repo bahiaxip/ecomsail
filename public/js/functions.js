@@ -339,8 +339,6 @@ if(route == 'cart'){
           loading.style.display='flex';
         })
       }
-      
-    
     set_payment();
 }
 

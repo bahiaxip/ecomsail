@@ -1,10 +1,67 @@
 <div style="position:relative;height:100vh" class="edit_user">
   @section('title','Editar usuario')
+    <div class="message_modal " >
+        <div class="message" >
+            <div>
+                <span class="success @if($typealert != 'success') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <span class="danger @if($typealert != 'danger') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </span>
+                <span class="info @if($typealert != 'info') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="warning @if($typealert != 'warning') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </span>
+                <span class="question @if($typealert != 'question') {{'dnone'}} @endif">
+                    <i class="fa-solid fa-circle-question"></i>
+                </span>
+                
+            </div>
+            <div>
+                <h2 class="title" style="display:flex;align-items:center">
+                    @if(session('message.title'))
+                        {{session('message.title')}}
+                    @endif
+                </h2>
+            </div>
+            <div>
+                <h3 class="text_message">
+                    @if(session('message.message'))
+                        {{ session('message.message') }}
+                    @endif
+                </h3>
+            </div>
+            
+            
+            <div class="buttons"></div>
+            
+        </div>
+        @if(session('message.title'))
+        <script>
+            console.log("msge");
+            let msge = document.querySelector('.message_modal');
+            setTimeout(()=>{
+                msge.style.visibility = 'hidden';
+                msge.style.opacity = 0;
+            },3000)
+            
+            /*
+            setTimeout(()=>{
+                cancelModal({'status':'{{$typealert}}'});
+            },3000)
+            */
+            //console.log("cancelModal")
+        </script>
+        @endif
+    </div>
   <!-- loading cuando actualizamos edición -->
     <div id="loading"  >
       <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>
-    <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
+    {{-- <div class="message_opacity" style="opacity:0;position:absolute;top:120px;left:50%;transform:translate(-50%,-50%);z-index:1">
         <div class="alert alert-{{$typealert}}" >            
             <h2 style="font-size:1em;text-align:center">{{session('message') }}</h2>
             @if($errors->any())
@@ -18,7 +75,7 @@
                 
             </script>
         </div>
-    </div>
+    </div> --}}
     @include('layouts.nav_user')
     <!-- loading cuando comienza la edición (al no ser modal en esta vista no es necesario) -->
     @if(!$user_id)

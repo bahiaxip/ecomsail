@@ -53,6 +53,14 @@ class EditUser extends Component
         $this->route_name = Route::currentRouteName();
     }
 
+    //método que se ejecuta después de renderizar (exceptuando la primera vez que carga la 
+    //página, en ese caso se puede usar mount()
+    public function dehydrate()
+    {
+        if(session('message.title'))
+            $this->dispatchBrowserEvent('eventModal',['data' => ['status' => $this->typealert]]);
+    }
+
     //redirección del buscador genérico
     public function go_to_search(){
         if($this->search_product)
@@ -127,9 +135,10 @@ class EditUser extends Component
                 }
             }
             $this->edit_user();
-            $this->typealert = 'success';
+            $this->set_session('success','Usuario actualizado','El usuario ha sido actualizado correctamente' );
+            /*$this->typealert = 'success';
             session()->flash('message','Usuario actualizado correctamente');
-            $this->emit('message_opacity');
+            $this->emit('message_opacity');*/
             //$this->clear2();
             /*
             $this->emit('message_opacity');
@@ -138,6 +147,17 @@ class EditUser extends Component
             */
         }
 
+    }
+
+    //establecer session temporal
+    public function set_session($typealert,$title,$message){
+        $this->typealert=$typealert;
+        $data = [
+            'message' => $message,
+            'title' => $title,
+            'status' => $typealert
+        ];
+        session()->flash('message',$data);
     }
 
     //limpiar datos de formulario
