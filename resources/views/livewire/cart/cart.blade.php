@@ -136,10 +136,21 @@
                                     && date('Y-m-d') >= $oi->product->infoprice->init_discount && date('Y-m-d') <= $oi->product->infoprice->end_discount)
                                         <div>
                                         <span>
-                                            {{ floatval(number_format((floatval($oi->total)*((100-$oi->discount)/100)),2,'.','')) }}€
+                                            {{ 
+                                                (get_position_coin() == 1) ?
+                                                get_coin().floatval(number_format((floatval($oi->total)*((100-$oi->discount)/100)),2,'.',''))
+                                                :
+                                                floatval(number_format((floatval($oi->total)*((100-$oi->discount)/100)),2,'.','')).get_coin()
+                                            }}
                                         </span>
                                         &nbsp;&nbsp;
-                                        <span class="through" >{{ floatval(number_format($oi->total,2,'.','')) }}€
+                                        <span class="through" >
+                                            {{ 
+                                                (get_position_coin() == 1) ?
+                                                get_coin().floatval(number_format($oi->total,2,'.',''))
+                                                :
+                                                floatval(number_format($oi->total,2,'.','')).get_coin()
+                                            }}
                                         </span>
                                         </div>
                                         <div class="discount">
@@ -154,7 +165,12 @@
                                         {{--
                                         number_format(floatval(number_format($oi->total,2,'.','')),0,",",".")
                                         --}} {{--€--}}
-                                        {{floatval(number_format($oi->total,2,'.',''))}}€
+                                        {{
+                                            (get_position_coin() == 1) ?
+                                            get_coin().floatval(number_format($oi->total,2,'.',''))
+                                            :
+                                            floatval(number_format($oi->total,2,'.','')).get_coin()
+                                        }}
                                     </span>
                                     @endif
                                         
@@ -204,7 +220,14 @@
             <div class="col-md-6 col-xl-3 shadow section_finish">
                 <div class="resum">
                     <span class="left">{{$sum}} @if($sum==1)Producto @else Productos @endif</span>
-                    <span class="right">{{floatval(number_format($total,2,'.',''))}} €</span>
+                    <span class="right">
+                        {{
+                            (get_position_coin() == 1) ?
+                            get_coin().floatval(number_format($total,2,'.',''))
+                            :
+                            floatval(number_format($total,2,'.','')).get_coin()
+                        }}
+                    </span>
                     
                 </div>
                 <div class="resum">
@@ -320,9 +343,7 @@
         </div>
     </div>
     @endif
-</div>
-
-<script>
+    <script>
     //eliminar producto del carrito
     function deleteId(data){
         cancelModal(data);
@@ -331,4 +352,7 @@
         @this.delete(data.id);
     }
 </script>
+</div>
+
+
 

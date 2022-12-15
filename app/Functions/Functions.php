@@ -95,10 +95,14 @@ function update_notifications($data = null){
 	    }
 	    
 	}
-    
-        
+}
 
-    
+function get_coin(){
+	return config('ecomsail.coin');
+}
+
+function get_position_coin(){
+	return config('ecomsail.position_coin');
 }
 //get_notifications();
 //dd("anda");

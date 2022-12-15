@@ -22,6 +22,5 @@ return [
 'zero_tax' => '0',
 'main_slider' => 'on',
 'time_interval' => '5',
-'autoslide' => 'on',
 ]
 ?>

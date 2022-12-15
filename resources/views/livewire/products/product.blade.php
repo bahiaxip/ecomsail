@@ -151,17 +151,35 @@
                         
                         @endphp                    
                         {{-- floatval(number_format(($net*((100-$prod->infoprice->discount)/100)),2,'.','')) --}}
-                        {{floatval(number_format($final_discounted,2,'.',''))}}€
+                        {{
+                            (get_position_coin() == 1) ?
+                                get_coin().floatval(number_format($final_discounted,2,'.',''))
+                            :
+                                floatval(number_format($final_discounted,2,'.','')).get_coin()
+                        }}
+
                         @if($prod->stock == 0)
                         {{'Sin stock'}}
                         @endif
                     </span>
                     <span style="text-decoration:line-through;color:#696969">
-                        {{$price_tmp}} €
+                        {{
+                            (get_position_coin() == 1) ?
+                            get_coin().$price_tmp
+                            :
+                            $price_tmp.get_coin()
+                        }}
+                        
                     </span>
                     @else
                     <span>                        
-                        {{ floatval(number_format($price_tmp,2,',',''))}} €
+                        {{ 
+                            (get_position_coin() == 1) ?    
+                            get_coin().floatval(number_format($price_tmp,2,',',''))
+                            :
+                            floatval(number_format($price_tmp,2,',','')).get_coin()
+
+                        }}
                     </span>
                     @endif
                     <p>(Impuestos incluidos)</p>
