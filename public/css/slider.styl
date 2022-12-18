@@ -11,11 +11,40 @@ color6 = #494949
 color7 = #E3E3E3
 color8 = #696969
 
+
+:root
+	--backgroundslider #f6f6f6
+	--color rgba(0,0,0,.7)
+	--minheight 400px
+
+
+full_slider = null
+/* para full_slider custom_slider = true y slider_auto: eliminar position:absolute y width a 100%*/
+custom_slider = true
+/*full_slider = true*/
+$midisplay = null
+if($autoslider)
+	$midisplay = flex
+else
+	$midisplay = none
+if(full_slider)
+	auto_slider = false
+w_sliderauto = 50%
+if(full_slider)
+	w_sliderauto = 100%
+if(!full_slider && !auto_slider)
+	custom_slider = false
+
+backslider = var(--backgroundslider)
+micolor = var(--color)
+slider_height = var(--minheight)
+/*if(!custom_slider)
+	slider_height = 400px*/
 .mdslider
 	display flex
 	flex-wrap wrap
 	margin-top 24px
-	min-height 500px
+	min-height slider_height
 	max-height 550px
 	overflow hidden
 	position relative
@@ -30,7 +59,7 @@ color8 = #696969
 		justify-content center
 		height 100%
 		width 100% !important
-		min-height 500px
+		min-height slider_height
 		transition .5s all ease-in-out
 		position absolute
 		.col-md-7
@@ -76,6 +105,103 @@ color8 = #696969
 		&:nth-child(4)
 			left 300%
 			*/
+		.div_img
+			max-height 500px
+			height 100%
+			
+			width 100%
+		.img
+			height 100%
+			position relative
+			width 100%
+			.text
+				background-color rgba(0,0,0,.7)
+				color #FFF
+				display none
+				min-height 100px
+				position absolute
+				bottom 0
+				width 100%
+				h2
+					font-size 30px
+					margin 10px
+				p
+					font-size 20px
+					margin 10px
+		/* full_slider (pantalla completa) y slider_auto (márgenes automáticos)*/
+		.box_slider.full_slider
+			width 100%
+		.box_slider.auto
+			width 50%
+		.box_slider
+			background backslider
+			height auto
+			margin 0
+			padding 0
+			/* para double_panel slider_auto */
+			.slider.slider_auto
+				position relative
+				width 50%
+				.div_text
+					display flex
+					justify-content center
+			.slider
+				margin auto
+				max-height slider_height				
+				width 100%
+				.div_text
+					display flex
+					justify-content center
+					width 100%
+					.text
+						background-color micolor
+						border-top-left-radius 6px
+						border-top-right-radius 6px
+						color #FFF
+						display block
+						min-height 100px
+						margin auto
+						position absolute
+						bottom 0
+						width 70%
+						h2
+							font-size 30px
+							margin 10px
+						p
+							font-size 20px
+							margin 10px
+			/*.double_panel
+				background backslider
+				if(full_slider)
+					height 100%
+					margin 0
+					padding 0
+					width 100%
+				.slider_auto
+					margin auto
+					max-height slider_height
+					if(!full_slider)
+						position relative
+					width w_sliderauto
+					.div_text
+						if(auto_slider)
+							display flex
+							justify-content center
+						width 100%
+						.text
+							background-color micolor
+							color #FFF
+							
+							height 100px
+							position absolute
+							bottom 0
+							width 100%
+							h2
+								font-size 30px
+								margin 10px
+							p
+								font-size 20px
+								margin 10px*/
 	ul.navigation
 		display block
 		margin 0px
@@ -122,37 +248,190 @@ color8 = #696969
 						margin-top 2px
 @media only screen and (max-width 1200px)
 	.mdslider
-		min-height 400px
+		min-height slider_height
 		.md-slider-item
-			min-height 400px
+			min-height slider_height
 			.content 
 				.cinside
 					h2
 						font-size 28px
 					p
 						font-size 18px
+			
 			/*margin-top 100px*/
-			img
-				display flex
-				margin auto
-				max-height 500px
+			.box_slider
+				.slider.slider_auto
+					img
+						display flex
+						margin auto
+				.full_slider
+					max-height slider_height
 
-@media only screen and (max-width 768px)
+@media only screen and (max-width 991px)
 	.mdslider
 		.md-slider-item
+			.row.double_panel
+				height 100%
+				max-height 500px
+				.dp_img
+					height 100%
+					
+					.img
+						height 100%
+						img
+							height 100%
+					
+				
 			margin 0
 			.slider_left
 				display none
+			.img
+				.text
+					
+					display block
+			.box_slider
+				.slider
+					.div_text
+						.text
+							width auto
+			/*slider auto */		
+			.box_slider
+				.slider.slider_auto
+					width 70%
+					position relative
+			/* full slider */
+			.box_slider.full_slider
+				.slider
+					.div_text
+						.text
+							width 100%
+			/* double panel */
+			.row.double_panel
+				
+				.div_text .text
+					width 100%
+			/*
+			.full_slider .slider_auto
+				if(auto_slider)
+					position inherit
+				if(!full_slider)
+					width 80%
+				.div_text 
+					.text
+						width auto
+			*/
 
-@media only screen and (max-width 500px)
+@media only screen and (max-width 850px)
+	.mdslider .md-slider-item
+		.img .text
+			bottom 0
+		.box_slider
+			.slider.slider_auto
+				width 70%
+/*if(!custom_slider)
+	@media only screen and (max-width 992px)
+		.mdslider
+			.md-slider-item
+				margin 0
+				.slider_left
+					display none
+				.img
+					.text
+						bottom 10%
+						display block
+				.full_slider .slider_auto
+					if(auto_slider)
+						position inherit
+					if(!full_slider)
+						width 80%
+					.div_text 
+						.text
+							width auto
+	@media only screen and (max-width 850px)
+		.mdslider .md-slider-item
+			.img .text
+				bottom 0
+			.full_slider .slider_auto
+				width 100%*/
+@media only screen and (max-width 700px)
 	.mdslider
 		margin-top 0px
 		min-height 300px
 		.md-slider-item
 			min-height 300px
+			
+	
+	.mdslider .md-slider-item
+		height 100%
+		.box_slider
+			width 100%
+			.slider.slider_auto
+				height 100%
+				img
+					height 100%
+					width 100%
+			/*válido para full slider y auto slider */
+			.slider 
+				.div_text
+					.text
+						min-height 80px
+						h2
+							font-size 24px
+						p
+							font-size 16px
+		.double_panel .dp_img
+			.div_text .text
+				min-height 80px
+				h2
+					font-size 24px
+				p
+					font-size 16px
+						
+@media only screen and (max-width 500px)
+	.mdslider .md-slider-item
+		.row.double_panel
+			height auto
+			.dp_img
+				.img
+					img
+						height auto
+				
+					.div_text
+						position relative	
+		.box_slider .slider.slider_auto,.box_slider.full_slider
+			position relative
 	.div_products_list
 		margin-top 0px
+		
+@media only screen and (max-width 400px)
+	.mdslider .md-slider-item
+		.double_panel .dp_img,.box_slider .slider
+			.div_text .text				
+				h2
+					font-size 20px
+				p
+					font-size 14px
+/*@media only screen and (max-width 700px)
+	if(!custom_slider)
+		.mdslider
+			margin-top 0px
+			min-height 300px
+			.md-slider-item
+				min-height 300px
+	else
+		if(!full_slider)
+			.mdslider .md-slider-item
+				height auto
+				.full_slider .slider_auto .text
+					height 85px
+					h2
+						font-size 24px
+					p
+						font-size 16px
+@media only screen and (max-width 500px)
 	
+	.div_products_list
+		margin-top 0px*/
 
 				
 				

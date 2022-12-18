@@ -54,7 +54,10 @@
       display: none !important;
    }
    
+   /*:root{
+        --blue : #FFFFFF;
 
+   }*/
     </style>
 </head>
 <body>
@@ -157,9 +160,37 @@
 
     //Inicio de librería AOS
     AOS.init();
-    console.log("hola")
 
+/* configuración de carousel en CSS */    
+    const r = document.querySelector(':root');
+    //obtenemos los datos del slider personalizado del archivo de configuración
+    //establecemos valores CSS a Stylus    
+    let backPanel = '{{config('ecomsail.background_panel')}}';
+    let customHeight = '{{config('ecomsail.slider_height')}}';
+    if(backPanel){        
+        r.style.setProperty('--backgroundslider',backPanel);
+    }
+    if(customHeight){
+        r.style.setProperty('--minheight',customHeight+'px');    
+    }
     
+    
+    
+    /*
+    let div_img =  document.querySelector('.slider_auto img');
+    let md_slider_item =  document.querySelector('.md-slider-item');
+    let text =  document.querySelector('.text');
+    window.addEventListener('resize',()=>{
+        console.log("height_div_img: ",div_img.clientHeight);
+        console.log("height_md_slider_item: ",md_slider_item.clientHeight);
+        if(md_slider_item.clientHeight < div_img.clientHeight){
+            let resta = (div_img.clientHeight - md_slider_item.clientHeight)/2;
+            if(window.innerWidth < 993){
+                //text.style.bottom = resta+'px';    
+            }
+        }
+    })
+    */
     </script>
 </body>
 

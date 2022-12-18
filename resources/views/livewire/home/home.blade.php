@@ -35,13 +35,14 @@
         x-show="show2"
         x-transition:enter.duration.1000ms
         >
+        <div wire:ignore>
+                            @include('livewire.home.slider_home')    
+                        </div>
             <div class="div_box_products">
                 <div  class="box_products" >
                     <div>
                         @if($main_slider == 'on')
-                        <div wire:ignore>
-                            @include('livewire.home.slider_home')    
-                        </div>
+                        
                         @endif
                         <div>
                             

@@ -372,6 +372,7 @@ document.addEventListener('readystatechange',() => {
 
 //document.addEventListener('DOMContentLoaded',() => {
         if(document.readyState == "complete"){
+            
             //tooltip
             Livewire.onLoad(() => {
                 $('[data-toggle="tooltip"]').tooltip()

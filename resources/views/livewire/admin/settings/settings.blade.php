@@ -186,7 +186,7 @@
 	                        		{{Form::text('coin',Config::get('ecomsail.coin'),['class' => 'form-control'])}}	
 	                    		</div>
 	                    	</div>
-	                    	<div class="row mtop16">
+	                    	<div class="row mtop26">
 	                    		<div class="col-12">
 	                    			{{Form::label('position_coin','Posición de la moneda')}}
 	                		    	{{ Form::select('position_coin',[0=>'Derecha',1=>'Izquierda'],Config::get('ecomsail.position_coin'),['class' => 'form-select'])}}
@@ -201,7 +201,7 @@
 		                            </div>
 	                    		</div>                    		
 	                    	</div>--}}
-	                    	<div class="row mtop26">
+	                    	<div class="row mtop20">
 	                    		<div class="col-12">
 	                    	
 		                            {{Form::label('button_adding_product','Mostrar link al añadir producto')}}
@@ -211,7 +211,7 @@
 		                        </div>
 	                    	</div>
 	                    	
-	                    	<div class="row mtop16">
+	                    	<div class="row mtop20">
 	                    		<div class="col-12">
 	                    			{{Form::label('items_per_page','Productos por página')}}
 	                        		{{Form::number('items_per_page',Config::get('ecomsail.items_per_page'),['class' => 'form-control'])}}	
@@ -230,7 +230,130 @@
 	                    </div>
 	                </div>
 	    		</div>
+	    		<div class="panel_settings">
+	    			<div class="card">
+	                    <div class="card-header">
+	                    	<i class="fa-solid fa-images"></i>
+	                        CAROUSEL
+	                    </div>
+	                    <div class="card-body">
+	                    	{{--
+	                    	<div class="row">
+	                    		<div class="col-12">
+		                    		{{Form::label('payment_target','Pago con tarjeta')}}
+		                        	<div class="form-check form-switch">
+		                                <input name="payment_target" class="form-check-input mtop10" type="checkbox" role="switch" id="payment_target" @if(Config::get('ecomsail.payment_target') == 'on') checked @endif>
+		                            </div>
+		                    	</div>
+	                    	</div>
+	                    	--}}
+	                    	<div class="row">
+	                    		<div class="col-md-6">
+	                    			{{Form::label('main_slider','Slider principal')}}
+		                		    <div class="form-check form-switch">
+		                                <input name="main_slider" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.main_slider') == 'on') checked @endif>
+		                            </div>	
+	                    		</div>
+	                    		<div class="col-md-6">
+					                {{Form::label('autoslide','Autoslide')}}
+					                <div class="form-check form-switch">
+					                    <input name="autoslide" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" @if(Config::get('ecomsail.autoslide') == 'on') checked @endif>
+					                </div>  
+					            </div>
+	                    	</div>
+	                    	<div class="row mtop26">
+					            <div class="col-md-12">
+					            	{{Form::label('time_interval','Intervalo')}}
+					                {{Form::number('time_interval',Config::get('ecomsail.time_interval'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+					            </div>
+					            
+					        </div>
+					        <div class="row mtop20">
+					            <div class="col-md-6">
+	                    			{{Form::label('main_slider','Pantalla completa')}}
+		                		    <div class="form-check form-switch">
+		                                <input name="full_slider" class="form-check-input mtop10" type="checkbox" role="switch" id="full_slider" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.full_slider') == 'on') checked @endif>
+		                            </div>
+	                            </div>
+		                    	<div class="col-md-6">
+		                    		{{Form::label('double_panel','Panel doble')}}
+			                		<div class="form-check form-switch">
+		                                <input name="double_panel" class="form-check-input mtop10" type="checkbox" role="switch" id="double_panel" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.double_panel') == 'on') checked @endif>
+		                            </div>
+	                    		</div>
+					        </div>
 
+					        <div class="row mtop20">
+					            <div class="col-md-6">
+					            	{{Form::label('slider_height','Altura')}}
+					                {{Form::number('slider_height',Config::get('ecomsail.slider_height'),['class' => 'form-control','min' => 200, 'step' => 50,'max' => 500,'onkeydown' =>'return false'])}}
+					            </div>
+					            <div class="col-md-6">
+					            	{{Form::label('background_panel','Color de fondo')}}
+					                {{Form::text('background_panel',Config::get('ecomsail.background_panel'),['class' => 'form-control'])}}
+					            </div>
+					        </div>
+					        
+					            
+				            <div class="row mtop16">
+				            	<div class="col-md-6">
+	                    			{{Form::label('main_title','Título principal')}}
+		                		    <div class="form-check form-switch">
+		                                <input name="main_title" class="form-check-input mtop10" type="checkbox" role="switch" id="main_title" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.main_title') == 'on') checked @endif>
+		                            </div>
+	                            </div>
+		                    	<div class="col-md-6">
+		                    		{{Form::label('aditional_title','Título adicional')}}
+			                		<div class="form-check form-switch">
+		                                <input name="aditional_title" class="form-check-input mtop10" type="checkbox" role="switch" id="aditional_title" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.aditional_title') == 'on') checked @endif>
+		                            </div>
+	                    		</div>
+					        </div>
+	                    </div>
+	                </div>
+	    		</div>
+	    	</div>
+
+	    	<div class="admin_panels" >
+	    		<div class="panel_settings">
+	    			<div class="card">
+	                    <div class="card-header">
+	                    	<i class="fa-solid fa-coins"></i>
+	                        TASAS
+	                    </div>
+	                    <div class="card-body">
+	                    	{{--
+	                    	<div class="row">
+	                    		<div class="col-12">
+		                    		{{Form::label('payment_target','Pago con tarjeta')}}
+		                        	<div class="form-check form-switch">
+		                                <input name="payment_target" class="form-check-input mtop10" type="checkbox" role="switch" id="payment_target" @if(Config::get('ecomsail.payment_target') == 'on') checked @endif>
+		                            </div>
+		                    	</div>
+	                    	</div>
+	                    	--}}
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('standard_tax','Tasa estándar')}}
+	                    			{{Form::number('standard_tax',Config::get('ecomsail.standard_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+	                    		</div>
+	                    	</div>
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('reduce_tax','Tasa reducida')}}
+	                    			{{Form::number('reduce_tax',Config::get('ecomsail.reduce_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+	                    		</div>
+	                    	</div>
+	                    	<div class="row mtop16">
+	                    		<div class="col-12">
+	                    			{{Form::label('zero_tax','Tasa cero')}}
+	                    			{{Form::number('zero_tax',Config::get('ecomsail.zero_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
+	                    		</div>
+	                    	</div>
+
+	                    </div>
+	                </div>
+	    		</div>
 	    		<div class="panel_settings" >
 	    			<div class="card">
 	                    <div class="card-header">
@@ -289,91 +412,6 @@
 	    		</div>
 	    		
 	    	</div>
-	    	<div class="admin_panels" >
-	    		<div class="panel_settings">
-	    			<div class="card">
-	                    <div class="card-header">
-	                    	<i class="fa-solid fa-coins"></i>
-	                        TASAS
-	                    </div>
-	                    <div class="card-body">
-	                    	{{--
-	                    	<div class="row">
-	                    		<div class="col-12">
-		                    		{{Form::label('payment_target','Pago con tarjeta')}}
-		                        	<div class="form-check form-switch">
-		                                <input name="payment_target" class="form-check-input mtop10" type="checkbox" role="switch" id="payment_target" @if(Config::get('ecomsail.payment_target') == 'on') checked @endif>
-		                            </div>
-		                    	</div>
-	                    	</div>
-	                    	--}}
-	                    	<div class="row mtop16">
-	                    		<div class="col-12">
-	                    			{{Form::label('standard_tax','Tasa estándar')}}
-	                    			{{Form::number('standard_tax',Config::get('ecomsail.standard_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
-	                    		</div>
-	                    	</div>
-	                    	<div class="row mtop16">
-	                    		<div class="col-12">
-	                    			{{Form::label('reduce_tax','Tasa reducida')}}
-	                    			{{Form::number('reduce_tax',Config::get('ecomsail.reduce_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
-	                    		</div>
-	                    	</div>
-	                    	<div class="row mtop16">
-	                    		<div class="col-12">
-	                    			{{Form::label('zero_tax','Tasa cero')}}
-	                    			{{Form::number('zero_tax',Config::get('ecomsail.zero_tax'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
-	                    		</div>
-	                    	</div>
-
-	                    </div>
-	                </div>
-	    		</div>
-	    		<div class="panel_settings">
-	    			<div class="card">
-	                    <div class="card-header">
-	                    	<i class="fa-solid fa-images"></i>
-	                        CAROUSEL
-	                    </div>
-	                    <div class="card-body">
-	                    	{{--
-	                    	<div class="row">
-	                    		<div class="col-12">
-		                    		{{Form::label('payment_target','Pago con tarjeta')}}
-		                        	<div class="form-check form-switch">
-		                                <input name="payment_target" class="form-check-input mtop10" type="checkbox" role="switch" id="payment_target" @if(Config::get('ecomsail.payment_target') == 'on') checked @endif>
-		                            </div>
-		                    	</div>
-	                    	</div>
-	                    	--}}
-	                    	<div class="row">
-	                    		<div class="col-md-12">
-	                    			{{Form::label('main_slider','Slider principal')}}
-		                		    <div class="form-check form-switch">
-		                                <input name="main_slider" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" style="width:2.4em;padding:7px" @if(Config::get('ecomsail.main_slider') == 'on') checked @endif>
-		                            </div>	
-	                    		</div>
-	                    	</div>
-	                    	<div class="row mtop26">
-					            <div class="col-md-12">
-					            	{{Form::label('time_interval','Intervalo')}}
-					                {{Form::number('time_interval',Config::get('ecomsail.time_interval'),['class' => 'form-control','min' => 0, 'step' => 1,'onkeydown' =>'return false'])}}
-					            </div>
-					            
-					        </div>
-					        <div class="row mtop20">
-					            <div class="col-md-12">
-					                {{Form::label('autoslide','Autoslide')}}
-					                <div class="form-check form-switch">
-					                    <input name="autoslide" class="form-check-input mtop10" type="checkbox" role="switch" id="flexSwitchCheckDefault" @if(Config::get('ecomsail.autoslide') == 'on') checked @endif>
-					                </div>  
-					            </div>
-					        </div>
-
-	                    </div>
-	                </div>
-	    		</div>
-	    	</div>
 	    	@endif
 	    	<div class="buttons mtop16">
 	    		<button type="submit" class="btn btn_pry">
@@ -382,5 +420,27 @@
 	    	</div>
     	</form>
     </div>
+    <script>
+    	let full_slider = document.querySelector('.admin_panels #full_slider');
+    	let double_panel = document.querySelector('.admin_panels #double_panel');
+    	full_slider.addEventListener('change',()=>{
+    		console.log("cambio: ",full_slider.checked)
+    		setUniqueSlider('full_slider');
+    	})
+    	
+    	double_panel.addEventListener('change',()=>{
+    		console.log("cambio: ",full_slider.checked)
+    		setUniqueSlider('double_panel');
+    	})
+    	function setUniqueSlider(inputRadio){
+    		if(inputRadio == 'double_panel' && full_slider.checked == true){
+    			full_slider.checked = false;
+    		}else if(inputRadio == 'full_slider' && double_panel.checked == true){
+    			double_panel.checked = false;
+    		}
+    		
 
+    	}
+
+    </script>
 </div>
