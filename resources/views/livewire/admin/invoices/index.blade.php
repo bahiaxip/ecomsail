@@ -157,8 +157,10 @@
                             ID
                         </a>
                     </td>
-                    <td>                        
-                        Nombre
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('name')">
+                            Nombre
+                        </a>
                     </td>
                     <td>                        
                         Neto                        

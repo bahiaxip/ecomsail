@@ -48,7 +48,7 @@
 -->
 	<div class=" nav_lat nav_right">
 		<ul>					
-			<li style="margin:auto 50px" >				
+			<li class="notifications" >				
 				<a href="{{ route('list_notifications',['filter_type' => 1]) }}" title="Notificaciones">
 					@php
 						$unseen = \App\Models\User::find(Auth::id())->unseen_notifications;
@@ -70,7 +70,7 @@
 	  				</div>
 				</a>
 			</li>
-			<li>				
+			<li class="store">				
 				<a href="{{ route('home') }}">
 					<i class="fa-solid fa-eye"></i> Ver Tienda
 				</a>

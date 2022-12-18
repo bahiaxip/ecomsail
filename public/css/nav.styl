@@ -33,7 +33,6 @@ rgba2 = rgba(0,178,146,1)
 	height 30px
 	justify-content space-between
 	margin auto
-	
 	width 100%
 	.nav_lat
 		display flex
@@ -53,6 +52,11 @@ rgba2 = rgba(0,178,146,1)
 		ul
 			display flex
 			justify-content flex-end
+			li.notifications
+				margin auto 50px
+			li.store
+				margin auto
+				
 		/*
 		@media screen and (max-width: 768px)
 			width 100%
@@ -91,4 +95,7 @@ rgba2 = rgba(0,178,146,1)
 					//background-color orange
 					color #FFF
 
-/*@media screen and (max-width:768px)*/
+@media screen and (max-width:400px)
+	.navtop .nav_right
+		ul li.notifications
+			margin auto 10px

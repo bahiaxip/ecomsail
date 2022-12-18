@@ -45,7 +45,7 @@
             </div>
         </div>
       <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-sm  btn_sail btn_sry" data-bs-dismiss="modal" wire:click="clearInvoiceId()">Cancelar</button>
+          <button type="button" class="btn btn-sm  btn_sail btn_sry" data-bs-dismiss="modal" wire:click="clearOrderId()">Cancelar</button>
           
           <button type="button" class="btn btn-sm btn_sail btn_pry" data-dismiss="modal" wire:click="sendEmail" id="btn_sendemail_cat">Enviar</button>
         
