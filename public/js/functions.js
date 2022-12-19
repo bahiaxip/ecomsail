@@ -2074,6 +2074,32 @@ function delete_notifications(){
         unseen_not.remove();
 }
 
+function slideSidebar(){
+
+    let sectionL = document.querySelector('.sectionL');
+    let list = sectionL.querySelector('.options').querySelectorAll('li a span');
+    if(sectionL.classList.contains('expand')){
+        sectionL.classList.remove('expand')
+        list.forEach((li)=>{
+            li.classList.remove('expand')
+        })
+    }else{
+        sectionL.classList.add('expand')    
+        list.forEach((li)=>{
+            li.classList.add('expand')
+        })
+    }
+    //sidebar.style.minWidth = '120px';
+    
+        
+
+    /*let list = sidebar.querySelector('.options').querySelectorAll('li');
+    list.forEach((li)=>{
+        li.classList.remove('d-none')
+    })*/
+    
+}
+
 
 
 

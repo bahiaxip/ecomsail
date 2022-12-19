@@ -11,7 +11,7 @@
 	</div>
 	-->
 	
-	<div class="logo">
+	<div class="logo" onclick="slideSidebar()">
 		{{--<img src="{{ asset('images/favicon_ecomsail.svg') }}" alt="" style="padding:5px">--}}
 		<img src="{{ asset('images/logo/favicon_ecomsail.svg') }}" alt="" style="padding:5px">
 	</div>
@@ -26,7 +26,7 @@
 			<li>
 				<a href="{{ route('show_analysis') }}">
 					<i class="fa-solid fa-chart-line"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="" >
 						Análisis
 					</span>
 				</a>
@@ -36,7 +36,7 @@
 				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_products',['filter_type' => 1]) }}">
-					<i class="fa-solid fa-box"></i> <span class="d-none d-lg-inline-flex">Productos</span>
+					<i class="fa-solid fa-box"></i> <span class="">Productos</span>
 				</a>
 			</li>
 			@endif
@@ -45,7 +45,7 @@
 			<li>
 				<a href="{{ route('list_orders',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-bag-shopping"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Pedidos
 					</span>
 				</a>
@@ -56,7 +56,7 @@
 			<li>
 				<a href="{{ route('list_invoices',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-file-invoice"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Facturas
 					</span>
 				</a>
@@ -69,7 +69,7 @@
 					<!--<i class="fa-solid fa-tags"></i> Categorías-->
 					<div class="icon icon_cat"></div>
 					<!--<img src="{{url('ics/grid_cat_D3D3D3.svg')}}" alt="" width="16" height="20" style="margin-right:2px;box-sizing:border-box"> -->
-					<span style="width:100%" class="d-none d-lg-inline-flex">Categorías</span>
+					<span style="width:100%" class="">Categorías</span>
 				</a>
 			</li>
 			@endif
@@ -77,7 +77,7 @@
 				|| Auth::user()->roles->special == 'all')
 			<li>
 				<a href="{{ route('list_attributes',['filter_type' => 1]) }}" style="display:inline-flex;justify-content:start;">
-					<div class="icon icon_value"></div> <span class="d-none d-lg-inline-flex">
+					<div class="icon icon_value"></div> <span class="">
 						Atributos
 					</span>
 				</a>
@@ -88,7 +88,7 @@
 			<li>
 				<a href="{{ route('list_users',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-users"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Usuarios
 					</span>
 				</a>
@@ -99,7 +99,7 @@
 			<li>
 				<a href="{{ route('list_locations',['filter_type' => 1]) }}">
 					<i class="fa-solid fa-location-dot"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Ubicaciones
 					</span>
 				</a>
@@ -110,7 +110,7 @@
 			<li>
 				<a href="{{route('list_carousel',['filter_type' => 1])}}">
 					<i class="fa-solid fa-images"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Carousel
 					</span>
 				</a>
@@ -121,7 +121,7 @@
 			<li>
 				<a href="{{route('list_permissions',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield"></i>
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Permisos
 					</span>
 				</a>
@@ -132,7 +132,7 @@
 			<li>
 				<a href="{{route('list_roles',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield-halved"></i>
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Roles
 					</span>
 				</a>
@@ -142,7 +142,7 @@
 			<li>
 				<a href="{{route('list_notifications',['filter_type' => 1])}}">
 					<i class="fa-solid fa-shield-halved"></i>
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Notificaciones
 					</span>
 				</a>
@@ -153,7 +153,7 @@
 			<li>
 				<a href="{{route('list_settings')}}">
 					<i class="fa-solid fa-gear"></i> 
-					<span class="d-none d-lg-inline-flex">
+					<span class="">
 						Ajustes
 					</span>
 				</a>

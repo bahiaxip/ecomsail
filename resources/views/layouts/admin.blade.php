@@ -26,6 +26,7 @@
     </div>
     <div class="content">
     <div class="sectionL">
+        
         @include('layouts.sidebar')
     </div>
     <div class="sectionR">
