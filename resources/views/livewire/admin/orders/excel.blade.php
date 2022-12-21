@@ -53,7 +53,7 @@
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px">
                                             @if($order->selected_address != 0)
-                                            {{ $order->get_address->name}} {{$order->get_address->lastname}}
+                                            {{ $order->get_history_address->name}} {{$order->get_history_address->lastname}}
                                             @else
                                             {{ $order->selected_address }}
                                             @endif

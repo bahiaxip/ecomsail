@@ -116,19 +116,14 @@
                             Nombre    
                         </a>
                     </td>
-                    <td>
-                        <a href="#" wire:click="setColAndOrder('name')">
-                            Slug    
-                        </a>
+                    <td>                        
+                        Slug
                     </td>
                     
                     <td class="max d-none d-md-table-cell">
-                        {{--
                         <a href="#" wire:click="setColAndOrder('description')">
                             Descripción
                         </a>
-                        --}}
-                        Descripción
                     </td>
                     <td width="140">Acciones</td>
                 </tr>

@@ -132,6 +132,8 @@
                             </a>
                         </td>
                         <td>
+                            <!-- nombre de la factura y dirección, no tiene porque ser
+                             el usuario iniciado-->
                             <a href="#" wire:click="setColAndOrder('selected_address')">
                                 Cliente
                             </a>
@@ -152,7 +154,9 @@
                             Estado
                         </td>
                         <td>
-                            Fecha
+                            <a href="#" wire:click="setColAndOrder('created_at')">
+                                Fecha
+                            </a>
                         </td>
                         <td>
                             Acciones

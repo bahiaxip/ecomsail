@@ -37,52 +37,6 @@ class Permission extends Component
         $this->order_type = 'asc';
         $this->username = Auth::user()->name;
     }
-
-    public function set_type_query($export=false){
-        return $this->set_filter_query($this->filter_type,$export);
-    }
-
-    //filtrado de categorías (Borrador/Público/Reciclaje/Todos), filtrado de 
-    //búsqueda y filtrado de export
-    public function set_filter_query($filter_type,$export=false){
-        $permission='';
-        $search_data = '%'.$this->search_data.'%';
-        
-        $col_order='id';
-        //si $this->selectedCol no es null establecemos la columna seleccionada 
-        if($this->selectedCol)
-            $col_order=$this->selectedCol;
-        //tipo de ordenamiento        
-        $order = $this->order_type;
-
-        //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
-        switch($filter_type):
-            case '0':
-            case '1':
-                $init_query = ($this->search_data) ?
-                    Perm::where('name','LIKE',$search_data)->where('status',$this->filter_type)
-                    :
-                    Perm::where('status',$filter_type);
-                break;
-            case '2':
-                $init_query = ($this->search_data) ?
-                    Perm::onlyTrashed()->where('name','LIKE',$search_data)
-                    :
-                    Perm::onlyTrashed()->orderBy($col_order,$order);
-                break;
-            case '3':
-                $init_query = ($this->search_data) ?
-                    Perm::where('name','LIKE',$search_data)
-                    :
-                    Perm::orderBy($col_order,$order);
-                break;
-        endswitch;
-
-        $permission = $init_query->paginate($this->limit_page);
-
-        return $permission;
-    }
-
     //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
     public function setColAndOrder($nameCol=null){
         //posibles columnas
@@ -103,6 +57,66 @@ class Permission extends Component
         $this->selectedCol = $nameCol;
         $this->order_type = $order;
     }
+
+    public function set_type_query($export=false){
+        return $this->set_filter_query($this->filter_type,$export);
+    }
+
+    //filtrado de categorías (Borrador/Público/Reciclaje/Todos), filtrado de 
+    //búsqueda y filtrado de export
+    public function set_filter_query($filter_type,$export=false){
+        $permission='';
+        $search_data = '%'.$this->search_data.'%';
+        
+        $col_order='id';
+        //si $this->selectedCol no es null establecemos la columna seleccionada 
+        if($this->selectedCol)
+            $col_order=$this->selectedCol;
+        //tipo de ordenamiento        
+        $order = $this->order_type;
+
+        //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
+        $params = [
+            ['status',$filter_type]
+        ];
+        switch($filter_type):
+            case '0':
+            case '1':
+                $init_query = ($this->search_data) ?
+                    Perm::where([
+                        ['name','LIKE',$search_data],
+                        $params[0]
+                    ])
+                    ->orWhere([
+                        ['description','LIKE',$search_data],
+                        $params[0]
+                    ])
+                    :
+                    Perm::where('status',$filter_type)
+                    ->orderBy($col_order,$order);
+                break;
+            case '2':
+                $init_query = ($this->search_data) ?
+                    Perm::where('name','LIKE',$search_data)->onlyTrashed()
+                        ->orWhere('description','LIKE',$search_data)->onlyTrashed()
+                    :
+                    Perm::onlyTrashed()->orderBy($col_order,$order);
+                break;
+            case '3':
+                $init_query = ($this->search_data) ?
+                    Perm::where('name','LIKE',$search_data)
+                        ->orWhere('description','LIKE',$search_data)
+                    :
+                    Perm::orderBy($col_order,$order);
+                break;
+        endswitch;
+
+        $permission = $init_query->paginate($this->limit_page);
+
+        return $permission;
+    }
+
+    
 
     public function store(){
 
@@ -134,6 +148,7 @@ class Permission extends Component
         $permission = Perm::find($id);
         if($permission){
             $this->permission_id = $permission->id;
+            $this->status = $permission->status;
             $this->name = $permission->name;
             $this->slug = $permission->slug;
             $this->box_permission = $permission->box_permission_id;

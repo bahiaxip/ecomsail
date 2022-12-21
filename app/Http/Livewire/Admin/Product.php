@@ -164,7 +164,27 @@ class Product extends Component
         
         if($this->search_data)
             $this->resetPage();
+    }
 
+    //actualizar datos de consulta de productos por columna (si se clica en el nombre las columnas)
+    public function setColAndOrder($nameCol=null){
+        //posibles columnas
+        $cols=['id','name','short_detail'];
+        //comprobamos si la columna seleccionada existe, por si se intenta 
+        //introducir otra de forma maliciosa
+        if(in_array($nameCol, $cols))
+            $this->selectedCol = $nameCol;
+        $order = 'asc';
+        //comprobando si el nombre de la columna seleccionado es distinto al 
+        //anterior (en caso de haber pulsado la vez anterior)
+        if($this->selectedCol != $nameCol)
+            $order = 'asc';
+        else
+            //if($this->order_type=='' || $this->order_type =='desc')
+            $order = ($this->order_type =='desc') ? 'asc': 'desc';
+        //se establece el nombre de la columna
+        $this->selectedCol = $nameCol;
+        $this->order_type = $order;
     }
 
     //comprobamos la acción seleccionada
@@ -241,7 +261,15 @@ class Product extends Component
             case '0':                
             case '1':                
                 $init_query = ($this->search_data) ?
-                    Prod::where('name','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
+                    Prod::where([
+                        ['name','LIKE',$search_data],
+                        ['status',$filter_type]
+                    ])
+                    ->orWhere([
+                        ['short_detail','LIKE',$search_data],
+                        ['status',$filter_type]  
+                    ])
+                    ->orderBy($col_order,$order)
                     :
                     Prod::where('status',$filter_type)->orderBy($col_order,$order);
                 break;

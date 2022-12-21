@@ -112,7 +112,26 @@ class Users extends Component
         $this->username=Auth::user()->name;
         $this->checkpdf=1;
     }
-
+    //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
+    public function setColAndOrder($nameCol=null){
+        //posibles columnas
+        $cols=['id','nick','name','lastname','email'];
+        //comprobamos si la columna seleccionada existe, por si se intenta 
+        //introducir otra de forma maliciosa
+        if(in_array($nameCol, $cols))
+            $this->selectedCol = $nameCol;
+        $order = 'asc';
+        //comprobando si el nombre de la columna seleccionado es distinto al 
+        //anterior (en caso de haber pulsado la vez anterior)
+        if($this->selectedCol != $nameCol)
+            $order = 'asc';
+        else
+            //if($this->order_type=='' || $this->order_type =='desc')
+            $order = ($this->order_type =='desc') ? 'asc': 'desc';
+        //se establece el nombre de la columna
+        $this->selectedCol = $nameCol;
+        $this->order_type = $order;
+    }
     public function set_filter_query($filter_type,$export=false,$role=0){
         $user=[];
         //$role=1;
@@ -136,14 +155,27 @@ class Users extends Component
         }else{
             
         }
-            
+        $params = [
+            ['status',$filter_type]
+        ];
         switch($filter_type):
             case '0':
             case '1':                
                 if($this->search_data) 
-                    $init_query = User::where('status',$filter_type)->where('name','LIKE',$search_data)->orWhere('nick','LIKE',$search_data);
+                    $init_query = User::where([
+                        $params[0],
+                        ['name','LIKE',$search_data]
+                    ])
+                    ->orWhere([
+                        $params[0],
+                        ['nick','LIKE',$search_data]
+                    ])
+                    ->orWhere([
+                        $params[0],
+                        ['lastname','LIKE',$search_data]
+                    ]);
                 else
-                    $init_query = User::where('status',$filter_type);
+                    $init_query = User::where('status',$filter_type)->orderBy($col_order,$order);
                 break;
                 //no mostramos ya que puede haber ususarios eliminados
             /*

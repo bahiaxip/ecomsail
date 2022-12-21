@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Order as Ord, App\Models\Invoice;
+use App\Models\Order as Ord, App\Models\Invoice, App\Models\History_Address;
 use Livewire\WithPagination;
 use App\Functions\Export;
 use PDF,Excel,Str;
@@ -68,7 +68,7 @@ class Order extends Component
     //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
     public function setColAndOrder($nameCol=null){
         //posibles columnas
-        $cols=['id','order_num','selected_address'];
+        $cols=['id','order_num','selected_address','created_at'];
         //comprobamos si la columna seleccionada existe, por si se intenta 
         //introducir otra de forma maliciosa
         if(in_array($nameCol, $cols))
@@ -115,6 +115,10 @@ class Order extends Component
                     //Ord::where('order_num','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
                     :
 
+                    /*Ord::with(['get_history_address' => function($query){
+                        $query->orderBy('name','desc');
+                    }]);*/
+                    
                     Ord::where('status',$filter_type);
                 break;
             case '2':
@@ -124,6 +128,7 @@ class Order extends Component
                             ->orWhere('name','like',$search_data);
                         })
                         ->orWhere('order_num','like',$search_data)
+                        ->onlyTrashed()
                     :
                     Ord::onlyTrashed();
                 break;
@@ -141,12 +146,42 @@ class Order extends Component
         endswitch;
         //(ANULADA LA EXCLUSIÓN):excluimos los pedidos con selected_address en 0,
         //que indica que no se ha finalizado la compra(no se ha añadido una dirección)
-
-        //comprobamos export por si es para generar excel,pdf o para consulta en pantalla
-        ($export) ?
-            $res = $init_query->orderBy($col_order,$order)->get()
+    //consulta solo exclusivamente para ordenar por cliente que es una relación 
+        //modificado a condicional terniario (más abajo)
+        //if($col_order == 'selected_address'){
+        /* join no devuelve el resultado esperado */
+            /*$res = Ord::join('history_addresses','orders.selected_address','=','history_addresses.id')
+                ->orderBy('history_addresses.name',$order)
+                ->select('orders.*')
+                ->paginate($this->limit_page);*/
+        /* subconsulta dentro del OrderBy resultado esperado */
+            /*
+            $init_query = $init_query
+                ->orderBy(History_Address::select('name')
+                    ->whereColumn('id','orders.selected_address')
+                    ->limit(1)
+                ,$order);
+            */
+                //->paginate($this->limit_page);
+        /* subconsulta mediante modelo no devuelve el resultado esperado */
+            /*$init_query = 
+            $init_query->with('get_address',function($query){
+                $query->orderBy('name','asc');
+            })->paginate($this->limit_page);*/
+        //}
+        $init_query = ($col_order == 'selected_address') ?
+            $init_query
+                ->orderBy(History_Address::select('name')
+                    ->whereColumn('id','orders.selected_address')
+                    ->limit(1)
+                ,$order)
             :
-            $res = $init_query->orderBy($col_order,$order)->paginate($this->limit_page);
+            $init_query->orderBy($col_order,$order);
+        //comprobamos export por si es para generar excel,pdf o para consulta en pantalla
+            ($export) ?
+                $res = $init_query->get()
+                :
+                $res = $init_query->paginate($this->limit_page);
 
         return $res;
     }

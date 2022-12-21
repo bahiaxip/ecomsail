@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Invoice as Inv, App\Models\Order;
+use App\Models\Invoice as Inv, App\Models\Order, App\Models\History_Address;
 use Livewire\WithPagination;
 use App\Functions\Export;
 use PDF,Excel,Str;
@@ -68,7 +68,7 @@ class Invoice extends Component
     //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
     public function setColAndOrder($nameCol=null){
         //posibles columnas
-        $cols=['id'];
+        $cols=['id','name'];
         //comprobamos si la columna seleccionada existe, por si se intenta 
         //introducir otra de forma maliciosa
         if(in_array($nameCol, $cols))
@@ -109,11 +109,17 @@ class Invoice extends Component
             case '1':
                 $init_query = ($this->search_data) ?
                     //Inv::where('order_num','LIKE',$search_data)->where('status',$filter_type)->orderBy($col_order,$order)
-                    Inv::whereHas('get_order',function($query) use ($search_data){
-                        $query->whereHas('get_history_address',function($query2) use ($search_data){
-                            $query2->where('name','like',$search_data)
-                            ->orWhere('lastname','like',$search_data);
-                        });
+                    Inv::whereHas('get_order',function($query) use ($search_data,$filter_type){
+                        $query->whereHas('get_history_address',function($query2) use ($search_data,$filter_type){
+                            $query2->where([
+                                ['name','like',$search_data],
+                                ['status',$filter_type]
+                            ])
+                            ->orWhere([
+                                ['lastname','like',$search_data],
+                                ['status',$filter_type]
+                            ]);
+                        })->where('status',$filter_type);
                     })
                     :
                     Inv::where('status',$filter_type)->orderBy($col_order,$order);
@@ -141,10 +147,21 @@ class Invoice extends Component
                     Inv::orderBy($col_order,$order);
                 break;
         endswitch;
-
+        //facturas asociadas a un pedido
         if($order_id){            
             $res = $init_query->where('order_id',$this->order_id)->paginate(10);
-        }else{
+        }
+        //prescindimos del orden del nombre del cliente en la factura
+        /*elseif($col_order == 'name'){
+        
+            $init_query = ($col_order == 'name') ?
+                $init_query->orderBy(Order::with('get_order.get_history_address'),$order)->limit(1)
+            :
+            dd("nada");
+        
+        
+        }*/
+        else{
             ($export) ?
                 $res = $init_query->get()
                 :

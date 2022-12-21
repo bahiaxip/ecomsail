@@ -43,7 +43,26 @@ class Notification extends Component
         }
 
     }
-
+    //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
+    public function setColAndOrder($nameCol=null){
+        //posibles columnas
+        $cols=['id','title','description'];
+        //comprobamos si la columna seleccionada existe, por si se intenta 
+        //introducir otra de forma maliciosa
+        if(in_array($nameCol, $cols))
+            $this->selectedCol = $nameCol;
+        $order = 'asc';
+        //comprobando si el nombre de la columna seleccionado es distinto al 
+        //anterior (en caso de haber pulsado la vez anterior)
+        if($this->selectedCol != $nameCol)
+            $order = 'asc';
+        else
+            //if($this->order_type=='' || $this->order_type =='desc')
+            $order = ($this->order_type =='desc') ? 'asc': 'desc';
+        //se establece el nombre de la columna
+        $this->selectedCol = $nameCol;
+        $this->order_type = $order;
+    }
     public function set_type_query($export=false){
         return $this->set_filter_query($this->filter_type,$export);
     }
@@ -72,17 +91,24 @@ class Notification extends Component
                         //->orWhere('title','LIKE',$search_data)
                         //->orWhere('description','LIKE',$search_data)
                     :
-                    Not::where('status',$filter_type);
+                    Not::where('status',$filter_type)
+                        ->OrderBy($col_order,$order);
                 break;
             case '2':
+
                 $init_query = ($this->search_data) ?
-                    Not::onlyTrashed()->where('title','LIKE',$search_data)
+                    Not::onlyTrashed()
+                        ->where(function ($query) use ($search_data){
+                            $query->where('title','LIKE',$search_data);
+                            $query->orWhere('description','LIKE',$search_data);
+                        })
                     :
                     Not::onlyTrashed()->orderBy($col_order,$order);
                 break;
             case '3':
                 $init_query = ($this->search_data) ?
                     Not::where('title','LIKE',$search_data)
+                        ->orWhere('description','LIKE',$search_data)
                     :
                     Not::orderBy($col_order,$order);
                 break;

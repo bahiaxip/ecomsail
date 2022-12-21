@@ -86,9 +86,22 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>Título</td>
-                    <td>Descripción</td>
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('id')">
+                            ID
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('title')">
+                            Título    
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('description')">
+                            Descripción        
+                        </a>
+                    
+                    </td>
                     <td>Acciones</td>
                 </tr>
             </thead>

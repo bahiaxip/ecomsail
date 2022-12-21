@@ -158,9 +158,11 @@
                         </a>
                     </td>
                     <td>
+                        {{--
                         <a href="#" wire:click="setColAndOrder('name')">
+                        --}}
                             Nombre
-                        </a>
+                        {{--</a>--}}
                     </td>
                     <td>                        
                         Neto                        

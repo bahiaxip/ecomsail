@@ -88,6 +88,26 @@ class Attribute extends Component
         $this->username = Auth::user()->name;
     }
 
+    //actualizar datos de consulta de orden por columna (si se clica en el nombre las columnas)
+    public function setColAndOrder($nameCol=null){
+        //posibles columnas
+        $cols=['id','name','description'];
+        //comprobamos si la columna seleccionada existe, por si se intenta 
+        //introducir otra de forma maliciosa
+        if(in_array($nameCol, $cols))
+            $this->selectedCol = $nameCol;
+        $order = 'asc';
+        //comprobando si el nombre de la columna seleccionado es distinto al 
+        //anterior (en caso de haber pulsado la vez anterior)
+        if($this->selectedCol != $nameCol)
+            $order = 'asc';
+        else
+            //if($this->order_type=='' || $this->order_type =='desc')
+            $order = ($this->order_type =='desc') ? 'asc': 'desc';
+        //se establece el nombre de la columna
+        $this->selectedCol = $nameCol;
+        $this->order_type = $order;
+    }
     //comprobar atributos o valores en todas las combinaciones
     public function testAttrInCombinations($attr_id){
         $combinations = Combination::all();
@@ -191,13 +211,29 @@ class Attribute extends Component
 
         $order = $this->order_type;
         //si es reciclaje creamos consulta con onlyTrashed(los eliminados mediante softDelete())
-
+        $params =[
+            ['status', '=', $filter_type],
+            ['type', '=',$attr]
+        ];
         switch($filter_type):
             case '0':
             case '1':
                 $init_query = ($this->search_data) ?
-                    Attr::where('name','LIKE',$search_data)->where('status',$filter_type)
-                        ->where('type',$attr)->orderBy($col_order,$order)
+                    Attr::where([
+                        ['name','LIKE',$search_data],
+                        $params[0],
+                        $params[1]
+                    ])
+                    ->orWhere([
+                        ['description','LIKE',$search_data],
+                        $params[0],
+                        $params[1]
+                    ])
+                    ->orderBy($col_order,$order)
+                    /*Attr::where('name','LIKE',$search_data)->where('status',$filter_type)
+                        ->where('type',$attr)
+
+                        ->orderBy($col_order,$order)*/
                     :
                     Attr::where('status',$filter_type)->where('type',$attr)->orderBy($col_order,$order);
                 break;

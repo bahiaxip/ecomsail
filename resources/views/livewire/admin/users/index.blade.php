@@ -93,7 +93,10 @@
 
             <li>            
                 <button class="btn btn-sm btn_sail btn_pry dropdown-toggle" type="button" id="dropdownMenuFilterUsers" onclick="showMenuFilters()" aria-expanded="false">
-                    Filtros
+                    <span class="d-none d-md-inline">Filtros</span>
+                    <span class="d-inline d-md-none">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </span>
                 </button>            
                 <ul class="dropdown-menu" id="dropdownMenuFilters" aria-labelledby="dropdownMenuFilterUsers">                
                     <li>
@@ -121,9 +124,22 @@
         <table class="table table-hover">
             <thead class="{{Auth::user()->roles->special}}">
                 <th width="64"></th>
-                <th>Nick</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
+                <th>
+                    <a href="#" wire:click="setColAndOrder('nick')">
+                        Nick    
+                    </a>
+                    
+                </th>
+                <th>
+                    <a href="#" wire:click="setColAndOrder('name')">
+                        Nombre
+                    </a>
+                </th>
+                <th>
+                    <a href="#" wire:click="setColAndOrder('nick')">
+                        Apellidos
+                    </a>
+                </th>
                 <th>E-Mail</th>                            
                 <th width="140"></th>
             </thead>

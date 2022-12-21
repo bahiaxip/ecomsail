@@ -47,7 +47,7 @@
                                             {{$invoice->id}}
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
-                                            {{ $invoice->get_order->get_address->name}} {{ $invoice->get_order->get_address->lastname}}
+                                            {{ $invoice->get_order->get_history_address->name}} {{ $invoice->get_order->get_history_address->lastname}}
                                         </td>
                                         <td style="margin-top: 14px;padding-top:12px;border:black 1px solid;text-align:center">
                                             {{ $invoice->net }}

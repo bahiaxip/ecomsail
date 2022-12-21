@@ -93,7 +93,10 @@
             <li>
                 <div class="dropdown">
                     <button class="btn btn-sm btn_primary dropdown-toggle" type="button" id="dropdownMenu1" onclick="showMenuFilters()" aria-expanded="false">
-                        Filtros
+                        <span class="d-none d-md-inline">Filtros</span>
+                        <span class="d-inline d-md-none">
+                            <i class="fa-solid fa-bars-staggered"></i>
+                        </span>
                     </button>            
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdownMenuFilters">
                         <li>
@@ -122,7 +125,10 @@
             @if(helper()->testRole(Auth::user()->role,'create_products') == true
                 || Auth::user()->roles->special == 'all')
                 <li>
-                    <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()"><i class="fa-solid fa-plus"></i> Crear Producto</a>    
+                    <button class="btn btn-sm btn_primary" data-bs-toggle="modal" data-bs-target="#addProduct" wire:click="setckeditor()">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="d-none d-md-inline">Crear Producto</span>
+                    </a>    
                 </li>
             @endif
             
@@ -135,10 +141,23 @@
                     <td>
                         {{Form::checkbox('box',true,null,['class' => 'form-check-input','id'=>'allcheckbox','onclick' => 'selectAllCheckbox()'])}}
                     </td>
-                    <td width="40">ID</td>
+                    <td width="40">
+                        <a href="#" wire:click="setColAndOrder('id')">
+                            ID
+                        </a>                        
+                    </td>
                     <td width="64"></td>
-                    <td>Nombre</td>
-                    <td>Descripción corta</td>
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('name')">
+                            Nombre
+                        </a>
+                        
+                    </td>
+                    <td>
+                        <a href="#" wire:click="setColAndOrder('short_detail')">
+                            Descripción corta
+                        </a>
+                    </td>
                     <td>Categoría</td>
                     <td>Precio</td>
                     <td>Stock</td>

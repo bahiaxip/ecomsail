@@ -203,10 +203,8 @@
                         </a>
                     </td>
                     @if($attr)
-                    <td>
-                        <a href="#" wire:click="setColAndOrder('name')">
-                            Imagen
-                        </a>
+                    <td>                        
+                        Imagen
                     </td>
                     @endif
                     <td>
@@ -222,10 +220,8 @@
                     </td>
                     @endif
                     @if(!$attr)
-                    <td>
-                        <a href="#" wire:click="setColAndOrder('name')">
-                            Cantidad    
-                        </a>
+                    <td>                        
+                        Cantidad
                     </td>
                     @endif
                     <td class="max d-none d-md-table-cell">
