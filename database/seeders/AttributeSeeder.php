@@ -39,6 +39,13 @@ class AttributeSeeder extends Seeder
             'status' => 1,
             'description' => 'Longitud'
         ]);
+        /*Attribute::create([
+            'name' => 'Números',
+            'type' => 0,
+            'slug' => 'numeros',
+            'status' => 1,
+            'description' => 'Números Calzado'
+        ]);*/
 
         $colores = [
             [

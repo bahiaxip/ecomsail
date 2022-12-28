@@ -10,7 +10,7 @@ class CombinationSeeder extends Seeder
     /**
      
 
-     Recordar que si se añaden Atributos nuevos los list_ids deben cambiarse (sumarse 1 por cada atributo nuevo)
+     Recordar que si se añaden Atributos nuevos en el AttributeSeeder  los list_ids deben cambiarse (sumarse 1 por cada atributo nuevo, ya que los atributos y los valores se encuentran en la misma tabla)
      */
     public function run()
     {

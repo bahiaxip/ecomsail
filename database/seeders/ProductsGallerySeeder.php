@@ -291,14 +291,14 @@ class ProductsGallerySeeder extends Seeder
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'blackdecker_BCF611CK',
-            'image' => 'tools/drill/blackdecker_BCF611CK/blackdecker_BCF611CK_2.jpg',
+            'image' => 'tools/screwdriver/blackdecker_BCF611CK/blackdecker_BCF611CK_2.jpg',
             'file_ext' => 'jpg',
             'product_id' => 16
         ]);
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'blackdecker_BCF611CK',
-            'image' => 'tools/drill/blackdecker_BCF611CK/blackdecker_BCF611CK_3.jpg',
+            'image' => 'tools/screwdriver/blackdecker_BCF611CK/blackdecker_BCF611CK_3.jpg',
             'file_ext' => 'jpg',
             'product_id' => 16
         ]);
@@ -306,14 +306,14 @@ class ProductsGallerySeeder extends Seeder
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_GSR12-15_2',
-            'image' => 'tools/drill/bosch_IXO/bosch_IXO_2.jpg',
+            'image' => 'tools/screwdriver/bosch_IXO/bosch_IXO_2.jpg',
             'file_ext' => 'jpg',
             'product_id' => 17
         ]);        
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_GSR12-15_2',
-            'image' => 'tools/drill/bosch_IXO/bosch_IXO_3.jpg',
+            'image' => 'tools/screwdriver/bosch_IXO/bosch_IXO_3.jpg',
             'file_ext' => 'jpg',
             'product_id' => 17
         ]);
@@ -321,21 +321,21 @@ class ProductsGallerySeeder extends Seeder
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_IXO',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_2.jpg',
+            'image' => 'tools/screwdriver/bosch_GSR12-15/bosch_GSR12-15_2.jpg',
             'file_ext' => 'jpg',
             'product_id' => 18
         ]);
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_IXO',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_3.jpg',
+            'image' => 'tools/screwdriver/bosch_GSR12-15/bosch_GSR12-15_3.jpg',
             'file_ext' => 'jpg',
             'product_id' => 18
         ]);
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'bosch_IXO',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15_4.jpg',
+            'image' => 'tools/screwdriver/bosch_GSR12-15/bosch_GSR12-15_4.jpg',
             'file_ext' => 'jpg',
             'product_id' => 18
         ]);
@@ -343,14 +343,14 @@ class ProductsGallerySeeder extends Seeder
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'deko_DKCD20XL01',
-            'image' => 'tools/drill/deko_DKCD20XL01/deko_DKCD20XL01_2.jpg',
+            'image' => 'tools/screwdriver/deko_DKCD20XL01/deko_DKCD20XL01_2.jpg',
             'file_ext' => 'jpg',
             'product_id' => 19
         ]);
         ImagesProducts::create([
             'path_tag' => 'images/products/',
             'file_name' =>'deko_DKCD20XL01',
-            'image' => 'tools/drill/deko_DKCD20XL01/deko_DKCD20XL01_3.jpg',
+            'image' => 'tools/screwdriver/deko_DKCD20XL01/deko_DKCD20XL01_3.jpg',
             'file_ext' => 'jpg',
             'product_id' => 19
         ]);
@@ -1578,5 +1578,685 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 90
         ]);
+        //product 91
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Adidas tiro17",
+            'image' => 'personal_care/fragances/adidas_getready/adidas_getready_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 91
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Polo Adidas tiro17",
+            'image' => 'personal_care/fragances/adidas_getready/adidas_getready_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 91
+        ]);
+        //product 92
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"black_opium_neon",
+            'image' => 'personal_care/fragances/black_opium_neon/black_opium_neon_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 92
+        ]);        
+        //product 93
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"hugo_boss",
+            'image' => 'personal_care/fragances/hugo_boss/hugo_boss_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 93
+        ]);
+        //94 solo una imagen
+        //product 95
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"calvin_klein_ck_in2u",
+            'image' => 'personal_care/fragances/calvin_klein_ck_in2u/calvin_klein_ck_in2u_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 95
+        ]);
+        //product 96
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 96
+        ]);
+        
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 96
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 96
+        ]);
+        //product 97
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Martillo perforador Bosch Professional",
+            'image' => 'tools/drill/bosch_gbh_2_28F/bosch_gbh_2_28F_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 97
+        ]);
+        //product 98
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 98
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 98
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 98
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_einhell",
+            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 98
+        ]);
+        //product 99
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_casals",
+            'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 99
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_casals",
+            'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 99
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_casals",
+            'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 99
+        ]);
+        //product 100
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_DeWalt_DWD024KS",
+            'image' => 'tools/drill/hammer_drill_dewalt_DWD024KS/hammer_drill_dewalt_DWD024KS_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 100
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"taladro_percutor_DeWalt_DWD024KS",
+            'image' => 'tools/drill/hammer_drill_dewalt_DWD024KS/hammer_drill_dewalt_DWD024KS_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 100
+        ]);
+        //product 101
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares Sony DWD024KS",
+            'image' => 'video/earphones/earphones_sony_wh_ch510/earphones_sony_wh_ch510_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 101
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares Sony DWD024KS",
+            'image' => 'video/earphones/earphones_sony_wh_ch510/earphones_sony_wh_ch510_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 101
+        ]);
+        //product 102
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares JBL TUNE 510BT",
+            'image' => 'video/earphones/earphones_jbl_tune_510bt/earphones_jbl_tune_510bt_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 102
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares JBL TUNE 510BT",
+            'image' => 'video/earphones/earphones_jbl_tune_510bt/earphones_jbl_tune_510bt_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 102
+        ]);
+        //product 103
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares TOZO A2",
+            'image' => 'video/earphones/earphones_tozo_a2/earphones_tozo_a2_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 103
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares TOZO A2",
+            'image' => 'video/earphones/earphones_tozo_a2/earphones_tozo_a2_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 103
+        ]);
+        //product 104
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares Xiaomi Redmi Buds3 Lite",
+            'image' => 'video/earphones/earphones_xiaomi_redmi_buds3_lite/earphones_xiaomi_redmi_buds3_lite_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 104
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares Xiaomi Redmi Buds3 Lite",
+            'image' => 'video/earphones/earphones_xiaomi_redmi_buds3_lite/earphones_xiaomi_redmi_buds3_lite_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 104
+        ]);
+        //product 105
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_airpods_pro2/earphones_airpods_pro2_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 105
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_airpods_pro2/earphones_airpods_pro2_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 105
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_airpods_pro2/earphones_airpods_pro2_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 105
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_airpods_pro2/earphones_airpods_pro2_5.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 105
+        ]);
+        //product 106
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_sony_mdr_rf811rk/earphones_sony_mdr_rf811rk_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 106
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_sony_mdr_rf811rk/earphones_sony_mdr_rf811rk_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 106
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"auriculares AirPods Pro 2",
+            'image' => 'video/earphones/earphones_sony_mdr_rf811rk/earphones_sony_mdr_rf811rk_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 106
+        ]);
+        //product 107
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi Smart TV P1 32",
+            'image' => 'video/tv/xiaomi_smarttv_p1_32/xiaomi_smarttv_p1_32_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 107
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi Smart TV P1 32",
+            'image' => 'video/tv/xiaomi_smarttv_p1_32/xiaomi_smarttv_p1_32_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 107
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi Smart TV P1 32",
+            'image' => 'video/tv/xiaomi_smarttv_p1_32/xiaomi_smarttv_p1_32_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 107
+        ]);
+        //product 108
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Crystal TV 2022 43BU8000",
+            'image' => 'video/tv/samsung_crystal_2022_32BU8000/samsung_crystal_2022_32BU8000_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 108
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Crystal TV 2022 43BU8000",
+            'image' => 'video/tv/samsung_crystal_2022_32BU8000/samsung_crystal_2022_32BU8000_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 108
+        ]);
+        //product 109
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"LG TV 55UQ70006LB",
+            'image' => 'video/tv/LG_TV_55UQ70006LB/LG_TV_55UQ70006LB_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 109
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"LG TV 55UQ70006LB",
+            'image' => 'video/tv/LG_TV_55UQ70006LB/LG_TV_55UQ70006LB_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 109
+        ]);
+        //product 110
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Cecotec TV A1 Series ALU10043",
+            'image' => 'video/tv/cecotec_tv_a1_series_alu10043/cecotec_tv_a1_series_alu10043_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 110
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Cecotec TV A1 Series ALU10043",
+            'image' => 'video/tv/cecotec_tv_a1_series_alu10043/cecotec_tv_a1_series_alu10043_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 110
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Cecotec TV A1 Series ALU10043",
+            'image' => 'video/tv/cecotec_tv_a1_series_alu10043/cecotec_tv_a1_series_alu10043_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 110
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Cecotec TV A1 Series ALU10043",
+            'image' => 'video/tv/cecotec_tv_a1_series_alu10043/cecotec_tv_a1_series_alu10043_5.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 110
+        ]);
+        //product 111
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ASUS TUF Gaming VG27AQ1A",
+            'image' => 'video/monitor/asus_tuf_gaming_vg27aq1a/asus_tuf_gaming_vg27aq1a_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 111
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ASUS TUF Gaming VG27AQ1A",
+            'image' => 'video/monitor/asus_tuf_gaming_vg27aq1a/asus_tuf_gaming_vg27aq1a_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 111
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ASUS TUF Gaming VG27AQ1A",
+            'image' => 'video/monitor/asus_tuf_gaming_vg27aq1a/asus_tuf_gaming_vg27aq1a_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 111
+        ]);
+        //product 112
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo L27q-35",
+            'image' => 'video/monitor/lenovo_l27q_35/lenovo_l27q_35_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 112
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo L27q-35",
+            'image' => 'video/monitor/lenovo_l27q_35/lenovo_l27q_35_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 112
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo L27q-35",
+            'image' => 'video/monitor/lenovo_l27q_35/lenovo_l27q_35_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 112
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo L27q-35",
+            'image' => 'video/monitor/lenovo_l27q_35/lenovo_l27q_35_5.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 112
+        ]);
+        //product 113
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Philips Gaming 27M1N3200VS",
+            'image' => 'video/monitor/philips_gaming_27m1n3200vs/philips_gaming_27m1n3200vs_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 113
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Philips Gaming 27M1N3200VS",
+            'image' => 'video/monitor/philips_gaming_27m1n3200vs/philips_gaming_27m1n3200vs_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 113
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Philips Gaming 27M1N3200VS",
+            'image' => 'video/monitor/philips_gaming_27m1n3200vs/philips_gaming_27m1n3200vs_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 113
+        ]);
+        //product 114
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Love Urban Beauty",
+            'image' => 'personal_care/makeup/love_urban_beauty/love_urban_beauty_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 114
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Love Urban Beauty",
+            'image' => 'personal_care/makeup/love_urban_beauty/love_urban_beauty_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 114
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Love Urban Beauty",
+            'image' => 'personal_care/makeup/love_urban_beauty/love_urban_beauty_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 114
+        ]);
+        //product 115
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ZMILE Cosmetics",
+            'image' => 'personal_care/makeup/zmile_cosmetics/zmile_cosmetics_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 115
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ZMILE Cosmetics",
+            'image' => 'personal_care/makeup/zmile_cosmetics/zmile_cosmetics_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 115
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ZMILE Cosmetics",
+            'image' => 'personal_care/makeup/zmile_cosmetics/zmile_cosmetics_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 115
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"ZMILE Cosmetics",
+            'image' => 'personal_care/makeup/zmile_cosmetics/zmile_cosmetics_5.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 115
+        ]);
+
+        //product 116
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Amazfit Bip U Pro",
+            'image' => 'tecnology/smartwatches/amazfit_bip_u_pro/amazfit_bip_u_pro_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 116
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Amazfit Bip U Pro",
+            'image' => 'tecnology/smartwatches/amazfit_bip_u_pro/amazfit_bip_u_pro_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 116
+        ]);
+        //product 117
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Galaxy Watch 4",
+            'image' => 'tecnology/smartwatches/samsung_galaxy_watch4/samsung_galaxy_watch4_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 117
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Galaxy Watch 4",
+            'image' => 'tecnology/smartwatches/samsung_galaxy_watch4/samsung_galaxy_watch4_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 117
+        ]);
+
+        //product 118
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi Smart Band 7",
+            'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 118
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi Smart Band 7",
+            'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 118
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi Smart Band 7",
+            'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 118
+        ]);
+        //product 119
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"XINGHESF CS3",
+            'image' => 'tecnology/smartwatches/xinghesf_cs3/xinghesf_cs3_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 119
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"XINGHESF CS3",
+            'image' => 'tecnology/smartwatches/xinghesf_cs3/xinghesf_cs3_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 119
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"XINGHESF CS3",
+            'image' => 'tecnology/smartwatches/xinghesf_cs3/xinghesf_cs3_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 119
+        ]);
+        //product 120
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Kindle 2022",
+            'image' => 'tecnology/ebooks/kindle_2022/kindle_2022_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 120
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Kindle 2022",
+            'image' => 'tecnology/ebooks/kindle_2022/kindle_2022_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 120
+        ]);
+
+        //product 121
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Kindle 2022",
+            'image' => 'tecnology/ebooks/basic_lux3/basic_lux3_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 121
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Kindle 2022",
+            'image' => 'tecnology/ebooks/basic_lux3/basic_lux3_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 121
+        ]);
+        //product 122
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Kobo Nia",
+            'image' => 'tecnology/ebooks/kobo_nia/kobo_nia_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 122
+        ]);
+        //product 123
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi L83",
+            'image' => 'tecnology/tablets/xiaomi_L83/xiaomi_L83_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 123
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Xiaomi L83",
+            'image' => 'tecnology/tablets/xiaomi_L83/xiaomi_L83_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 123
+        ]);
+        //product 124
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo Tab M10",
+            'image' => 'tecnology/tablets/lenovo_tab_m10/lenovo_tab_m10_2.webp',
+            'file_ext' => 'jpg',
+            'product_id' => 124
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo Tab M10",
+            'image' => 'tecnology/tablets/lenovo_tab_m10/lenovo_tab_m10_3.webp',
+            'file_ext' => 'jpg',
+            'product_id' => 124
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Lenovo Tab M10",
+            'image' => 'tecnology/tablets/lenovo_tab_m10/lenovo_tab_m10_4.webp',
+            'file_ext' => 'jpg',
+            'product_id' => 124
+        ]);
+        //product 125
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Galaxy Tab S6",
+            'image' => 'tecnology/tablets/samsung_galaxy_tab_s6/samsung_galaxy_tab_s6_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 125
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Galaxy Tab S6",
+            'image' => 'tecnology/tablets/samsung_galaxy_tab_s6/samsung_galaxy_tab_s6_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 125
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Galaxy Tab S6",
+            'image' => 'tecnology/tablets/samsung_galaxy_tab_s6/samsung_galaxy_tab_s6_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 125
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Samsung Galaxy Tab S6",
+            'image' => 'tecnology/tablets/samsung_galaxy_tab_s6/samsung_galaxy_tab_s6_5.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 125
+        ]);
+        //product 126
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Alcatel 1T",
+            'image' => 'tecnology/tablets/alcatel_1t/alcatel_1t_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 126
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Alcatel 1T",
+            'image' => 'tecnology/tablets/alcatel_1t/alcatel_1t_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 126
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Alcatel 1T",
+            'image' => 'tecnology/tablets/alcatel_1t/alcatel_1t_4.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 126
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Alcatel 1T",
+            'image' => 'tecnology/tablets/alcatel_1t/alcatel_1t_5.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 126
+        ]);
+
+        //product 127
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Alcatel 1T",
+            'image' => 'tecnology/smartphones/xiaomi_redmi_note_11/xiaomi_redmi_note_11_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 127
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>"Alcatel 1T",
+            'image' => 'tecnology/smartphones/xiaomi_redmi_note_11/xiaomi_redmi_note_11_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 127
+        ]);
+        
     }
 }

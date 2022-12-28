@@ -37,17 +37,7 @@ class CategorySeeder extends Seeder
             'title_offer' =>'Herramientas',
             'icon_awesome_offer' => '<i class="fa-solid fa-toolbox"></i>',
         ]);
-        Category::create([
-            'status' => 1,
-            'type' => 0,
-            'name' =>'Calzado',
-            'file_name' => 'calzado.png',
-            'image' => 'footwear.png',
-            'path_tag' => '/ics/cat_icons/',
-            'offer' => 1,
-            'title_offer' =>'Calzado',
-            'icon_awesome_offer' => '<i class="fa-solid fa-shoe-prints"></i>',            
-        ]);
+        
 
         Category::create([
             'status' => 1,
@@ -62,7 +52,8 @@ class CategorySeeder extends Seeder
             'icon_image_offer_hover' => 'others/appliance.svg',
         ]);
 
-        Category::create([
+        /* categoría alimentación anulado */
+        /*Category::create([
             'status' => 1,
             'type' => 0,
             'name' =>'Alimentación',
@@ -70,6 +61,17 @@ class CategorySeeder extends Seeder
             'image' => 'food.png',
             'path_tag' => '/ics/cat_icons/',
             'offer' => 1,
+            'title_offer' =>NULL,            
+            'icon_awesome_offer' => NULL, 
+        ]);*/
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Tecnología',
+            'file_name' => 'Tecnologia.png',
+            'image' => 'smartphone.png',
+            'path_tag' => '/ics/cat_icons/',
+            'offer' => 0,
             'title_offer' =>NULL,            
             'icon_awesome_offer' => NULL, 
         ]);
@@ -106,6 +108,42 @@ class CategorySeeder extends Seeder
             'title_offer' =>'Cuidado personal',
             'icon_awesome_offer' => '<i class="fa-solid fa-heart-pulse"></i>',
         ]);
+        //Categoría Audio y vídeo
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Audio y vídeo',
+            'file_name' => 'audio_video.png',
+            'image' => 'audio_video.png',
+            'path_tag' => '/ics/cat_icons/',
+            'offer' => 1,
+            'title_offer' =>'Audio y vídeo',
+            'icon_awesome_offer' => '<i class="fa-solid fa-tv"></i>',
+        ]);
+        Category::create([
+            'status' => 1,
+            'type' => 0,
+            'name' =>'Calzado',
+            'file_name' => 'calzado.png',
+            'image' => 'footwear.png',
+            'path_tag' => '/ics/cat_icons/',
+            'offer' => 1,
+            'title_offer' =>'Calzado',
+            'icon_awesome_offer' => '<i class="fa-solid fa-shoe-prints"></i>',            
+        ]);
+        for($i=0;$i<20;$i++){
+            Category::create([
+                'status' => 0,
+                'type' => 0,
+                'name' =>"NULL",
+                'file_name' => "NULL",
+                'image' => "NULL",
+                'path_tag' => '/ics/cat_icons/',
+                'offer' => NULL,
+                'title_offer' =>NULL,
+                'icon_awesome_offer' => NULL,
+            ]);
+        }
         
 
 
@@ -152,13 +190,13 @@ class CategorySeeder extends Seeder
                 'path_tag' => '/ics/cat_icons/clothes/',
             ]);
 
-        
+        //Herramientas
             Category::create([
                 'status' => 1,
                 'type' => 2,
                 'name' =>'Atornilladoras',
                 'file_name' => 'atornilladora.png',
-                'image' => 'drill.png',
+                'image' => 'screwdriver.png',
                 'path_tag' => '/ics/cat_icons/tools/',
             ]);
             Category::create([
@@ -169,6 +207,19 @@ class CategorySeeder extends Seeder
                 'image' => 'tape_mesure.png',
                 'path_tag' => '/ics/cat_icons/tools/',
             ]);
+            //Subcategoría Taladro  (Herramientas) //44
+            Category::create([
+                'status' => 1,
+                'type' => 2,
+                'name' =>'Taladros',
+                'file_name' => 'taladro.png',
+                'image' => 'drill.png',
+                'path_tag' => '/ics/cat_icons/tools/',
+            ]);
+            
+
+
+        
             
 
 
@@ -176,41 +227,6 @@ class CategorySeeder extends Seeder
             Category::create([
                 'status' => 1,
                 'type' => 3,
-                'name' =>'Zapatillas deportivas',
-                'file_name' => 'deportiva.png',
-                'image' => 'sneakers.png',
-                'path_tag' => '/ics/cat_icons/shoes/',
-            ]);
-            Category::create([
-                'status' => 1,
-                'type' => 3,
-                'name' =>'Sportwear',
-                'file_name' => 'sportwear.png',
-                'image' => 'sportwear.png',
-                'path_tag' => '/ics/cat_icons/shoes/',
-            ]);
-            Category::create([
-                'status' => 1,
-                'type' => 3,
-                'name' =>'Sandalias',
-                'file_name' => 'Sandalia.png',
-                'image' => 'sandals.png',
-                'path_tag' => '/ics/cat_icons/shoes/',
-            ]);
-            Category::create([
-                'status' => 1,
-                'type' => 3,
-                'name' =>'Botas de agua',
-                'file_name' => 'Bota_agua.png',
-                'image' => 'water_boots.png',
-                'path_tag' => '/ics/cat_icons/shoes/',
-            ]);
-
-
-        
-            Category::create([
-                'status' => 1,
-                'type' => 4,
                 'name' =>'Lavadoras',
                 'file_name' => 'Lavadora.png',
                 'image' => 'washer.png',
@@ -218,7 +234,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 4,
+                'type' => 3,
                 'name' =>'Placas/Fogones',
                 'file_name' => 'Televisor.png',
                 'image' => 'cooking_food.svg',
@@ -227,7 +243,7 @@ class CategorySeeder extends Seeder
             /*
             Category::create([
                 'status' => 1,
-                'type' => 4,
+                'type' => 3,
                 'name' =>'Televisores',
                 'file_name' => 'Televisor.png',
                 'image' => 'tv.png',
@@ -236,7 +252,7 @@ class CategorySeeder extends Seeder
             */
             Category::create([
                 'status' => 1,
-                'type' => 4,
+                'type' => 3,
                 'name' =>'Aspiradoras',
                 'file_name' => 'Aspiradora.png',
                 'image' => 'vacuum-cleaner.png',
@@ -245,7 +261,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 4,
+                'type' => 3,
                 'name' =>'Frigoríficos',
                 'file_name' => 'Frigorífico.png',
                 'image' => 'fridge.png',
@@ -253,15 +269,51 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 4,
+                'type' => 3,
                 'name' =>'Secadores',
                 'file_name' => 'secador.png',
                 'image' => 'hair_dryer.png',
                 'path_tag' => '/ics/cat_icons/appliance/',
             ]);
 
-        
+            /* subcategorías de tecnología */
             Category::create([
+                'status' => 1,
+                'type' => 4,
+                'name' =>'Smartphones',
+                'file_name' => 'smartphone.png',
+                'image' => 'smartphone.png',
+                'path_tag' => '/ics/cat_icons/tecnology/',
+            ]);
+
+            Category::create([
+                'status' => 1,
+                'type' => 4,
+                'name' =>'Tablets',
+                'file_name' => 'tablet.png',
+                'image' => 'tablet.png',
+                'path_tag' => '/ics/cat_icons/tecnology/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 4,
+                'name' =>'Ebooks',
+                'file_name' => 'ebook.png',
+                'image' => 'ebook.png',
+                'path_tag' => '/ics/cat_icons/tecnology/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 4,
+                'name' =>'Smartwatches',
+                'file_name' => 'smartwatch.png',
+                'image' => 'smartwatch.png',
+                'path_tag' => '/ics/cat_icons/tecnology/',
+            ]);
+
+
+            /* subcategorías de alimentación anuladas*/        
+            /*Category::create([
                 'status' => 1,
                 'type' => 5,
                 'name' =>'Fruta',
@@ -293,12 +345,12 @@ class CategorySeeder extends Seeder
                 'file_name' => 'Refresco.png',
                 'image' => 'soda.png',
                 'path_tag' => '/ics/cat_icons/food/',
-            ]);
+            ]);*/
 
             //Informática
             Category::create([
                 'status' => 1,
-                'type' => 6,
+                'type' => 5,
                 'name' =>'Ordenadores sobremesa',
                 'file_name' => 'Ordenadores_sobremesa.png',
                 'image' => 'portable.png',
@@ -306,7 +358,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 6,
+                'type' => 5,
                 'name' =>'Ordenadores portátiles',
                 'file_name' => 'Ordenadores_portatiles.png',
                 'image' => 'portable.png',
@@ -314,7 +366,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 6,
+                'type' => 5,
                 'name' =>'Almacenamiento',
                 'file_name' => 'Almacenamiento.png',
                 'image' => 'sd.png',
@@ -322,7 +374,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 6,
+                'type' => 5,
                 'name' =>'Aplicaciones',
                 'file_name' => 'Aplicaciones.png',
                 'image' => 'windows.png',
@@ -333,7 +385,7 @@ class CategorySeeder extends Seeder
             //Jardín
             Category::create([
                 'status' => 1,
-                'type' => 7,
+                'type' => 6,
                 'name' =>'Riego',
                 'file_name' => 'Mangueras.png',
                 'image' => 'hose.png',
@@ -341,7 +393,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 7,
+                'type' => 6,
                 'name' =>'Piscinas',
                 'file_name' => 'Piscinas.png',
                 'image' => 'inflatable-pool.png',
@@ -349,7 +401,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 7,
+                'type' => 6,
                 'name' =>'Cortacésped',
                 'file_name' => 'Cortacésped.png',
                 'image' => 'mower.png',
@@ -357,7 +409,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 7,
+                'type' => 6,
                 'name' =>'Semillas',
                 'file_name' => 'Semillas.png',
                 'image' => 'seed.png',
@@ -367,7 +419,7 @@ class CategorySeeder extends Seeder
             //Cuidado personal
             Category::create([
                 'status' => 1,
-                'type' => 8,
+                'type' => 7,
                 'name' =>'Cepillos de dientes',
                 'file_name' => 'Cepillos de dientes.png',
                 'image' => 'electric-toothbrush.png',
@@ -375,7 +427,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 8,
+                'type' => 7,
                 'name' =>'Maquillaje',
                 'file_name' => 'Maquillaje.png',
                 'image' => 'make-up.png',
@@ -383,29 +435,18 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 8,
+                'type' => 7,
                 'name' =>'Perfumes',
                 'file_name' => 'Perfumes.png',
                 'image' => 'fragance.png',
                 'path_tag' => '/ics/cat_icons/personal_care/',
             ]);
 
-    //Categoría Audio y vídeo
-            Category::create([
-            'status' => 1,
-            'type' => 0,
-            'name' =>'Audio y vídeo',
-            'file_name' => 'audio_video.png',
-            'image' => 'audio_video.png',
-            'path_tag' => '/ics/cat_icons/',
-            'offer' => 1,
-            'title_offer' =>'Audio y vídeo',
-            'icon_awesome_offer' => '<i class="fa-solid fa-tv"></i>',
-        ]);
+    
             //Audio y vídeo
             Category::create([
                 'status' => 1,
-                'type' => 40,
+                'type' => 8,
                 'name' =>'Televisores',
                 'file_name' => 'tv.png',
                 'image' => 'tv.png',
@@ -413,7 +454,7 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 40,
+                'type' => 8,
                 'name' =>'Monitores',
                 'file_name' => 'monitor.png',
                 'image' => 'monitor.png',
@@ -421,11 +462,44 @@ class CategorySeeder extends Seeder
             ]);
             Category::create([
                 'status' => 1,
-                'type' => 40,
+                'type' => 8,
                 'name' =>'Auriculares',
                 'file_name' => 'earphones.png',
                 'image' => 'earphones.png',
                 'path_tag' => '/ics/cat_icons/audio_video/',
+            ]);
+            //Calzado
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Zapatillas deportivas',
+                'file_name' => 'deportiva.png',
+                'image' => 'sneakers.png',
+                'path_tag' => '/ics/cat_icons/shoes/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Sportwear',
+                'file_name' => 'sportwear.png',
+                'image' => 'sportwear.png',
+                'path_tag' => '/ics/cat_icons/shoes/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Sandalias',
+                'file_name' => 'Sandalia.png',
+                'image' => 'sandals.png',
+                'path_tag' => '/ics/cat_icons/shoes/',
+            ]);
+            Category::create([
+                'status' => 1,
+                'type' => 9,
+                'name' =>'Botas de agua',
+                'file_name' => 'Bota_agua.png',
+                'image' => 'water_boots.png',
+                'path_tag' => '/ics/cat_icons/shoes/',
             ]);
         
 

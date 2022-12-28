@@ -20,8 +20,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico BOSCH KGN39VIEA',            
             'slug' => Str::slug('Frigorífico BOSCH KGN39VIEA'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,            
+            'category_id' => 3,
+            'subcategory_id' => 41,            
             'price' => 699,
             'stock' => 5,
             'short_detail' => 'Frigorífico Bosch Combi, Serie 4, Inox',
@@ -45,8 +45,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Candy CMDDS',            
             'slug' => Str::slug('Frigorífico Candy CMDDS'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,
+            'category_id' => 3,
+            'subcategory_id' => 41,
             'price' => 375,
             'stock' => 3,
             'short_detail' => 'Frigorífico Candy 2 puertas, Clase F, Blanco',
@@ -69,8 +69,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Corberó CCH18021X',            
             'slug' => Str::slug('Frigorífico Corberó CCH18021X'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,
+            'category_id' => 3,
+            'subcategory_id' => 41,
             'price' => 500,
             'stock' => 7,
             'short_detail' => 'Frigorífico Corberó Combi, No Frost, Inox',
@@ -93,8 +93,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Hisense RQ515N4AC2',            
             'slug' => Str::slug('Frigorífico Hisense RQ515N4AC2'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,
+            'category_id' => 3,
+            'subcategory_id' => 41,
             'price' => 750,
             'stock' => 8,
             'short_detail' => 'Frigorífico Hisense, No Frost, Inox, Silencioso',
@@ -117,8 +117,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico LG GTB362PZCZD',            
             'slug' => Str::slug('Frigorífico LG GTB362PZCZD'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,
+            'category_id' => 3,
+            'subcategory_id' => 41,
             'price' => 589,
             'stock' => 6,
             'short_detail' => 'Frigorífico LG, Clase F, Inox',
@@ -140,8 +140,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Samsung RB34T602EWW',
             'slug' => Str::slug('Frigorífico Samsung RB34T602EWW'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,
+            'category_id' => 3,
+            'subcategory_id' => 41,
             'price' => 723,
             'stock' => 6,
             'short_detail' => 'Frigorífico Samsung Combi, Blanco',
@@ -163,8 +163,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Teka NFL320',
             'slug' => Str::slug('Frigorífico Teka NFL320'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 23,
+            'category_id' => 3,
+            'subcategory_id' => 41,
             'price' => 485,
             'stock' => 3,
             'short_detail' => 'Frigorífico Teka Combi, Clase F, Blanco',
@@ -187,8 +187,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Babyliss 6613DE',
             'slug' => Str::slug('Secador Babyliss 6613DE'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 77,
             'stock' => 10,
             'short_detail' => 'Secador de pelo Profesional Babyliss , Iónico, 2200W',
@@ -210,8 +210,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Babyliss 6615E',
             'slug' => Str::slug('Secador Babyliss 6615E'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 76,
             'stock' => 3,
             'short_detail' => 'Secador de pelo Profesional Babyliss, Iónico, 2400W',
@@ -233,8 +233,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Braun Satin Hair 7',
             'slug' => Str::slug('Secador Braun Satin Hair 7'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 58,
             'stock' => 5,
             'short_detail' => 'Secador de pelo Profesional Braun,Iónico, 2200W',
@@ -256,8 +256,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Cecotec Bamba',
             'slug' => Str::slug('Secador Cecotec Bamba'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 31.52,
             'stock' => 5,
             'short_detail' => 'Secador de pelo Profesional Cecotec, Iónico, 2400W',
@@ -279,8 +279,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Happygoo',
             'slug' => Str::slug('Secador Happygoo'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 45,
             'stock' => 8,
             'short_detail' => 'Secador de pelo Profesional Happygoo, Iónico, 2400W',
@@ -302,8 +302,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Remington Compact',
             'slug' => Str::slug('Secador Remington Compact'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 25,
             'stock' => 8,
             'short_detail' => 'Secador de pelo Plegable Remington',
@@ -325,8 +325,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Remington Silk',
             'slug' => Str::slug('Secador Remington Silk'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 55,
             'stock' => 15,
             'short_detail' => 'Secador de pelo Profesional Remington Silk, Iónico, 2400W',
@@ -348,8 +348,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Solac Hair & Go',
             'slug' => Str::slug('Solac Hair & Go'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 24,
+            'category_id' => 3,
+            'subcategory_id' => 42,
             'price' => 46,
             'stock' => 12,
             'short_detail' => 'Secador de pelo Plegable Solac, 2000W',
@@ -373,7 +373,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Atornillador BlackAndDecker BCF611CK'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 14,
+            'subcategory_id' => 35,
             'price' => 38,
             'stock' => 12,
             'short_detail' => 'Atornillador BlackAndDecker, Carga rápida, Naranja',
@@ -390,14 +390,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Peso:</strong> 680g.</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'tools/drill/blackdecker_BCF611CK/blackdecker_BCF611CK.jpg',
+            'image' => 'tools/screwdriver/blackdecker_BCF611CK/blackdecker_BCF611CK.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Atornillador Bosch IXO',
             'slug' => Str::slug('Atornillador Bosch IXO'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 14,
+            'subcategory_id' => 35,
             'price' => 52,
             'stock' => 12,
             'short_detail' => 'Atornillador Bosch Home and Garden, Classic Green',
@@ -414,14 +414,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Peso:</strong> 340g.</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'tools/drill/bosch_IXO/bosch_IXO.jpg',
+            'image' => 'tools/screwdriver/bosch_IXO/bosch_IXO.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Atornillador Bosch GSR 12V-15',
             'slug' => Str::slug('Atornillador Bosch GSR 12V-15'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 14,
+            'subcategory_id' => 35,
             'price' => 133,
             'stock' => 10,
             'short_detail' => 'Atornillador Bosch Profesional, Azul',
@@ -439,14 +439,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Pack:</strong> Maletín + 39 piezas</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'tools/drill/bosch_GSR12-15/bosch_GSR12-15.jpg',
+            'image' => 'tools/screwdriver/bosch_GSR12-15/bosch_GSR12-15.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Atornillador Deko DKCD20XL01',
             'slug' => Str::slug('Atornillador Deko DKCD20XL01'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 14,
+            'subcategory_id' => 35,
             'price' => 45,
             'stock' => 20,
             'short_detail' => 'Atornillador Deko, Inhalámbrico, 20V',
@@ -464,7 +464,7 @@ class ProductSeeder extends Seeder
                 <li><strong>Pack:</strong> 13 piezas</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'tools/drill/deko_DKCD20XL01/deko_DKCD20XL01.jpg',
+            'image' => 'tools/screwdriver/deko_DKCD20XL01/deko_DKCD20XL01.jpg',
         ]);
         //Metros
         $product[] = Product::create([
@@ -472,7 +472,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Bellota 50011'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 12,
             'stock' => 20,
             'short_detail' => 'Flexómetro Bellota Standard 5M',
@@ -493,7 +493,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Fisco TK'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 32,
             'stock' => 31,
             'short_detail' => 'Flexómetro Fisco 3M/5M/8M',
@@ -514,7 +514,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Milwaukee'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 20,
             'stock' => 20,
             'short_detail' => 'Flexómetro Milwaukee 5M/8M',
@@ -535,7 +535,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley DualLock 3M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 8,
             'stock' => 25,
             'short_detail' => 'Flexómetro Stanley DualLock 3M',
@@ -557,7 +557,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley DualLock 5M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 9,
             'stock' => 25,
             'short_detail' => 'Flexómetro Stanley DualLock 5M',
@@ -579,7 +579,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley DualLock 8M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' =>36,
             'price' => 15,
             'stock' => 25,
             'short_detail' => 'Flexómetro Stanley DualLock 8M',
@@ -602,7 +602,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley Classic PowerLock Classic 3M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 12,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley PowerLock Classic 3M',
@@ -625,7 +625,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley PowerLock Classic 5M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 25,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley PowerLock Classic 5M',
@@ -648,7 +648,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley PowerLock Classic 10M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 30,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley PowerLock Classic 10M',
@@ -671,7 +671,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley Tylon 5M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 9,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley Tylon 5M',
@@ -694,7 +694,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Flexómetro Stanley Tylon 8M'),
             'status' => 1,
             'category_id' => 2,
-            'subcategory_id' => 15,
+            'subcategory_id' => 36,
             'price' => 14.56,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley Tylon 8M',
@@ -717,7 +717,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Camiseta Icon Futura'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 9,
+            'subcategory_id' => 30,
             'price' => 14,
             'stock' => 30,
             'short_detail' => 'Camiseta para hombre',
@@ -730,7 +730,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Camiseta SWSH'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 9,
+            'subcategory_id' => 30,
             'price' => 14,
             'stock' => 30,
             'short_detail' => 'Camiseta de manga corta para mujer SwooShwear',
@@ -743,7 +743,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Camiseta Dri-fit Strike'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 9,
+            'subcategory_id' => 30,
             'price' => 35,
             'stock' => 30,
             'short_detail' => 'Camiseta deportiva para mujer',
@@ -763,7 +763,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Camiseta FC Barcelona'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 9,
+            'subcategory_id' => 30,
             'price' => 101,
             'stock' => 30,
             'short_detail' => 'Camiseta para mujer, equipación oficial FC Barcelona 2021/2022',
@@ -782,7 +782,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Vestido de mujer Berylove'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 11,
+            'subcategory_id' => 32,
             'price' => 55,
             'stock' => 10,
             'short_detail' => 'Vestido Berylove para eventos:fiestas, bodas...',
@@ -805,7 +805,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Vestido Lápiz Grace Karin'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 11,
+            'subcategory_id' => 32,
             'price' => 66,
             'stock' => 15,
             'short_detail' => 'Vestido Lápiz Grace Karin para eventos:fiestas, bodas...',
@@ -826,7 +826,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Vestido Vintage Grace Karin'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 11,
+            'subcategory_id' => 32,
             'price' => 66,
             'stock' => 15,
             'short_detail' => 'Vestido plisado Grace Karin para eventos:fiestas, bodas...',
@@ -847,7 +847,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Vestido de mujer Lacoste'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 11,
+            'subcategory_id' => 32,
             'price' => 66,
             'stock' => 15,
             'short_detail' => 'Vestido polo de mujer Lacoste',
@@ -868,7 +868,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Vestido de mujer Ever-Pretty'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 11,
+            'subcategory_id' => 32,
             'price' => 57.5,
             'stock' => 15,
             'short_detail' => 'Vestido de Fiesta Ever-Pretty',
@@ -889,7 +889,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug('Vestido murciélago Grace Karin'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 11,
+            'subcategory_id' => 32,
             'price' => 42,
             'stock' => 25,
             'short_detail' => 'Vestido murciélago de mujer',
@@ -909,7 +909,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Levi's 501 Ironwood Overt"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 65,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Ironwood Overt",
@@ -929,7 +929,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Levi's 501 Black 80701"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Black 80701",
@@ -949,7 +949,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Levi's 501 Canyon Kings"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Canyon Kings",
@@ -969,7 +969,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Levi's 501 Levis Marlon"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Levis Marlon",
@@ -989,7 +989,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Pepe Jeans Stanley Jeans"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Stanley Jeans Denim",
@@ -1009,7 +1009,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Pepe Jeans Kingston Zip"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 62,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Kingston Zip 000 Denim",
@@ -1029,7 +1029,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Pepe Jeans Finsbury Jeans"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 42,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Finsbury Jeans 000 Denim",
@@ -1049,7 +1049,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Lee Straight Fit Xm Jeans"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Lee Straight Fit Xm Jeans Maddox",
@@ -1069,7 +1069,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Lee Elly Jeans Dark Daisy"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Lee Elly Jeans Dark Daisy",
@@ -1089,7 +1089,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Pepe Jeans Regent Jeans Denim"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Regent Jeans Denim",
@@ -1109,7 +1109,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Vaqueros Pepe Mary Regent Jeans Denim"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 10,
+            'subcategory_id' => 31,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Mary Jeans Denim",
@@ -1129,8 +1129,8 @@ class ProductSeeder extends Seeder
             'name' => 'Lavadora Balay 3TS885BE',            
             'slug' => Str::slug('Lavadora Balay 3TS885BE'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 20,
+            'category_id' => 3,
+            'subcategory_id' => 38,
             'price' => 480,
             'stock' => 7,
             'short_detail' => 'Lavadora Balay 3TS885BE, Carga frontal, Blanco',
@@ -1153,8 +1153,8 @@ class ProductSeeder extends Seeder
             'name' => 'Lavadora Indesit EWC61251WSPTN',            
             'slug' => Str::slug('Lavadora Indesit EWC61251WSPTN'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 20,
+            'category_id' => 3,
+            'subcategory_id' => 38,
             'price' => 278,
             'stock' => 7,
             'short_detail' => 'Lavadora Indesit EWC61251WSPTN, Carga frontal, Blanco',
@@ -1177,8 +1177,8 @@ class ProductSeeder extends Seeder
             'name' => 'Lavadora Whirpool FFB8458WV',            
             'slug' => Str::slug('Lavadora Whirpool FFB8458WV'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 20,
+            'category_id' => 3,
+            'subcategory_id' => 38,
             'price' => 525,
             'stock' => 7,
             'short_detail' => 'Lavadora Whirpool FFB8458WV, Carga frontal, Blanco',
@@ -1201,8 +1201,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa de inducción Balay 3EB865FR',            
             'slug' => Str::slug('Placa de inducción Balay 3EB865FR'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 21,
+            'category_id' => 3,
+            'subcategory_id' => 39,
             'price' => 350,
             'stock' => 7,
             'short_detail' => 'Placa de inducción Balay 3EB865FR, 3 zonas, negro',
@@ -1226,8 +1226,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa de fogones Beko HIGG64103SX',            
             'slug' => Str::slug('Placa de fogones Beko HIGG64103SX'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 21,
+            'category_id' => 3,
+            'subcategory_id' => 39,
             'price' => 85,
             'stock' => 7,
             'short_detail' => 'Placa de fogones Beko HIGG64103SX, 4 fuegos, Gas, Inox',
@@ -1249,8 +1249,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa vitrocerámica Teka TZ6415',            
             'slug' => Str::slug('Placa vitrocerámica Teka TZ6415'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 21,
+            'category_id' => 3,
+            'subcategory_id' => 39,
             'price' => 198,
             'stock' => 15,
             'short_detail' => 'Placa vitrocerámica Teka TZ6415, 4 zonas, negro',
@@ -1274,8 +1274,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa vitrocerámica Candy CH63CC',            
             'slug' => Str::slug('Placa vitrocerámica Candy CH63CC'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 21,
+            'category_id' => 3,
+            'subcategory_id' => 39,
             'price' => 176,
             'stock' => 30,
             'short_detail' => 'Placa vitrocerámica Candy CH63CC, 3 zonas, negro',
@@ -1298,8 +1298,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Rowenta Swift Power RO2981',            
             'slug' => Str::slug('Aspiradora Rowenta Swift Power RO2981'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 22,
+            'category_id' => 3,
+            'subcategory_id' => 40,
             'price' => 115,
             'stock' => 10,
             'short_detail' => 'Aspiradora Rowenta Swift Power Total Care, 1.5L, Multicolor',
@@ -1321,8 +1321,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Cecotec Vertical Conga Popstar',            
             'slug' => Str::slug('Aspiradora Cecotec Vertical Conga Popstar'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 22,
+            'category_id' => 3,
+            'subcategory_id' => 40,
             'price' => 115,
             'stock' => 10,
             'short_detail' => 'Aspiradora Cecotec Vertical, 800ML, Multicolor',
@@ -1345,8 +1345,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Orbegozo Ap 8030',
             'slug' => Str::slug('Aspiradora Orbegozo Ap 8030'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 22,
+            'category_id' => 3,
+            'subcategory_id' => 40,
             'price' => 115,
             'stock' => 10,
             'short_detail' => 'Aspiradora Orbegozo Ap 8030, 2L, Negro y azul',
@@ -1369,8 +1369,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Karcher 1000W',
             'slug' => Str::slug('Aspiradora Karcher 1000W'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 22,
+            'category_id' => 3,
+            'subcategory_id' => 40,
             'price' => 85,
             'stock' => 10,
             'short_detail' => 'Aspiradora Karcher 1000W, Seco y húmedo, 17L, Amarillo, con ruedas',
@@ -1391,8 +1391,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Xiaomi Robot Vacuum',
             'slug' => Str::slug('Aspiradora Xiaomi Robot Vacuum'),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 22,
+            'category_id' => 3,
+            'subcategory_id' => 40,
             'price' => 200,
             'stock' => 10,
             'short_detail' => 'Aspiradora Xiaomi Robot Vacuum, Fregasuelos, Blanco, navegación inteligente',
@@ -1416,8 +1416,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador sobremesa HP Victus 15L',
             'slug' => Str::slug('Ordenador sobremesa HP Victus 15L'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 29,
+            'category_id' => 5,
+            'subcategory_id' => 47,
             'price' => 1100,
             'stock' => 10,
             'short_detail' => 'Ordenador sobremesa HP Victus 15L, 5700G, 16GB, 1TB + 512SSD',
@@ -1446,8 +1446,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador sobremesa IdeaCentre AIO 3',
             'slug' => Str::slug('Ordenador sobremesa IdeaCentre AIO 3'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 29,
+            'category_id' => 5,
+            'subcategory_id' => 47,
             'price' => 650,
             'stock' => 10,
             'short_detail' => 'Ordenador sobremesa IdeaCentre AIO 3, 4500U, 8GB, 512 SSD, Windows 10 Home',
@@ -1476,8 +1476,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador sobremesa MSI mag Infinite',
             'slug' => Str::slug('Ordenador sobremesa MSI mag Infinite'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 29,
+            'category_id' => 5,
+            'subcategory_id' => 47,
             'price' => 1439,
             'stock' => 10,
             'short_detail' => 'Ordenador sobremesa MSI mag Infinite, i7 10700, 16GB, 1TB SSD, GeForce RTX 3060, Windows 10 Home',
@@ -1505,8 +1505,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador portátil HP Victus 16-e0090ns',
             'slug' => Str::slug('Ordenador portátil HP Victus 16-e0090ns'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 30,
+            'category_id' => 5,
+            'subcategory_id' => 48,
             'price' => 999,
             'stock' => 10,
             'short_detail' => 'Ordenador portátil HP Victus 16-e0090ns, 5800H, 16GB, 512GB SSD, RTX 3050Ti',
@@ -1537,8 +1537,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador portátil MSI Katana GF66 12UD-081XES',
             'slug' => Str::slug('Ordenador portátil MSI Katana GF66 12UD-081XES'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 30,
+            'category_id' => 5,
+            'subcategory_id' => 48,
             'price' => 999,
             'stock' => 10,
             'short_detail' => 'Ordenador portátil MSI Katana GF66 12UD-081XES, i7 12700H, 16GB, 512GB SSD, RTX 3050Ti',
@@ -1569,8 +1569,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador portátil Acer Nitro AN515-57-75M9',
             'slug' => Str::slug('Ordenador portátil Acer Nitro AN515-57-75M9'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 30,
+            'category_id' => 5,
+            'subcategory_id' => 4,
             'price' => 1001,
             'stock' => 10,
             'short_detail' => 'Ordenador portátil Acer Nitro AN515-57-75M9, i7 11800H, 16GB, 512GB SSD, RTX 3050Ti',
@@ -1601,8 +1601,8 @@ class ProductSeeder extends Seeder
             'name' => 'Disco duro Seagate Barracuda 3.5"',
             'slug' => Str::slug('Disco duro Seagate Barracuda 3.5"'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 31,
+            'category_id' => 5,
+            'subcategory_id' => 49,
             'price' => 45,
             'stock' => 10,
             'short_detail' => 'Disco duro Seagate Barracuda 3.5", 1TB SATA3',
@@ -1629,8 +1629,8 @@ class ProductSeeder extends Seeder
             'name' => 'Disco duro Samsung 870 EVO',
             'slug' => Str::slug('Disco duro Samsung 870 EVO'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 31,
+            'category_id' => 5,
+            'subcategory_id' => 49,
             'price' => 110,
             'stock' => 10,
             'short_detail' => 'Disco duro Samsung 870 EVO SSD 2.5", 1TB SATA3, Negro',
@@ -1657,8 +1657,8 @@ class ProductSeeder extends Seeder
             'name' => 'Disco duro Kioxia Exceria 480GB',
             'slug' => Str::slug('Disco duro Kioxia Exceria 480GB'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 31,
+            'category_id' => 5,
+            'subcategory_id' => 49,
             'price' => 110,
             'stock' => 10,
             'short_detail' => 'Disco duro Kioxia Exceria 2.5", 480GB SATA3, Negro',
@@ -1685,8 +1685,8 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Cellfast Economic',
             'slug' => Str::slug('Manguera de jardín Cellfast Economic'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 33,
+            'category_id' => 6,
+            'subcategory_id' => 51,
             'price' => 25,
             'stock' => 10,
             'short_detail' => 'Manguera de jardín Cellfast Economic, 1/2" 20M',
@@ -1707,8 +1707,8 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Natrain',
             'slug' => Str::slug('Manguera de jardín Natrain'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 33,
+            'category_id' => 6,
+            'subcategory_id' => 51,
             'price' => 22,
             'stock' => 10,
             'short_detail' => 'Manguera de jardín Natrain, 15M',
@@ -1728,8 +1728,8 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Gardena Comfort FLEX',
             'slug' => Str::slug('Manguera de jardín Gardena Comfort FLEX'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 33,
+            'category_id' => 6,
+            'subcategory_id' => 51,
             'price' => 38,
             'stock' => 10,
             'short_detail' => 'Manguera de jardín Gardena Comfort FLEX, 15M',
@@ -1750,8 +1750,8 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina hinchable INTEX Easy Set 366 X 76',
             'slug' => Str::slug('Piscina hinchable INTEX Easy Set 366 X 76'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 34,
+            'category_id' => 6,
+            'subcategory_id' => 52,
             'price' => 76,
             'stock' => 10,
             'short_detail' => 'Piscina hinchable INTEX Easy Set 366 X 76, circular',
@@ -1773,8 +1773,8 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina hinchable Bestrip 300 X 170',
             'slug' => Str::slug('Piscina hinchable Bestrip 300 X 170'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 34,
+            'category_id' => 6,
+            'subcategory_id' => 52,
             'price' => 89,
             'stock' => 10,
             'short_detail' => 'Piscina hinchable Bestrip 300 X 170, rectangular',
@@ -1796,8 +1796,8 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina desmontable INTEX 457X122',
             'slug' => Str::slug('Piscina desmontable INTEX 457X122'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 34,
+            'category_id' => 6,
+            'subcategory_id' => 52,
             'price' => 89,
             'stock' => 10,
             'short_detail' => 'Piscina desmontable INTEX 457X122, circular',
@@ -1819,8 +1819,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped Bosch Home and Garden ARM 3200',
             'slug' => Str::slug('Cortacésped Bosch Home and Garden ARM 3200'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 35,
+            'category_id' => 6,
+            'subcategory_id' => 53,
             'price' => 135,
             'stock' => 10,
             'short_detail' => 'Cortacésped Bosch Home and Garden ARM 3200, Eléctrico, Verde',
@@ -1848,8 +1848,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped Einhell GC EM 1536',
             'slug' => Str::slug('Cortacésped Einhell GC EM 1536'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 35,
+            'category_id' => 6,
+            'subcategory_id' => 53,
             'price' => 89,
             'stock' => 10,
             'short_detail' => 'Cortacésped Einhell GC EM 1536, Eléctrico, Rojo y negro',
@@ -1876,8 +1876,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped BlackAndDecker BEMW351',
             'slug' => Str::slug('Cortacésped BlackAndDecker BEMW351'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 35,
+            'category_id' => 6,
+            'subcategory_id' => 53,
             'price' => 78,
             'stock' => 10,
             'short_detail' => 'Cortacésped BlackAndDecker BEMW351, Eléctrico, Negro y naranja',
@@ -1904,8 +1904,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped Greenworks G40LM35K',
             'slug' => Str::slug('Cortacésped Greenworks G40LM35K'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 35,
+            'category_id' => 6,
+            'subcategory_id' => 53,
             'price' => 78,
             'stock' => 10,
             'short_detail' => 'Cortacésped Greenworks G40LM35K, Eléctrico, Verde y negro',
@@ -1932,8 +1932,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cepillo de dientes Oral-B Pro 3500',
             'slug' => Str::slug('Cepillo de dientes Oral-B Pro 3500'),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 37,
+            'category_id' => 7,
+            'subcategory_id' => 55,
             'price' => 55,
             'stock' => 10,
             'short_detail' => 'Cepillo de dientes Oral-B Pro 3500, eléctrico, negro',
@@ -1957,8 +1957,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cepillo de dientes Xiaomi MI SMART T500',
             'slug' => Str::slug('Cepillo de dientes Xiaomi MI SMART T500'),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 37,
+            'category_id' => 7,
+            'subcategory_id' => 55,
             'price' => 45,
             'stock' => 10,
             'short_detail' => 'Cepillo de dientes Xiaomi MI SMART T500, eléctrico, blanco',
@@ -1983,8 +1983,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cepillo de dientes Philips Sonicare 2',
             'slug' => Str::slug('Cepillo de dientes Philips Sonicare 2'),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 37,
+            'category_id' => 7,
+            'subcategory_id' => 55,
             'price' => 59,
             'stock' => 10,
             'short_detail' => 'Cepillo de dientes Philips Sonicare 2, eléctrico, blanco',
@@ -2008,8 +2008,8 @@ class ProductSeeder extends Seeder
             'name' => 'Pintalabios OULAC Metálico',
             'slug' => Str::slug('Pintalabios OULAC Metálico'),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 38,
+            'category_id' => 7,
+            'subcategory_id' => 56,
             'price' => 12,
             'stock' => 10,
             'short_detail' => 'Pintalabios OULAC Metálico, impermeable, larga duración',
@@ -2030,7 +2030,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Polo Kappa Uomo Peleot"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 13,
+            'subcategory_id' => 34,
             'price' => 35,
             'stock' => 20,
             'short_detail' => "Polo Kappa Uomo Peleot, Manga corta",
@@ -2050,7 +2050,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Polo Levi's Mineral Black"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 13,
+            'subcategory_id' => 34,
             'price' => 38,
             'stock' => 20,
             'short_detail' => "Polo Levi's Mineral Black, Manga corta",
@@ -2070,7 +2070,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Polo Lacoste DH3201"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 13,
+            'subcategory_id' => 34,
             'price' => 92,
             'stock' => 20,
             'short_detail' => "Polo Lacoste, Manga corta, Hombre",
@@ -2090,7 +2090,7 @@ class ProductSeeder extends Seeder
             'slug' => Str::slug("Polo Adidas Tiro17"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 13,
+            'subcategory_id' => 34,
             'price' => 32,
             'stock' => 20,
             'short_detail' => "Polo Adidas Tiro17, Manga corta, Hombre",
@@ -2105,6 +2105,978 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_azul_marino.jpg',
         ]);
+        
+        $product[] = Product::create([
+            'name' => "Adidas Get Ready",
+            'slug' => Str::slug("Adidas Get Ready"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 39,
+            'price' => 14.99,
+            'stock' => 20,
+            'short_detail' => "Adidas Get Ready Eau de Toilette, Mujer",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Adidas</li>
+                <li><strong>Fragancia:&nbsp;</strong>Floral</li>                
+                <li><strong>Tipo:&nbsp;</strong>Mujer</li>
+                <li><strong>Volumen:&nbsp;</strong>50ml</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/fragances/adidas_getready/adidas_getready.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "BLACK OPIUM NEON",
+            'slug' => Str::slug("BLACK OPIUM NEON"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 57,
+            'price' => 54.50,
+            'stock' => 20,
+            'short_detail' => "BLACK OPIUM NEON WATER, Mujer",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Yves Saint Laurent</li>
+                <li><strong>Fragancia:&nbsp;</strong>Lavanda</li>                
+                <li><strong>Tipo:&nbsp;</strong>Mujer</li>
+                <li><strong>Volumen:&nbsp;</strong>75ml</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/fragances/black_opium_neon/black_opium_neon.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "HUGO BOSS",
+            'slug' => Str::slug("HUGO BOSS"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 57,
+            'price' => 83.39,
+            'stock' => 20,
+            'short_detail' => "HUGO BOSS,vaporizador de Hombre",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>BOSS</li>
+                <li><strong>Fragancia:&nbsp;</strong>Dulce</li>                
+                <li><strong>Tipo:&nbsp;</strong>Hombre</li>
+                <li><strong>Volumen:&nbsp;</strong>100ml</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/fragances/adidas_getready/adidas_getready.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Victoria Secret PURE SEDUCTION",
+            'slug' => Str::slug("Victoria Secret PURE SEDUCTION"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 57,
+            'price' => 32.49,
+            'stock' => 20,
+            'short_detail' => "Victoria Secret NEW PURE SEDUCTION FRAGRANCE MIST",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Victoria Secret</li>
+                <li><strong>Tipo:&nbsp;</strong>Mujer</li>
+                <li><strong>Volumen:&nbsp;</strong>250ml</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/fragances/victoria_secret_pure_seduction/victoria_secret_pure_seduction.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Calvin Klein CK IN2U",
+            'slug' => Str::slug("Calvin Klein CK IN2U"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 57,
+            'price' => 26.16,
+            'stock' => 20,
+            'short_detail' => "Calvin Klein CK IN2U Eau de Toilette",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Calvin Klein</li>
+                <li><strong>Fragancia:&nbsp;</strong>Cítrico</li>
+                <li><strong>Tipo:&nbsp;</strong>Mujer</li>
+                <li><strong>Volumen:&nbsp;</strong>50ml</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/fragances/calvin_klein_ck_in2u/calvin_klein_ck_in2u.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Taladro percutor Einhell",
+            'slug' => Str::slug("Taladro percutor Einhell"),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 37,
+            'price' => 77.07,
+            'stock' => 50,
+            'short_detail' => "Taladro percutor Einhell, batería",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Einhell</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería Li-Ion,18V</li>
+                <li><strong>Velocidad:&nbsp;</strong>260RPM</li>
+                <li><strong>Color:&nbsp;</strong>Rojo y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal</li>
+                <li><strong>Dimensiones:&nbsp;</strong>28.3L X 6.7W X20H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>1.6Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Martillo perforador Bosch Professional",
+            'slug' => Str::slug("Martillo perforador Bosch Professional"),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 37,
+            'price' => 299,
+            'stock' => 40,
+            'short_detail' => "Martillo perforador Bosch Professional GBH 2-28F",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Bosch</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC cable</li>
+                <li><strong>Velocidad:&nbsp;</strong>900RPM</li>
+                <li><strong>Color:&nbsp;</strong>Azul y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>880W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>44 X 40 X 20H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>3.1Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/bosch_gbh_2_28F/bosch_gbh_2_28F.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Martillo perforador BlackAndDecker BEHS03K-QS",
+            'slug' => Str::slug("Martillo perforador BlackAndDecker BEHS03K-QS"),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 37,
+            'price' => 166,
+            'stock' => 30,
+            'short_detail' => "Martillo perforador BlackAndDecker BEHS03K-QS, SDS-PLUS, Percutor y cincelador",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>BlackAndDecker</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>
+                <li><strong>Velocidad:&nbsp;</strong>900RPM</li>
+                <li><strong>Color:&nbsp;</strong>Naranja y negro</li>
+                <li><strong>Material:&nbsp;</strong>Acero, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>1250W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>41.5L X 13.5W X 33.3H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>7.5Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Taladro percutor Casals ID500REA",
+            'slug' => Str::slug("Taladro percutor Casals ID500REA"),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 37,
+            'price' => 58.39,
+            'stock' => 30,
+            'short_detail' => "Taladro percutor Casals ID500REA, agarre Soft-touch",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Casals</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>
+                <li><strong>Velocidad:&nbsp;</strong>3000RPM</li>
+                <li><strong>Color:&nbsp;</strong>Rojo y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>500W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>28L X 7W X 24H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>2.2Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Taladro percutor DeWalt DWD024KS",
+            'slug' => Str::slug("Taladro percutor DeWalt DWD024KS"),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 37,
+            'price' => 105,
+            'stock' => 25,
+            'short_detail' => "Taladro percutor DeWalt DWD024KS-QS",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>DeWalt</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>                
+                <li><strong>Color:&nbsp;</strong>Amarillo y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>701W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>25L X 7.5W X 18H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>1.8Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_dewalt_DWD024KS/hammer_drill_dewalt_DWD024KS.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Auriculares inhalámbricos Sony WH-CH510",
+            'slug' => Str::slug("Auriculares inhalámbricos Sony WH-CH510"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 60,
+            'price' => 48.99,
+            'stock' => 25,
+            'short_detail' => "Auriculares inhalámbricos Sony WH-CH510, Negros",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Sony</li>                
+                
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Circumaurales</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>
+                <li><strong>Dimensiones:&nbsp;</strong>7 X 17.2 X 16 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>132g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/earphones/earphones_sony_wh_ch510/earphones_sony_wh_ch510.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Auriculares inhalámbricos JBL TUNE 510BT",
+            'slug' => Str::slug("Auriculares inhalámbricos JBL TUNE 510BT"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 60,
+            'price' => 45,
+            'stock' => 25,
+            'short_detail' => "Auriculares inhalámbricos JBL TUNE 510BT, plegables",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>JBL</li>                
+                
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Supraaurales</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Aluminio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>27 X 23 X 26 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>159g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/earphones/earphones_jbl_tune_510bt/earphones_jbl_tune_510bt.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Auriculares inhalámbricos TOZO A2",
+            'slug' => Str::slug("Auriculares inhalámbricos TOZO A2"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 60,
+            'price' => 22.80,
+            'stock' => 58,
+            'short_detail' => "Auriculares inhalámbricos TOZO A2, IPX5, Negro",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>TOZO</li>                
+                
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Intraaurales</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>
+                <li><strong>Dimensiones:&nbsp;</strong>8.31 X 8.1 X 4.19 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>91g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/earphones/earphones_tozo_a2/earphones_tozo_a2.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Auriculares inhalámbricos Xiaomi Redmi Buds 3",
+            'slug' => Str::slug("Auriculares inhalámbricos Xiaomi Redmi Buds 3"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 60,
+            'price' => 25,
+            'stock' => 50,
+            'short_detail' => "Auriculares inhalámbricos Xiaomi Redmi Buds 3 Lite, Negro",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Intraaurales</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Silicona</li>
+                <li><strong>Dimensiones:&nbsp;</strong>2.45 X 1.67 X 2.46 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>90g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/earphones/earphones_xiaomi_redmi_buds3_lite/earphones_xiaomi_redmi_buds3_lite.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Auriculares inhalámbricos AirPods Pro",
+            'slug' => Str::slug("Auriculares inhalámbricos AirPods Pro"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 60,
+            'price' => 299,
+            'stock' => 20,
+            'short_detail' => "Auriculares inhalámbricos AirPods Pro, 2ª generación",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Apple</li>
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Intraaurales</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>
+                <li><strong>Dimensiones:&nbsp;</strong>24 X 21 X 30.9 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>240g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/earphones/earphones_airpods_pro2/earphones_airpods_pro2.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Auriculares inhalámbricos Sony MDR-RF811RK",
+            'slug' => Str::slug("Auriculares inhalámbricos Sony MDR-RF811RK"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 60,
+            'price' => 65,
+            'stock' => 20,
+            'short_detail' => "Auriculares inhalámbricos Sony MDR-RF811RK, RadioFrecuencia (RF)",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Sony</li>
+                <li><strong>Conexión:&nbsp;</strong>Bluetooth</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería litio</li>
+                <li><strong>Tipo:&nbsp;</strong>Circumaurales</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>                
+                <li><strong>Peso:&nbsp;</strong>272g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/earphones/earphones_sony_mdr_rf811rk/earphones_sony_mdr_rf811rk.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Xiaomi Smart TV P1 32",
+            'slug' => Str::slug("Xiaomi Smart TV P1 32"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 58,
+            'price' => 224,
+            'stock' => 20,
+            'short_detail' => "Xiaomi Smart TV P1 32,HD Led 32 pulgadas",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                
+                <li><strong>Resolución:&nbsp;</strong>1366 X 768 (HD Ready/720p)</li>
+                <li><strong>Tipo:&nbsp;</strong>LCD</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth, Wifi, USB, Ethernet, HDMI</li>
+                <li><strong>Conexiones:&nbsp;</strong>3xHDMI,2xUSB2.0,AV,Ethernet Lan (RJ45), WLan, salida auriculares</li>
+                <li><strong>Controles:&nbsp;</strong>Mando a distancia Bluetooth con 2 micrófonos</li>
+                <li><strong>Potencia:&nbsp;</strong>45W</li>
+                <li><strong>Frecuencia:&nbsp;</strong>60Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Plástico</li>
+                <li><strong>Tamaño:&nbsp;</strong>32\", 81cm.</li>
+                <li><strong>Dimensiones:&nbsp;</strong>733 X 48 X 180 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>4Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/tv/xiaomi_smarttv_p1_32/xiaomi_smarttv_p1_32.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Samsung TV Crystal 43BU8000",
+            'slug' => Str::slug("Samsung TV Crystal 43BU8000"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 58,
+            'price' => 224,
+            'stock' => 20,
+            'short_detail' => "Samsung TV Crystal 2022 43BU8000,4K 43\", Alexa integrada",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Samsung</li>                
+                <li><strong>Resolución:&nbsp;</strong>4K</li>
+                <li><strong>Tipo:&nbsp;</strong>UHD</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth, Wifi, Ethernet, HDMI</li>                
+                <li><strong>Controles:&nbsp;</strong>Mando a distancia con carga solar</li>                
+                <li><strong>Frecuencia:&nbsp;</strong>60Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>                
+                <li><strong>Tamaño:&nbsp;</strong>43\"</li>
+                <li><strong>Dimensiones:&nbsp;</strong>19.69 X 10.8 X 1.91 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>9Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/tv/samsung_crystal_2022_32BU8000/samsung_crystal_2022_32BU8000.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "LG TV 55UQ70006LB",
+            'slug' => Str::slug("LG TV 55UQ70006LB"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 58,
+            'price' => 459,
+            'stock' => 20,
+            'short_detail' => "LG TV 55UQ70006LB,4K 55\",Gen5.",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>LG</li>                
+                <li><strong>Resolución:&nbsp;</strong>4K</li>
+                <li><strong>Tipo:&nbsp;</strong>LCD</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth, Wifi, Ethernet, HDMI</li>                
+                <li><strong>Controles:&nbsp;</strong>Mando a distancia con accesos directos a Netflix, Prime Video</li>
+                <li><strong>Potencia:&nbsp;</strong>102W</li>
+                <li><strong>Frecuencia:&nbsp;</strong>60Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>                
+                <li><strong>Tamaño:&nbsp;</strong>43\"</li>
+                <li><strong>Dimensiones:&nbsp;</strong>8.99 X 123.6 X 71.8 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>11.2Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/tv/LG_TV_55UQ70006LB/LG_TV_55UQ70006LB.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Cecotec TV A1 Series ALU10043",
+            'slug' => Str::slug("Cecotec TV A1 Series ALU10043"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 58,
+            'price' => 333,
+            'stock' => 20,
+            'short_detail' => "Cecotec TV A1 Series ALU10043,4K 43\" UHD",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Cecotec</li>
+                <li><strong>Resolución:&nbsp;</strong>4K</li>
+                <li><strong>Tipo:&nbsp;</strong>LCD</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Ethernet, HDMI</li>                
+                <li><strong>Controles:&nbsp;</strong>Mando a distancia con accesos directos a Netflix, Prime Video, Youtube</li>
+                <li><strong>Potencia:&nbsp;</strong>92W</li>
+                <li><strong>Frecuencia:&nbsp;</strong>60Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>                
+                <li><strong>Tamaño:&nbsp;</strong>43\"</li>
+                <li><strong>Dimensiones:&nbsp;</strong>8.2 X 96.5 X 56 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>7.5Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/tv/cecotec_tv_a1_series_alu10043/cecotec_tv_a1_series_alu10043.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Asus TUF Gaming VG27AQ1A",
+            'slug' => Str::slug("Asus TUF Gaming VG27AQ1A"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 59,
+            'price' => 357.55,
+            'stock' => 15,
+            'short_detail' => "Asus TUF Gaming VG27AQ1A, 27\" LED IPS",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Asus</li>
+                <li><strong>Resolución:&nbsp;</strong>2560 x 1440</li>
+                <li><strong>Tipo:&nbsp;</strong>IPS</li>
+                <li><strong>Conexiones:&nbsp;</strong>2xHDMI, 2xUSB3.0,</li>
+                <li><strong>Potencia:&nbsp;</strong>35W</li>
+                <li><strong>Frecuencia:&nbsp;</strong>170Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>                
+                <li><strong>Tamaño:&nbsp;</strong>27\"</li>
+                <li><strong>Dimensiones:&nbsp;</strong>615 X 455 X 514 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>5.4Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/monitor/asus_tuf_gaming_vg27aq1a/asus_tuf_gaming_vg27aq1a.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Lenovo L27q-35",
+            'slug' => Str::slug("Lenovo L27q-35"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 59,
+            'price' => 223,
+            'stock' => 25,
+            'short_detail' => "Lenovo L27q-35, 27\"",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lenovo</li>
+                <li><strong>Resolución:&nbsp;</strong>2560 x 1440</li>
+                <li><strong>Tipo:&nbsp;</strong>VA</li>
+                <li><strong>Conexiones:&nbsp;</strong>2xHDMI, 2xUSB3.0,</li>
+                <li><strong>Potencia:&nbsp;</strong>22W</li>
+                <li><strong>Frecuencia:&nbsp;</strong>75Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>                
+                <li><strong>Tamaño:&nbsp;</strong>27\"</li>
+                <li><strong>Dimensiones:&nbsp;</strong>6.89 X 24.19 X 18.76 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>4.6Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/monitor/lenovo_l27q_35/lenovo_l27q_35.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Philips Gaming 27M1N3200VS",
+            'slug' => Str::slug("Philips Gaming 27M1N3200VS"),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 59,
+            'price' => 258,
+            'stock' => 25,
+            'short_detail' => "Philips Gaming 27M1N3200VS, 27\"",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Philips</li>
+                <li><strong>Resolución:&nbsp;</strong>1920 x 1080</li>
+                <li><strong>Tipo:&nbsp;</strong>VA</li>
+                <li><strong>Potencia:&nbsp;</strong>22W</li>
+                <li><strong>Frecuencia:&nbsp;</strong>165Hz</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>                
+                <li><strong>Tamaño:&nbsp;</strong>27\"</li>
+                <li><strong>Dimensiones:&nbsp;</strong>614 X 193 X 447 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>5.52Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'video/monitor/philips_gaming_27m1n3200vs/philips_gaming_27m1n3200vs.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Love Urban Beauty",
+            'slug' => Str::slug("Love Urban Beauty"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 56,
+            'price' => 35,
+            'stock' => 50,
+            'short_detail' => "Love Urban Beauty, 82 piezas",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Love Urban Beauty</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Dimensiones:&nbsp;</strong>25 X 17 X 9 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>350g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/makeup/love_urban_beauty/love_urban_beauty.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "ZMILE Cosmetics",
+            'slug' => Str::slug("ZMILE Cosmetics"),
+            'status' => 1,
+            'category_id' => 7,
+            'subcategory_id' => 56,
+            'price' => 19.20,
+            'stock' => 22,
+            'short_detail' => "ZMILE Cosmetics",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>ZMILE Cosmetics</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Dimensiones:&nbsp;</strong>9.2 X 12.1 X 2.8 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>190g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'personal_care/makeup/zmile_cosmetics/zmile_cosmetics.jpg',
+        ]);
+        //Subcategoriás de Tecnología
+        $product[] = Product::create([
+            'name' => "Amazfit Bip U Pro",
+            'slug' => Str::slug("Amazfit Bip U Pro"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 46,
+            'price' => 45.99,
+            'stock' => 52,
+            'short_detail' => "Amazfit Bip U Pro, Verde",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Amazfit</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>1.43\"</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Conexión:&nbsp;</strong>USB</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth</li>
+                <li><strong>GPS:&nbsp;</strong>Sí</li>
+                <li><strong>Batería:&nbsp;</strong>Litio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>4.09 X 3.55 X 1.14 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>32g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartwatches/amazfit_bip_u_pro/amazfit_bip_u_pro.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => "Samsung Galaxy Watch 4",
+            'slug' => Str::slug("Samsung Galaxy Watch 4"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 46,
+            'price' => 186,
+            'stock' => 25,
+            'short_detail' => "Samsung Galaxy Watch 4, versión ES",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Samsung</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>1.35\", Super AMOLED</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Conexión:&nbsp;</strong>USB</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth</li>
+                <li><strong>GPS:&nbsp;</strong>Sí</li>
+                <li><strong>Batería:&nbsp;</strong>Litio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>4.44 X 4.33 X 0.98 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>30.3g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartwatches/samsung_galaxy_watch4/samsung_galaxy_watch4.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Xiaomi Mi Smart Band 7",
+            'slug' => Str::slug("Xiaomi Mi Smart Band 7"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 46,
+            'price' => 65,
+            'stock' => 25,
+            'short_detail' => "Xiaomi Mi Smart Band 7,Negro",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>1.62\", Super AMOLED</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Conexión:&nbsp;</strong>USB, Magnética</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth</li>
+                <li><strong>GPS:&nbsp;</strong>No</li>
+                <li><strong>Batería:&nbsp;</strong>Litio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>10 X 2 X 0.5 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>110g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => "XINGHESF CS3",
+            'slug' => Str::slug("XINGHESF CS3"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 46,
+            'price' => 57.99,
+            'stock' => 25,
+            'short_detail' => "XINGHESF CS3,Rosa",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>XINGHESF</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>1.7\"</li>
+                <li><strong>Color:&nbsp;</strong>Rosa</li>
+                <li><strong>Conexión:&nbsp;</strong>USB, Magnética</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth</li>
+                <li><strong>GPS:&nbsp;</strong>Sí</li>
+                <li><strong>Batería:&nbsp;</strong>Litio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>3 X 2 X 1 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>160g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Kindle 2022",
+            'slug' => Str::slug("Kindle 2022"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 45,
+            'price' => 120,
+            'stock' => 20,
+            'short_detail' => "Nuevo Kindle modelo 2022",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Kindle</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6\"</li>
+                <li><strong>Resolución:&nbsp;</strong>300ppp</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Conexión:&nbsp;</strong>USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>16GB</li>
+                <li><strong>Batería:&nbsp;</strong>Litio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>157.8 X 108.6 X 8 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>158g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/ebooks/kindle_2022/kindle_2022.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => "Basic Lux 3",
+            'slug' => Str::slug("Basic Lux 3"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 45,
+            'price' => 120,
+            'stock' => 20,
+            'short_detail' => "Basic Lux 3 Ink Black POCKETBOOK",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>PocketBook</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6\"</li>
+                <li><strong>Resolución:&nbsp;</strong>758 x 1024</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Bluetooth, Wifi</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>8GB</li>
+                <li><strong>Batería:&nbsp;</strong>Litio</li>
+                <li><strong>Dimensiones:&nbsp;</strong>8 X 161 X 108 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>155g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/ebooks/basic_lux3/basic_lux3.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Kobo Nia",
+            'slug' => Str::slug("Kobo Nia"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 45,
+            'price' => 110,
+            'stock' => 20,
+            'short_detail' => "Kobo Nia eReader",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Kobo</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6\"</li>
+                <li><strong>Resolución:&nbsp;</strong>1024 x 758</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>8GB</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 1000mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>9.2 X 159.3 X 112.4 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>172g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/ebooks/kobo_nia/kobo_nia.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Xiaomi L83",
+            'slug' => Str::slug("Xiaomi L83"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 44,
+            'price' => 247.80,
+            'stock' => 20,
+            'short_detail' => "Xiaomi L83 Redmi Pad Tablet, Carga rápida",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>10.61\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>LCD</li>
+
+                <li><strong>Resolución:&nbsp;</strong>1200 x 2000</li>
+                <li><strong>Color:&nbsp;</strong>Gris</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth</li>
+                <li><strong>Procesador:&nbsp;</strong>Mediatek Helio G99</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>4GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>128GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>8MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>8MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 8000mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>25 X 7.37 X 0.7 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>445g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/tablets/xiaomi_L83/xiaomi_L83.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Lenovo Tab M10",
+            'slug' => Str::slug("Lenovo Tab M10"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 44,
+            'price' => 247.80,
+            'stock' => 20,
+            'short_detail' => "Lenovo Tab M10 Plus Gen3",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Lenovo</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>10.6\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>LCD</li>
+
+                <li><strong>Resolución:&nbsp;</strong>2000 x 1200</li>
+                <li><strong>Color:&nbsp;</strong>Gris</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth</li>
+                <li><strong>Procesador:&nbsp;</strong>Mediatek Helio G80</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>4GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>128GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>8MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>8MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 7500mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>251 X 158.8 X 7.45 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>465g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/tablets/lenovo_tab_m10/lenovo_tab_m10.webp',
+        ]);
+        $product[] = Product::create([
+            'name' => "Samsung Galaxy Tab S6",
+            'slug' => Str::slug("Samsung Galaxy Tab S6"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 44,
+            'price' => 247.80,
+            'stock' => 20,
+            'short_detail' => "Samsung Galaxy Tab S6 Lite",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Samsung</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>10.4\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>LCD</li>
+
+                <li><strong>Resolución:&nbsp;</strong>2000 x 1200</li>
+                <li><strong>Color:&nbsp;</strong>Azul</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth</li>
+                <li><strong>Procesador:&nbsp;</strong>Qualcomm Snapdragon 720G</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>4GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>64GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>5MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>8MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 7500mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>253 X 162 X 0.9 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>467g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/tablets/samsung_galaxy_tab_s6/samsung_galaxy_tab_s6.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Alcatel 1T 7",
+            'slug' => Str::slug("Alcatel 1T 7"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 44,
+            'price' => 247.80,
+            'stock' => 20,
+            'short_detail' => "Alcatel 1T 7",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Alcatel</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>7\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>LCD</li>
+
+                <li><strong>Resolución:&nbsp;</strong>1024 x 600</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth</li>
+                <li><strong>Procesador:&nbsp;</strong>Qualcomm MT8167</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>1GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>16GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>2MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>2MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 2580mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>18.9 X 11.1 X 0.91 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>250g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/tablets/alcatel_1t/alcatel_1t.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Xiaomi Redmi Note 11",
+            'slug' => Str::slug("Xiaomi Redmi Note 11"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 43,
+            'price' => 201,
+            'stock' => 20,
+            'short_detail' => "Xiaomi Redmi Note 11, Gris",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Xiaomi</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6.43\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>AMOLED</li>
+
+                <li><strong>Resolución:&nbsp;</strong>2400 x 1080</li>
+                <li><strong>Color:&nbsp;</strong>Gris</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth, NFC, Infrarrojo</li>
+                <li><strong>Procesador:&nbsp;</strong>Mediatek Helio G96</li>
+                <li><strong>Gráfica:&nbsp;</strong>ARM Mali-G57 MC2</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>6GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>128GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>16MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>50MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 5000mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>15.98 X 7.38 X 0.81 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>179g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smarthpnes/xiaomi_redmi_note_11/xiaomi_redmi_note_11.jpg',
+        ]);
+
         $count_product = count($product);
         /*
         for($i=0;$i<$count_product;$i++){

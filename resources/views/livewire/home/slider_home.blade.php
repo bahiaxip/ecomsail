@@ -7,9 +7,18 @@
 	<div class="md-slider-item" >
 		@if(config('ecomsail.full_slider') && config('ecomsail.full_slider') == 'on')
 		<div class="box_slider full_slider">
-			<div class="slider">
+			<div class="slider" style="position:relative">
+				@if(config('ecomsail.full_slider') && $slider->aux_image)
+				
+				<picture>
+					<source srcset="{{ url($slider->path_tag.$slider->image)}}" media="(min-width: 900px)">
+					<img src="{{ url($slider->path_tag.'/tv_home2.jpg')}}" alt="" class="img-fluid">
+				</picture>
+				@else
 				<img src="{{ url($slider->path_tag.$slider->image)}}" alt="" class="img-fluid">
-
+				@endif
+				@if(config('ecomsail.main_title') == 'on' 
+						|| config('ecomsail.aditional_title') == 'on' )
 				<div class="div_text">
 					<div class="text">
 						@if(config('ecomsail.main_title') == 'on')
@@ -20,6 +29,7 @@
 						@endif
 					</div>
 				</div>
+				@endif
 			</div>
 		</div>
 		@elseif(config('ecomsail.double_panel') && config('ecomsail.double_panel') == 'on')
@@ -42,6 +52,7 @@
 			<div class="col-lg-5 col-sm-12 dp_img">
 				<div class="img">
 					<img src="{{ url($slider->path_tag.$slider->image)}}" alt="" class="img-fluid">
+					
 					<div class="div_text">
 						<div class="text">
 							@if(config('ecomsail.main_title') == 'on')
@@ -52,6 +63,7 @@
 							@endif
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
