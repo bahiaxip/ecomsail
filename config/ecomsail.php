@@ -19,6 +19,8 @@ return [
 'full_slider' => 'on',
 'slider_height' => '400',
 'background_panel' => '#D3D3D3',
+'main_title' => 'on',
+'aditional_title' => 'on',
 'standard_tax' => '21',
 'reduce_tax' => '4',
 'zero_tax' => '0',

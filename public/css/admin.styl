@@ -881,6 +881,7 @@ body
 		margin auto
 		outline #D3D3D3 1px solid
 		padding 15px 0
+		
 		.slider
 			display flex
 			margin 5px auto
@@ -897,6 +898,7 @@ body
 			.div_image
 				align-items center
 				display flex
+				position relative
 				width 85%
 				.image
 					margin auto
@@ -913,6 +915,7 @@ body
 					p
 						font-size 15px
 			.actions
+				position relative
 				width 30%
 				button
 					display flex
@@ -932,6 +935,33 @@ body
 				width 40%
 			.mid.right
 				width 60%
+		
+		.aux_img
+			height 0
+			overflow hidden
+			transition height .5s linear
+			.div_image
+				align-items center
+				display flex
+				margin auto
+				width 85%
+				.image
+					margin auto
+					max-height 100px
+					min-height 75px
+		.aux_img.activ
+			height 100px
+			
+			
+			
+				
+/* edit carousel */
+.thumbnails
+	display flex
+	justify-content space-around
+	img
+		margin auto
+		max-height 64px
 		
 /* fin carousel */
 

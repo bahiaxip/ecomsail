@@ -87,7 +87,7 @@
         </ul>
     </div>
     <div class="sliders mtop16">
-        @foreach($sliders as $slider)
+        @foreach($sliders as $key => $slider)
     	<div class="row mtop16 box_slider" >
     		<div class="slider">
                 <div class="mid left">
@@ -113,6 +113,14 @@
                     @if($slider->image)                
                         <img  src="{{url($slider->path_tag.$slider->image)}}" alt="" class="image">
                     @endif
+                    @if($slider->aux_image)
+                        <div style="position:absolute; bottom:10px;right:20px">
+                            <button class="btn btn-sm btn_pry" onclick="showAuxImage({{$key}})">Auxiliar
+                            {{-- <span>&#x02228;</span> --}}
+                            <span style="margin:auto">&#11015;</span>
+                            </button>
+                        </div>
+                        @endif
                     </div>
                     <div class="actions_hidden">
                         @if(helper()->testRole($role_user,'edit_carousel') == true 
@@ -179,10 +187,20 @@
                             </button>
                         </div>
                         @endif
+
                     </div>
                 </div>
-    			
     		</div>
+            <div class="container">
+                <div class="aux_img {{'aux_'.$key}} ">
+                    <div class="div_image" >
+                        @if($slider->aux_image)
+                        Imagen auxiliar
+                        <img  src="{{url($slider->aux_path_tag.$slider->aux_image)}}" alt="" class="image">
+                    @endif  
+                    </div>
+                </div>
+            </div>
     	</div>
         @endforeach
     </div>

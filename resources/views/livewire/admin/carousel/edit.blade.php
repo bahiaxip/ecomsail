@@ -48,7 +48,7 @@
         	</div>
           <div class="row mtop16">
               <div class="col-md-6">
-                  <label for="customFile" >Default file input example</label>
+                  <label for="customFile" >Imagen</label>
                     <!--<label for="icon" class="mtop16">Icono:</label>-->
                     <!--<div class="form-file">                      
                       <input class="form-control" type="file" id="formFile" wire:model="icon">
@@ -66,6 +66,37 @@
                     {{ Form::select('status',[0 => 'Borrador',1 => 'Público'],null,['class' => 'form-select', 'wire:model' => 'status'])}}
                   </div>  
               </div>
+          </div>
+          <div class="row mtop16">
+              <div class="col-md-6" >
+                  <label for="customFile" >Imagen auxiliar</label>
+                    <!--<label for="icon" class="mtop16">Icono:</label>-->
+                    <!--<div class="form-file">                      
+                      <input class="form-control" type="file" id="formFile" wire:model="icon">
+                    </div>-->
+                  
+                  {!! Form::file('aux_image',['class' =>'form-control','id' => $iteration,'accept' =>'image/*','wire:model'=>"aux_image"])!!}
+                  
+              </div>
+              
+              <div class="col-md-6 thumbnails">
+                  <div>
+                      <div wire:loading wire:target="aux_image">
+                        <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="32">
+                      </div>
+                  @if($aux_image)
+                    <label for="customFile" >Imagen aux seleccionada</label>
+                    <img src="{{$aux_image->temporaryUrl()}}" alt="">
+                  @endif                  
+                  </div>
+                  @if($aux_thumb)
+                  <div>
+                    <label for="customFile" >Imagen aux. actual</label>
+                    <img src="{{url($aux_path_tag.$aux_thumb)}}" alt="">
+                  </div>
+                  @endif
+              </div>
+              
           </div>
           <div class="row mtop16">
           </div>

@@ -5,16 +5,21 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Models\Carousel as Carous;
 use Livewire\WithFileUploads;
-use Auth;
+use Auth, Image;
 class Carousel extends Component
 {
     use WithFileUploads;
+
     public $filter_type;
     public $slider_id;
     public $iteration;
     public $main_title;
     public $second_title;
-    public $image;    
+    public $image;
+    public $aux_image;
+    public $duplicate_aux_image;
+    public $aux_path_tag;
+    public $aux_thumb;
     public $status=0;
     public $sliderIdTmp;
     public $total_sliders;
@@ -43,6 +48,7 @@ class Carousel extends Component
             'main_title' => 'required',
             'second_title' => 'required',
             'image' => 'required|image',
+            'aux_image' => 'nullable|image',
             'status' => 'required'
         ]);
         
@@ -63,7 +69,7 @@ class Carousel extends Component
             $position = $count;
         }
         
-        Carous::create([
+        $slider = Carous::create([
             'title' => $validated['main_title'],
             'text' => $validated['second_title'],  
             'path_tag' => $path_tag,
@@ -75,6 +81,31 @@ class Carousel extends Component
             'position' => $position,
             'user_id' => Auth::id()
         ]);
+//Revisar para optimizar, ya que se puede realizar la creación sin 
+//actualizar, a diferencia del método update().
+        //imagen auxiliar (recomendable para modo pantalla completa)
+        //si se ha seleccionado una imagen se actualiza, si no, se mantiene,
+        //de la misma forma que la imagen principal
+        if($validated['aux_image']  !== null){
+            $aux_image_name = $this->aux_image->getClientOriginalName();
+            $aux_ext = $this->aux_image->getClientOriginalExtension();
+            //almacenamos con el método store que genera un nombre de archivo aleatorio                
+            $aux_image = $this->aux_image->store('public/carousel');
+            //eliminamos el directorio public
+            $aux_imagelesspublic = substr($aux_image,7);            
+            //$aux_thumb = $aux_imagelesspublic;
+            //redimensionamos imagen para crear un thumbnail
+            $array_aux_thumb = $this->set_thumb_image(public_path('/storage/'.$aux_imagelesspublic),$aux_ext);
+            $aux_path_tag = $array_aux_thumb['path_tag'];
+            $aux_thumb = $array_aux_thumb['thumb'];
+            $slider->update([
+                'aux_path_tag' => $aux_path_tag,
+                'aux_file_name' => $aux_image_name,
+                'aux_ext' => $aux_ext,
+                'aux_image' => $aux_imagelesspublic,
+                'aux_thumb' => $aux_thumb
+            ]);
+        }
         //actualizamos total de sliders
         $this->set_total_sliders();
         $this->typealert="success";
@@ -89,6 +120,10 @@ class Carousel extends Component
         $this->main_title = $slider->title;
         $this->second_title = $slider->text;
         $this->status = $slider->status;
+        $this->aux_path_tag = $slider->aux_path_tag;        
+        //$this->aux_image = $slider->aux_image;
+        $this->duplicate_aux_image = $slider->aux_image;
+        $this->aux_thumb = $slider->aux_thumb;
     }
 
     public function update(){
@@ -96,6 +131,7 @@ class Carousel extends Component
             'main_title' => 'required',
             'second_title' => 'required',
             'image' => 'nullable|image',
+            'aux_image' => 'nullable|image',
             'status' => 'required'
         ]);
         $slider = Carous::findOrFail($this->slider_id);
@@ -126,6 +162,8 @@ class Carousel extends Component
             }
             
         }
+        //si el campo de imagen está vacío no se actualiza la imagen,
+        //manteniendo la que ya tiene.
         if($validated['image']  === null){
             $slider->update([
                 'title' => $validated['main_title'],
@@ -134,7 +172,7 @@ class Carousel extends Component
                 'position' => $position,            
             ]);
         }else{
-            //comprobar si existe imagen y eliminar la anterior            
+    //falta comprobar si existe imagen y eliminar la anterior                 
                 $image_name = $this->image->getClientOriginalName();
                 $ext = $this->image->getClientOriginalExtension();
                 //almacenamos con el método store que genera un nombre de archivo aleatorio
@@ -145,6 +183,7 @@ class Carousel extends Component
 
                 $path_tag = '/storage/';
                 $thumb = $imagelesspublic;
+            
             $slider->update([
                 'title' => $validated['main_title'],
                 'text' => $validated['second_title'],  
@@ -155,6 +194,29 @@ class Carousel extends Component
                 'thumb' => $thumb,
                 'status' => $validated['status'],
                 'position' => $position,     
+            ]);
+        }
+        //imagen auxiliar (recomendable para modo pantalla completa)
+        //si se ha seleccionado una imagen se actualiza, si no, se mantiene,
+        //de la misma forma que la imagen principal
+        if($validated['aux_image']  !== null){
+            $aux_image_name = $this->aux_image->getClientOriginalName();
+            $aux_ext = $this->aux_image->getClientOriginalExtension();
+            //almacenamos con el método store que genera un nombre de archivo aleatorio                
+            $aux_image = $this->aux_image->store('public/carousel');
+            //eliminamos el directorio public
+            $aux_imagelesspublic = substr($aux_image,7);            
+            //$aux_thumb = $aux_imagelesspublic;
+            //redimensionamos imagen para crear un thumbnail
+            $array_aux_thumb = $this->set_thumb_image(public_path('/storage/'.$aux_imagelesspublic),$aux_ext);
+            $aux_path_tag = $array_aux_thumb['path_tag'];
+            $aux_thumb = $array_aux_thumb['thumb'];
+            $slider->update([
+                'aux_path_tag' => $aux_path_tag,
+                'aux_file_name' => $aux_image_name,
+                'aux_ext' => $aux_ext,
+                'aux_image' => $aux_imagelesspublic,
+                'aux_thumb' => $aux_thumb
             ]);
         }
         //actualizamos total de sliders
@@ -200,6 +262,8 @@ class Carousel extends Component
         $this->second_title = null;
         $this->image = null;
         $this->status = 0;
+        $this->aux_image = null;
+        $this->iteration = rand();
 
     }
     public function clear2(){
@@ -243,5 +307,59 @@ class Carousel extends Component
         $sliders = $this->set_type_query();
         $data = ['sliders' => $sliders];
         return view('livewire.admin.carousel.carousel',$data);
+    }
+
+    public function set_thumb_image($image,$ext){
+        $path_tag[0] = '/storage/';
+        $path_tag[1] = 'carousel/';
+        $only_image = str_replace(public_path().$path_tag[0].$path_tag[1],"",$image);
+        
+        $picture = $image;
+        //establecemos máximo de anchura o altura
+        $max = 75;
+        //creamos objeto imagen desde una imagen desde el
+        //sistema de archivo, no desde el dominio
+        if($ext == 'jpg' || $ext == 'jpeg')
+            $src_img = ImagecreateFromJpeg($picture);
+        elseif($ext == 'png')
+            $src_img = ImagecreateFromPng($picture);
+        else
+            $src_img = ImagecreateFromGif($picture);
+        //obtenemos altura y anchura
+        $oh = imagesy($src_img); //original height
+        $ow = imagesx($src_img); //original width
+        //establecemos una altura y anchura por defecto
+        $new_h = $oh;
+        $new_w = $ow;
+        //modificamos la anchura y la altura en caso de que alguna
+        //de ellas sobrepase el máximo obteniendo la proporción y 
+        //comprobando si es más alta que ancha o viceversas
+        if($oh > $max || $ow > $max){
+            $r = $oh/$ow;
+            $new_h = ($oh > $ow) ? $max : $max*$r;
+            $new_w = $new_h/$r;
+        }
+        //creamos un recurso de imagen en blanco para rellenar
+        $dst_img = ImageCreateTrueColor($new_w,$new_h);
+
+        //establecemos la redimensión de la imagen en el recurso de imagen
+        if($ext == 'png'){
+            imagealphablending($dst_img, false);
+            imagesavealpha($dst_img,true);
+            imagecolortransparent($dst_img, imagecolorallocatealpha($dst_img, 255, 255, 255, 127));
+        }
+        ImageCopyResized($dst_img,$src_img,0,0,0,0,$new_w,$new_h,ImageSX($src_img),ImageSY($src_img));
+        //exportamos la imagen
+        $new_thumb = $path_tag[1].'th_'.$only_image;
+        $list = ['path_tag' => $path_tag[0],'thumb' => $new_thumb];
+        if($ext == 'png'){
+            imagepng($dst_img,public_path($path_tag[0].$new_thumb));
+        }elseif($ext == 'gif'){
+            imagegif($dst_img,public_path($path_tag[0].$new_thumb));
+        }else{
+            imagejpeg($dst_img,public_path($path_tag[0].$new_thumb));
+        }
+        return $list;
+        
     }
 }

@@ -23,12 +23,16 @@ class CreateCarouselTable extends Migration
             $table->string('file_name')->nullable();
             $table->string('file_ext')->nullable();
             $table->string('image');
+            $table->string('thumb');
             //imagen auxiliar solo disponible en modo full slider 
             //para dispositivos
+            //$table->string('aux_title');
+            //$table->text('aux_text');
+            $table->string('aux_path_tag')->nullable();
             $table->string('aux_file_name')->nullable();
             $table->string('aux_file_ext')->nullable();
             $table->string('aux_image')->nullable();
-            $table->string('thumb');
+            $table->string('aux_thumb')->nullable();
             $table->integer('position');
             $table->integer('user_id');
             $table->timestamps();

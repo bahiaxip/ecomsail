@@ -2100,6 +2100,18 @@ function slideSidebar(){
     
 }
 
+function showAuxImage(keyDiv){
+    let boxAuxImg = document.querySelector('.aux_img.aux_'+keyDiv);
+    console.log(boxAuxImg);
+    if(boxAuxImg.classList.contains('activ')){
+        boxAuxImg.classList.remove('activ');
+    }else{
+        boxAuxImg.classList.add('activ');
+        
+    }
+    
+}
+
 
 
 
