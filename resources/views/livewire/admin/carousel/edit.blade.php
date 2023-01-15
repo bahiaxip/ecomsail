@@ -69,7 +69,7 @@
           </div>
           <div class="row mtop16">
               <div class="col-md-6" >
-                  <label for="customFile" >Imagen auxiliar</label>
+                  <label for="customFile" >Imagen auxiliar <span style="background-color:#4861ff;color:white;border-radius:50%;font-size:14px;padding:0px 7px">&#x2139;</span></label>
                     <!--<label for="icon" class="mtop16">Icono:</label>-->
                     <!--<div class="form-file">                      
                       <input class="form-control" type="file" id="formFile" wire:model="icon">

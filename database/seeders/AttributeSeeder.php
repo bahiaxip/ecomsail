@@ -176,10 +176,14 @@ class AttributeSeeder extends Seeder
                 'text'=>'burdeos',
                 'hex' => '#641C34'
             ],
+            [
+                'text'=>'Gris oscuro',
+                'hex' => '#353535'
+            ],
 
         ];
         
-        $tallas = ['XS','S','M','L','XL','XXL','XXXL'];
+        $tallas = ['XS','S','M','L','XL','XXL','XXXL','2 años','3 años','4 años','XXS','5 años','6 años','7 años','8 años','9 años','10 años','12 años', '14 años', '16 años','6 meses','9 meses','12 meses', '18 meses'];
         $tallas_v = ['26W / 28L','26W / 30L','26W / 34L','27W / 28L','27W / 30L','28W / 28L','28W / 30L','28W / 32L','28W / 34L','29W / 28L','29W / 30L','29W / 32L','29W / 34L','30W / 30L','30W / 32L','30W / 33L','30W / 34L','31W / 30L','31W / 32L','31W / 34L','32W / 29L','32W / 30L','32W / 32L','32W / 33L','32W / 34L','32W / 36L','33W / 30L','33W / 32L','33W / 34L','33W / 36L','34W / 30L','34W / 32L','34W / 33L','34W / 34L','34W / 36L','35W / 30L','35W / 36L','36W / 30L','36W / 32L','36W / 34L','36W / 36L','36W / 38L','36W / 40L','38W / 30L','38W / 31L','38W / 32L','38W / 34L','38W / 36L','40W / 32L','40W / 34L','40W / 36L','42W / 32L','42W / 33L','42W / 34L','44W / 34L'];
         $flexometros = ['3M','5M','8M'];
 

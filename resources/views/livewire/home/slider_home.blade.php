@@ -12,7 +12,7 @@
 				
 				<picture>
 					<source srcset="{{ url($slider->path_tag.$slider->image)}}" media="(min-width: 900px)">
-					<img src="{{ url($slider->path_tag.'/tv_home2.jpg')}}" alt="" class="img-fluid">
+					<img src="{{ url($slider->aux_path_tag.$slider->aux_image)}}" alt="" class="img-fluid">
 				</picture>
 				@else
 				<img src="{{ url($slider->path_tag.$slider->image)}}" alt="" class="img-fluid">

@@ -20,8 +20,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico BOSCH KGN39VIEA',            
             'slug' => Str::slug('Frigorífico BOSCH KGN39VIEA'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,            
+            'category_id' => 5,
+            'subcategory_id' => 54,            
             'price' => 699,
             'stock' => 5,
             'short_detail' => 'Frigorífico Bosch Combi, Serie 4, Inox',
@@ -45,8 +45,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Candy CMDDS',            
             'slug' => Str::slug('Frigorífico Candy CMDDS'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,
+            'category_id' => 5,
+            'subcategory_id' => 54,
             'price' => 375,
             'stock' => 3,
             'short_detail' => 'Frigorífico Candy 2 puertas, Clase F, Blanco',
@@ -69,8 +69,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Corberó CCH18021X',            
             'slug' => Str::slug('Frigorífico Corberó CCH18021X'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,
+            'category_id' => 5,
+            'subcategory_id' => 54,
             'price' => 500,
             'stock' => 7,
             'short_detail' => 'Frigorífico Corberó Combi, No Frost, Inox',
@@ -93,8 +93,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Hisense RQ515N4AC2',            
             'slug' => Str::slug('Frigorífico Hisense RQ515N4AC2'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,
+            'category_id' => 5,
+            'subcategory_id' => 54,
             'price' => 750,
             'stock' => 8,
             'short_detail' => 'Frigorífico Hisense, No Frost, Inox, Silencioso',
@@ -117,8 +117,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico LG GTB362PZCZD',            
             'slug' => Str::slug('Frigorífico LG GTB362PZCZD'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,
+            'category_id' => 5,
+            'subcategory_id' => 54,
             'price' => 589,
             'stock' => 6,
             'short_detail' => 'Frigorífico LG, Clase F, Inox',
@@ -140,8 +140,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Samsung RB34T602EWW',
             'slug' => Str::slug('Frigorífico Samsung RB34T602EWW'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,
+            'category_id' => 5,
+            'subcategory_id' => 54,
             'price' => 723,
             'stock' => 6,
             'short_detail' => 'Frigorífico Samsung Combi, Blanco',
@@ -163,8 +163,8 @@ class ProductSeeder extends Seeder
             'name' => 'Frigorífico Teka NFL320',
             'slug' => Str::slug('Frigorífico Teka NFL320'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 41,
+            'category_id' => 5,
+            'subcategory_id' => 54,
             'price' => 485,
             'stock' => 3,
             'short_detail' => 'Frigorífico Teka Combi, Clase F, Blanco',
@@ -187,8 +187,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Babyliss 6613DE',
             'slug' => Str::slug('Secador Babyliss 6613DE'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 77,
             'stock' => 10,
             'short_detail' => 'Secador de pelo Profesional Babyliss , Iónico, 2200W',
@@ -210,8 +210,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Babyliss 6615E',
             'slug' => Str::slug('Secador Babyliss 6615E'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 76,
             'stock' => 3,
             'short_detail' => 'Secador de pelo Profesional Babyliss, Iónico, 2400W',
@@ -233,8 +233,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Braun Satin Hair 7',
             'slug' => Str::slug('Secador Braun Satin Hair 7'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 58,
             'stock' => 5,
             'short_detail' => 'Secador de pelo Profesional Braun,Iónico, 2200W',
@@ -256,8 +256,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Cecotec Bamba',
             'slug' => Str::slug('Secador Cecotec Bamba'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 31.52,
             'stock' => 5,
             'short_detail' => 'Secador de pelo Profesional Cecotec, Iónico, 2400W',
@@ -279,8 +279,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Happygoo',
             'slug' => Str::slug('Secador Happygoo'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 45,
             'stock' => 8,
             'short_detail' => 'Secador de pelo Profesional Happygoo, Iónico, 2400W',
@@ -302,8 +302,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Remington Compact',
             'slug' => Str::slug('Secador Remington Compact'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 25,
             'stock' => 8,
             'short_detail' => 'Secador de pelo Plegable Remington',
@@ -325,8 +325,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Remington Silk',
             'slug' => Str::slug('Secador Remington Silk'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 55,
             'stock' => 15,
             'short_detail' => 'Secador de pelo Profesional Remington Silk, Iónico, 2400W',
@@ -348,8 +348,8 @@ class ProductSeeder extends Seeder
             'name' => 'Secador Solac Hair & Go',
             'slug' => Str::slug('Solac Hair & Go'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 42,
+            'category_id' => 5,
+            'subcategory_id' => 55,
             'price' => 46,
             'stock' => 12,
             'short_detail' => 'Secador de pelo Plegable Solac, 2000W',
@@ -372,8 +372,8 @@ class ProductSeeder extends Seeder
             'name' => 'Atornillador BlackAndDecker BCF611CK',
             'slug' => Str::slug('Atornillador BlackAndDecker BCF611CK'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 35,
+            'category_id' => 4,
+            'subcategory_id' => 48,
             'price' => 38,
             'stock' => 12,
             'short_detail' => 'Atornillador BlackAndDecker, Carga rápida, Naranja',
@@ -396,8 +396,8 @@ class ProductSeeder extends Seeder
             'name' => 'Atornillador Bosch IXO',
             'slug' => Str::slug('Atornillador Bosch IXO'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 35,
+            'category_id' => 4,
+            'subcategory_id' => 48,
             'price' => 52,
             'stock' => 12,
             'short_detail' => 'Atornillador Bosch Home and Garden, Classic Green',
@@ -420,8 +420,8 @@ class ProductSeeder extends Seeder
             'name' => 'Atornillador Bosch GSR 12V-15',
             'slug' => Str::slug('Atornillador Bosch GSR 12V-15'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 35,
+            'category_id' => 4,
+            'subcategory_id' => 48,
             'price' => 133,
             'stock' => 10,
             'short_detail' => 'Atornillador Bosch Profesional, Azul',
@@ -445,8 +445,8 @@ class ProductSeeder extends Seeder
             'name' => 'Atornillador Deko DKCD20XL01',
             'slug' => Str::slug('Atornillador Deko DKCD20XL01'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 35,
+            'category_id' => 4,
+            'subcategory_id' => 48,
             'price' => 45,
             'stock' => 20,
             'short_detail' => 'Atornillador Deko, Inhalámbrico, 20V',
@@ -471,8 +471,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Bellota 50011',
             'slug' => Str::slug('Flexómetro Bellota 50011'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 12,
             'stock' => 20,
             'short_detail' => 'Flexómetro Bellota Standard 5M',
@@ -492,8 +492,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Fisco TK',
             'slug' => Str::slug('Flexómetro Fisco TK'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 32,
             'stock' => 31,
             'short_detail' => 'Flexómetro Fisco 3M/5M/8M',
@@ -513,8 +513,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Milwaukee',
             'slug' => Str::slug('Flexómetro Milwaukee'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 20,
             'stock' => 20,
             'short_detail' => 'Flexómetro Milwaukee 5M/8M',
@@ -534,8 +534,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley DualLock 3M',
             'slug' => Str::slug('Flexómetro Stanley DualLock 3M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 8,
             'stock' => 25,
             'short_detail' => 'Flexómetro Stanley DualLock 3M',
@@ -556,8 +556,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley DualLock 5M',
             'slug' => Str::slug('Flexómetro Stanley DualLock 5M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 9,
             'stock' => 25,
             'short_detail' => 'Flexómetro Stanley DualLock 5M',
@@ -578,8 +578,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley DualLock 8M',
             'slug' => Str::slug('Flexómetro Stanley DualLock 8M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' =>36,
+            'category_id' => 4,
+            'subcategory_id' =>49,
             'price' => 15,
             'stock' => 25,
             'short_detail' => 'Flexómetro Stanley DualLock 8M',
@@ -601,8 +601,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley PowerLock Classic 3M',
             'slug' => Str::slug('Flexómetro Stanley Classic PowerLock Classic 3M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 12,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley PowerLock Classic 3M',
@@ -624,8 +624,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley PowerLock Classic 5M',
             'slug' => Str::slug('Flexómetro Stanley PowerLock Classic 5M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 25,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley PowerLock Classic 5M',
@@ -647,8 +647,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley PowerLock Classic 10M',
             'slug' => Str::slug('Flexómetro Stanley PowerLock Classic 10M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 30,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley PowerLock Classic 10M',
@@ -670,8 +670,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley Tylon 5M',
             'slug' => Str::slug('Flexómetro Stanley Tylon 5M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 9,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley Tylon 5M',
@@ -693,8 +693,8 @@ class ProductSeeder extends Seeder
             'name' => 'Flexómetro Stanley Tylon 8M',
             'slug' => Str::slug('Flexómetro Stanley Tylon 8M'),
             'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 36,
+            'category_id' => 4,
+            'subcategory_id' => 49,
             'price' => 14.56,
             'stock' => 30,
             'short_detail' => 'Flexómetro Stanley Tylon 8M',
@@ -713,37 +713,160 @@ class ProductSeeder extends Seeder
             'image' => 'tools/flexometer/stanley_tylon/stanley_tylon_8M.jpg',
         ]);
         $product[] = Product::create([
+            'name' => "Taladro percutor Einhell",
+            'slug' => Str::slug("Taladro percutor Einhell"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 50,
+            'price' => 77.07,
+            'stock' => 50,
+            'short_detail' => "Taladro percutor Einhell, batería",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Einhell</li>
+                <li><strong>Alimentación:&nbsp;</strong>Batería Li-Ion,18V</li>
+                <li><strong>Velocidad:&nbsp;</strong>260RPM</li>
+                <li><strong>Color:&nbsp;</strong>Rojo y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal</li>
+                <li><strong>Dimensiones:&nbsp;</strong>28.3L X 6.7W X20H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>1.6Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Martillo perforador Bosch Professional",
+            'slug' => Str::slug("Martillo perforador Bosch Professional"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 50,
+            'price' => 299,
+            'stock' => 40,
+            'short_detail' => "Martillo perforador Bosch Professional GBH 2-28F",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Bosch</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC cable</li>
+                <li><strong>Velocidad:&nbsp;</strong>900RPM</li>
+                <li><strong>Color:&nbsp;</strong>Azul y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>880W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>44 X 40 X 20H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>3.1Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/bosch_gbh_2_28F/bosch_gbh_2_28F.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Martillo perforador BlackAndDecker BEHS03K-QS",
+            'slug' => Str::slug("Martillo perforador BlackAndDecker BEHS03K-QS"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 50,
+            'price' => 166,
+            'stock' => 30,
+            'short_detail' => "Martillo perforador BlackAndDecker BEHS03K-QS, SDS-PLUS, Percutor y cincelador",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>BlackAndDecker</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>
+                <li><strong>Velocidad:&nbsp;</strong>900RPM</li>
+                <li><strong>Color:&nbsp;</strong>Naranja y negro</li>
+                <li><strong>Material:&nbsp;</strong>Acero, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>1250W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>41.5L X 13.5W X 33.3H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>7.5Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Taladro percutor Casals ID500REA",
+            'slug' => Str::slug("Taladro percutor Casals ID500REA"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 50,
+            'price' => 58.39,
+            'stock' => 30,
+            'short_detail' => "Taladro percutor Casals ID500REA, agarre Soft-touch",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Casals</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>
+                <li><strong>Velocidad:&nbsp;</strong>3000RPM</li>
+                <li><strong>Color:&nbsp;</strong>Rojo y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>500W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>28L X 7W X 24H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>2.2Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Taladro percutor DeWalt DWD024KS",
+            'slug' => Str::slug("Taladro percutor DeWalt DWD024KS"),
+            'status' => 1,
+            'category_id' => 4,
+            'subcategory_id' => 50,
+            'price' => 105,
+            'stock' => 25,
+            'short_detail' => "Taladro percutor DeWalt DWD024KS-QS",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>DeWalt</li>
+                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>                
+                <li><strong>Color:&nbsp;</strong>Amarillo y negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
+                <li><strong>Potencia:&nbsp;</strong>701W</li>
+                <li><strong>Dimensiones:&nbsp;</strong>25L X 7.5W X 18H cm.</li>
+                <li><strong>Peso:&nbsp;</strong>1.8Kg.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tools/drill/hammer_drill_dewalt_DWD024KS/hammer_drill_dewalt_DWD024KS.jpg',
+        ]);
+        $product[] = Product::create([
             'name' => 'Camiseta Icon Futura',
             'slug' => Str::slug('Camiseta Icon Futura'),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 30,
+            'category_id' => 2,
+            'subcategory_id' => 40,
             'price' => 14,
             'stock' => 30,
             'short_detail' => 'Camiseta para hombre',
             'detail' =>'Camiseta para hombre Icon Futura',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/t-shirt/nike_iconfutura/nike_iconfutura_black.jpg',
+            'image' => 'clothes_men/t-shirt/nike_iconfutura/nike_iconfutura_black.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Camiseta SWSH',
             'slug' => Str::slug('Camiseta SWSH'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 30,
+            'subcategory_id' => 34,
             'price' => 14,
             'stock' => 30,
             'short_detail' => 'Camiseta de manga corta para mujer SwooShwear',
             'detail' =>'Camiseta de manga corta para mujer SwooShwear',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/t-shirt/nike_swsh/nike_swsh.jpg',
+            'image' => 'clothes_women/t-shirt/nike_swsh/nike_swsh.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Camiseta Dri-fit Strike',
             'slug' => Str::slug('Camiseta Dri-fit Strike'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 30,
+            'subcategory_id' => 34,
             'price' => 35,
             'stock' => 30,
             'short_detail' => 'Camiseta deportiva para mujer',
@@ -756,33 +879,15 @@ class ProductSeeder extends Seeder
                 <li><strong>Tecnolog&iacute;a:&nbsp;</strong>Dri-fit</li>                
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_black.jpg',
+            'image' => 'clothes_women/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_black.jpg',
         ]);
-        $product[] = Product::create([
-            'name' => 'Camiseta FC Barcelona',
-            'slug' => Str::slug('Camiseta FC Barcelona'),
-            'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 30,
-            'price' => 101,
-            'stock' => 30,
-            'short_detail' => 'Camiseta para mujer, equipación oficial FC Barcelona 2021/2022',
-            'detail' =>'<p>
-                <strong>Caracter&iacute;sticas</strong>
-            </p>
-            <ul>
-                <li><strong>Marca:&nbsp;</strong>Nike</li>
-                <li><strong>Material:&nbsp;</strong>100% Poliéster, transpirable</li>                
-            </ul>',
-            'path_tag' => '/images/products/',
-            'image' => 'clothes/t-shirt/FC_Barcelona/FC_Barcelona.jpg',
-        ]);
+        
         $product[] = Product::create([
             'name' => 'Vestido de mujer Berylove',
             'slug' => Str::slug('Vestido de mujer Berylove'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 32,
+            'subcategory_id' => 33,
             'price' => 55,
             'stock' => 10,
             'short_detail' => 'Vestido Berylove para eventos:fiestas, bodas...',
@@ -798,14 +903,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cinturón</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/dress/berylove/berylove_violeta.jpg',
+            'image' => 'clothes_women/dress/berylove/berylove_violeta.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Vestido Lápiz Grace Karin',
             'slug' => Str::slug('Vestido Lápiz Grace Karin'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 32,
+            'subcategory_id' => 33,
             'price' => 66,
             'stock' => 15,
             'short_detail' => 'Vestido Lápiz Grace Karin para eventos:fiestas, bodas...',
@@ -819,14 +924,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/dress/grace_karin_lapiz/grace_karin_lapiz_blanco.jpg',
+            'image' => 'clothes_women/dress/grace_karin_lapiz/grace_karin_lapiz_blanco.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Vestido Vintage Grace Karin',
             'slug' => Str::slug('Vestido Vintage Grace Karin'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 32,
+            'subcategory_id' => 33,
             'price' => 66,
             'stock' => 15,
             'short_detail' => 'Vestido plisado Grace Karin para eventos:fiestas, bodas...',
@@ -840,14 +945,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cruzado</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/dress/grace_karin_vintage/grace_karin_vintage_rojo.jpg',
+            'image' => 'clothes_women/dress/grace_karin_vintage/grace_karin_vintage_rojo.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Vestido de mujer Lacoste',
             'slug' => Str::slug('Vestido de mujer Lacoste'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 32,
+            'subcategory_id' => 33,
             'price' => 66,
             'stock' => 15,
             'short_detail' => 'Vestido polo de mujer Lacoste',
@@ -861,14 +966,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones y cinturón</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/dress/vestido_lacoste_polo/vestido_lacoste_polo_azul_marino.jpg',
+            'image' => 'clothes_women/dress/vestido_lacoste_polo/vestido_lacoste_polo_azul_marino.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Vestido de mujer Ever-Pretty',
             'slug' => Str::slug('Vestido de mujer Ever-Pretty'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 32,
+            'subcategory_id' => 33,
             'price' => 57.5,
             'stock' => 15,
             'short_detail' => 'Vestido de Fiesta Ever-Pretty',
@@ -882,14 +987,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_azul_marino.jpg',
+            'image' => 'clothes_women/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_azul_marino.jpg',
         ]);
         $product[] = Product::create([
             'name' => 'Vestido murciélago Grace Karin',
             'slug' => Str::slug('Vestido murciélago Grace Karin'),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 32,
+            'subcategory_id' => 33,
             'price' => 42,
             'stock' => 25,
             'short_detail' => 'Vestido murciélago de mujer',
@@ -902,14 +1007,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Diseño:&nbsp;</strong>Manga de murciélago</li>
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes/dress/grace_karin_murcielago/grace_karin_murcielago_negro.jpg',
+            'image' => 'clothes_women/dress/grace_karin_murcielago/grace_karin_murcielago_negro.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Ironwood Overt",
             'slug' => Str::slug("Vaqueros Levi's 501 Ironwood Overt"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 65,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Ironwood Overt",
@@ -922,14 +1027,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/levis_501_ironwood_overt/ironwood_overt.jpg',
+            'image' => 'clothes_men/jeans/levis_501_ironwood_overt/ironwood_overt.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Black 80701",
             'slug' => Str::slug("Vaqueros Levi's 501 Black 80701"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Black 80701",
@@ -942,14 +1047,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/levis_501_black_80701/black_80701.jpg',
+            'image' => 'clothes_men/jeans/levis_501_black_80701/black_80701.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Canyon Kings",
             'slug' => Str::slug("Vaqueros Levi's 501 Canyon Kings"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Canyon Kings",
@@ -962,14 +1067,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/levis_501_canyon_kings/canyon_kings.jpg',
+            'image' => 'clothes_men/jeans/levis_501_canyon_kings/canyon_kings.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Levis Marlon",
             'slug' => Str::slug("Vaqueros Levi's 501 Levis Marlon"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Levi's 501 Levis Marlon",
@@ -982,14 +1087,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/levis_501_levis_marlon/levis_marlon.jpg',
+            'image' => 'clothes_men/jeans/levis_501_levis_marlon/levis_marlon.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Stanley Jeans",
             'slug' => Str::slug("Vaqueros Pepe Jeans Stanley Jeans"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 66,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Stanley Jeans Denim",
@@ -1002,14 +1107,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/pepe_jeans_stanley_jeans_denim/stanley_jeans_denim.jpg',
+            'image' => 'clothes_men/jeans/pepe_jeans_stanley_jeans_denim/stanley_jeans_denim.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Kingston Zip",
             'slug' => Str::slug("Vaqueros Pepe Jeans Kingston Zip"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 62,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Kingston Zip 000 Denim",
@@ -1022,14 +1127,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/pepe_jeans_kingston_zip_000_denim/kingston_zip_000_denim.jpg',
+            'image' => 'clothes_men/jeans/pepe_jeans_kingston_zip_000_denim/kingston_zip_000_denim.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Finsbuty Jeans",
             'slug' => Str::slug("Vaqueros Pepe Jeans Finsbury Jeans"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 42,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Finsbury Jeans 000 Denim",
@@ -1042,14 +1147,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/pepe_jeans_finsbury_jeans_000_denim/finsbury_jeans_000_denim.jpg',
+            'image' => 'clothes_men/jeans/pepe_jeans_finsbury_jeans_000_denim/finsbury_jeans_000_denim.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Lee Straight Fit Xm Jeans",
             'slug' => Str::slug("Vaqueros Lee Straight Fit Xm Jeans"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 31,
+            'category_id' => 2,
+            'subcategory_id' => 42,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Lee Straight Fit Xm Jeans Maddox",
@@ -1062,14 +1167,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/lee_straight_fit_xm_jeans_maddox/straight_fit_xm_jeans_maddox.jpg',
+            'image' => 'clothes_men/jeans/lee_straight_fit_xm_jeans_maddox/straight_fit_xm_jeans_maddox.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Lee Elly Jeans Dark Daisy",
             'slug' => Str::slug("Vaqueros Lee Elly Jeans Dark Daisy"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 31,
+            'subcategory_id' => 38,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Lee Elly Jeans Dark Daisy",
@@ -1082,14 +1187,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Cremallera</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/lee_elly_jeans_dark_daisy/elly_jeans_dark_daisy.jpg',
+            'image' => 'clothes_women/jeans/lee_elly_jeans_dark_daisy/elly_jeans_dark_daisy.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Regent Jeans Denim",
             'slug' => Str::slug("Vaqueros Pepe Jeans Regent Jeans Denim"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 31,
+            'subcategory_id' => 38,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Regent Jeans Denim",
@@ -1102,14 +1207,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/pepe_jeans_regent_jeans_denim/regent_jeans_denim.jpg',
+            'image' => 'clothes_women/jeans/pepe_jeans_regent_jeans_denim/regent_jeans_denim.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Mary Jeans Denim",
             'slug' => Str::slug("Vaqueros Pepe Mary Regent Jeans Denim"),
             'status' => 1,
             'category_id' => 1,
-            'subcategory_id' => 31,
+            'subcategory_id' => 38,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Vaqueros Pepe Jeans Mary Jeans Denim",
@@ -1122,15 +1227,15 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/jeans/pepe_jeans_mary_jeans_denim/mary_jeans_denim.jpg',
+            'image' => 'clothes_women/jeans/pepe_jeans_mary_jeans_denim/mary_jeans_denim.jpg',
         ]);
         
         $product[] = Product::create([
             'name' => 'Lavadora Balay 3TS885BE',            
             'slug' => Str::slug('Lavadora Balay 3TS885BE'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 38,
+            'category_id' => 5,
+            'subcategory_id' => 51,
             'price' => 480,
             'stock' => 7,
             'short_detail' => 'Lavadora Balay 3TS885BE, Carga frontal, Blanco',
@@ -1153,8 +1258,8 @@ class ProductSeeder extends Seeder
             'name' => 'Lavadora Indesit EWC61251WSPTN',            
             'slug' => Str::slug('Lavadora Indesit EWC61251WSPTN'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 38,
+            'category_id' => 5,
+            'subcategory_id' => 51,
             'price' => 278,
             'stock' => 7,
             'short_detail' => 'Lavadora Indesit EWC61251WSPTN, Carga frontal, Blanco',
@@ -1177,8 +1282,8 @@ class ProductSeeder extends Seeder
             'name' => 'Lavadora Whirpool FFB8458WV',            
             'slug' => Str::slug('Lavadora Whirpool FFB8458WV'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 38,
+            'category_id' => 5,
+            'subcategory_id' => 51,
             'price' => 525,
             'stock' => 7,
             'short_detail' => 'Lavadora Whirpool FFB8458WV, Carga frontal, Blanco',
@@ -1201,8 +1306,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa de inducción Balay 3EB865FR',            
             'slug' => Str::slug('Placa de inducción Balay 3EB865FR'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 39,
+            'category_id' => 5,
+            'subcategory_id' => 52,
             'price' => 350,
             'stock' => 7,
             'short_detail' => 'Placa de inducción Balay 3EB865FR, 3 zonas, negro',
@@ -1226,8 +1331,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa de fogones Beko HIGG64103SX',            
             'slug' => Str::slug('Placa de fogones Beko HIGG64103SX'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 39,
+            'category_id' => 5,
+            'subcategory_id' => 52,
             'price' => 85,
             'stock' => 7,
             'short_detail' => 'Placa de fogones Beko HIGG64103SX, 4 fuegos, Gas, Inox',
@@ -1249,8 +1354,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa vitrocerámica Teka TZ6415',            
             'slug' => Str::slug('Placa vitrocerámica Teka TZ6415'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 39,
+            'category_id' => 5,
+            'subcategory_id' => 52,
             'price' => 198,
             'stock' => 15,
             'short_detail' => 'Placa vitrocerámica Teka TZ6415, 4 zonas, negro',
@@ -1274,8 +1379,8 @@ class ProductSeeder extends Seeder
             'name' => 'Placa vitrocerámica Candy CH63CC',            
             'slug' => Str::slug('Placa vitrocerámica Candy CH63CC'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 39,
+            'category_id' => 5,
+            'subcategory_id' => 52,
             'price' => 176,
             'stock' => 30,
             'short_detail' => 'Placa vitrocerámica Candy CH63CC, 3 zonas, negro',
@@ -1298,8 +1403,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Rowenta Swift Power RO2981',            
             'slug' => Str::slug('Aspiradora Rowenta Swift Power RO2981'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 40,
+            'category_id' => 5,
+            'subcategory_id' => 53,
             'price' => 115,
             'stock' => 10,
             'short_detail' => 'Aspiradora Rowenta Swift Power Total Care, 1.5L, Multicolor',
@@ -1321,8 +1426,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Cecotec Vertical Conga Popstar',            
             'slug' => Str::slug('Aspiradora Cecotec Vertical Conga Popstar'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 40,
+            'category_id' => 5,
+            'subcategory_id' => 53,
             'price' => 115,
             'stock' => 10,
             'short_detail' => 'Aspiradora Cecotec Vertical, 800ML, Multicolor',
@@ -1345,8 +1450,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Orbegozo Ap 8030',
             'slug' => Str::slug('Aspiradora Orbegozo Ap 8030'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 40,
+            'category_id' => 5,
+            'subcategory_id' => 53,
             'price' => 115,
             'stock' => 10,
             'short_detail' => 'Aspiradora Orbegozo Ap 8030, 2L, Negro y azul',
@@ -1369,8 +1474,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Karcher 1000W',
             'slug' => Str::slug('Aspiradora Karcher 1000W'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 40,
+            'category_id' => 5,
+            'subcategory_id' => 53,
             'price' => 85,
             'stock' => 10,
             'short_detail' => 'Aspiradora Karcher 1000W, Seco y húmedo, 17L, Amarillo, con ruedas',
@@ -1391,8 +1496,8 @@ class ProductSeeder extends Seeder
             'name' => 'Aspiradora Xiaomi Robot Vacuum',
             'slug' => Str::slug('Aspiradora Xiaomi Robot Vacuum'),
             'status' => 1,
-            'category_id' => 3,
-            'subcategory_id' => 40,
+            'category_id' => 5,
+            'subcategory_id' => 53,
             'price' => 200,
             'stock' => 10,
             'short_detail' => 'Aspiradora Xiaomi Robot Vacuum, Fregasuelos, Blanco, navegación inteligente',
@@ -1416,8 +1521,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador sobremesa HP Victus 15L',
             'slug' => Str::slug('Ordenador sobremesa HP Victus 15L'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 47,
+            'category_id' => 7,
+            'subcategory_id' => 60,
             'price' => 1100,
             'stock' => 10,
             'short_detail' => 'Ordenador sobremesa HP Victus 15L, 5700G, 16GB, 1TB + 512SSD',
@@ -1446,8 +1551,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador sobremesa IdeaCentre AIO 3',
             'slug' => Str::slug('Ordenador sobremesa IdeaCentre AIO 3'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 47,
+            'category_id' => 7,
+            'subcategory_id' => 60,
             'price' => 650,
             'stock' => 10,
             'short_detail' => 'Ordenador sobremesa IdeaCentre AIO 3, 4500U, 8GB, 512 SSD, Windows 10 Home',
@@ -1476,8 +1581,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador sobremesa MSI mag Infinite',
             'slug' => Str::slug('Ordenador sobremesa MSI mag Infinite'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 47,
+            'category_id' => 7,
+            'subcategory_id' => 60,
             'price' => 1439,
             'stock' => 10,
             'short_detail' => 'Ordenador sobremesa MSI mag Infinite, i7 10700, 16GB, 1TB SSD, GeForce RTX 3060, Windows 10 Home',
@@ -1505,8 +1610,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador portátil HP Victus 16-e0090ns',
             'slug' => Str::slug('Ordenador portátil HP Victus 16-e0090ns'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 48,
+            'category_id' => 7,
+            'subcategory_id' => 61,
             'price' => 999,
             'stock' => 10,
             'short_detail' => 'Ordenador portátil HP Victus 16-e0090ns, 5800H, 16GB, 512GB SSD, RTX 3050Ti',
@@ -1537,8 +1642,8 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador portátil MSI Katana GF66 12UD-081XES',
             'slug' => Str::slug('Ordenador portátil MSI Katana GF66 12UD-081XES'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 48,
+            'category_id' => 7,
+            'subcategory_id' => 61,
             'price' => 999,
             'stock' => 10,
             'short_detail' => 'Ordenador portátil MSI Katana GF66 12UD-081XES, i7 12700H, 16GB, 512GB SSD, RTX 3050Ti',
@@ -1569,7 +1674,7 @@ class ProductSeeder extends Seeder
             'name' => 'Ordenador portátil Acer Nitro AN515-57-75M9',
             'slug' => Str::slug('Ordenador portátil Acer Nitro AN515-57-75M9'),
             'status' => 1,
-            'category_id' => 5,
+            'category_id' => 7,
             'subcategory_id' => 4,
             'price' => 1001,
             'stock' => 10,
@@ -1601,8 +1706,8 @@ class ProductSeeder extends Seeder
             'name' => 'Disco duro Seagate Barracuda 3.5"',
             'slug' => Str::slug('Disco duro Seagate Barracuda 3.5"'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 49,
+            'category_id' => 7,
+            'subcategory_id' => 62,
             'price' => 45,
             'stock' => 10,
             'short_detail' => 'Disco duro Seagate Barracuda 3.5", 1TB SATA3',
@@ -1629,8 +1734,8 @@ class ProductSeeder extends Seeder
             'name' => 'Disco duro Samsung 870 EVO',
             'slug' => Str::slug('Disco duro Samsung 870 EVO'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 49,
+            'category_id' => 7,
+            'subcategory_id' => 62,
             'price' => 110,
             'stock' => 10,
             'short_detail' => 'Disco duro Samsung 870 EVO SSD 2.5", 1TB SATA3, Negro',
@@ -1657,8 +1762,8 @@ class ProductSeeder extends Seeder
             'name' => 'Disco duro Kioxia Exceria 480GB',
             'slug' => Str::slug('Disco duro Kioxia Exceria 480GB'),
             'status' => 1,
-            'category_id' => 5,
-            'subcategory_id' => 49,
+            'category_id' => 7,
+            'subcategory_id' => 62,
             'price' => 110,
             'stock' => 10,
             'short_detail' => 'Disco duro Kioxia Exceria 2.5", 480GB SATA3, Negro',
@@ -1685,8 +1790,8 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Cellfast Economic',
             'slug' => Str::slug('Manguera de jardín Cellfast Economic'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 51,
+            'category_id' => 9,
+            'subcategory_id' => 69,
             'price' => 25,
             'stock' => 10,
             'short_detail' => 'Manguera de jardín Cellfast Economic, 1/2" 20M',
@@ -1707,8 +1812,8 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Natrain',
             'slug' => Str::slug('Manguera de jardín Natrain'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 51,
+            'category_id' => 9,
+            'subcategory_id' => 69,
             'price' => 22,
             'stock' => 10,
             'short_detail' => 'Manguera de jardín Natrain, 15M',
@@ -1728,8 +1833,8 @@ class ProductSeeder extends Seeder
             'name' => 'Manguera de jardín Gardena Comfort FLEX',
             'slug' => Str::slug('Manguera de jardín Gardena Comfort FLEX'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 51,
+            'category_id' => 9,
+            'subcategory_id' => 69,
             'price' => 38,
             'stock' => 10,
             'short_detail' => 'Manguera de jardín Gardena Comfort FLEX, 15M',
@@ -1750,8 +1855,8 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina hinchable INTEX Easy Set 366 X 76',
             'slug' => Str::slug('Piscina hinchable INTEX Easy Set 366 X 76'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 52,
+            'category_id' => 9,
+            'subcategory_id' => 70,
             'price' => 76,
             'stock' => 10,
             'short_detail' => 'Piscina hinchable INTEX Easy Set 366 X 76, circular',
@@ -1773,8 +1878,8 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina hinchable Bestrip 300 X 170',
             'slug' => Str::slug('Piscina hinchable Bestrip 300 X 170'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 52,
+            'category_id' => 9,
+            'subcategory_id' => 70,
             'price' => 89,
             'stock' => 10,
             'short_detail' => 'Piscina hinchable Bestrip 300 X 170, rectangular',
@@ -1796,8 +1901,8 @@ class ProductSeeder extends Seeder
             'name' => 'Piscina desmontable INTEX 457X122',
             'slug' => Str::slug('Piscina desmontable INTEX 457X122'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 52,
+            'category_id' => 9,
+            'subcategory_id' => 70,
             'price' => 89,
             'stock' => 10,
             'short_detail' => 'Piscina desmontable INTEX 457X122, circular',
@@ -1819,8 +1924,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped Bosch Home and Garden ARM 3200',
             'slug' => Str::slug('Cortacésped Bosch Home and Garden ARM 3200'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 53,
+            'category_id' => 9,
+            'subcategory_id' => 71,
             'price' => 135,
             'stock' => 10,
             'short_detail' => 'Cortacésped Bosch Home and Garden ARM 3200, Eléctrico, Verde',
@@ -1848,8 +1953,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped Einhell GC EM 1536',
             'slug' => Str::slug('Cortacésped Einhell GC EM 1536'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 53,
+            'category_id' => 9,
+            'subcategory_id' => 71,
             'price' => 89,
             'stock' => 10,
             'short_detail' => 'Cortacésped Einhell GC EM 1536, Eléctrico, Rojo y negro',
@@ -1876,8 +1981,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped BlackAndDecker BEMW351',
             'slug' => Str::slug('Cortacésped BlackAndDecker BEMW351'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 53,
+            'category_id' => 9,
+            'subcategory_id' => 71,
             'price' => 78,
             'stock' => 10,
             'short_detail' => 'Cortacésped BlackAndDecker BEMW351, Eléctrico, Negro y naranja',
@@ -1904,8 +2009,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cortacésped Greenworks G40LM35K',
             'slug' => Str::slug('Cortacésped Greenworks G40LM35K'),
             'status' => 1,
-            'category_id' => 6,
-            'subcategory_id' => 53,
+            'category_id' => 9,
+            'subcategory_id' => 71,
             'price' => 78,
             'stock' => 10,
             'short_detail' => 'Cortacésped Greenworks G40LM35K, Eléctrico, Verde y negro',
@@ -1932,8 +2037,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cepillo de dientes Oral-B Pro 3500',
             'slug' => Str::slug('Cepillo de dientes Oral-B Pro 3500'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 55,
+            'category_id' => 10,
+            'subcategory_id' => 73,
             'price' => 55,
             'stock' => 10,
             'short_detail' => 'Cepillo de dientes Oral-B Pro 3500, eléctrico, negro',
@@ -1957,8 +2062,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cepillo de dientes Xiaomi MI SMART T500',
             'slug' => Str::slug('Cepillo de dientes Xiaomi MI SMART T500'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 55,
+            'category_id' => 10,
+            'subcategory_id' => 73,
             'price' => 45,
             'stock' => 10,
             'short_detail' => 'Cepillo de dientes Xiaomi MI SMART T500, eléctrico, blanco',
@@ -1983,8 +2088,8 @@ class ProductSeeder extends Seeder
             'name' => 'Cepillo de dientes Philips Sonicare 2',
             'slug' => Str::slug('Cepillo de dientes Philips Sonicare 2'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 55,
+            'category_id' => 10,
+            'subcategory_id' => 73,
             'price' => 59,
             'stock' => 10,
             'short_detail' => 'Cepillo de dientes Philips Sonicare 2, eléctrico, blanco',
@@ -2008,8 +2113,8 @@ class ProductSeeder extends Seeder
             'name' => 'Pintalabios OULAC Metálico',
             'slug' => Str::slug('Pintalabios OULAC Metálico'),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 56,
+            'category_id' => 10,
+            'subcategory_id' => 74,
             'price' => 12,
             'stock' => 10,
             'short_detail' => 'Pintalabios OULAC Metálico, impermeable, larga duración',
@@ -2029,8 +2134,8 @@ class ProductSeeder extends Seeder
             'name' => "Polo Kappa Uomo Peleot",
             'slug' => Str::slug("Polo Kappa Uomo Peleot"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 34,
+            'category_id' => 2,
+            'subcategory_id' => 43,
             'price' => 35,
             'stock' => 20,
             'short_detail' => "Polo Kappa Uomo Peleot, Manga corta",
@@ -2043,14 +2148,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_verde.jpg',
+            'image' => 'clothes_men/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_verde.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Polo Levi's Mineral Black",
             'slug' => Str::slug("Polo Levi's Mineral Black"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 34,
+            'category_id' => 2,
+            'subcategory_id' => 43,
             'price' => 38,
             'stock' => 20,
             'short_detail' => "Polo Levi's Mineral Black, Manga corta",
@@ -2063,14 +2168,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/polo_shirt/polo_levis_mineral_black/polo_levis_mineral_black.jpg',
+            'image' => 'clothes_men/polo_shirt/polo_levis_mineral_black/polo_levis_mineral_black.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Polo Lacoste DH3201",
             'slug' => Str::slug("Polo Lacoste DH3201"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 34,
+            'category_id' => 2,
+            'subcategory_id' => 43,
             'price' => 92,
             'stock' => 20,
             'short_detail' => "Polo Lacoste, Manga corta, Hombre",
@@ -2083,14 +2188,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/polo_shirt/polo_lacoste_dh3201/polo_lacoste_azul_marino.jpg',
+            'image' => 'clothes_men/polo_shirt/polo_lacoste_dh3201/polo_lacoste_azul_marino.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Polo Adidas Tiro17",
             'slug' => Str::slug("Polo Adidas Tiro17"),
             'status' => 1,
-            'category_id' => 1,
-            'subcategory_id' => 34,
+            'category_id' => 2,
+            'subcategory_id' => 43,
             'price' => 32,
             'stock' => 20,
             'short_detail' => "Polo Adidas Tiro17, Manga corta, Hombre",
@@ -2103,15 +2208,15 @@ class ProductSeeder extends Seeder
                 <li><strong>Cierre:&nbsp;</strong>Botones</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'clothes/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_azul_marino.jpg',
+            'image' => 'clothes_men/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_azul_marino.jpg',
         ]);
         
         $product[] = Product::create([
             'name' => "Adidas Get Ready",
             'slug' => Str::slug("Adidas Get Ready"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 39,
+            'category_id' => 10,
+            'subcategory_id' => 75,
             'price' => 14.99,
             'stock' => 20,
             'short_detail' => "Adidas Get Ready Eau de Toilette, Mujer",
@@ -2131,8 +2236,8 @@ class ProductSeeder extends Seeder
             'name' => "BLACK OPIUM NEON",
             'slug' => Str::slug("BLACK OPIUM NEON"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 57,
+            'category_id' => 10,
+            'subcategory_id' => 75,
             'price' => 54.50,
             'stock' => 20,
             'short_detail' => "BLACK OPIUM NEON WATER, Mujer",
@@ -2152,8 +2257,8 @@ class ProductSeeder extends Seeder
             'name' => "HUGO BOSS",
             'slug' => Str::slug("HUGO BOSS"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 57,
+            'category_id' => 10,
+            'subcategory_id' => 75,
             'price' => 83.39,
             'stock' => 20,
             'short_detail' => "HUGO BOSS,vaporizador de Hombre",
@@ -2173,8 +2278,8 @@ class ProductSeeder extends Seeder
             'name' => "Victoria Secret PURE SEDUCTION",
             'slug' => Str::slug("Victoria Secret PURE SEDUCTION"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 57,
+            'category_id' => 10,
+            'subcategory_id' => 75,
             'price' => 32.49,
             'stock' => 20,
             'short_detail' => "Victoria Secret NEW PURE SEDUCTION FRAGRANCE MIST",
@@ -2193,8 +2298,8 @@ class ProductSeeder extends Seeder
             'name' => "Calvin Klein CK IN2U",
             'slug' => Str::slug("Calvin Klein CK IN2U"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 57,
+            'category_id' => 10,
+            'subcategory_id' => 75,
             'price' => 26.16,
             'stock' => 20,
             'short_detail' => "Calvin Klein CK IN2U Eau de Toilette",
@@ -2210,135 +2315,13 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/fragances/calvin_klein_ck_in2u/calvin_klein_ck_in2u.jpg',
         ]);
-        $product[] = Product::create([
-            'name' => "Taladro percutor Einhell",
-            'slug' => Str::slug("Taladro percutor Einhell"),
-            'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 37,
-            'price' => 77.07,
-            'stock' => 50,
-            'short_detail' => "Taladro percutor Einhell, batería",
-            'detail' =>"<p>
-                <strong>Caracter&iacute;sticas</strong>
-            </p>
-            <ul>
-                <li><strong>Marca:&nbsp;</strong>Einhell</li>
-                <li><strong>Alimentación:&nbsp;</strong>Batería Li-Ion,18V</li>
-                <li><strong>Velocidad:&nbsp;</strong>260RPM</li>
-                <li><strong>Color:&nbsp;</strong>Rojo y negro</li>
-                <li><strong>Material:&nbsp;</strong>Metal</li>
-                <li><strong>Dimensiones:&nbsp;</strong>28.3L X 6.7W X20H cm.</li>
-                <li><strong>Peso:&nbsp;</strong>1.6Kg.</li>
-            </ul>",
-            'path_tag' => '/images/products/',
-            'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell.jpg',
-        ]);
-        $product[] = Product::create([
-            'name' => "Martillo perforador Bosch Professional",
-            'slug' => Str::slug("Martillo perforador Bosch Professional"),
-            'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 37,
-            'price' => 299,
-            'stock' => 40,
-            'short_detail' => "Martillo perforador Bosch Professional GBH 2-28F",
-            'detail' =>"<p>
-                <strong>Caracter&iacute;sticas</strong>
-            </p>
-            <ul>
-                <li><strong>Marca:&nbsp;</strong>Bosch</li>
-                <li><strong>Alimentación:&nbsp;</strong>AC cable</li>
-                <li><strong>Velocidad:&nbsp;</strong>900RPM</li>
-                <li><strong>Color:&nbsp;</strong>Azul y negro</li>
-                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
-                <li><strong>Potencia:&nbsp;</strong>880W</li>
-                <li><strong>Dimensiones:&nbsp;</strong>44 X 40 X 20H cm.</li>
-                <li><strong>Peso:&nbsp;</strong>3.1Kg.</li>
-            </ul>",
-            'path_tag' => '/images/products/',
-            'image' => 'tools/drill/bosch_gbh_2_28F/bosch_gbh_2_28F.jpg',
-        ]);
-        $product[] = Product::create([
-            'name' => "Martillo perforador BlackAndDecker BEHS03K-QS",
-            'slug' => Str::slug("Martillo perforador BlackAndDecker BEHS03K-QS"),
-            'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 37,
-            'price' => 166,
-            'stock' => 30,
-            'short_detail' => "Martillo perforador BlackAndDecker BEHS03K-QS, SDS-PLUS, Percutor y cincelador",
-            'detail' =>"<p>
-                <strong>Caracter&iacute;sticas</strong>
-            </p>
-            <ul>
-                <li><strong>Marca:&nbsp;</strong>BlackAndDecker</li>
-                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>
-                <li><strong>Velocidad:&nbsp;</strong>900RPM</li>
-                <li><strong>Color:&nbsp;</strong>Naranja y negro</li>
-                <li><strong>Material:&nbsp;</strong>Acero, plástico</li>
-                <li><strong>Potencia:&nbsp;</strong>1250W</li>
-                <li><strong>Dimensiones:&nbsp;</strong>41.5L X 13.5W X 33.3H cm.</li>
-                <li><strong>Peso:&nbsp;</strong>7.5Kg.</li>
-            </ul>",
-            'path_tag' => '/images/products/',
-            'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K.jpg',
-        ]);
-        $product[] = Product::create([
-            'name' => "Taladro percutor Casals ID500REA",
-            'slug' => Str::slug("Taladro percutor Casals ID500REA"),
-            'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 37,
-            'price' => 58.39,
-            'stock' => 30,
-            'short_detail' => "Taladro percutor Casals ID500REA, agarre Soft-touch",
-            'detail' =>"<p>
-                <strong>Caracter&iacute;sticas</strong>
-            </p>
-            <ul>
-                <li><strong>Marca:&nbsp;</strong>Casals</li>
-                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>
-                <li><strong>Velocidad:&nbsp;</strong>3000RPM</li>
-                <li><strong>Color:&nbsp;</strong>Rojo y negro</li>
-                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
-                <li><strong>Potencia:&nbsp;</strong>500W</li>
-                <li><strong>Dimensiones:&nbsp;</strong>28L X 7W X 24H cm.</li>
-                <li><strong>Peso:&nbsp;</strong>2.2Kg.</li>
-            </ul>",
-            'path_tag' => '/images/products/',
-            'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA.jpg',
-        ]);
-        $product[] = Product::create([
-            'name' => "Taladro percutor DeWalt DWD024KS",
-            'slug' => Str::slug("Taladro percutor DeWalt DWD024KS"),
-            'status' => 1,
-            'category_id' => 2,
-            'subcategory_id' => 37,
-            'price' => 105,
-            'stock' => 25,
-            'short_detail' => "Taladro percutor DeWalt DWD024KS-QS",
-            'detail' =>"<p>
-                <strong>Caracter&iacute;sticas</strong>
-            </p>
-            <ul>
-                <li><strong>Marca:&nbsp;</strong>DeWalt</li>
-                <li><strong>Alimentación:&nbsp;</strong>AC con cable</li>                
-                <li><strong>Color:&nbsp;</strong>Amarillo y negro</li>
-                <li><strong>Material:&nbsp;</strong>Metal, plástico</li>
-                <li><strong>Potencia:&nbsp;</strong>701W</li>
-                <li><strong>Dimensiones:&nbsp;</strong>25L X 7.5W X 18H cm.</li>
-                <li><strong>Peso:&nbsp;</strong>1.8Kg.</li>
-            </ul>",
-            'path_tag' => '/images/products/',
-            'image' => 'tools/drill/hammer_drill_dewalt_DWD024KS/hammer_drill_dewalt_DWD024KS.jpg',
-        ]);
+        
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos Sony WH-CH510",
             'slug' => Str::slug("Auriculares inhalámbricos Sony WH-CH510"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 60,
+            'category_id' => 11,
+            'subcategory_id' => 78,
             'price' => 48.99,
             'stock' => 25,
             'short_detail' => "Auriculares inhalámbricos Sony WH-CH510, Negros",
@@ -2363,8 +2346,8 @@ class ProductSeeder extends Seeder
             'name' => "Auriculares inhalámbricos JBL TUNE 510BT",
             'slug' => Str::slug("Auriculares inhalámbricos JBL TUNE 510BT"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 60,
+            'category_id' => 11,
+            'subcategory_id' => 78,
             'price' => 45,
             'stock' => 25,
             'short_detail' => "Auriculares inhalámbricos JBL TUNE 510BT, plegables",
@@ -2389,8 +2372,8 @@ class ProductSeeder extends Seeder
             'name' => "Auriculares inhalámbricos TOZO A2",
             'slug' => Str::slug("Auriculares inhalámbricos TOZO A2"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 60,
+            'category_id' => 11,
+            'subcategory_id' => 78,
             'price' => 22.80,
             'stock' => 58,
             'short_detail' => "Auriculares inhalámbricos TOZO A2, IPX5, Negro",
@@ -2415,8 +2398,8 @@ class ProductSeeder extends Seeder
             'name' => "Auriculares inhalámbricos Xiaomi Redmi Buds 3",
             'slug' => Str::slug("Auriculares inhalámbricos Xiaomi Redmi Buds 3"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 60,
+            'category_id' => 11,
+            'subcategory_id' => 78,
             'price' => 25,
             'stock' => 50,
             'short_detail' => "Auriculares inhalámbricos Xiaomi Redmi Buds 3 Lite, Negro",
@@ -2440,8 +2423,8 @@ class ProductSeeder extends Seeder
             'name' => "Auriculares inhalámbricos AirPods Pro",
             'slug' => Str::slug("Auriculares inhalámbricos AirPods Pro"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 60,
+            'category_id' => 11,
+            'subcategory_id' => 78,
             'price' => 299,
             'stock' => 20,
             'short_detail' => "Auriculares inhalámbricos AirPods Pro, 2ª generación",
@@ -2465,8 +2448,8 @@ class ProductSeeder extends Seeder
             'name' => "Auriculares inhalámbricos Sony MDR-RF811RK",
             'slug' => Str::slug("Auriculares inhalámbricos Sony MDR-RF811RK"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 60,
+            'category_id' => 11,
+            'subcategory_id' => 78,
             'price' => 65,
             'stock' => 20,
             'short_detail' => "Auriculares inhalámbricos Sony MDR-RF811RK, RadioFrecuencia (RF)",
@@ -2489,8 +2472,8 @@ class ProductSeeder extends Seeder
             'name' => "Xiaomi Smart TV P1 32",
             'slug' => Str::slug("Xiaomi Smart TV P1 32"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 58,
+            'category_id' => 11,
+            'subcategory_id' => 76,
             'price' => 224,
             'stock' => 20,
             'short_detail' => "Xiaomi Smart TV P1 32,HD Led 32 pulgadas",
@@ -2520,8 +2503,8 @@ class ProductSeeder extends Seeder
             'name' => "Samsung TV Crystal 43BU8000",
             'slug' => Str::slug("Samsung TV Crystal 43BU8000"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 58,
+            'category_id' => 11,
+            'subcategory_id' => 76,
             'price' => 224,
             'stock' => 20,
             'short_detail' => "Samsung TV Crystal 2022 43BU8000,4K 43\", Alexa integrada",
@@ -2547,8 +2530,8 @@ class ProductSeeder extends Seeder
             'name' => "LG TV 55UQ70006LB",
             'slug' => Str::slug("LG TV 55UQ70006LB"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 58,
+            'category_id' => 11,
+            'subcategory_id' => 76,
             'price' => 459,
             'stock' => 20,
             'short_detail' => "LG TV 55UQ70006LB,4K 55\",Gen5.",
@@ -2575,8 +2558,8 @@ class ProductSeeder extends Seeder
             'name' => "Cecotec TV A1 Series ALU10043",
             'slug' => Str::slug("Cecotec TV A1 Series ALU10043"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 58,
+            'category_id' => 11,
+            'subcategory_id' => 76,
             'price' => 333,
             'stock' => 20,
             'short_detail' => "Cecotec TV A1 Series ALU10043,4K 43\" UHD",
@@ -2603,8 +2586,8 @@ class ProductSeeder extends Seeder
             'name' => "Asus TUF Gaming VG27AQ1A",
             'slug' => Str::slug("Asus TUF Gaming VG27AQ1A"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 59,
+            'category_id' => 11,
+            'subcategory_id' => 77,
             'price' => 357.55,
             'stock' => 15,
             'short_detail' => "Asus TUF Gaming VG27AQ1A, 27\" LED IPS",
@@ -2630,8 +2613,8 @@ class ProductSeeder extends Seeder
             'name' => "Lenovo L27q-35",
             'slug' => Str::slug("Lenovo L27q-35"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 59,
+            'category_id' => 11,
+            'subcategory_id' => 77,
             'price' => 223,
             'stock' => 25,
             'short_detail' => "Lenovo L27q-35, 27\"",
@@ -2657,8 +2640,8 @@ class ProductSeeder extends Seeder
             'name' => "Philips Gaming 27M1N3200VS",
             'slug' => Str::slug("Philips Gaming 27M1N3200VS"),
             'status' => 1,
-            'category_id' => 8,
-            'subcategory_id' => 59,
+            'category_id' => 11,
+            'subcategory_id' => 77,
             'price' => 258,
             'stock' => 25,
             'short_detail' => "Philips Gaming 27M1N3200VS, 27\"",
@@ -2683,8 +2666,8 @@ class ProductSeeder extends Seeder
             'name' => "Love Urban Beauty",
             'slug' => Str::slug("Love Urban Beauty"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 56,
+            'category_id' => 10,
+            'subcategory_id' => 74,
             'price' => 35,
             'stock' => 50,
             'short_detail' => "Love Urban Beauty, 82 piezas",
@@ -2704,8 +2687,8 @@ class ProductSeeder extends Seeder
             'name' => "ZMILE Cosmetics",
             'slug' => Str::slug("ZMILE Cosmetics"),
             'status' => 1,
-            'category_id' => 7,
-            'subcategory_id' => 56,
+            'category_id' => 10,
+            'subcategory_id' => 74,
             'price' => 19.20,
             'stock' => 22,
             'short_detail' => "ZMILE Cosmetics",
@@ -2726,8 +2709,8 @@ class ProductSeeder extends Seeder
             'name' => "Amazfit Bip U Pro",
             'slug' => Str::slug("Amazfit Bip U Pro"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 46,
+            'category_id' => 6,
+            'subcategory_id' => 59,
             'price' => 45.99,
             'stock' => 52,
             'short_detail' => "Amazfit Bip U Pro, Verde",
@@ -2746,15 +2729,15 @@ class ProductSeeder extends Seeder
                 <li><strong>Peso:&nbsp;</strong>32g.</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'tecnology/smartwatches/amazfit_bip_u_pro/amazfit_bip_u_pro.jpg',
+            'image' => 'tecnology/smartwatches/amazfit_bip_u_pro/amazfit_bip_u_pro_green.jpg',
         ]);
 
         $product[] = Product::create([
             'name' => "Samsung Galaxy Watch 4",
             'slug' => Str::slug("Samsung Galaxy Watch 4"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 46,
+            'category_id' => 6,
+            'subcategory_id' => 59,
             'price' => 186,
             'stock' => 25,
             'short_detail' => "Samsung Galaxy Watch 4, versión ES",
@@ -2779,8 +2762,8 @@ class ProductSeeder extends Seeder
             'name' => "Xiaomi Mi Smart Band 7",
             'slug' => Str::slug("Xiaomi Mi Smart Band 7"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 46,
+            'category_id' => 6,
+            'subcategory_id' => 59,
             'price' => 65,
             'stock' => 25,
             'short_detail' => "Xiaomi Mi Smart Band 7,Negro",
@@ -2806,8 +2789,8 @@ class ProductSeeder extends Seeder
             'name' => "XINGHESF CS3",
             'slug' => Str::slug("XINGHESF CS3"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 46,
+            'category_id' => 6,
+            'subcategory_id' => 59,
             'price' => 57.99,
             'stock' => 25,
             'short_detail' => "XINGHESF CS3,Rosa",
@@ -2826,14 +2809,14 @@ class ProductSeeder extends Seeder
                 <li><strong>Peso:&nbsp;</strong>160g.</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7.jpg',
+            'image' => 'tecnology/smartwatches/xinghesf_cs3/xinghesf_cs3.jpg',
         ]);
         $product[] = Product::create([
             'name' => "Kindle 2022",
             'slug' => Str::slug("Kindle 2022"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 45,
+            'category_id' => 6,
+            'subcategory_id' => 58,
             'price' => 120,
             'stock' => 20,
             'short_detail' => "Nuevo Kindle modelo 2022",
@@ -2860,8 +2843,8 @@ class ProductSeeder extends Seeder
             'name' => "Basic Lux 3",
             'slug' => Str::slug("Basic Lux 3"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 45,
+            'category_id' => 6,
+            'subcategory_id' => 58,
             'price' => 120,
             'stock' => 20,
             'short_detail' => "Basic Lux 3 Ink Black POCKETBOOK",
@@ -2887,8 +2870,8 @@ class ProductSeeder extends Seeder
             'name' => "Kobo Nia",
             'slug' => Str::slug("Kobo Nia"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 45,
+            'category_id' => 6,
+            'subcategory_id' => 58,
             'price' => 110,
             'stock' => 20,
             'short_detail' => "Kobo Nia eReader",
@@ -2914,8 +2897,8 @@ class ProductSeeder extends Seeder
             'name' => "Xiaomi L83",
             'slug' => Str::slug("Xiaomi L83"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 44,
+            'category_id' => 6,
+            'subcategory_id' => 57,
             'price' => 247.80,
             'stock' => 20,
             'short_detail' => "Xiaomi L83 Redmi Pad Tablet, Carga rápida",
@@ -2947,8 +2930,8 @@ class ProductSeeder extends Seeder
             'name' => "Lenovo Tab M10",
             'slug' => Str::slug("Lenovo Tab M10"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 44,
+            'category_id' => 6,
+            'subcategory_id' => 57,
             'price' => 247.80,
             'stock' => 20,
             'short_detail' => "Lenovo Tab M10 Plus Gen3",
@@ -2980,8 +2963,8 @@ class ProductSeeder extends Seeder
             'name' => "Samsung Galaxy Tab S6",
             'slug' => Str::slug("Samsung Galaxy Tab S6"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 44,
+            'category_id' => 6,
+            'subcategory_id' => 57,
             'price' => 247.80,
             'stock' => 20,
             'short_detail' => "Samsung Galaxy Tab S6 Lite",
@@ -3003,7 +2986,7 @@ class ProductSeeder extends Seeder
                 <li><strong>Cámara frontal:&nbsp;</strong>5MP</li>
                 <li><strong>Cámara trasera:&nbsp;</strong>8MP</li>
                 <li><strong>Batería:&nbsp;</strong>Litio 7500mAh</li>
-                <li><strong>Dimensiones:&nbsp;</strong>253 X 162 X 0.9 mm.</li>
+                <li><strong>Dimensiones:&nbsp;</strong>253 X 162 X 0.9 cm.</li>
                 <li><strong>Peso:&nbsp;</strong>467g.</li>
             </ul>",
             'path_tag' => '/images/products/',
@@ -3013,8 +2996,8 @@ class ProductSeeder extends Seeder
             'name' => "Alcatel 1T 7",
             'slug' => Str::slug("Alcatel 1T 7"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 44,
+            'category_id' => 6,
+            'subcategory_id' => 57,
             'price' => 247.80,
             'stock' => 20,
             'short_detail' => "Alcatel 1T 7",
@@ -3036,7 +3019,7 @@ class ProductSeeder extends Seeder
                 <li><strong>Cámara frontal:&nbsp;</strong>2MP</li>
                 <li><strong>Cámara trasera:&nbsp;</strong>2MP</li>
                 <li><strong>Batería:&nbsp;</strong>Litio 2580mAh</li>
-                <li><strong>Dimensiones:&nbsp;</strong>18.9 X 11.1 X 0.91 mm.</li>
+                <li><strong>Dimensiones:&nbsp;</strong>18.9 X 11.1 X 0.91 cm.</li>
                 <li><strong>Peso:&nbsp;</strong>250g.</li>
             </ul>",
             'path_tag' => '/images/products/',
@@ -3046,8 +3029,8 @@ class ProductSeeder extends Seeder
             'name' => "Xiaomi Redmi Note 11",
             'slug' => Str::slug("Xiaomi Redmi Note 11"),
             'status' => 1,
-            'category_id' => 4,
-            'subcategory_id' => 43,
+            'category_id' => 6,
+            'subcategory_id' => 56,
             'price' => 201,
             'stock' => 20,
             'short_detail' => "Xiaomi Redmi Note 11, Gris",
@@ -3063,6 +3046,7 @@ class ProductSeeder extends Seeder
                 <li><strong>Color:&nbsp;</strong>Gris</li>
                 <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
                 <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth, NFC, Infrarrojo</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>MIUI 13</li>
                 <li><strong>Procesador:&nbsp;</strong>Mediatek Helio G96</li>
                 <li><strong>Gráfica:&nbsp;</strong>ARM Mali-G57 MC2</li>
                 <li><strong>Memoria RAM:&nbsp;</strong>6GB</li>
@@ -3070,13 +3054,1561 @@ class ProductSeeder extends Seeder
                 <li><strong>Cámara frontal:&nbsp;</strong>16MP</li>
                 <li><strong>Cámara trasera:&nbsp;</strong>50MP</li>
                 <li><strong>Batería:&nbsp;</strong>Litio 5000mAh</li>
-                <li><strong>Dimensiones:&nbsp;</strong>15.98 X 7.38 X 0.81 mm.</li>
+                <li><strong>Dimensiones:&nbsp;</strong>15.98 X 7.38 X 0.81 cm.</li>
                 <li><strong>Peso:&nbsp;</strong>179g.</li>
             </ul>",
             'path_tag' => '/images/products/',
-            'image' => 'tecnology/smarthpnes/xiaomi_redmi_note_11/xiaomi_redmi_note_11.jpg',
+            'image' => 'tecnology/smartphones/xiaomi_redmi_note_11/xiaomi_redmi_note_11.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Apple iPhone 13",
+            'slug' => Str::slug("Apple iPhone 13"),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 56,
+            'price' => 929,
+            'stock' => 10,
+            'short_detail' => "Apple iPhone 13, Azul, 5G",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Apple</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6.1\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>OLED</li>
+
+                <li><strong>Resolución:&nbsp;</strong>2532 x 1170</li>
+                <li><strong>Color:&nbsp;</strong>Azul</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth, NFC, Infrarrojo</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>iOS 15</li>
+                <li><strong>Procesador:&nbsp;</strong>Chip A15 Bionic</li>
+                <li><strong>Gráfica:&nbsp;</strong>GPU 4 núcleos</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>4GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>128GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>12MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>12MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 3227mAh</li>
+                <li><strong>Otras características:&nbsp;</strong>IP68 Resistente al agua</li>
+                <li><strong>Dimensiones:&nbsp;</strong>146 X 71.5 X 7.6 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>173g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartphones/iphone13/iphone13.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Samsung Galaxy A13",
+            'slug' => Str::slug("Samsung Galaxy A13"),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 56,
+            'price' => 224,
+            'stock' => 10,
+            'short_detail' => "Samsung Galaxy A13, Azul claro",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Samsung</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6.6\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>LCD</li>
+
+                <li><strong>Resolución:&nbsp;</strong>2240 x 1080</li>
+                <li><strong>Color:&nbsp;</strong>Azul claro</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth, NFC, Infrarrojo</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Android 12</li>
+                <li><strong>Procesador:&nbsp;</strong>Exynos 850</li>
+                <li><strong>Gráfica:&nbsp;</strong>ARM Mali-G52</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>4GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>128GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>8MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>50MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 5000mAh</li>
+                
+                <li><strong>Dimensiones:&nbsp;</strong>165 X 764 X 88 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>195g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartphones/samsung_galaxy_a13/samsung_galaxy_a13.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => "Oppo A17",
+            'slug' => Str::slug("Oppo A17"),
+            'status' => 1,
+            'category_id' => 6,
+            'subcategory_id' => 56,
+            'price' => 203,
+            'stock' => 10,
+            'short_detail' => "Oppo A17, Negro",
+            'detail' =>"<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Oppo</li>
+                <li><strong>Tamaño pantalla:&nbsp;</strong>6.52\"</li>
+                <li><strong>Tipo de panel:&nbsp;</strong>LCD</li>
+
+                <li><strong>Resolución:&nbsp;</strong>1612 x 720</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Conexión:&nbsp;</strong>micro USB-C</li>
+                <li><strong>Conectividad:&nbsp;</strong>Wifi, Bluetooth, NFC, Infrarrojo</li>
+                <li><strong>Sistema operativo:&nbsp;</strong>Android 12</li>
+                <li><strong>Procesador:&nbsp;</strong>Mediatek MT6765 Helio G35</li>
+                <li><strong>Gráfica:&nbsp;</strong>PowerVR GE8320</li>
+                <li><strong>Memoria RAM:&nbsp;</strong>4GB</li>
+                <li><strong>Almacenamiento:&nbsp;</strong>64GB</li>
+                <li><strong>Cámara frontal:&nbsp;</strong>8MP</li>
+                <li><strong>Cámara trasera:&nbsp;</strong>50MP</li>
+                <li><strong>Batería:&nbsp;</strong>Litio 5000mAh</li>
+                <li><strong>Dimensiones:&nbsp;</strong>164 X 756 X 83 mm.</li>
+                <li><strong>Peso:&nbsp;</strong>189g.</li>
+            </ul>",
+            'path_tag' => '/images/products/',
+            'image' => 'tecnology/smartphones/oppo_a17/oppo_a17.jpg',
         ]);
 
+        $product[] = Product::create([
+            'name' => 'Blusa original tee',
+            'slug' => Str::slug('Blusa original tee'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 35,
+            'price' => 17.98,
+            'stock' => 30,
+            'short_detail' => 'Blusa manga larga',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>NUSGEAR</li>                                
+                <li><strong>Diseño:&nbsp;</strong>Fiesta, elástico</li>
+                <li><strong>Cierre:&nbsp;</strong>Pull-on</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/blouse/blouse_original_tee/blouse_original_tee.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Blusa JDY Mio',
+            'slug' => Str::slug('Blusa JDY Mio'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 35,
+            'price' => 24.33,
+            'stock' => 30,
+            'short_detail' => 'Blusa JDY Mio para mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>JDY</li> 
+
+                <li><strong>Diseño:&nbsp;</strong>Elegante, elástico</li>
+                <li><strong>Cierre:&nbsp;</strong>Botón</li>
+                <li><strong>Material:&nbsp;</strong>72% Algodón, 24% Poliéster, 4% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/blouse/blouse_JDY_Mio/blouse_JDY_Mio.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Blusa Grebrafan Steampunk',
+            'slug' => Str::slug('Blusa Grebrafan Steampunk'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 35,
+            'price' => 18.99,
+            'stock' => 30,
+            'short_detail' => 'Blusa Grebrafan Steampunk',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Grebrafan</li> 
+
+                <li><strong>Diseño:&nbsp;</strong>Blusa top, hombros descubiertos</li>
+                <li><strong>Cierre:&nbsp;</strong>Pull-on</li>
+                <li><strong>Material:&nbsp;</strong>90% Algodón, 10% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/blouse/blouse_grebrafan_steampunk/blouse_grebrafan_steampunk.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Blusa Grace Karin',
+            'slug' => Str::slug('Blusa Grace Karin'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 35,
+            'price' => 22.99,
+            'stock' => 30,
+            'short_detail' => 'Blusa Grace Karin, sin mangas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Grace Karin</li> 
+
+                <li><strong>Diseño:&nbsp;</strong>Blusa sin mangas, cuello de solapa</li>
+                <li><strong>Cierre:&nbsp;</strong>Pull-on</li>
+                <li><strong>Material:&nbsp;</strong>98% Algodón, 2% Viscosa</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/blouse/blouse_grace_karin/blouse_grace_karin.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Leggings Puma Individualliga',
+            'slug' => Str::slug('Leggings Puma Individualliga'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 37,
+            'stock' => 10,
+            'short_detail' => 'Leggings elásticos para mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Puma</li>
+                <li><strong>Material:&nbsp;</strong>70% Poliéster, 30% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/puma_individualliga/puma_individualliga.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Urban Classic Dark Camo',
+            'slug' => Str::slug('Leggings Urban Classic Dark Camo'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 22,
+            'stock' => 10,
+            'short_detail' => 'Leggings Camo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Urban Classic</li>
+                <li><strong>Material:&nbsp;</strong>91% Algodón, 9% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/urban_classic_dark_camo/urban_classic_dark_camo.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Urban Classic Snow Camo',
+            'slug' => Str::slug('Leggings Urban Classic Snow Camo'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 22,
+            'stock' => 10,
+            'short_detail' => 'Leggings Camo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Urban Classic</li>
+                <li><strong>Material:&nbsp;</strong>91% Algodón, 9% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/urban_classic_snow_camo/urban_classic_snow_camo.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Urban Classic Red Camo',
+            'slug' => Str::slug('Leggings Urban Classic Red Camo'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 22,
+            'stock' => 10,
+            'short_detail' => 'Leggings Camo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Urban Classic</li>
+                <li><strong>Material:&nbsp;</strong>91% Algodón, 9% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/urban_classic_red_camo/urban_classic_red_camo.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Urban Classic Wood Camo',
+            'slug' => Str::slug('Leggings Urban Classic Wood Camo'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 22,
+            'stock' => 10,
+            'short_detail' => 'Leggings Camo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Urban Classic</li>
+                <li><strong>Material:&nbsp;</strong>91% Algodón, 9% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/urban_classic_wood_camo/urban_classic_wood_camo.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Puma ESS',
+            'slug' => Str::slug('Leggings Puma ESS'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 25,
+            'stock' => 10,
+            'short_detail' => 'Mallas deportivas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Puma</li>
+                <li><strong>Material:&nbsp;</strong>95% Algodón, 5% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/puma_ess/puma_ess.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Everbellus',
+            'slug' => Str::slug('Leggings Everbellus'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 37,
+            'stock' => 10,
+            'short_detail' => 'Leggings imitación cuero, con bolsillo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Everbellus</li>
+                <li><strong>Material:&nbsp;</strong>85% Poliéster, 10% Pu, 5% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/everbellus_cuero/everbellus_cuero.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Leggings Reebook Identity',
+            'slug' => Str::slug('Leggings Reebook Identity'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 36,
+            'price' => 37,
+            'stock' => 10,
+            'short_detail' => 'Mallas de mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Reebook</li>
+                <li><strong>Material:&nbsp;</strong>93% Poliéster, 7% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/leggings/reebook_identity/reebook_identity.jpg',
+        ]);
+        
+        $product[] = Product::create([
+            'name' => 'Falda GoCo Patinadora',
+            'slug' => Str::slug('Falda GoCo Patinadora'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 37,
+            'price' => 27.99,
+            'stock' => 10,
+            'short_detail' => 'Falda corta, elástica',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Urban GoCo</li>
+                <li><strong>Material:&nbsp;</strong>95% Poliéster, 5% Spandex</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/skirt/urban_goco_patinadora/urban_goco_patinadora.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Falda Pepe Jeans Nikita',
+            'slug' => Str::slug('Falda Pepe Jeans Nikita'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 37,
+            'price' => 49.26,
+            'stock' => 10,
+            'short_detail' => 'Falda vaquera',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/skirt/urban_goco_patinadora/urban_goco_patinadora.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Falda Urban GoCo Midi Bodycon',
+            'slug' => Str::slug('Falda Urban GoCo Midi Bodycon'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 37,
+            'price' => 36,
+            'stock' => 10,
+            'short_detail' => 'Falda recta, cintura alta',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Urban GoCo</li>
+                <li><strong>Material:&nbsp;</strong>70% Viscosa, 25% Poliamida, 5% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/skirt/urban_goco_midi_bodycon/urban_goco_midi_bodycon.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Falda Shein',
+            'slug' => Str::slug('Falda Shein'),
+            'status' => 1,
+            'category_id' => 1,
+            'subcategory_id' => 37,
+            'price' => 38.99,
+            'stock' => 10,
+            'short_detail' => 'Falda ajustada, con volantes',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Shein</li>
+                <li><strong>Material:&nbsp;</strong>93% Poliéster, 7% Elastano</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_women/skirt/shein_skirt/shein_skirt.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Mueble TV BRIMNES',
+            'slug' => Str::slug('Mueble TV BRIMNES'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 44,
+            'price' => 159.99,
+            'stock' => 10,
+            'short_detail' => 'Mueble TV',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Brimnes</li>
+                <li><strong>Material:&nbsp;</strong>Tablero de partículas, lámina de papel</li>
+                <li><strong>Dimensiones:&nbsp;</strong>120 X 41 X 53 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/furniture/brimnes_mueble_tv/brimnes_mueble_tv.avif',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Mueble TV MALM',
+            'slug' => Str::slug('Mueble TV MALM'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 44,
+            'price' => 258,
+            'stock' => 10,
+            'short_detail' => 'Mueble TV',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Brimnes</li>
+                <li><strong>Material:&nbsp;</strong>Tablero de partículas, lámina de papel</li>
+                <li><strong>Dimensiones:&nbsp;</strong>160 X 48 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/furniture/malm_mueble_tv/malm_mueble_tv.avif',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Mueble TV Habitdesign',
+            'slug' => Str::slug('Mueble TV Habitdesign'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 44,
+            'price' => 258,
+            'stock' => 10,
+            'short_detail' => 'Mueble TV Salón Moderno',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Habitdesign</li>
+                <li><strong>Material:&nbsp;</strong>Madera</li>
+                <li><strong>Color:&nbsp;</strong>Blanco brillo y Roble Canadian</li>
+                <li><strong>Dimensiones:&nbsp;</strong>200 X 41 X 46 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/furniture/mueble_tv_habitdesign/mueble_tv_habitdesign.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Armario Habitdesign MAX020BO',
+            'slug' => Str::slug('Armario Habitdesign MAX020BO'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 44,
+            'price' => 232,
+            'stock' => 10,
+            'short_detail' => 'Armario Habitdesign, 2 puertas correderas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Habitdesign</li>
+                <li><strong>Material:&nbsp;</strong>Madera</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Dimensiones:&nbsp;</strong>120 X 50 X 200 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/furniture/armario_habitdesign_max020BO/armario_habitdesign_max020BO.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Escritorio Comifort Montgo Stone',
+            'slug' => Str::slug('Escritorio Comifort Montgo Stone'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 44,
+            'price' => 190.90,
+            'stock' => 10,
+            'short_detail' => 'Escritorio juvenil, 2 cajones, 5 estantes y bandeja teclado',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Comifort</li>
+                <li><strong>Material:&nbsp;</strong>Madera</li>
+                <li><strong>Color:&nbsp;</strong>Gris</li>
+                <li><strong>Dimensiones:&nbsp;</strong>115 X 55 X 76 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/furniture/escritorio_comifort_montgo_stone/escritorio_comifort_montgo_stone.jpg',
+        ]);
+        
+        $product[] = Product::create([
+            'name' => 'Escritorio Comifort Montgo Wengue',
+            'slug' => Str::slug('Escritorio Comifort Montgo Wengue'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 44,
+            'price' => 141.90,
+            'stock' => 10,
+            'short_detail' => 'Escritorio juvenil, 2 cajones, 5 estantes y bandeja teclado',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Comifort</li>
+                <li><strong>Material:&nbsp;</strong>Madera</li>
+                <li><strong>Color:&nbsp;</strong>Wengue</li>
+                <li><strong>Dimensiones:&nbsp;</strong>115 X 55 X 76 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/furniture/escritorio_comifort_montgo_wengue/escritorio_comifort_montgo_wengue.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Cafetera Cecotec Espresso 20',
+            'slug' => Str::slug('Cafetera Cecotec Espresso 20'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 45,
+            'price' => 82,
+            'stock' => 10,
+            'short_detail' => 'Cafetera Cecotec Express Manual',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Cecotec</li>
+                
+                <li><strong>Color:&nbsp;</strong>Negro y Acero inoxidable</li>
+                <li><strong>Potencia:&nbsp;</strong>850W, presión 20 Bares</li>
+                <li><strong>Deposito:&nbsp;</strong>1,5L</li>
+                <li><strong>Dimensiones:&nbsp;</strong>26 X 32 X 32 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>3.58 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/small_appliance/cecotec_espresso20/cecotec_espresso20.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cafetera Swan Retro One Touch SK22150GN',
+            'slug' => Str::slug('Cafetera Swan Retro One Touch SK22150GN'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 45,
+            'price' => 175,
+            'stock' => 10,
+            'short_detail' => 'Cafetera Retro Semiautomática',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Swan</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Potencia:&nbsp;</strong>1200W, presión 15 Bares</li>
+                <li><strong>Deposito:&nbsp;</strong>1,7L</li>
+                <li><strong>Dimensiones:&nbsp;</strong>30 X 22.5 X 35 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>7.36 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/small_appliance/cecotec_espresso20/cecotec_espresso20.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cafetera Nescafe Dolce Gusto KP123B',
+            'slug' => Str::slug('Cafetera Nescafe Dolce Gusto KP123B'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 45,
+            'price' => 77.90,
+            'stock' => 10,
+            'short_detail' => 'Cafetera Expresso de cápsulas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Krups</li>
+                <li><strong>Color:&nbsp;</strong>Acero</li>
+                <li><strong>Potencia:&nbsp;</strong>1500W, presión 15 Bares</li>
+                <li><strong>Deposito:&nbsp;</strong>0,8L</li>
+                <li><strong>Dimensiones:&nbsp;</strong>7.6 X 11.3 X 14.3 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>2.40 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/small_appliance/nescafe_dolcegusto_kp123b/nescafe_dolcegusto_kp123b.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cafetera Solac Espresso CE4497',
+            'slug' => Str::slug('Cafetera Solac Espresso CE4497'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 45,
+            'price' => 135,
+            'stock' => 10,
+            'short_detail' => 'Cafetera Expresso Multi',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Solac</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>
+                <li><strong>Potencia:&nbsp;</strong>850W, presión 20 Bares</li>
+                <li><strong>Deposito:&nbsp;</strong>1,2L</li>
+                <li><strong>Dimensiones:&nbsp;</strong>36.6 X 33.8 X 31.4 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>4.60 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/small_appliance/solac_espresso_ce4497/solac_espresso_ce4497.jpg',
+        ]);
+        
+        $product[] = Product::create([
+            'name' => 'Estor Blindecor Ara',
+            'slug' => Str::slug('Estor Blindecor Ara'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 46,
+            'price' => 135,
+            'stock' => 10,
+            'short_detail' => 'Estor Enrollable translúcido',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Blindecor</li>
+                <li><strong>Color:&nbsp;</strong>Blanco</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>160 X 175 cm.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/decor/blindecor_ara/blindecor_ara.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Jarrón Koomuao',
+            'slug' => Str::slug('Jarrón Koomuao'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 46,
+            'price' => 22,
+            'stock' => 10,
+            'short_detail' => 'Jarrón florero',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Koomuao</li>
+                <li><strong>Color:&nbsp;</strong>Beige</li>
+                <li><strong>Material:&nbsp;</strong>Cerámica</li>
+                <li><strong>Dimensiones:&nbsp;</strong>145 X 4 X 21.5 cm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/decor/koomuao/koomuao.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Paragüero Baroni Home',
+            'slug' => Str::slug('Paragüero Baroni Home'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 46,
+            'price' => 37,
+            'stock' => 10,
+            'short_detail' => 'Paragüero rectangular de mariposas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Baroni Home</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>Metal</li>
+                <li><strong>Dimensiones:&nbsp;</strong>15 X 15 X 49 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>2.2 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/decor/baroni_home/baroni_home.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Cuadro Picanova Montañas',
+            'slug' => Str::slug('Cuadro Picanova Montañas'),
+            'status' => 1,
+            'category_id' => 3,
+            'subcategory_id' => 46,
+            'price' => 65,
+            'stock' => 10,
+            'short_detail' => 'Cuadro sobre lienzo, lago y montañas sobre marco de madera',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Picanova</li>
+                <li><strong>Estilo:&nbsp;</strong>Moderno</li>
+                <li><strong>Material:&nbsp;</strong>Lino y madera</li>
+                <li><strong>Dimensiones:&nbsp;</strong>120 X 80 X 2 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>300 g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'home/decor/picanova_cuadro_montanas/picanova_cuadro_montanas.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Anorak Columbia Powder Lite',
+            'slug' => Str::slug('Anorak Columbia Powder Lite'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 64,
+            'price' => 65,
+            'stock' => 10,
+            'short_detail' => 'Anorak con capucha para niños, resistente al agua',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Columbia</li>
+                <li><strong>Estilo:&nbsp;</strong>Moderno, reflectante</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/anorak/columbia_powder_lite/columbia_powder_lite.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Chaqueta Pepe Jeans Gilford',
+            'slug' => Str::slug('Chaqueta Pepe Jeans Gilford'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 64,
+            'price' => 54,
+            'stock' => 10,
+            'short_detail' => 'Chaqueta para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>
+                <li><strong>Estilo:&nbsp;</strong>Polar, Beige</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/anorak/pepejeans_gilford/pepejeans_gilford.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Abrigo Mayoral Niños',
+            'slug' => Str::slug('Abrigo Mayoral Niños'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 64,
+            'price' => 85.70,
+            'stock' => 10,
+            'short_detail' => 'Abrigo Mayoral Niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Mayoral</li>
+                <li><strong>Estilo:&nbsp;</strong>Acolchado</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliamida</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/anorak/mayoral_children/mayoral_children.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Abrigo Chicco',
+            'slug' => Str::slug('Abrigo Chicco'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 64,
+            'price' => 80.99,
+            'stock' => 10,
+            'short_detail' => 'Abrigo Chicco con capucha para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Chicco</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/anorak/chicco_children/chicco_children.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Camiseta Pepe Jeans New Herman',
+            'slug' => Str::slug('Camiseta Pepe Jeans New Herman'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 65,
+            'price' => 18,
+            'stock' => 10,
+            'short_detail' => 'Camiseta Pepe Jeans para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/t_shirt/pepejeans_new_herman/pepejeans_new_herman.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Camiseta Marvel',
+            'slug' => Str::slug('Camiseta Marvel'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 65,
+            'price' => 17.20,
+            'stock' => 10,
+            'short_detail' => 'Camiseta Marvel para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Marvel</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/t_shirt/marvel_children/marvel_children.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Camiseta Adidas Ent22',
+            'slug' => Str::slug('Camiseta Adidas Ent22'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 65,
+            'price' => 17.80,
+            'stock' => 10,
+            'short_detail' => 'Camiseta Adidas manga corta, unisex para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Adidas</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/t_shirt/marvel_children/marvel_children.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Pijama TEDD Dinosaurios',
+            'slug' => Str::slug('Pijama TEDD Dinosaurios'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 66,
+            'price' => 18.99,
+            'stock' => 10,
+            'short_detail' => 'Pijama para niños de dinosaurio',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>TEDD</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/pijama/tedd_children_dinosaurio/tedd_children_dinosaurio.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Pijama Disney Cars',
+            'slug' => Str::slug('Pijama Disney Cars'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 66,
+            'price' => 25.95,
+            'stock' => 10,
+            'short_detail' => 'Pijama para niños de Disney',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Disney</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/pijama/disney_cars/disney_cars.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Pijama Paw Patrol',
+            'slug' => Str::slug('Pijama Paw Patrol'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 66,
+            'price' => 25.95,
+            'stock' => 10,
+            'short_detail' => 'Pijama para niños de Patrulla Canina',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Paw Patrol</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/pijama/paw_patrol/paw_patrol.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Pijama Marvel Spiderman',
+            'slug' => Str::slug('Pijama Marvel Spiderman'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 66,
+            'price' => 26,
+            'stock' => 10,
+            'short_detail' => 'Pijama para niños de Spiderman',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Marvel</li>                
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/pijama/marvel_spiderman/marvel_spiderman.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Bufanda United Colors of Benetton',
+            'slug' => Str::slug('Bufanda United Colors of Benetton'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 67,
+            'price' => 27,
+            'stock' => 10,
+            'short_detail' => 'Bufanda United Colors of Benetton para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Benetton Group</li>
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/scarf/benetton_children/benetton_children.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Bufanda Pepe Jeans Huxley',
+            'slug' => Str::slug('Bufanda Pepe Jeans Huxley'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 67,
+            'price' => 19.75,
+            'stock' => 10,
+            'short_detail' => 'Bufanda Pepe Jeans para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>
+                <li><strong>Material:&nbsp;</strong>100% Algodón</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/scarf/pepejeans_huxley/pepejeans_huxley.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Set Bufanda, Gorro y Guantes de Spiderman',
+            'slug' => Str::slug('Set Bufanda, Gorro y Guantes de Spiderman'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 67,
+            'price' => 27.75,
+            'stock' => 10,
+            'short_detail' => 'Set Bufanda, Gorro y Guantes de Spiderman para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Marvel</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/scarf/set_marvel_spiderman/set_marvel_spiderman.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Set Bufanda, Gorro y Guantes de Patrulla Canina',
+            'slug' => Str::slug('Set Bufanda, Gorro y Guantes de Patrulla Canina'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 67,
+            'price' => 27.75,
+            'stock' => 10,
+            'short_detail' => 'Set Bufanda, Gorro y Guantes de Patrulla Canina para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Paw Patrol</li>
+                <li><strong>Material:&nbsp;</strong>100% Acrílico</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/scarf/set_paw_patrol/set_paw_patrol.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Gorro CERDÁ Batman',
+            'slug' => Str::slug('Gorro CERDÁ Batman'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 68,
+            'price' => 10,
+            'stock' => 10,
+            'short_detail' => 'Gorro Batman para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>CERDÁ LIFE\'S</li>
+                <li><strong>Material:&nbsp;</strong>100% Acrílico</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/hat/cerda_batman/cerda_batman.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Gorro DANISH ENDURANCE',
+            'slug' => Str::slug('Gorro DANISH ENDURANCE'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 68,
+            'price' => 19.99,
+            'stock' => 10,
+            'short_detail' => 'Gorro DANISH ENDURANCE de lana',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>DANISH ENDURANCE</li>
+                <li><strong>Material:&nbsp;</strong>50% Lana, 50% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/hat/danish_endurance_beanie/danish_endurance_beanie.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Gorra NIKE H86',
+            'slug' => Str::slug('Gorra NIKE H86'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 68,
+            'price' => 19.99,
+            'stock' => 10,
+            'short_detail' => 'Gorra NIKE H86 Futura Unisex niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>NIKE</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/hat/nike_h86/nike_h86.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Gorra Marvel Spiderman',
+            'slug' => Str::slug('Gorra Marvel Spiderman'),
+            'status' => 1,
+            'category_id' => 8,
+            'subcategory_id' => 68,
+            'price' => 15,
+            'stock' => 10,
+            'short_detail' => 'Gorra Marvel Spiderman ajustable para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Marvel</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_children/hat/marvel_spiderman_cap/marvel_spiderman_cap.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Camiseta Joma Academy IV',
+            'slug' => Str::slug('Camiseta Joma Academy IV'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 79,
+            'price' => 16.99,
+            'stock' => 10,
+            'short_detail' => 'Camiseta Joma Academy IV para mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Joma</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/sport_clothes/joma_academiIV/joma_academiIV.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Camiseta Nike Tank Pure',
+            'slug' => Str::slug('Camiseta Nike Tank Pure'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 79,
+            'price' => 42.60,
+            'stock' => 10,
+            'short_detail' => 'Camiseta Nike Tank Pure para mujer',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>NIKE</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/sport_clothes/nike_tank_pure/nike_tank_pure.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Bolsa de deporte Puma Challenger',
+            'slug' => Str::slug('Bolsa de deporte Puma Challenger'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 26.40,
+            'stock' => 10,
+            'short_detail' => 'Bolsa de deporte Puma Challenger',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>PUMA</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/puma_challenger/puma_challenger.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Bolsa de deporte Adidas Tiro Du S',
+            'slug' => Str::slug('Bolsa de deporte Adidas Tiro Du S'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 36.40,
+            'stock' => 10,
+            'short_detail' => 'Bolsa de deporte Adidas, unisex',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Adidas</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/adidas_tiro_du_s/adidas_tiro_du_s.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Bolsa de deporte Nike Academy Team M sp21',
+            'slug' => Str::slug('Bolsa de deporte Nike Academy Team M sp21'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 48.49,
+            'stock' => 10,
+            'short_detail' => 'Bolsa de deporte Nike, unisex',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>NIKE</li>
+                <li><strong>Color:&nbsp;</strong>Azul</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/nike_academyteam_sp21/nike_academyteam_sp21.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Bolsa de deporte Minecraft',
+            'slug' => Str::slug('Bolsa de deporte Minecraft'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 28.49,
+            'stock' => 10,
+            'short_detail' => 'Bolsa de deporte Minecraft para niño',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Minecraft</li>
+                <li><strong>Color:&nbsp;</strong>Verde</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/minecraft/minecraft.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Bolsa de deporte Safta Super Mario',
+            'slug' => Str::slug('Bolsa de deporte Safta Super Mario'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 44.79,
+            'stock' => 10,
+            'short_detail' => 'Bolsa de deporte Super Mario, multicolor para niños',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Safta</li>
+                <li><strong>Color:&nbsp;</strong>Multicolor</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+                <li><strong>Dimensiones:&nbsp;</strong>400 X 230 X 240 mm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/safta_super_mario/safta_super_mario.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Mochila deportiva Czemo',
+            'slug' => Str::slug('Mochila deportiva Czemo'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 18.99,
+            'stock' => 10,
+            'short_detail' => 'Mochila deportiva Czemo de cuerdas',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Czemo</li>
+                <li><strong>Color:&nbsp;</strong>Negro</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>
+                <li><strong>Dimensiones:&nbsp;</strong>500 X 400 X 180 mm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/czemo_mochila_cuerdas/czemo_mochila_cuerdas.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Bolsa de deporte Tokeya',
+            'slug' => Str::slug('Bolsa de deporte Tokeya'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 80,
+            'price' => 36.99,
+            'stock' => 10,
+            'short_detail' => 'Bolsa de deporte Tokeya, plegable, impermeable',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Tokeya</li>
+                <li><strong>Color:&nbsp;</strong>Azul, Negro, Violeta</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster, impermeable</li>
+                <li><strong>Dimensiones:&nbsp;</strong>500 X 280 X 250 mm.</li>
+                <li><strong>Dimensiones plegada:&nbsp;</strong>245 X 200 X 80 mm.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/duffel_bag/tokeya_folding/tokeya_folding.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Esterilla de Fitness Tresko',
+            'slug' => Str::slug('Esterilla de Fitness Tresko'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 40.55,
+            'stock' => 10,
+            'short_detail' => 'Esterilla de Fitness Tresko de espuma',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>TRESKO</li>                
+                <li><strong>Material:&nbsp;</strong>Espuma de caucho de nitrilo butadieno</li>
+                <li><strong>Dimensiones:&nbsp;</strong>185 X 60 X 1 cm.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/tresko_fitness/tresko_fitness.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Esterilla de Fitness Cambivo',
+            'slug' => Str::slug('Esterilla de Fitness Cambivo'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 85.99,
+            'stock' => 10,
+            'short_detail' => 'Esterilla de Fitness Cambivo grande',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>CAMBIVO</li>                
+                <li><strong>Material:&nbsp;</strong>Elastómeros termoplásticos</li>
+                <li><strong>Dimensiones:&nbsp;</strong>183 X 122 X 0.6 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>1.7 Kg.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/cambivo_fitness/cambivo_fitness.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Guantes de Fitness AQF',
+            'slug' => Str::slug('Guantes de Fitness AQF'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 19.90,
+            'stock' => 10,
+            'short_detail' => 'Guantes de Fitness AQF, transpirables, unisex',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>AQF</li>
+                <li><strong>Material:&nbsp;</strong>Cuero sintético</li>
+                <li><strong>Dimensiones:&nbsp;</strong>30 X 18 X 5 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>100 g.</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/aqf_guantes_fitness/aqf_guantes_fitness.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Guantes de Fitness RDX',
+            'slug' => Str::slug('Guantes de Fitness RDX'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 19.90,
+            'stock' => 10,
+            'short_detail' => 'Guantes de Fitness RDX, dedo completo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>AQF</li>
+                <li><strong>Material:&nbsp;</strong>Algodón, nylon, silicona</li>
+                <li><strong>Dimensiones:&nbsp;</strong>31.9 X 14.1 X 4.1 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>138 g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/rdx_guantes_fitness/rdx_guantes_fitness.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Pelota de Fitness Core Balance',
+            'slug' => Str::slug('Pelota de Fitness Core Balance'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 28.90,
+            'stock' => 10,
+            'short_detail' => 'Pelota de Fitness Core Balance para ejercicios',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>CORE BALANCE</li>
+                <li><strong>Material:&nbsp;</strong>Antiexplosión</li>
+                <li><strong>Dimensiones:&nbsp;</strong>75 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>1.2 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/core_balance_ball/core_balance_ball.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Faja reductora Mezzuno',
+            'slug' => Str::slug('Faja reductora Mezzuno'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 23.50,
+            'stock' => 10,
+            'short_detail' => 'Faja reductora Mezzuno, unisex, ajuste ergonómico',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Mezzuno</li>
+                <li><strong>Material:&nbsp;</strong>Neopreno</li>
+                <li><strong>Dimensiones:&nbsp;</strong>98 X 20 X 0.5 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>200 g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/mezzuno_faja_reductora/mezzuno_faja_reductora.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Faja reductora InnoTi',
+            'slug' => Str::slug('Faja reductora InnoTi'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 23.50,
+            'stock' => 10,
+            'short_detail' => 'Faja reductora InnoTi',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>InnoTi</li>
+                <li><strong>Material:&nbsp;</strong>Neopreno</li>
+                <li><strong>Dimensiones:&nbsp;</strong>70-90 cm. de diámetro</li>
+                <li><strong>Peso:&nbsp;</strong>280 g.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/innoti_faja_reductora/innoti_faja_reductora.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Banco de abdominales Gorilla Sports',
+            'slug' => Str::slug('Banco de abdominales Gorilla Sports'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 81,
+            'price' => 68.99,
+            'stock' => 10,
+            'short_detail' => 'Banco de abdominales, ajustable',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Gorilla Sports</li>                
+                <li><strong>Dimensiones:&nbsp;</strong>120 X 32 X 60 cm.</li>
+                <li><strong>Peso:&nbsp;</strong>8 Kg.</li>
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/fitness/abdominal_bench_gorillasports/abdominal_bench_gorillasports.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Sudadera Puma Teamgoal 23',
+            'slug' => Str::slug('Sudadera Puma Teamgoal 23'),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 41,
+            'price' => 44.30,
+            'stock' => 10,
+            'short_detail' => 'Sudadera con capucha y bolsillo delantero',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Puma</li>
+                <li><strong>Material:&nbsp;</strong>68% Algodón, 32% Poliéster</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_men/hoodie/puma_teamgoal23/puma_teamgoal23.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Sudadera Helly Hansen HH',
+            'slug' => Str::slug('Sudadera Helly Hansen HH'),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 41,
+            'price' => 44.30,
+            'stock' => 10,
+            'short_detail' => 'Sudadera con capucha con bolsillo tipo canguro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Helly Hansen</li>
+                <li><strong>Material:&nbsp;</strong>70% Algodón, 30% Poliéster</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_men/hoodie/helly_hansen_hh/helly_hansen_hh.jpg',
+        ]);
+
+        $product[] = Product::create([
+            'name' => 'Sudadera Nike Park20 Po',
+            'slug' => Str::slug('Sudadera Nike Park20 Po'),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 41,
+            'price' => 45.90,
+            'stock' => 10,
+            'short_detail' => 'Sudadera con capucha con bolsillo tipo canguro',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>NIKE</li>
+                <li><strong>Material:&nbsp;</strong>82% Algodón, 18% Poliéster</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_men/hoodie/nike_park20pro/nike_park20pro.jpg',
+        ]);
+        $product[] = Product::create([
+            'name' => 'Sudadera Joma Cairo',
+            'slug' => Str::slug('Sudadera Joma Cairo'),
+            'status' => 1,
+            'category_id' => 2,
+            'subcategory_id' => 41,
+            'price' => 28,
+            'stock' => 10,
+            'short_detail' => 'Sudadera con cuello redondo',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Joma</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'clothes_men/hoodie/joma_cairo/joma_cairo.jpg',
+        ]);
+
+
+        //FC Barcelona
+        $product[] = Product::create([
+            'name' => 'Camiseta FC Barcelona',
+            'slug' => Str::slug('Camiseta FC Barcelona'),
+            'status' => 1,
+            'category_id' => 12,
+            'subcategory_id' => 79,
+            'price' => 101,
+            'stock' => 30,
+            'short_detail' => 'Camiseta para mujer, equipación oficial FC Barcelona 2021/2022',
+            'detail' =>'<p>
+                <strong>Caracter&iacute;sticas</strong>
+            </p>
+            <ul>
+                <li><strong>Marca:&nbsp;</strong>Nike</li>
+                <li><strong>Material:&nbsp;</strong>100% Poliéster, transpirable</li>                
+            </ul>',
+            'path_tag' => '/images/products/',
+            'image' => 'sport/sport_clothes/FC_Barcelona/FC_Barcelona.jpg',
+        ]);
         $count_product = count($product);
         /*
         for($i=0;$i<$count_product;$i++){
