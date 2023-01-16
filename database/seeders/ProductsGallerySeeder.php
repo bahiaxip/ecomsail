@@ -2711,14 +2711,7 @@ class ProductsGallerySeeder extends Seeder
             'file_ext' => 'jpg',
             'product_id' => 145
         ]);
-        //Product 
-        ImagesProducts::create([
-            'path_tag' => 'images/products/',
-            'file_name' =>'FC_Barcelona',
-            'image' => 'sport/sport_clothes/FC_Barcelona/FC_Barcelona_3.jpg',
-            'file_ext' => 'jpg',
-            'product_id' => 131
-        ]);
+        
         
         //Product 146
         ImagesProducts::create([
@@ -3988,7 +3981,21 @@ class ProductsGallerySeeder extends Seeder
             'image' => 'clothes_men/hoodie/joma_cairo/joma_cairo_11.jpg',
             'file_ext' => 'jpg',
             'product_id' => 199
-        ]);        
-
+        ]);
+        //Product 200
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Camiseta FC_Barcelona',
+            'image' => 'sport/sport_clothes/FC_Barcelona/FC_Barcelona_2.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 200
+        ]);
+        ImagesProducts::create([
+            'path_tag' => 'images/products/',
+            'file_name' =>'Camiseta FC_Barcelona',
+            'image' => 'sport/sport_clothes/FC_Barcelona/FC_Barcelona_3.jpg',
+            'file_ext' => 'jpg',
+            'product_id' => 200
+        ]);
     }
 }

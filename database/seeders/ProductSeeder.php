@@ -4761,22 +4761,21 @@ class ProductSeeder extends Seeder
             'image' => 'clothes_men/hoodie/joma_cairo/joma_cairo.jpg',
         ]);
 
-
-        //FC Barcelona
+        //Product ID: 200 //FC Barcelona
         $product[] = Product::create([
             'name' => 'Camiseta FC Barcelona',
             'slug' => Str::slug('Camiseta FC Barcelona'),
             'status' => 1,
             'category_id' => 12,
             'subcategory_id' => 79,
-            'price' => 101,
+            'price' => 50,
             'stock' => 30,
             'short_detail' => 'Camiseta para mujer, equipación oficial FC Barcelona 2021/2022',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
             </p>
             <ul>
-                <li><strong>Marca:&nbsp;</strong>Nike</li>
+                <li><strong>Marca:&nbsp;</strong>NIKE</li>
                 <li><strong>Material:&nbsp;</strong>100% Poliéster, transpirable</li>                
             </ul>',
             'path_tag' => '/images/products/',

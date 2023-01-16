@@ -5886,42 +5886,47 @@ class CombinationSeeder extends Seeder
             'list_ids' => 58,
             'parent_attr' => 2,
             'amount' => 0,
-            'product_id' => 131
+            'stock' => 10,
+            'product_id' => 200
         ]);
         Combination::create([
             'name' => 'Talla > S',
             'list_ids' => 59,
             'parent_attr' => 2,
             'amount' => 0,
-            'product_id' => 131
+            'stock' => 10,
+            'product_id' => 200
         ]);
         Combination::create([
             'name' => 'Talla > M',
             'list_ids' => 60,
             'parent_attr' => 2,
             'amount' => 0,
-            'product_id' => 131
+            'stock' => 10,
+            'product_id' => 200
         ]);
         Combination::create([
             'name' => 'Talla > L',
             'list_ids' => 61,
             'parent_attr' => 2,
             'amount' => 0,
-            'product_id' => 131
+            'stock' => 10,
+            'product_id' => 200
         ]);
         Combination::create([
             'name' => 'Talla > XL',
             'list_ids' => 62,
             'parent_attr' => 2,
             'amount' => 0,
-            'product_id' => 131
+            'stock' => 10,
+            'product_id' => 200
         ]);
         //parent_combinations
         ParentComb::create([
             'parent_id' => 2,
             'parent_name' => 'Talla',
             'type_selection' => 2,
-            'product_id' => 131
+            'product_id' => 200
         ]);
     }
 
