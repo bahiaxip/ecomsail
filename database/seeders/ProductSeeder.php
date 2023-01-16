@@ -16,6 +16,7 @@ class ProductSeeder extends Seeder
     {
         $product = [];
         //Frigoríficos
+        //Product ID: 1
         $product[] = Product::create([
             'name' => 'Frigorífico BOSCH KGN39VIEA',            
             'slug' => Str::slug('Frigorífico BOSCH KGN39VIEA'),
@@ -40,7 +41,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/fridges/bosch_KGN39VIEA/bosch_KGN39VIEA.jpg',
         ]);
-
+        //Product ID: 2
         $product[] = Product::create([
             'name' => 'Frigorífico Candy CMDDS',            
             'slug' => Str::slug('Frigorífico Candy CMDDS'),
@@ -65,6 +66,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/fridges/candy_CMDDS/candy_CMDDS.jpg',
         ]);
+        //Product ID: 3
         $product[] = Product::create([
             'name' => 'Frigorífico Corberó CCH18021X',            
             'slug' => Str::slug('Frigorífico Corberó CCH18021X'),
@@ -89,6 +91,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/fridges/corbero_CCH18021X/corbero_CCH18021X.jpg',
         ]);
+        //Product ID: 4
         $product[] = Product::create([
             'name' => 'Frigorífico Hisense RQ515N4AC2',            
             'slug' => Str::slug('Frigorífico Hisense RQ515N4AC2'),
@@ -113,6 +116,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/fridges/hisense_RQ515N4AC2/hisense_RQ515N4AC2.jpg',
         ]);
+        //Product ID: 5
         $product[] = Product::create([
             'name' => 'Frigorífico LG GTB362PZCZD',            
             'slug' => Str::slug('Frigorífico LG GTB362PZCZD'),
@@ -136,6 +140,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/fridges/lg_GTB362PZCZD/lg_GTB362PZCZD.jpg',
         ]);
+        //Product ID: 6
         $product[] = Product::create([
             'name' => 'Frigorífico Samsung RB34T602EWW',
             'slug' => Str::slug('Frigorífico Samsung RB34T602EWW'),
@@ -159,6 +164,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/fridges/samsung_RB34T602EWW/samsung_RB34T602EWW.jpg',
         ]);
+        //Product ID: 7
         $product[] = Product::create([
             'name' => 'Frigorífico Teka NFL320',
             'slug' => Str::slug('Frigorífico Teka NFL320'),
@@ -183,6 +189,7 @@ class ProductSeeder extends Seeder
             'image' => 'appliance/fridges/teka_NFL320/teka_NFL320.jpg',
         ]);
         //Secadores
+        //Product ID: 8
         $product[] = Product::create([
             'name' => 'Secador Babyliss 6613DE',
             'slug' => Str::slug('Secador Babyliss 6613DE'),
@@ -206,6 +213,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/babyliss_6613DE/babyliss_6613DE.jpg',
         ]);
+        //Product ID: 9
         $product[] = Product::create([
             'name' => 'Secador Babyliss 6615E',
             'slug' => Str::slug('Secador Babyliss 6615E'),
@@ -229,6 +237,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/babyliss_6615E/babyliss_6615E.jpg',
         ]);
+        //Product ID: 10
         $product[] = Product::create([
             'name' => 'Secador Braun Satin Hair 7',
             'slug' => Str::slug('Secador Braun Satin Hair 7'),
@@ -252,6 +261,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/braun_satin_hair7/braun_satin_hair7.jpg',
         ]);
+        //Product ID: 11
         $product[] = Product::create([
             'name' => 'Secador Cecotec Bamba',
             'slug' => Str::slug('Secador Cecotec Bamba'),
@@ -275,6 +285,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/cecotec_power_go/cecotec_power_go.jpg',
         ]);
+        //Product ID: 12
         $product[] = Product::create([
             'name' => 'Secador Happygoo',
             'slug' => Str::slug('Secador Happygoo'),
@@ -298,6 +309,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/happygoo/happygoo.jpg',
         ]);
+        //Product ID: 13
         $product[] = Product::create([
             'name' => 'Secador Remington Compact',
             'slug' => Str::slug('Secador Remington Compact'),
@@ -321,6 +333,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/remington_compact/remington_compact.jpg',
         ]);
+        //Product ID: 14
         $product[] = Product::create([
             'name' => 'Secador Remington Silk',
             'slug' => Str::slug('Secador Remington Silk'),
@@ -344,6 +357,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/hair_dryer/remington_silk/remington_silk.jpg',
         ]);
+        //Product ID: 15
         $product[] = Product::create([
             'name' => 'Secador Solac Hair & Go',
             'slug' => Str::slug('Solac Hair & Go'),
@@ -368,6 +382,7 @@ class ProductSeeder extends Seeder
             'image' => 'appliance/hair_dryer/solar_hair_go/solar_hair_go.jpg',
         ]);
         //atornilladoras
+        //Product ID: 16
         $product[] = Product::create([
             'name' => 'Atornillador BlackAndDecker BCF611CK',
             'slug' => Str::slug('Atornillador BlackAndDecker BCF611CK'),
@@ -392,6 +407,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/screwdriver/blackdecker_BCF611CK/blackdecker_BCF611CK.jpg',
         ]);
+        //Product ID: 17
         $product[] = Product::create([
             'name' => 'Atornillador Bosch IXO',
             'slug' => Str::slug('Atornillador Bosch IXO'),
@@ -416,6 +432,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/screwdriver/bosch_IXO/bosch_IXO.jpg',
         ]);
+        //Product ID: 18
         $product[] = Product::create([
             'name' => 'Atornillador Bosch GSR 12V-15',
             'slug' => Str::slug('Atornillador Bosch GSR 12V-15'),
@@ -441,6 +458,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/screwdriver/bosch_GSR12-15/bosch_GSR12-15.jpg',
         ]);
+        //Product ID: 19
         $product[] = Product::create([
             'name' => 'Atornillador Deko DKCD20XL01',
             'slug' => Str::slug('Atornillador Deko DKCD20XL01'),
@@ -467,6 +485,7 @@ class ProductSeeder extends Seeder
             'image' => 'tools/screwdriver/deko_DKCD20XL01/deko_DKCD20XL01.jpg',
         ]);
         //Metros
+        //Product ID: 20
         $product[] = Product::create([
             'name' => 'Flexómetro Bellota 50011',
             'slug' => Str::slug('Flexómetro Bellota 50011'),
@@ -488,6 +507,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/bellota_50011/bellota_50011.jpg',
         ]);
+        //Product ID: 21
         $product[] = Product::create([
             'name' => 'Flexómetro Fisco TK',
             'slug' => Str::slug('Flexómetro Fisco TK'),
@@ -509,6 +529,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/fisco_TK/fisco_TK.jpg',
         ]);
+        //Product ID: 22
         $product[] = Product::create([
             'name' => 'Flexómetro Milwaukee',
             'slug' => Str::slug('Flexómetro Milwaukee'),
@@ -530,6 +551,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/milwaukee/milwaukee.jpg',
         ]);
+        //Product ID: 23
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley DualLock 3M',
             'slug' => Str::slug('Flexómetro Stanley DualLock 3M'),
@@ -552,6 +574,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_duallock/stanley_duallock_3M.jpg',
         ]);
+        //Product ID: 24
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley DualLock 5M',
             'slug' => Str::slug('Flexómetro Stanley DualLock 5M'),
@@ -574,6 +597,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_duallock/stanley_duallock_5M.jpg',
         ]);
+        //Product ID: 25
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley DualLock 8M',
             'slug' => Str::slug('Flexómetro Stanley DualLock 8M'),
@@ -596,7 +620,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_duallock/stanley_duallock_8M.jpg',
         ]);
-        
+        //Product ID: 26
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley PowerLock Classic 3M',
             'slug' => Str::slug('Flexómetro Stanley Classic PowerLock Classic 3M'),
@@ -620,6 +644,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_powerlock_classic/stanley_powerlock_classic_3M.jpg',
         ]);
+        //Product ID: 27
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley PowerLock Classic 5M',
             'slug' => Str::slug('Flexómetro Stanley PowerLock Classic 5M'),
@@ -643,6 +668,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_powerlock_classic/stanley_powerlock_classic_5M.jpg',
         ]);
+        //Product ID: 28
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley PowerLock Classic 10M',
             'slug' => Str::slug('Flexómetro Stanley PowerLock Classic 10M'),
@@ -666,6 +692,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_powerlock_classic/stanley_powerlock_classic_10M.jpg',
         ]);
+        //Product ID: 29
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley Tylon 5M',
             'slug' => Str::slug('Flexómetro Stanley Tylon 5M'),
@@ -689,6 +716,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_tylon/stanley_tylon_5M.jpg',
         ]);
+        //Product ID: 30
         $product[] = Product::create([
             'name' => 'Flexómetro Stanley Tylon 8M',
             'slug' => Str::slug('Flexómetro Stanley Tylon 8M'),
@@ -712,6 +740,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/flexometer/stanley_tylon/stanley_tylon_8M.jpg',
         ]);
+        //Product ID: 31
         $product[] = Product::create([
             'name' => "Taladro percutor Einhell",
             'slug' => Str::slug("Taladro percutor Einhell"),
@@ -736,6 +765,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/drill/hammer_drill_einhell_4513960/hammer_drill_einhell.jpg',
         ]);
+        //Product ID: 32
         $product[] = Product::create([
             'name' => "Martillo perforador Bosch Professional",
             'slug' => Str::slug("Martillo perforador Bosch Professional"),
@@ -761,6 +791,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/drill/bosch_gbh_2_28F/bosch_gbh_2_28F.jpg',
         ]);
+        //Product ID: 33
         $product[] = Product::create([
             'name' => "Martillo perforador BlackAndDecker BEHS03K-QS",
             'slug' => Str::slug("Martillo perforador BlackAndDecker BEHS03K-QS"),
@@ -786,6 +817,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/drill/hammer_drill_blackanddecker_BEHS03K/hammer_drill_blackanddecker_BEHS03K.jpg',
         ]);
+        //Product ID: 34
         $product[] = Product::create([
             'name' => "Taladro percutor Casals ID500REA",
             'slug' => Str::slug("Taladro percutor Casals ID500REA"),
@@ -811,6 +843,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/drill/hammer_drill_casals_ID500REA/hammer_drill_casals_ID500REA.jpg',
         ]);
+        //Product ID: 35
         $product[] = Product::create([
             'name' => "Taladro percutor DeWalt DWD024KS",
             'slug' => Str::slug("Taladro percutor DeWalt DWD024KS"),
@@ -835,6 +868,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tools/drill/hammer_drill_dewalt_DWD024KS/hammer_drill_dewalt_DWD024KS.jpg',
         ]);
+        //Product ID: 36
         $product[] = Product::create([
             'name' => 'Camiseta Icon Futura',
             'slug' => Str::slug('Camiseta Icon Futura'),
@@ -848,6 +882,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/t-shirt/nike_iconfutura/nike_iconfutura_black.jpg',
         ]);
+        //Product ID: 37
         $product[] = Product::create([
             'name' => 'Camiseta SWSH',
             'slug' => Str::slug('Camiseta SWSH'),
@@ -861,6 +896,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/t-shirt/nike_swsh/nike_swsh.jpg',
         ]);
+        //Product ID: 38
         $product[] = Product::create([
             'name' => 'Camiseta Dri-fit Strike',
             'slug' => Str::slug('Camiseta Dri-fit Strike'),
@@ -881,7 +917,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/t-shirt/nike_dri-fit_strike/nike_dri-fit_strike_black.jpg',
         ]);
-        
+        //Product ID: 39        
         $product[] = Product::create([
             'name' => 'Vestido de mujer Berylove',
             'slug' => Str::slug('Vestido de mujer Berylove'),
@@ -905,6 +941,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/dress/berylove/berylove_violeta.jpg',
         ]);
+        //Product ID: 40
         $product[] = Product::create([
             'name' => 'Vestido Lápiz Grace Karin',
             'slug' => Str::slug('Vestido Lápiz Grace Karin'),
@@ -912,7 +949,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 33,
             'price' => 66,
-            'stock' => 15,
+            'stock' => 60,
             'short_detail' => 'Vestido Lápiz Grace Karin para eventos:fiestas, bodas...',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -926,6 +963,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/dress/grace_karin_lapiz/grace_karin_lapiz_blanco.jpg',
         ]);
+        //Product ID: 41
         $product[] = Product::create([
             'name' => 'Vestido Vintage Grace Karin',
             'slug' => Str::slug('Vestido Vintage Grace Karin'),
@@ -933,7 +971,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 33,
             'price' => 66,
-            'stock' => 15,
+            'stock' => 62,
             'short_detail' => 'Vestido plisado Grace Karin para eventos:fiestas, bodas...',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -947,6 +985,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/dress/grace_karin_vintage/grace_karin_vintage_rojo.jpg',
         ]);
+        //Product ID: 42
         $product[] = Product::create([
             'name' => 'Vestido de mujer Lacoste',
             'slug' => Str::slug('Vestido de mujer Lacoste'),
@@ -954,7 +993,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 33,
             'price' => 66,
-            'stock' => 15,
+            'stock' => 28,
             'short_detail' => 'Vestido polo de mujer Lacoste',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -968,6 +1007,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/dress/vestido_lacoste_polo/vestido_lacoste_polo_azul_marino.jpg',
         ]);
+        //Product ID: 43
         $product[] = Product::create([
             'name' => 'Vestido de mujer Ever-Pretty',
             'slug' => Str::slug('Vestido de mujer Ever-Pretty'),
@@ -989,6 +1029,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/dress/ever-pretty_fiesta_largo/ever-pretty_fiesta_largo_azul_marino.jpg',
         ]);
+        //Product ID: 44
         $product[] = Product::create([
             'name' => 'Vestido murciélago Grace Karin',
             'slug' => Str::slug('Vestido murciélago Grace Karin'),
@@ -996,7 +1037,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 33,
             'price' => 42,
-            'stock' => 25,
+            'stock' => 48,
             'short_detail' => 'Vestido murciélago de mujer',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -1009,6 +1050,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/dress/grace_karin_murcielago/grace_karin_murcielago_negro.jpg',
         ]);
+        //Product ID: 45
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Ironwood Overt",
             'slug' => Str::slug("Vaqueros Levi's 501 Ironwood Overt"),
@@ -1029,6 +1071,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/levis_501_ironwood_overt/ironwood_overt.jpg',
         ]);
+        //Product ID: 46
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Black 80701",
             'slug' => Str::slug("Vaqueros Levi's 501 Black 80701"),
@@ -1049,6 +1092,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/levis_501_black_80701/black_80701.jpg',
         ]);
+        //Product ID: 47
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Canyon Kings",
             'slug' => Str::slug("Vaqueros Levi's 501 Canyon Kings"),
@@ -1069,6 +1113,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/levis_501_canyon_kings/canyon_kings.jpg',
         ]);
+        //Product ID: 48
         $product[] = Product::create([
             'name' => "Vaqueros Levi's 501 Levis Marlon",
             'slug' => Str::slug("Vaqueros Levi's 501 Levis Marlon"),
@@ -1089,6 +1134,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/levis_501_levis_marlon/levis_marlon.jpg',
         ]);
+        //Product ID: 49
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Stanley Jeans",
             'slug' => Str::slug("Vaqueros Pepe Jeans Stanley Jeans"),
@@ -1109,6 +1155,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/pepe_jeans_stanley_jeans_denim/stanley_jeans_denim.jpg',
         ]);
+        //Product ID: 50
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Kingston Zip",
             'slug' => Str::slug("Vaqueros Pepe Jeans Kingston Zip"),
@@ -1129,6 +1176,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/pepe_jeans_kingston_zip_000_denim/kingston_zip_000_denim.jpg',
         ]);
+        //Product ID: 51
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Finsbuty Jeans",
             'slug' => Str::slug("Vaqueros Pepe Jeans Finsbury Jeans"),
@@ -1149,6 +1197,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/pepe_jeans_finsbury_jeans_000_denim/finsbury_jeans_000_denim.jpg',
         ]);
+        //Product ID: 52
         $product[] = Product::create([
             'name' => "Vaqueros Lee Straight Fit Xm Jeans",
             'slug' => Str::slug("Vaqueros Lee Straight Fit Xm Jeans"),
@@ -1169,6 +1218,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/jeans/lee_straight_fit_xm_jeans_maddox/straight_fit_xm_jeans_maddox.jpg',
         ]);
+        //Product ID: 53
         $product[] = Product::create([
             'name' => "Vaqueros Lee Elly Jeans Dark Daisy",
             'slug' => Str::slug("Vaqueros Lee Elly Jeans Dark Daisy"),
@@ -1189,6 +1239,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/jeans/lee_elly_jeans_dark_daisy/elly_jeans_dark_daisy.jpg',
         ]);
+        //Product ID: 54
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Regent Jeans Denim",
             'slug' => Str::slug("Vaqueros Pepe Jeans Regent Jeans Denim"),
@@ -1209,6 +1260,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/jeans/pepe_jeans_regent_jeans_denim/regent_jeans_denim.jpg',
         ]);
+        //Product ID: 55
         $product[] = Product::create([
             'name' => "Vaqueros Pepe Jeans Mary Jeans Denim",
             'slug' => Str::slug("Vaqueros Pepe Mary Regent Jeans Denim"),
@@ -1229,7 +1281,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/jeans/pepe_jeans_mary_jeans_denim/mary_jeans_denim.jpg',
         ]);
-        
+        //Product ID: 56
         $product[] = Product::create([
             'name' => 'Lavadora Balay 3TS885BE',            
             'slug' => Str::slug('Lavadora Balay 3TS885BE'),
@@ -1254,6 +1306,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/washers/balay_3TS885BE/balay_3TS885BE.jpg',
         ]);
+        //Product ID: 57
         $product[] = Product::create([
             'name' => 'Lavadora Indesit EWC61251WSPTN',            
             'slug' => Str::slug('Lavadora Indesit EWC61251WSPTN'),
@@ -1278,6 +1331,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/washers/indesit_EWC61251WSPTN/indesit_EWC61251WSPTN.jpg',
         ]);
+        //Product ID: 58
         $product[] = Product::create([
             'name' => 'Lavadora Whirpool FFB8458WV',            
             'slug' => Str::slug('Lavadora Whirpool FFB8458WV'),
@@ -1301,7 +1355,8 @@ class ProductSeeder extends Seeder
             </ul>',
             'path_tag' => '/images/products/',
             'image' => 'appliance/washers/whirpool_FFB8458WV/whirpool_FFB8458WV.jpg',
-        ]);        
+        ]);
+        //Product ID: 59
         $product[] = Product::create([
             'name' => 'Placa de inducción Balay 3EB865FR',            
             'slug' => Str::slug('Placa de inducción Balay 3EB865FR'),
@@ -1327,6 +1382,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/cooking/balay_3EB865FR/balay_3EB865FR.jpg',
         ]);
+        //Product ID: 60
         $product[] = Product::create([
             'name' => 'Placa de fogones Beko HIGG64103SX',            
             'slug' => Str::slug('Placa de fogones Beko HIGG64103SX'),
@@ -1350,6 +1406,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/cooking/beko_HIGG64103SX/beko_HIGG64103SX.jpg',
         ]);
+        //Product ID: 61
         $product[] = Product::create([
             'name' => 'Placa vitrocerámica Teka TZ6415',            
             'slug' => Str::slug('Placa vitrocerámica Teka TZ6415'),
@@ -1375,6 +1432,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/cooking/balay_3EB865FR/balay_3EB865FR.jpg',
         ]);
+        //Product ID: 62
         $product[] = Product::create([
             'name' => 'Placa vitrocerámica Candy CH63CC',            
             'slug' => Str::slug('Placa vitrocerámica Candy CH63CC'),
@@ -1399,6 +1457,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/cooking/candy_CH63CC/candy_CH63CC.jpg',
         ]);
+        //Product ID: 63
         $product[] = Product::create([
             'name' => 'Aspiradora Rowenta Swift Power RO2981',            
             'slug' => Str::slug('Aspiradora Rowenta Swift Power RO2981'),
@@ -1422,6 +1481,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/vacuum_cleaner/rowenta_swift_power_total_care/rowenta_R02981.jpg',
         ]);
+        //Product ID: 64
         $product[] = Product::create([
             'name' => 'Aspiradora Cecotec Vertical Conga Popstar',            
             'slug' => Str::slug('Aspiradora Cecotec Vertical Conga Popstar'),
@@ -1446,6 +1506,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/vacuum_cleaner/cecotec_conga_popstar/cecotec_conga_popstar.jpg',
         ]);
+        //Product ID: 65
         $product[] = Product::create([
             'name' => 'Aspiradora Orbegozo Ap 8030',
             'slug' => Str::slug('Aspiradora Orbegozo Ap 8030'),
@@ -1470,6 +1531,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/vacuum_cleaner/orbegozo_ap_8030/orbegozo_ap_8030.jpg',
         ]);
+        //Product ID: 66
         $product[] = Product::create([
             'name' => 'Aspiradora Karcher 1000W',
             'slug' => Str::slug('Aspiradora Karcher 1000W'),
@@ -1492,6 +1554,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/vacuum_cleaner/karcher_1000w/karcher_1000w.jpg',
         ]);
+        //Product ID: 67
         $product[] = Product::create([
             'name' => 'Aspiradora Xiaomi Robot Vacuum',
             'slug' => Str::slug('Aspiradora Xiaomi Robot Vacuum'),
@@ -1517,6 +1580,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'appliance/vacuum_cleaner/xiaomi_robot_vacuum/xiaomi_robot_vacuum.jpg',
         ]);
+        //Product ID: 68
         $product[] = Product::create([
             'name' => 'Ordenador sobremesa HP Victus 15L',
             'slug' => Str::slug('Ordenador sobremesa HP Victus 15L'),
@@ -1547,6 +1611,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/desktop/hp_victus_15L/hp_victus_15L.webp',
         ]);
+        //Product ID: 69
         $product[] = Product::create([
             'name' => 'Ordenador sobremesa IdeaCentre AIO 3',
             'slug' => Str::slug('Ordenador sobremesa IdeaCentre AIO 3'),
@@ -1577,6 +1642,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/desktop/lenovo_ideacentre_aio3/lenovo_ideacentre_aio3.jpg',
         ]);
+        //Product ID: 70
         $product[] = Product::create([
             'name' => 'Ordenador sobremesa MSI mag Infinite',
             'slug' => Str::slug('Ordenador sobremesa MSI mag Infinite'),
@@ -1606,6 +1672,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/desktop/msi_mag_infinite/msi_mag_infinite.jpg',
         ]);
+        //Product ID: 71
         $product[] = Product::create([
             'name' => 'Ordenador portátil HP Victus 16-e0090ns',
             'slug' => Str::slug('Ordenador portátil HP Victus 16-e0090ns'),
@@ -1638,6 +1705,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/portable/hp_victus_16-e0090ns/hp_victus_16-e0090ns.jpg',
         ]);
+        //Product ID: 72
         $product[] = Product::create([
             'name' => 'Ordenador portátil MSI Katana GF66 12UD-081XES',
             'slug' => Str::slug('Ordenador portátil MSI Katana GF66 12UD-081XES'),
@@ -1670,6 +1738,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/portable/msi_katana_gf66_12ud_081xes/msi_katana_gf66_12ud_081xes.jpg',
         ]);
+        //Product ID: 73
         $product[] = Product::create([
             'name' => 'Ordenador portátil Acer Nitro AN515-57-75M9',
             'slug' => Str::slug('Ordenador portátil Acer Nitro AN515-57-75M9'),
@@ -1702,6 +1771,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/portable/acer_nitro_an515_57_75m9/acer_nitro_an515_57_75m9.jpg',
         ]);
+        //Product ID: 74
         $product[] = Product::create([
             'name' => 'Disco duro Seagate Barracuda 3.5"',
             'slug' => Str::slug('Disco duro Seagate Barracuda 3.5"'),
@@ -1730,6 +1800,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/storage/seagate_barracuda/seagate_barracuda.jpg',
         ]);
+        //Product ID: 75
         $product[] = Product::create([
             'name' => 'Disco duro Samsung 870 EVO',
             'slug' => Str::slug('Disco duro Samsung 870 EVO'),
@@ -1758,6 +1829,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/storage/samsung_870_evo/samsung_870_evo.jpg',
         ]);
+        //Product ID: 76
         $product[] = Product::create([
             'name' => 'Disco duro Kioxia Exceria 480GB',
             'slug' => Str::slug('Disco duro Kioxia Exceria 480GB'),
@@ -1786,6 +1858,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'computers/storage/kioxia_exceria_480GB/kioxia_exceria_480GB.jpg',
         ]);
+        //Product ID: 77
         $product[] = Product::create([
             'name' => 'Manguera de jardín Cellfast Economic',
             'slug' => Str::slug('Manguera de jardín Cellfast Economic'),
@@ -1808,6 +1881,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/hose/hose_cellfast_20m/hose_cellfast_20m.jpg',
         ]);
+        //Product ID: 78
         $product[] = Product::create([
             'name' => 'Manguera de jardín Natrain',
             'slug' => Str::slug('Manguera de jardín Natrain'),
@@ -1829,6 +1903,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/hose/hose_natrain_15m/hose_natrain_15m.jpg',
         ]);
+        //Product ID: 79
         $product[] = Product::create([
             'name' => 'Manguera de jardín Gardena Comfort FLEX',
             'slug' => Str::slug('Manguera de jardín Gardena Comfort FLEX'),
@@ -1851,6 +1926,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/hose/hose_gardena_flex_15m/hose_gardena_flex_15m.jpg',
         ]);
+        //Product ID: 80
         $product[] = Product::create([
             'name' => 'Piscina hinchable INTEX Easy Set 366 X 76',
             'slug' => Str::slug('Piscina hinchable INTEX Easy Set 366 X 76'),
@@ -1874,6 +1950,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/swim/swim_intex_366x76/swim_intex_366x76.jpg',
         ]);
+        //Product ID: 81
         $product[] = Product::create([
             'name' => 'Piscina hinchable Bestrip 300 X 170',
             'slug' => Str::slug('Piscina hinchable Bestrip 300 X 170'),
@@ -1897,6 +1974,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/swim/swim_bestrip_300x170/swim_bestrip_300x170.jpg',
         ]);
+        //Product ID: 82
         $product[] = Product::create([
             'name' => 'Piscina desmontable INTEX 457X122',
             'slug' => Str::slug('Piscina desmontable INTEX 457X122'),
@@ -1920,6 +1998,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/swim/swim_intex_457x122/swim_intex_457x122.jpg',
         ]);
+        //Product ID: 83
         $product[] = Product::create([
             'name' => 'Cortacésped Bosch Home and Garden ARM 3200',
             'slug' => Str::slug('Cortacésped Bosch Home and Garden ARM 3200'),
@@ -1949,6 +2028,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/mower/bosch_arm_3200/bosch_arm_3200.jpg',
         ]);
+        //Product ID: 84
         $product[] = Product::create([
             'name' => 'Cortacésped Einhell GC EM 1536',
             'slug' => Str::slug('Cortacésped Einhell GC EM 1536'),
@@ -1977,6 +2057,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/mower/einhell_gc_em_1536/einhell_gc_em_1536.jpg',
         ]);
+        //Product ID: 85
         $product[] = Product::create([
             'name' => 'Cortacésped BlackAndDecker BEMW351',
             'slug' => Str::slug('Cortacésped BlackAndDecker BEMW351'),
@@ -2005,6 +2086,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/mower/blackanddecker_bemw351/blackanddecker_bemw351.jpg',
         ]);
+        //Product ID: 86
         $product[] = Product::create([
             'name' => 'Cortacésped Greenworks G40LM35K',
             'slug' => Str::slug('Cortacésped Greenworks G40LM35K'),
@@ -2033,6 +2115,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'garden/mower/greenworks_G40LM35K/greenworks_G40LM35K.jpg',
         ]);
+        //Product ID: 87
         $product[] = Product::create([
             'name' => 'Cepillo de dientes Oral-B Pro 3500',
             'slug' => Str::slug('Cepillo de dientes Oral-B Pro 3500'),
@@ -2058,6 +2141,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/toothbrushes/oral_b_pro_3500/oral_b_pro_3500.jpg',
         ]);
+        //Product ID: 88
         $product[] = Product::create([
             'name' => 'Cepillo de dientes Xiaomi MI SMART T500',
             'slug' => Str::slug('Cepillo de dientes Xiaomi MI SMART T500'),
@@ -2084,6 +2168,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/toothbrushes/xiaomi_mi_smart_t500/xiaomi_mi_smart_t500.jpg',
         ]);
+        //Product ID: 89
         $product[] = Product::create([
             'name' => 'Cepillo de dientes Philips Sonicare 2',
             'slug' => Str::slug('Cepillo de dientes Philips Sonicare 2'),
@@ -2109,6 +2194,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/toothbrushes/philips_sonicare2/philips_sonicare2.jpg',
         ]);
+        //Product ID: 90
         $product[] = Product::create([
             'name' => 'Pintalabios OULAC Metálico',
             'slug' => Str::slug('Pintalabios OULAC Metálico'),
@@ -2130,6 +2216,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/makeup/lipstick_OULAC_metal/lipstick_OULAC_metal.jpg',
         ]);
+        //Product ID: 91
         $product[] = Product::create([
             'name' => "Polo Kappa Uomo Peleot",
             'slug' => Str::slug("Polo Kappa Uomo Peleot"),
@@ -2150,6 +2237,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/polo_shirt/polo_kappa_uomo_peleot/polo_kappa_verde.jpg',
         ]);
+        //Product ID: 92
         $product[] = Product::create([
             'name' => "Polo Levi's Mineral Black",
             'slug' => Str::slug("Polo Levi's Mineral Black"),
@@ -2170,6 +2258,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/polo_shirt/polo_levis_mineral_black/polo_levis_mineral_black.jpg',
         ]);
+        //Product ID: 93
         $product[] = Product::create([
             'name' => "Polo Lacoste DH3201",
             'slug' => Str::slug("Polo Lacoste DH3201"),
@@ -2177,7 +2266,7 @@ class ProductSeeder extends Seeder
             'category_id' => 2,
             'subcategory_id' => 43,
             'price' => 92,
-            'stock' => 20,
+            'stock' => 60,
             'short_detail' => "Polo Lacoste, Manga corta, Hombre",
             'detail' =>"<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -2190,6 +2279,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/polo_shirt/polo_lacoste_dh3201/polo_lacoste_azul_marino.jpg',
         ]);
+        //Product ID: 94
         $product[] = Product::create([
             'name' => "Polo Adidas Tiro17",
             'slug' => Str::slug("Polo Adidas Tiro17"),
@@ -2197,7 +2287,7 @@ class ProductSeeder extends Seeder
             'category_id' => 2,
             'subcategory_id' => 43,
             'price' => 32,
-            'stock' => 20,
+            'stock' => 80,
             'short_detail' => "Polo Adidas Tiro17, Manga corta, Hombre",
             'detail' =>"<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -2210,7 +2300,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/polo_shirt/polo_adidas_tiro17/polo_adidas_tiro17_azul_marino.jpg',
         ]);
-        
+        //Product ID: 95
         $product[] = Product::create([
             'name' => "Adidas Get Ready",
             'slug' => Str::slug("Adidas Get Ready"),
@@ -2232,6 +2322,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/fragances/adidas_getready/adidas_getready.jpg',
         ]);
+        //Product ID: 96
         $product[] = Product::create([
             'name' => "BLACK OPIUM NEON",
             'slug' => Str::slug("BLACK OPIUM NEON"),
@@ -2253,6 +2344,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/fragances/black_opium_neon/black_opium_neon.jpg',
         ]);
+        //Product ID: 97
         $product[] = Product::create([
             'name' => "HUGO BOSS",
             'slug' => Str::slug("HUGO BOSS"),
@@ -2274,6 +2366,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/fragances/adidas_getready/adidas_getready.jpg',
         ]);
+        //Product ID: 98
         $product[] = Product::create([
             'name' => "Victoria Secret PURE SEDUCTION",
             'slug' => Str::slug("Victoria Secret PURE SEDUCTION"),
@@ -2294,6 +2387,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/fragances/victoria_secret_pure_seduction/victoria_secret_pure_seduction.jpg',
         ]);
+        //Product ID: 99
         $product[] = Product::create([
             'name' => "Calvin Klein CK IN2U",
             'slug' => Str::slug("Calvin Klein CK IN2U"),
@@ -2315,7 +2409,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/fragances/calvin_klein_ck_in2u/calvin_klein_ck_in2u.jpg',
         ]);
-        
+        //Product ID: 100
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos Sony WH-CH510",
             'slug' => Str::slug("Auriculares inhalámbricos Sony WH-CH510"),
@@ -2342,6 +2436,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/earphones/earphones_sony_wh_ch510/earphones_sony_wh_ch510.jpg',
         ]);
+        //Product ID: 101
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos JBL TUNE 510BT",
             'slug' => Str::slug("Auriculares inhalámbricos JBL TUNE 510BT"),
@@ -2368,6 +2463,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/earphones/earphones_jbl_tune_510bt/earphones_jbl_tune_510bt.jpg',
         ]);
+        //Product ID: 102
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos TOZO A2",
             'slug' => Str::slug("Auriculares inhalámbricos TOZO A2"),
@@ -2394,6 +2490,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/earphones/earphones_tozo_a2/earphones_tozo_a2.jpg',
         ]);
+        //Product ID: 103
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos Xiaomi Redmi Buds 3",
             'slug' => Str::slug("Auriculares inhalámbricos Xiaomi Redmi Buds 3"),
@@ -2419,6 +2516,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/earphones/earphones_xiaomi_redmi_buds3_lite/earphones_xiaomi_redmi_buds3_lite.jpg',
         ]);
+        //Product ID: 104
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos AirPods Pro",
             'slug' => Str::slug("Auriculares inhalámbricos AirPods Pro"),
@@ -2444,6 +2542,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/earphones/earphones_airpods_pro2/earphones_airpods_pro2.jpg',
         ]);
+        //Product ID: 105
         $product[] = Product::create([
             'name' => "Auriculares inhalámbricos Sony MDR-RF811RK",
             'slug' => Str::slug("Auriculares inhalámbricos Sony MDR-RF811RK"),
@@ -2468,6 +2567,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/earphones/earphones_sony_mdr_rf811rk/earphones_sony_mdr_rf811rk.jpg',
         ]);
+        //Product ID: 106
         $product[] = Product::create([
             'name' => "Xiaomi Smart TV P1 32",
             'slug' => Str::slug("Xiaomi Smart TV P1 32"),
@@ -2499,6 +2599,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/tv/xiaomi_smarttv_p1_32/xiaomi_smarttv_p1_32.jpg',
         ]);
+        //Product ID: 107
         $product[] = Product::create([
             'name' => "Samsung TV Crystal 43BU8000",
             'slug' => Str::slug("Samsung TV Crystal 43BU8000"),
@@ -2526,6 +2627,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/tv/samsung_crystal_2022_32BU8000/samsung_crystal_2022_32BU8000.jpg',
         ]);
+        //Product ID: 108
         $product[] = Product::create([
             'name' => "LG TV 55UQ70006LB",
             'slug' => Str::slug("LG TV 55UQ70006LB"),
@@ -2554,6 +2656,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/tv/LG_TV_55UQ70006LB/LG_TV_55UQ70006LB.jpg',
         ]);
+        //Product ID: 109
         $product[] = Product::create([
             'name' => "Cecotec TV A1 Series ALU10043",
             'slug' => Str::slug("Cecotec TV A1 Series ALU10043"),
@@ -2582,6 +2685,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/tv/cecotec_tv_a1_series_alu10043/cecotec_tv_a1_series_alu10043.jpg',
         ]);
+        //Product ID: 110
         $product[] = Product::create([
             'name' => "Asus TUF Gaming VG27AQ1A",
             'slug' => Str::slug("Asus TUF Gaming VG27AQ1A"),
@@ -2609,6 +2713,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/monitor/asus_tuf_gaming_vg27aq1a/asus_tuf_gaming_vg27aq1a.jpg',
         ]);
+        //Product ID: 111
         $product[] = Product::create([
             'name' => "Lenovo L27q-35",
             'slug' => Str::slug("Lenovo L27q-35"),
@@ -2636,6 +2741,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/monitor/lenovo_l27q_35/lenovo_l27q_35.jpg',
         ]);
+        //Product ID: 112
         $product[] = Product::create([
             'name' => "Philips Gaming 27M1N3200VS",
             'slug' => Str::slug("Philips Gaming 27M1N3200VS"),
@@ -2662,6 +2768,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'video/monitor/philips_gaming_27m1n3200vs/philips_gaming_27m1n3200vs.jpg',
         ]);
+        //Product ID: 113
         $product[] = Product::create([
             'name' => "Love Urban Beauty",
             'slug' => Str::slug("Love Urban Beauty"),
@@ -2683,6 +2790,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/makeup/love_urban_beauty/love_urban_beauty.jpg',
         ]);
+        //Product ID: 114
         $product[] = Product::create([
             'name' => "ZMILE Cosmetics",
             'slug' => Str::slug("ZMILE Cosmetics"),
@@ -2704,6 +2812,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'personal_care/makeup/zmile_cosmetics/zmile_cosmetics.jpg',
         ]);
+        //Product ID: 115
         //Subcategoriás de Tecnología
         $product[] = Product::create([
             'name' => "Amazfit Bip U Pro",
@@ -2731,7 +2840,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartwatches/amazfit_bip_u_pro/amazfit_bip_u_pro_green.jpg',
         ]);
-
+        //Product ID: 116
         $product[] = Product::create([
             'name' => "Samsung Galaxy Watch 4",
             'slug' => Str::slug("Samsung Galaxy Watch 4"),
@@ -2758,6 +2867,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartwatches/samsung_galaxy_watch4/samsung_galaxy_watch4.jpg',
         ]);
+        //Product ID: 117
         $product[] = Product::create([
             'name' => "Xiaomi Mi Smart Band 7",
             'slug' => Str::slug("Xiaomi Mi Smart Band 7"),
@@ -2784,7 +2894,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartwatches/xiaomi_smart_band7/xiaomi_smart_band7.jpg',
         ]);
-
+        //Product ID: 118
         $product[] = Product::create([
             'name' => "XINGHESF CS3",
             'slug' => Str::slug("XINGHESF CS3"),
@@ -2811,6 +2921,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartwatches/xinghesf_cs3/xinghesf_cs3.jpg',
         ]);
+        //Product ID: 119
         $product[] = Product::create([
             'name' => "Kindle 2022",
             'slug' => Str::slug("Kindle 2022"),
@@ -2838,7 +2949,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/ebooks/kindle_2022/kindle_2022.jpg',
         ]);
-
+        //Product ID: 120
         $product[] = Product::create([
             'name' => "Basic Lux 3",
             'slug' => Str::slug("Basic Lux 3"),
@@ -2866,6 +2977,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/ebooks/basic_lux3/basic_lux3.jpg',
         ]);
+        //Product ID: 121
         $product[] = Product::create([
             'name' => "Kobo Nia",
             'slug' => Str::slug("Kobo Nia"),
@@ -2893,6 +3005,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/ebooks/kobo_nia/kobo_nia.jpg',
         ]);
+        //Product ID: 122
         $product[] = Product::create([
             'name' => "Xiaomi L83",
             'slug' => Str::slug("Xiaomi L83"),
@@ -2926,6 +3039,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/tablets/xiaomi_L83/xiaomi_L83.jpg',
         ]);
+        //Product ID: 123
         $product[] = Product::create([
             'name' => "Lenovo Tab M10",
             'slug' => Str::slug("Lenovo Tab M10"),
@@ -2959,6 +3073,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/tablets/lenovo_tab_m10/lenovo_tab_m10.webp',
         ]);
+        //Product ID: 124
         $product[] = Product::create([
             'name' => "Samsung Galaxy Tab S6",
             'slug' => Str::slug("Samsung Galaxy Tab S6"),
@@ -2992,6 +3107,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/tablets/samsung_galaxy_tab_s6/samsung_galaxy_tab_s6.jpg',
         ]);
+        //Product ID: 125
         $product[] = Product::create([
             'name' => "Alcatel 1T 7",
             'slug' => Str::slug("Alcatel 1T 7"),
@@ -3025,6 +3141,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/tablets/alcatel_1t/alcatel_1t.jpg',
         ]);
+        //Product ID: 126
         $product[] = Product::create([
             'name' => "Xiaomi Redmi Note 11",
             'slug' => Str::slug("Xiaomi Redmi Note 11"),
@@ -3060,6 +3177,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartphones/xiaomi_redmi_note_11/xiaomi_redmi_note_11.jpg',
         ]);
+        //Product ID: 127
         $product[] = Product::create([
             'name' => "Apple iPhone 13",
             'slug' => Str::slug("Apple iPhone 13"),
@@ -3096,6 +3214,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartphones/iphone13/iphone13.jpg',
         ]);
+        //Product ID: 128
         $product[] = Product::create([
             'name' => "Samsung Galaxy A13",
             'slug' => Str::slug("Samsung Galaxy A13"),
@@ -3132,6 +3251,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartphones/samsung_galaxy_a13/samsung_galaxy_a13.jpg',
         ]);
+        //Product ID: 129
         $product[] = Product::create([
             'name' => "Oppo A17",
             'slug' => Str::slug("Oppo A17"),
@@ -3167,7 +3287,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'tecnology/smartphones/oppo_a17/oppo_a17.jpg',
         ]);
-
+        //Product ID: 130
         $product[] = Product::create([
             'name' => 'Blusa original tee',
             'slug' => Str::slug('Blusa original tee'),
@@ -3188,6 +3308,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/blouse/blouse_original_tee/blouse_original_tee.jpg',
         ]);
+        //Product ID: 131
         $product[] = Product::create([
             'name' => 'Blusa JDY Mio',
             'slug' => Str::slug('Blusa JDY Mio'),
@@ -3210,6 +3331,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/blouse/blouse_JDY_Mio/blouse_JDY_Mio.jpg',
         ]);
+        //Product ID: 132
         $product[] = Product::create([
             'name' => 'Blusa Grebrafan Steampunk',
             'slug' => Str::slug('Blusa Grebrafan Steampunk'),
@@ -3232,6 +3354,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/blouse/blouse_grebrafan_steampunk/blouse_grebrafan_steampunk.jpg',
         ]);
+        //Product ID: 133
         $product[] = Product::create([
             'name' => 'Blusa Grace Karin',
             'slug' => Str::slug('Blusa Grace Karin'),
@@ -3254,7 +3377,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/blouse/blouse_grace_karin/blouse_grace_karin.jpg',
         ]);
-
+        //Product ID: 134
         $product[] = Product::create([
             'name' => 'Leggings Puma Individualliga',
             'slug' => Str::slug('Leggings Puma Individualliga'),
@@ -3274,6 +3397,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/puma_individualliga/puma_individualliga.jpg',
         ]);
+        //Product ID: 135
         $product[] = Product::create([
             'name' => 'Leggings Urban Classic Dark Camo',
             'slug' => Str::slug('Leggings Urban Classic Dark Camo'),
@@ -3293,6 +3417,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/urban_classic_dark_camo/urban_classic_dark_camo.jpg',
         ]);
+        //Product ID: 136
         $product[] = Product::create([
             'name' => 'Leggings Urban Classic Snow Camo',
             'slug' => Str::slug('Leggings Urban Classic Snow Camo'),
@@ -3312,6 +3437,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/urban_classic_snow_camo/urban_classic_snow_camo.jpg',
         ]);
+        //Product ID: 137
         $product[] = Product::create([
             'name' => 'Leggings Urban Classic Red Camo',
             'slug' => Str::slug('Leggings Urban Classic Red Camo'),
@@ -3331,6 +3457,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/urban_classic_red_camo/urban_classic_red_camo.jpg',
         ]);
+        //Product ID: 138
         $product[] = Product::create([
             'name' => 'Leggings Urban Classic Wood Camo',
             'slug' => Str::slug('Leggings Urban Classic Wood Camo'),
@@ -3350,6 +3477,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/urban_classic_wood_camo/urban_classic_wood_camo.jpg',
         ]);
+        //Product ID: 139
         $product[] = Product::create([
             'name' => 'Leggings Puma ESS',
             'slug' => Str::slug('Leggings Puma ESS'),
@@ -3357,7 +3485,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 36,
             'price' => 25,
-            'stock' => 10,
+            'stock' => 18,
             'short_detail' => 'Mallas deportivas',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3369,6 +3497,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/puma_ess/puma_ess.jpg',
         ]);
+        //Product ID: 140
         $product[] = Product::create([
             'name' => 'Leggings Everbellus',
             'slug' => Str::slug('Leggings Everbellus'),
@@ -3388,6 +3517,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/everbellus_cuero/everbellus_cuero.jpg',
         ]);
+        //Product ID: 141
         $product[] = Product::create([
             'name' => 'Leggings Reebook Identity',
             'slug' => Str::slug('Leggings Reebook Identity'),
@@ -3407,7 +3537,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/leggings/reebook_identity/reebook_identity.jpg',
         ]);
-        
+        //Product ID: 142
         $product[] = Product::create([
             'name' => 'Falda GoCo Patinadora',
             'slug' => Str::slug('Falda GoCo Patinadora'),
@@ -3415,7 +3545,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 37,
             'price' => 27.99,
-            'stock' => 10,
+            'stock' => 120,
             'short_detail' => 'Falda corta, elástica',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3427,6 +3557,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/skirt/urban_goco_patinadora/urban_goco_patinadora.jpg',
         ]);
+        //Product ID: 143
         $product[] = Product::create([
             'name' => 'Falda Pepe Jeans Nikita',
             'slug' => Str::slug('Falda Pepe Jeans Nikita'),
@@ -3443,8 +3574,9 @@ class ProductSeeder extends Seeder
                 <li><strong>Marca:&nbsp;</strong>Pepe Jeans</li>                
             </ul>',
             'path_tag' => '/images/products/',
-            'image' => 'clothes_women/skirt/urban_goco_patinadora/urban_goco_patinadora.jpg',
+            'image' => 'clothes_women/skirt/pepe_jeans_nikita/pepe_jeans_nikita.jpg',
         ]);
+        //Product ID: 144
         $product[] = Product::create([
             'name' => 'Falda Urban GoCo Midi Bodycon',
             'slug' => Str::slug('Falda Urban GoCo Midi Bodycon'),
@@ -3452,7 +3584,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 37,
             'price' => 36,
-            'stock' => 10,
+            'stock' => 64,
             'short_detail' => 'Falda recta, cintura alta',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3464,6 +3596,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/skirt/urban_goco_midi_bodycon/urban_goco_midi_bodycon.jpg',
         ]);
+        //Product ID: 145
         $product[] = Product::create([
             'name' => 'Falda Shein',
             'slug' => Str::slug('Falda Shein'),
@@ -3471,7 +3604,7 @@ class ProductSeeder extends Seeder
             'category_id' => 1,
             'subcategory_id' => 37,
             'price' => 38.99,
-            'stock' => 10,
+            'stock' => 20,
             'short_detail' => 'Falda ajustada, con volantes',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3483,6 +3616,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_women/skirt/shein_skirt/shein_skirt.jpg',
         ]);
+        //Product ID: 146
         $product[] = Product::create([
             'name' => 'Mueble TV BRIMNES',
             'slug' => Str::slug('Mueble TV BRIMNES'),
@@ -3490,7 +3624,7 @@ class ProductSeeder extends Seeder
             'category_id' => 3,
             'subcategory_id' => 44,
             'price' => 159.99,
-            'stock' => 10,
+            'stock' => 30,
             'short_detail' => 'Mueble TV',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3503,7 +3637,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/furniture/brimnes_mueble_tv/brimnes_mueble_tv.avif',
         ]);
-
+        //Product ID: 147
         $product[] = Product::create([
             'name' => 'Mueble TV MALM',
             'slug' => Str::slug('Mueble TV MALM'),
@@ -3524,7 +3658,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/furniture/malm_mueble_tv/malm_mueble_tv.avif',
         ]);
-
+        //Product ID: 148
         $product[] = Product::create([
             'name' => 'Mueble TV Habitdesign',
             'slug' => Str::slug('Mueble TV Habitdesign'),
@@ -3546,6 +3680,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/furniture/mueble_tv_habitdesign/mueble_tv_habitdesign.jpg',
         ]);
+        //Product ID: 149
         $product[] = Product::create([
             'name' => 'Armario Habitdesign MAX020BO',
             'slug' => Str::slug('Armario Habitdesign MAX020BO'),
@@ -3567,6 +3702,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/furniture/armario_habitdesign_max020BO/armario_habitdesign_max020BO.jpg',
         ]);
+        //Product ID: 150
         $product[] = Product::create([
             'name' => 'Escritorio Comifort Montgo Stone',
             'slug' => Str::slug('Escritorio Comifort Montgo Stone'),
@@ -3588,7 +3724,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/furniture/escritorio_comifort_montgo_stone/escritorio_comifort_montgo_stone.jpg',
         ]);
-        
+        //Product ID: 151
         $product[] = Product::create([
             'name' => 'Escritorio Comifort Montgo Wengue',
             'slug' => Str::slug('Escritorio Comifort Montgo Wengue'),
@@ -3610,7 +3746,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/furniture/escritorio_comifort_montgo_wengue/escritorio_comifort_montgo_wengue.jpg',
         ]);
-
+        //Product ID: 152
         $product[] = Product::create([
             'name' => 'Cafetera Cecotec Espresso 20',
             'slug' => Str::slug('Cafetera Cecotec Espresso 20'),
@@ -3635,6 +3771,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/small_appliance/cecotec_espresso20/cecotec_espresso20.jpg',
         ]);
+        //Product ID: 153
         $product[] = Product::create([
             'name' => 'Cafetera Swan Retro One Touch SK22150GN',
             'slug' => Str::slug('Cafetera Swan Retro One Touch SK22150GN'),
@@ -3658,6 +3795,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/small_appliance/cecotec_espresso20/cecotec_espresso20.jpg',
         ]);
+        //Product ID: 154
         $product[] = Product::create([
             'name' => 'Cafetera Nescafe Dolce Gusto KP123B',
             'slug' => Str::slug('Cafetera Nescafe Dolce Gusto KP123B'),
@@ -3681,6 +3819,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/small_appliance/nescafe_dolcegusto_kp123b/nescafe_dolcegusto_kp123b.jpg',
         ]);
+        //Product ID: 155
         $product[] = Product::create([
             'name' => 'Cafetera Solac Espresso CE4497',
             'slug' => Str::slug('Cafetera Solac Espresso CE4497'),
@@ -3704,7 +3843,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/small_appliance/solac_espresso_ce4497/solac_espresso_ce4497.jpg',
         ]);
-        
+        //Product ID: 156
         $product[] = Product::create([
             'name' => 'Estor Blindecor Ara',
             'slug' => Str::slug('Estor Blindecor Ara'),
@@ -3725,6 +3864,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/decor/blindecor_ara/blindecor_ara.jpg',
         ]);
+        //Product ID: 157
         $product[] = Product::create([
             'name' => 'Jarrón Koomuao',
             'slug' => Str::slug('Jarrón Koomuao'),
@@ -3732,7 +3872,7 @@ class ProductSeeder extends Seeder
             'category_id' => 3,
             'subcategory_id' => 46,
             'price' => 22,
-            'stock' => 10,
+            'stock' => 40,
             'short_detail' => 'Jarrón florero',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3746,6 +3886,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/decor/koomuao/koomuao.jpg',
         ]);
+        //Product ID: 158
         $product[] = Product::create([
             'name' => 'Paragüero Baroni Home',
             'slug' => Str::slug('Paragüero Baroni Home'),
@@ -3768,6 +3909,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/decor/baroni_home/baroni_home.jpg',
         ]);
+        //Product ID: 159
         $product[] = Product::create([
             'name' => 'Cuadro Picanova Montañas',
             'slug' => Str::slug('Cuadro Picanova Montañas'),
@@ -3790,7 +3932,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'home/decor/picanova_cuadro_montanas/picanova_cuadro_montanas.jpg',
         ]);
-
+        //Product ID: 160
         $product[] = Product::create([
             'name' => 'Anorak Columbia Powder Lite',
             'slug' => Str::slug('Anorak Columbia Powder Lite'),
@@ -3798,7 +3940,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 64,
             'price' => 65,
-            'stock' => 10,
+            'stock' => 100,
             'short_detail' => 'Anorak con capucha para niños, resistente al agua',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3811,6 +3953,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/anorak/columbia_powder_lite/columbia_powder_lite.jpg',
         ]);
+        //Product ID: 161
         $product[] = Product::create([
             'name' => 'Chaqueta Pepe Jeans Gilford',
             'slug' => Str::slug('Chaqueta Pepe Jeans Gilford'),
@@ -3818,7 +3961,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 64,
             'price' => 54,
-            'stock' => 10,
+            'stock' => 30,
             'short_detail' => 'Chaqueta para niños',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3831,6 +3974,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/anorak/pepejeans_gilford/pepejeans_gilford.jpg',
         ]);
+        //Product ID: 162
         $product[] = Product::create([
             'name' => 'Abrigo Mayoral Niños',
             'slug' => Str::slug('Abrigo Mayoral Niños'),
@@ -3838,7 +3982,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 64,
             'price' => 85.70,
-            'stock' => 10,
+            'stock' => 40,
             'short_detail' => 'Abrigo Mayoral Niños',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3851,6 +3995,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/anorak/mayoral_children/mayoral_children.jpg',
         ]);
+        //Product ID: 163
         $product[] = Product::create([
             'name' => 'Abrigo Chicco',
             'slug' => Str::slug('Abrigo Chicco'),
@@ -3871,6 +4016,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/anorak/chicco_children/chicco_children.jpg',
         ]);
+        //Product ID: 164
         $product[] = Product::create([
             'name' => 'Camiseta Pepe Jeans New Herman',
             'slug' => Str::slug('Camiseta Pepe Jeans New Herman'),
@@ -3878,7 +4024,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 65,
             'price' => 18,
-            'stock' => 10,
+            'stock' => 150,
             'short_detail' => 'Camiseta Pepe Jeans para niños',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3890,6 +4036,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/t_shirt/pepejeans_new_herman/pepejeans_new_herman.jpg',
         ]);
+        //Product ID: 165
         $product[] = Product::create([
             'name' => 'Camiseta Marvel',
             'slug' => Str::slug('Camiseta Marvel'),
@@ -3897,7 +4044,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 65,
             'price' => 17.20,
-            'stock' => 10,
+            'stock' => 80,
             'short_detail' => 'Camiseta Marvel para niños',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3909,6 +4056,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/t_shirt/marvel_children/marvel_children.jpg',
         ]);
+        //Product ID: 166
         $product[] = Product::create([
             'name' => 'Camiseta Adidas Ent22',
             'slug' => Str::slug('Camiseta Adidas Ent22'),
@@ -3916,7 +4064,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 65,
             'price' => 17.80,
-            'stock' => 10,
+            'stock' => 200,
             'short_detail' => 'Camiseta Adidas manga corta, unisex para niños',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3928,6 +4076,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/t_shirt/marvel_children/marvel_children.jpg',
         ]);
+        //Product ID: 167
         $product[] = Product::create([
             'name' => 'Pijama TEDD Dinosaurios',
             'slug' => Str::slug('Pijama TEDD Dinosaurios'),
@@ -3935,7 +4084,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 66,
             'price' => 18.99,
-            'stock' => 10,
+            'stock' => 160,
             'short_detail' => 'Pijama para niños de dinosaurio',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3947,6 +4096,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/pijama/tedd_children_dinosaurio/tedd_children_dinosaurio.jpg',
         ]);
+        //Product ID: 168
         $product[] = Product::create([
             'name' => 'Pijama Disney Cars',
             'slug' => Str::slug('Pijama Disney Cars'),
@@ -3954,7 +4104,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 66,
             'price' => 25.95,
-            'stock' => 10,
+            'stock' => 35,
             'short_detail' => 'Pijama para niños de Disney',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3966,6 +4116,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/pijama/disney_cars/disney_cars.jpg',
         ]);
+        //Product ID: 169
         $product[] = Product::create([
             'name' => 'Pijama Paw Patrol',
             'slug' => Str::slug('Pijama Paw Patrol'),
@@ -3973,7 +4124,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 66,
             'price' => 25.95,
-            'stock' => 10,
+            'stock' => 35,
             'short_detail' => 'Pijama para niños de Patrulla Canina',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -3985,7 +4136,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/pijama/paw_patrol/paw_patrol.jpg',
         ]);
-
+        //Product ID: 170
         $product[] = Product::create([
             'name' => 'Pijama Marvel Spiderman',
             'slug' => Str::slug('Pijama Marvel Spiderman'),
@@ -3993,7 +4144,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 66,
             'price' => 26,
-            'stock' => 10,
+            'stock' => 35,
             'short_detail' => 'Pijama para niños de Spiderman',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4005,7 +4156,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/pijama/marvel_spiderman/marvel_spiderman.jpg',
         ]);
-
+        //Product ID: 171
         $product[] = Product::create([
             'name' => 'Bufanda United Colors of Benetton',
             'slug' => Str::slug('Bufanda United Colors of Benetton'),
@@ -4013,7 +4164,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 67,
             'price' => 27,
-            'stock' => 10,
+            'stock' => 40,
             'short_detail' => 'Bufanda United Colors of Benetton para niños',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4025,6 +4176,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/scarf/benetton_children/benetton_children.jpg',
         ]);
+        //Product ID: 172
         $product[] = Product::create([
             'name' => 'Bufanda Pepe Jeans Huxley',
             'slug' => Str::slug('Bufanda Pepe Jeans Huxley'),
@@ -4044,6 +4196,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/scarf/pepejeans_huxley/pepejeans_huxley.jpg',
         ]);
+        //Product ID: 173
         $product[] = Product::create([
             'name' => 'Set Bufanda, Gorro y Guantes de Spiderman',
             'slug' => Str::slug('Set Bufanda, Gorro y Guantes de Spiderman'),
@@ -4063,6 +4216,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/scarf/set_marvel_spiderman/set_marvel_spiderman.jpg',
         ]);
+        //Product ID: 174
         $product[] = Product::create([
             'name' => 'Set Bufanda, Gorro y Guantes de Patrulla Canina',
             'slug' => Str::slug('Set Bufanda, Gorro y Guantes de Patrulla Canina'),
@@ -4082,7 +4236,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/scarf/set_paw_patrol/set_paw_patrol.jpg',
         ]);
-
+        //Product ID: 175
         $product[] = Product::create([
             'name' => 'Gorro CERDÁ Batman',
             'slug' => Str::slug('Gorro CERDÁ Batman'),
@@ -4102,6 +4256,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/hat/cerda_batman/cerda_batman.jpg',
         ]);
+        //Product ID: 176
         $product[] = Product::create([
             'name' => 'Gorro DANISH ENDURANCE',
             'slug' => Str::slug('Gorro DANISH ENDURANCE'),
@@ -4109,7 +4264,7 @@ class ProductSeeder extends Seeder
             'category_id' => 8,
             'subcategory_id' => 68,
             'price' => 19.99,
-            'stock' => 10,
+            'stock' => 40,
             'short_detail' => 'Gorro DANISH ENDURANCE de lana',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4121,6 +4276,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/hat/danish_endurance_beanie/danish_endurance_beanie.jpg',
         ]);
+        //Product ID: 177
         $product[] = Product::create([
             'name' => 'Gorra NIKE H86',
             'slug' => Str::slug('Gorra NIKE H86'),
@@ -4140,6 +4296,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/hat/nike_h86/nike_h86.jpg',
         ]);
+        //Product ID: 178
         $product[] = Product::create([
             'name' => 'Gorra Marvel Spiderman',
             'slug' => Str::slug('Gorra Marvel Spiderman'),
@@ -4159,7 +4316,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_children/hat/marvel_spiderman_cap/marvel_spiderman_cap.jpg',
         ]);
-
+        //Product ID: 179
         $product[] = Product::create([
             'name' => 'Camiseta Joma Academy IV',
             'slug' => Str::slug('Camiseta Joma Academy IV'),
@@ -4167,7 +4324,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 79,
             'price' => 16.99,
-            'stock' => 10,
+            'stock' => 180,
             'short_detail' => 'Camiseta Joma Academy IV para mujer',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4179,6 +4336,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/sport_clothes/joma_academiIV/joma_academiIV.jpg',
         ]);
+        //Product ID: 180
         $product[] = Product::create([
             'name' => 'Camiseta Nike Tank Pure',
             'slug' => Str::slug('Camiseta Nike Tank Pure'),
@@ -4186,7 +4344,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 79,
             'price' => 42.60,
-            'stock' => 10,
+            'stock' => 120,
             'short_detail' => 'Camiseta Nike Tank Pure para mujer',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4198,7 +4356,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/sport_clothes/nike_tank_pure/nike_tank_pure.jpg',
         ]);
-
+        //Product ID: 181
         $product[] = Product::create([
             'name' => 'Bolsa de deporte Puma Challenger',
             'slug' => Str::slug('Bolsa de deporte Puma Challenger'),
@@ -4218,7 +4376,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/puma_challenger/puma_challenger.jpg',
         ]);
-
+        //Product ID: 182
         $product[] = Product::create([
             'name' => 'Bolsa de deporte Adidas Tiro Du S',
             'slug' => Str::slug('Bolsa de deporte Adidas Tiro Du S'),
@@ -4239,6 +4397,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/adidas_tiro_du_s/adidas_tiro_du_s.jpg',
         ]);
+        //Product ID: 183
         $product[] = Product::create([
             'name' => 'Bolsa de deporte Nike Academy Team M sp21',
             'slug' => Str::slug('Bolsa de deporte Nike Academy Team M sp21'),
@@ -4259,6 +4418,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/nike_academyteam_sp21/nike_academyteam_sp21.jpg',
         ]);
+        //Product ID: 184
         $product[] = Product::create([
             'name' => 'Bolsa de deporte Minecraft',
             'slug' => Str::slug('Bolsa de deporte Minecraft'),
@@ -4279,6 +4439,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/minecraft/minecraft.jpg',
         ]);
+        //Product ID: 185
         $product[] = Product::create([
             'name' => 'Bolsa de deporte Safta Super Mario',
             'slug' => Str::slug('Bolsa de deporte Safta Super Mario'),
@@ -4300,6 +4461,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/safta_super_mario/safta_super_mario.jpg',
         ]);
+        //Product ID: 186
         $product[] = Product::create([
             'name' => 'Mochila deportiva Czemo',
             'slug' => Str::slug('Mochila deportiva Czemo'),
@@ -4321,6 +4483,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/czemo_mochila_cuerdas/czemo_mochila_cuerdas.jpg',
         ]);
+        //Product ID: 187
         $product[] = Product::create([
             'name' => 'Bolsa de deporte Tokeya',
             'slug' => Str::slug('Bolsa de deporte Tokeya'),
@@ -4328,7 +4491,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 80,
             'price' => 36.99,
-            'stock' => 10,
+            'stock' => 30,
             'short_detail' => 'Bolsa de deporte Tokeya, plegable, impermeable',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4343,7 +4506,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/duffel_bag/tokeya_folding/tokeya_folding.jpg',
         ]);
-
+        //Product ID: 188
         $product[] = Product::create([
             'name' => 'Esterilla de Fitness Tresko',
             'slug' => Str::slug('Esterilla de Fitness Tresko'),
@@ -4351,7 +4514,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 40.55,
-            'stock' => 10,
+            'stock' => 120,
             'short_detail' => 'Esterilla de Fitness Tresko de espuma',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4364,6 +4527,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/tresko_fitness/tresko_fitness.jpg',
         ]);
+        //Product ID: 189
         $product[] = Product::create([
             'name' => 'Esterilla de Fitness Cambivo',
             'slug' => Str::slug('Esterilla de Fitness Cambivo'),
@@ -4371,7 +4535,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 85.99,
-            'stock' => 10,
+            'stock' => 80,
             'short_detail' => 'Esterilla de Fitness Cambivo grande',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4385,6 +4549,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/cambivo_fitness/cambivo_fitness.jpg',
         ]);
+        //Product ID: 190
         $product[] = Product::create([
             'name' => 'Guantes de Fitness AQF',
             'slug' => Str::slug('Guantes de Fitness AQF'),
@@ -4392,7 +4557,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 19.90,
-            'stock' => 10,
+            'stock' => 60,
             'short_detail' => 'Guantes de Fitness AQF, transpirables, unisex',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4406,6 +4571,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/aqf_guantes_fitness/aqf_guantes_fitness.jpg',
         ]);
+        //Product ID: 191
         $product[] = Product::create([
             'name' => 'Guantes de Fitness RDX',
             'slug' => Str::slug('Guantes de Fitness RDX'),
@@ -4413,7 +4579,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 19.90,
-            'stock' => 10,
+            'stock' => 280,
             'short_detail' => 'Guantes de Fitness RDX, dedo completo',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4427,6 +4593,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/rdx_guantes_fitness/rdx_guantes_fitness.jpg',
         ]);
+        //Product ID: 192
         $product[] = Product::create([
             'name' => 'Pelota de Fitness Core Balance',
             'slug' => Str::slug('Pelota de Fitness Core Balance'),
@@ -4434,7 +4601,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 28.90,
-            'stock' => 10,
+            'stock' => 40,
             'short_detail' => 'Pelota de Fitness Core Balance para ejercicios',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4448,6 +4615,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/core_balance_ball/core_balance_ball.jpg',
         ]);
+        //Product ID: 193
         $product[] = Product::create([
             'name' => 'Faja reductora Mezzuno',
             'slug' => Str::slug('Faja reductora Mezzuno'),
@@ -4455,7 +4623,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 23.50,
-            'stock' => 10,
+            'stock' => 30,
             'short_detail' => 'Faja reductora Mezzuno, unisex, ajuste ergonómico',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4469,6 +4637,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/mezzuno_faja_reductora/mezzuno_faja_reductora.jpg',
         ]);
+        //Product ID: 194
         $product[] = Product::create([
             'name' => 'Faja reductora InnoTi',
             'slug' => Str::slug('Faja reductora InnoTi'),
@@ -4476,7 +4645,7 @@ class ProductSeeder extends Seeder
             'category_id' => 12,
             'subcategory_id' => 81,
             'price' => 23.50,
-            'stock' => 10,
+            'stock' => 20,
             'short_detail' => 'Faja reductora InnoTi',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4490,6 +4659,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/innoti_faja_reductora/innoti_faja_reductora.jpg',
         ]);
+        //Product ID: 195
         $product[] = Product::create([
             'name' => 'Banco de abdominales Gorilla Sports',
             'slug' => Str::slug('Banco de abdominales Gorilla Sports'),
@@ -4510,6 +4680,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'sport/fitness/abdominal_bench_gorillasports/abdominal_bench_gorillasports.jpg',
         ]);
+        //Product ID: 196
         $product[] = Product::create([
             'name' => 'Sudadera Puma Teamgoal 23',
             'slug' => Str::slug('Sudadera Puma Teamgoal 23'),
@@ -4517,7 +4688,7 @@ class ProductSeeder extends Seeder
             'category_id' => 2,
             'subcategory_id' => 41,
             'price' => 44.30,
-            'stock' => 10,
+            'stock' => 144,
             'short_detail' => 'Sudadera con capucha y bolsillo delantero',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4529,6 +4700,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/hoodie/puma_teamgoal23/puma_teamgoal23.jpg',
         ]);
+        //Product ID: 197
         $product[] = Product::create([
             'name' => 'Sudadera Helly Hansen HH',
             'slug' => Str::slug('Sudadera Helly Hansen HH'),
@@ -4536,7 +4708,7 @@ class ProductSeeder extends Seeder
             'category_id' => 2,
             'subcategory_id' => 41,
             'price' => 44.30,
-            'stock' => 10,
+            'stock' => 200,
             'short_detail' => 'Sudadera con capucha con bolsillo tipo canguro',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4548,7 +4720,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/hoodie/helly_hansen_hh/helly_hansen_hh.jpg',
         ]);
-
+        //Product ID: 198
         $product[] = Product::create([
             'name' => 'Sudadera Nike Park20 Po',
             'slug' => Str::slug('Sudadera Nike Park20 Po'),
@@ -4556,7 +4728,7 @@ class ProductSeeder extends Seeder
             'category_id' => 2,
             'subcategory_id' => 41,
             'price' => 45.90,
-            'stock' => 10,
+            'stock' => 80,
             'short_detail' => 'Sudadera con capucha con bolsillo tipo canguro',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
@@ -4568,6 +4740,7 @@ class ProductSeeder extends Seeder
             'path_tag' => '/images/products/',
             'image' => 'clothes_men/hoodie/nike_park20pro/nike_park20pro.jpg',
         ]);
+        //Product ID: 199
         $product[] = Product::create([
             'name' => 'Sudadera Joma Cairo',
             'slug' => Str::slug('Sudadera Joma Cairo'),
@@ -4575,7 +4748,7 @@ class ProductSeeder extends Seeder
             'category_id' => 2,
             'subcategory_id' => 41,
             'price' => 28,
-            'stock' => 10,
+            'stock' => 320,
             'short_detail' => 'Sudadera con cuello redondo',
             'detail' =>'<p>
                 <strong>Caracter&iacute;sticas</strong>
