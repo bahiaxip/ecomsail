@@ -42,7 +42,7 @@
     @include('livewire.home.modal_feedback')
     {{-- para no incluir $user_id2 a todo el home usamos el modal de cart --}}
     {{--@include('livewire.cart.edit_user')--}}
-    @if(!$orders || !$orders_items)
+    @if(!$orders)
     <div class="loading"   >
       <img src="{{url('ics/loading/dualball.svg')}}" alt="" style="margin:auto" width="80">
     </div>

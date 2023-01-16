@@ -84,7 +84,8 @@ class Category extends Component
     //subcategorías que no contienen resultados, y por tanto no existe $subcatlist['name']
     public $btn_back;
     public $switch_type;
-
+    //solución accediendo a subcategorías desde una página > 1
+    public $current_url;
     //personalizamos el nombre del atributo de los mensajes de error
     protected $validationAttributes = [
         'main_title' => 'título',
@@ -102,6 +103,9 @@ class Category extends Component
         $this->listname = 'categories';
         $this->username=Auth::user()->name;
         $this->checkpdf = 1;
+        $this->current_url = url()->current();
+
+
     }
 
     //comprobamos la acción seleccionada
@@ -626,6 +630,11 @@ class Category extends Component
     //mostrar listado de subcategorías
     public function renderSubCat($subcat_id,$name){
         
+        if($this->page != 1){
+            $this->resetPage();
+        }
+        
+        //dd(url()->current());
         $this->subcatlist['name']=$name;
         $this->subcatlist['id'] = $subcat_id;
         //método para mostrar el minilink de subcategorías

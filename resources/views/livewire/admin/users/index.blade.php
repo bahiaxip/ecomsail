@@ -98,7 +98,7 @@
                         <i class="fa-solid fa-bars-staggered"></i>
                     </span>
                 </button>            
-                <ul class="dropdown-menu" id="dropdownMenuFilters" aria-labelledby="dropdownMenuFilterUsers">                
+                <ul class="dropdown-menu right0" id="dropdownMenuFilters" aria-labelledby="dropdownMenuFilterUsers">                
                     <li>
                         <a href="{{ route('list_users',['filter_type' => 1]) }}" class="dropdown-item">&#x2714; Público</a>
                     </li>

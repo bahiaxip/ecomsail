@@ -80,7 +80,7 @@
     <div  class="container product_item" x-data="cart()" x-init="start()" x-cloak>
         <div class="btn_return">
             <button onclick="history.back()" class="btn_sry" style="padding:3px 15px;border-radius:4px" title="Volver atrás">
-                <i class="fa-solid fa-turn-up" style="transform:rotate(270deg);font-size:1.3em"></i>
+                <i class="fa-solid fa-turn-up" style="transform:rotate(270deg);font-size:1.2em"></i>
             </button>
         </div>
         <!--
@@ -253,7 +253,7 @@
                                         <div class="item">
                                             <div>
                                                 <input class="mylabel {{$c['id']}}"  type="radio" name="{{$comb['name']}}" value="{{$c['id']}}" wire:click="set_value({{$c['id']}})" wire:model="option.{{$key}}"  @if($c['stock'] <= 0 || $c['disabled'] == true) {{'disabled'}} @endif/>
-                                                <label for="" style="background-color:orange;">
+                                                <label for="" style="">
                                                   {{$c['name']}}
                                                 </label>
                                             </div>

@@ -70,7 +70,7 @@
                         <i class="fa-solid fa-bars-staggered"></i>
                     </span>
                 </button>            
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
+                <ul class="dropdown-menu right0" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
                     <li>
                         <a 
                         {{--@if(!$subcat)--}}

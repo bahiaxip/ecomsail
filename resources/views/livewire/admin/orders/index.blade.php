@@ -86,7 +86,7 @@
                             <i class="fa-solid fa-bars-staggered"></i>
                         </span>
                     </button>            
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
+                    <ul class="dropdown-menu right0" aria-labelledby="dropdownMenu2" id="dropdownMenuFilters">
                         <li>
                             <a href="{{ route('list_orders',['filter_type' => 1]) }}" class="dropdown-item">
                                 &#x2714; Público

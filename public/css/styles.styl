@@ -415,7 +415,13 @@ rgba2 = rgba(0,178,146,1)
 .modal_item .modal-content,.product_item
 	.btn_return
 		font-family QuicksandB		
-		margin-top 10px	
+		margin-top 10px
+		button
+			i
+				color color7
+			&:hover
+				i
+					color white
 	.title_item
 		h5
 			font-family QuicksandB
@@ -503,7 +509,7 @@ rgba2 = rgba(0,178,146,1)
 						border-radius 50%
 						cursor pointer
 						margin 0
-						outline color7 1px solid
+						outline color8 1px solid
 						padding 2px 8px
 						width 100%
 						height 100%
@@ -522,7 +528,7 @@ rgba2 = rgba(0,178,146,1)
 						&:after
 							content '\2714'
 							color color8
-							font-size 14px							
+							font-size 11px							
 					
 												
 					
@@ -695,7 +701,7 @@ rgba2 = rgba(0,178,146,1)
 						padding 2px 15px
 						
 					input[type=radio]:checked + label
-						background-color color1
+						background-color color2
 						color #FFF
 					
 		
@@ -1490,11 +1496,14 @@ como existen 2 uno es el carousel de product y otro el modal de product
 		display flex
 		justify-content center
 		height 100px
+		.nav_offers_categories::-webkit-scrollbar{
+			display none
+		}
 		.nav_offers_categories
-			
+			scrollbar-width none
 			display flex
 			margin auto
-			max-width 60%
+			max-width 75%
 			overflow auto
 			.div_category
 				border-radius 8px

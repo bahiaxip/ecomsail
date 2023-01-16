@@ -24,7 +24,7 @@ class CategorySeeder extends Seeder
             'path_tag' => '/ics/cat_icons/',
             'offer' => 1,
             'title_offer' =>'Moda mujer',
-            'icon_awesome_offer' => '<i class="fa-solid fa-shirt"></i>',
+            'icon_awesome_offer' => '<i class="fa-solid fa-person-dress"></i>',
 
         ]);
         //category 2
@@ -37,7 +37,7 @@ class CategorySeeder extends Seeder
             'path_tag' => '/ics/cat_icons/',
             'offer' => 1,
             'title_offer' =>'Moda hombre',
-            'icon_awesome_offer' => '<i class="fa-solid fa-shirt"></i>',
+            'icon_awesome_offer' => '<i class="fa-solid fa-user-tie"></i>',
 
         ]);
         //category 3
@@ -50,7 +50,7 @@ class CategorySeeder extends Seeder
             'path_tag' => '/ics/cat_icons/',
             'offer' => 1,
             'title_offer' =>'Hogar',
-            'icon_awesome_offer' => '<i class="fa-solid fa-shirt"></i>',
+            'icon_awesome_offer' => '<i class="fa-solid fa-house"></i>',
 
         ]);
 
@@ -137,8 +137,8 @@ class CategorySeeder extends Seeder
             'image' => 'kids_clothes.png',
             'path_tag' => '/ics/cat_icons/',
             'offer' => 1,
-            'title_offer' =>'Ropa',
-            'icon_awesome_offer' => '<i class="fa-solid fa-shirt"></i>',
+            'title_offer' =>'Moda infantil',
+            'icon_awesome_offer' => '<i class="fa-solid fa-children"></i>',
 
         ]);
         //category 9
