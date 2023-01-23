@@ -20,9 +20,10 @@ class CreateFeedbackProductsTable extends Migration
             $table->integer('feedback')->nullable();
             $table->text('description')->nullable();
             $table->integer('product_id');
-            $table->integer('order_id');
-            $table->integer('order_item_id');
-            $table->integer('user_id');
+            //establecido nullable() para los seeders
+            $table->integer('order_id')->nullable();
+            $table->integer('order_item_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

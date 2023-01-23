@@ -760,6 +760,7 @@ class Cart extends Component
     //serán sumados en la cantidad de productos ni en el precio total.
     //Si se pulsa "finalizar compra" los productos desactivados serán excluidos del pedido.
     public function test_current_stock($order_items){
+
         foreach($this->orders_items as $oi){
             if($oi->combinations != 'null'){
                 //decodificamos
@@ -770,7 +771,9 @@ class Cart extends Component
                 }
                 $list_ids=implode($list);
                 $combination = Combination::where('product_id',$oi->product_id)->where('list_ids',$list_ids)->first();
-                if($combination->stock < $oi->quantity){
+                //dd($combination);
+                if($combination && $combination && $combination->stock < $oi->quantity){
+
                     $oi->update(['checked_stock' => 0]);
                 }
             }else{
