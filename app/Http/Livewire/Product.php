@@ -583,23 +583,27 @@ class Product extends Component
                 if(count($test) > 0){
                     //$this->dispatchBrowserEvent('contentChanged');
                     //$this->emit('fastview');
-                    $this->typealert = 'info';
+                    //$this->typealert = 'info';
                     $data = [
                         'message' => 'Ya existe ese producto en el carrito',
                         'title' => 'Añadido',
                         'status' => 'info'
                     ];
-                    session()->flash('message',$message);
-                    $this->emit('modal');
+                    $this->set_session($data['status'],$data['title'],$data['message']);
+                   // $this->emit('modal');
                     return false;
                 }
             }
             //si no existe un producto con ese id en la db se devuelve mensaje de error
             $product = Prod::findOrFail($this->product_id);
             if(!$product){
-                $this->typealert = 'danger';
-                session()->flash('message2','No existe ese producto');
-                $this->emit('modal');
+                $data = [
+                        'message' => 'No existe ese producto',
+                        'title' => 'Añadido',
+                        'status' => 'danger'
+                    ];
+
+                $this->set_session($data['status'],$data['title'],$data['message']);                
                 return false;
             }
             //comprobamos si existe suplemento de precio por alguna
