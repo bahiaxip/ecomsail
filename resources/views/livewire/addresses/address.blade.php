@@ -88,7 +88,7 @@
                 @if($addresses->count()==0)
                 
                 <div class="empty  ">
-                    <p class="mauto">No existen direcciones</p>
+                    <p class="mauto">La lista de direcciones está vacía</p>
                 </div>
                 
                 @else

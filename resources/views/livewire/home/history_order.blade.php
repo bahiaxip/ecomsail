@@ -59,8 +59,8 @@
                     </h5>                    
                 </div>
                 @if(!$orders || $orders->count() == 0)
-                <div class="empty alert alert-success">
-                    <h5>Aun no existen pedidos</h5>
+                <div class="empty">
+                    <h5>La lista de pedidos está vacía</h5>
                 </div>
                 
                 @else
